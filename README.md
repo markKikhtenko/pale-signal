@@ -34,11 +34,11 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 ## Текущая сборка
 
-- Обновлено: `2026-07-17T09:57:33Z`
-- Серверов: `286`
-- Reality: `199`
-- TLS: `277`
-- TCP: `153`
-- WebSocket: `21`
-- gRPC: `30`
-- XHTTP: `82`
+- Обновлено: `2026-07-17T10:00:54Z`
+- Серверов: `225`
+- Reality: `153`
+- TLS: `217`
+- TCP: `134`
+- WebSocket: `11`
+- gRPC: `17`
+- XHTTP: `63`
