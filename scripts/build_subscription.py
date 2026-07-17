@@ -3,6 +3,7 @@ import datetime as dt
 import hashlib
 import ipaddress
 import json
+import os
 import re
 import socket
 import sys
@@ -148,8 +149,11 @@ README_FILE = ROOT / "README.md"
 URL_TEST = "https://www.gstatic.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 
-SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
 TRUE_VALUES = {"1", "true", "yes", "on"}
+# XHTTP requires a fairly recent Mihomo core. OpenClash routers often run
+# older cores, so published subscriptions stay router-safe by default.
+INCLUDE_XHTTP = os.getenv("INCLUDE_XHTTP", "").strip().lower() in TRUE_VALUES
+SUPPORTED_NETWORKS = {"tcp", "ws", "grpc"} | ({"xhttp"} if INCLUDE_XHTTP else set())
 GEOIP_BATCH_URL = "http://ip-api.com/batch?fields=status,countryCode,query,message"
 
 
