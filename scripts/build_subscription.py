@@ -34,6 +34,41 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/KiryaScript/white-lists/main/source/githubmirror/26.txt",
     },
     {
+        "id": "KIRYA_WL_26",
+        "name": "KiryaScript WhiteListsVPN 26.txt",
+        "url": "https://raw.githubusercontent.com/KiryaScript/white-lists/main/githubmirror/26.txt",
+    },
+    {
+        "id": "KIRYA_WL_27",
+        "name": "KiryaScript WhiteListsVPN 27.txt",
+        "url": "https://raw.githubusercontent.com/KiryaScript/white-lists/main/githubmirror/27.txt",
+    },
+    {
+        "id": "KIRYA_WL_28",
+        "name": "KiryaScript WhiteListsVPN 28.txt",
+        "url": "https://raw.githubusercontent.com/KiryaScript/white-lists/main/githubmirror/28.txt",
+    },
+    {
+        "id": "KIRYA_WL_29",
+        "name": "KiryaScript WhiteListsVPN 29.txt",
+        "url": "https://raw.githubusercontent.com/KiryaScript/white-lists/main/githubmirror/29.txt",
+    },
+    {
+        "id": "BYEWL2",
+        "name": "ByeWhiteLists2",
+        "url": "https://raw.githubusercontent.com/ByeWhiteLists/ByeWhiteLists2/refs/heads/main/ByeWhiteLists2.txt",
+    },
+    {
+        "id": "IGARECK_WHITE_SNI",
+        "name": "igareck WHITE-SNI-RU-all.txt",
+        "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-SNI-RU-all.txt",
+    },
+    {
+        "id": "IGARECK_WHITE_CIDR",
+        "name": "igareck WHITE-CIDR-RU-all.txt",
+        "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt",
+    },
+    {
         "id": "MAHAN_VLESS",
         "name": "MahanKenway configs/vless.txt",
         "url": "https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt",
