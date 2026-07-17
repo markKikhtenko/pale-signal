@@ -21,6 +21,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 Дополнительные ссылки:
 
 ```text
+https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml
+https://markkikhtenko.github.io/pale-signal/subscription-global.yaml
 https://markkikhtenko.github.io/pale-signal/merged_flclash.yaml
 https://markkikhtenko.github.io/pale-signal/subscription_base64.txt
 https://markkikhtenko.github.io/pale-signal/subscription_info.txt
@@ -62,9 +64,9 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | 🔒 Reality | Поддержка VLESS Reality |
 | 🔐 TLS | Поддержка TLS-серверов |
 | 🌐 TCP / WS / gRPC / XHTTP | Поддержка основных транспортов Mihomo |
-| 📦 Группы источников | Каждый источник вынесен в отдельную группу |
+| 🌍 RU / Global | Отдельные подписки для России и остальных стран |
 | 🚀 AUTO | URL Test выбирает сервер на стороне клиента |
-| 🧯 FALLBACK | Резервное переключение между серверами |
+| 👆 MANUAL | Ручной выбор сервера |
 | 🗑 Дедупликация | Повторяющиеся серверы удаляются |
 | ✅ Без ping в Actions | Работоспособность проверяет OpenClash/Mihomo |
 
@@ -75,20 +77,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | Группа | Тип | Описание |
 |--------|-----|----------|
 | `AUTO` | url-test | Автоматический выбор по URL Test |
-| `FALLBACK` | fallback | Резервное переключение между серверами |
+| `MANUAL` | select | Ручной выбор конкретного сервера |
 | `PROXY` | select | Главная группа для правила `MATCH,PROXY` |
-| `FULL` | select | Серверы из `zieng2 vless_universal.txt` |
-| `LITE` | select | Серверы из `zieng2 vless_lite.txt` |
-| `RADIKAL_LIGHT` | select | Серверы из `0xRadikal light/configs.txt` |
-| `KIRYA_26` | select | Серверы из `KiryaScript source/githubmirror/26.txt` |
-| `MAHAN_VLESS` | select | Серверы из `MahanKenway configs/vless.txt` |
-| `EPODONIOS_26` | select | Серверы из `Epodonios Sub26.txt` |
-| `AVEN_26` | select | Серверы из `AvenCores 26_urls.json` |
-| `REALITY` | select | Только Reality-серверы |
-| `TLS` | select | Серверы с TLS |
-| `WS` | select | WebSocket-серверы |
-| `GRPC` | select | gRPC-серверы |
-| `XHTTP` | select | XHTTP-серверы |
 
 ---
 
@@ -114,6 +104,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | Файл | Назначение |
 |------|------------|
 | `subscription.yaml` | Основная подписка для OpenClash/Mihomo |
+| `subscription-ru.yaml` | Серверы, физически расположенные в России |
+| `subscription-global.yaml` | Серверы остальных стран и `[UNKNOWN]` |
 | `merged_flclash.yaml` | Та же подписка под именем для FLClash |
 | `subscription_base64.txt` | Base64-версия подписки |
 | `subscription_info.txt` | Краткая информация о последней сборке |
@@ -141,7 +133,9 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 - Серверы берутся из внешнего публичного списка.
 - GitHub Actions не проверяет серверы через ping и не подключается к ним.
-- Реальную работоспособность проверяет OpenClash/Mihomo через `AUTO` и `FALLBACK`.
+- Разделение RU/global не использует SNI, servername, Host, XHTTP host или gRPC service name.
+- Для узлов без страны в имени используется GeoIP фактического поля `server`.
+- Реальную работоспособность проверяет OpenClash/Mihomo через `AUTO`.
 - Для роутера обычно достаточно добавить только `subscription.yaml`.
 
 ---
@@ -152,13 +146,13 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 - Используйте группу `AUTO`.
 - Подождите несколько минут, пока клиент выполнит URL Test.
-- Попробуйте вручную выбрать сервер из `REALITY`, `TLS`, `WS`, `GRPC` или `XHTTP`.
+- Попробуйте вручную выбрать сервер из `MANUAL`.
 
 **Если не подключается:**
 
 - Обновите подписку в OpenClash.
-- Переключитесь с `AUTO` на `FALLBACK`.
-- Попробуйте выбрать сервер вручную из `PROXY`.
+- Переключитесь с `AUTO` на `MANUAL`.
+- Попробуйте отдельные подписки `subscription-ru.yaml` или `subscription-global.yaml`.
 
 **Если серверы пропали:**
 
@@ -170,20 +164,23 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 ## 📊 Статус
 
-- ✅ Обновлено: `2026-07-17T11:54:33Z`
+- ✅ Обновлено: `2026-07-17T12:40:15Z`
 - ✅ Серверов: `4440`
-- ✅ FULL: `225`
-- ✅ LITE: `225`
+- ✅ RU: `2100`
+- ✅ Global: `2340`
+- ✅ Unknown: `55`
+- ✅ FULL: `215`
+- ✅ LITE: `215`
 - ✅ RADIKAL_LIGHT: `386`
 - ✅ KIRYA_26: `1326`
 - ✅ MAHAN_VLESS: `128`
 - ✅ EPODONIOS_26: `119`
-- ✅ AVEN_26: `2588`
-- ✅ Reality: `3412`
-- ✅ TLS: `3938`
-- ✅ TCP: `3086`
-- ✅ WebSocket: `713`
-- ✅ gRPC: `269`
-- ✅ XHTTP: `372`
+- ✅ AVEN_26: `2582`
+- ✅ Reality: `3415`
+- ✅ TLS: `3940`
+- ✅ TCP: `3090`
+- ✅ WebSocket: `717`
+- ✅ gRPC: `264`
+- ✅ XHTTP: `369`
 - ✅ Автообновление: работает через GitHub Actions
 - ✅ Публикация: GitHub Pages

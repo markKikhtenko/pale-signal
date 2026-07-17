@@ -1,5 +1,5 @@
 Pale Signal - подписка для Mihomo/OpenClash
-Обновлено: 2026-07-17T11:54:33Z
+Обновлено: 2026-07-17T12:40:15Z
 Источники:
 - zieng2 vless_universal.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt
 - zieng2 vless_lite.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
@@ -9,23 +9,28 @@ Pale Signal - подписка для Mihomo/OpenClash
 - Epodonios Sub26.txt: https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt
 - AvenCores 26_urls.json: https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json
 Серверов всего: 4440
-FULL: 225
-LITE: 225
+RU: 2100
+GLOBAL: 2340
+UNKNOWN: 55
+FULL: 215
+LITE: 215
 RADIKAL_LIGHT: 386
 KIRYA_26: 1326
 MAHAN_VLESS: 128
 EPODONIOS_26: 119
-AVEN_26: 2588
-Reality: 3412
-TLS: 3938
-TCP: 3086
-WebSocket: 713
-gRPC: 269
-XHTTP: 372
-SHA256: 80b1c4db7bda0747f2df545dca860e05c54cdb68864ab33cc28d208b196ffb94
+AVEN_26: 2582
+Reality: 3415
+TLS: 3940
+TCP: 3090
+WebSocket: 717
+gRPC: 264
+XHTTP: 369
+SHA256: e8e5f5265aa34e838e2fda37fc56be0900e9ba2b8cdbbed976ac944f6f908420
 
 Файлы:
 - subscription.yaml - основная ссылка для OpenClash
+- subscription-ru.yaml - серверы, физически расположенные в России
+- subscription-global.yaml - серверы остальных стран и [UNKNOWN]
 - merged_flclash.yaml - тот же конфиг под именем для FLClash
 - subscription_base64.txt - base64-версия YAML
 - servers_history.json - история появления серверов

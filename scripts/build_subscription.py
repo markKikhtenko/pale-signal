@@ -5,6 +5,7 @@ import hashlib
 import ipaddress
 import json
 import re
+import socket
 import sys
 import urllib.parse
 import urllib.request
@@ -52,6 +53,8 @@ SOURCES = [
 ]
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
+RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
+GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 FLCLASH_FILE = ROOT / "merged_flclash.yaml"
 BASE64_FILE = ROOT / "subscription_base64.txt"
 INFO_FILE = ROOT / "subscription_info.txt"
@@ -61,6 +64,7 @@ URL_TEST = "https://www.gstatic.com/generate_204"
 
 SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
 TRUE_VALUES = {"1", "true", "yes", "on"}
+GEOIP_BATCH_URL = "http://ip-api.com/batch?fields=status,countryCode,query,message"
 
 
 def source_urls() -> str:
@@ -151,6 +155,20 @@ def normalize_network(raw_network: str) -> str:
     return network
 
 
+def normalize_fingerprint(value: str) -> str:
+    fingerprint = value.strip().lower()
+    if fingerprint == "randomized":
+        return "random"
+    return fingerprint
+
+
+def normalize_flow(value: str) -> str:
+    flow = value.strip()
+    if flow == "xtls-rprx-vision-udp443":
+        return "xtls-rprx-vision"
+    return flow
+
+
 def valid_server(server: str) -> bool:
     try:
         address = ipaddress.ip_address(server)
@@ -200,7 +218,7 @@ def parse_vless(line: str, source_id: str) -> dict | None:
             "encryption": first_param(params, "encryption") or "none",
         }
 
-        flow = first_param(params, "flow")
+        flow = normalize_flow(first_param(params, "flow"))
         if flow:
             proxy["flow"] = flow
 
@@ -212,7 +230,7 @@ def parse_vless(line: str, source_id: str) -> dict | None:
 
             fingerprint = first_param(params, "fp", "fingerprint", "client-fingerprint")
             if fingerprint:
-                proxy["client-fingerprint"] = fingerprint
+                proxy["client-fingerprint"] = normalize_fingerprint(fingerprint)
 
             alpn = first_param(params, "alpn")
             if alpn:
@@ -292,69 +310,198 @@ def dedupe_and_name(proxies: list[dict]) -> list[dict]:
     return result
 
 
+def flag_to_country_code(flag: str) -> str | None:
+    if len(flag) != 2:
+        return None
+    codepoints = [ord(char) for char in flag]
+    if not all(0x1F1E6 <= point <= 0x1F1FF for point in codepoints):
+        return None
+    return "".join(chr(point - 0x1F1E6 + ord("A")) for point in codepoints)
+
+
+def country_from_name(name: str) -> str | None:
+    lowered = name.casefold()
+    for index in range(len(name) - 1):
+        code = flag_to_country_code(name[index : index + 2])
+        if code:
+            return code
+
+    ru_patterns = [
+        "russia",
+        "russian federation",
+        "россия",
+        "российская федерация",
+        "москва",
+        "moscow",
+        "санкт-петербург",
+        "saint petersburg",
+        "st petersburg",
+    ]
+    if any(pattern in lowered for pattern in ru_patterns):
+        return "RU"
+
+    other_country_patterns = [
+        "germany", "deutschland", "германия",
+        "netherlands", "нидерланды",
+        "france", "франция",
+        "united kingdom", "great britain", "британия", "англия",
+        "united states", "usa", "america", "сша",
+        "canada", "канада",
+        "finland", "финляндия",
+        "sweden", "швеция",
+        "poland", "польша",
+        "turkey", "турция",
+        "iran", "иран",
+        "singapore", "сингапур",
+        "japan", "япония",
+        "hong kong", "гонконг",
+        "korea", "корея",
+        "china", "китай",
+        "kazakhstan", "казахстан",
+        "armenia", "армения",
+        "georgia", "грузия",
+        "estonia", "эстония",
+        "latvia", "латвия",
+        "lithuania", "литва",
+        "ukraine", "украина",
+    ]
+    if any(pattern in lowered for pattern in other_country_patterns):
+        return "OTHER"
+
+    if re.search(r"(^|[^a-zа-я0-9])ru([^a-zа-я0-9]|$)", lowered):
+        return "RU"
+    return None
+
+
+def resolve_server_ip(server: str) -> str | None:
+    try:
+        address = ipaddress.ip_address(server)
+        return str(address)
+    except ValueError:
+        pass
+
+    try:
+        addresses = socket.getaddrinfo(server, None, family=socket.AF_INET, type=socket.SOCK_STREAM)
+    except OSError:
+        return None
+
+    for address in addresses:
+        ip = address[4][0]
+        try:
+            ipaddress.ip_address(ip)
+            return ip
+        except ValueError:
+            continue
+    return None
+
+
+def geoip_lookup(ips: set[str]) -> dict[str, str]:
+    result: dict[str, str] = {}
+    clean_ips = sorted(ip for ip in ips if ip)
+    for index in range(0, len(clean_ips), 100):
+        chunk = clean_ips[index : index + 100]
+        request = urllib.request.Request(
+            GEOIP_BATCH_URL,
+            data=json.dumps(chunk).encode("utf-8"),
+            headers={
+                "Content-Type": "application/json",
+                "User-Agent": "pale-signal-subscription-builder/1.0",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=45) as response:
+                payload = json.loads(response.read().decode("utf-8", errors="replace"))
+        except Exception as exc:
+            print(f"warning: skipped GeoIP batch: {exc}", file=sys.stderr)
+            continue
+
+        if not isinstance(payload, list):
+            continue
+        for item in payload:
+            if not isinstance(item, dict):
+                continue
+            query = item.get("query")
+            country_code = item.get("countryCode")
+            if item.get("status") == "success" and isinstance(query, str) and isinstance(country_code, str):
+                result[query] = country_code.upper()
+    return result
+
+
+def ensure_unique_names(proxies: list[dict]) -> None:
+    used_names: dict[str, int] = {}
+    for proxy in proxies:
+        base_name = proxy["name"]
+        count = used_names.get(base_name, 0) + 1
+        used_names[base_name] = count
+        if count > 1:
+            proxy["name"] = f"{base_name} {count}"
+
+
+def split_by_country(proxies: list[dict]) -> tuple[list[dict], list[dict]]:
+    pending_geo: dict[int, str | None] = {}
+    ips: set[str] = set()
+
+    for index, proxy in enumerate(proxies):
+        name_country = country_from_name(proxy["name"])
+        if name_country == "RU":
+            proxy["_country"] = "RU"
+        elif name_country:
+            proxy["_country"] = name_country
+        else:
+            ip = resolve_server_ip(proxy["server"])
+            pending_geo[index] = ip
+            if ip:
+                ips.add(ip)
+
+    geoip = geoip_lookup(ips)
+    for index, ip in pending_geo.items():
+        proxy = proxies[index]
+        country = geoip.get(ip or "")
+        if country:
+            proxy["_country"] = country
+        else:
+            proxy["_country"] = "UNKNOWN"
+            if "[UNKNOWN]" not in proxy["name"]:
+                proxy["name"] = f"{proxy['name']} [UNKNOWN]"
+
+    ensure_unique_names(proxies)
+    ru_proxies = [proxy for proxy in proxies if proxy.get("_country") == "RU"]
+    global_proxies = [proxy for proxy in proxies if proxy.get("_country") != "RU"]
+    return ru_proxies, global_proxies
+
+
 def build_config(proxies: list[dict]) -> dict:
     names = [proxy["name"] for proxy in proxies]
-    source_groups = [
-        (
-            source["id"],
-            [proxy["name"] for proxy in proxies if source["id"] in proxy.get("_sources", [])],
-        )
-        for source in SOURCES
-    ]
-    reality_names = [proxy["name"] for proxy in proxies if "reality-opts" in proxy]
-    tls_names = [proxy["name"] for proxy in proxies if proxy.get("tls")]
-    ws_names = [proxy["name"] for proxy in proxies if proxy.get("network") == "ws"]
-    grpc_names = [proxy["name"] for proxy in proxies if proxy.get("network") == "grpc"]
-    xhttp_names = [proxy["name"] for proxy in proxies if proxy.get("network") == "xhttp"]
-
-    groups = [
-        {
-            "name": "AUTO",
-            "type": "url-test",
-            "proxies": names,
-            "url": URL_TEST,
-            "interval": 300,
-            "tolerance": 50,
-        },
-        {
-            "name": "FALLBACK",
-            "type": "fallback",
-            "proxies": names,
-            "url": URL_TEST,
-            "interval": 300,
-        },
-    ]
-
-    category_groups = [
-        *source_groups,
-        ("REALITY", reality_names),
-        ("TLS", tls_names),
-        ("WS", ws_names),
-        ("GRPC", grpc_names),
-        ("XHTTP", xhttp_names),
-    ]
-    select_groups = [name for name, group_proxies in category_groups if group_proxies]
-    groups.append(
-        {
-            "name": "PROXY",
-            "type": "select",
-            "proxies": ["AUTO", "FALLBACK", *select_groups, *names],
-        }
-    )
-    groups.extend(
-        {"name": group_name, "type": "select", "proxies": group_proxies}
-        for group_name, group_proxies in category_groups
-        if group_proxies
-    )
 
     return {
         "mixed-port": 7890,
         "allow-lan": True,
         "mode": "rule",
         "log-level": "info",
-        "ipv6": True,
+        "ipv6": False,
         "proxies": [{key: value for key, value in proxy.items() if not key.startswith("_")} for proxy in proxies],
-        "proxy-groups": groups,
+        "proxy-groups": [
+            {
+                "name": "AUTO",
+                "type": "url-test",
+                "proxies": names,
+                "url": URL_TEST,
+                "interval": 900,
+                "tolerance": 100,
+                "lazy": True,
+            },
+            {
+                "name": "MANUAL",
+                "type": "select",
+                "proxies": names,
+            },
+            {
+                "name": "PROXY",
+                "type": "select",
+                "proxies": ["AUTO", "MANUAL"],
+            },
+        ],
         "rules": ["MATCH,PROXY"],
     }
 
@@ -406,10 +553,12 @@ def validate_config(config: dict) -> None:
     rules = config.get("rules")
     if not isinstance(proxies, list) or not proxies:
         raise RuntimeError("no valid proxies were produced")
-    if not isinstance(groups, list) or len(groups) < 3:
+    if not isinstance(groups, list) or len(groups) != 3:
         raise RuntimeError("proxy groups are missing")
     group_names_ordered = [group.get("name") for group in groups]
-    for required in ("AUTO", "FALLBACK", "PROXY"):
+    if group_names_ordered != ["AUTO", "MANUAL", "PROXY"]:
+        raise RuntimeError(f"unexpected proxy groups: {group_names_ordered}")
+    for required in ("AUTO", "MANUAL", "PROXY"):
         if required not in group_names_ordered:
             raise RuntimeError(f"required group {required} is missing")
     if rules != ["MATCH,PROXY"]:
@@ -457,6 +606,9 @@ def stats_for(proxies: list[dict]) -> dict[str, int]:
         "ws": sum(1 for proxy in proxies if proxy.get("network") == "ws"),
         "grpc": sum(1 for proxy in proxies if proxy.get("network") == "grpc"),
         "xhttp": sum(1 for proxy in proxies if proxy.get("network") == "xhttp"),
+        "ru": sum(1 for proxy in proxies if proxy.get("_country") == "RU"),
+        "global": sum(1 for proxy in proxies if proxy.get("_country") != "RU"),
+        "unknown": sum(1 for proxy in proxies if proxy.get("_country") == "UNKNOWN"),
     }
 
 
@@ -480,6 +632,7 @@ def update_history(proxies: list[dict], now: str) -> dict:
             "server": proxy["server"],
             "port": proxy["port"],
             "sources": proxy.get("_sources", []),
+            "country": proxy.get("_country", "UNKNOWN"),
             "network": proxy.get("network", "tcp"),
             "reality": "reality-opts" in proxy,
             "tls": bool(proxy.get("tls")),
@@ -539,6 +692,9 @@ def write_project_info(proxies: list[dict], yaml_text: str, now: str) -> None:
         "Источники:",
         *source_urls().splitlines(),
         f"Серверов всего: {stats['total']}",
+        f"RU: {stats['ru']}",
+        f"GLOBAL: {stats['global']}",
+        f"UNKNOWN: {stats['unknown']}",
         *source_count_lines,
         f"Reality: {stats['reality']}",
         f"TLS: {stats['tls']}",
@@ -550,6 +706,8 @@ def write_project_info(proxies: list[dict], yaml_text: str, now: str) -> None:
         "",
         "Файлы:",
         "- subscription.yaml - основная ссылка для OpenClash",
+        "- subscription-ru.yaml - серверы, физически расположенные в России",
+        "- subscription-global.yaml - серверы остальных стран и [UNKNOWN]",
         "- merged_flclash.yaml - тот же конфиг под именем для FLClash",
         "- subscription_base64.txt - base64-версия YAML",
         "- servers_history.json - история появления серверов",
@@ -640,6 +798,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 Дополнительные ссылки:
 
 ```text
+https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml
+https://markkikhtenko.github.io/pale-signal/subscription-global.yaml
 https://markkikhtenko.github.io/pale-signal/merged_flclash.yaml
 https://markkikhtenko.github.io/pale-signal/subscription_base64.txt
 https://markkikhtenko.github.io/pale-signal/subscription_info.txt
@@ -681,9 +841,9 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | 🔒 Reality | Поддержка VLESS Reality |
 | 🔐 TLS | Поддержка TLS-серверов |
 | 🌐 TCP / WS / gRPC / XHTTP | Поддержка основных транспортов Mihomo |
-| 📦 Группы источников | Каждый источник вынесен в отдельную группу |
+| 🌍 RU / Global | Отдельные подписки для России и остальных стран |
 | 🚀 AUTO | URL Test выбирает сервер на стороне клиента |
-| 🧯 FALLBACK | Резервное переключение между серверами |
+| 👆 MANUAL | Ручной выбор сервера |
 | 🗑 Дедупликация | Повторяющиеся серверы удаляются |
 | ✅ Без ping в Actions | Работоспособность проверяет OpenClash/Mihomo |
 
@@ -694,14 +854,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | Группа | Тип | Описание |
 |--------|-----|----------|
 | `AUTO` | url-test | Автоматический выбор по URL Test |
-| `FALLBACK` | fallback | Резервное переключение между серверами |
+| `MANUAL` | select | Ручной выбор конкретного сервера |
 | `PROXY` | select | Главная группа для правила `MATCH,PROXY` |
-{source_group_rows}
-| `REALITY` | select | Только Reality-серверы |
-| `TLS` | select | Серверы с TLS |
-| `WS` | select | WebSocket-серверы |
-| `GRPC` | select | gRPC-серверы |
-| `XHTTP` | select | XHTTP-серверы |
 
 ---
 
@@ -727,6 +881,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | Файл | Назначение |
 |------|------------|
 | `subscription.yaml` | Основная подписка для OpenClash/Mihomo |
+| `subscription-ru.yaml` | Серверы, физически расположенные в России |
+| `subscription-global.yaml` | Серверы остальных стран и `[UNKNOWN]` |
 | `merged_flclash.yaml` | Та же подписка под именем для FLClash |
 | `subscription_base64.txt` | Base64-версия подписки |
 | `subscription_info.txt` | Краткая информация о последней сборке |
@@ -748,7 +904,9 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 - Серверы берутся из внешнего публичного списка.
 - GitHub Actions не проверяет серверы через ping и не подключается к ним.
-- Реальную работоспособность проверяет OpenClash/Mihomo через `AUTO` и `FALLBACK`.
+- Разделение RU/global не использует SNI, servername, Host, XHTTP host или gRPC service name.
+- Для узлов без страны в имени используется GeoIP фактического поля `server`.
+- Реальную работоспособность проверяет OpenClash/Mihomo через `AUTO`.
 - Для роутера обычно достаточно добавить только `subscription.yaml`.
 
 ---
@@ -759,13 +917,13 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 - Используйте группу `AUTO`.
 - Подождите несколько минут, пока клиент выполнит URL Test.
-- Попробуйте вручную выбрать сервер из `REALITY`, `TLS`, `WS`, `GRPC` или `XHTTP`.
+- Попробуйте вручную выбрать сервер из `MANUAL`.
 
 **Если не подключается:**
 
 - Обновите подписку в OpenClash.
-- Переключитесь с `AUTO` на `FALLBACK`.
-- Попробуйте выбрать сервер вручную из `PROXY`.
+- Переключитесь с `AUTO` на `MANUAL`.
+- Попробуйте отдельные подписки `subscription-ru.yaml` или `subscription-global.yaml`.
 
 **Если серверы пропали:**
 
@@ -779,6 +937,9 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 - ✅ Обновлено: `{now}`
 - ✅ Серверов: `{stats['total']}`
+- ✅ RU: `{stats['ru']}`
+- ✅ Global: `{stats['global']}`
+- ✅ Unknown: `{stats['unknown']}`
 {source_status_lines}
 - ✅ Reality: `{stats['reality']}`
 - ✅ TLS: `{stats['tls']}`
@@ -802,22 +963,34 @@ def main() -> int:
                 if (proxy := parse_vless(line, source["id"]))
             )
     proxies = dedupe_and_name(parsed)
+    ru_proxies, global_proxies = split_by_country(proxies)
     config = build_config(proxies)
+    ru_config = build_config(ru_proxies)
+    global_config = build_config(global_proxies)
     validate_config(config)
+    validate_config(ru_config)
+    validate_config(global_config)
 
     yaml_text = "\n".join(dump_yaml(config)) + "\n"
-    if not yaml_text.strip():
+    ru_yaml_text = "\n".join(dump_yaml(ru_config)) + "\n"
+    global_yaml_text = "\n".join(dump_yaml(global_config)) + "\n"
+    if not yaml_text.strip() or not ru_yaml_text.strip() or not global_yaml_text.strip():
         raise RuntimeError("empty YAML output")
 
     now = dt.datetime.now(dt.UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     history = update_history(proxies, now)
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
+    RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
+    GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
     FLCLASH_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     BASE64_FILE.write_text(base64.b64encode(yaml_text.encode("utf-8")).decode("ascii") + "\n", encoding="ascii", newline="\n")
     HISTORY_FILE.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     write_project_info(proxies, yaml_text, now)
     write_project_readme(proxies, now)
-    print(f"wrote subscription files with {len(proxies)} proxies")
+    print(
+        f"wrote subscription files with {len(proxies)} proxies "
+        f"({len(ru_proxies)} ru, {len(global_proxies)} global)"
+    )
     return 0
 
 
