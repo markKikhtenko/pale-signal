@@ -166,7 +166,7 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 ## 📊 Статус
 
-- ✅ Обновлено: `2026-07-17T10:28:21Z`
+- ✅ Обновлено: `2026-07-17T10:28:54Z`
 - ✅ Серверов: `2185`
 - ✅ FULL: `225`
 - ✅ LITE: `225`
