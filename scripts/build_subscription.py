@@ -99,6 +99,46 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json",
         "type": "url_list_json",
     },
+    {
+        "id": "AVEN_MIRROR_26",
+        "name": "AvenCores githubmirror/26.txt",
+        "url": "https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/githubmirror/26.txt",
+    },
+    {
+        "id": "VOID_URL_WORK",
+        "name": "V.O.I.D VPN Bypass url_work.txt",
+        "url": "https://raw.githubusercontent.com/VOID-Anonymity/V.O.I.D-VPN_Bypass/main/url_work.txt",
+    },
+    {
+        "id": "RKP_WHITELIST",
+        "name": "RKP bypass whitelist.txt",
+        "url": "https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/main/whitelist.txt",
+    },
+    {
+        "id": "WLUNLOCKER_WHITE_ALL",
+        "name": "wlunlocker whitelist_all.txt",
+        "url": "https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_all.txt",
+    },
+    {
+        "id": "WLUNLOCKER_CIDR_1",
+        "name": "wlunlocker whitelist_cidr1_ru.txt",
+        "url": "https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_cidr1_ru.txt",
+    },
+    {
+        "id": "WLUNLOCKER_CIDR_2",
+        "name": "wlunlocker whitelist_cidr2_ru.txt",
+        "url": "https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_cidr2_ru.txt",
+    },
+    {
+        "id": "VLADVARP_WHITELIST_VLESS",
+        "name": "vladvarp Prometheus WhiteList/vless.txt",
+        "url": "https://raw.githubusercontent.com/vladvarp/Prometheus/main/WhiteList/vless.txt",
+    },
+    {
+        "id": "PRINCE_WHITE_LIST",
+        "name": "PrinceVSFX Adapt-Configs White_list.txt",
+        "url": "https://raw.githubusercontent.com/PrinceVSFX/Adapt-Configs/main/Configs/White_list.txt",
+    },
 ]
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
