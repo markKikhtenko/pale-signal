@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md subscription.yaml subscription-ru.yaml subscription-global.yaml merged_flclash.yaml subscription_base64.txt subscription_info.txt servers_history.json
+          git add README.md subscription.yaml subscription-ru.yaml subscription-global.yaml
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else
@@ -51,10 +51,6 @@ jobs:
           cp subscription.yaml public/subscription.yaml
           cp subscription-ru.yaml public/subscription-ru.yaml
           cp subscription-global.yaml public/subscription-global.yaml
-          cp merged_flclash.yaml public/merged_flclash.yaml
-          cp subscription_base64.txt public/subscription_base64.txt
-          cp subscription_info.txt public/subscription_info.txt
-          cp servers_history.json public/servers_history.json
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

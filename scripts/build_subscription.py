@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import base64
 import datetime as dt
 import hashlib
 import ipaddress
@@ -55,10 +54,6 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
 RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
 GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
-FLCLASH_FILE = ROOT / "merged_flclash.yaml"
-BASE64_FILE = ROOT / "subscription_base64.txt"
-INFO_FILE = ROOT / "subscription_info.txt"
-HISTORY_FILE = ROOT / "servers_history.json"
 README_FILE = ROOT / "README.md"
 URL_TEST = "https://www.gstatic.com/generate_204"
 
@@ -1048,14 +1043,9 @@ def main() -> int:
         raise RuntimeError("empty YAML output")
 
     now = dt.datetime.now(dt.UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-    history = update_history(proxies, now)
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
-    FLCLASH_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
-    BASE64_FILE.write_text(base64.b64encode(yaml_text.encode("utf-8")).decode("ascii") + "\n", encoding="ascii", newline="\n")
-    HISTORY_FILE.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    write_project_info(proxies, yaml_text, now)
     write_clean_readme(proxies, now)
     print(
         f"wrote subscription files with {len(proxies)} proxies "
