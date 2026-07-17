@@ -6478,179 +6478,6 @@ proxies:
     grpc-opts:
       grpc-service-name: "neurex"
   -
-    name: "🇷🇺 VK — #1 4"
-    type: "vless"
-    server: "89.208.231.191"
-    port: 8443
-    uuid: "8d58ecdf-64eb-07d0-b416-b878daf2d914"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "max.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik"
-      short-id: "d8c6b58bcbb0c323"
-  -
-    name: "🇷🇺 Aeza Group — #2"
-    type: "vless"
-    server: "45.151.101.137"
-    port: 2053
-    uuid: "a9a96ecb-0d66-5809-a833-7a7431c1ca60"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "www.amazon.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "l_C0QQhMVDqhDT3-_AS8cBoOOhKksv8ubX4cf4EVjwo"
-      short-id: "17"
-      spider-x: "/5QFfdWJo6AMdStV"
-    grpc-opts:
-      grpc-service-name: "grpc-ru-2053-4f7b2a"
-  -
-    name: "🇷🇺 Beget — #3 2"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "2232c568-5841-4ece-b33d-55a7c36ea7cf"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
-    name: "🇷🇺 Beget — #4 2"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "6dc117f0-7a8e-4565-b28c-09f1eaaf0b33"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
-    name: "🇷🇺 Beget — #5 2"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "22b6aad9-06f6-4c86-a65a-0303a61d454e"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
-    name: "🇷🇺 Beget — #6 2"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "b1e0c267-2d97-4166-8b50-11bdead6e247"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
-    name: "🇷🇺 Beget — #7 2"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "47e069d4-e2b9-4d67-8d12-ac0454669441"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
-    name: "🇷🇺 Beget — #8 2"
-    type: "vless"
-    server: "5.35.91.70"
-    port: 443
-    uuid: "47e144de-9fb2-47da-9a1b-c8f78df22e99"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "github.com"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "0Ez22rHq6dK6mUOOU5nv0uEhEkMBTui07FFTe1mH70Q"
-      short-id: "f8c21d6b3a9e7054"
-  -
-    name: "🇷🇺 Beget — #9 2"
-    type: "vless"
-    server: "5.35.91.70"
-    port: 443
-    uuid: "47e144de-9fb2-47da-9a1b-c8f78df22e99"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "github.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "0Ez22rHq6dK6mUOOU5nv0uEhEkMBTui07FFTe1mH70Q"
-      short-id: "f8c21d6b3a9e7054"
-  -
-    name: "🇷🇺 Fornex Hosting S.L. — #15"
-    type: "vless"
-    server: "130.17.2.48"
-    port: 2200
-    uuid: "2aa7f4b1-e859-46d0-b8ac-8587811ab7b1"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-      headers:
-        Host: "rzd.ru"
-  -
-    name: "🇷🇺 ProCloud — #16 2"
-    type: "vless"
-    server: "176.109.85.77"
-    port: 10443
-    uuid: "f4c0abef-dffd-4922-bd0b-c77e3d0e64f2"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "muzgrape.space"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "5M0khPdwiXYhayuP4i76J1am-q85Sno7vGnqEnZ1ngI"
-      short-id: "ccaa"
-  -
     name: "🇷🇺 RU | — | 35 | @ByeWhiteLists2"
     type: "vless"
     server: "194.113.235.13"
@@ -34587,6 +34414,22 @@ proxies:
       public-key: "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc"
       short-id: "43dcff53849b81e6"
   -
+    name: "1148 | 🇷🇺 Russia | 🏳️ SNI-DZEN | VLESS | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "77.105.168.100"
+    port: 443
+    uuid: "81c620a2-03d2-4c2a-83b0-0302cdcd197a"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "dzen.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "olcTApVIdrdt_bsMJaLsZ-8bYR73oMNzgCZJuR_4sFA"
+      short-id: "7c83683ed7507a69"
+  -
     name: "1150 | 🇷🇺 Russia | 🏳️ CIDR-Selectel | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
     type: "vless"
     server: "185.91.54.30"
@@ -35698,17 +35541,6 @@ proxy-groups:
       - "🇷🇺 Russia | [*CIDR]"
       - "🇷🇺 Russia | [*CIDR] 2"
       - "🇷🇺 Russia | [*CIDR] 3"
-      - "🇷🇺 VK — #1 4"
-      - "🇷🇺 Aeza Group — #2"
-      - "🇷🇺 Beget — #3 2"
-      - "🇷🇺 Beget — #4 2"
-      - "🇷🇺 Beget — #5 2"
-      - "🇷🇺 Beget — #6 2"
-      - "🇷🇺 Beget — #7 2"
-      - "🇷🇺 Beget — #8 2"
-      - "🇷🇺 Beget — #9 2"
-      - "🇷🇺 Fornex Hosting S.L. — #15"
-      - "🇷🇺 ProCloud — #16 2"
       - "🇷🇺 RU | — | 35 | @ByeWhiteLists2"
       - "🇷🇺 RU | — | 36 | @ByeWhiteLists2"
       - "🇷🇺 RU | — | 39 | @ByeWhiteLists2"
@@ -37441,6 +37273,7 @@ proxy-groups:
       - "1098 | 🇷🇺 Russia | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
       - "1121 | 🇷🇺 Russia | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
       - "1147 | 🇷🇺 Russia | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
+      - "1148 | 🇷🇺 Russia | 🏳️ SNI-DZEN | VLESS | TG: @YoutubeUnBlockRu"
       - "1150 | 🇷🇺 Russia | 🏳️ CIDR-Selectel | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
       - "1153 | 🇷🇺 Russia | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
       - "1171 | 🇷🇺 Russia | 🏳️ CIDR-Selectel | VLESS | TG: @YoutubeUnBlockRu"
@@ -37900,17 +37733,6 @@ proxy-groups:
       - "🇷🇺 Russia | [*CIDR]"
       - "🇷🇺 Russia | [*CIDR] 2"
       - "🇷🇺 Russia | [*CIDR] 3"
-      - "🇷🇺 VK — #1 4"
-      - "🇷🇺 Aeza Group — #2"
-      - "🇷🇺 Beget — #3 2"
-      - "🇷🇺 Beget — #4 2"
-      - "🇷🇺 Beget — #5 2"
-      - "🇷🇺 Beget — #6 2"
-      - "🇷🇺 Beget — #7 2"
-      - "🇷🇺 Beget — #8 2"
-      - "🇷🇺 Beget — #9 2"
-      - "🇷🇺 Fornex Hosting S.L. — #15"
-      - "🇷🇺 ProCloud — #16 2"
       - "🇷🇺 RU | — | 35 | @ByeWhiteLists2"
       - "🇷🇺 RU | — | 36 | @ByeWhiteLists2"
       - "🇷🇺 RU | — | 39 | @ByeWhiteLists2"
@@ -39643,6 +39465,7 @@ proxy-groups:
       - "1098 | 🇷🇺 Russia | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
       - "1121 | 🇷🇺 Russia | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
       - "1147 | 🇷🇺 Russia | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
+      - "1148 | 🇷🇺 Russia | 🏳️ SNI-DZEN | VLESS | TG: @YoutubeUnBlockRu"
       - "1150 | 🇷🇺 Russia | 🏳️ CIDR-Selectel | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
       - "1153 | 🇷🇺 Russia | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
       - "1171 | 🇷🇺 Russia | 🏳️ CIDR-Selectel | VLESS | TG: @YoutubeUnBlockRu"
