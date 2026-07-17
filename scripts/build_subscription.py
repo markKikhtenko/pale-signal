@@ -3,7 +3,6 @@ import datetime as dt
 import hashlib
 import ipaddress
 import json
-import os
 import re
 import socket
 import sys
@@ -150,10 +149,7 @@ URL_TEST = "https://www.gstatic.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 
 TRUE_VALUES = {"1", "true", "yes", "on"}
-# XHTTP requires a fairly recent Mihomo core. OpenClash routers often run
-# older cores, so published subscriptions stay router-safe by default.
-INCLUDE_XHTTP = os.getenv("INCLUDE_XHTTP", "").strip().lower() in TRUE_VALUES
-SUPPORTED_NETWORKS = {"tcp", "ws", "grpc"} | ({"xhttp"} if INCLUDE_XHTTP else set())
+SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
 GEOIP_BATCH_URL = "http://ip-api.com/batch?fields=status,countryCode,query,message"
 
 
@@ -249,6 +245,11 @@ def normalize_fingerprint(value: str) -> str:
     fingerprint = value.strip().lower()
     if fingerprint == "randomized":
         return "random"
+    if fingerprint.startswith("hellochrome") or fingerprint.startswith("chrome_"):
+        return "chrome"
+    allowed = {"chrome", "firefox", "safari", "ios", "android", "edge", "qq", "random"}
+    if fingerprint not in allowed:
+        return ""
     return fingerprint
 
 
@@ -309,7 +310,7 @@ def parse_vless(line: str, source_id: str) -> dict | None:
         }
 
         flow = normalize_flow(first_param(params, "flow"))
-        if flow:
+        if flow and network == "tcp" and security in {"tls", "reality"}:
             proxy["flow"] = flow
 
         if security in {"tls", "reality"}:
@@ -561,8 +562,20 @@ def split_by_country(proxies: list[dict]) -> tuple[list[dict], list[dict]]:
     return ru_proxies, global_proxies
 
 
-def build_config(proxies: list[dict]) -> dict:
-    names = [proxy["name"] for proxy in proxies]
+def export_proxy_name(prefix: str, index: int, proxy: dict) -> str:
+    suffix = "-UNKNOWN" if proxy.get("_country") == "UNKNOWN" else ""
+    return f"{prefix}-{index:05d}{suffix}"
+
+
+def build_config(proxies: list[dict], name_prefix: str) -> dict:
+    export_proxies = []
+    names = []
+    for index, proxy in enumerate(proxies, start=1):
+        name = export_proxy_name(name_prefix, index, proxy)
+        names.append(name)
+        export_proxy = {key: value for key, value in proxy.items() if not key.startswith("_")}
+        export_proxy["name"] = name
+        export_proxies.append(export_proxy)
 
     return {
         "mixed-port": 7890,
@@ -570,7 +583,7 @@ def build_config(proxies: list[dict]) -> dict:
         "mode": "rule",
         "log-level": "info",
         "ipv6": False,
-        "proxies": [{key: value for key, value in proxy.items() if not key.startswith("_")} for proxy in proxies],
+        "proxies": export_proxies,
         "proxy-groups": [
             {
                 "name": "AUTO",
@@ -1193,9 +1206,9 @@ def main() -> int:
         raise RuntimeError("no valid VLESS servers were parsed")
     proxies = dedupe_and_name(parsed)
     ru_proxies, global_proxies = split_by_country(proxies)
-    config = build_config(proxies)
-    ru_config = build_config(ru_proxies)
-    global_config = build_config(global_proxies)
+    config = build_config(proxies, "PS")
+    ru_config = build_config(ru_proxies, "PS-RU")
+    global_config = build_config(global_proxies, "PS-GLOBAL")
     validate_config(config)
     validate_config(ru_config)
     validate_config(global_config)
