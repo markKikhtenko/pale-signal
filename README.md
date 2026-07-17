@@ -60,6 +60,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | 🔒 Reality | Поддержка VLESS Reality |
 | 🔐 TLS | Поддержка TLS-серверов |
 | 🌐 TCP / WS / gRPC / XHTTP | Поддержка основных транспортов Mihomo |
+| 📦 FULL | Универсальный не-lite список `vless_universal.txt` отдельной группой |
+| 🪶 LITE | Облегчённый список `vless_lite.txt` отдельной группой |
 | 🚀 AUTO | URL Test выбирает сервер на стороне клиента |
 | 🧯 FALLBACK | Резервное переключение между серверами |
 | 🗑 Дедупликация | Повторяющиеся серверы удаляются |
@@ -74,6 +76,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | `AUTO` | url-test | Автоматический выбор по URL Test |
 | `FALLBACK` | fallback | Резервное переключение между серверами |
 | `PROXY` | select | Главная группа для правила `MATCH,PROXY` |
+| `FULL` | select | Серверы из универсального не-lite списка `vless_universal.txt` |
+| `LITE` | select | Серверы из облегчённого списка `vless_lite.txt` |
 | `REALITY` | select | Только Reality-серверы |
 | `TLS` | select | Серверы с TLS |
 | `WS` | select | WebSocket-серверы |
@@ -113,12 +117,14 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 ---
 
-## 🛠 Источник серверов
+## 🛠 Источники серверов
 
-1. zieng2 - VLESS lite list
+1. zieng2 - универсальный VLESS-список, не-lite
+2. zieng2 - облегчённый VLESS-список
 
 ```text
-https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
+- zieng2 vless_universal.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt
+- zieng2 vless_lite.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
 ```
 
 ---
@@ -156,8 +162,10 @@ https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
 
 ## 📊 Статус
 
-- ✅ Обновлено: `2026-07-17T10:06:17Z`
+- ✅ Обновлено: `2026-07-17T10:18:41Z`
 - ✅ Серверов: `225`
+- ✅ FULL: `225`
+- ✅ LITE: `225`
 - ✅ Reality: `153`
 - ✅ TLS: `217`
 - ✅ TCP: `134`

@@ -12,7 +12,18 @@ import uuid
 from pathlib import Path
 
 
-SOURCE_URL = "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt"
+SOURCES = [
+    {
+        "id": "FULL",
+        "name": "zieng2 vless_universal.txt",
+        "url": "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt",
+    },
+    {
+        "id": "LITE",
+        "name": "zieng2 vless_lite.txt",
+        "url": "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt",
+    },
+]
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
 FLCLASH_FILE = ROOT / "merged_flclash.yaml"
@@ -26,14 +37,18 @@ SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
 TRUE_VALUES = {"1", "true", "yes", "on"}
 
 
-def fetch_source() -> str:
+def source_urls() -> str:
+    return "\n".join(f"- {source['name']}: {source['url']}" for source in SOURCES)
+
+
+def fetch_source(source: dict[str, str]) -> str:
     request = urllib.request.Request(
-        SOURCE_URL,
+        source["url"],
         headers={"User-Agent": "pale-signal-subscription-builder/1.0"},
     )
     with urllib.request.urlopen(request, timeout=45) as response:
         if response.status != 200:
-            raise RuntimeError(f"source returned HTTP {response.status}")
+            raise RuntimeError(f"{source['name']} returned HTTP {response.status}")
         return response.read().decode("utf-8", errors="replace")
 
 
@@ -80,7 +95,7 @@ def valid_server(server: str) -> bool:
         return bool(re.fullmatch(r"[A-Za-z0-9.-]+", server)) and "." in server
 
 
-def parse_vless(line: str) -> dict | None:
+def parse_vless(line: str, source_id: str) -> dict | None:
     line = line.strip()
     if not line.startswith("vless://"):
         return None
@@ -181,34 +196,42 @@ def parse_vless(line: str) -> dict | None:
 
         fallback_name = f"{server}:{port}"
         proxy["_source_name"] = clean_name(parsed.fragment, fallback_name)
+        proxy["_source_id"] = source_id
         return proxy
     except Exception:
         return None
 
 
 def dedupe_and_name(proxies: list[dict]) -> list[dict]:
-    seen_keys: set[str] = set()
+    seen_keys: dict[str, dict] = {}
     used_names: dict[str, int] = {}
     result: list[dict] = []
 
     for proxy in proxies:
         source_name = proxy.pop("_source_name")
+        source_id = proxy.pop("_source_id")
         key = json.dumps(proxy, sort_keys=True, ensure_ascii=False)
         digest = hashlib.sha256(key.encode("utf-8")).hexdigest()
         if digest in seen_keys:
+            existing_sources = seen_keys[digest].setdefault("_sources", [])
+            if source_id not in existing_sources:
+                existing_sources.append(source_id)
             continue
-        seen_keys.add(digest)
 
         count = used_names.get(source_name, 0) + 1
         used_names[source_name] = count
         proxy["name"] = source_name if count == 1 else f"{source_name} {count}"
-        result.append({"name": proxy.pop("name"), **proxy})
+        named_proxy = {"name": proxy.pop("name"), "_sources": [source_id], **proxy}
+        seen_keys[digest] = named_proxy
+        result.append(named_proxy)
 
     return result
 
 
 def build_config(proxies: list[dict]) -> dict:
     names = [proxy["name"] for proxy in proxies]
+    full_names = [proxy["name"] for proxy in proxies if "FULL" in proxy.get("_sources", [])]
+    lite_names = [proxy["name"] for proxy in proxies if "LITE" in proxy.get("_sources", [])]
     reality_names = [proxy["name"] for proxy in proxies if "reality-opts" in proxy]
     tls_names = [proxy["name"] for proxy in proxies if proxy.get("tls")]
     ws_names = [proxy["name"] for proxy in proxies if proxy.get("network") == "ws"]
@@ -234,6 +257,8 @@ def build_config(proxies: list[dict]) -> dict:
     ]
 
     category_groups = [
+        ("FULL", full_names),
+        ("LITE", lite_names),
         ("REALITY", reality_names),
         ("TLS", tls_names),
         ("WS", ws_names),
@@ -260,7 +285,7 @@ def build_config(proxies: list[dict]) -> dict:
         "mode": "rule",
         "log-level": "info",
         "ipv6": True,
-        "proxies": proxies,
+        "proxies": [{key: value for key, value in proxy.items() if not key.startswith("_")} for proxy in proxies],
         "proxy-groups": groups,
         "rules": ["MATCH,PROXY"],
     }
@@ -353,6 +378,8 @@ def proxy_key(proxy: dict) -> str:
 def stats_for(proxies: list[dict]) -> dict[str, int]:
     return {
         "total": len(proxies),
+        "full": sum(1 for proxy in proxies if "FULL" in proxy.get("_sources", [])),
+        "lite": sum(1 for proxy in proxies if "LITE" in proxy.get("_sources", [])),
         "reality": sum(1 for proxy in proxies if "reality-opts" in proxy),
         "tls": sum(1 for proxy in proxies if proxy.get("tls")),
         "tcp": sum(1 for proxy in proxies if proxy.get("network") == "tcp"),
@@ -381,6 +408,7 @@ def update_history(proxies: list[dict], now: str) -> dict:
             "name": proxy["name"],
             "server": proxy["server"],
             "port": proxy["port"],
+            "sources": proxy.get("_sources", []),
             "network": proxy.get("network", "tcp"),
             "reality": "reality-opts" in proxy,
             "tls": bool(proxy.get("tls")),
@@ -395,7 +423,7 @@ def update_history(proxies: list[dict], now: str) -> dict:
             item["active"] = True
 
     return {
-        "source": SOURCE_URL,
+        "sources": SOURCES,
         "updated_at": now,
         "active_count": len(proxies),
         "servers": servers,
@@ -410,6 +438,34 @@ def write_info(proxies: list[dict], yaml_text: str, now: str) -> None:
         f"Обновлено: {now}",
         f"Источник: {SOURCE_URL}",
         f"Серверов: {stats['total']}",
+        f"Reality: {stats['reality']}",
+        f"TLS: {stats['tls']}",
+        f"TCP: {stats['tcp']}",
+        f"WebSocket: {stats['ws']}",
+        f"gRPC: {stats['grpc']}",
+        f"XHTTP: {stats['xhttp']}",
+        f"SHA256: {digest}",
+        "",
+        "Файлы:",
+        "- subscription.yaml - основная ссылка для OpenClash",
+        "- merged_flclash.yaml - тот же конфиг под именем для FLClash",
+        "- subscription_base64.txt - base64-версия YAML",
+        "- servers_history.json - история появления серверов",
+    ]
+    INFO_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+
+
+def write_project_info(proxies: list[dict], yaml_text: str, now: str) -> None:
+    stats = stats_for(proxies)
+    digest = hashlib.sha256(yaml_text.encode("utf-8")).hexdigest()
+    lines = [
+        "Pale Signal - подписка для Mihomo/OpenClash",
+        f"Обновлено: {now}",
+        "Источники:",
+        *source_urls().splitlines(),
+        f"Серверов всего: {stats['total']}",
+        f"FULL: {stats['full']}",
+        f"LITE: {stats['lite']}",
         f"Reality: {stats['reality']}",
         f"TLS: {stats['tls']}",
         f"TCP: {stats['tcp']}",
@@ -541,6 +597,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | 🔒 Reality | Поддержка VLESS Reality |
 | 🔐 TLS | Поддержка TLS-серверов |
 | 🌐 TCP / WS / gRPC / XHTTP | Поддержка основных транспортов Mihomo |
+| 📦 FULL | Универсальный не-lite список `vless_universal.txt` отдельной группой |
+| 🪶 LITE | Облегчённый список `vless_lite.txt` отдельной группой |
 | 🚀 AUTO | URL Test выбирает сервер на стороне клиента |
 | 🧯 FALLBACK | Резервное переключение между серверами |
 | 🗑 Дедупликация | Повторяющиеся серверы удаляются |
@@ -555,6 +613,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | `AUTO` | url-test | Автоматический выбор по URL Test |
 | `FALLBACK` | fallback | Резервное переключение между серверами |
 | `PROXY` | select | Главная группа для правила `MATCH,PROXY` |
+| `FULL` | select | Серверы из универсального не-lite списка `vless_universal.txt` |
+| `LITE` | select | Серверы из облегчённого списка `vless_lite.txt` |
 | `REALITY` | select | Только Reality-серверы |
 | `TLS` | select | Серверы с TLS |
 | `WS` | select | WebSocket-серверы |
@@ -594,12 +654,13 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 ---
 
-## 🛠 Источник серверов
+## 🛠 Источники серверов
 
-1. zieng2 - VLESS lite list
+1. zieng2 - универсальный VLESS-список, не-lite
+2. zieng2 - облегчённый VLESS-список
 
 ```text
-{SOURCE_URL}
+{source_urls()}
 ```
 
 ---
@@ -639,6 +700,8 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 - ✅ Обновлено: `{now}`
 - ✅ Серверов: `{stats['total']}`
+- ✅ FULL: `{stats['full']}`
+- ✅ LITE: `{stats['lite']}`
 - ✅ Reality: `{stats['reality']}`
 - ✅ TLS: `{stats['tls']}`
 - ✅ TCP: `{stats['tcp']}`
@@ -652,8 +715,14 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 
 def main() -> int:
-    source = fetch_source()
-    parsed = [proxy for line in source.splitlines() if (proxy := parse_vless(line))]
+    parsed = []
+    for source in SOURCES:
+        source_text = fetch_source(source)
+        parsed.extend(
+            proxy
+            for line in source_text.splitlines()
+            if (proxy := parse_vless(line, source["id"]))
+        )
     proxies = dedupe_and_name(parsed)
     config = build_config(proxies)
     validate_config(config)
@@ -668,7 +737,7 @@ def main() -> int:
     FLCLASH_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     BASE64_FILE.write_text(base64.b64encode(yaml_text.encode("utf-8")).decode("ascii") + "\n", encoding="ascii", newline="\n")
     HISTORY_FILE.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    write_info(proxies, yaml_text, now)
+    write_project_info(proxies, yaml_text, now)
     write_project_readme(proxies, now)
     print(f"wrote subscription files with {len(proxies)} proxies")
     return 0
