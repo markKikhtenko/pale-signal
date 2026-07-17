@@ -156,7 +156,7 @@ https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
 
 ## 📊 Статус
 
-- ✅ Обновлено: `2026-07-17T10:05:07Z`
+- ✅ Обновлено: `2026-07-17T10:06:17Z`
 - ✅ Серверов: `225`
 - ✅ Reality: `153`
 - ✅ TLS: `217`
