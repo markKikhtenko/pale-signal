@@ -56,6 +56,7 @@ RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
 GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 README_FILE = ROOT / "README.md"
 URL_TEST = "https://www.gstatic.com/generate_204"
+MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 
 SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
 TRUE_VALUES = {"1", "true", "yes", "on"}
@@ -1092,6 +1093,10 @@ GitHub Actions пересобирает подписки раз в час. Ру�
     README_FILE.write_text(text, encoding="utf-8", newline="\n")
 
 
+def msk_timestamp() -> str:
+    return dt.datetime.now(MSK).replace(microsecond=0).strftime("%Y-%m-%d %H:%M:%S МСК")
+
+
 def main() -> int:
     parsed = []
     for source in SOURCES:
@@ -1123,7 +1128,7 @@ def main() -> int:
     if not yaml_text.strip() or not ru_yaml_text.strip() or not global_yaml_text.strip():
         raise RuntimeError("empty YAML output")
 
-    now = dt.datetime.now(dt.UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    now = msk_timestamp()
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
