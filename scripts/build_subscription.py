@@ -299,6 +299,10 @@ def parse_vless(line: str, source_id: str) -> dict | None:
         if security not in {"none", "tls", "reality"}:
             return None
 
+        encryption = (first_param(params, "encryption") or "none").strip().lower()
+        if encryption != "none":
+            return None
+
         proxy: dict = {
             "type": "vless",
             "server": server,
@@ -306,7 +310,7 @@ def parse_vless(line: str, source_id: str) -> dict | None:
             "uuid": user,
             "network": network,
             "udp": True,
-            "encryption": first_param(params, "encryption") or "none",
+            "encryption": "none",
         }
 
         flow = normalize_flow(first_param(params, "flow"))
