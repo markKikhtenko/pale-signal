@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated hourly](https://img.shields.io/badge/update-every%20hour-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-10864-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-10930-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 pale-signal автоматически собирает VLESS-подписки для Mihomo/OpenClash.
 
-**Последнее обновление:** `2026-07-17 23:48:56 МСК`
+**Последнее обновление:** `2026-07-18 00:42:05 МСК`
 
 ## Подписки
 
@@ -20,16 +20,16 @@ pale-signal автоматически собирает VLESS-подписки �
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `10864` |
-| Россия | `4575` |
-| Global | `6289` |
-| Unknown | `104` |
-| Reality | `8196` |
-| TLS | `10204` |
-| TCP | `7433` |
-| WebSocket | `2203` |
-| gRPC | `718` |
-| XHTTP | `510` |
+| Всего серверов | `10930` |
+| Россия | `4483` |
+| Global | `6447` |
+| Unknown | `106` |
+| Reality | `8221` |
+| TLS | `10272` |
+| TCP | `7448` |
+| WebSocket | `2228` |
+| gRPC | `731` |
+| XHTTP | `523` |
 
 ## Группы
 
