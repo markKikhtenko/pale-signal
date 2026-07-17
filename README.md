@@ -22,7 +22,7 @@ Automatically updated VLESS subscription for Mihomo, OpenClash and FLClash.
 
 ## Current build
 
-- Updated: `2026-07-17T09:50:15Z`
+- Updated: `2026-07-17T09:54:15Z`
 - Servers: `286`
 - Reality: `199`
 - TLS: `277`
