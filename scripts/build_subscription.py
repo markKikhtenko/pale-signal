@@ -406,10 +406,10 @@ def write_info(proxies: list[dict], yaml_text: str, now: str) -> None:
     stats = stats_for(proxies)
     digest = hashlib.sha256(yaml_text.encode("utf-8")).hexdigest()
     lines = [
-        "Pale Signal subscription",
-        f"Updated: {now}",
-        f"Source: {SOURCE_URL}",
-        f"Servers: {stats['total']}",
+        "Pale Signal - подписка для Mihomo/OpenClash",
+        f"Обновлено: {now}",
+        f"Источник: {SOURCE_URL}",
+        f"Серверов: {stats['total']}",
         f"Reality: {stats['reality']}",
         f"TLS: {stats['tls']}",
         f"TCP: {stats['tcp']}",
@@ -418,11 +418,11 @@ def write_info(proxies: list[dict], yaml_text: str, now: str) -> None:
         f"XHTTP: {stats['xhttp']}",
         f"SHA256: {digest}",
         "",
-        "Files:",
-        "- subscription.yaml",
-        "- merged_flclash.yaml",
-        "- subscription_base64.txt",
-        "- servers_history.json",
+        "Файлы:",
+        "- subscription.yaml - основная ссылка для OpenClash",
+        "- merged_flclash.yaml - тот же конфиг под именем для FLClash",
+        "- subscription_base64.txt - base64-версия YAML",
+        "- servers_history.json - история появления серверов",
     ]
     INFO_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
@@ -431,42 +431,48 @@ def write_readme(proxies: list[dict], now: str) -> None:
     stats = stats_for(proxies)
     text = f"""# Pale Signal
 
-Automatically updated VLESS subscription for Mihomo, OpenClash and FLClash.
+Автоматически обновляемая VLESS-подписка для Mihomo, OpenClash и FLClash.
 
-## Subscription files
+## Ссылка для OpenClash
 
-- `subscription.yaml` - main Mihomo/OpenClash config.
-- `merged_flclash.yaml` - same config under a FLClash-style name.
-- `subscription_base64.txt` - base64 encoded YAML.
-- `subscription_info.txt` - update summary and counters.
-- `servers_history.json` - first/last seen server history.
+Основная ссылка подписки:
 
-## Features
+```text
+https://markkikhtenko.github.io/pale-signal/subscription.yaml
+```
 
-- Updates every hour through GitHub Actions.
-- Parses VLESS links from one source: `{SOURCE_URL}`.
-- Skips invalid lines and keeps the previous working files if build validation fails.
-- Deduplicates servers and keeps proxy names unique.
-- Supports Reality, TLS, TCP, WebSocket, gRPC and XHTTP.
-- Provides `AUTO`, `FALLBACK`, `PROXY` and protocol/security groups when available.
-- Does not ping servers or connect to them during Actions.
+Её можно добавить в OpenClash как обычную подписку Clash/Mihomo.
 
-## Current build
+## Файлы подписки
 
-- Updated: `{now}`
-- Servers: `{stats['total']}`
+- `subscription.yaml` - основной конфиг Mihomo/OpenClash.
+- `merged_flclash.yaml` - тот же конфиг под именем, привычным для FLClash.
+- `subscription_base64.txt` - base64-версия YAML.
+- `subscription_info.txt` - краткая информация о последней сборке.
+- `servers_history.json` - история first seen / last seen по серверам.
+
+## Что делает сборка
+
+- Раз в час запускается GitHub Actions.
+- Также есть ручной запуск: `Actions` -> `Regenerate subscription` -> `Run workflow`.
+- Скачивает VLESS-ссылки из источника: `{SOURCE_URL}`.
+- Пропускает некорректные строки.
+- Удаляет дубли и делает имена серверов уникальными.
+- Поддерживает Reality, TLS, TCP, WebSocket, gRPC и XHTTP.
+- Создаёт группы `AUTO`, `FALLBACK`, `PROXY`, а также группы по типам, если такие серверы есть.
+- Не проверяет серверы через ping и не пытается подключаться к ним.
+- Если источник не скачался, серверов нет или YAML сломан, предыдущие рабочие файлы сохраняются.
+
+## Текущая сборка
+
+- Обновлено: `{now}`
+- Серверов: `{stats['total']}`
 - Reality: `{stats['reality']}`
 - TLS: `{stats['tls']}`
 - TCP: `{stats['tcp']}`
 - WebSocket: `{stats['ws']}`
 - gRPC: `{stats['grpc']}`
 - XHTTP: `{stats['xhttp']}`
-
-## OpenClash
-
-Use the GitHub Pages URL when this repository is public or the account plan supports Pages for private repositories:
-
-`https://markkikhtenko.github.io/pale-signal/subscription.yaml`
 """
     README_FILE.write_text(text, encoding="utf-8", newline="\n")
 

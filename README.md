@@ -1,38 +1,44 @@
 # Pale Signal
 
-Automatically updated VLESS subscription for Mihomo, OpenClash and FLClash.
+Автоматически обновляемая VLESS-подписка для Mihomo, OpenClash и FLClash.
 
-## Subscription files
+## Ссылка для OpenClash
 
-- `subscription.yaml` - main Mihomo/OpenClash config.
-- `merged_flclash.yaml` - same config under a FLClash-style name.
-- `subscription_base64.txt` - base64 encoded YAML.
-- `subscription_info.txt` - update summary and counters.
-- `servers_history.json` - first/last seen server history.
+Основная ссылка подписки:
 
-## Features
+```text
+https://markkikhtenko.github.io/pale-signal/subscription.yaml
+```
 
-- Updates every hour through GitHub Actions.
-- Parses VLESS links from one source: `https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt`.
-- Skips invalid lines and keeps the previous working files if build validation fails.
-- Deduplicates servers and keeps proxy names unique.
-- Supports Reality, TLS, TCP, WebSocket, gRPC and XHTTP.
-- Provides `AUTO`, `FALLBACK`, `PROXY` and protocol/security groups when available.
-- Does not ping servers or connect to them during Actions.
+Её можно добавить в OpenClash как обычную подписку Clash/Mihomo.
 
-## Current build
+## Файлы подписки
 
-- Updated: `2026-07-17T09:54:15Z`
-- Servers: `286`
+- `subscription.yaml` - основной конфиг Mihomo/OpenClash.
+- `merged_flclash.yaml` - тот же конфиг под именем, привычным для FLClash.
+- `subscription_base64.txt` - base64-версия YAML.
+- `subscription_info.txt` - краткая информация о последней сборке.
+- `servers_history.json` - история first seen / last seen по серверам.
+
+## Что делает сборка
+
+- Раз в час запускается GitHub Actions.
+- Также есть ручной запуск: `Actions` -> `Regenerate subscription` -> `Run workflow`.
+- Скачивает VLESS-ссылки из источника: `https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt`.
+- Пропускает некорректные строки.
+- Удаляет дубли и делает имена серверов уникальными.
+- Поддерживает Reality, TLS, TCP, WebSocket, gRPC и XHTTP.
+- Создаёт группы `AUTO`, `FALLBACK`, `PROXY`, а также группы по типам, если такие серверы есть.
+- Не проверяет серверы через ping и не пытается подключаться к ним.
+- Если источник не скачался, серверов нет или YAML сломан, предыдущие рабочие файлы сохраняются.
+
+## Текущая сборка
+
+- Обновлено: `2026-07-17T09:57:33Z`
+- Серверов: `286`
 - Reality: `199`
 - TLS: `277`
 - TCP: `153`
 - WebSocket: `21`
 - gRPC: `30`
 - XHTTP: `82`
-
-## OpenClash
-
-Use the GitHub Pages URL when this repository is public or the account plan supports Pages for private repositories:
-
-`https://markkikhtenko.github.io/pale-signal/subscription.yaml`

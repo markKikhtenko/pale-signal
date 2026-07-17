@@ -1,7 +1,7 @@
-Pale Signal subscription
-Updated: 2026-07-17T09:54:15Z
-Source: https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
-Servers: 286
+Pale Signal - подписка для Mihomo/OpenClash
+Обновлено: 2026-07-17T09:57:33Z
+Источник: https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
+Серверов: 286
 Reality: 199
 TLS: 277
 TCP: 153
@@ -10,8 +10,8 @@ gRPC: 30
 XHTTP: 82
 SHA256: b61b4e44acd5605638fcebd99c29bce32a7c09c5f3622d0af81c01b9b81ffcc6
 
-Files:
-- subscription.yaml
-- merged_flclash.yaml
-- subscription_base64.txt
-- servers_history.json
+Файлы:
+- subscription.yaml - основная ссылка для OpenClash
+- merged_flclash.yaml - тот же конфиг под именем для FLClash
+- subscription_base64.txt - base64-версия YAML
+- servers_history.json - история появления серверов
