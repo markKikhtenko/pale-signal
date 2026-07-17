@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import base64
+import datetime as dt
 import hashlib
 import ipaddress
 import json
@@ -11,7 +13,13 @@ from pathlib import Path
 
 
 SOURCE_URL = "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt"
-OUTPUT_FILE = Path(__file__).resolve().parents[1] / "subscription.yaml"
+ROOT = Path(__file__).resolve().parents[1]
+OUTPUT_FILE = ROOT / "subscription.yaml"
+FLCLASH_FILE = ROOT / "merged_flclash.yaml"
+BASE64_FILE = ROOT / "subscription_base64.txt"
+INFO_FILE = ROOT / "subscription_info.txt"
+HISTORY_FILE = ROOT / "servers_history.json"
+README_FILE = ROOT / "README.md"
 URL_TEST = "https://www.gstatic.com/generate_204"
 
 SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
@@ -108,6 +116,7 @@ def parse_vless(line: str) -> dict | None:
             "server": server,
             "port": port,
             "uuid": user,
+            "network": network,
             "udp": True,
             "encryption": first_param(params, "encryption") or "none",
         }
@@ -148,9 +157,6 @@ def parse_vless(line: str) -> dict | None:
 
         path = first_param(params, "path")
         host = first_param(params, "host", "authority")
-
-        if network != "tcp":
-            proxy["network"] = network
 
         if network == "ws":
             ws_opts: dict = {"path": path or "/"}
@@ -203,6 +209,51 @@ def dedupe_and_name(proxies: list[dict]) -> list[dict]:
 
 def build_config(proxies: list[dict]) -> dict:
     names = [proxy["name"] for proxy in proxies]
+    reality_names = [proxy["name"] for proxy in proxies if "reality-opts" in proxy]
+    tls_names = [proxy["name"] for proxy in proxies if proxy.get("tls")]
+    ws_names = [proxy["name"] for proxy in proxies if proxy.get("network") == "ws"]
+    grpc_names = [proxy["name"] for proxy in proxies if proxy.get("network") == "grpc"]
+    xhttp_names = [proxy["name"] for proxy in proxies if proxy.get("network") == "xhttp"]
+
+    groups = [
+        {
+            "name": "AUTO",
+            "type": "url-test",
+            "proxies": names,
+            "url": URL_TEST,
+            "interval": 300,
+            "tolerance": 50,
+        },
+        {
+            "name": "FALLBACK",
+            "type": "fallback",
+            "proxies": names,
+            "url": URL_TEST,
+            "interval": 300,
+        },
+    ]
+
+    category_groups = [
+        ("REALITY", reality_names),
+        ("TLS", tls_names),
+        ("WS", ws_names),
+        ("GRPC", grpc_names),
+        ("XHTTP", xhttp_names),
+    ]
+    select_groups = [name for name, group_proxies in category_groups if group_proxies]
+    groups.append(
+        {
+            "name": "PROXY",
+            "type": "select",
+            "proxies": ["AUTO", "FALLBACK", *select_groups, *names],
+        }
+    )
+    groups.extend(
+        {"name": group_name, "type": "select", "proxies": group_proxies}
+        for group_name, group_proxies in category_groups
+        if group_proxies
+    )
+
     return {
         "mixed-port": 7890,
         "allow-lan": True,
@@ -210,28 +261,7 @@ def build_config(proxies: list[dict]) -> dict:
         "log-level": "info",
         "ipv6": True,
         "proxies": proxies,
-        "proxy-groups": [
-            {
-                "name": "AUTO",
-                "type": "url-test",
-                "proxies": names,
-                "url": URL_TEST,
-                "interval": 300,
-                "tolerance": 50,
-            },
-            {
-                "name": "FALLBACK",
-                "type": "fallback",
-                "proxies": names,
-                "url": URL_TEST,
-                "interval": 300,
-            },
-            {
-                "name": "PROXY",
-                "type": "select",
-                "proxies": ["AUTO", "FALLBACK", *names],
-            },
-        ],
+        "proxy-groups": groups,
         "rules": ["MATCH,PROXY"],
     }
 
@@ -283,8 +313,12 @@ def validate_config(config: dict) -> None:
     rules = config.get("rules")
     if not isinstance(proxies, list) or not proxies:
         raise RuntimeError("no valid proxies were produced")
-    if not isinstance(groups, list) or len(groups) != 3:
+    if not isinstance(groups, list) or len(groups) < 3:
         raise RuntimeError("proxy groups are missing")
+    group_names_ordered = [group.get("name") for group in groups]
+    for required in ("AUTO", "FALLBACK", "PROXY"):
+        if required not in group_names_ordered:
+            raise RuntimeError(f"required group {required} is missing")
     if rules != ["MATCH,PROXY"]:
         raise RuntimeError("rules are invalid")
 
@@ -303,6 +337,140 @@ def validate_config(config: dict) -> None:
             raise RuntimeError(f"group {group.get('name')} references missing proxies: {missing}")
 
 
+def proxy_key(proxy: dict) -> str:
+    parts = [
+        str(proxy.get("type", "")),
+        str(proxy.get("server", "")),
+        str(proxy.get("port", "")),
+        str(proxy.get("uuid", "")),
+        str(proxy.get("network", "")),
+        str(proxy.get("servername", "")),
+        json.dumps(proxy.get("reality-opts", {}), sort_keys=True, ensure_ascii=False),
+    ]
+    return hashlib.sha256("|".join(parts).encode("utf-8")).hexdigest()
+
+
+def stats_for(proxies: list[dict]) -> dict[str, int]:
+    return {
+        "total": len(proxies),
+        "reality": sum(1 for proxy in proxies if "reality-opts" in proxy),
+        "tls": sum(1 for proxy in proxies if proxy.get("tls")),
+        "tcp": sum(1 for proxy in proxies if proxy.get("network") == "tcp"),
+        "ws": sum(1 for proxy in proxies if proxy.get("network") == "ws"),
+        "grpc": sum(1 for proxy in proxies if proxy.get("network") == "grpc"),
+        "xhttp": sum(1 for proxy in proxies if proxy.get("network") == "xhttp"),
+    }
+
+
+def update_history(proxies: list[dict], now: str) -> dict:
+    if HISTORY_FILE.exists():
+        try:
+            history = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            history = {}
+    else:
+        history = {}
+
+    servers = history.get("servers", {})
+    current_keys = set()
+    for proxy in proxies:
+        key = proxy_key(proxy)
+        current_keys.add(key)
+        existing = servers.get(key, {})
+        servers[key] = {
+            "name": proxy["name"],
+            "server": proxy["server"],
+            "port": proxy["port"],
+            "network": proxy.get("network", "tcp"),
+            "reality": "reality-opts" in proxy,
+            "tls": bool(proxy.get("tls")),
+            "first_seen": existing.get("first_seen", now),
+            "last_seen": now,
+        }
+
+    for key, item in list(servers.items()):
+        if key not in current_keys:
+            item["active"] = False
+        else:
+            item["active"] = True
+
+    return {
+        "source": SOURCE_URL,
+        "updated_at": now,
+        "active_count": len(proxies),
+        "servers": servers,
+    }
+
+
+def write_info(proxies: list[dict], yaml_text: str, now: str) -> None:
+    stats = stats_for(proxies)
+    digest = hashlib.sha256(yaml_text.encode("utf-8")).hexdigest()
+    lines = [
+        "Pale Signal subscription",
+        f"Updated: {now}",
+        f"Source: {SOURCE_URL}",
+        f"Servers: {stats['total']}",
+        f"Reality: {stats['reality']}",
+        f"TLS: {stats['tls']}",
+        f"TCP: {stats['tcp']}",
+        f"WebSocket: {stats['ws']}",
+        f"gRPC: {stats['grpc']}",
+        f"XHTTP: {stats['xhttp']}",
+        f"SHA256: {digest}",
+        "",
+        "Files:",
+        "- subscription.yaml",
+        "- merged_flclash.yaml",
+        "- subscription_base64.txt",
+        "- servers_history.json",
+    ]
+    INFO_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+
+
+def write_readme(proxies: list[dict], now: str) -> None:
+    stats = stats_for(proxies)
+    text = f"""# Pale Signal
+
+Automatically updated VLESS subscription for Mihomo, OpenClash and FLClash.
+
+## Subscription files
+
+- `subscription.yaml` - main Mihomo/OpenClash config.
+- `merged_flclash.yaml` - same config under a FLClash-style name.
+- `subscription_base64.txt` - base64 encoded YAML.
+- `subscription_info.txt` - update summary and counters.
+- `servers_history.json` - first/last seen server history.
+
+## Features
+
+- Updates every hour through GitHub Actions.
+- Parses VLESS links from one source: `{SOURCE_URL}`.
+- Skips invalid lines and keeps the previous working files if build validation fails.
+- Deduplicates servers and keeps proxy names unique.
+- Supports Reality, TLS, TCP, WebSocket, gRPC and XHTTP.
+- Provides `AUTO`, `FALLBACK`, `PROXY` and protocol/security groups when available.
+- Does not ping servers or connect to them during Actions.
+
+## Current build
+
+- Updated: `{now}`
+- Servers: `{stats['total']}`
+- Reality: `{stats['reality']}`
+- TLS: `{stats['tls']}`
+- TCP: `{stats['tcp']}`
+- WebSocket: `{stats['ws']}`
+- gRPC: `{stats['grpc']}`
+- XHTTP: `{stats['xhttp']}`
+
+## OpenClash
+
+Use the GitHub Pages URL when this repository is public or the account plan supports Pages for private repositories:
+
+`https://markkikhtenko.github.io/pale-signal/subscription.yaml`
+"""
+    README_FILE.write_text(text, encoding="utf-8", newline="\n")
+
+
 def main() -> int:
     source = fetch_source()
     parsed = [proxy for line in source.splitlines() if (proxy := parse_vless(line))]
@@ -314,8 +482,15 @@ def main() -> int:
     if not yaml_text.strip():
         raise RuntimeError("empty YAML output")
 
+    now = dt.datetime.now(dt.UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    history = update_history(proxies, now)
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
-    print(f"wrote {OUTPUT_FILE} with {len(proxies)} proxies")
+    FLCLASH_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
+    BASE64_FILE.write_text(base64.b64encode(yaml_text.encode("utf-8")).decode("ascii") + "\n", encoding="ascii", newline="\n")
+    HISTORY_FILE.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    write_info(proxies, yaml_text, now)
+    write_readme(proxies, now)
+    print(f"wrote subscription files with {len(proxies)} proxies")
     return 0
 
 
