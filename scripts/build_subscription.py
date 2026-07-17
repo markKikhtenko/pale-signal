@@ -59,6 +59,21 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/ByeWhiteLists/ByeWhiteLists2/refs/heads/main/ByeWhiteLists2.txt",
     },
     {
+        "id": "RJSXRD_BYPASS_ALL",
+        "name": "rjsxrd bypass-all",
+        "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt",
+    },
+    {
+        "id": "IGARECK_WHITE_MOBILE_1",
+        "name": "igareck Vless-Reality-White-Lists-Rus-Mobile.txt",
+        "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
+    },
+    {
+        "id": "IGARECK_WHITE_CIDR_CHECKED",
+        "name": "igareck WHITE-CIDR-RU-checked.txt",
+        "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt",
+    },
+    {
         "id": "IGARECK_WHITE_SNI",
         "name": "igareck WHITE-SNI-RU-all.txt",
         "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-SNI-RU-all.txt",
