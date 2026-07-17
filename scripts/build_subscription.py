@@ -631,6 +631,8 @@ def write_project_readme(proxies: list[dict], now: str) -> None:
 
 ## 📥 Подписка
 
+[![Скачать YAML](https://img.shields.io/badge/Download-YAML-2ea44f?style=for-the-badge)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+
 ```text
 https://markkikhtenko.github.io/pale-signal/subscription.yaml
 ```

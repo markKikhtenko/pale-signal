@@ -2,7 +2,7 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated](https://img.shields.io/badge/Updated-Every%20Hour-blue)](https://github.com/markKikhtenko/pale-signal)
-[![Servers](https://img.shields.io/badge/Servers-4565-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/Servers-4440-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 > Автоматически обновляемая VLESS-подписка для Mihomo, OpenClash и FLClash.
 >
@@ -11,6 +11,8 @@
 ---
 
 ## 📥 Подписка
+
+[![Скачать YAML](https://img.shields.io/badge/Download-YAML-2ea44f?style=for-the-badge)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 ```text
 https://markkikhtenko.github.io/pale-signal/subscription.yaml
@@ -168,20 +170,20 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 ## 📊 Статус
 
-- ✅ Обновлено: `2026-07-17T11:45:11Z`
-- ✅ Серверов: `4565`
+- ✅ Обновлено: `2026-07-17T11:54:33Z`
+- ✅ Серверов: `4440`
 - ✅ FULL: `225`
 - ✅ LITE: `225`
 - ✅ RADIKAL_LIGHT: `386`
 - ✅ KIRYA_26: `1326`
 - ✅ MAHAN_VLESS: `128`
 - ✅ EPODONIOS_26: `119`
-- ✅ AVEN_26: `2716`
-- ✅ Reality: `3531`
-- ✅ TLS: `4058`
-- ✅ TCP: `3205`
-- ✅ WebSocket: `718`
+- ✅ AVEN_26: `2588`
+- ✅ Reality: `3412`
+- ✅ TLS: `3938`
+- ✅ TCP: `3086`
+- ✅ WebSocket: `713`
 - ✅ gRPC: `269`
-- ✅ XHTTP: `373`
+- ✅ XHTTP: `372`
 - ✅ Автообновление: работает через GitHub Actions
 - ✅ Публикация: GitHub Pages
