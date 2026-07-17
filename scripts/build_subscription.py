@@ -953,6 +953,76 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
     README_FILE.write_text(text, encoding="utf-8", newline="\n")
 
 
+def write_clean_readme(proxies: list[dict], now: str) -> None:
+    stats = stats_for(proxies)
+    text = f"""# Pale Signal
+
+[![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
+[![Updated hourly](https://img.shields.io/badge/update-every%20hour-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
+[![Servers](https://img.shields.io/badge/servers-{stats['total']}-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+
+Автоматически обновляемые VLESS-подписки для Mihomo/OpenClash.
+
+**Последнее обновление:** `{now}`
+
+## Подписки
+
+| Файл | Что внутри | Ссылка |
+|------|------------|--------|
+| `subscription.yaml` | Все серверы | [скачать](https://markkikhtenko.github.io/pale-signal/subscription.yaml) |
+| `subscription-ru.yaml` | Серверы, физически расположенные в России | [скачать](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
+| `subscription-global.yaml` | Остальные страны и `[UNKNOWN]` | [скачать](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
+
+Основная ссылка для OpenClash:
+
+```text
+https://markkikhtenko.github.io/pale-signal/subscription.yaml
+```
+
+## Статус
+
+| Показатель | Значение |
+|------------|----------|
+| Всего серверов | `{stats['total']}` |
+| Россия | `{stats['ru']}` |
+| Global | `{stats['global']}` |
+| Unknown | `{stats['unknown']}` |
+| Reality | `{stats['reality']}` |
+| TLS | `{stats['tls']}` |
+| TCP | `{stats['tcp']}` |
+| WebSocket | `{stats['ws']}` |
+| gRPC | `{stats['grpc']}` |
+| XHTTP | `{stats['xhttp']}` |
+
+## Группы
+
+Во всех трёх подписках оставлены только:
+
+| Группа | Тип | Назначение |
+|--------|-----|------------|
+| `AUTO` | `url-test` | Автовыбор серверов через URL Test |
+| `MANUAL` | `select` | Ручной выбор сервера |
+| `PROXY` | `select` | Главная группа для правила `MATCH,PROXY` |
+
+Параметры `AUTO`: `interval: 900`, `tolerance: 100`, `lazy: true`.
+
+## Разделение по странам
+
+- Сначала используется флаг или страна в имени узла.
+- Если страны в имени нет, используется GeoIP фактического поля `server`.
+- Если `server` является доменом, он сначала разрешается в IP.
+- SNI, `servername`, `Host`, XHTTP host и gRPC service name не используются для определения страны.
+- Узлы без определённой страны попадают в `subscription-global.yaml` и получают `[UNKNOWN]` в имени.
+
+## Обновление
+
+GitHub Actions пересобирает подписки раз в час. Ручной запуск: `Actions` -> `Regenerate subscription` -> `Run workflow`.
+
+Если источник не скачался, серверов нет или YAML сломан, предыдущие рабочие файлы не заменяются.
+"""
+    README_FILE.write_text(text, encoding="utf-8", newline="\n")
+
+
 def main() -> int:
     parsed = []
     for source in SOURCES:
@@ -986,7 +1056,7 @@ def main() -> int:
     BASE64_FILE.write_text(base64.b64encode(yaml_text.encode("utf-8")).decode("ascii") + "\n", encoding="ascii", newline="\n")
     HISTORY_FILE.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     write_project_info(proxies, yaml_text, now)
-    write_project_readme(proxies, now)
+    write_clean_readme(proxies, now)
     print(
         f"wrote subscription files with {len(proxies)} proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} global)"

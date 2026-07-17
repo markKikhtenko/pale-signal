@@ -1,186 +1,64 @@
-# Pale Signal VLESS Subscription
+# Pale Signal
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Updated](https://img.shields.io/badge/Updated-Every%20Hour-blue)](https://github.com/markKikhtenko/pale-signal)
-[![Servers](https://img.shields.io/badge/Servers-4591-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Updated hourly](https://img.shields.io/badge/update-every%20hour-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
+[![Servers](https://img.shields.io/badge/servers-4440-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
-> Автоматически обновляемая VLESS-подписка для Mihomo, OpenClash и FLClash.
->
-> Серверы скачиваются из одного источника каждый час, преобразуются в готовый Clash/Mihomo YAML и публикуются через GitHub Pages.
+Автоматически обновляемые VLESS-подписки для Mihomo/OpenClash.
 
----
+**Последнее обновление:** `2026-07-17T12:46:13Z`
 
-## 📥 Подписка
+## Подписки
 
-[![Скачать YAML](https://img.shields.io/badge/Download-YAML-2ea44f?style=for-the-badge)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+| Файл | Что внутри | Ссылка |
+|------|------------|--------|
+| `subscription.yaml` | Все серверы | [скачать](https://markkikhtenko.github.io/pale-signal/subscription.yaml) |
+| `subscription-ru.yaml` | Серверы, физически расположенные в России | [скачать](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
+| `subscription-global.yaml` | Остальные страны и `[UNKNOWN]` | [скачать](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
 
-```text
-https://markkikhtenko.github.io/pale-signal/subscription.yaml
-```
-
-Дополнительные ссылки:
-
-```text
-https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml
-https://markkikhtenko.github.io/pale-signal/subscription-global.yaml
-https://markkikhtenko.github.io/pale-signal/merged_flclash.yaml
-https://markkikhtenko.github.io/pale-signal/subscription_base64.txt
-https://markkikhtenko.github.io/pale-signal/subscription_info.txt
-```
-
----
-
-## 📱 Как установить
-
-### OpenClash
-
-1. Откройте OpenClash в панели роутера.
-2. Перейдите в раздел подписок / профилей.
-3. Добавьте новую подписку Clash/Mihomo по URL.
-4. Вставьте ссылку:
+Основная ссылка для OpenClash:
 
 ```text
 https://markkikhtenko.github.io/pale-signal/subscription.yaml
 ```
 
-5. Сохраните и обновите подписку.
-6. Используйте группу `PROXY`, `AUTO` или нужную группу по типу серверов.
+## Статус
 
-### FLClash / Mihomo-клиенты
+| Показатель | Значение |
+|------------|----------|
+| Всего серверов | `4440` |
+| Россия | `2100` |
+| Global | `2340` |
+| Unknown | `55` |
+| Reality | `3415` |
+| TLS | `3940` |
+| TCP | `3090` |
+| WebSocket | `717` |
+| gRPC | `264` |
+| XHTTP | `369` |
 
-1. Откройте раздел `Config`, `Profiles` или `Subscription`.
-2. Нажмите `Add`, `URL` или `Remote Config`.
-3. Вставьте основную ссылку подписки.
-4. Скачайте профиль и включите его.
+## Группы
 
----
+Во всех трёх подписках оставлены только:
 
-## ✨ Возможности
+| Группа | Тип | Назначение |
+|--------|-----|------------|
+| `AUTO` | `url-test` | Автовыбор серверов через URL Test |
+| `MANUAL` | `select` | Ручной выбор сервера |
+| `PROXY` | `select` | Главная группа для правила `MATCH,PROXY` |
 
-| Функция | Описание |
-|---------|----------|
-| 🔄 Автообновление | Каждый час через GitHub Actions |
-| 🛠 Ручная перегенерация | `Actions` -> `Regenerate subscription` -> `Run workflow` |
-| 🔒 Reality | Поддержка VLESS Reality |
-| 🔐 TLS | Поддержка TLS-серверов |
-| 🌐 TCP / WS / gRPC / XHTTP | Поддержка основных транспортов Mihomo |
-| 🌍 RU / Global | Отдельные подписки для России и остальных стран |
-| 🚀 AUTO | URL Test выбирает сервер на стороне клиента |
-| 👆 MANUAL | Ручной выбор сервера |
-| 🗑 Дедупликация | Повторяющиеся серверы удаляются |
-| ✅ Без ping в Actions | Работоспособность проверяет OpenClash/Mihomo |
+Параметры `AUTO`: `interval: 900`, `tolerance: 100`, `lazy: true`.
 
----
+## Разделение по странам
 
-## 📋 Группы серверов
+- Сначала используется флаг или страна в имени узла.
+- Если страны в имени нет, используется GeoIP фактического поля `server`.
+- Если `server` является доменом, он сначала разрешается в IP.
+- SNI, `servername`, `Host`, XHTTP host и gRPC service name не используются для определения страны.
+- Узлы без определённой страны попадают в `subscription-global.yaml` и получают `[UNKNOWN]` в имени.
 
-| Группа | Тип | Описание |
-|--------|-----|----------|
-| `AUTO` | url-test | Автоматический выбор по URL Test |
-| `MANUAL` | select | Ручной выбор конкретного сервера |
-| `PROXY` | select | Главная группа для правила `MATCH,PROXY` |
+## Обновление
 
----
+GitHub Actions пересобирает подписки раз в час. Ручной запуск: `Actions` -> `Regenerate subscription` -> `Run workflow`.
 
-## 🔄 Как работает обновление
-
-```text
-Каждый час:
-📥 Скачивается свежий список VLESS-ссылок
-🧹 Некорректные строки пропускаются
-🔄 Ссылки преобразуются в формат Mihomo/OpenClash
-🗑 Удаляются дубликаты
-💾 Сохраняется новая подписка
-🚀 GitHub Pages публикует готовый YAML
-📡 OpenClash забирает обновление по ссылке
-```
-
-Если источник не скачался, серверов нет или итоговый YAML сломан, предыдущий рабочий файл остаётся опубликованным.
-
----
-
-## 📁 Файлы в репозитории
-
-| Файл | Назначение |
-|------|------------|
-| `subscription.yaml` | Основная подписка для OpenClash/Mihomo |
-| `subscription-ru.yaml` | Серверы, физически расположенные в России |
-| `subscription-global.yaml` | Серверы остальных стран и `[UNKNOWN]` |
-| `merged_flclash.yaml` | Та же подписка под именем для FLClash |
-| `subscription_base64.txt` | Base64-версия подписки |
-| `subscription_info.txt` | Краткая информация о последней сборке |
-| `servers_history.json` | История появления и обновления серверов |
-| `scripts/build_subscription.py` | Скрипт сборки подписки |
-| `.github/workflows/update-subscription.yml` | Джоба перегенерации и публикации |
-
----
-
-## 🛠 Источники серверов
-
-```text
-- zieng2 vless_universal.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt
-- zieng2 vless_lite.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
-- 0xRadikal light/configs.txt: https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/light/configs.txt
-- KiryaScript source/githubmirror/26.txt: https://raw.githubusercontent.com/KiryaScript/white-lists/main/source/githubmirror/26.txt
-- MahanKenway configs/vless.txt: https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt
-- Epodonios Sub26.txt: https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt
-- AvenCores 26_urls.json: https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json
-```
-
----
-
-## ⚠️ Важно
-
-- Серверы берутся из внешнего публичного списка.
-- GitHub Actions не проверяет серверы через ping и не подключается к ним.
-- Разделение RU/global не использует SNI, servername, Host, XHTTP host или gRPC service name.
-- Для узлов без страны в имени используется GeoIP фактического поля `server`.
-- Реальную работоспособность проверяет OpenClash/Mihomo через `AUTO`.
-- Для роутера обычно достаточно добавить только `subscription.yaml`.
-
----
-
-## 💡 Советы
-
-**Если медленно:**
-
-- Используйте группу `AUTO`.
-- Подождите несколько минут, пока клиент выполнит URL Test.
-- Попробуйте вручную выбрать сервер из `MANUAL`.
-
-**Если не подключается:**
-
-- Обновите подписку в OpenClash.
-- Переключитесь с `AUTO` на `MANUAL`.
-- Попробуйте отдельные подписки `subscription-ru.yaml` или `subscription-global.yaml`.
-
-**Если серверы пропали:**
-
-- Проверьте статус последнего workflow.
-- Дождитесь следующей часовой перегенерации.
-- Предыдущая рабочая подписка сохраняется, если новая сборка сломалась.
-
----
-
-## 📊 Статус
-
-- ✅ Обновлено: `2026-07-17T12:42:48Z`
-- ✅ Серверов: `4591`
-- ✅ RU: `2174`
-- ✅ Global: `2417`
-- ✅ Unknown: `55`
-- ✅ FULL: `215`
-- ✅ LITE: `215`
-- ✅ RADIKAL_LIGHT: `386`
-- ✅ KIRYA_26: `1326`
-- ✅ MAHAN_VLESS: `128`
-- ✅ EPODONIOS_26: `119`
-- ✅ AVEN_26: `2736`
-- ✅ Reality: `3557`
-- ✅ TLS: `4083`
-- ✅ TCP: `3230`
-- ✅ WebSocket: `725`
-- ✅ gRPC: `266`
-- ✅ XHTTP: `370`
-- ✅ Автообновление: работает через GitHub Actions
-- ✅ Публикация: GitHub Pages
+Если источник не скачался, серверов нет или YAML сломан, предыдущие рабочие файлы не заменяются.
