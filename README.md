@@ -2,7 +2,7 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated](https://img.shields.io/badge/Updated-Every%20Hour-blue)](https://github.com/markKikhtenko/pale-signal)
-[![Servers](https://img.shields.io/badge/Servers-225-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/Servers-2185-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 > Автоматически обновляемая VLESS-подписка для Mihomo, OpenClash и FLClash.
 >
@@ -60,8 +60,7 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | 🔒 Reality | Поддержка VLESS Reality |
 | 🔐 TLS | Поддержка TLS-серверов |
 | 🌐 TCP / WS / gRPC / XHTTP | Поддержка основных транспортов Mihomo |
-| 📦 FULL | Универсальный не-lite список `vless_universal.txt` отдельной группой |
-| 🪶 LITE | Облегчённый список `vless_lite.txt` отдельной группой |
+| 📦 Группы источников | Каждый источник вынесен в отдельную группу |
 | 🚀 AUTO | URL Test выбирает сервер на стороне клиента |
 | 🧯 FALLBACK | Резервное переключение между серверами |
 | 🗑 Дедупликация | Повторяющиеся серверы удаляются |
@@ -76,8 +75,12 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | `AUTO` | url-test | Автоматический выбор по URL Test |
 | `FALLBACK` | fallback | Резервное переключение между серверами |
 | `PROXY` | select | Главная группа для правила `MATCH,PROXY` |
-| `FULL` | select | Серверы из универсального не-lite списка `vless_universal.txt` |
-| `LITE` | select | Серверы из облегчённого списка `vless_lite.txt` |
+| `FULL` | select | Серверы из `zieng2 vless_universal.txt` |
+| `LITE` | select | Серверы из `zieng2 vless_lite.txt` |
+| `RADIKAL_LIGHT` | select | Серверы из `0xRadikal light/configs.txt` |
+| `KIRYA_26` | select | Серверы из `KiryaScript source/githubmirror/26.txt` |
+| `MAHAN_VLESS` | select | Серверы из `MahanKenway configs/vless.txt` |
+| `EPODONIOS_26` | select | Серверы из `Epodonios Sub26.txt` |
 | `REALITY` | select | Только Reality-серверы |
 | `TLS` | select | Серверы с TLS |
 | `WS` | select | WebSocket-серверы |
@@ -119,12 +122,13 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 ## 🛠 Источники серверов
 
-1. zieng2 - универсальный VLESS-список, не-lite
-2. zieng2 - облегчённый VLESS-список
-
 ```text
 - zieng2 vless_universal.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt
 - zieng2 vless_lite.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
+- 0xRadikal light/configs.txt: https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/light/configs.txt
+- KiryaScript source/githubmirror/26.txt: https://raw.githubusercontent.com/KiryaScript/white-lists/main/source/githubmirror/26.txt
+- MahanKenway configs/vless.txt: https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt
+- Epodonios Sub26.txt: https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt
 ```
 
 ---
@@ -162,15 +166,19 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 ## 📊 Статус
 
-- ✅ Обновлено: `2026-07-17T10:19:12Z`
-- ✅ Серверов: `225`
+- ✅ Обновлено: `2026-07-17T10:28:21Z`
+- ✅ Серверов: `2185`
 - ✅ FULL: `225`
 - ✅ LITE: `225`
-- ✅ Reality: `153`
-- ✅ TLS: `217`
-- ✅ TCP: `134`
-- ✅ WebSocket: `11`
-- ✅ gRPC: `17`
-- ✅ XHTTP: `63`
+- ✅ RADIKAL_LIGHT: `419`
+- ✅ KIRYA_26: `1326`
+- ✅ MAHAN_VLESS: `127`
+- ✅ EPODONIOS_26: `119`
+- ✅ Reality: `1243`
+- ✅ TLS: `1689`
+- ✅ TCP: `1176`
+- ✅ WebSocket: `688`
+- ✅ gRPC: `120`
+- ✅ XHTTP: `201`
 - ✅ Автообновление: работает через GitHub Actions
 - ✅ Публикация: GitHub Pages

@@ -23,6 +23,26 @@ SOURCES = [
         "name": "zieng2 vless_lite.txt",
         "url": "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt",
     },
+    {
+        "id": "RADIKAL_LIGHT",
+        "name": "0xRadikal light/configs.txt",
+        "url": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/light/configs.txt",
+    },
+    {
+        "id": "KIRYA_26",
+        "name": "KiryaScript source/githubmirror/26.txt",
+        "url": "https://raw.githubusercontent.com/KiryaScript/white-lists/main/source/githubmirror/26.txt",
+    },
+    {
+        "id": "MAHAN_VLESS",
+        "name": "MahanKenway configs/vless.txt",
+        "url": "https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt",
+    },
+    {
+        "id": "EPODONIOS_26",
+        "name": "Epodonios Sub26.txt",
+        "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt",
+    },
 ]
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
@@ -230,8 +250,13 @@ def dedupe_and_name(proxies: list[dict]) -> list[dict]:
 
 def build_config(proxies: list[dict]) -> dict:
     names = [proxy["name"] for proxy in proxies]
-    full_names = [proxy["name"] for proxy in proxies if "FULL" in proxy.get("_sources", [])]
-    lite_names = [proxy["name"] for proxy in proxies if "LITE" in proxy.get("_sources", [])]
+    source_groups = [
+        (
+            source["id"],
+            [proxy["name"] for proxy in proxies if source["id"] in proxy.get("_sources", [])],
+        )
+        for source in SOURCES
+    ]
     reality_names = [proxy["name"] for proxy in proxies if "reality-opts" in proxy]
     tls_names = [proxy["name"] for proxy in proxies if proxy.get("tls")]
     ws_names = [proxy["name"] for proxy in proxies if proxy.get("network") == "ws"]
@@ -257,8 +282,7 @@ def build_config(proxies: list[dict]) -> dict:
     ]
 
     category_groups = [
-        ("FULL", full_names),
-        ("LITE", lite_names),
+        *source_groups,
         ("REALITY", reality_names),
         ("TLS", tls_names),
         ("WS", ws_names),
@@ -376,10 +400,13 @@ def proxy_key(proxy: dict) -> str:
 
 
 def stats_for(proxies: list[dict]) -> dict[str, int]:
+    source_stats = {
+        source["id"].lower(): sum(1 for proxy in proxies if source["id"] in proxy.get("_sources", []))
+        for source in SOURCES
+    }
     return {
         "total": len(proxies),
-        "full": sum(1 for proxy in proxies if "FULL" in proxy.get("_sources", [])),
-        "lite": sum(1 for proxy in proxies if "LITE" in proxy.get("_sources", [])),
+        **source_stats,
         "reality": sum(1 for proxy in proxies if "reality-opts" in proxy),
         "tls": sum(1 for proxy in proxies if proxy.get("tls")),
         "tcp": sum(1 for proxy in proxies if proxy.get("network") == "tcp"),
@@ -458,14 +485,17 @@ def write_info(proxies: list[dict], yaml_text: str, now: str) -> None:
 def write_project_info(proxies: list[dict], yaml_text: str, now: str) -> None:
     stats = stats_for(proxies)
     digest = hashlib.sha256(yaml_text.encode("utf-8")).hexdigest()
+    source_count_lines = [
+        f"{source['id']}: {stats[source['id'].lower()]}"
+        for source in SOURCES
+    ]
     lines = [
         "Pale Signal - подписка для Mihomo/OpenClash",
         f"Обновлено: {now}",
         "Источники:",
         *source_urls().splitlines(),
         f"Серверов всего: {stats['total']}",
-        f"FULL: {stats['full']}",
-        f"LITE: {stats['lite']}",
+        *source_count_lines,
         f"Reality: {stats['reality']}",
         f"TLS: {stats['tls']}",
         f"TCP: {stats['tcp']}",
@@ -535,6 +565,14 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 def write_project_readme(proxies: list[dict], now: str) -> None:
     stats = stats_for(proxies)
+    source_group_rows = "\n".join(
+        f"| `{source['id']}` | select | Серверы из `{source['name']}` |"
+        for source in SOURCES
+    )
+    source_status_lines = "\n".join(
+        f"- ✅ {source['id']}: `{stats[source['id'].lower()]}`"
+        for source in SOURCES
+    )
     text = f"""# Pale Signal VLESS Subscription
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
@@ -597,8 +635,7 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | 🔒 Reality | Поддержка VLESS Reality |
 | 🔐 TLS | Поддержка TLS-серверов |
 | 🌐 TCP / WS / gRPC / XHTTP | Поддержка основных транспортов Mihomo |
-| 📦 FULL | Универсальный не-lite список `vless_universal.txt` отдельной группой |
-| 🪶 LITE | Облегчённый список `vless_lite.txt` отдельной группой |
+| 📦 Группы источников | Каждый источник вынесен в отдельную группу |
 | 🚀 AUTO | URL Test выбирает сервер на стороне клиента |
 | 🧯 FALLBACK | Резервное переключение между серверами |
 | 🗑 Дедупликация | Повторяющиеся серверы удаляются |
@@ -613,8 +650,7 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | `AUTO` | url-test | Автоматический выбор по URL Test |
 | `FALLBACK` | fallback | Резервное переключение между серверами |
 | `PROXY` | select | Главная группа для правила `MATCH,PROXY` |
-| `FULL` | select | Серверы из универсального не-lite списка `vless_universal.txt` |
-| `LITE` | select | Серверы из облегчённого списка `vless_lite.txt` |
+{source_group_rows}
 | `REALITY` | select | Только Reality-серверы |
 | `TLS` | select | Серверы с TLS |
 | `WS` | select | WebSocket-серверы |
@@ -655,9 +691,6 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 ---
 
 ## 🛠 Источники серверов
-
-1. zieng2 - универсальный VLESS-список, не-lite
-2. zieng2 - облегчённый VLESS-список
 
 ```text
 {source_urls()}
@@ -700,8 +733,7 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 - ✅ Обновлено: `{now}`
 - ✅ Серверов: `{stats['total']}`
-- ✅ FULL: `{stats['full']}`
-- ✅ LITE: `{stats['lite']}`
+{source_status_lines}
 - ✅ Reality: `{stats['reality']}`
 - ✅ TLS: `{stats['tls']}`
 - ✅ TCP: `{stats['tcp']}`

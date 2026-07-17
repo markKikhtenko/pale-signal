@@ -1,18 +1,26 @@
 Pale Signal - подписка для Mihomo/OpenClash
-Обновлено: 2026-07-17T10:19:12Z
+Обновлено: 2026-07-17T10:28:21Z
 Источники:
 - zieng2 vless_universal.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt
 - zieng2 vless_lite.txt: https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt
-Серверов всего: 225
+- 0xRadikal light/configs.txt: https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/light/configs.txt
+- KiryaScript source/githubmirror/26.txt: https://raw.githubusercontent.com/KiryaScript/white-lists/main/source/githubmirror/26.txt
+- MahanKenway configs/vless.txt: https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt
+- Epodonios Sub26.txt: https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt
+Серверов всего: 2185
 FULL: 225
 LITE: 225
-Reality: 153
-TLS: 217
-TCP: 134
-WebSocket: 11
-gRPC: 17
-XHTTP: 63
-SHA256: d7ca906766f9261c4ee133eede003d48472030a1fd099042d255a20d456271f7
+RADIKAL_LIGHT: 419
+KIRYA_26: 1326
+MAHAN_VLESS: 127
+EPODONIOS_26: 119
+Reality: 1243
+TLS: 1689
+TCP: 1176
+WebSocket: 688
+gRPC: 120
+XHTTP: 201
+SHA256: 0aa80af310e05a4dade0eaa9f6592a8711194388fdc00a1eae395c3e916575bc
 
 Файлы:
 - subscription.yaml - основная ссылка для OpenClash
