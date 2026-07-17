@@ -43,6 +43,12 @@ SOURCES = [
         "name": "Epodonios Sub26.txt",
         "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt",
     },
+    {
+        "id": "AVEN_26",
+        "name": "AvenCores 26_urls.json",
+        "url": "https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json",
+        "type": "url_list_json",
+    },
 ]
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
@@ -70,6 +76,44 @@ def fetch_source(source: dict[str, str]) -> str:
         if response.status != 200:
             raise RuntimeError(f"{source['name']} returned HTTP {response.status}")
         return response.read().decode("utf-8", errors="replace")
+
+
+def fetch_url(url: str, timeout: int = 45) -> str:
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": "pale-signal-subscription-builder/1.0"},
+    )
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        if response.status != 200:
+            raise RuntimeError(f"{url} returned HTTP {response.status}")
+        return response.read().decode("utf-8", errors="replace")
+
+
+def fetch_source_texts(source: dict[str, str]) -> list[str]:
+    source_text = fetch_source(source)
+    if source.get("type") != "url_list_json":
+        return [source_text]
+
+    try:
+        urls = json.loads(source_text)
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"{source['name']} is not valid JSON") from exc
+
+    if not isinstance(urls, list) or not urls:
+        raise RuntimeError(f"{source['name']} does not contain a URL list")
+
+    texts = []
+    for url in urls:
+        if not isinstance(url, str) or not url.startswith(("http://", "https://")):
+            continue
+        try:
+            texts.append(fetch_url(url, timeout=25))
+        except Exception as exc:
+            print(f"warning: skipped nested source {url}: {exc}", file=sys.stderr)
+
+    if not texts:
+        raise RuntimeError(f"{source['name']} did not provide any downloadable nested sources")
+    return texts
 
 
 def first_param(params: dict[str, list[str]], *names: str) -> str:
@@ -749,12 +793,12 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 def main() -> int:
     parsed = []
     for source in SOURCES:
-        source_text = fetch_source(source)
-        parsed.extend(
-            proxy
-            for line in source_text.splitlines()
-            if (proxy := parse_vless(line, source["id"]))
-        )
+        for source_text in fetch_source_texts(source):
+            parsed.extend(
+                proxy
+                for line in source_text.splitlines()
+                if (proxy := parse_vless(line, source["id"]))
+            )
     proxies = dedupe_and_name(parsed)
     config = build_config(proxies)
     validate_config(config)

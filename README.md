@@ -2,7 +2,7 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated](https://img.shields.io/badge/Updated-Every%20Hour-blue)](https://github.com/markKikhtenko/pale-signal)
-[![Servers](https://img.shields.io/badge/Servers-2151-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/Servers-4440-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 > Автоматически обновляемая VLESS-подписка для Mihomo, OpenClash и FLClash.
 >
@@ -81,6 +81,7 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 | `KIRYA_26` | select | Серверы из `KiryaScript source/githubmirror/26.txt` |
 | `MAHAN_VLESS` | select | Серверы из `MahanKenway configs/vless.txt` |
 | `EPODONIOS_26` | select | Серверы из `Epodonios Sub26.txt` |
+| `AVEN_26` | select | Серверы из `AvenCores 26_urls.json` |
 | `REALITY` | select | Только Reality-серверы |
 | `TLS` | select | Серверы с TLS |
 | `WS` | select | WebSocket-серверы |
@@ -129,6 +130,7 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 - KiryaScript source/githubmirror/26.txt: https://raw.githubusercontent.com/KiryaScript/white-lists/main/source/githubmirror/26.txt
 - MahanKenway configs/vless.txt: https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt
 - Epodonios Sub26.txt: https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt
+- AvenCores 26_urls.json: https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json
 ```
 
 ---
@@ -166,19 +168,20 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 ## 📊 Статус
 
-- ✅ Обновлено: `2026-07-17T11:13:22Z`
-- ✅ Серверов: `2151`
+- ✅ Обновлено: `2026-07-17T11:43:28Z`
+- ✅ Серверов: `4440`
 - ✅ FULL: `225`
 - ✅ LITE: `225`
 - ✅ RADIKAL_LIGHT: `386`
 - ✅ KIRYA_26: `1326`
-- ✅ MAHAN_VLESS: `127`
+- ✅ MAHAN_VLESS: `128`
 - ✅ EPODONIOS_26: `119`
-- ✅ Reality: `1206`
-- ✅ TLS: `1659`
-- ✅ TCP: `1149`
-- ✅ WebSocket: `685`
-- ✅ gRPC: `110`
-- ✅ XHTTP: `207`
+- ✅ AVEN_26: `2588`
+- ✅ Reality: `3412`
+- ✅ TLS: `3938`
+- ✅ TCP: `3086`
+- ✅ WebSocket: `713`
+- ✅ gRPC: `269`
+- ✅ XHTTP: `372`
 - ✅ Автообновление: работает через GitHub Actions
 - ✅ Публикация: GitHub Pages
