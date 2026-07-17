@@ -950,28 +950,30 @@ https://markkikhtenko.github.io/pale-signal/subscription.yaml
 
 def write_clean_readme(proxies: list[dict], now: str) -> None:
     stats = stats_for(proxies)
-    text = f"""# Pale Signal
+    text = f"""# pale-signal подписки
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated hourly](https://img.shields.io/badge/update-every%20hour-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Servers](https://img.shields.io/badge/servers-{stats['total']}-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
-Автоматически обновляемые VLESS-подписки для Mihomo/OpenClash.
+pale-signal автоматически собирает VLESS-подписки для Mihomo/OpenClash.
 
 **Последнее обновление:** `{now}`
 
 ## Подписки
 
-| Файл | Что внутри | Ссылка |
-|------|------------|--------|
-| `subscription.yaml` | Все серверы | [скачать](https://markkikhtenko.github.io/pale-signal/subscription.yaml) |
-| `subscription-ru.yaml` | Серверы, физически расположенные в России | [скачать](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
-| `subscription-global.yaml` | Остальные страны и `[UNKNOWN]` | [скачать](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
+| Название | Что внутри | Ссылка |
+|----------|------------|--------|
+| pale-signal подписка — общая | Все серверы | https://markkikhtenko.github.io/pale-signal/subscription.yaml |
+| pale-signal подписка — Россия | Серверы, физически расположенные в России | https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml |
+| pale-signal подписка — Global | Остальные страны и `[UNKNOWN]` | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml |
 
-Основная ссылка для OpenClash:
+Прямые ссылки для OpenClash:
 
 ```text
 https://markkikhtenko.github.io/pale-signal/subscription.yaml
+https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml
+https://markkikhtenko.github.io/pale-signal/subscription-global.yaml
 ```
 
 ## Статус

@@ -34179,6 +34179,43 @@ proxies:
       grpc-service-name: "neurex"
   -
     name: "🌐 Anycast-IP | 🇨🇭 🇳🇱 [*CIDR]"
+<<<<<<< HEAD
+    type: "vless"
+    server: "89.23.113.168"
+    port: 7443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.aviasales.com"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "aBs0x09cXtjTpsrGb21cJsEmDsaCaC1RPeutNu404V0"
+      short-id: "6fa13cdb"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "🌐 Anycast-IP | 🇨🇭 🇳🇱 [*CIDR] 2"
+    type: "vless"
+    server: "89.23.113.168"
+    port: 7443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.aviasales.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "aBs0x09cXtjTpsrGb21cJsEmDsaCaC1RPeutNu404V0"
+      short-id: "6fa13cdb"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "🇧🇬 Bulgaria | [SNI-RU] web.max.ru"
+=======
+>>>>>>> 2e30e3c (Clarify subscription links in README)
     type: "vless"
     server: "89.23.113.168"
     port: 7443
@@ -34222,23 +34259,6 @@ proxies:
     encryption: "none"
     tls: true
     servername: "web.max.ru"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "X-YL5VNtlMNIaBrwaHt3hJCeF_gMT9gPRDDlK1Qg7Tc"
-      short-id: "8321461729abcdef"
-    grpc-opts:
-      grpc-service-name: "web.max.ru"
-  -
-    name: "🇧🇬 Bulgaria [SNI-RU] web.max.ru"
-    type: "vless"
-    server: "nl2.vrsvpn.com"
-    port: 444
-    uuid: "0b9bcbc1-b289-4a64-86fa-a5b731b65384"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "web.max.ru"
     client-fingerprint: "edge"
     reality-opts:
       public-key: "X-YL5VNtlMNIaBrwaHt3hJCeF_gMT9gPRDDlK1Qg7Tc"
@@ -34246,24 +34266,7 @@ proxies:
     grpc-opts:
       grpc-service-name: "web.max.ru"
   -
-    name: "🇧🇬 Bulgaria [SNI-RU] web.max.ru 2"
-    type: "vless"
-    server: "nl2.vrsvpn.com"
-    port: 444
-    uuid: "0b9bcbc1-b289-4a64-86fa-a5b731b65384"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "web.max.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "X-YL5VNtlMNIaBrwaHt3hJCeF_gMT9gPRDDlK1Qg7Tc"
-      short-id: "8321461729abcdef"
-    grpc-opts:
-      grpc-service-name: "web.max.ru"
-  -
-    name: "🇧🇬 Bulgaria [SNI-RU] web.max.ru 3"
+    name: "🇧🇬 Bulgaria | [SNI-RU] web.max.ru 2"
     type: "vless"
     server: "nl2.vrsvpn.com"
     port: 444
@@ -34280,69 +34283,56 @@ proxies:
     grpc-opts:
       grpc-service-name: "web.max.ru"
   -
-    name: "🇩🇪 Germany | [SNI-RU] max.ru"
+    name: "🇧🇬 Bulgaria | [SNI-RU] web.max.ru 3"
     type: "vless"
-    server: "3.maxg.ch"
-    port: 443
-    uuid: "a773efb7-7981-4271-a1b5-2bd13decc259"
-    network: "tcp"
+    server: "nl2.vrsvpn.com"
+    port: 444
+    uuid: "0b9bcbc1-b289-4a64-86fa-a5b731b65384"
+    network: "grpc"
     udp: true
     encryption: "none"
-    flow: "xtls-rprx-vision"
     tls: true
-    servername: "max.ru"
-    client-fingerprint: "android"
-    reality-opts:
-      public-key: "q-MQ5ED1cqC28IdlV8rNg6Ya2yONdCJwecMiFI3o2ic"
-      short-id: "8a282472fee64b17"
-  -
-    name: "🇩🇪 Germany | [SNI-RU] max.ru 2"
-    type: "vless"
-    server: "3.maxg.ch"
-    port: 443
-    uuid: "a773efb7-7981-4271-a1b5-2bd13decc259"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "max.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "q-MQ5ED1cqC28IdlV8rNg6Ya2yONdCJwecMiFI3o2ic"
-      short-id: "8a282472fee64b17"
-  -
-    name: "🇩🇪 Germany | [SNI-RU] max.ru 3"
-    type: "vless"
-    server: "3.maxg.ch"
-    port: 443
-    uuid: "a773efb7-7981-4271-a1b5-2bd13decc259"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "max.ru"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "q-MQ5ED1cqC28IdlV8rNg6Ya2yONdCJwecMiFI3o2ic"
-      short-id: "8a282472fee64b17"
-  -
-    name: "🇩🇪 Germany | [SNI-RU] max.ru 4"
-    type: "vless"
-    server: "3.maxg.ch"
-    port: 443
-    uuid: "a773efb7-7981-4271-a1b5-2bd13decc259"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "max.ru"
+    servername: "web.max.ru"
     client-fingerprint: "safari"
     reality-opts:
-      public-key: "q-MQ5ED1cqC28IdlV8rNg6Ya2yONdCJwecMiFI3o2ic"
-      short-id: "8a282472fee64b17"
+      public-key: "X-YL5VNtlMNIaBrwaHt3hJCeF_gMT9gPRDDlK1Qg7Tc"
+      short-id: "8321461729abcdef"
+    grpc-opts:
+      grpc-service-name: "web.max.ru"
+  -
+    name: "🇧🇬 Bulgaria [SNI-RU] web.max.ru"
+    type: "vless"
+    server: "nl2.vrsvpn.com"
+    port: 444
+    uuid: "0b9bcbc1-b289-4a64-86fa-a5b731b65384"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "web.max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "X-YL5VNtlMNIaBrwaHt3hJCeF_gMT9gPRDDlK1Qg7Tc"
+      short-id: "8321461729abcdef"
+    grpc-opts:
+      grpc-service-name: "web.max.ru"
+  -
+    name: "🇩🇪 Germany | [SNI-RU] api-maps.yandex.ru"
+    type: "vless"
+    server: "89.222.123.211"
+    port: 16923
+    uuid: "7d964bd1-f1af-45a5-926f-56238617ac50"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
   -
     name: "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru"
     type: "vless"
@@ -34371,7 +34361,7 @@ proxies:
     flow: "xtls-rprx-vision"
     tls: true
     servername: "ads.x5.ru"
-    client-fingerprint: "firefox"
+    client-fingerprint: "qq"
     reality-opts:
       public-key: "MZ4v9kcs6nnAKuCAz4pvViC50BoM3exoL_5Yi-1b1kE"
       short-id: "59de66570907b747"
@@ -34387,12 +34377,12 @@ proxies:
     flow: "xtls-rprx-vision"
     tls: true
     servername: "ads.x5.ru"
-    client-fingerprint: "qq"
+    client-fingerprint: "safari"
     reality-opts:
       public-key: "MZ4v9kcs6nnAKuCAz4pvViC50BoM3exoL_5Yi-1b1kE"
       short-id: "59de66570907b747"
   -
-    name: "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru 4"
+    name: "🇩🇪 Germany [SNI-RU] ads.x5.ru"
     type: "vless"
     server: "ya51.prowebcore.ru"
     port: 443
@@ -34403,7 +34393,7 @@ proxies:
     flow: "xtls-rprx-vision"
     tls: true
     servername: "ads.x5.ru"
-    client-fingerprint: "safari"
+    client-fingerprint: "firefox"
     reality-opts:
       public-key: "MZ4v9kcs6nnAKuCAz4pvViC50BoM3exoL_5Yi-1b1kE"
       short-id: "59de66570907b747"
@@ -34412,7 +34402,7 @@ proxies:
     type: "vless"
     server: "89.222.123.211"
     port: 16923
-    uuid: "0dce55ed-b73c-40cf-95e3-bcd5831c57f7"
+    uuid: "7d964bd1-f1af-45a5-926f-56238617ac50"
     network: "grpc"
     udp: true
     encryption: "none"
@@ -34429,7 +34419,7 @@ proxies:
     type: "vless"
     server: "89.222.123.211"
     port: 16923
-    uuid: "0dce55ed-b73c-40cf-95e3-bcd5831c57f7"
+    uuid: "7d964bd1-f1af-45a5-926f-56238617ac50"
     network: "grpc"
     udp: true
     encryption: "none"
@@ -34446,74 +34436,6 @@ proxies:
     type: "vless"
     server: "89.222.123.211"
     port: 16923
-    uuid: "0dce55ed-b73c-40cf-95e3-bcd5831c57f7"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
-      short-id: "10ffb85da1c2d986"
-    grpc-opts:
-      grpc-service-name: "neurex"
-  -
-    name: "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 4"
-    type: "vless"
-    server: "89.222.123.211"
-    port: 16923
-    uuid: "0dce55ed-b73c-40cf-95e3-bcd5831c57f7"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
-      short-id: "10ffb85da1c2d986"
-    grpc-opts:
-      grpc-service-name: "neurex"
-  -
-    name: "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 5"
-    type: "vless"
-    server: "89.222.123.211"
-    port: 16923
-    uuid: "7d964bd1-f1af-45a5-926f-56238617ac50"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
-      short-id: "10ffb85da1c2d986"
-    grpc-opts:
-      grpc-service-name: "neurex"
-  -
-    name: "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 6"
-    type: "vless"
-    server: "89.222.123.211"
-    port: 16923
-    uuid: "7d964bd1-f1af-45a5-926f-56238617ac50"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
-      short-id: "10ffb85da1c2d986"
-    grpc-opts:
-      grpc-service-name: "neurex"
-  -
-    name: "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 7"
-    type: "vless"
-    server: "89.222.123.211"
-    port: 16923
     uuid: "7d964bd1-f1af-45a5-926f-56238617ac50"
     network: "grpc"
     udp: true
@@ -34526,87 +34448,6 @@ proxies:
       short-id: "10ffb85da1c2d986"
     grpc-opts:
       grpc-service-name: "neurex"
-  -
-    name: "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 8"
-    type: "vless"
-    server: "89.222.123.211"
-    port: 16923
-    uuid: "7d964bd1-f1af-45a5-926f-56238617ac50"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
-      short-id: "10ffb85da1c2d986"
-    grpc-opts:
-      grpc-service-name: "neurex"
-  -
-    name: "🇳🇱 The Netherlands | [SNI-RU] api-maps.yandex.ru"
-    type: "vless"
-    server: "94.183.221.233"
-    port: 443
-    uuid: "92ed2a4f-5219-444f-8b0b-a5d07a7e3ed2"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "zRVSRinqebogFvlL5GWcaYfLlKGueXknigEI-f-tKAI"
-      short-id: "d82c4b67f9a13e5c"
-  -
-    name: "🇳🇱 The Netherlands [SNI-RU] api-maps.yandex.ru"
-    type: "vless"
-    server: "94.183.221.233"
-    port: 443
-    uuid: "92ed2a4f-5219-444f-8b0b-a5d07a7e3ed2"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "zRVSRinqebogFvlL5GWcaYfLlKGueXknigEI-f-tKAI"
-      short-id: "d82c4b67f9a13e5c"
-  -
-    name: "🇳🇱 The Netherlands [SNI-RU] api-maps.yandex.ru 2"
-    type: "vless"
-    server: "94.183.221.233"
-    port: 443
-    uuid: "92ed2a4f-5219-444f-8b0b-a5d07a7e3ed2"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "zRVSRinqebogFvlL5GWcaYfLlKGueXknigEI-f-tKAI"
-      short-id: "d82c4b67f9a13e5c"
-  -
-    name: "🇳🇱 The Netherlands [SNI-RU] api-maps.yandex.ru 3"
-    type: "vless"
-    server: "94.183.221.233"
-    port: 443
-    uuid: "92ed2a4f-5219-444f-8b0b-a5d07a7e3ed2"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "zRVSRinqebogFvlL5GWcaYfLlKGueXknigEI-f-tKAI"
-      short-id: "d82c4b67f9a13e5c"
   -
     name: "🇺🇸 United States | [SNI-RU] web.max.ru"
     type: "vless"
@@ -34618,24 +34459,7 @@ proxies:
     encryption: "none"
     tls: true
     servername: "web.max.ru"
-    client-fingerprint: "android"
-    reality-opts:
-      public-key: "MF_E-_CYAXdWxC1N_wTkdFyk3K7_1cNqNDPb0vnwl20"
-      short-id: "8311761729abcdef"
-    grpc-opts:
-      grpc-service-name: "web.max.ru"
-  -
-    name: "🇺🇸 United States | [SNI-RU] web.max.ru 2"
-    type: "vless"
-    server: "usa.vrsvpn.com"
-    port: 444
-    uuid: "0b9bcbc1-b289-4a64-86fa-a5b731b65384"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "web.max.ru"
-    client-fingerprint: "firefox"
+    client-fingerprint: "chrome"
     reality-opts:
       public-key: "MF_E-_CYAXdWxC1N_wTkdFyk3K7_1cNqNDPb0vnwl20"
       short-id: "8311761729abcdef"
@@ -34660,6 +34484,23 @@ proxies:
       grpc-service-name: "web.max.ru"
   -
     name: "🇺🇸 United States [SNI-RU] web.max.ru 2"
+    type: "vless"
+    server: "usa.vrsvpn.com"
+    port: 444
+    uuid: "0b9bcbc1-b289-4a64-86fa-a5b731b65384"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "web.max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "MF_E-_CYAXdWxC1N_wTkdFyk3K7_1cNqNDPb0vnwl20"
+      short-id: "8311761729abcdef"
+    grpc-opts:
+      grpc-service-name: "web.max.ru"
+  -
+    name: "🇺🇸 United States [SNI-RU] web.max.ru 3"
     type: "vless"
     server: "usa.vrsvpn.com"
     port: 444
@@ -48103,6 +47944,25 @@ proxies:
       public-key: "5M0khPdwiXYhayuP4i76J1am-q85Sno7vGnqEnZ1ngI"
       short-id: "ccaa"
   -
+    name: "55. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
+    type: "vless"
+    server: "178.176.128.128"
+    port: 443
+    uuid: "5811c644-63ca-4611-89e3-dc0d59cc2024"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "third.spaniolo.site"
+    client-fingerprint: "edge"
+    alpn:
+      - "h2"
+      - "http/1.1"
+    xhttp-opts:
+      path: "/api/uploadFile/"
+      host: "third.spaniolo.site"
+      mode: "packet-up"
+  -
     name: "59. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
     type: "vless"
     server: "178.176.128.128"
@@ -48127,6 +47987,25 @@ proxies:
     server: "178.176.128.128"
     port: 443
     uuid: "e91c6d37-7cc7-45c8-95ca-88388efb4883"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "third.spaniolo.site"
+    client-fingerprint: "edge"
+    alpn:
+      - "h2"
+      - "http/1.1"
+    xhttp-opts:
+      path: "/api/uploadFile/"
+      host: "third.spaniolo.site"
+      mode: "packet-up"
+  -
+    name: "61. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
+    type: "vless"
+    server: "178.176.128.128"
+    port: 443
+    uuid: "3b67de98-2c9e-4316-be6d-c87d62dc9dd6"
     network: "xhttp"
     udp: true
     encryption: "none"
@@ -72953,6 +72832,7 @@ proxies:
       public-key: "OtGux0Ty5TSzfIvlHVd4q_TdYbRUHKbS8WCxmpHJx18"
       short-id: "f543a7a8ec616e07"
       spider-x: "/"
+<<<<<<< HEAD
   -
     name: "0009 | 🇩🇪 Germany | 🏳️ SNI-X5 | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
     type: "vless"
@@ -75271,6 +75151,8 @@ proxies:
     reality-opts:
       public-key: "pPi-WO8qQFFZ9UJWNLW9YClbjcoAAZWJQ2_FM3Kjhz8"
       short-id: "500aec9e9e5e2212"
+=======
+>>>>>>> 2e30e3c (Clarify subscription links in README)
 proxy-groups:
   -
     name: "AUTO"
@@ -77522,33 +77404,21 @@ proxy-groups:
       - "🌐 Anycast-IP | 🇨🇭 🇳🇱 [*CIDR]"
       - "🌐 Anycast-IP | 🇨🇭 🇳🇱 [*CIDR] 2"
       - "🇧🇬 Bulgaria | [SNI-RU] web.max.ru"
+      - "🇧🇬 Bulgaria | [SNI-RU] web.max.ru 2"
+      - "🇧🇬 Bulgaria | [SNI-RU] web.max.ru 3"
       - "🇧🇬 Bulgaria [SNI-RU] web.max.ru"
-      - "🇧🇬 Bulgaria [SNI-RU] web.max.ru 2"
-      - "🇧🇬 Bulgaria [SNI-RU] web.max.ru 3"
-      - "🇩🇪 Germany | [SNI-RU] max.ru"
-      - "🇩🇪 Germany | [SNI-RU] max.ru 2"
-      - "🇩🇪 Germany | [SNI-RU] max.ru 3"
-      - "🇩🇪 Germany | [SNI-RU] max.ru 4"
+      - "🇩🇪 Germany | [SNI-RU] api-maps.yandex.ru"
       - "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru"
       - "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru 2"
       - "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru 3"
-      - "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru 4"
+      - "🇩🇪 Germany [SNI-RU] ads.x5.ru"
       - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru"
       - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 2"
       - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 3"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 4"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 5"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 6"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 7"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 8"
-      - "🇳🇱 The Netherlands | [SNI-RU] api-maps.yandex.ru"
-      - "🇳🇱 The Netherlands [SNI-RU] api-maps.yandex.ru"
-      - "🇳🇱 The Netherlands [SNI-RU] api-maps.yandex.ru 2"
-      - "🇳🇱 The Netherlands [SNI-RU] api-maps.yandex.ru 3"
       - "🇺🇸 United States | [SNI-RU] web.max.ru"
-      - "🇺🇸 United States | [SNI-RU] web.max.ru 2"
       - "🇺🇸 United States [SNI-RU] web.max.ru"
       - "🇺🇸 United States [SNI-RU] web.max.ru 2"
+<<<<<<< HEAD
       - "🇷🇺 VK — #1 4"
       - "🇷🇺 Aeza Group — #2"
       - "🇷🇺 Beget — #3 2"
@@ -77701,6 +77571,9 @@ proxy-groups:
       - "🇸🇪 Sweden — #213"
       - "🇸🇪 Sweden — #214"
       - "🇸🇪 Sweden — #215"
+=======
+      - "🇺🇸 United States [SNI-RU] web.max.ru 3"
+>>>>>>> 2e30e3c (Clarify subscription links in README)
       - "🇺🇸 US | — | 1 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 2 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 3 | @ByeWhiteLists2"
@@ -78374,8 +78247,10 @@ proxy-groups:
       - "51. 🇷🇺 VLESS | SNI: 5post-gate.x5.ru | CIDR: REG.RU | TG: @wlrustg | Thanks: @YoutubeUnBlockRu"
       - "52. 🇷🇺 VLESS | SNI: max.ru | CIDR: VK | TG: @wlrustg"
       - "54. 🇷🇺 VLESS | SNI: muzgrape.space | CIDR: ? | TG: @wlrustg"
+      - "55. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
       - "59. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
       - "60. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
+      - "61. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
       - "62. 🇩🇪 VLESS | SNI: first.eurocast.work | CIDR: ? | TG: @wlrustg"
       - "63. 🇩🇪 VLESS | SNI: first.eurocast.work | CIDR: ? | TG: @wlrustg"
       - "64. 🇩🇪 VLESS | SNI: first.eurocast.work | CIDR: ? | TG: @wlrustg"
@@ -79917,6 +79792,7 @@ proxy-groups:
       - "1776. VLESS | SNI: st.okcdn.ru | CIDR: REG.RU | TG: @wlrustg"
       - "1777. 🇩🇪 VLESS | SNI: ads.x5.ru | CIDR: REG.RU | TG: @wlrustg"
       - "1778. 🇩🇪 VLESS | SNI: st.okcdn.ru | CIDR: REG.RU | TG: @wlrustg"
+<<<<<<< HEAD
       - "0009 | 🇩🇪 Germany | 🏳️ SNI-X5 | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0011 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0018 | 🇷🇺 Russia | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
@@ -80067,6 +79943,8 @@ proxy-groups:
       - "3583 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "3602 | 🇦🇹 Austria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3607 | 🇬🇧 United Kingdom | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+=======
+>>>>>>> 2e30e3c (Clarify subscription links in README)
     url: "https://www.gstatic.com/generate_204"
     interval: 900
     tolerance: 100
@@ -82321,33 +82199,21 @@ proxy-groups:
       - "🌐 Anycast-IP | 🇨🇭 🇳🇱 [*CIDR]"
       - "🌐 Anycast-IP | 🇨🇭 🇳🇱 [*CIDR] 2"
       - "🇧🇬 Bulgaria | [SNI-RU] web.max.ru"
+      - "🇧🇬 Bulgaria | [SNI-RU] web.max.ru 2"
+      - "🇧🇬 Bulgaria | [SNI-RU] web.max.ru 3"
       - "🇧🇬 Bulgaria [SNI-RU] web.max.ru"
-      - "🇧🇬 Bulgaria [SNI-RU] web.max.ru 2"
-      - "🇧🇬 Bulgaria [SNI-RU] web.max.ru 3"
-      - "🇩🇪 Germany | [SNI-RU] max.ru"
-      - "🇩🇪 Germany | [SNI-RU] max.ru 2"
-      - "🇩🇪 Germany | [SNI-RU] max.ru 3"
-      - "🇩🇪 Germany | [SNI-RU] max.ru 4"
+      - "🇩🇪 Germany | [SNI-RU] api-maps.yandex.ru"
       - "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru"
       - "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru 2"
       - "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru 3"
-      - "🇩🇪 Germany | 🌐 [SNI-RU] ads.x5.ru 4"
+      - "🇩🇪 Germany [SNI-RU] ads.x5.ru"
       - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru"
       - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 2"
       - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 3"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 4"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 5"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 6"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 7"
-      - "🇩🇪 Germany [SNI-RU] api-maps.yandex.ru 8"
-      - "🇳🇱 The Netherlands | [SNI-RU] api-maps.yandex.ru"
-      - "🇳🇱 The Netherlands [SNI-RU] api-maps.yandex.ru"
-      - "🇳🇱 The Netherlands [SNI-RU] api-maps.yandex.ru 2"
-      - "🇳🇱 The Netherlands [SNI-RU] api-maps.yandex.ru 3"
       - "🇺🇸 United States | [SNI-RU] web.max.ru"
-      - "🇺🇸 United States | [SNI-RU] web.max.ru 2"
       - "🇺🇸 United States [SNI-RU] web.max.ru"
       - "🇺🇸 United States [SNI-RU] web.max.ru 2"
+<<<<<<< HEAD
       - "🇷🇺 VK — #1 4"
       - "🇷🇺 Aeza Group — #2"
       - "🇷🇺 Beget — #3 2"
@@ -82500,6 +82366,9 @@ proxy-groups:
       - "🇸🇪 Sweden — #213"
       - "🇸🇪 Sweden — #214"
       - "🇸🇪 Sweden — #215"
+=======
+      - "🇺🇸 United States [SNI-RU] web.max.ru 3"
+>>>>>>> 2e30e3c (Clarify subscription links in README)
       - "🇺🇸 US | — | 1 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 2 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 3 | @ByeWhiteLists2"
@@ -83173,8 +83042,10 @@ proxy-groups:
       - "51. 🇷🇺 VLESS | SNI: 5post-gate.x5.ru | CIDR: REG.RU | TG: @wlrustg | Thanks: @YoutubeUnBlockRu"
       - "52. 🇷🇺 VLESS | SNI: max.ru | CIDR: VK | TG: @wlrustg"
       - "54. 🇷🇺 VLESS | SNI: muzgrape.space | CIDR: ? | TG: @wlrustg"
+      - "55. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
       - "59. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
       - "60. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
+      - "61. 🇩🇪 VLESS | SNI: third.spaniolo.site | CIDR: ? | TG: @wlrustg"
       - "62. 🇩🇪 VLESS | SNI: first.eurocast.work | CIDR: ? | TG: @wlrustg"
       - "63. 🇩🇪 VLESS | SNI: first.eurocast.work | CIDR: ? | TG: @wlrustg"
       - "64. 🇩🇪 VLESS | SNI: first.eurocast.work | CIDR: ? | TG: @wlrustg"
@@ -84716,6 +84587,7 @@ proxy-groups:
       - "1776. VLESS | SNI: st.okcdn.ru | CIDR: REG.RU | TG: @wlrustg"
       - "1777. 🇩🇪 VLESS | SNI: ads.x5.ru | CIDR: REG.RU | TG: @wlrustg"
       - "1778. 🇩🇪 VLESS | SNI: st.okcdn.ru | CIDR: REG.RU | TG: @wlrustg"
+<<<<<<< HEAD
       - "0009 | 🇩🇪 Germany | 🏳️ SNI-X5 | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0011 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0018 | 🇷🇺 Russia | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
@@ -84866,6 +84738,8 @@ proxy-groups:
       - "3583 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "3602 | 🇦🇹 Austria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3607 | 🇬🇧 United Kingdom | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+=======
+>>>>>>> 2e30e3c (Clarify subscription links in README)
   -
     name: "PROXY"
     type: "select"
