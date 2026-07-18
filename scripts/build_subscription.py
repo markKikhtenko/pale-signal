@@ -566,20 +566,9 @@ def split_by_country(proxies: list[dict]) -> tuple[list[dict], list[dict]]:
     return ru_proxies, global_proxies
 
 
-def export_proxy_name(prefix: str, index: int, proxy: dict) -> str:
-    suffix = "-UNKNOWN" if proxy.get("_country") == "UNKNOWN" else ""
-    return f"{prefix}-{index:05d}{suffix}"
-
-
-def build_config(proxies: list[dict], name_prefix: str) -> dict:
-    export_proxies = []
-    names = []
-    for index, proxy in enumerate(proxies, start=1):
-        name = export_proxy_name(name_prefix, index, proxy)
-        names.append(name)
-        export_proxy = {key: value for key, value in proxy.items() if not key.startswith("_")}
-        export_proxy["name"] = name
-        export_proxies.append(export_proxy)
+def build_config(proxies: list[dict]) -> dict:
+    names = [proxy["name"] for proxy in proxies]
+    export_proxies = [{key: value for key, value in proxy.items() if not key.startswith("_")} for proxy in proxies]
 
     return {
         "mixed-port": 7890,
@@ -1210,9 +1199,9 @@ def main() -> int:
         raise RuntimeError("no valid VLESS servers were parsed")
     proxies = dedupe_and_name(parsed)
     ru_proxies, global_proxies = split_by_country(proxies)
-    config = build_config(proxies, "PS")
-    ru_config = build_config(ru_proxies, "PS-RU")
-    global_config = build_config(global_proxies, "PS-GLOBAL")
+    config = build_config(proxies)
+    ru_config = build_config(ru_proxies)
+    global_config = build_config(global_proxies)
     validate_config(config)
     validate_config(ru_config)
     validate_config(global_config)
