@@ -193,16 +193,19 @@ def fetch_source_texts(source: dict[str, str]) -> list[str]:
         raise RuntimeError(f"{source['name']} does not contain a URL list")
 
     texts = []
+    failed_urls = []
     for url in urls:
         if not isinstance(url, str) or not url.startswith(("http://", "https://")):
             continue
         try:
             texts.append(fetch_url(url, timeout=25))
         except Exception as exc:
-            print(f"warning: skipped nested source {url}: {exc}", file=sys.stderr)
+            failed_urls.append(f"{url}: {exc}")
 
     if not texts:
         raise RuntimeError(f"{source['name']} did not provide any downloadable nested sources")
+    if failed_urls:
+        raise RuntimeError(f"{source['name']} has failed nested sources: {'; '.join(failed_urls)}")
     return texts
 
 
@@ -688,6 +691,51 @@ def proxy_key(proxy: dict) -> str:
     return hashlib.sha256("|".join(parts).encode("utf-8")).hexdigest()
 
 
+def proxy_block_keys(yaml_text: str) -> set[str]:
+    keys: set[str] = set()
+    block: list[str] = []
+    in_proxies = False
+
+    for line in yaml_text.splitlines():
+        if line == "proxies:":
+            in_proxies = True
+            continue
+        if in_proxies and line == "proxy-groups:":
+            if block:
+                keys.add(hashlib.sha256("\n".join(block).encode("utf-8")).hexdigest())
+            break
+        if not in_proxies:
+            continue
+
+        if line == "  -":
+            if block:
+                keys.add(hashlib.sha256("\n".join(block).encode("utf-8")).hexdigest())
+            block = [line]
+            continue
+        if block and not line.startswith("    name: "):
+            block.append(line)
+
+    return keys
+
+
+def compare_with_existing(path: Path, yaml_text: str) -> dict[str, int]:
+    old_keys = proxy_block_keys(path.read_text(encoding="utf-8", errors="replace")) if path.exists() else set()
+    new_keys = proxy_block_keys(yaml_text)
+    added = len(new_keys - old_keys)
+    removed = len(old_keys - new_keys)
+    return {
+        "old": len(old_keys),
+        "new": len(new_keys),
+        "added": added,
+        "removed": removed,
+        "delta": added - removed,
+    }
+
+
+def signed(value: int) -> str:
+    return f"+{value}" if value > 0 else str(value)
+
+
 def stats_for(proxies: list[dict]) -> dict[str, int]:
     source_stats = {
         source["id"].lower(): sum(1 for proxy in proxies if source["id"] in proxy.get("_sources", []))
@@ -1113,7 +1161,7 @@ GitHub Actions пересобирает подписки раз в час. Ру�
     README_FILE.write_text(text, encoding="utf-8", newline="\n")
 
 
-def write_final_readme(proxies: list[dict], now: str) -> None:
+def write_final_readme(proxies: list[dict], now: str, changes: dict[str, dict[str, int]]) -> None:
     stats = stats_for(proxies)
     text = f"""# pale-signal подписки
 
@@ -1147,6 +1195,17 @@ pale-signal автоматически собирает VLESS-подписки �
 | WebSocket | `{stats['ws']}` |
 | gRPC | `{stats['grpc']}` |
 | XHTTP | `{stats['xhttp']}` |
+
+<details>
+<summary>Статистика последнего обновления</summary>
+
+| Подписка | Было | Стало | Добавлено | Убрано | Разница |
+|----------|------|-------|-----------|--------|---------|
+| Общая | `{changes['all']['old']}` | `{changes['all']['new']}` | `+{changes['all']['added']}` | `-{changes['all']['removed']}` | `{signed(changes['all']['delta'])}` |
+| Россия | `{changes['ru']['old']}` | `{changes['ru']['new']}` | `+{changes['ru']['added']}` | `-{changes['ru']['removed']}` | `{signed(changes['ru']['delta'])}` |
+| Global | `{changes['global']['old']}` | `{changes['global']['new']}` | `+{changes['global']['added']}` | `-{changes['global']['removed']}` | `{signed(changes['global']['delta'])}` |
+
+</details>
 
 ## Группы
 
@@ -1183,11 +1242,13 @@ def msk_timestamp() -> str:
 
 def main() -> int:
     parsed = []
+    fetch_errors = []
     for source in SOURCES:
         try:
             source_texts = fetch_source_texts(source)
         except Exception as exc:
             print(f"warning: skipped source {source['name']}: {exc}", file=sys.stderr)
+            fetch_errors.append(f"{source['name']}: {exc}")
             continue
         for source_text in source_texts:
             parsed.extend(
@@ -1195,6 +1256,8 @@ def main() -> int:
                 for line in source_text.splitlines()
                 if (proxy := parse_vless(line, source["id"]))
             )
+    if fetch_errors:
+        raise RuntimeError(f"source download errors: {'; '.join(fetch_errors)}")
     if not parsed:
         raise RuntimeError("no valid VLESS servers were parsed")
     proxies = dedupe_and_name(parsed)
@@ -1213,10 +1276,15 @@ def main() -> int:
         raise RuntimeError("empty YAML output")
 
     now = msk_timestamp()
+    changes = {
+        "all": compare_with_existing(OUTPUT_FILE, yaml_text),
+        "ru": compare_with_existing(RU_OUTPUT_FILE, ru_yaml_text),
+        "global": compare_with_existing(GLOBAL_OUTPUT_FILE, global_yaml_text),
+    }
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
-    write_final_readme(proxies, now)
+    write_final_readme(proxies, now, changes)
     print(
         f"wrote subscription files with {len(proxies)} proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} global)"
