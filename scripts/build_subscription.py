@@ -774,16 +774,14 @@ def update_run_history(now: str, stats: dict[str, int], changes: dict[str, dict[
     return history
 
 
-def sparkline(values: list[int]) -> str:
+def trend_arrow(values: list[int]) -> str:
     if not values:
         return "-"
-    ticks = "▁▂▃▄▅▆▇█"
-    low = min(values)
-    high = max(values)
-    if low == high:
-        return ticks[-1] * len(values)
-    scale = len(ticks) - 1
-    return "".join(ticks[round((value - low) * scale / (high - low))] for value in values)
+    if values[-1] > values[0]:
+        return "↑"
+    if values[-1] < values[0]:
+        return "↓"
+    return "→"
 
 
 def history_count(run: dict, key: str) -> int:
@@ -808,7 +806,7 @@ def history_lines(history: list[dict]) -> str:
     for key, title in titles.items():
         values = [history_count(run, key) for run in history]
         lines.append(
-            f"| {title} | `{sparkline(values)}` | `{values[0]}` | `{values[-1]}` | `{signed(values[-1] - values[0])}` |"
+            f"| {title} | `{trend_arrow(values)}` | `{values[0]}` | `{values[-1]}` | `{signed(values[-1] - values[0])}` |"
         )
 
     lines.extend(
