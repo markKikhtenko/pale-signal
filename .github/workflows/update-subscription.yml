@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md subscription.yaml subscription-ru.yaml subscription-global.yaml
+          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else

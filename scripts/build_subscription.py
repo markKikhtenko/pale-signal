@@ -145,8 +145,10 @@ OUTPUT_FILE = ROOT / "subscription.yaml"
 RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
 GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 README_FILE = ROOT / "README.md"
+UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://www.gstatic.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
+UPDATE_HISTORY_LIMIT = 10
 
 TRUE_VALUES = {"1", "true", "yes", "on"}
 SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
@@ -736,6 +738,100 @@ def signed(value: int) -> str:
     return f"+{value}" if value > 0 else str(value)
 
 
+def load_update_history() -> list[dict]:
+    if not UPDATE_HISTORY_FILE.exists():
+        return []
+    try:
+        data = json.loads(UPDATE_HISTORY_FILE.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return []
+    runs = data.get("runs") if isinstance(data, dict) else data
+    return runs if isinstance(runs, list) else []
+
+
+def history_entry(now: str, stats: dict[str, int], changes: dict[str, dict[str, int]]) -> dict:
+    return {
+        "updated_at": now,
+        "counts": {
+            "all": stats["total"],
+            "ru": stats["ru"],
+            "global": stats["global"],
+        },
+        "changes": changes,
+    }
+
+
+def update_run_history(now: str, stats: dict[str, int], changes: dict[str, dict[str, int]]) -> list[dict]:
+    history = load_update_history()
+    history.append(history_entry(now, stats, changes))
+    history = history[-UPDATE_HISTORY_LIMIT:]
+    data = {"runs": history}
+    UPDATE_HISTORY_FILE.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    return history
+
+
+def sparkline(values: list[int]) -> str:
+    if not values:
+        return "-"
+    ticks = "▁▂▃▄▅▆▇█"
+    low = min(values)
+    high = max(values)
+    if low == high:
+        return ticks[-1] * len(values)
+    scale = len(ticks) - 1
+    return "".join(ticks[round((value - low) * scale / (high - low))] for value in values)
+
+
+def history_count(run: dict, key: str) -> int:
+    value = run.get("counts", {}).get(key, 0)
+    return value if isinstance(value, int) else 0
+
+
+def history_change(run: dict, key: str, field: str) -> int:
+    value = run.get("changes", {}).get(key, {}).get(field, 0)
+    return value if isinstance(value, int) else 0
+
+
+def history_lines(history: list[dict]) -> str:
+    if not history:
+        return "Истории пока нет: она появится после следующей успешной сборки."
+
+    titles = {"all": "Общая", "ru": "Россия", "global": "Global"}
+    lines = [
+        "| Подписка | Тренд | Первое | Последнее | Разница |",
+        "|----------|-------|--------|-----------|---------|",
+    ]
+    for key, title in titles.items():
+        values = [history_count(run, key) for run in history]
+        lines.append(
+            f"| {title} | `{sparkline(values)}` | `{values[0]}` | `{values[-1]}` | `{signed(values[-1] - values[0])}` |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "| Обновление, МСК | Общая | Россия | Global | Δ общая | Δ Россия | Δ Global |",
+            "|-----------------|-------|--------|--------|---------|----------|----------|",
+        ]
+    )
+    for run in reversed(history):
+        lines.append(
+            "| "
+            f"`{run.get('updated_at', '-')}` | "
+            f"`{history_count(run, 'all')}` | "
+            f"`{history_count(run, 'ru')}` | "
+            f"`{history_count(run, 'global')}` | "
+            f"`{signed(history_change(run, 'all', 'delta'))}` | "
+            f"`{signed(history_change(run, 'ru', 'delta'))}` | "
+            f"`{signed(history_change(run, 'global', 'delta'))}` |"
+        )
+    return "\n".join(lines)
+
+
 def stats_for(proxies: list[dict]) -> dict[str, int]:
     source_stats = {
         source["id"].lower(): sum(1 for proxy in proxies if source["id"] in proxy.get("_sources", []))
@@ -1161,8 +1257,9 @@ GitHub Actions пересобирает подписки раз в час. Ру�
     README_FILE.write_text(text, encoding="utf-8", newline="\n")
 
 
-def write_final_readme(proxies: list[dict], now: str, changes: dict[str, dict[str, int]]) -> None:
+def write_final_readme(proxies: list[dict], now: str, changes: dict[str, dict[str, int]], history: list[dict]) -> None:
     stats = stats_for(proxies)
+    history_table = history_lines(history)
     text = f"""# pale-signal подписки
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
@@ -1197,13 +1294,9 @@ pale-signal автоматически собирает VLESS-подписки �
 | XHTTP | `{stats['xhttp']}` |
 
 <details>
-<summary>Статистика последнего обновления</summary>
+<summary>Последние {UPDATE_HISTORY_LIMIT} обновлений и тренд</summary>
 
-| Подписка | Было | Стало | Добавлено | Убрано | Разница |
-|----------|------|-------|-----------|--------|---------|
-| Общая | `{changes['all']['old']}` | `{changes['all']['new']}` | `+{changes['all']['added']}` | `-{changes['all']['removed']}` | `{signed(changes['all']['delta'])}` |
-| Россия | `{changes['ru']['old']}` | `{changes['ru']['new']}` | `+{changes['ru']['added']}` | `-{changes['ru']['removed']}` | `{signed(changes['ru']['delta'])}` |
-| Global | `{changes['global']['old']}` | `{changes['global']['new']}` | `+{changes['global']['added']}` | `-{changes['global']['removed']}` | `{signed(changes['global']['delta'])}` |
+{history_table}
 
 </details>
 
@@ -1281,10 +1374,11 @@ def main() -> int:
         "ru": compare_with_existing(RU_OUTPUT_FILE, ru_yaml_text),
         "global": compare_with_existing(GLOBAL_OUTPUT_FILE, global_yaml_text),
     }
+    history = update_run_history(now, stats_for(proxies), changes)
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
-    write_final_readme(proxies, now, changes)
+    write_final_readme(proxies, now, changes, history)
     print(
         f"wrote subscription files with {len(proxies)} proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} global)"
