@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import base64
 import datetime as dt
 import hashlib
 import ipaddress
@@ -236,10 +237,27 @@ def fetch_url(url: str, timeout: int = 45) -> str:
         return response.read().decode("utf-8", errors="replace")
 
 
+def expand_subscription_texts(text: str) -> list[str]:
+    texts = [text]
+    compact = re.sub(r"\s+", "", text.strip())
+    if len(compact) < 16 or not re.fullmatch(r"[A-Za-z0-9+/_=-]+", compact):
+        return texts
+
+    padded = compact + "=" * (-len(compact) % 4)
+    for decoder in (base64.b64decode, base64.urlsafe_b64decode):
+        try:
+            decoded = decoder(padded).decode("utf-8", errors="replace")
+        except Exception:
+            continue
+        if "://" in decoded and decoded not in texts:
+            texts.append(decoded)
+    return texts
+
+
 def fetch_source_texts(source: dict[str, str]) -> list[str]:
     source_text = fetch_source(source)
     if source.get("type") != "url_list_json":
-        return [source_text]
+        return expand_subscription_texts(source_text)
 
     try:
         urls = json.loads(source_text)
@@ -255,7 +273,7 @@ def fetch_source_texts(source: dict[str, str]) -> list[str]:
         if not isinstance(url, str) or not url.startswith(("http://", "https://")):
             continue
         try:
-            texts.append(fetch_url(url, timeout=25))
+            texts.extend(expand_subscription_texts(fetch_url(url, timeout=25)))
         except Exception as exc:
             failed_urls.append(f"{url}: {exc}")
 
