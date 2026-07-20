@@ -89,9 +89,64 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt",
     },
     {
+        "id": "EPODONIOS_VLESS",
+        "name": "Epodonios Splitted-By-Protocol/vless.txt",
+        "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
+    },
+    {
         "id": "EPODONIOS_26",
         "name": "Epodonios Sub26.txt",
         "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt",
+    },
+    {
+        "id": "BARRY_FAR_VLESS",
+        "name": "barry-far V2ray-config vless.txt",
+        "url": "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt",
+    },
+    {
+        "id": "SOLISPIRIT_VLESS",
+        "name": "SoliSpirit Protocols/vless.txt",
+        "url": "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt",
+    },
+    {
+        "id": "MATIN_VLESS",
+        "name": "MatinGhanbari filtered vless.txt",
+        "url": "https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/filtered/subs/vless.txt",
+    },
+    {
+        "id": "LIMILCO_VLESS",
+        "name": "liMilCo v2r pro/vless.txt",
+        "url": "https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt",
+    },
+    {
+        "id": "V2RAYROOT_VLESS",
+        "name": "V2RayRoot Config/vless.txt",
+        "url": "https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt",
+    },
+    {
+        "id": "SURFBOARD_MIXED",
+        "name": "Surfboardv2ray TGParse mixed",
+        "url": "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/mixed",
+    },
+    {
+        "id": "ALIILAPRO_SUB",
+        "name": "ALIILAPRO v2rayNG-Config sub.txt",
+        "url": "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt",
+    },
+    {
+        "id": "MAHSANET_XRAY_FINAL",
+        "name": "MahsaNetConfigTopic xray_final.txt",
+        "url": "https://raw.githubusercontent.com/MahsaNetConfigTopic/config/refs/heads/main/xray_final.txt",
+    },
+    {
+        "id": "RAYAN_PROXY",
+        "name": "Rayan-Config proxy.txt",
+        "url": "https://raw.githubusercontent.com/Rayan-Config/C-Sub/refs/heads/main/configs/proxy.txt",
+    },
+    {
+        "id": "FNET_MAIN",
+        "name": "FNET00 Config/Main",
+        "url": "https://raw.githubusercontent.com/FNET00bot/FNET00/Config/Main",
     },
     {
         "id": "AVEN_26",
@@ -830,6 +885,17 @@ def history_lines(history: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def source_table(stats: dict[str, int]) -> str:
+    lines = [
+        "| Источник | Серверов в подписке | Ссылка |",
+        "|----------|---------------------|--------|",
+    ]
+    for source in SOURCES:
+        count = stats.get(source["id"].lower(), 0)
+        lines.append(f"| {source['name']} | `{count}` | [raw]({source['url']}) |")
+    return "\n".join(lines)
+
+
 def stats_for(proxies: list[dict]) -> dict[str, int]:
     source_stats = {
         source["id"].lower(): sum(1 for proxy in proxies if source["id"] in proxy.get("_sources", []))
@@ -1258,6 +1324,7 @@ GitHub Actions пересобирает подписки раз в час. Ру�
 def write_final_readme(proxies: list[dict], now: str, changes: dict[str, dict[str, int]], history: list[dict]) -> None:
     stats = stats_for(proxies)
     history_table = history_lines(history)
+    sources_markdown = source_table(stats)
     text = f"""# pale-signal подписки
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
@@ -1290,6 +1357,13 @@ pale-signal автоматически собирает VLESS-подписки �
 | WebSocket | `{stats['ws']}` |
 | gRPC | `{stats['grpc']}` |
 | XHTTP | `{stats['xhttp']}` |
+
+<details>
+<summary>Источники</summary>
+
+{sources_markdown}
+
+</details>
 
 <details>
 <summary>Последние {UPDATE_HISTORY_LIMIT} обновлений и тренд</summary>
