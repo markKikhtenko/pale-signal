@@ -196,6 +196,33 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/PrinceVSFX/Adapt-Configs/main/Configs/White_list.txt",
     },
 ]
+
+BYPASS_SOURCE_IDS = {
+    "FULL",
+    "LITE",
+    "KIRYA_26",
+    "KIRYA_WL_26",
+    "KIRYA_WL_27",
+    "KIRYA_WL_28",
+    "KIRYA_WL_29",
+    "BYEWL2",
+    "RJSXRD_BYPASS_ALL",
+    "IGARECK_WHITE_MOBILE_1",
+    "IGARECK_WHITE_CIDR_CHECKED",
+    "IGARECK_WHITE_SNI",
+    "IGARECK_WHITE_CIDR",
+    "EPODONIOS_26",
+    "AVEN_26",
+    "AVEN_MIRROR_26",
+    "VOID_URL_WORK",
+    "RKP_WHITELIST",
+    "WLUNLOCKER_WHITE_ALL",
+    "WLUNLOCKER_CIDR_1",
+    "WLUNLOCKER_CIDR_2",
+    "VLADVARP_WHITELIST_VLESS",
+    "PRINCE_WHITE_LIST",
+}
+
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
 RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
@@ -904,13 +931,30 @@ def history_lines(history: list[dict]) -> str:
 
 
 def source_table(stats: dict[str, int]) -> str:
+    bypass_sources = [source for source in SOURCES if source["id"] in BYPASS_SOURCE_IDS]
+    global_sources = [source for source in SOURCES if source["id"] not in BYPASS_SOURCE_IDS]
+
+    def rows_for(sources: list[dict]) -> list[str]:
+        lines = [
+            "| Источник | Серверов в подписке | Ссылка |",
+            "|----------|---------------------|--------|",
+        ]
+        for source in sorted(sources, key=lambda item: stats.get(item["id"].lower(), 0), reverse=True):
+            count = stats.get(source["id"].lower(), 0)
+            lines.append(f"| {source['name']} | `{count}` | [raw]({source['url']}) |")
+        return lines
+
     lines = [
-        "| Источник | Серверов в подписке | Ссылка |",
-        "|----------|---------------------|--------|",
+        "Источники разделены по назначению. БС-группа - это whitelist/bypass/26/CIDR/SNI-источники. Общие global-пулы оставлены как запас иностранных VLESS, но не считаются проверенными под обход БС.",
+        "",
+        "### БС / whitelist / bypass",
+        "",
+        *rows_for(bypass_sources),
+        "",
+        "### Общие global-пулы",
+        "",
+        *rows_for(global_sources),
     ]
-    for source in SOURCES:
-        count = stats.get(source["id"].lower(), 0)
-        lines.append(f"| {source['name']} | `{count}` | [raw]({source['url']}) |")
     return "\n".join(lines)
 
 
