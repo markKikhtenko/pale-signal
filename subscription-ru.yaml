@@ -6467,6 +6467,19 @@ proxies:
       public-key: "vnjp7zIK2H3CGdjSis_79KXqS6IG-opmpbETPUD-EC8"
       short-id: "15affa0af66dfc79"
   -
+    name: "🏳[openproxylist.com] vless- 2"
+    type: "vless"
+    server: "tn.tmn141246.ru"
+    port: 4100
+    uuid: "155e8dd4-a559-407a-9ea8-13a5e829f066"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "live.ok.ru"
+  -
     name: "🏳[openproxylist.com] vless- 3"
     type: "vless"
     server: "185.247.16.3"
@@ -16549,23 +16562,6 @@ proxies:
     reality-opts:
       public-key: "HHTugdBbPIsLatDJJIqLBA2xYiLzv5pGijXREUABvQU"
       short-id: "0a000000"
-  -
-    name: "By EbraSha 1209"
-    type: "vless"
-    server: "eu-gw.videomonitor.cloud"
-    port: 2053
-    uuid: "a588b572-5142-11f1-9b07-7a2bf7e13604"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dzen.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "j8OW1foMwfeiy3VMbNPHLgTXgy_ZPdFFxv-H3HrbNF0"
-      short-id: "2c60309fa586eb60"
-    grpc-opts:
-      grpc-service-name: "grpc-direct"
   -
     name: "By EbraSha 1210"
     type: "vless"
@@ -27701,6 +27697,19 @@ proxies:
       short-id: "10ffb85da1c2d986"
     grpc-opts:
       grpc-service-name: "neurex"
+  -
+    name: "EPODONIOS 1424"
+    type: "vless"
+    server: "tn.tmn141246.ru"
+    port: 2200
+    uuid: "d4aad26f-70b6-4411-8517-17f7b4281886"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "rzd.ru"
   -
     name: "EPODONIOS 1866"
     type: "vless"
@@ -50343,6 +50352,21 @@ proxies:
     grpc-opts:
       grpc-service-name: "ns"
   -
+    name: "gRPC, Дзен [V.O.I.D] 2"
+    type: "vless"
+    server: "eu-gw.videomonitor.cloud"
+    port: 2053
+    uuid: "a588b572-5142-11f1-9b07-7a2bf7e13604"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dzen.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "j8OW1foMwfeiy3VMbNPHLgTXgy_ZPdFFxv-H3HrbNF0"
+      short-id: "2c60309fa586eb60"
+  -
     name: "Reality, Пятёрочка [V.O.I.D] 123"
     type: "vless"
     server: "176.109.85.112"
@@ -51257,6 +51281,22 @@ proxies:
     reality-opts:
       public-key: "yX1E6fqEpS0oU3efsyAc0x6hXsl7w5iBTnZkbzG7JB8"
       short-id: "22730c666bd10642"
+  -
+    name: "TCP, Пятёрочка [V.O.I.D] 57"
+    type: "vless"
+    server: "ru.riotvpn.eu"
+    port: 443
+    uuid: "0698d601-aa2f-40a8-8060-e19723564e2f"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "ads.x5.ru"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "8h8t5eBWL9oERK7xWHQLFJE5j6sZdgNDQAs3EGnNbho"
+      short-id: "2f49bccf11150ef2"
   -
     name: "Reality, Яндекс [V.O.I.D] 168"
     type: "vless"
@@ -57491,6 +57531,7 @@ proxy-groups:
       - "1303 | 🇷🇺 Russia | 🏳️ VK | TG: @YoutubeUnBlockRu"
       - "1329 | 🇷🇺 Russia | 🏳️ X5 | TG: @YoutubeUnBlockRu"
       - "1429 | 🇷🇺 Russia | 🏳️ X5 | TG: @YoutubeUnBlockRu"
+      - "🏳[openproxylist.com] vless- 2"
       - "🏳[openproxylist.com] vless- 3"
       - "INT🌍 4"
       - "@Vip_Security join us - 577"
@@ -58133,7 +58174,6 @@ proxy-groups:
       - "By EbraSha 1157"
       - "By EbraSha 1168"
       - "By EbraSha 1201"
-      - "By EbraSha 1209"
       - "By EbraSha 1210"
       - "By EbraSha 1211"
       - "By EbraSha 1216"
@@ -58829,6 +58869,7 @@ proxy-groups:
       - "EPODONIOS 1313"
       - "EPODONIOS 1345"
       - "EPODONIOS 1356"
+      - "EPODONIOS 1424"
       - "EPODONIOS 1866"
       - "EPODONIOS 2009"
       - "EPODONIOS 2046"
@@ -60231,6 +60272,7 @@ proxy-groups:
       - "XHTTP, Mail.ru [V.O.I.D]"
       - "Reality, Яндекс Карты [V.O.I.D] 68"
       - "gRPC, Яндекс [V.O.I.D] 36"
+      - "gRPC, Дзен [V.O.I.D] 2"
       - "Reality, Пятёрочка [V.O.I.D] 123"
       - "Reality, Max [V.O.I.D] 94"
       - "Reality, VK [V.O.I.D] 80"
@@ -60287,6 +60329,7 @@ proxy-groups:
       - "Reality, Пятёрочка [V.O.I.D] 147"
       - "TCP, VK [V.O.I.D] 61"
       - "Reality, Яндекс Карты [V.O.I.D] 80"
+      - "TCP, Пятёрочка [V.O.I.D] 57"
       - "Reality, Яндекс [V.O.I.D] 168"
       - "Reality, Max [V.O.I.D] 112"
       - "Reality, Яндекс [V.O.I.D] 169"
@@ -61073,6 +61116,7 @@ proxy-groups:
       - "1303 | 🇷🇺 Russia | 🏳️ VK | TG: @YoutubeUnBlockRu"
       - "1329 | 🇷🇺 Russia | 🏳️ X5 | TG: @YoutubeUnBlockRu"
       - "1429 | 🇷🇺 Russia | 🏳️ X5 | TG: @YoutubeUnBlockRu"
+      - "🏳[openproxylist.com] vless- 2"
       - "🏳[openproxylist.com] vless- 3"
       - "INT🌍 4"
       - "@Vip_Security join us - 577"
@@ -61715,7 +61759,6 @@ proxy-groups:
       - "By EbraSha 1157"
       - "By EbraSha 1168"
       - "By EbraSha 1201"
-      - "By EbraSha 1209"
       - "By EbraSha 1210"
       - "By EbraSha 1211"
       - "By EbraSha 1216"
@@ -62411,6 +62454,7 @@ proxy-groups:
       - "EPODONIOS 1313"
       - "EPODONIOS 1345"
       - "EPODONIOS 1356"
+      - "EPODONIOS 1424"
       - "EPODONIOS 1866"
       - "EPODONIOS 2009"
       - "EPODONIOS 2046"
@@ -63813,6 +63857,7 @@ proxy-groups:
       - "XHTTP, Mail.ru [V.O.I.D]"
       - "Reality, Яндекс Карты [V.O.I.D] 68"
       - "gRPC, Яндекс [V.O.I.D] 36"
+      - "gRPC, Дзен [V.O.I.D] 2"
       - "Reality, Пятёрочка [V.O.I.D] 123"
       - "Reality, Max [V.O.I.D] 94"
       - "Reality, VK [V.O.I.D] 80"
@@ -63869,6 +63914,7 @@ proxy-groups:
       - "Reality, Пятёрочка [V.O.I.D] 147"
       - "TCP, VK [V.O.I.D] 61"
       - "Reality, Яндекс Карты [V.O.I.D] 80"
+      - "TCP, Пятёрочка [V.O.I.D] 57"
       - "Reality, Яндекс [V.O.I.D] 168"
       - "Reality, Max [V.O.I.D] 112"
       - "Reality, Яндекс [V.O.I.D] 169"
