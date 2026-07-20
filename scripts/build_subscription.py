@@ -35,6 +35,17 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/ByeWhiteLists/ByeWhiteLists2/refs/heads/main/ByeWhiteLists2.txt",
     },
     {
+        "id": "WLRUS_WL",
+        "name": "wlrus wl.txt",
+        "url": "https://s3c3.001.gpucloud.ru/wlr/wl.txt",
+    },
+    {
+        "id": "ETONEYA_WHITELIST",
+        "name": "etoneya whitelist",
+        "url": "https://etoneya.su/whitelist",
+        "timeout": 15,
+    },
+    {
         "id": "RJSXRD_BYPASS_ALL",
         "name": "rjsxrd bypass-all",
         "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt",
@@ -176,6 +187,8 @@ BYPASS_SOURCE_IDS = {
     "FULL",
     "LITE",
     "BYEWL2",
+    "WLRUS_WL",
+    "ETONEYA_WHITELIST",
     "RJSXRD_BYPASS_ALL",
     "IGARECK_WHITE_MOBILE_1",
     "IGARECK_WHITE_CIDR_CHECKED",
@@ -217,7 +230,8 @@ def fetch_source(source: dict[str, str]) -> str:
         source["url"],
         headers={"User-Agent": "pale-signal-subscription-builder/1.0"},
     )
-    with urllib.request.urlopen(request, timeout=45) as response:
+    timeout = int(source.get("timeout", 45))
+    with urllib.request.urlopen(request, timeout=timeout) as response:
         if response.status != 200:
             raise RuntimeError(f"{source['name']} returned HTTP {response.status}")
         return response.read().decode("utf-8", errors="replace")
@@ -277,7 +291,7 @@ def fetch_source_texts(source: dict[str, str]) -> list[str]:
     if not texts:
         raise RuntimeError(f"{source['name']} did not provide any downloadable nested sources")
     if failed_urls:
-        raise RuntimeError(f"{source['name']} has failed nested sources: {'; '.join(failed_urls)}")
+        print(f"warning: skipped nested sources for {source['name']}: {'; '.join(failed_urls)}", file=sys.stderr)
     return texts
 
 
