@@ -215,6 +215,21 @@ UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://www.gstatic.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 UPDATE_HISTORY_LIMIT = 10
+GLOBAL_SUBSCRIPTION_LIMIT = 2500
+GLOBAL_SOURCE_PRIORITY = (
+    "AVEN_MIRROR_26",
+    "AVEN_26",
+    "WLRUS_WL",
+    "ETONEYA_WHITELIST",
+    "BYEWL2",
+    "FULL",
+    "LITE",
+    "IGARECK_WHITE_CIDR",
+    "IGARECK_WHITE_SNI",
+    "IGARECK_WHITE_CIDR_CHECKED",
+    "IGARECK_WHITE_MOBILE_1",
+)
+GLOBAL_SOURCE_RANK = {source_id: index for index, source_id in enumerate(GLOBAL_SOURCE_PRIORITY)}
 
 TRUE_VALUES = {"1", "true", "yes", "on"}
 SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
@@ -473,7 +488,7 @@ def dedupe_and_name(proxies: list[dict]) -> list[dict]:
     used_names: dict[str, int] = {}
     result: list[dict] = []
 
-    for proxy in proxies:
+    for input_order, proxy in enumerate(proxies):
         source_name = proxy.pop("_source_name")
         source_id = proxy.pop("_source_id")
         key = json.dumps(proxy, sort_keys=True, ensure_ascii=False)
@@ -487,7 +502,7 @@ def dedupe_and_name(proxies: list[dict]) -> list[dict]:
         count = used_names.get(source_name, 0) + 1
         used_names[source_name] = count
         proxy["name"] = source_name if count == 1 else f"{source_name} {count}"
-        named_proxy = {"name": proxy.pop("name"), "_sources": [source_id], **proxy}
+        named_proxy = {"name": proxy.pop("name"), "_sources": [source_id], "_input_order": input_order, **proxy}
         seen_keys[digest] = named_proxy
         result.append(named_proxy)
 
@@ -653,6 +668,38 @@ def split_by_country(proxies: list[dict]) -> tuple[list[dict], list[dict]]:
     ru_proxies = [proxy for proxy in proxies if proxy.get("_country") == "RU"]
     global_proxies = [proxy for proxy in proxies if proxy.get("_country") != "RU"]
     return ru_proxies, global_proxies
+
+
+def curated_global_rank(proxy: dict) -> tuple:
+    sources = proxy.get("_sources", [])
+    source_rank = min(
+        (GLOBAL_SOURCE_RANK[source] for source in sources if source in GLOBAL_SOURCE_RANK),
+        default=999,
+    )
+    curated_source_count = sum(1 for source in sources if source in GLOBAL_SOURCE_RANK)
+    transport_rank = {"tcp": 0, "grpc": 1, "ws": 2, "xhttp": 3}.get(proxy.get("network", "tcp"), 9)
+    return (
+        source_rank,
+        -curated_source_count,
+        0 if "reality-opts" in proxy else 1,
+        0 if proxy.get("tls") else 1,
+        1 if proxy.get("_country") == "UNKNOWN" else 0,
+        transport_rank,
+        proxy.get("_input_order", 0),
+        proxy.get("name", ""),
+        proxy.get("server", ""),
+        proxy.get("port", 0),
+    )
+
+
+def curate_global_proxies(global_proxies: list[dict]) -> list[dict]:
+    curated = [
+        proxy
+        for proxy in global_proxies
+        if any(source in GLOBAL_SOURCE_RANK for source in proxy.get("_sources", []))
+    ]
+    curated.sort(key=curated_global_rank)
+    return curated[:GLOBAL_SUBSCRIPTION_LIMIT]
 
 
 def build_config(proxies: list[dict]) -> dict:
@@ -914,28 +961,61 @@ def history_lines(history: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def source_table(stats: dict[str, int]) -> str:
-    bypass_sources = [source for source in SOURCES if source["id"] in BYPASS_SOURCE_IDS]
+def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = None) -> str:
+    global_stats = global_stats or {}
+    global_shortlist_sources = [source for source in SOURCES if source["id"] in GLOBAL_SOURCE_RANK]
+    other_bypass_sources = [
+        source
+        for source in SOURCES
+        if source["id"] in BYPASS_SOURCE_IDS and source["id"] not in GLOBAL_SOURCE_RANK
+    ]
     global_sources = [source for source in SOURCES if source["id"] not in BYPASS_SOURCE_IDS]
 
-    def rows_for(sources: list[dict]) -> list[str]:
-        lines = [
-            "| Источник | Серверов в подписке | Ссылка |",
-            "|----------|---------------------|--------|",
-        ]
-        for source in sorted(sources, key=lambda item: stats.get(item["id"].lower(), 0), reverse=True):
+    def rows_for(sources: list[dict], show_global: bool = False) -> list[str]:
+        if show_global:
+            lines = [
+                "| Источник | Серверов в общей подписке | В Global-файле | Ссылка |",
+                "|----------|---------------------------|----------------|--------|",
+            ]
+        else:
+            lines = [
+                "| Источник | Серверов в общей подписке | Ссылка |",
+                "|----------|---------------------------|--------|",
+            ]
+        ordered_sources = sorted(sources, key=lambda item: stats.get(item["id"].lower(), 0), reverse=True)
+        if show_global:
+            ordered_sources = sorted(
+                sources,
+                key=lambda item: GLOBAL_SOURCE_RANK.get(item["id"], 999),
+            )
+        for source in ordered_sources:
             count = stats.get(source["id"].lower(), 0)
-            lines.append(f"| {source['name']} | `{count}` | [raw]({source['url']}) |")
+            if show_global:
+                global_count = global_stats.get(source["id"].lower(), 0)
+                lines.append(f"| {source['name']} | `{count}` | `{global_count}` | [raw]({source['url']}) |")
+            else:
+                lines.append(f"| {source['name']} | `{count}` | [raw]({source['url']}) |")
         return lines
 
+    def source_ids(sources: list[dict]) -> str:
+        return ", ".join(f"`{source['id']}`" for source in sources)
+
+    global_shortlist_text = source_ids(
+        sorted(global_shortlist_sources, key=lambda item: GLOBAL_SOURCE_RANK.get(item["id"], 999))
+    )
+
     lines = [
-        "Источники разделены по назначению. БС-группа - это whitelist/bypass/26/CIDR/SNI-источники. Общие global-пулы оставлены как запас иностранных VLESS, но не считаются проверенными под обход БС.",
+        f"Источники разделены по назначению. `subscription-global.yaml` берёт только свежие узлы из curated shortlist ({global_shortlist_text}) и ограничен до {GLOBAL_SUBSCRIPTION_LIMIT} серверов. Остальные источники остаются только в полной `subscription.yaml`.",
         "",
-        "### БС / whitelist / bypass",
+        "### Global shortlist",
         "",
-        *rows_for(bypass_sources),
+        *rows_for(global_shortlist_sources, show_global=True),
         "",
-        "### Общие global-пулы",
+        "### БС / whitelist / bypass только для полной подписки",
+        "",
+        *rows_for(other_bypass_sources),
+        "",
+        "### Общие global-пулы только для полной подписки",
         "",
         *rows_for(global_sources),
     ]
@@ -1367,10 +1447,18 @@ GitHub Actions запускает пересборку примерно раз �
     README_FILE.write_text(text, encoding="utf-8", newline="\n")
 
 
-def write_final_readme(proxies: list[dict], now: str, changes: dict[str, dict[str, int]], history: list[dict]) -> None:
-    stats = stats_for(proxies)
+def write_final_readme(
+    proxies: list[dict],
+    now: str,
+    changes: dict[str, dict[str, int]],
+    history: list[dict],
+    stats: dict[str, int] | None = None,
+    global_stats: dict[str, int] | None = None,
+) -> None:
+    if stats is None:
+        stats = stats_for(proxies)
     history_table = history_lines(history)
-    sources_markdown = source_table(stats)
+    sources_markdown = source_table(stats, global_stats)
     text = f"""# pale-signal подписки
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
@@ -1387,7 +1475,7 @@ pale-signal автоматически собирает VLESS-подписки �
 |----------|------------|----------------------|---------|
 | **pale-signal подписка - общая** | Все серверы | https://markkikhtenko.github.io/pale-signal/subscription.yaml | [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) |
 | **pale-signal подписка - Россия** | Серверы, физически расположенные в России | https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
-| **pale-signal подписка - Global** | Остальные страны и `[UNKNOWN]` | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
+| **pale-signal подписка - Global** | Curated иностранные серверы для обхода БС, до {GLOBAL_SUBSCRIPTION_LIMIT} узлов | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
 
 ## Статус
 
@@ -1403,6 +1491,8 @@ pale-signal автоматически собирает VLESS-подписки �
 | WebSocket | `{stats['ws']}` |
 | gRPC | `{stats['grpc']}` |
 | XHTTP | `{stats['xhttp']}` |
+
+`subscription-global.yaml` каждый запуск собирается заново из свежих trusted whitelist/26 источников, но обрезается до {GLOBAL_SUBSCRIPTION_LIMIT} серверов, чтобы не перегружать роутер.
 
 <details>
 <summary>Источники</summary>
@@ -1468,7 +1558,10 @@ def main() -> int:
     if not parsed:
         raise RuntimeError("no valid VLESS servers were parsed")
     proxies = dedupe_and_name(parsed)
-    ru_proxies, global_proxies = split_by_country(proxies)
+    ru_proxies, global_candidates = split_by_country(proxies)
+    global_proxies = curate_global_proxies(global_candidates)
+    if not global_proxies:
+        raise RuntimeError("no curated global VLESS servers were produced")
     config = build_config(proxies)
     ru_config = build_config(ru_proxies)
     global_config = build_config(global_proxies)
@@ -1488,14 +1581,20 @@ def main() -> int:
         "ru": compare_with_existing(RU_OUTPUT_FILE, ru_yaml_text),
         "global": compare_with_existing(GLOBAL_OUTPUT_FILE, global_yaml_text),
     }
-    history = update_run_history(now, stats_for(proxies), changes)
+    stats = stats_for(proxies)
+    stats["ru"] = len(ru_proxies)
+    stats["global"] = len(global_proxies)
+    stats["unknown"] = sum(1 for proxy in global_proxies if proxy.get("_country") == "UNKNOWN")
+    global_stats = stats_for(global_proxies)
+    history = update_run_history(now, stats, changes)
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
-    write_final_readme(proxies, now, changes, history)
+    write_final_readme(proxies, now, changes, history, stats, global_stats)
     print(
         f"wrote subscription files with {len(proxies)} proxies "
-        f"({len(ru_proxies)} ru, {len(global_proxies)} global)"
+        f"({len(ru_proxies)} ru, {len(global_proxies)} curated global, "
+        f"{len(global_candidates)} global candidates)"
     )
     return 0
 
