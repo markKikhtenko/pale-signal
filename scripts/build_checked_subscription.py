@@ -569,6 +569,26 @@ def free_port() -> int:
         return int(sock.getsockname()[1])
 
 
+def allocate_worker_port_pairs(worker_count: int) -> list[tuple[int, int]]:
+    needed_ports = worker_count * 2
+    ports: list[int] = []
+    used: set[int] = set()
+    attempts = 0
+    max_attempts = max(100, needed_ports * 20)
+
+    while len(ports) < needed_ports:
+        attempts += 1
+        if attempts > max_attempts:
+            raise CheckedAbort(f"could not allocate {needed_ports} unique local ports")
+        port = free_port()
+        if port in used:
+            continue
+        used.add(port)
+        ports.append(port)
+
+    return [(ports[index], ports[index + 1]) for index in range(0, needed_ports, 2)]
+
+
 def write_batch_config(path: Path, proxies: list[dict], api_port: int, mixed_port: int) -> None:
     names = [proxy["name"] for proxy in proxies]
     export_proxies = [{key: value for key, value in proxy.items() if not key.startswith("_")} for proxy in proxies]
@@ -789,6 +809,8 @@ def check_worker(
     worker_number: int,
     worker_total: int,
     batch_number: int,
+    api_port: int,
+    mixed_port: int,
     worker_items: list[tuple[int, dict]],
     total_deadline: float,
     stop_event: threading.Event,
@@ -796,8 +818,6 @@ def check_worker(
     expected_healthcheck_sha256: str,
 ) -> tuple[int, list[tuple[int, dict]], dict[str, int]]:
     started = time.monotonic()
-    api_port = free_port()
-    mixed_port = free_port()
     with tempfile.TemporaryDirectory(prefix=f"pale-signal-mihomo-worker-{worker_number}-") as temp_name:
         temp_dir = Path(temp_name)
         config_path = temp_dir / "config.yaml"
@@ -889,6 +909,7 @@ def check_batch(
     success_items: list[tuple[int, dict]] = []
     counters = empty_check_counters()
     stop_event = threading.Event()
+    worker_port_pairs = allocate_worker_port_pairs(worker_total)
     executor = concurrent.futures.ThreadPoolExecutor(max_workers=worker_total)
     try:
         futures = [
@@ -898,13 +919,18 @@ def check_batch(
                 worker_number,
                 worker_total,
                 batch_number,
+                api_port,
+                mixed_port,
                 worker_items,
                 total_deadline,
                 stop_event,
                 expected_healthcheck_size,
                 expected_healthcheck_sha256,
             )
-            for worker_number, worker_items in enumerate(worker_batches, start=1)
+            for worker_number, (worker_items, (api_port, mixed_port)) in enumerate(
+                zip(worker_batches, worker_port_pairs),
+                start=1,
+            )
         ]
         for future in concurrent.futures.as_completed(futures):
             if time.monotonic() > total_deadline:
