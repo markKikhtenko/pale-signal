@@ -31,11 +31,17 @@ jobs:
       - name: Regenerate subscription files
         run: python scripts/build_subscription.py
 
+      - name: Build checked global subscription
+        run: python scripts/build_checked_subscription.py
+
       - name: Commit subscription when changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml
+          if [ -f subscription-global-checked.yaml ]; then
+            git add subscription-global-checked.yaml
+          fi
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else
@@ -53,6 +59,9 @@ jobs:
           cp subscription.yaml public/subscription.yaml
           cp subscription-ru.yaml public/subscription-ru.yaml
           cp subscription-global.yaml public/subscription-global.yaml
+          if [ -f subscription-global-checked.yaml ]; then
+            cp subscription-global-checked.yaml public/subscription-global-checked.yaml
+          fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
