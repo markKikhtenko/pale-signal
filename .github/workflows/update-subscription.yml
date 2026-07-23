@@ -30,6 +30,8 @@ jobs:
           python-version: "3.12"
 
       - name: Regenerate subscription files
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: python scripts/build_subscription.py
 
       - name: Build checked global subscription

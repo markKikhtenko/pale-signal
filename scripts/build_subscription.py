@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import base64
 import datetime as dt
+import email.utils
 import hashlib
 import ipaddress
 import json
@@ -218,21 +219,32 @@ UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://www.gstatic.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 UPDATE_HISTORY_LIMIT = 10
-GLOBAL_SUBSCRIPTION_LIMIT = 2500
+GLOBAL_SUBSCRIPTION_LIMIT = 3000
 GLOBAL_SOURCE_PRIORITY = (
     "AVEN_MIRROR_26",
     "AVEN_26",
+    "VOID_URL_WORK",
+    "RJSXRD_BYPASS_ALL",
+    "WLUNLOCKER_WHITE_ALL",
+    "RKP_WHITELIST",
     "WLRUS_WL",
     "ETONEYA_WHITELIST",
     "BYEWL2",
     "FULL",
     "LITE",
+    "VLADVARP_WHITELIST_VLESS",
+    "EPODONIOS_26",
+    "WLUNLOCKER_CIDR_2",
+    "WLUNLOCKER_CIDR_1",
     "IGARECK_WHITE_CIDR",
     "IGARECK_WHITE_SNI",
     "IGARECK_WHITE_CIDR_CHECKED",
     "IGARECK_WHITE_MOBILE_1",
+    "PRINCE_WHITE_LIST",
 )
 GLOBAL_SOURCE_RANK = {source_id: index for index, source_id in enumerate(GLOBAL_SOURCE_PRIORITY)}
+SOURCE_PUBLICATION_INFO: dict[str, dict[str, str | float]] = {}
+GITHUB_PUBLICATION_CACHE: dict[str, tuple[float, str]] = {}
 
 TRUE_VALUES = {"1", "true", "yes", "on"}
 SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
@@ -247,6 +259,112 @@ def source_urls() -> str:
     return "\n".join(f"- {source['name']}: {source['url']}" for source in SOURCES)
 
 
+def parse_http_datetime(value: str) -> float:
+    if not value:
+        return 0.0
+    try:
+        parsed = email.utils.parsedate_to_datetime(value)
+    except (TypeError, ValueError):
+        try:
+            parsed = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            return 0.0
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=dt.timezone.utc)
+    return parsed.timestamp()
+
+
+def raw_github_file_parts(url: str) -> tuple[str, str, str, str] | None:
+    parsed = urllib.parse.urlsplit(url)
+    if parsed.netloc.lower() != "raw.githubusercontent.com":
+        return None
+    parts = [part for part in parsed.path.strip("/").split("/") if part]
+    if len(parts) < 4:
+        return None
+    owner, repo = parts[0], parts[1]
+    if len(parts) >= 6 and parts[2] == "refs" and parts[3] == "heads":
+        branch = parts[4]
+        path = "/".join(parts[5:])
+    else:
+        branch = parts[2]
+        path = "/".join(parts[3:])
+    if not path:
+        return None
+    return owner, repo, branch, path
+
+
+def github_file_publication(url: str) -> tuple[float, str]:
+    if url in GITHUB_PUBLICATION_CACHE:
+        return GITHUB_PUBLICATION_CACHE[url]
+    parts = raw_github_file_parts(url)
+    if not parts:
+        GITHUB_PUBLICATION_CACHE[url] = (0.0, "")
+        return GITHUB_PUBLICATION_CACHE[url]
+
+    owner, repo, branch, path = parts
+    query = urllib.parse.urlencode({"path": path, "sha": branch, "per_page": "1"})
+    api_url = f"https://api.github.com/repos/{owner}/{repo}/commits?{query}"
+    request = urllib.request.Request(
+        api_url,
+        headers={
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "pale-signal-subscription-builder/1.0",
+        },
+    )
+    github_token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if github_token:
+        request.add_header("Authorization", f"Bearer {github_token}")
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            if response.status != 200:
+                raise RuntimeError(f"GitHub API returned HTTP {response.status}")
+            payload = json.loads(response.read().decode("utf-8", errors="replace"))
+    except Exception as exc:
+        print(f"warning: could not read GitHub publication date for {url}: {exc}", file=sys.stderr)
+        GITHUB_PUBLICATION_CACHE[url] = (0.0, "")
+        return GITHUB_PUBLICATION_CACHE[url]
+
+    if not isinstance(payload, list) or not payload:
+        GITHUB_PUBLICATION_CACHE[url] = (0.0, "")
+        return GITHUB_PUBLICATION_CACHE[url]
+    commit = payload[0].get("commit") if isinstance(payload[0], dict) else None
+    committer = commit.get("committer") if isinstance(commit, dict) else None
+    published_at = committer.get("date") if isinstance(committer, dict) else ""
+    published_ts = parse_http_datetime(published_at)
+    GITHUB_PUBLICATION_CACHE[url] = (published_ts, published_at)
+    return GITHUB_PUBLICATION_CACHE[url]
+
+
+def record_source_publication(source_id: str, url: str, headers, use_github_api: bool = True) -> None:
+    last_modified = headers.get("Last-Modified", "")
+    published_ts = parse_http_datetime(last_modified)
+    if use_github_api:
+        github_ts, github_date = github_file_publication(url)
+        if github_ts > published_ts:
+            published_ts = github_ts
+            last_modified = github_date
+    current = SOURCE_PUBLICATION_INFO.get(source_id)
+    if current and float(current.get("published_ts", 0.0)) >= published_ts:
+        return
+    SOURCE_PUBLICATION_INFO[source_id] = {
+        "published_ts": published_ts,
+        "last_modified": last_modified,
+        "url": url,
+    }
+
+
+def source_published_ts(source_id: str) -> float:
+    return float(SOURCE_PUBLICATION_INFO.get(source_id, {}).get("published_ts", 0.0))
+
+
+def source_published_label(source_id: str) -> str:
+    info = SOURCE_PUBLICATION_INFO.get(source_id, {})
+    timestamp = float(info.get("published_ts", 0.0))
+    if timestamp <= 0:
+        return "-"
+    return dt.datetime.fromtimestamp(timestamp, MSK).strftime("%Y-%m-%d %H:%M МСК")
+
+
 def fetch_source(source: dict[str, str]) -> str:
     request = urllib.request.Request(
         source["url"],
@@ -256,10 +374,11 @@ def fetch_source(source: dict[str, str]) -> str:
     with urllib.request.urlopen(request, timeout=timeout) as response:
         if response.status != 200:
             raise RuntimeError(f"{source['name']} returned HTTP {response.status}")
+        record_source_publication(source["id"], source["url"], response.headers)
         return response.read().decode("utf-8", errors="replace")
 
 
-def fetch_url(url: str, timeout: int = 45) -> str:
+def fetch_url(url: str, timeout: int = 45, source_id: str | None = None) -> str:
     request = urllib.request.Request(
         url,
         headers={"User-Agent": "pale-signal-subscription-builder/1.0"},
@@ -267,6 +386,8 @@ def fetch_url(url: str, timeout: int = 45) -> str:
     with urllib.request.urlopen(request, timeout=timeout) as response:
         if response.status != 200:
             raise RuntimeError(f"{url} returned HTTP {response.status}")
+        if source_id:
+            record_source_publication(source_id, url, response.headers, use_github_api=False)
         return response.read().decode("utf-8", errors="replace")
 
 
@@ -306,7 +427,7 @@ def fetch_source_texts(source: dict[str, str]) -> list[str]:
         if not isinstance(url, str) or not url.startswith(("http://", "https://")):
             continue
         try:
-            texts.extend(expand_subscription_texts(fetch_url(url, timeout=25)))
+            texts.extend(expand_subscription_texts(fetch_url(url, timeout=25, source_id=source["id"])))
         except Exception as exc:
             failed_urls.append(f"{url}: {exc}")
 
@@ -719,6 +840,10 @@ def split_by_country(proxies: list[dict]) -> tuple[list[dict], list[dict]]:
 
 def curated_global_rank(proxy: dict) -> tuple:
     sources = proxy.get("_sources", [])
+    source_published = max(
+        (source_published_ts(source) for source in sources if source in GLOBAL_SOURCE_RANK),
+        default=0.0,
+    )
     source_rank = min(
         (GLOBAL_SOURCE_RANK[source] for source in sources if source in GLOBAL_SOURCE_RANK),
         default=999,
@@ -726,6 +851,7 @@ def curated_global_rank(proxy: dict) -> tuple:
     curated_source_count = sum(1 for source in sources if source in GLOBAL_SOURCE_RANK)
     transport_rank = {"tcp": 0, "grpc": 1, "ws": 2, "xhttp": 3}.get(proxy.get("network", "tcp"), 9)
     return (
+        -source_published,
         source_rank,
         -curated_source_count,
         0 if "reality-opts" in proxy else 1,
@@ -1021,8 +1147,8 @@ def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = No
     def rows_for(sources: list[dict], show_global: bool = False) -> list[str]:
         if show_global:
             lines = [
-                "| Источник | Серверов в общей подписке | В Global-файле | Ссылка |",
-                "|----------|---------------------------|----------------|--------|",
+                "| Источник | Обновление источника | Серверов в общей подписке | В Global-файле | Ссылка |",
+                "|----------|---------------------|---------------------------|----------------|--------|",
             ]
         else:
             lines = [
@@ -1033,13 +1159,19 @@ def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = No
         if show_global:
             ordered_sources = sorted(
                 sources,
-                key=lambda item: GLOBAL_SOURCE_RANK.get(item["id"], 999),
+                key=lambda item: (
+                    -source_published_ts(item["id"]),
+                    GLOBAL_SOURCE_RANK.get(item["id"], 999),
+                ),
             )
         for source in ordered_sources:
             count = stats.get(source["id"].lower(), 0)
             if show_global:
                 global_count = global_stats.get(source["id"].lower(), 0)
-                lines.append(f"| {source['name']} | `{count}` | `{global_count}` | [raw]({source['url']}) |")
+                lines.append(
+                    f"| {source['name']} | `{source_published_label(source['id'])}` | "
+                    f"`{count}` | `{global_count}` | [raw]({source['url']}) |"
+                )
             else:
                 lines.append(f"| {source['name']} | `{count}` | [raw]({source['url']}) |")
         return lines
@@ -1052,20 +1184,27 @@ def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = No
     )
 
     lines = [
-        f"Источники разделены по назначению. `subscription-global.yaml` берёт только свежие узлы из curated shortlist ({global_shortlist_text}) и ограничен до {GLOBAL_SUBSCRIPTION_LIMIT} серверов. Остальные источники остаются только в полной `subscription.yaml`.",
+        f"Источники разделены по назначению. `subscription-global.yaml` берёт только узлы из БС / whitelist / bypass shortlist ({global_shortlist_text}), сортирует их по дате публикации источника и ограничивает до {GLOBAL_SUBSCRIPTION_LIMIT} серверов. Остальные источники остаются только в полной `subscription.yaml`.",
         "",
         "### Global shortlist",
         "",
         *rows_for(global_shortlist_sources, show_global=True),
-        "",
-        "### БС / whitelist / bypass только для полной подписки",
-        "",
-        *rows_for(other_bypass_sources),
+    ]
+    if other_bypass_sources:
+        lines.extend(
+            [
+                "",
+                "### БС / whitelist / bypass только для полной подписки",
+                "",
+                *rows_for(other_bypass_sources),
+            ]
+        )
+    lines.extend([
         "",
         "### Общие global-пулы только для полной подписки",
         "",
         *rows_for(global_sources),
-    ]
+    ])
     return "\n".join(lines)
 
 
