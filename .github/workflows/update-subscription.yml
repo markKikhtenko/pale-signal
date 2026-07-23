@@ -19,6 +19,7 @@ jobs:
   regenerate:
     name: Regenerate and publish subscription
     runs-on: ubuntu-latest
+    timeout-minutes: 330
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,7 +33,9 @@ jobs:
         run: python scripts/build_subscription.py
 
       - name: Build checked global subscription
-        run: python scripts/build_checked_subscription.py
+        run: |
+          CHECKED_HEALTHCHECK_URL="https://raw.githubusercontent.com/markKikhtenko/pale-signal/${GITHUB_SHA}/healthcheck.txt" \
+            python scripts/build_checked_subscription.py
 
       - name: Commit subscription when changed
         run: |
@@ -59,6 +62,7 @@ jobs:
           cp subscription.yaml public/subscription.yaml
           cp subscription-ru.yaml public/subscription-ru.yaml
           cp subscription-global.yaml public/subscription-global.yaml
+          cp healthcheck.txt public/healthcheck.txt
           if [ -f subscription-global-checked.yaml ]; then
             cp subscription-global-checked.yaml public/subscription-global-checked.yaml
           fi
