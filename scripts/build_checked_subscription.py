@@ -21,6 +21,7 @@ import zipfile
 from pathlib import Path
 
 from build_subscription import (
+    GLOBAL_OUTPUT_FILE,
     OUTPUT_FILE,
     ROOT,
     URL_TEST,
@@ -185,6 +186,45 @@ def load_full_subscription_proxies() -> list:
     if not isinstance(proxies, list) or not proxies:
         raise CheckedAbort(f"source full subscription has no proxies: {OUTPUT_FILE.name}")
     return proxies
+
+
+def proxy_signature(proxy: dict) -> str:
+    comparable = {
+        key: value
+        for key, value in proxy.items()
+        if key != "name" and not key.startswith("_")
+    }
+    return json.dumps(comparable, sort_keys=True, ensure_ascii=False)
+
+
+def load_curated_global_priority() -> dict[str, int]:
+    if not GLOBAL_OUTPUT_FILE.exists():
+        return {}
+    try:
+        config = load_generated_yaml(GLOBAL_OUTPUT_FILE)
+    except Exception as exc:
+        print(f"warning: could not read {GLOBAL_OUTPUT_FILE.name} for checked priority: {exc}", file=sys.stderr)
+        return {}
+    proxies = config.get("proxies") if isinstance(config, dict) else None
+    if not isinstance(proxies, list):
+        return {}
+
+    priority: dict[str, int] = {}
+    for index, proxy in enumerate(proxies):
+        if isinstance(proxy, dict):
+            priority.setdefault(proxy_signature(proxy), index)
+    return priority
+
+
+def prioritize_curated_global(proxies: list[dict]) -> dict[str, int]:
+    priority = load_curated_global_priority()
+    if not priority:
+        return {"curated_priority": 0, "other_priority": len(proxies)}
+
+    fallback_rank = len(priority) + 1
+    matched = sum(1 for proxy in proxies if proxy_signature(proxy) in priority)
+    proxies.sort(key=lambda proxy: priority.get(proxy_signature(proxy), fallback_rank))
+    return {"curated_priority": matched, "other_priority": len(proxies) - matched}
 
 
 def is_local_or_private_server(server: str) -> bool:
@@ -1160,6 +1200,7 @@ def main(argv: list[str]) -> int:
             )
         proxies = load_full_subscription_proxies()
         foreign_proxies, filter_stats = select_foreign_proxies(proxies)
+        priority_stats = prioritize_curated_global(foreign_proxies)
         total_batches = math.ceil(len(foreign_proxies) / CHECKED_BATCH_SIZE) if foreign_proxies else 0
         print(
             "checked: filter stats: "
@@ -1173,6 +1214,12 @@ def main(argv: list[str]) -> int:
             f"classified_total={filter_stats['classified_total']}, "
             f"classification_delta={filter_stats['classification_delta']}, "
             f"batches={total_batches}"
+        )
+        print(
+            "checked: priority stats: "
+            f"priority_source={GLOBAL_OUTPUT_FILE.name}, "
+            f"curated_bypass_first={priority_stats['curated_priority']}, "
+            f"other_after={priority_stats['other_priority']}"
         )
         if filter_only:
             print("checked: filter-only mode, Mihomo checks were not started")
