@@ -4,9 +4,12 @@ import datetime as dt
 import hashlib
 import ipaddress
 import json
+import os
 import re
 import socket
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import uuid
@@ -234,6 +237,10 @@ GLOBAL_SOURCE_RANK = {source_id: index for index, source_id in enumerate(GLOBAL_
 TRUE_VALUES = {"1", "true", "yes", "on"}
 SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
 GEOIP_BATCH_URL = "http://ip-api.com/batch?fields=status,countryCode,query,message"
+GEOIP_BATCH_SIZE = int(os.environ.get("GEOIP_BATCH_SIZE", "100"))
+GEOIP_RETRIES = int(os.environ.get("GEOIP_RETRIES", "6"))
+GEOIP_MIN_INTERVAL_SECONDS = float(os.environ.get("GEOIP_MIN_INTERVAL_SECONDS", "1.6"))
+GEOIP_RETRY_BASE_SECONDS = float(os.environ.get("GEOIP_RETRY_BASE_SECONDS", "2.0"))
 
 
 def source_urls() -> str:
@@ -597,8 +604,23 @@ def resolve_server_ip(server: str) -> str | None:
 def geoip_lookup(ips: set[str]) -> dict[str, str]:
     result: dict[str, str] = {}
     clean_ips = sorted(ip for ip in ips if ip)
-    for index in range(0, len(clean_ips), 100):
-        chunk = clean_ips[index : index + 100]
+    if not clean_ips:
+        return result
+
+    last_request_at = 0.0
+
+    def retry_delay(exc: Exception, attempt: int) -> float:
+        if isinstance(exc, urllib.error.HTTPError):
+            retry_after = exc.headers.get("Retry-After")
+            if retry_after and retry_after.isdigit():
+                return float(int(retry_after) + 1)
+            ttl = exc.headers.get("X-Ttl")
+            if exc.code == 429 and ttl and ttl.isdigit():
+                return float(int(ttl) + 1)
+        return GEOIP_RETRY_BASE_SECONDS * attempt
+
+    def request_chunk(chunk: list[str], chunk_number: int, total_chunks: int):
+        nonlocal last_request_at
         request = urllib.request.Request(
             GEOIP_BATCH_URL,
             data=json.dumps(chunk).encode("utf-8"),
@@ -608,12 +630,37 @@ def geoip_lookup(ips: set[str]) -> dict[str, str]:
             },
             method="POST",
         )
-        try:
-            with urllib.request.urlopen(request, timeout=45) as response:
-                payload = json.loads(response.read().decode("utf-8", errors="replace"))
-        except Exception as exc:
-            print(f"warning: skipped GeoIP batch: {exc}", file=sys.stderr)
-            continue
+        for attempt in range(1, GEOIP_RETRIES + 1):
+            elapsed = time.monotonic() - last_request_at
+            wait = GEOIP_MIN_INTERVAL_SECONDS - elapsed
+            if wait > 0:
+                time.sleep(wait)
+            last_request_at = time.monotonic()
+            try:
+                with urllib.request.urlopen(request, timeout=45) as response:
+                    return json.loads(response.read().decode("utf-8", errors="replace"))
+            except Exception as exc:
+                if attempt >= GEOIP_RETRIES:
+                    print(
+                        "warning: skipped GeoIP batch after retries: "
+                        f"batch={chunk_number}/{total_chunks}, attempts={attempt}, error={exc}",
+                        file=sys.stderr,
+                    )
+                    return None
+                delay = retry_delay(exc, attempt)
+                print(
+                    "warning: retrying GeoIP batch: "
+                    f"batch={chunk_number}/{total_chunks}, attempt={attempt}/{GEOIP_RETRIES}, "
+                    f"sleep={delay:.1f}s, error={exc}",
+                    file=sys.stderr,
+                )
+                time.sleep(delay)
+
+    batch_size = max(1, GEOIP_BATCH_SIZE)
+    total_chunks = (len(clean_ips) + batch_size - 1) // batch_size
+    for chunk_number, index in enumerate(range(0, len(clean_ips), batch_size), start=1):
+        chunk = clean_ips[index : index + batch_size]
+        payload = request_chunk(chunk, chunk_number, total_chunks)
 
         if not isinstance(payload, list):
             continue
