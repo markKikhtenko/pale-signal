@@ -34,6 +34,7 @@ jobs:
 
       - name: Build checked global subscription
         run: |
+          CHECKED_WORKERS=50 \
           CHECKED_HEALTHCHECK_URL="https://raw.githubusercontent.com/markKikhtenko/pale-signal/${GITHUB_SHA}/healthcheck.txt" \
             python scripts/build_checked_subscription.py
 
