@@ -2,6 +2,11 @@ name: Regenerate subscription
 
 on:
   workflow_dispatch:
+    inputs:
+      skip_checked:
+        description: "Skip checked subscription rebuild and publish regular YAML faster"
+        type: boolean
+        default: false
   schedule:
     # GitHub cron uses UTC: 06:00 and 18:00 UTC = 09:00 and 21:00 MSK.
     - cron: "0 6,18 * * *"
@@ -35,6 +40,7 @@ jobs:
         run: python scripts/build_subscription.py
 
       - name: Build checked global subscription
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.skip_checked != true }}
         run: |
           CHECKED_WORKERS=50 \
           CHECKED_HEALTHCHECK_URL="https://raw.githubusercontent.com/markKikhtenko/pale-signal/${GITHUB_SHA}/healthcheck.txt" \
