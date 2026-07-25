@@ -492,6 +492,15 @@ def normalize_flow(value: str) -> str:
     return flow
 
 
+def valid_reality_short_id(value: str) -> bool:
+    short_id = value.strip()
+    return (
+        len(short_id) <= 16
+        and len(short_id) % 2 == 0
+        and re.fullmatch(r"[0-9A-Fa-f]*", short_id) is not None
+    )
+
+
 def valid_server(server: str) -> bool:
     try:
         address = ipaddress.ip_address(server)
@@ -573,6 +582,8 @@ def parse_vless(line: str, source_id: str) -> dict | None:
             reality_opts = {"public-key": public_key}
             short_id = first_param(params, "sid", "short-id", "shortId")
             if short_id:
+                if not valid_reality_short_id(short_id):
+                    return None
                 reality_opts["short-id"] = short_id
             spider_x = first_param(params, "spx", "spider-x", "spiderX")
             if spider_x:
