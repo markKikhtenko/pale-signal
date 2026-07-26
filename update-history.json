@@ -1,37 +1,6 @@
 {
   "runs": [
     {
-      "updated_at": "2026-07-23 22:08:07 МСК",
-      "counts": {
-        "all": 12127,
-        "ru": 4071,
-        "global": 3000
-      },
-      "changes": {
-        "all": {
-          "old": 12026,
-          "new": 12127,
-          "added": 177,
-          "removed": 76,
-          "delta": 101
-        },
-        "ru": {
-          "old": 3997,
-          "new": 4071,
-          "added": 86,
-          "removed": 12,
-          "delta": 74
-        },
-        "global": {
-          "old": 3000,
-          "new": 3000,
-          "added": 180,
-          "removed": 180,
-          "delta": 0
-        }
-      }
-    },
-    {
       "updated_at": "2026-07-23 22:17:13 МСК",
       "counts": {
         "all": 12317,
@@ -306,6 +275,37 @@
           "new": 3000,
           "added": 1028,
           "removed": 1028,
+          "delta": 0
+        }
+      }
+    },
+    {
+      "updated_at": "2026-07-26 22:12:26 МСК",
+      "counts": {
+        "all": 12422,
+        "ru": 4150,
+        "global": 3000
+      },
+      "changes": {
+        "all": {
+          "old": 12983,
+          "new": 12422,
+          "added": 1903,
+          "removed": 2464,
+          "delta": -561
+        },
+        "ru": {
+          "old": 4760,
+          "new": 4150,
+          "added": 756,
+          "removed": 1366,
+          "delta": -610
+        },
+        "global": {
+          "old": 3000,
+          "new": 3000,
+          "added": 1009,
+          "removed": 1009,
           "delta": 0
         }
       }
