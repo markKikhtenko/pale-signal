@@ -214,11 +214,13 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
 RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
 GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
+GLOBAL_5K_OUTPUT_FILE = ROOT / "subscription-global-5k.yaml"
 README_FILE = ROOT / "README.md"
 UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://www.gstatic.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 UPDATE_HISTORY_LIMIT = 10
+GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
 GLOBAL_SOURCE_PRIORITY = (
     "AVEN_MIRROR_26",
     "AVEN_26",
@@ -885,6 +887,10 @@ def curate_global_proxies(global_proxies: list[dict]) -> list[dict]:
     return curated
 
 
+def limit_global_5k_proxies(global_proxies: list[dict]) -> list[dict]:
+    return global_proxies[:GLOBAL_5K_SUBSCRIPTION_LIMIT]
+
+
 def build_config(proxies: list[dict]) -> dict:
     names = [proxy["name"] for proxy in proxies]
     export_proxies = [{key: value for key, value in proxy.items() if not key.startswith("_")} for proxy in proxies]
@@ -1070,6 +1076,7 @@ def history_entry(now: str, stats: dict[str, int], changes: dict[str, dict[str, 
             "all": stats["total"],
             "ru": stats["ru"],
             "global": stats["global"],
+            "global_5k": stats.get("global_5k", stats["global"]),
         },
         "changes": changes,
     }
@@ -1099,12 +1106,14 @@ def trend_arrow(values: list[int]) -> str:
 
 
 def history_count(run: dict, key: str) -> int:
-    value = run.get("counts", {}).get(key, 0)
+    counts = run.get("counts", {})
+    value = counts.get(key, counts.get("global", 0) if key == "global_5k" else 0)
     return value if isinstance(value, int) else 0
 
 
 def history_change(run: dict, key: str, field: str) -> int:
-    value = run.get("changes", {}).get(key, {}).get(field, 0)
+    changes = run.get("changes", {})
+    value = changes.get(key, changes.get("global", {}) if key == "global_5k" else {}).get(field, 0)
     return value if isinstance(value, int) else 0
 
 
@@ -1112,7 +1121,7 @@ def history_lines(history: list[dict]) -> str:
     if not history:
         return "Истории пока нет: она появится после следующей успешной сборки."
 
-    titles = {"all": "Общая", "ru": "Россия", "global": "Global"}
+    titles = {"all": "Общая", "ru": "Россия", "global": "Global", "global_5k": "Global 5K"}
     lines = [
         "| Подписка | Тренд | Первое | Последнее | Разница |",
         "|----------|-------|--------|-----------|---------|",
@@ -1126,8 +1135,8 @@ def history_lines(history: list[dict]) -> str:
     lines.extend(
         [
             "",
-            "| Обновление, МСК | Общая | Россия | Global | Δ общая | Δ Россия | Δ Global |",
-            "|-----------------|-------|--------|--------|---------|----------|----------|",
+            "| Обновление, МСК | Общая | Россия | Global | Global 5K | Δ общая | Δ Россия | Δ Global | Δ Global 5K |",
+            "|-----------------|-------|--------|--------|-----------|---------|----------|----------|-------------|",
         ]
     )
     for run in reversed(history):
@@ -1137,9 +1146,11 @@ def history_lines(history: list[dict]) -> str:
             f"`{history_count(run, 'all')}` | "
             f"`{history_count(run, 'ru')}` | "
             f"`{history_count(run, 'global')}` | "
+            f"`{history_count(run, 'global_5k')}` | "
             f"`{signed(history_change(run, 'all', 'delta'))}` | "
             f"`{signed(history_change(run, 'ru', 'delta'))}` | "
-            f"`{signed(history_change(run, 'global', 'delta'))}` |"
+            f"`{signed(history_change(run, 'global', 'delta'))}` | "
+            f"`{signed(history_change(run, 'global_5k', 'delta'))}` |"
         )
     return "\n".join(lines)
 
@@ -1195,6 +1206,7 @@ def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = No
 
     lines = [
         f"Источники разделены по назначению. `subscription-global.yaml` берёт все узлы из БС / whitelist / bypass shortlist ({global_shortlist_text}) и сортирует их по дате публикации источника. Остальные источники остаются только в полной `subscription.yaml`.",
+        f"`subscription-global-5k.yaml` берёт первые {GLOBAL_5K_SUBSCRIPTION_LIMIT} узлов из этого же отсортированного global-списка.",
         "",
         "### Global shortlist",
         "",
@@ -1598,7 +1610,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | **pale-signal подписка - общая** | Все серверы | https://markkikhtenko.github.io/pale-signal/subscription.yaml | [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) |
 | **pale-signal подписка - Россия** | Серверы, физически расположенные в России | https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
 | **pale-signal подписка - Global** | Остальные страны и `[UNKNOWN]` | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
-| **pale-signal подписка - Global checked** | Иностранные серверы из всех источников, проверенные Mihomo; БС/whitelist shortlist проверяется первым | https://markkikhtenko.github.io/pale-signal/subscription-global-checked.yaml | [subscription-global-checked.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-checked.yaml) |
+| **pale-signal подписка - Global 5K** | До {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих global узлов | https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) |
 
 ## Статус
 
@@ -1673,7 +1685,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | **pale-signal подписка - общая** | Все серверы | https://markkikhtenko.github.io/pale-signal/subscription.yaml | [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) |
 | **pale-signal подписка - Россия** | Серверы, физически расположенные в России | https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
 | **pale-signal подписка - Global** | Все curated иностранные серверы для обхода БС | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
-| **pale-signal подписка - Global checked** | Иностранные серверы из всех источников, проверенные Mihomo; БС/whitelist shortlist проверяется первым | https://markkikhtenko.github.io/pale-signal/subscription-global-checked.yaml | [subscription-global-checked.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-checked.yaml) |
+| **pale-signal подписка - Global 5K** | До {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих curated global узлов | https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) |
 
 ## Статус
 
@@ -1682,6 +1694,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | Всего серверов | `{stats['total']}` |
 | Россия | `{stats['ru']}` |
 | Global | `{stats['global']}` |
+| Global 5K | `{stats['global_5k']}` |
 | Unknown | `{stats['unknown']}` |
 | Reality | `{stats['reality']}` |
 | TLS | `{stats['tls']}` |
@@ -1692,7 +1705,7 @@ pale-signal автоматически собирает VLESS-подписки �
 
 `subscription-global.yaml` каждый запуск собирается заново из всех свежих trusted whitelist/26 источников без ограничения по количеству серверов.
 
-`subscription-global-checked.yaml` создаётся после полной `subscription.yaml`: GitHub Actions берёт иностранные серверы из всех источников, сначала проверяет БС/whitelist shortlist из `subscription-global.yaml`, затем остальные, и оставляет только прошедшие проверку через API Mihomo.
+`subscription-global-5k.yaml` берёт первые {GLOBAL_5K_SUBSCRIPTION_LIMIT} узлов из той же сортировки: сначала более свежая дата обновления источника, затем приоритет whitelist/bypass источника. Проверка живости прокси в GitHub Actions отключена, чтобы GitHub не отбрасывал узлы, которые могут работать только из-под БС на роутере.
 
 <details>
 <summary>Источники</summary>
@@ -1710,7 +1723,7 @@ pale-signal автоматически собирает VLESS-подписки �
 
 ## Группы
 
-Во всех трех подписках оставлены только группы `AUTO`, `MANUAL` и `PROXY`.
+Во всех подписках оставлены только группы `AUTO`, `MANUAL` и `PROXY`.
 
 | Группа | Тип | Назначение |
 |--------|-----|------------|
@@ -1726,7 +1739,7 @@ pale-signal автоматически собирает VLESS-подписки �
 - Если страны в имени нет, используется GeoIP фактического поля `server`.
 - Если `server` является доменом, он сначала разрешается в IP.
 - SNI, `servername`, `Host`, XHTTP host и gRPC service name не используются для определения страны.
-- Узлы без определенной страны попадают в `subscription-global.yaml` и получают `[UNKNOWN]` в имени.
+- Узлы без определенной страны попадают в global-подписки и получают `[UNKNOWN]` в имени.
 
 ## Обновление
 
@@ -1760,19 +1773,23 @@ def main() -> int:
     proxies = dedupe_and_name(parsed)
     ru_proxies, global_candidates = split_by_country(proxies)
     global_proxies = curate_global_proxies(global_candidates)
+    global_5k_proxies = limit_global_5k_proxies(global_proxies)
     if not global_proxies:
         raise RuntimeError("no curated global VLESS servers were produced")
     config = build_config(proxies)
     ru_config = build_config(ru_proxies)
     global_config = build_config(global_proxies)
+    global_5k_config = build_config(global_5k_proxies)
     validate_config(config)
     validate_config(ru_config)
     validate_config(global_config)
+    validate_config(global_5k_config)
 
     yaml_text = "\n".join(dump_yaml(config)) + "\n"
     ru_yaml_text = "\n".join(dump_yaml(ru_config)) + "\n"
     global_yaml_text = "\n".join(dump_yaml(global_config)) + "\n"
-    if not yaml_text.strip() or not ru_yaml_text.strip() or not global_yaml_text.strip():
+    global_5k_yaml_text = "\n".join(dump_yaml(global_5k_config)) + "\n"
+    if not yaml_text.strip() or not ru_yaml_text.strip() or not global_yaml_text.strip() or not global_5k_yaml_text.strip():
         raise RuntimeError("empty YAML output")
 
     now = msk_timestamp()
@@ -1780,20 +1797,24 @@ def main() -> int:
         "all": compare_with_existing(OUTPUT_FILE, yaml_text),
         "ru": compare_with_existing(RU_OUTPUT_FILE, ru_yaml_text),
         "global": compare_with_existing(GLOBAL_OUTPUT_FILE, global_yaml_text),
+        "global_5k": compare_with_existing(GLOBAL_5K_OUTPUT_FILE, global_5k_yaml_text),
     }
     stats = stats_for(proxies)
     stats["ru"] = len(ru_proxies)
     stats["global"] = len(global_proxies)
+    stats["global_5k"] = len(global_5k_proxies)
     stats["unknown"] = sum(1 for proxy in global_proxies if proxy.get("_country") == "UNKNOWN")
     global_stats = stats_for(global_proxies)
     history = update_run_history(now, stats, changes)
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
+    GLOBAL_5K_OUTPUT_FILE.write_text(global_5k_yaml_text, encoding="utf-8", newline="\n")
     write_final_readme(proxies, now, changes, history, stats, global_stats)
     print(
         f"wrote subscription files with {len(proxies)} proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} curated global, "
+        f"{len(global_5k_proxies)} global 5k, "
         f"{len(global_candidates)} global candidates)"
     )
     return 0

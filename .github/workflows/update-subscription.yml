@@ -2,11 +2,6 @@ name: Regenerate subscription
 
 on:
   workflow_dispatch:
-    inputs:
-      skip_checked:
-        description: "Skip checked subscription rebuild and publish regular YAML faster"
-        type: boolean
-        default: false
   schedule:
     # GitHub cron uses UTC: 06:00 and 18:00 UTC = 09:00 and 21:00 MSK.
     - cron: "0 6,18 * * *"
@@ -24,7 +19,7 @@ jobs:
   regenerate:
     name: Regenerate and publish subscription
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    timeout-minutes: 90
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,21 +34,11 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: python scripts/build_subscription.py
 
-      - name: Build checked global subscription
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.skip_checked != true }}
-        run: |
-          CHECKED_WORKERS=50 \
-          CHECKED_HEALTHCHECK_URL="https://raw.githubusercontent.com/markKikhtenko/pale-signal/${GITHUB_SHA}/healthcheck.txt" \
-            python scripts/build_checked_subscription.py
-
       - name: Commit subscription when changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml
-          if [ -f subscription-global-checked.yaml ]; then
-            git add subscription-global-checked.yaml
-          fi
+          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else
@@ -71,10 +56,7 @@ jobs:
           cp subscription.yaml public/subscription.yaml
           cp subscription-ru.yaml public/subscription-ru.yaml
           cp subscription-global.yaml public/subscription-global.yaml
-          cp healthcheck.txt public/healthcheck.txt
-          if [ -f subscription-global-checked.yaml ]; then
-            cp subscription-global-checked.yaml public/subscription-global-checked.yaml
-          fi
+          cp subscription-global-5k.yaml public/subscription-global-5k.yaml
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
