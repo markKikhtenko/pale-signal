@@ -219,7 +219,6 @@ UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://www.gstatic.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 UPDATE_HISTORY_LIMIT = 10
-GLOBAL_SUBSCRIPTION_LIMIT = 3000
 GLOBAL_SOURCE_PRIORITY = (
     "AVEN_MIRROR_26",
     "AVEN_26",
@@ -883,7 +882,7 @@ def curate_global_proxies(global_proxies: list[dict]) -> list[dict]:
         if any(source in GLOBAL_SOURCE_RANK for source in proxy.get("_sources", []))
     ]
     curated.sort(key=curated_global_rank)
-    return curated[:GLOBAL_SUBSCRIPTION_LIMIT]
+    return curated
 
 
 def build_config(proxies: list[dict]) -> dict:
@@ -1195,7 +1194,7 @@ def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = No
     )
 
     lines = [
-        f"Источники разделены по назначению. `subscription-global.yaml` берёт только узлы из БС / whitelist / bypass shortlist ({global_shortlist_text}), сортирует их по дате публикации источника и ограничивает до {GLOBAL_SUBSCRIPTION_LIMIT} серверов. Остальные источники остаются только в полной `subscription.yaml`.",
+        f"Источники разделены по назначению. `subscription-global.yaml` берёт все узлы из БС / whitelist / bypass shortlist ({global_shortlist_text}) и сортирует их по дате публикации источника. Остальные источники остаются только в полной `subscription.yaml`.",
         "",
         "### Global shortlist",
         "",
@@ -1673,7 +1672,7 @@ pale-signal автоматически собирает VLESS-подписки �
 |----------|------------|----------------------|---------|
 | **pale-signal подписка - общая** | Все серверы | https://markkikhtenko.github.io/pale-signal/subscription.yaml | [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) |
 | **pale-signal подписка - Россия** | Серверы, физически расположенные в России | https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
-| **pale-signal подписка - Global** | Curated иностранные серверы для обхода БС, до {GLOBAL_SUBSCRIPTION_LIMIT} узлов | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
+| **pale-signal подписка - Global** | Все curated иностранные серверы для обхода БС | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
 | **pale-signal подписка - Global checked** | Иностранные серверы из всех источников, проверенные Mihomo; БС/whitelist shortlist проверяется первым | https://markkikhtenko.github.io/pale-signal/subscription-global-checked.yaml | [subscription-global-checked.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-checked.yaml) |
 
 ## Статус
@@ -1691,7 +1690,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | gRPC | `{stats['grpc']}` |
 | XHTTP | `{stats['xhttp']}` |
 
-`subscription-global.yaml` каждый запуск собирается заново из свежих trusted whitelist/26 источников, но обрезается до {GLOBAL_SUBSCRIPTION_LIMIT} серверов, чтобы не перегружать роутер.
+`subscription-global.yaml` каждый запуск собирается заново из всех свежих trusted whitelist/26 источников без ограничения по количеству серверов.
 
 `subscription-global-checked.yaml` создаётся после полной `subscription.yaml`: GitHub Actions берёт иностранные серверы из всех источников, сначала проверяет БС/whitelist shortlist из `subscription-global.yaml`, затем остальные, и оставляет только прошедшие проверку через API Mihomo.
 
