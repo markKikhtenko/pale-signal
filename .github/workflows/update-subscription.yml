@@ -40,7 +40,21 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: python scripts/build_subscription.py
 
+      - name: Check checkout freshness
+        id: freshness
+        run: |
+          git fetch origin main
+          local_head="$(git rev-parse HEAD)"
+          remote_head="$(git rev-parse origin/main)"
+          if [ "$local_head" != "$remote_head" ]; then
+            echo "origin/main moved from $local_head to $remote_head; skipping stale publish"
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "stale=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Commit subscription when changed
+        if: steps.freshness.outputs.stale != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -49,14 +63,24 @@ jobs:
             echo "subscription files are unchanged"
           else
             git commit -m "Update subscription"
-            git pull --rebase origin main
-            git push
+            for attempt in 1 2 3; do
+              if git pull --rebase origin main && git push; then
+                exit 0
+              fi
+              git rebase --abort || true
+              echo "git push failed on attempt $attempt; retrying"
+              sleep $((attempt * 5))
+            done
+            echo "git push failed after retries"
+            exit 1
           fi
 
       - name: Configure GitHub Pages
+        if: steps.freshness.outputs.stale != 'true'
         uses: actions/configure-pages@v5
 
       - name: Prepare Pages artifact
+        if: steps.freshness.outputs.stale != 'true'
         run: |
           mkdir -p public
           cp subscription.yaml public/subscription.yaml
@@ -65,10 +89,12 @@ jobs:
           cp subscription-global-5k.yaml public/subscription-global-5k.yaml
 
       - name: Upload Pages artifact
+        if: steps.freshness.outputs.stale != 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
 
       - name: Publish subscription to GitHub Pages
+        if: steps.freshness.outputs.stale != 'true'
         id: deployment
         uses: actions/deploy-pages@v4
