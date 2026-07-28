@@ -50,9 +50,29 @@ SOURCES = [
         "timeout": 15,
     },
     {
+        "id": "ETONEYA_GH_WHITELIST",
+        "name": "EtoNeYaProject GitHub whitelist",
+        "url": "https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/whitelist",
+    },
+    {
         "id": "RJSXRD_BYPASS_ALL",
         "name": "rjsxrd bypass-all",
         "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt",
+    },
+    {
+        "id": "FLEXIYO_RUSSIA_WHITELIST",
+        "name": "FLEXIY0 matryoshka-vpn russia_whitelist.txt",
+        "url": "https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt",
+    },
+    {
+        "id": "PROSEK_WHITELIST",
+        "name": "55prosek vpn_config_for_russia whitelist.txt",
+        "url": "https://raw.githubusercontent.com/55prosek-lgtm/vpn_config_for_russia/refs/heads/main/whitelist.txt",
+    },
+    {
+        "id": "SILENTGHOST_WHITELIST",
+        "name": "SilentGhostCodes WhiteListVpn Whitelist.txt",
+        "url": "https://raw.githubusercontent.com/SilentGhostCodes/WhiteListVpn/main/Whitelist.txt",
     },
     {
         "id": "IGARECK_WHITE_MOBILE_1",
@@ -73,6 +93,26 @@ SOURCES = [
         "id": "IGARECK_WHITE_CIDR",
         "name": "igareck WHITE-CIDR-RU-all.txt",
         "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt",
+    },
+    {
+        "id": "KIRILLO4KA_WHITE_MOBILE",
+        "name": "Kirillo4ka eavevpn Vless-Reality-White-Lists-Rus-Mobile.txt",
+        "url": "https://raw.githubusercontent.com/Kirillo4ka/eavevpn-configs/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
+    },
+    {
+        "id": "KIRILLO4KA_WHITE_CIDR_CHECKED",
+        "name": "Kirillo4ka eavevpn WHITE-CIDR-RU-checked.txt",
+        "url": "https://raw.githubusercontent.com/Kirillo4ka/eavevpn-configs/main/WHITE-CIDR-RU-checked.txt",
+    },
+    {
+        "id": "KIRILLO4KA_WHITE_SNI",
+        "name": "Kirillo4ka eavevpn WHITE-SNI-RU-all.txt",
+        "url": "https://raw.githubusercontent.com/Kirillo4ka/eavevpn-configs/main/WHITE-SNI-RU-all.txt",
+    },
+    {
+        "id": "KIRILLO4KA_WHITE_CIDR",
+        "name": "Kirillo4ka eavevpn WHITE-CIDR-RU-all.txt",
+        "url": "https://raw.githubusercontent.com/Kirillo4ka/eavevpn-configs/main/WHITE-CIDR-RU-all.txt",
     },
     {
         "id": "MAHAN_VLESS",
@@ -193,11 +233,19 @@ BYPASS_SOURCE_IDS = {
     "BYEWL2",
     "WLRUS_WL",
     "ETONEYA_WHITELIST",
+    "ETONEYA_GH_WHITELIST",
     "RJSXRD_BYPASS_ALL",
+    "FLEXIYO_RUSSIA_WHITELIST",
+    "PROSEK_WHITELIST",
+    "SILENTGHOST_WHITELIST",
     "IGARECK_WHITE_MOBILE_1",
     "IGARECK_WHITE_CIDR_CHECKED",
     "IGARECK_WHITE_SNI",
     "IGARECK_WHITE_CIDR",
+    "KIRILLO4KA_WHITE_MOBILE",
+    "KIRILLO4KA_WHITE_CIDR_CHECKED",
+    "KIRILLO4KA_WHITE_SNI",
+    "KIRILLO4KA_WHITE_CIDR",
     "EPODONIOS_26",
     "AVEN_26",
     "AVEN_MIRROR_26",
@@ -230,9 +278,13 @@ GLOBAL_SOURCE_PRIORITY = (
     "RKP_WHITELIST",
     "WLRUS_WL",
     "ETONEYA_WHITELIST",
+    "ETONEYA_GH_WHITELIST",
     "BYEWL2",
     "FULL",
     "LITE",
+    "FLEXIYO_RUSSIA_WHITELIST",
+    "PROSEK_WHITELIST",
+    "SILENTGHOST_WHITELIST",
     "VLADVARP_WHITELIST_VLESS",
     "EPODONIOS_26",
     "WLUNLOCKER_CIDR_2",
@@ -241,6 +293,10 @@ GLOBAL_SOURCE_PRIORITY = (
     "IGARECK_WHITE_SNI",
     "IGARECK_WHITE_CIDR_CHECKED",
     "IGARECK_WHITE_MOBILE_1",
+    "KIRILLO4KA_WHITE_CIDR",
+    "KIRILLO4KA_WHITE_SNI",
+    "KIRILLO4KA_WHITE_CIDR_CHECKED",
+    "KIRILLO4KA_WHITE_MOBILE",
     "PRINCE_WHITE_LIST",
 )
 GLOBAL_SOURCE_RANK = {source_id: index for index, source_id in enumerate(GLOBAL_SOURCE_PRIORITY)}
@@ -880,8 +936,37 @@ def prioritize_global_proxies(global_proxies: list[dict]) -> list[dict]:
     return prioritized
 
 
-def limit_global_5k_proxies(global_proxies: list[dict]) -> list[dict]:
-    return global_proxies[:GLOBAL_5K_SUBSCRIPTION_LIMIT]
+def global_5k_rank(proxy: dict) -> tuple:
+    sources = proxy.get("_sources", [])
+    bypass_sources = [source for source in sources if source in BYPASS_SOURCE_IDS]
+    priority_sources = [source for source in bypass_sources if source in GLOBAL_SOURCE_RANK]
+    ranked_sources = bypass_sources or sources
+    source_published = max((source_published_ts(source) for source in ranked_sources), default=0.0)
+    source_rank = min((GLOBAL_SOURCE_RANK[source] for source in priority_sources), default=999)
+    transport_rank = {"tcp": 0, "grpc": 1, "ws": 2, "xhttp": 3}.get(proxy.get("network", "tcp"), 9)
+    return (
+        -source_published,
+        source_rank,
+        -len(priority_sources),
+        0 if "reality-opts" in proxy else 1,
+        0 if proxy.get("tls") else 1,
+        transport_rank,
+        proxy.get("_input_order", 0),
+        proxy.get("name", ""),
+        proxy.get("server", ""),
+        proxy.get("port", 0),
+    )
+
+
+def select_global_5k_proxies(global_proxies: list[dict]) -> list[dict]:
+    candidates = [
+        proxy
+        for proxy in global_proxies
+        if proxy.get("_country") not in {"RU", "UNKNOWN"}
+        and any(source in BYPASS_SOURCE_IDS for source in proxy.get("_sources", []))
+    ]
+    candidates.sort(key=global_5k_rank)
+    return candidates[:GLOBAL_5K_SUBSCRIPTION_LIMIT]
 
 
 def build_config(proxies: list[dict]) -> dict:
@@ -1100,13 +1185,22 @@ def trend_arrow(values: list[int]) -> str:
 
 def history_count(run: dict, key: str) -> int:
     counts = run.get("counts", {})
-    value = counts.get(key, counts.get("global", 0) if key == "global_5k" else 0)
+    value = counts.get(key)
+    if value is None and key == "global_5k":
+        value = counts.get("global", 0)
+    if value is None:
+        value = 0
     return value if isinstance(value, int) else 0
 
 
 def history_change(run: dict, key: str, field: str) -> int:
     changes = run.get("changes", {})
-    value = changes.get(key, changes.get("global", {}) if key == "global_5k" else {}).get(field, 0)
+    source_changes = changes.get(key)
+    if source_changes is None and key == "global_5k":
+        source_changes = changes.get("global", {})
+    if not isinstance(source_changes, dict):
+        source_changes = {}
+    value = source_changes.get(field, 0)
     return value if isinstance(value, int) else 0
 
 
@@ -1114,7 +1208,12 @@ def history_lines(history: list[dict]) -> str:
     if not history:
         return "Истории пока нет: она появится после следующей успешной сборки."
 
-    titles = {"all": "Общая", "ru": "Россия", "global": "Global", "global_5k": "Global 5K"}
+    titles = {
+        "all": "Общая",
+        "ru": "Россия",
+        "global": "Global",
+        "global_5k": "Global 5K",
+    }
     lines = [
         "| Подписка | Тренд | Первое | Последнее | Разница |",
         "|----------|-------|--------|-----------|---------|",
@@ -1129,7 +1228,7 @@ def history_lines(history: list[dict]) -> str:
         [
             "",
             "| Обновление, МСК | Общая | Россия | Global | Global 5K | Δ общая | Δ Россия | Δ Global | Δ Global 5K |",
-            "|-----------------|-------|--------|--------|-----------|---------|----------|----------|-------------|",
+            "|-----------------|-------|--------|--------|------------|---------|----------|----------|--------------|",
         ]
     )
     for run in reversed(history):
@@ -1148,8 +1247,13 @@ def history_lines(history: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = None) -> str:
+def source_table(
+    stats: dict[str, int],
+    global_stats: dict[str, int] | None = None,
+    global_5k_stats: dict[str, int] | None = None,
+) -> str:
     global_stats = global_stats or {}
+    global_5k_stats = global_5k_stats or {}
     global_shortlist_sources = [source for source in SOURCES if source["id"] in GLOBAL_SOURCE_RANK]
     other_bypass_sources = [
         source
@@ -1161,8 +1265,8 @@ def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = No
     def rows_for(sources: list[dict], show_global: bool = False) -> list[str]:
         if show_global:
             lines = [
-                "| Источник | Обновление источника | Серверов в общей подписке | В Global-файле | Ссылка |",
-                "|----------|---------------------|---------------------------|----------------|--------|",
+                "| Источник | Обновление источника | Серверов в общей подписке | В Global | В Global 5K | Ссылка |",
+                "|----------|---------------------|---------------------------|-----------|---------------|--------|",
             ]
         else:
             lines = [
@@ -1182,9 +1286,10 @@ def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = No
             count = stats.get(source["id"].lower(), 0)
             if show_global:
                 global_count = global_stats.get(source["id"].lower(), 0)
+                global_5k_count = global_5k_stats.get(source["id"].lower(), 0)
                 lines.append(
                     f"| {source['name']} | `{source_published_label(source['id'])}` | "
-                    f"`{count}` | `{global_count}` | [raw]({source['url']}) |"
+                    f"`{count}` | `{global_count}` | `{global_5k_count}` | [raw]({source['url']}) |"
                 )
             else:
                 lines.append(f"| {source['name']} | `{count}` | [raw]({source['url']}) |")
@@ -1198,8 +1303,8 @@ def source_table(stats: dict[str, int], global_stats: dict[str, int] | None = No
     )
 
     lines = [
-        f"Источники разделены по назначению. `subscription-global.yaml` берёт все non-RU узлы из всех источников. БС / whitelist / bypass shortlist ({global_shortlist_text}) получает приоритет в сортировке, затем идут остальные global-пулы.",
-        f"`subscription-global-5k.yaml` берёт первые {GLOBAL_5K_SUBSCRIPTION_LIMIT} узлов из этого же отсортированного global-списка: сначала свежие БС/whitelist/bypass источники, потом остальные свежие global-источники.",
+        "`subscription-global.yaml` берёт все non-RU узлы из всех источников и остаётся полным большим global-списком.",
+        f"`subscription-global-5k.yaml` берёт до {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих узлов с подтверждённой страной не RU только из БС / whitelist / bypass источников ({global_shortlist_text}). Проверок живости в GitHub Actions нет.",
         "",
         "### Приоритетные БС / whitelist / bypass источники",
         "",
@@ -1656,11 +1761,12 @@ def write_final_readme(
     history: list[dict],
     stats: dict[str, int] | None = None,
     global_stats: dict[str, int] | None = None,
+    global_5k_stats: dict[str, int] | None = None,
 ) -> None:
     if stats is None:
         stats = stats_for(proxies)
     history_table = history_lines(history)
-    sources_markdown = source_table(stats, global_stats)
+    sources_markdown = source_table(stats, global_stats, global_5k_stats)
     text = f"""# pale-signal подписки
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
@@ -1678,7 +1784,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | **pale-signal подписка - общая** | Все серверы | https://markkikhtenko.github.io/pale-signal/subscription.yaml | [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) |
 | **pale-signal подписка - Россия** | Серверы, физически расположенные в России | https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
 | **pale-signal подписка - Global** | Все иностранные non-RU серверы из общей подписки | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
-| **pale-signal подписка - Global 5K** | До {GLOBAL_5K_SUBSCRIPTION_LIMIT} приоритетных иностранных серверов | https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) |
+| **pale-signal подписка - Global 5K** | До {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих иностранных БС/whitelist/bypass серверов | https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) |
 
 ## Статус
 
@@ -1698,7 +1804,7 @@ pale-signal автоматически собирает VLESS-подписки �
 
 `subscription-global.yaml` каждый запуск собирается заново из всех non-RU серверов общей подписки без ограничения по количеству.
 
-`subscription-global-5k.yaml` берёт первые {GLOBAL_5K_SUBSCRIPTION_LIMIT} узлов из той же сортировки: сначала более свежая дата обновления источника, затем приоритет whitelist/bypass источника. Проверка живости прокси в GitHub Actions отключена, чтобы GitHub не отбрасывал узлы, которые могут работать только из-под БС на роутере.
+`subscription-global-5k.yaml` берёт до {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих узлов с подтверждённой страной не RU только из БС / whitelist / bypass источников. Проверка живости прокси в GitHub Actions отключена, чтобы GitHub не отбрасывал узлы, которые могут работать только из-под БС на роутере.
 
 <details>
 <summary>Источники</summary>
@@ -1766,9 +1872,11 @@ def main() -> int:
     proxies = dedupe_and_name(parsed)
     ru_proxies, global_candidates = split_by_country(proxies)
     global_proxies = prioritize_global_proxies(global_candidates)
-    global_5k_proxies = limit_global_5k_proxies(global_proxies)
+    global_5k_proxies = select_global_5k_proxies(global_proxies)
     if not global_proxies:
         raise RuntimeError("no global VLESS servers were produced")
+    if not global_5k_proxies:
+        raise RuntimeError("no global 5k VLESS servers were produced")
     config = build_config(proxies)
     ru_config = build_config(ru_proxies)
     global_config = build_config(global_proxies)
@@ -1782,7 +1890,12 @@ def main() -> int:
     ru_yaml_text = "\n".join(dump_yaml(ru_config)) + "\n"
     global_yaml_text = "\n".join(dump_yaml(global_config)) + "\n"
     global_5k_yaml_text = "\n".join(dump_yaml(global_5k_config)) + "\n"
-    if not yaml_text.strip() or not ru_yaml_text.strip() or not global_yaml_text.strip() or not global_5k_yaml_text.strip():
+    if (
+        not yaml_text.strip()
+        or not ru_yaml_text.strip()
+        or not global_yaml_text.strip()
+        or not global_5k_yaml_text.strip()
+    ):
         raise RuntimeError("empty YAML output")
 
     now = msk_timestamp()
@@ -1798,17 +1911,17 @@ def main() -> int:
     stats["global_5k"] = len(global_5k_proxies)
     stats["unknown"] = sum(1 for proxy in global_proxies if proxy.get("_country") == "UNKNOWN")
     global_stats = stats_for(global_proxies)
+    global_5k_stats = stats_for(global_5k_proxies)
     history = update_run_history(now, stats, changes)
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_5K_OUTPUT_FILE.write_text(global_5k_yaml_text, encoding="utf-8", newline="\n")
-    write_final_readme(proxies, now, changes, history, stats, global_stats)
+    write_final_readme(proxies, now, changes, history, stats, global_stats, global_5k_stats)
     print(
         f"wrote subscription files with {len(proxies)} proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} global, "
-        f"{len(global_5k_proxies)} global 5k, "
-        f"{len(global_candidates)} global candidates)"
+        f"{len(global_5k_proxies)} global 5k)"
     )
     return 0
 
