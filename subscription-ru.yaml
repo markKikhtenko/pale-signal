@@ -33879,23 +33879,6 @@ proxies:
       short-id: "224eb069dd8cd581"
       spider-x: "/"
   -
-    name: "EPODONIOS 265"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2053
-    uuid: "26c04130-059c-4ef9-b83b-314d2a471d35"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "za12kl3.bingnet.online"
-    client-fingerprint: "chrome"
-    skip-cert-verify: true
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "za12kl3.bingnet.online"
-  -
     name: "EPODONIOS 280"
     type: "vless"
     server: "45.131.212.4"
@@ -33983,24 +33966,6 @@ proxies:
       path: "/video"
       mode: "auto"
   -
-    name: "EPODONIOS 670"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2096
-    uuid: "686c62d9-17a7-43c9-a40a-f6747df60a9f"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ca.adobe-connect.top"
-    client-fingerprint: "chrome"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "ca.adobe-connect.top"
-  -
     name: "EPODONIOS 671"
     type: "vless"
     server: "secget.ru"
@@ -34080,6 +34045,22 @@ proxies:
     client-fingerprint: "chrome"
     alpn:
       - "h2"
+  -
+    name: "EPODONIOS 845"
+    type: "vless"
+    server: "tw04.kinomir.fun"
+    port: 40443
+    uuid: "84e919d1-efc6-48fc-8248-8c3cbfec9f17"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "deepl.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "IZn3ibz8K1yot2cj4ssmAQHVB--xrcQEc3RCFQUSRiE"
+      short-id: "2143"
+      spider-x: "/"
   -
     name: "EPODONIOS 915"
     type: "vless"
@@ -34499,38 +34480,6 @@ proxies:
     reality-opts:
       public-key: "M9_R2DX7bxoMJpkF4RcyJ0oJ8ZuGsxWrjuREKi6Ol0w"
   -
-    name: "🚀@VPNine1 13"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 443
-    uuid: "e308c804-cd05-406b-8b3e-291bce8b191f"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "site.iotdev3.workers.dev"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "site.iotdev3.workers.dev"
-  -
-    name: "[6334] - Telegram : @V2All"
-    type: "vless"
-    server: "www.chatgpt.com"
-    port: 443
-    uuid: "e308c804-cd05-406b-8b3e-291bce8b191f"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "site.iotdev3.workers.dev"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "site.iotdev3.workers.dev"
-  -
     name: "🔥Join+Telegram:@Farah_VPN🟣 17"
     type: "vless"
     server: "193.233.255.5"
@@ -34624,15 +34573,6 @@ proxies:
     client-fingerprint: "firefox"
     reality-opts:
       public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-  -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 63"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 443
-    uuid: "425ef0c5-4e79-4aa5-bf9e-b847a0f73601"
-    network: "tcp"
-    udp: true
-    encryption: "none"
   -
     name: "🔥Join+Telegram:@Farah_VPN🟣 77"
     type: "vless"
@@ -35078,21 +35018,6 @@ proxies:
     reality-opts:
       public-key: "FkyjJ-RLGIBWnsUQAuyfv-qReJSiuyb7qFnJS14ASgQ"
       short-id: "27e53bbcab7593d7"
-  -
-    name: "Telegram | @FNET00📱 2"
-    type: "vless"
-    server: "chat.openai.com"
-    port: 443
-    uuid: "396c904b-4b62-4334-b793-ee25fc0c61cc"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "pages.dev"
-    ws-opts:
-      path: "/eyJqdW5rIjoiTHczMWlhREZIb0ljUDhoaCIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0=?ed=2560"
-      headers:
-        Host: "8vmU06cxdz59m931xnREgj8qpnoq1-06.pages.dev"
   -
     name: "Telegram | @FNET00📱 16"
     type: "vless"
@@ -72356,19 +72281,18 @@ proxy-groups:
       - "EPODONIOS 234"
       - "EPODONIOS 235"
       - "EPODONIOS 255"
-      - "EPODONIOS 265"
       - "EPODONIOS 280"
       - "EPODONIOS 281"
       - "EPODONIOS 284"
       - "EPODONIOS 470"
       - "EPODONIOS 471"
       - "EPODONIOS 561"
-      - "EPODONIOS 670"
       - "EPODONIOS 671"
       - "EPODONIOS 672"
       - "EPODONIOS 686"
       - "EPODONIOS 688"
       - "EPODONIOS 695"
+      - "EPODONIOS 845"
       - "EPODONIOS 915"
       - "EPODONIOS 916"
       - "EPODONIOS 1017"
@@ -72398,8 +72322,6 @@ proxy-groups:
       - "@filembad 6"
       - "@hex_proxy ²"
       - "@hex_proxy ¹"
-      - "🚀@VPNine1 13"
-      - "[6334] - Telegram : @V2All"
       - "🔥Join+Telegram:@Farah_VPN🟣 17"
       - "🔥Join+Telegram:@Farah_VPN🟣 25"
       - "🔥Join+Telegram:@Farah_VPN🟣 30"
@@ -72407,7 +72329,6 @@ proxy-groups:
       - "🔥Join+Telegram:@Farah_VPN🟣 38"
       - "🔥Join+Telegram:@Farah_VPN🟣 54"
       - "🔥Join+Telegram:@Farah_VPN🟣 61"
-      - "🔥Join+Telegram:@Farah_VPN🟣 63"
       - "🔥Join+Telegram:@Farah_VPN🟣 77"
       - "🔥Join+Telegram:@Farah_VPN🟣 107"
       - "🔥Join+Telegram:@Farah_VPN🟣 112"
@@ -72441,7 +72362,6 @@ proxy-groups:
       - "https://t.me/VPNgoma 4"
       - "🇷🇺"
       - "🏳️ 2"
-      - "Telegram | @FNET00📱 2"
       - "Telegram | @FNET00📱 16"
       - "🏳️ ShatakVPN 756003"
       - "🏳️ ShatakVPN 919838"
@@ -76749,19 +76669,18 @@ proxy-groups:
       - "EPODONIOS 234"
       - "EPODONIOS 235"
       - "EPODONIOS 255"
-      - "EPODONIOS 265"
       - "EPODONIOS 280"
       - "EPODONIOS 281"
       - "EPODONIOS 284"
       - "EPODONIOS 470"
       - "EPODONIOS 471"
       - "EPODONIOS 561"
-      - "EPODONIOS 670"
       - "EPODONIOS 671"
       - "EPODONIOS 672"
       - "EPODONIOS 686"
       - "EPODONIOS 688"
       - "EPODONIOS 695"
+      - "EPODONIOS 845"
       - "EPODONIOS 915"
       - "EPODONIOS 916"
       - "EPODONIOS 1017"
@@ -76791,8 +76710,6 @@ proxy-groups:
       - "@filembad 6"
       - "@hex_proxy ²"
       - "@hex_proxy ¹"
-      - "🚀@VPNine1 13"
-      - "[6334] - Telegram : @V2All"
       - "🔥Join+Telegram:@Farah_VPN🟣 17"
       - "🔥Join+Telegram:@Farah_VPN🟣 25"
       - "🔥Join+Telegram:@Farah_VPN🟣 30"
@@ -76800,7 +76717,6 @@ proxy-groups:
       - "🔥Join+Telegram:@Farah_VPN🟣 38"
       - "🔥Join+Telegram:@Farah_VPN🟣 54"
       - "🔥Join+Telegram:@Farah_VPN🟣 61"
-      - "🔥Join+Telegram:@Farah_VPN🟣 63"
       - "🔥Join+Telegram:@Farah_VPN🟣 77"
       - "🔥Join+Telegram:@Farah_VPN🟣 107"
       - "🔥Join+Telegram:@Farah_VPN🟣 112"
@@ -76834,7 +76750,6 @@ proxy-groups:
       - "https://t.me/VPNgoma 4"
       - "🇷🇺"
       - "🏳️ 2"
-      - "Telegram | @FNET00📱 2"
       - "Telegram | @FNET00📱 16"
       - "🏳️ ShatakVPN 756003"
       - "🏳️ ShatakVPN 919838"
