@@ -5,23 +5,6 @@ log-level: "info"
 ipv6: false
 proxies:
   -
-    name: "🇱🇹 Lithuania — #163"
-    type: "vless"
-    server: "51.250.82.165"
-    port: 443
-    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
-      short-id: "4e07408562be"
-      spider-x: "/"
-  -
     name: "🇳🇱 The Netherlands — #214"
     type: "vless"
     server: "51.250.104.176"
@@ -38,38 +21,21 @@ proxies:
       public-key: "NGze952SdwNsPo_v2VgZJE9-vuwwj4dn_wTQZtZTThM"
       short-id: "209f2958ef7626ec"
   -
-    name: "🇸🇬 Singapore — #283"
+    name: "🇪🇪 Estonia — #113"
     type: "vless"
-    server: "94.126.206.121"
-    port: 443
-    uuid: "a8f84171-5f96-4547-b621-59758fe668c8"
+    server: "51.250.104.176"
+    port: 29447
+    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
     network: "tcp"
     udp: true
     encryption: "none"
     flow: "xtls-rprx-vision"
     tls: true
-    servername: "www.singaporeair.com"
-    client-fingerprint: "firefox"
+    servername: "www.twitch.tv"
+    client-fingerprint: "chrome"
     reality-opts:
-      public-key: "jWVk2Z7eFkyDcu2xgzqX8JsPbZuCVhHUWD463Vfgazw"
-      short-id: "7a5b89ecdb01f781"
-      spider-x: "/"
-  -
-    name: "6100 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-    type: "vless"
-    server: "45.196.201.221"
-    port: 443
-    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "storage.yandex.net"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "zii4nGNapnFKL6SN8GzWNqFlElBvUCUFUThEP0kFH04"
-      short-id: "c6ef72e4635d15a5"
+      public-key: "b7L2qrpKuFSOVFNY9A-Phylorw1DuteAetgS5ipERyA"
+      short-id: "2749d73d715730e1"
   -
     name: "🇩🇪 Germany — #48"
     type: "vless"
@@ -105,10 +71,579 @@ proxies:
     grpc-opts:
       grpc-service-name: "grpc-tunnel"
   -
-    name: "🇸🇪 Sweden — #270"
+    name: "🇵🇱 Poland — #258"
+    type: "vless"
+    server: "72.56.38.194"
+    port: 9892
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇸🇪 Sweden — #273"
+    type: "vless"
+    server: "5.42.106.202"
+    port: 9878
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabbccdd"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇺🇸 United States [*CIDR]"
+    type: "vless"
+    server: "92.63.99.228"
+    port: 4353
+    uuid: "b222ebc7-569c-45ca-a0e4-756f171b247b"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "tradingview.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "YXVnk7FdM6IXOlFqisWurmtfmoftXLqqsrJ-JqqP6Rc"
+  -
+    name: "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 2"
+    type: "vless"
+    server: "80.78.246.111"
+    port: 9878
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabb"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇨🇿 Czechia [*CIDR]"
+    type: "vless"
+    server: "5.189.223.90"
+    port: 9891
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
+      short-id: "aa"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇩🇪 Germany | 🌐 | [*CIDR]"
+    type: "vless"
+    server: "46.8.220.182"
+    port: 443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "media2.tcpdoor.net"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "vxhkDXfYpz1OLqZ-_9QVoQr3_UJLtJFheb5bD5YH7z8"
+      short-id: "3303c7a5"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "🇱🇹 Lithuania — #155"
+    type: "vless"
+    server: "51.250.82.165"
+    port: 443
+    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
+      short-id: "4e07408562be"
+  -
+    name: "🇱🇹 Lithuania — #159"
+    type: "vless"
+    server: "51.250.82.165"
+    port: 443
+    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
+      short-id: "4e07408562be"
+  -
+    name: "🇱🇹 Lithuania — #160"
+    type: "vless"
+    server: "51.250.82.165"
+    port: 443
+    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
+      short-id: "4e07408562be"
+  -
+    name: "🇪🇪 Estonia — #116"
+    type: "vless"
+    server: "51.250.104.176"
+    port: 29447
+    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.twitch.tv"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "b7L2qrpKuFSOVFNY9A-Phylorw1DuteAetgS5ipERyA"
+      short-id: "2749d73d715730e1"
+  -
+    name: "🇵🇱 Poland — #251"
+    type: "vless"
+    server: "51.250.104.176"
+    port: 29445
+    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.twitch.tv"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
+      short-id: "1297b6f0f6dc88d0"
+  -
+    name: "🇵🇱 Poland — #255"
+    type: "vless"
+    server: "51.250.104.176"
+    port: 29446
+    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.twitch.tv"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
+      short-id: "1297b6f0f6dc88d0"
+  -
+    name: "🇪🇪 Estonia — #115"
+    type: "vless"
+    server: "51.250.104.176"
+    port: 29447
+    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.twitch.tv"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "b7L2qrpKuFSOVFNY9A-Phylorw1DuteAetgS5ipERyA"
+      short-id: "2749d73d715730e1"
+  -
+    name: "🇵🇱 Poland — #254"
+    type: "vless"
+    server: "51.250.104.176"
+    port: 29446
+    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.twitch.tv"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
+      short-id: "1297b6f0f6dc88d0"
+  -
+    name: "🇵🇱 Poland — #256"
+    type: "vless"
+    server: "51.250.104.176"
+    port: 29445
+    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.twitch.tv"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
+      short-id: "1297b6f0f6dc88d0"
+  -
+    name: "🇵🇱 Poland — #257"
+    type: "vless"
+    server: "51.250.104.176"
+    port: 29445
+    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.twitch.tv"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
+      short-id: "1297b6f0f6dc88d0"
+  -
+    name: "🇨🇭 Switzerland — #35"
+    type: "vless"
+    server: "82.202.159.157"
+    port: 9882
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "amd.com"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
+      spider-x: "/"
+  -
+    name: "🇸🇪 Sweden — #269"
     type: "vless"
     server: "85.208.85.227"
     port: 9879
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇸🇪 Sweden — #271"
+    type: "vless"
+    server: "85.208.85.227"
+    port: 9879
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇸🇪 Sweden — #272"
+    type: "vless"
+    server: "85.208.85.227"
+    port: 9879
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇨🇭 Switzerland — #34"
+    type: "vless"
+    server: "82.202.159.157"
+    port: 9882
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "amd.com"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
+      spider-x: "/"
+  -
+    name: "🇸🇪 Sweden — #275"
+    type: "vless"
+    server: "85.208.85.227"
+    port: 9879
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇮🇹 Italy | [*CIDR] t.me/rjsxrd"
+    type: "vless"
+    server: "85.208.85.227"
+    port: 9879
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇮🇹 Italy | [*CIDR]"
+    type: "vless"
+    server: "92.63.99.228"
+    port: 7899
+    uuid: "e27dce75-b33b-49b6-afb7-17e29ce67bb1"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "tradingview.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "YXVnk7FdM6IXOlFqisWurmtfmoftXLqqsrJ-JqqP6Rc"
+  -
+    name: "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 2"
+    type: "vless"
+    server: "72.56.38.194"
+    port: 9892
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aa"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 3"
+    type: "vless"
+    server: "72.56.38.194"
+    port: 9892
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇩🇪 Germany | 🌐 [*CIDR]"
+    type: "vless"
+    server: "46.8.220.182"
+    port: 443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "media2.tcpdoor.net"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "vxhkDXfYpz1OLqZ-_9QVoQr3_UJLtJFheb5bD5YH7z8"
+      short-id: "3303c7a5"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "🇩🇪 Germany — #58"
+    type: "vless"
+    server: "5.188.115.69"
+    port: 443
+    uuid: "b6f4db0e-cc0e-4256-9c70-0dd253121ffd"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "amogus.razkur.dev"
+    client-fingerprint: "chrome"
+    alpn:
+      - "http/1.1"
+    ws-opts:
+      path: "/ws"
+  -
+    name: "🇺🇸 United States | [*CIDR] 4"
+    type: "vless"
+    server: "92.63.99.228"
+    port: 4353
+    uuid: "e27dce75-b33b-49b6-afb7-17e29ce67bb1"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "tradingview.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "YXVnk7FdM6IXOlFqisWurmtfmoftXLqqsrJ-JqqP6Rc"
+  -
+    name: "🇩🇪 Germany | [*CIDR] t.me/rjsxrd"
+    type: "vless"
+    server: "45.151.102.99"
+    port: 6443
+    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "maps.apple.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "OMlQAFrCMZ3DX0xlnbEZiByLBFzpUE8XJHJsrBzLdlY"
+      short-id: "2da4299da566b7"
+    grpc-opts:
+      grpc-service-name: "your-custom-path"
+  -
+    name: "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 3"
+    type: "vless"
+    server: "80.78.246.111"
+    port: 9878
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabbccdd"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 4"
+    type: "vless"
+    server: "80.78.246.111"
+    port: 9878
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabb"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇸🇪 Sweden | [*CIDR] t.me/rjsxrd"
+    type: "vless"
+    server: "5.42.106.202"
+    port: 9878
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabbccdd"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd"
+    type: "vless"
+    server: "194.87.226.71"
+    port: 9877
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
+      short-id: "aabbccdd"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇵🇱 Poland | [*CIDR] t.me/rjsxrd"
+    type: "vless"
+    server: "72.56.38.194"
+    port: 9892
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "android"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aa"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 4"
+    type: "vless"
+    server: "72.56.38.194"
+    port: 9892
     uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
     network: "grpc"
     udp: true
@@ -120,6 +655,433 @@ proxies:
       public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
     grpc-opts:
       grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇵🇱 Poland [*CIDR] t.me/rjsxrd"
+    type: "vless"
+    server: "72.56.38.194"
+    port: 9892
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇦🇹 Austria [*CIDR]"
+    type: "vless"
+    server: "31.77.169.70"
+    port: 9830
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇨🇿 Czechia [*CIDR] 2"
+    type: "vless"
+    server: "5.189.223.90"
+    port: 9891
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇩🇪 Germany | 🌐 | [*CIDR] 2"
+    type: "vless"
+    server: "46.8.220.182"
+    port: 443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "media2.tcpdoor.net"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "vxhkDXfYpz1OLqZ-_9QVoQr3_UJLtJFheb5bD5YH7z8"
+      short-id: "3303c7a5"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "🇸🇪 Sweden | [*CIDR] 2"
+    type: "vless"
+    server: "5.42.106.202"
+    port: 9878
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aa"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇺🇸 United States | [*CIDR] 2"
+    type: "vless"
+    server: "45.130.43.15"
+    port: 443
+    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "maps.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "gr7DAOBqoNiHEUhWZQh3nSqBOmg6QwmRC0HKj7TOsUk"
+      short-id: "2da4299da566b7"
+    grpc-opts:
+      grpc-service-name: "your-custom-path"
+  -
+    name: "🇺🇸 United States | 🌐 | [*CIDR]"
+    type: "vless"
+    server: "45.151.102.99"
+    port: 443
+    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "maps.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "gr7DAOBqoNiHEUhWZQh3nSqBOmg6QwmRC0HKj7TOsUk"
+      short-id: "2da4299da566b7"
+    grpc-opts:
+      grpc-service-name: "your-custom-path"
+  -
+    name: "🇮🇹 Italy | [*CIDR] 2"
+    type: "vless"
+    server: "92.63.99.228"
+    port: 7899
+    uuid: "e27dce75-b33b-49b6-afb7-17e29ce67bb1"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "tradingview.com"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "YXVnk7FdM6IXOlFqisWurmtfmoftXLqqsrJ-JqqP6Rc"
+  -
+    name: "🇺🇸 United States | [*CIDR] 3"
+    type: "vless"
+    server: "92.63.99.228"
+    port: 4353
+    uuid: "b222ebc7-569c-45ca-a0e4-756f171b247b"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "tradingview.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "YXVnk7FdM6IXOlFqisWurmtfmoftXLqqsrJ-JqqP6Rc"
+  -
+    name: "🇺🇸 United States | [*CIDR] 5"
+    type: "vless"
+    server: "92.63.99.228"
+    port: 4353
+    uuid: "e27dce75-b33b-49b6-afb7-17e29ce67bb1"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "tradingview.com"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "YXVnk7FdM6IXOlFqisWurmtfmoftXLqqsrJ-JqqP6Rc"
+  -
+    name: "🇦🇹 Austria [*CIDR] 2"
+    type: "vless"
+    server: "31.77.169.70"
+    port: 9830
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇨🇿 Czechia [*CIDR] 3"
+    type: "vless"
+    server: "5.189.223.90"
+    port: 9891
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇨🇿 Czechia | [*CIDR]"
+    type: "vless"
+    server: "5.189.223.90"
+    port: 9891
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
+      short-id: "aa"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇩🇪 Germany | [*CIDR]"
+    type: "vless"
+    server: "185.91.52.199"
+    port: 6443
+    uuid: "b1a6e9ca-de32-4adb-b473-061b32501714"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "play.overcloud.cloud"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ivgTfLR13A6xBsicIA28OPoav2tXlsstTTmGuETfnSk"
+      short-id: "5c766813929a1fdd"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "🇩🇪 Germany | [*CIDR] 2"
+    type: "vless"
+    server: "185.91.52.199"
+    port: 6443
+    uuid: "b1a6e9ca-de32-4adb-b473-061b32501714"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "play.overcloud.cloud"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "ivgTfLR13A6xBsicIA28OPoav2tXlsstTTmGuETfnSk"
+      short-id: "5c766813929a1fdd"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "🇩🇪 Germany | [*CIDR] 3"
+    type: "vless"
+    server: "91.185.83.91"
+    port: 10443
+    uuid: "b1a6e9ca-de32-4adb-b473-061b32501714"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "5post-gate.x5.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "ivgTfLR13A6xBsicIA28OPoav2tXlsstTTmGuETfnSk"
+      short-id: "5c766813929a1fdd"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "🇩🇪 Germany | [*CIDR] 4"
+    type: "vless"
+    server: "91.185.83.91"
+    port: 10443
+    uuid: "b1a6e9ca-de32-4adb-b473-061b32501714"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "5post-gate.x5.ru"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "ivgTfLR13A6xBsicIA28OPoav2tXlsstTTmGuETfnSk"
+      short-id: "5c766813929a1fdd"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "🇮🇹 Italy [*CIDR]"
+    type: "vless"
+    server: "85.208.85.227"
+    port: 9879
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇸🇪 Sweden | [*CIDR]"
+    type: "vless"
+    server: "5.42.106.202"
+    port: 9878
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aa"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇺🇸 United States | [*CIDR]"
+    type: "vless"
+    server: "45.130.43.15"
+    port: 443
+    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "maps.apple.com"
+    client-fingerprint: "android"
+    reality-opts:
+      public-key: "gr7DAOBqoNiHEUhWZQh3nSqBOmg6QwmRC0HKj7TOsUk"
+      short-id: "2da4299da566b7"
+    grpc-opts:
+      grpc-service-name: "your-custom-path"
+  -
+    name: "🇺🇸 United States | 🌐 [*CIDR]"
+    type: "vless"
+    server: "80.78.246.111"
+    port: 9878
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabbccdd"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇺🇸 United States | 🌐 | [*CIDR] 2"
+    type: "vless"
+    server: "45.151.102.99"
+    port: 443
+    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "maps.apple.com"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "gr7DAOBqoNiHEUhWZQh3nSqBOmg6QwmRC0HKj7TOsUk"
+      short-id: "2da4299da566b7"
+    grpc-opts:
+      grpc-service-name: "your-custom-path"
+  -
+    name: "🇩🇪 Germany | 🌐 | [*CIDR] 3"
+    type: "vless"
+    server: "5.188.115.69"
+    port: 443
+    uuid: "b6f4db0e-cc0e-4256-9c70-0dd253121ffd"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "amogus.razkur.dev"
+    client-fingerprint: "ios"
+    alpn:
+      - "http/1.1"
+    ws-opts:
+      path: "/ws"
+  -
+    name: "🇪🇪 EE | — | 493 | @ByeWhiteLists2"
+    type: "vless"
+    server: "as-ee.agveit.pro"
+    port: 443
+    uuid: "2402d74e-dbad-4ce3-9c0b-9202714715dc"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "as-ee.agveit.pro"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "sCryUbUEVHiZp1a-Dj9ZY7AojIDcJcDru4WpaVDzgFs"
+      short-id: "d4a1a56044f07e25"
+  -
+    name: "🇱🇹 Lithuania — #163"
+    type: "vless"
+    server: "51.250.82.165"
+    port: 443
+    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
+      short-id: "4e07408562be"
+      spider-x: "/"
+  -
+    name: "6100 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "45.196.201.221"
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "storage.yandex.net"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "zii4nGNapnFKL6SN8GzWNqFlElBvUCUFUThEP0kFH04"
+      short-id: "c6ef72e4635d15a5"
   -
     name: "0178 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
     type: "vless"
@@ -296,39 +1258,6 @@ proxies:
     reality-opts:
       public-key: "zii4nGNapnFKL6SN8GzWNqFlElBvUCUFUThEP0kFH04"
       short-id: "c6ef72e4635d15a5"
-  -
-    name: "🇵🇱 Poland — #258"
-    type: "vless"
-    server: "72.56.38.194"
-    port: 9892
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇸🇪 Sweden — #273"
-    type: "vless"
-    server: "5.42.106.202"
-    port: 9878
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aabbccdd"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
   -
     name: "1734 | 🌐 Unknown | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
     type: "vless"
@@ -1400,6 +2329,22 @@ proxies:
     grpc-opts:
       grpc-service-name: "your-custom-path"
   -
+    name: "🇸🇪 Sweden — #270"
+    type: "vless"
+    server: "85.208.85.227"
+    port: 9879
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
     name: "1291 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
     type: "vless"
     server: "93.152.205.216"
@@ -1447,6 +2392,23 @@ proxies:
     client-fingerprint: "ios"
     reality-opts:
       public-key: "nP_8HCJb-7_QaRP8MM_Gn4DFvukednJ2xSkmRAW1EAo"
+      spider-x: "/"
+  -
+    name: "🇸🇬 Singapore — #283"
+    type: "vless"
+    server: "94.126.206.121"
+    port: 443
+    uuid: "a8f84171-5f96-4547-b621-59758fe668c8"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.singaporeair.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "jWVk2Z7eFkyDcu2xgzqX8JsPbZuCVhHUWD463Vfgazw"
+      short-id: "7a5b89ecdb01f781"
       spider-x: "/"
   -
     name: "0021 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -1832,57 +2794,6 @@ proxies:
     grpc-opts:
       grpc-service-name: "web.max.ru"
   -
-    name: "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd"
-    type: "vless"
-    server: "80.78.246.111"
-    port: 9887
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aabbccdd"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 2"
-    type: "vless"
-    server: "80.78.246.111"
-    port: 9878
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aabb"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 2"
-    type: "vless"
-    server: "45.130.43.15"
-    port: 6443
-    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "maps.apple.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "OMlQAFrCMZ3DX0xlnbEZiByLBFzpUE8XJHJsrBzLdlY"
-      short-id: "2da4299da566b7"
-    grpc-opts:
-      grpc-service-name: "your-custom-path"
-  -
     name: "🇨🇭 Switzerland — #33"
     type: "vless"
     server: "82.202.159.157"
@@ -1947,6 +2858,40 @@ proxies:
       public-key: "idAD9lBougKTjO-EoWH03ieKqplNFUQ9lnYwU-USVys"
       short-id: "d8f3a9c2"
   -
+    name: "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd"
+    type: "vless"
+    server: "80.78.246.111"
+    port: 9887
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabbccdd"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 2"
+    type: "vless"
+    server: "45.130.43.15"
+    port: 6443
+    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "maps.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "OMlQAFrCMZ3DX0xlnbEZiByLBFzpUE8XJHJsrBzLdlY"
+      short-id: "2da4299da566b7"
+    grpc-opts:
+      grpc-service-name: "your-custom-path"
+  -
     name: "🇨🇭 Switzerland | TG: @HardVpn_robot t.me/rjsxrd"
     type: "vless"
     server: "l90909l.vip"
@@ -1993,6 +2938,23 @@ proxies:
       path: "/@Marisa_kristi"
       headers:
         Host: "wkytah9k8oggj60.qzfi0skkopy875xhtc0l9pwds.workers.dev"
+  -
+    name: "🇱🇹 Lithuania — #156"
+    type: "vless"
+    server: "51.250.82.165"
+    port: 443
+    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
+      short-id: "4e07408562be"
+      spider-x: "/"
   -
     name: "🇱🇹 Lithuania — #167"
     type: "vless"
@@ -2045,40 +3007,6 @@ proxies:
       short-id: "4e07408562be"
       spider-x: "/"
   -
-    name: "🇱🇹 Lithuania — #172"
-    type: "vless"
-    server: "51.250.82.165"
-    port: 443
-    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
-      short-id: "4e07408562be"
-      spider-x: "/"
-  -
-    name: "🇱🇹 Lithuania — #156"
-    type: "vless"
-    server: "51.250.82.165"
-    port: 443
-    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
-      short-id: "4e07408562be"
-      spider-x: "/"
-  -
     name: "🇱🇹 Lithuania — #168"
     type: "vless"
     server: "51.250.82.165"
@@ -2110,38 +3038,6 @@ proxies:
     reality-opts:
       public-key: "di2ZUAOzfJD2nDPKdWltqoIDHBJGOFlzJyazMYmTRQE"
   -
-    name: "🇱🇹 Lithuania — #155"
-    type: "vless"
-    server: "51.250.82.165"
-    port: 443
-    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
-      short-id: "4e07408562be"
-  -
-    name: "🇱🇹 Lithuania — #159"
-    type: "vless"
-    server: "51.250.82.165"
-    port: 443
-    uuid: "15e0833c-08ad-47f3-bf80-60c2a47a6774"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
-      short-id: "4e07408562be"
-  -
     name: "🇱🇹 Lithuania — #161"
     type: "vless"
     server: "51.250.82.165"
@@ -2158,7 +3054,7 @@ proxies:
       public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
       short-id: "4e07408562be"
   -
-    name: "🇱🇹 Lithuania — #160"
+    name: "🇱🇹 Lithuania — #172"
     type: "vless"
     server: "51.250.82.165"
     port: 443
@@ -2169,10 +3065,11 @@ proxies:
     flow: "xtls-rprx-vision"
     tls: true
     servername: "api-maps.yandex.ru"
-    client-fingerprint: "safari"
+    client-fingerprint: "firefox"
     reality-opts:
       public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
       short-id: "4e07408562be"
+      spider-x: "/"
   -
     name: "🇱🇹 Lithuania — #170"
     type: "vless"
@@ -2189,22 +3086,6 @@ proxies:
     reality-opts:
       public-key: "KEZ93Y9VgoirI18wIpcfS3z8I9GiaiFe-GKqGdEPMmg"
       short-id: "4e07408562be"
-  -
-    name: "🇪🇪 Estonia — #116"
-    type: "vless"
-    server: "51.250.104.176"
-    port: 29447
-    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.twitch.tv"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "b7L2qrpKuFSOVFNY9A-Phylorw1DuteAetgS5ipERyA"
-      short-id: "2749d73d715730e1"
   -
     name: "🇱🇹 Lithuania — #157"
     type: "vless"
@@ -2254,54 +3135,6 @@ proxies:
     reality-opts:
       public-key: "zii4nGNapnFKL6SN8GzWNqFlElBvUCUFUThEP0kFH04"
       short-id: "c6ef72e4635d15a5"
-  -
-    name: "🇸🇪 Sweden — #269"
-    type: "vless"
-    server: "85.208.85.227"
-    port: 9879
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇸🇪 Sweden — #271"
-    type: "vless"
-    server: "85.208.85.227"
-    port: 9879
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇨🇭 Switzerland — #35"
-    type: "vless"
-    server: "82.202.159.157"
-    port: 9882
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "amd.com"
-    client-fingerprint: "random"
-    reality-opts:
-      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
-      spider-x: "/"
   -
     name: "🇱🇹 Lithuania — #158"
     type: "vless"
@@ -2674,38 +3507,6 @@ proxies:
       short-id: "8321461729abcdef"
     grpc-opts:
       grpc-service-name: "web.max.ru"
-  -
-    name: "🇮🇹 Italy | [*CIDR] t.me/rjsxrd"
-    type: "vless"
-    server: "85.208.85.227"
-    port: 9879
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇩🇪 Germany — #71"
-    type: "vless"
-    server: "5.188.115.69"
-    port: 443
-    uuid: "bf802204-6b7e-4c20-b8b4-70c976a8616c"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "amogus.razkur.dev"
-    client-fingerprint: "firefox"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/ws"
   -
     name: "🇱🇹 Lithuania — #165"
     type: "vless"
@@ -3171,23 +3972,6 @@ proxies:
       public-key: "zii4nGNapnFKL6SN8GzWNqFlElBvUCUFUThEP0kFH04"
       short-id: "c6ef72e4635d15a5"
   -
-    name: "🇸🇬 Singapore | [*CIDR] YA t.me/rjsxrd"
-    type: "vless"
-    server: "94.126.206.121"
-    port: 443
-    uuid: "a8f84171-5f96-4547-b621-59758fe668c8"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.singaporeair.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "jWVk2Z7eFkyDcu2xgzqX8JsPbZuCVhHUWD463Vfgazw"
-      short-id: "7a5b89ecdb01f781"
-      spider-x: "/"
-  -
     name: "3037 | 🌐 Unknown | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
     type: "vless"
     server: "nlfast.mifbot.pro"
@@ -3251,72 +4035,6 @@ proxies:
       short-id: "8321461729abcdef"
     grpc-opts:
       grpc-service-name: "web.max.ru"
-  -
-    name: "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd"
-    type: "vless"
-    server: "80.78.246.111"
-    port: 9878
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aabbccdd"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 2"
-    type: "vless"
-    server: "72.56.38.194"
-    port: 9892
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aa"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 3"
-    type: "vless"
-    server: "72.56.38.194"
-    port: 9892
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇨🇭 Switzerland — #34"
-    type: "vless"
-    server: "82.202.159.157"
-    port: 9882
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "amd.com"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
-      spider-x: "/"
   -
     name: "🇨🇭 Switzerland — #36"
     type: "vless"
@@ -3494,68 +4212,6 @@ proxies:
       public-key: "WTCfu0XRIGi93MomsdOxuLOdnjXBkaaVZqaJWpxxYlk"
       short-id: "d8f3a9c2"
   -
-    name: "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd"
-    type: "vless"
-    server: "82.202.159.157"
-    port: 9882
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.amd.com"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
-  -
-    name: "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 2"
-    type: "vless"
-    server: "82.202.159.157"
-    port: 9882
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.amd.com"
-    client-fingerprint: "random"
-    reality-opts:
-      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
-      spider-x: "/"
-  -
-    name: "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 3"
-    type: "vless"
-    server: "82.202.159.157"
-    port: 9882
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.amd.com"
-    client-fingerprint: "random"
-    reality-opts:
-      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
-  -
-    name: "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 4"
-    type: "vless"
-    server: "82.202.159.157"
-    port: 9882
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.amd.com"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
-      spider-x: "/"
-  -
     name: "0330 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
     type: "vless"
     server: "93.152.205.216"
@@ -3657,169 +4313,17 @@ proxies:
     grpc-opts:
       grpc-service-name: "web.max.ru"
   -
-    name: "🇩🇪 Germany | [*CIDR] t.me/rjsxrd"
-    type: "vless"
-    server: "45.151.102.99"
-    port: 6443
-    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "maps.apple.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "OMlQAFrCMZ3DX0xlnbEZiByLBFzpUE8XJHJsrBzLdlY"
-      short-id: "2da4299da566b7"
-    grpc-opts:
-      grpc-service-name: "your-custom-path"
-  -
-    name: "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 3"
-    type: "vless"
-    server: "80.78.246.111"
-    port: 9878
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aabbccdd"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 4"
-    type: "vless"
-    server: "80.78.246.111"
-    port: 9878
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aabb"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd 2"
-    type: "vless"
-    server: "80.78.246.111"
-    port: 9887
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "android"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aabbccdd"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇸🇪 Sweden | [*CIDR] t.me/rjsxrd"
-    type: "vless"
-    server: "5.42.106.202"
-    port: 9878
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aabbccdd"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd"
-    type: "vless"
-    server: "194.87.226.71"
-    port: 9877
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
-      short-id: "aabbccdd"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 3"
-    type: "vless"
-    server: "45.130.43.15"
-    port: 6443
-    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "maps.apple.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "OMlQAFrCMZ3DX0xlnbEZiByLBFzpUE8XJHJsrBzLdlY"
-      short-id: "2da4299da566b7"
-    grpc-opts:
-      grpc-service-name: "your-custom-path"
-  -
-    name: "🇵🇱 Poland | [*CIDR] t.me/rjsxrd"
-    type: "vless"
-    server: "72.56.38.194"
-    port: 9892
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "android"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aa"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 4"
-    type: "vless"
-    server: "72.56.38.194"
-    port: 9892
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd 2"
+    name: "🇩🇪 Germany — #71"
     type: "vless"
     server: "5.188.115.69"
     port: 443
-    uuid: "4a555e7e-ea31-4f39-8d26-de0f68bc1460"
+    uuid: "bf802204-6b7e-4c20-b8b4-70c976a8616c"
     network: "ws"
     udp: true
     encryption: "none"
     tls: true
     servername: "amogus.razkur.dev"
-    client-fingerprint: "edge"
+    client-fingerprint: "firefox"
     alpn:
       - "http/1.1"
     ws-opts:
@@ -4777,6 +5281,23 @@ proxies:
       short-id: "3149e7e043"
       spider-x: "/3e063ff67abadad"
   -
+    name: "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd"
+    type: "vless"
+    server: "80.78.246.111"
+    port: 9878
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabbccdd"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
     name: "🇸🇪 Sweden — #227 [Verified RU] t.me/rjsxrd"
     type: "vless"
     server: "5.42.106.202"
@@ -5256,6 +5777,68 @@ proxies:
       public-key: "lYcMPEgf6ePmF_d8RXR5fsVorycW37v_ECl-fz_H6w4"
       short-id: "cfe08c23a85f24"
   -
+    name: "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd"
+    type: "vless"
+    server: "82.202.159.157"
+    port: 9882
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.amd.com"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
+  -
+    name: "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 2"
+    type: "vless"
+    server: "82.202.159.157"
+    port: 9882
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.amd.com"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
+      spider-x: "/"
+  -
+    name: "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 3"
+    type: "vless"
+    server: "82.202.159.157"
+    port: 9882
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.amd.com"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
+  -
+    name: "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 4"
+    type: "vless"
+    server: "82.202.159.157"
+    port: 9882
+    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.amd.com"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8"
+      spider-x: "/"
+  -
     name: "🇩🇪 德国 | DEU t.me/rjsxrd 7"
     type: "vless"
     server: "pro-de.emrata.top"
@@ -5316,6 +5899,23 @@ proxies:
     reality-opts:
       public-key: "OncWhxWwzrKOFH21JT9WxcenacQuc7ZmuQy_rZFJ8xg"
       short-id: "c6e19c434dc87df7"
+  -
+    name: "🇸🇬 Singapore | [*CIDR] YA t.me/rjsxrd"
+    type: "vless"
+    server: "94.126.206.121"
+    port: 443
+    uuid: "a8f84171-5f96-4547-b621-59758fe668c8"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.singaporeair.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "jWVk2Z7eFkyDcu2xgzqX8JsPbZuCVhHUWD463Vfgazw"
+      short-id: "7a5b89ecdb01f781"
+      spider-x: "/"
   -
     name: "🇫🇮 [VL] Финляндия #3564 | РосТуннель t.me/rjsxrd"
     type: "vless"
@@ -7656,6 +8256,40 @@ proxies:
     grpc-opts:
       grpc-service-name: "grpc"
   -
+    name: "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd 2"
+    type: "vless"
+    server: "80.78.246.111"
+    port: 9887
+    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "android"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabbccdd"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+  -
+    name: "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 3"
+    type: "vless"
+    server: "45.130.43.15"
+    port: 6443
+    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "maps.apple.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "OMlQAFrCMZ3DX0xlnbEZiByLBFzpUE8XJHJsrBzLdlY"
+      short-id: "2da4299da566b7"
+    grpc-opts:
+      grpc-service-name: "your-custom-path"
+  -
     name: "🇨🇭 Switzerland | TG: @HardVpn_robot t.me/rjsxrd 2"
     type: "vless"
     server: "l90909l.vip"
@@ -7751,22 +8385,6 @@ proxies:
     client-fingerprint: "edge"
     reality-opts:
       public-key: "Ux2M6x46mIcoAoP2oCA8qEQnqc1O5cpa5zYRIdCNdnw"
-  -
-    name: "🇵🇱 Poland [*CIDR] t.me/rjsxrd"
-    type: "vless"
-    server: "72.56.38.194"
-    port: 9892
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
   -
     name: "🇩🇪 Join+Telegram:@SolVPN 🇩🇪 t.me/rjsxrd 5"
     type: "vless"
@@ -9539,6 +10157,22 @@ proxies:
       path: "/sea"
       headers:
         Host: "okvnt.redcloud-salo.sbs"
+  -
+    name: "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd 2"
+    type: "vless"
+    server: "5.188.115.69"
+    port: 443
+    uuid: "4a555e7e-ea31-4f39-8d26-de0f68bc1460"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "amogus.razkur.dev"
+    client-fingerprint: "edge"
+    alpn:
+      - "http/1.1"
+    ws-opts:
+      path: "/ws"
   -
     name: "𝗝𝗼𝗶𝗻➠@PlanB_net t.me/rjsxrd t.me/rjsxrd t.me/rjsxrd"
     type: "vless"
@@ -28322,7 +28956,7 @@ proxies:
       public-key: "IzCxPP6AbT5ncuSfj17EsHCyjnirVQ_LN62uIiQeQVA"
       short-id: "111111"
   -
-    name: "EPODONIOS 1270"
+    name: "EPODONIOS 1269"
     type: "vless"
     server: "89.222.123.211"
     port: 16923
@@ -28671,7 +29305,7 @@ proxies:
       public-key: "FtdsU_DLWDJ1Fk7NESJAy_S0ezFFL_gaslsFDF23KCw"
       short-id: "7fe0c1c54e89aaae"
   -
-    name: "EPODONIOS 1155"
+    name: "EPODONIOS 1154"
     type: "vless"
     server: "node1.ietotozheproidet.site"
     port: 8443
@@ -31809,7 +32443,7 @@ proxies:
       short-id: "764f497dda21c4fc"
       spider-x: "/@HesarWeb"
   -
-    name: "EPODONIOS 1089"
+    name: "EPODONIOS 1088"
     type: "vless"
     server: "83.168.71.216"
     port: 443
@@ -31824,7 +32458,7 @@ proxies:
       public-key: "8h8t5eBWL9oERK7xWHQLFJE5j6sZdgNDQAs3EGnNbho"
       short-id: "2f49bccf11150ef2"
   -
-    name: "EPODONIOS 1804"
+    name: "EPODONIOS 1803"
     type: "vless"
     server: "45.196.201.122"
     port: 443
@@ -31916,7 +32550,7 @@ proxies:
       public-key: "zii4nGNapnFKL6SN8GzWNqFlElBvUCUFUThEP0kFH04"
       short-id: "c6ef72e4635d15a5"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 427"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 428"
     type: "vless"
     server: "45.196.201.94"
     port: 443
@@ -37066,22 +37700,6 @@ proxies:
       public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
       short-id: "1297b6f0f6dc88d0"
   -
-    name: "🇪🇪 Estonia — #113"
-    type: "vless"
-    server: "51.250.104.176"
-    port: 29447
-    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.twitch.tv"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "b7L2qrpKuFSOVFNY9A-Phylorw1DuteAetgS5ipERyA"
-      short-id: "2749d73d715730e1"
-  -
     name: "🇪🇪 Estonia — #112"
     type: "vless"
     server: "95.163.250.241"
@@ -37256,6 +37874,22 @@ proxies:
       public-key: "b7L2qrpKuFSOVFNY9A-Phylorw1DuteAetgS5ipERyA"
       short-id: "2749d73d715730e1"
   -
+    name: "🇳🇱 The Netherlands — #212"
+    type: "vless"
+    server: "51.250.104.176"
+    port: 29443
+    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "ign.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "NGze952SdwNsPo_v2VgZJE9-vuwwj4dn_wTQZtZTThM"
+      short-id: "209f2958ef7626ec"
+  -
     name: "🇳🇱 The Netherlands — #213"
     type: "vless"
     server: "51.250.104.176"
@@ -37288,118 +37922,6 @@ proxies:
       public-key: "b7L2qrpKuFSOVFNY9A-Phylorw1DuteAetgS5ipERyA"
       short-id: "2749d73d715730e1"
   -
-    name: "🇵🇱 Poland — #251"
-    type: "vless"
-    server: "51.250.104.176"
-    port: 29445
-    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.twitch.tv"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
-      short-id: "1297b6f0f6dc88d0"
-  -
-    name: "🇵🇱 Poland — #255"
-    type: "vless"
-    server: "51.250.104.176"
-    port: 29446
-    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.twitch.tv"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
-      short-id: "1297b6f0f6dc88d0"
-  -
-    name: "🇪🇪 Estonia — #115"
-    type: "vless"
-    server: "51.250.104.176"
-    port: 29447
-    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.twitch.tv"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "b7L2qrpKuFSOVFNY9A-Phylorw1DuteAetgS5ipERyA"
-      short-id: "2749d73d715730e1"
-  -
-    name: "🇵🇱 Poland — #254"
-    type: "vless"
-    server: "51.250.104.176"
-    port: 29446
-    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.twitch.tv"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
-      short-id: "1297b6f0f6dc88d0"
-  -
-    name: "🇵🇱 Poland — #256"
-    type: "vless"
-    server: "51.250.104.176"
-    port: 29445
-    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.twitch.tv"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
-      short-id: "1297b6f0f6dc88d0"
-  -
-    name: "🇵🇱 Poland — #257"
-    type: "vless"
-    server: "51.250.104.176"
-    port: 29445
-    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.twitch.tv"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "3cCVMGigEU7wpQm3SkT7EeBuR7QT9_xgAyiC5trENFY"
-      short-id: "1297b6f0f6dc88d0"
-  -
-    name: "🇳🇱 The Netherlands — #212"
-    type: "vless"
-    server: "51.250.104.176"
-    port: 29443
-    uuid: "0d7d959f-5498-457e-aee7-fd16b1f3e77d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "ign.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "NGze952SdwNsPo_v2VgZJE9-vuwwj4dn_wTQZtZTThM"
-      short-id: "209f2958ef7626ec"
-  -
     name: "🇳🇱 The Netherlands — #218"
     type: "vless"
     server: "51.250.104.176"
@@ -37415,38 +37937,6 @@ proxies:
     reality-opts:
       public-key: "NGze952SdwNsPo_v2VgZJE9-vuwwj4dn_wTQZtZTThM"
       short-id: "209f2958ef7626ec"
-  -
-    name: "🇸🇪 Sweden — #275"
-    type: "vless"
-    server: "85.208.85.227"
-    port: 9879
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇩🇪 Germany — #55"
-    type: "vless"
-    server: "5.188.115.69"
-    port: 443
-    uuid: "bf802204-6b7e-4c20-b8b4-70c976a8616c"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "amogus.razkur.dev"
-    client-fingerprint: "chrome"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/ws"
   -
     name: "🇫🇮 Finland — #123"
     type: "vless"
@@ -37464,21 +37954,21 @@ proxies:
       public-key: "gwuAehnMX6e-n1fxIenfjx43j3qXXi7Cb4wfnW5VyBQ"
       short-id: "f04729f65b9ea261"
   -
-    name: "🇸🇪 Sweden — #272"
+    name: "🇩🇪 Germany — #55"
     type: "vless"
-    server: "85.208.85.227"
-    port: 9879
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
+    server: "5.188.115.69"
+    port: 443
+    uuid: "bf802204-6b7e-4c20-b8b4-70c976a8616c"
+    network: "ws"
     udp: true
     encryption: "none"
     tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
+    servername: "amogus.razkur.dev"
+    client-fingerprint: "chrome"
+    alpn:
+      - "http/1.1"
+    ws-opts:
+      path: "/ws"
   -
     name: "🇩🇪 Germany — #51"
     type: "vless"
@@ -39554,22 +40044,6 @@ proxies:
     alpn:
       - "http/1.1"
   -
-    name: "🇩🇪 Germany — #58"
-    type: "vless"
-    server: "5.188.115.69"
-    port: 443
-    uuid: "b6f4db0e-cc0e-4256-9c70-0dd253121ffd"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "amogus.razkur.dev"
-    client-fingerprint: "chrome"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/ws"
-  -
     name: "🇩🇪 Germany — #60"
     type: "vless"
     server: "5.188.115.69"
@@ -40575,37 +41049,6 @@ proxies:
       public-key: "ZCYpNgP7BsaN5WzpxhO8IXtfoHm2DWZuchCAl-ACmyI"
       short-id: "6e4a9c1f0b7d23a8"
   -
-    name: "🇳🇱 The Netherlands | 🌐 | [*CIDR] 2"
-    type: "vless"
-    server: "92.246.138.131"
-    port: 443
-    uuid: "71cada65-d23e-418c-88e4-a06188d14689"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "nl-one.quiet-rogue.site"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "UvJqmTGvadeK94_38ncycxTRqU4lmsjhDjJBuL0CQSA"
-      short-id: "c71af684feb2fef4"
-  -
-    name: "🇺🇸 United States [*CIDR]"
-    type: "vless"
-    server: "92.63.99.228"
-    port: 4353
-    uuid: "b222ebc7-569c-45ca-a0e4-756f171b247b"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "tradingview.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "YXVnk7FdM6IXOlFqisWurmtfmoftXLqqsrJ-JqqP6Rc"
-  -
     name: "🇫🇷 France | 🌐 [*CIDR] 3"
     type: "vless"
     server: "87.242.85.201"
@@ -40640,6 +41083,22 @@ proxies:
       path: "/v1"
       headers:
         Host: "live.ok.ru"
+  -
+    name: "🇳🇱 The Netherlands | 🌐 [*CIDR] 2"
+    type: "vless"
+    server: "92.246.138.131"
+    port: 443
+    uuid: "71cada65-d23e-418c-88e4-a06188d14689"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "nl-one.quiet-rogue.site"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "UvJqmTGvadeK94_38ncycxTRqU4lmsjhDjJBuL0CQSA"
+      short-id: "c71af684feb2fef4"
   -
     name: "🇺🇸[openproxylist.com] vless-US"
     type: "vless"
@@ -40724,56 +41183,6 @@ proxies:
     reality-opts:
       public-key: "b7L2qrpKuFSOVFNY9A-Phylorw1DuteAetgS5ipERyA"
       short-id: "2749d73d715730e1"
-  -
-    name: "🇨🇿 Czechia | [*CIDR]"
-    type: "vless"
-    server: "5.189.223.90"
-    port: 9891
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
-      short-id: "aa"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇨🇿 Czechia | [*CIDR] 2"
-    type: "vless"
-    server: "5.189.223.90"
-    port: 9891
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇺🇸 United States | 🌐 | [*CIDR] 2"
-    type: "vless"
-    server: "45.130.43.15"
-    port: 443
-    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "maps.apple.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "gr7DAOBqoNiHEUhWZQh3nSqBOmg6QwmRC0HKj7TOsUk"
-      short-id: "2da4299da566b7"
-    grpc-opts:
-      grpc-service-name: "your-custom-path"
   -
     name: "0223 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
     type: "vless"
@@ -41108,7 +41517,7 @@ proxies:
       short-id: "120443"
       spider-x: "/"
   -
-    name: "EPODONIOS 1130"
+    name: "EPODONIOS 1129"
     type: "vless"
     server: "46.226.166.205"
     port: 34034
@@ -41237,7 +41646,7 @@ proxies:
       public-key: "pk41DLgF-uMU46On9iqmFFNO5ejtzCpYATAAOaEU90Q"
       short-id: "098114ff3f7d0898"
   -
-    name: "🇸🇪 Швеция [#РКП] 6"
+    name: "🇸🇪 Швеция [#РКП] 5"
     type: "vless"
     server: "109.120.157.207"
     port: 26978
@@ -41871,21 +42280,6 @@ proxies:
       public-key: "QQZQVGy8uV4JSgPJ6a8jA56bptsSifntKDJjhSvOl2I"
       short-id: "197e9c7abe"
   -
-    name: "🇺🇸 США [#РКП] 7"
-    type: "vless"
-    server: "92.63.99.228"
-    port: 4353
-    uuid: "e27dce75-b33b-49b6-afb7-17e29ce67bb1"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "tradingview.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "YXVnk7FdM6IXOlFqisWurmtfmoftXLqqsrJ-JqqP6Rc"
-  -
     name: "🇩🇪 Германия [#РКП] 11"
     type: "vless"
     server: "62.152.58.114"
@@ -41966,7 +42360,7 @@ proxies:
       public-key: "gwuAehnMX6e-n1fxIenfjx43j3qXXi7Cb4wfnW5VyBQ"
       short-id: "f04729f65b9ea261"
   -
-    name: "🌐 Неизвестно [#РКП] 47"
+    name: "🌐 Неизвестно [#РКП] 46"
     type: "vless"
     server: "178.92.205.63"
     port: 11167
@@ -42068,23 +42462,6 @@ proxies:
       short-id: "10ffb85da1c2d986"
     grpc-opts:
       grpc-service-name: "neurex"
-  -
-    name: "🇸🇪 Швеция [#РКП]"
-    type: "vless"
-    server: "5.42.106.202"
-    port: 9878
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aa"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
   -
     name: "🇰🇿 Казахстан [#РКП]"
     type: "vless"
@@ -42188,7 +42565,7 @@ proxies:
     grpc-opts:
       grpc-service-name: "grpc-tunnel"
   -
-    name: "🇸🇪 Швеция [#РКП] 2"
+    name: "🇸🇪 Швеция [#РКП]"
     type: "vless"
     server: "5.188.115.159"
     port: 8446
@@ -42202,7 +42579,7 @@ proxies:
     reality-opts:
       public-key: "rUCHk3_64Wv_f_v46OfVNYldKu9fUqHpX937bmGeeDs"
   -
-    name: "🇸🇪 Швеция [#РКП] 3"
+    name: "🇸🇪 Швеция [#РКП] 2"
     type: "vless"
     server: "185.91.54.126"
     port: 8445
@@ -42218,7 +42595,7 @@ proxies:
     grpc-opts:
       grpc-service-name: "ns"
   -
-    name: "🇸🇪 Швеция [#РКП] 4"
+    name: "🇸🇪 Швеция [#РКП] 3"
     type: "vless"
     server: "213.219.212.254"
     port: 8443
@@ -42234,7 +42611,7 @@ proxies:
     grpc-opts:
       grpc-service-name: "ns"
   -
-    name: "🇸🇪 Швеция [#РКП] 5"
+    name: "🇸🇪 Швеция [#РКП] 4"
     type: "vless"
     server: "87.228.101.33"
     port: 8444
@@ -42349,7 +42726,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 401"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 402"
     type: "vless"
     server: "5.255.124.180"
     port: 3011
@@ -42817,7 +43194,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🇸🇪 Швеция [#РКП] 7"
+    name: "🇸🇪 Швеция [#РКП] 6"
     type: "vless"
     server: "188.114.96.7"
     port: 8443
@@ -42880,7 +43257,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🌐 Неизвестно [#РКП] 37"
+    name: "🌐 Неизвестно [#РКП] 36"
     type: "vless"
     server: "138.124.97.220"
     port: 443
@@ -42898,7 +43275,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🌐 Неизвестно [#РКП] 48"
+    name: "🌐 Неизвестно [#РКП] 47"
     type: "vless"
     server: "45.130.125.114"
     port: 80
@@ -42907,7 +43284,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🌐 Неизвестно [#РКП] 49"
+    name: "🌐 Неизвестно [#РКП] 48"
     type: "vless"
     server: "46.8.225.26"
     port: 2090
@@ -42916,7 +43293,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🌐 Неизвестно [#РКП] 51"
+    name: "🌐 Неизвестно [#РКП] 50"
     type: "vless"
     server: "188.114.96.3"
     port: 2086
@@ -42934,7 +43311,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🌐 Неизвестно [#РКП] 60"
+    name: "🌐 Неизвестно [#РКП] 59"
     type: "vless"
     server: "45.130.125.30"
     port: 8880
@@ -42961,7 +43338,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🌐 Неизвестно [#РКП] 64"
+    name: "🌐 Неизвестно [#РКП] 63"
     type: "vless"
     server: "188.114.96.1"
     port: 8080
@@ -42988,7 +43365,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🌐 Неизвестно [#РКП] 66"
+    name: "🌐 Неизвестно [#РКП] 65"
     type: "vless"
     server: "188.114.97.6"
     port: 80
@@ -43108,7 +43485,7 @@ proxies:
       headers:
         Host: "144.31.14.168"
   -
-    name: "🌐 Неизвестно [#РКП] 50"
+    name: "🌐 Неизвестно [#РКП] 49"
     type: "vless"
     server: "188.114.97.3"
     port: 2086
@@ -43121,7 +43498,7 @@ proxies:
       headers:
         Host: "tight-thunder-ce8e.hamid-r-aliakbari1379-0f0.workers.dev"
   -
-    name: "🌐 Неизвестно [#РКП] 52"
+    name: "🌐 Неизвестно [#РКП] 51"
     type: "vless"
     server: "188.114.96.1"
     port: 2082
@@ -43134,7 +43511,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🇺🇸 США [#РКП] 8"
+    name: "🇺🇸 США [#РКП] 7"
     type: "vless"
     server: "188.114.96.1"
     port: 80
@@ -43147,7 +43524,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🌐 Неизвестно [#РКП] 53"
+    name: "🌐 Неизвестно [#РКП] 52"
     type: "vless"
     server: "188.114.97.1"
     port: 8880
@@ -43160,7 +43537,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🌐 Неизвестно [#РКП] 54"
+    name: "🌐 Неизвестно [#РКП] 53"
     type: "vless"
     server: "188.114.97.1"
     port: 8080
@@ -43173,7 +43550,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🇺🇸 США [#РКП] 9"
+    name: "🇺🇸 США [#РКП] 8"
     type: "vless"
     server: "188.114.96.1"
     port: 8080
@@ -43186,7 +43563,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🌐 Неизвестно [#РКП] 55"
+    name: "🌐 Неизвестно [#РКП] 54"
     type: "vless"
     server: "188.114.96.1"
     port: 2052
@@ -43199,7 +43576,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🇺🇸 США [#РКП] 10"
+    name: "🇺🇸 США [#РКП] 9"
     type: "vless"
     server: "188.114.96.1"
     port: 8880
@@ -43212,7 +43589,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🇺🇸 США [#РКП] 11"
+    name: "🇺🇸 США [#РКП] 10"
     type: "vless"
     server: "188.114.97.1"
     port: 2086
@@ -43225,7 +43602,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🇺🇸 США [#РКП] 12"
+    name: "🇺🇸 США [#РКП] 11"
     type: "vless"
     server: "188.114.97.1"
     port: 2052
@@ -43238,7 +43615,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🌐 Неизвестно [#РКП] 56"
+    name: "🌐 Неизвестно [#РКП] 55"
     type: "vless"
     server: "91.193.58.13"
     port: 80
@@ -43251,7 +43628,7 @@ proxies:
       headers:
         Host: "plain-darkness-90ea.259.workers.dev"
   -
-    name: "🌐 Неизвестно [#РКП] 57"
+    name: "🌐 Неизвестно [#РКП] 56"
     type: "vless"
     server: "188.114.97.1"
     port: 2095
@@ -43264,7 +43641,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🌐 Неизвестно [#РКП] 58"
+    name: "🌐 Неизвестно [#РКП] 57"
     type: "vless"
     server: "91.193.58.198"
     port: 80
@@ -43277,7 +43654,7 @@ proxies:
       headers:
         Host: "plain-darkness-90ea.259.workers.dev"
   -
-    name: "🌐 Неизвестно [#РКП] 59"
+    name: "🌐 Неизвестно [#РКП] 58"
     type: "vless"
     server: "188.114.96.1"
     port: 2095
@@ -43290,7 +43667,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🇺🇸 США [#РКП] 13"
+    name: "🇺🇸 США [#РКП] 12"
     type: "vless"
     server: "188.114.97.1"
     port: 2082
@@ -43316,7 +43693,7 @@ proxies:
       headers:
         Host: "rzd.ru"
   -
-    name: "🌐 Неизвестно [#РКП] 61"
+    name: "🌐 Неизвестно [#РКП] 60"
     type: "vless"
     server: "91.193.58.204"
     port: 80
@@ -43342,7 +43719,7 @@ proxies:
       headers:
         Host: "rzd.ru"
   -
-    name: "🌐 Неизвестно [#РКП] 62"
+    name: "🌐 Неизвестно [#РКП] 61"
     type: "vless"
     server: "188.114.97.1"
     port: 80
@@ -43355,7 +43732,7 @@ proxies:
       headers:
         Host: "shrill-lake-231c.jachhitachi69.workers.dev"
   -
-    name: "🌐 Неизвестно [#РКП] 63"
+    name: "🌐 Неизвестно [#РКП] 62"
     type: "vless"
     server: "188.114.96.1"
     port: 2086
@@ -43452,204 +43829,6 @@ proxies:
     encryption: "none"
     xhttp-opts:
       path: "/"
-  -
-    name: "🇨🇿 Czechia [*CIDR]"
-    type: "vless"
-    server: "5.189.223.90"
-    port: 9891
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
-      short-id: "aa"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇩🇪 Germany | 🌐 | [*CIDR] 2"
-    type: "vless"
-    server: "46.8.220.182"
-    port: 443
-    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "media2.tcpdoor.net"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "vxhkDXfYpz1OLqZ-_9QVoQr3_UJLtJFheb5bD5YH7z8"
-      short-id: "3303c7a5"
-    grpc-opts:
-      grpc-service-name: "grpc"
-  -
-    name: "🇩🇪 Germany | 🌐 [*CIDR]"
-    type: "vless"
-    server: "46.8.220.182"
-    port: 443
-    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "media2.tcpdoor.net"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "vxhkDXfYpz1OLqZ-_9QVoQr3_UJLtJFheb5bD5YH7z8"
-      short-id: "3303c7a5"
-    grpc-opts:
-      grpc-service-name: "grpc"
-  -
-    name: "🇳🇱 The Netherlands | 🌐 | [*CIDR]"
-    type: "vless"
-    server: "92.246.138.131"
-    port: 443
-    uuid: "71cada65-d23e-418c-88e4-a06188d14689"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "nl-one.quiet-rogue.site"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "UvJqmTGvadeK94_38ncycxTRqU4lmsjhDjJBuL0CQSA"
-      short-id: "c71af684feb2fef4"
-  -
-    name: "🇦🇹 Austria [*CIDR] 2"
-    type: "vless"
-    server: "31.77.169.70"
-    port: 9830
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇦🇹 Austria [*CIDR] 3"
-    type: "vless"
-    server: "31.77.169.70"
-    port: 9830
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇨🇿 Czechia | [*CIDR] 3"
-    type: "vless"
-    server: "5.189.223.90"
-    port: 9891
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "Dfgu8Ey0M8Hz4gXGZAwQ3H9jLt2HByVsjAOTWiuKDB0"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇩🇪 Germany | 🌐 | [*CIDR]"
-    type: "vless"
-    server: "46.8.220.182"
-    port: 443
-    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "media2.tcpdoor.net"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "vxhkDXfYpz1OLqZ-_9QVoQr3_UJLtJFheb5bD5YH7z8"
-      short-id: "3303c7a5"
-    grpc-opts:
-      grpc-service-name: "grpc"
-  -
-    name: "🇮🇹 Italy | [*CIDR]"
-    type: "vless"
-    server: "85.208.85.227"
-    port: 9879
-    uuid: "9c444a99-da61-4d82-939f-c3dd8fb41e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇺🇸 United States | 🌐 [*CIDR]"
-    type: "vless"
-    server: "80.78.246.111"
-    port: 9878
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-      short-id: "aabbccdd"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
-    name: "🇺🇸 United States | 🌐 | [*CIDR]"
-    type: "vless"
-    server: "45.130.43.15"
-    port: 443
-    uuid: "423caebf-ce56-4e26-a792-7a6becb17e9b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "maps.apple.com"
-    client-fingerprint: "android"
-    reality-opts:
-      public-key: "gr7DAOBqoNiHEUhWZQh3nSqBOmg6QwmRC0HKj7TOsUk"
-      short-id: "2da4299da566b7"
-    grpc-opts:
-      grpc-service-name: "your-custom-path"
-  -
-    name: "🇩🇪 Germany | 🌐 | [*CIDR] 3"
-    type: "vless"
-    server: "5.188.115.69"
-    port: 443
-    uuid: "b9651c9d-01be-4e52-9b95-5a273e65e556"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "amogus.razkur.dev"
-    client-fingerprint: "android"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/ws"
   -
     name: "2821 | 🇰🇿 Kazakhstan | 🏳️ SNI-X5 | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
     type: "vless"
@@ -49783,22 +49962,6 @@ proxies:
       public-key: "uYVDQmYNVB_yJ-nqn3ZJaRqLvfZnilS8ukZMzDn99D8"
       short-id: "e419fa28"
   -
-    name: "🇦🇹 Austria [*CIDR]"
-    type: "vless"
-    server: "31.77.169.70"
-    port: 9830
-    uuid: "884d811f-577b-421e-aabb-608660b0ecfa"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
-    grpc-opts:
-      grpc-service-name: "grpc-tunnel"
-  -
     name: "🌐 Anycast-IP | 🇨🇭 🇳🇱 [*CIDR]"
     type: "vless"
     server: "45.151.62.156"
@@ -54999,22 +55162,6 @@ proxies:
     reality-opts:
       public-key: "4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik"
       short-id: "d8c6b58bcbb0c323"
-  -
-    name: "🇪🇪 EE | — | 493 | @ByeWhiteLists2"
-    type: "vless"
-    server: "as-ee.agveit.pro"
-    port: 443
-    uuid: "2402d74e-dbad-4ce3-9c0b-9202714715dc"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "as-ee.agveit.pro"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "sCryUbUEVHiZp1a-Dj9ZY7AojIDcJcDru4WpaVDzgFs"
-      short-id: "d4a1a56044f07e25"
   -
     name: "🇩🇪 DE | — | 7 | @ByeWhiteLists2"
     type: "vless"
@@ -77362,164 +77509,77 @@ proxies:
     reality-opts:
       public-key: "aom9XGtg9tre2RGo8XkCaRqlE02nrZ4smmnpLpzidRE"
       short-id: "b2a9bd658fc81dc6"
-  -
-    name: "By EbraSha 1501"
-    type: "vless"
-    server: "89.125.19.237"
-    port: 47200
-    uuid: "ffaa8e95-74e2-4ef4-8974-69dd3651b6f9"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "stats.vk-portal.net"
-    reality-opts:
-      public-key: "aom9XGtg9tre2RGo8XkCaRqlE02nrZ4smmnpLpzidRE"
-      short-id: "b2a9bd658fc81dc6"
-  -
-    name: "🇩🇪 Germany — #38 2"
-    type: "vless"
-    server: "91.185.83.64"
-    port: 9443
-    uuid: "fd8cdff2-5350-434c-b9af-8d2773a94f86"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "muzgrape.space"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "5M0khPdwiXYhayuP4i76J1am-q85Sno7vGnqEnZ1ngI"
-      short-id: "ccaaaa"
-  -
-    name: "🇩🇪 Germany — #99 3"
-    type: "vless"
-    server: "37.9.4.224"
-    port: 443
-    uuid: "1c4380ee-5e1a-4f8d-aa7e-f1c9d1109e4f"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "wl-2-1.legendary.ac"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "uL4x8EbCl080G43kFlv8nbpEyseWi1Dc_bl8F7lWtm8"
-      short-id: "aa03ec59c9695e91"
-  -
-    name: "🇩🇪 Germany — #100 2"
-    type: "vless"
-    server: "62.152.58.114"
-    port: 443
-    uuid: "1c4380ee-5e1a-4f8d-aa7e-f1c9d1109e4f"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "wl-13-1.nodes.ac"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "jAJoyWJ4nMGai3H9BOa6QMUr2Vvpgqs8VipbaO5mCVU"
-      short-id: "3130197867c23edb"
-  -
-    name: "🇪🇪 Estonia — #119"
-    type: "vless"
-    server: "85.209.135.18"
-    port: 443
-    uuid: "56b812e4-2d96-0001-b365-6c801663a37a"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "ru-xr-1.124515.xyz"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "dxsu1yp4dcpuhq32vLIX6fZ3A7uWs_5OzNIlUmLBSzQ"
-      short-id: "c7c005c49b11d17c"
-  -
-    name: "🇪🇪 Estonia — #121"
-    type: "vless"
-    server: "46.254.17.226"
-    port: 443
-    uuid: "1c4380ee-5e1a-4f8d-aa7e-f1c9d1109e4f"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "wl-8-1.nodes.ac"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "knrqm393ghxJNYj-4qu2BYpwpG5_zOG5h5-H7yyyR38"
-      short-id: "0be28edc1b0278d6"
-  -
-    name: "🇬🇧 United Kingdom — #139 2"
-    type: "vless"
-    server: "185.40.153.217"
-    port: 443
-    uuid: "a91ebb48-b920-4b44-9f97-fb0d8ac58a97"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "ads.x5.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs"
-      short-id: "428ef87fd47a3a32"
-      spider-x: "/"
-  -
-    name: "🇬🇧 United Kingdom — #153"
-    type: "vless"
-    server: "79.174.90.201"
-    port: 443
-    uuid: "a91ebb48-b920-4b44-9f97-fb0d8ac58a97"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "ads.x5.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs"
-      short-id: "428ef87fd47a3a32"
-      spider-x: "/"
-  -
-    name: "🇱🇹 Lithuania — #201 2"
-    type: "vless"
-    server: "194.55.239.225"
-    port: 443
-    uuid: "c4abebd5-0e33-45e7-9c72-36f21ab4ec46"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "ads.x5.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "cs3rjd3sEWQgm3remEcWXqyxANbJAAWjEHfGNOU-KwE"
-      short-id: "fb7bcadf992e2411"
-      spider-x: "/"
 proxy-groups:
   -
     name: "AUTO"
     type: "url-test"
     proxies:
-      - "🇱🇹 Lithuania — #163"
       - "🇳🇱 The Netherlands — #214"
-      - "🇸🇬 Singapore — #283"
-      - "6100 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "🇪🇪 Estonia — #113"
       - "🇩🇪 Germany — #48"
       - "🇩🇪 Germany — #53"
-      - "🇸🇪 Sweden — #270"
+      - "🇵🇱 Poland — #258"
+      - "🇸🇪 Sweden — #273"
+      - "🇺🇸 United States [*CIDR]"
+      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 2"
+      - "🇨🇿 Czechia [*CIDR]"
+      - "🇩🇪 Germany | 🌐 | [*CIDR]"
+      - "🇱🇹 Lithuania — #155"
+      - "🇱🇹 Lithuania — #159"
+      - "🇱🇹 Lithuania — #160"
+      - "🇪🇪 Estonia — #116"
+      - "🇵🇱 Poland — #251"
+      - "🇵🇱 Poland — #255"
+      - "🇪🇪 Estonia — #115"
+      - "🇵🇱 Poland — #254"
+      - "🇵🇱 Poland — #256"
+      - "🇵🇱 Poland — #257"
+      - "🇨🇭 Switzerland — #35"
+      - "🇸🇪 Sweden — #269"
+      - "🇸🇪 Sweden — #271"
+      - "🇸🇪 Sweden — #272"
+      - "🇨🇭 Switzerland — #34"
+      - "🇸🇪 Sweden — #275"
+      - "🇮🇹 Italy | [*CIDR] t.me/rjsxrd"
+      - "🇮🇹 Italy | [*CIDR]"
+      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 2"
+      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 3"
+      - "🇩🇪 Germany | 🌐 [*CIDR]"
+      - "🇩🇪 Germany — #58"
+      - "🇺🇸 United States | [*CIDR] 4"
+      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd"
+      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 3"
+      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 4"
+      - "🇸🇪 Sweden | [*CIDR] t.me/rjsxrd"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd"
+      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd"
+      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 4"
+      - "🇵🇱 Poland [*CIDR] t.me/rjsxrd"
+      - "🇦🇹 Austria [*CIDR]"
+      - "🇨🇿 Czechia [*CIDR] 2"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] 2"
+      - "🇸🇪 Sweden | [*CIDR] 2"
+      - "🇺🇸 United States | [*CIDR] 2"
+      - "🇺🇸 United States | 🌐 | [*CIDR]"
+      - "🇮🇹 Italy | [*CIDR] 2"
+      - "🇺🇸 United States | [*CIDR] 3"
+      - "🇺🇸 United States | [*CIDR] 5"
+      - "🇦🇹 Austria [*CIDR] 2"
+      - "🇨🇿 Czechia [*CIDR] 3"
+      - "🇨🇿 Czechia | [*CIDR]"
+      - "🇩🇪 Germany | [*CIDR]"
+      - "🇩🇪 Germany | [*CIDR] 2"
+      - "🇩🇪 Germany | [*CIDR] 3"
+      - "🇩🇪 Germany | [*CIDR] 4"
+      - "🇮🇹 Italy [*CIDR]"
+      - "🇸🇪 Sweden | [*CIDR]"
+      - "🇺🇸 United States | [*CIDR]"
+      - "🇺🇸 United States | 🌐 [*CIDR]"
+      - "🇺🇸 United States | 🌐 | [*CIDR] 2"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] 3"
+      - "🇪🇪 EE | — | 493 | @ByeWhiteLists2"
+      - "🇱🇹 Lithuania — #163"
+      - "6100 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0178 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0569 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0647 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -77531,8 +77591,6 @@ proxy-groups:
       - "3716 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "4276 | 🇺🇸 USA | 🏳️ SNI-Avito | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5179 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇵🇱 Poland — #258"
-      - "🇸🇪 Sweden — #273"
       - "1734 | 🌐 Unknown | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
       - "0023 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0067 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -77600,9 +77658,11 @@ proxy-groups:
       - "6159 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "6262 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "🇫🇷 France — #128"
+      - "🇸🇪 Sweden — #270"
       - "1291 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "🇫🇮 Finland — #122"
       - "🇳🇱 The Netherlands — #219"
+      - "🇸🇬 Singapore — #283"
       - "0021 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0403 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0545 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -77627,35 +77687,27 @@ proxy-groups:
       - "6027 | 🇩🇪 Germany | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "6276 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "1957 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
-      - "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd"
-      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 2"
-      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 2"
       - "🇨🇭 Switzerland — #33"
       - "US 🇺🇸 | @Raydikalx | 1575"
       - "3506 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "🇸🇪 瑞典 | SWE t.me/rjsxrd 3"
+      - "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd"
+      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 2"
       - "🇨🇭 Switzerland | TG: @HardVpn_robot t.me/rjsxrd"
       - "🇺🇸 [VL] США #2360 | РосТуннель t.me/rjsxrd"
       - "🇳🇱 Нидерланды | ip = 109.120.150.17 (CIDR) | 🔥 от катлер t.me/rjsxrd"
+      - "🇱🇹 Lithuania — #156"
       - "🇱🇹 Lithuania — #167"
       - "🇱🇹 Lithuania — #164"
       - "🇱🇹 Lithuania — #166"
-      - "🇱🇹 Lithuania — #172"
-      - "🇱🇹 Lithuania — #156"
       - "🇱🇹 Lithuania — #168"
       - "🇩🇪 Germany — #38"
-      - "🇱🇹 Lithuania — #155"
-      - "🇱🇹 Lithuania — #159"
       - "🇱🇹 Lithuania — #161"
-      - "🇱🇹 Lithuania — #160"
+      - "🇱🇹 Lithuania — #172"
       - "🇱🇹 Lithuania — #170"
-      - "🇪🇪 Estonia — #116"
       - "🇱🇹 Lithuania — #157"
       - "0794 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "2231 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇸🇪 Sweden — #269"
-      - "🇸🇪 Sweden — #271"
-      - "🇨🇭 Switzerland — #35"
       - "🇱🇹 Lithuania — #158"
       - "🇱🇹 Lithuania — #162"
       - "🇱🇹 Lithuania — #173"
@@ -77679,8 +77731,6 @@ proxy-groups:
       - "5294 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5401 | 🇧🇷 Brazil | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "4232 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
-      - "🇮🇹 Italy | [*CIDR] t.me/rjsxrd"
-      - "🇩🇪 Germany — #71"
       - "🇱🇹 Lithuania — #165"
       - "🇱🇹 Lithuania — #169"
       - "🇱🇹 Lithuania — #171"
@@ -77710,15 +77760,10 @@ proxy-groups:
       - "5963 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "6150 | 🇧🇷 Brazil | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "6182 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇸🇬 Singapore | [*CIDR] YA t.me/rjsxrd"
       - "3037 | 🌐 Unknown | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
       - "5548 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5579 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "6033 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd"
-      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 2"
-      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 3"
-      - "🇨🇭 Switzerland — #34"
       - "🇨🇭 Switzerland — #36"
       - "🇫🇮 Finland — #119"
       - "🇳🇱 The Netherlands — #217"
@@ -77730,26 +77775,13 @@ proxy-groups:
       - "4851 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5029 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5365 | 🇺🇸 USA | 🏳️ SNI-Avito | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd"
-      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 2"
-      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 3"
-      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 4"
       - "0330 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "1766 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "2493 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3067 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "3176 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "3772 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd"
-      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 3"
-      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 4"
-      - "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd 2"
-      - "🇸🇪 Sweden | [*CIDR] t.me/rjsxrd"
-      - "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd"
-      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 3"
-      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd"
-      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 4"
-      - "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd 2"
+      - "🇩🇪 Germany — #71"
       - "🇵🇱 Poland | TG: @HardVpn_robot t.me/rjsxrd"
       - "🇺🇸 United States | TG: @HardVpn_robot t.me/rjsxrd 2"
       - "AetrisVPN White list ┃ ✅ SNI: storage.yandex.net ┃ 🇩🇪 Германия t.me/rjsxrd"
@@ -77810,6 +77842,7 @@ proxy-groups:
       - "🌐 Unknown | @RaViraNet t.me/rjsxrd"
       - "🇳🇱 The Netherlands | БЕЛЫЙ IP | @RaViraNet t.me/rjsxrd"
       - "🇦🇪 ОАЭ [#РКП] t.me/rjsxrd"
+      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd"
       - "🇸🇪 Sweden — #227 [Verified RU] t.me/rjsxrd"
       - "🇩🇪 [VL] Германия #1936 | РосТуннель t.me/rjsxrd"
       - "🇫🇷 [VL] Франция #4379 | РосТуннель t.me/rjsxrd"
@@ -77841,10 +77874,15 @@ proxy-groups:
       - "🇪🇪 爱沙尼亚 | EST t.me/rjsxrd"
       - "🇩🇪 德国 | DEU t.me/rjsxrd 6"
       - "🇺🇸 美国 | USA t.me/rjsxrd 2"
+      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd"
+      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 2"
+      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 3"
+      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 4"
       - "🇩🇪 德国 | DEU t.me/rjsxrd 7"
       - "🇹🇷 土耳其 | TUR t.me/rjsxrd"
       - "🇺🇸_美国_17 t.me/rjsxrd"
       - "🇨🇭 瑞士 | CHE t.me/rjsxrd"
+      - "🇸🇬 Singapore | [*CIDR] YA t.me/rjsxrd"
       - "🇫🇮 [VL] Финляндия #3564 | РосТуннель t.me/rjsxrd"
       - "🇫🇮 [VL] Финляндия #3559 | РосТуннель t.me/rjsxrd"
       - "🇩🇪 Germany | TG: @HardVpn_robot t.me/rjsxrd"
@@ -77991,13 +78029,14 @@ proxy-groups:
       - "🇦🇹 LTE 123 | тгк: @rostunnel t.me/rjsxrd"
       - "🇺🇸 United States [*CIDR] t.me/rjsxrd"
       - "NL 🇳🇱 | @Raydikalx | 1429"
+      - "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd 2"
+      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 3"
       - "🇨🇭 Switzerland | TG: @HardVpn_robot t.me/rjsxrd 2"
       - "🇧🇬 Bulgaria | TG: @HardVpn_robot t.me/rjsxrd"
       - "🇫🇷 [VL] Франция #4427 | РосТуннель t.me/rjsxrd"
       - "🇵🇱 [VL] Польша #5561 | РосТуннель t.me/rjsxrd"
       - "🇫🇷 [VL] Франция #4374 | РосТуннель t.me/rjsxrd"
       - "🇮🇹 Italy [03] MIFA t.me/rjsxrd"
-      - "🇵🇱 Poland [*CIDR] t.me/rjsxrd"
       - "🇩🇪 Join+Telegram:@SolVPN 🇩🇪 t.me/rjsxrd 5"
       - "AetrisVPN White list ┃ ✅ SNI: max.ru ┃ 🇩🇪 Германия t.me/rjsxrd"
       - "🇳🇱 [VL] Нидерланды #19246 | РосТуннель t.me/rjsxrd"
@@ -78111,6 +78150,7 @@ proxy-groups:
       - "t.me/Notorgames_0 - 292 🏳️ t.me/rjsxrd"
       - "🇽🇽XX(AzadNet.t.me) (379) t.me/rjsxrd"
       - "🇺🇸 United States | TG: @HardVpn_robot t.me/rjsxrd t.me/rjsxrd"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd 2"
       - "𝗝𝗼𝗶𝗻➠@PlanB_net t.me/rjsxrd t.me/rjsxrd t.me/rjsxrd"
       - "[OpenRay] Dynamic-25215 t.me/rjsxrd"
       - "🇺🇸 美国 | USA t.me/rjsxrd 6"
@@ -79299,7 +79339,7 @@ proxy-groups:
       - "By EbraSha 546"
       - "By EbraSha 672"
       - "By EbraSha 1290"
-      - "EPODONIOS 1270"
+      - "EPODONIOS 1269"
       - "gRPC, Яндекс Карты [V.O.I.D]"
       - "gRPC, Max [V.O.I.D]"
       - "gRPC, Яндекс [V.O.I.D] 3"
@@ -79322,7 +79362,7 @@ proxy-groups:
       - "gRPC, Яндекс Карты [V.O.I.D] 6"
       - "gRPC, Max [V.O.I.D] 6"
       - "gRPC, Яндекс Карты [V.O.I.D] 7"
-      - "EPODONIOS 1155"
+      - "EPODONIOS 1154"
       - "Reality, Ozon [V.O.I.D] 2"
       - "Reality, VK [V.O.I.D] 10"
       - "XHTTP, VK [V.O.I.D]"
@@ -79523,14 +79563,14 @@ proxy-groups:
       - "US 🇺🇸 | @Raydikalx | 1470"
       - "EPODONIOS 704"
       - "EPODONIOS 839"
-      - "EPODONIOS 1089"
-      - "EPODONIOS 1804"
+      - "EPODONIOS 1088"
+      - "EPODONIOS 1803"
       - "📯3@oneclickvpnkeys"
       - "@filembad 4"
       - "🇩🇪124355 | ⚡️Telegram = t.me/SOSkeyNET"
       - "🇩🇪124351 | ⚡️Telegram = t.me/SOSkeyNET"
       - "filembad-598"
-      - "🔥Join+Telegram:@Farah_VPN🟣 427"
+      - "🔥Join+Telegram:@Farah_VPN🟣 428"
       - "🔥Join+Telegram:@Farah_VPN🟣 700"
       - "TCP, Яндекс [V.O.I.D] 246"
       - "Reality, Яндекс [V.O.I.D] 29"
@@ -79852,7 +79892,6 @@ proxy-groups:
       - "XHTTP, ServerStats [V.O.I.D] 12"
       - "🇵🇱 Poland — #252"
       - "🇵🇱 Poland — #253"
-      - "🇪🇪 Estonia — #113"
       - "🇪🇪 Estonia — #112"
       - "🇳🇱 The Netherlands — #216"
       - "🇺🇸 United States — #285"
@@ -79865,20 +79904,12 @@ proxy-groups:
       - "🇩🇪 Germany — #47"
       - "🇰🇿 Kazakhstan — #153"
       - "🇪🇪 Estonia — #114"
+      - "🇳🇱 The Netherlands — #212"
       - "🇳🇱 The Netherlands — #213"
       - "🇳🇱 The Netherlands — #215"
-      - "🇵🇱 Poland — #251"
-      - "🇵🇱 Poland — #255"
-      - "🇪🇪 Estonia — #115"
-      - "🇵🇱 Poland — #254"
-      - "🇵🇱 Poland — #256"
-      - "🇵🇱 Poland — #257"
-      - "🇳🇱 The Netherlands — #212"
       - "🇳🇱 The Netherlands — #218"
-      - "🇸🇪 Sweden — #275"
-      - "🇩🇪 Germany — #55"
       - "🇫🇮 Finland — #123"
-      - "🇸🇪 Sweden — #272"
+      - "🇩🇪 Germany — #55"
       - "🇩🇪 Germany — #51"
       - "🇩🇪 Germany — #40"
       - "🇩🇪 Germany — #72"
@@ -80006,7 +80037,6 @@ proxy-groups:
       - "🇵🇱 Poland — #266"
       - "🇵🇱 Poland — #267"
       - "🇵🇱 Poland — #268"
-      - "🇩🇪 Germany — #58"
       - "🇩🇪 Germany — #60"
       - "🇩🇪 Germany — #63"
       - "🇩🇪 Germany — #65"
@@ -80062,19 +80092,15 @@ proxy-groups:
       - "🇩🇪 Germany — #49"
       - "🇩🇪 Germany — #54"
       - "4648 | 🌐 Unknown | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
-      - "🇳🇱 The Netherlands | 🌐 | [*CIDR] 2"
-      - "🇺🇸 United States [*CIDR]"
       - "🇫🇷 France | 🌐 [*CIDR] 3"
       - "🇩🇪[openproxylist.com] vless-DE"
       - "[OpenRay] 🇺🇸 US-21663"
+      - "🇳🇱 The Netherlands | 🌐 [*CIDR] 2"
       - "🇺🇸[openproxylist.com] vless-US"
       - "🇨🇭 Switzerland, Zurich | [BL]"
       - "🇺🇸 United States, Salt Lake | [BL]"
       - "🇫🇮 Finland [*CIDR]"
       - "162. 🇪🇪 VLESS | SNI: www.twitch.tv | CIDR: Yandex | TG: @wlrustg"
-      - "🇨🇿 Czechia | [*CIDR]"
-      - "🇨🇿 Czechia | [*CIDR] 2"
-      - "🇺🇸 United States | 🌐 | [*CIDR] 2"
       - "0223 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0355 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0464 | 🇧🇪 Belgium | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -80098,7 +80124,7 @@ proxy-groups:
       - "5627 | 🇫🇮 Finland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3287 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "🇫🇷 FR | 46.226.166.205"
-      - "EPODONIOS 1130"
+      - "EPODONIOS 1129"
       - "🇳🇱 Нидерланды [#РКП] 10"
       - "🇳🇱 Нидерланды [#РКП] 14"
       - "🇳🇱 Нидерланды [#РКП] 16"
@@ -80106,7 +80132,7 @@ proxy-groups:
       - "🇳🇱 Нидерланды [#РКП] 21"
       - "🇩🇪 Германия [#РКП] 5"
       - "🇵🇱 Польша [#РКП] 3"
-      - "🇸🇪 Швеция [#РКП] 6"
+      - "🇸🇪 Швеция [#РКП] 5"
       - "🇳🇱 Нидерланды [#РКП] 23"
       - "🇪🇪 Эстония [#РКП] 2"
       - "🇳🇱 Нидерланды [#РКП] 25"
@@ -80147,29 +80173,27 @@ proxy-groups:
       - "🇳🇱 Нидерланды [#РКП] 45"
       - "🇳🇱 Нидерланды [#РКП] 46"
       - "🇫🇮 Финляндия [#РКП] 22"
-      - "🇺🇸 США [#РКП] 7"
       - "🇩🇪 Германия [#РКП] 11"
       - "🇩🇪 Германия [#РКП] 12"
       - "🇪🇪 Эстония [#РКП] 4"
       - "🇳🇱 Нидерланды [#РКП] 48"
       - "🇵🇱 Польша [#РКП] 9"
-      - "🌐 Неизвестно [#РКП] 47"
+      - "🌐 Неизвестно [#РКП] 46"
       - "🇵🇱 Польша [#РКП] 10"
       - "🇫🇮 Финляндия [#РКП] 9"
       - "🇫🇷 Франция [#РКП] 5"
       - "🇳🇱 Нидерланды [#РКП] 8"
       - "🇦🇹 Австрия [#РКП] 8"
-      - "🇸🇪 Швеция [#РКП]"
       - "🇰🇿 Казахстан [#РКП]"
       - "🇵🇱 Польша [#РКП]"
       - "🇫🇷 Франция [#РКП] 7"
       - "🇬🇧 Великобритания [#РКП]"
       - "🇩🇪 Германия [#РКП] 4"
       - "🇳🇱 Нидерланды [#РКП] 9"
+      - "🇸🇪 Швеция [#РКП]"
       - "🇸🇪 Швеция [#РКП] 2"
       - "🇸🇪 Швеция [#РКП] 3"
       - "🇸🇪 Швеция [#РКП] 4"
-      - "🇸🇪 Швеция [#РКП] 5"
       - "🇵🇱 Польша [#РКП] 2"
       - "🇪🇪 Эстония [#РКП]"
       - "🇫🇷 Франция [#РКП]"
@@ -80177,7 +80201,7 @@ proxy-groups:
       - "🇩🇪 Германия [#РКП] 8"
       - "LV 🇱🇻 | @Raydikalx | 1364"
       - "NL 🇳🇱 | @Raydikalx | 1420"
-      - "🔥Join+Telegram:@Farah_VPN🟣 401"
+      - "🔥Join+Telegram:@Farah_VPN🟣 402"
       - "🇳🇱 Нидерланды [#РКП]"
       - "🇳🇱 Нидерланды [#РКП] 2"
       - "🇳🇱 Нидерланды [#РКП] 3"
@@ -80229,26 +80253,26 @@ proxy-groups:
       - "🇵🇱 Польша [#РКП] 8"
       - "🇳🇱 Нидерланды [#РКП] 30"
       - "🇪🇪 Эстония [#РКП] 3"
-      - "🇸🇪 Швеция [#РКП] 7"
+      - "🇸🇪 Швеция [#РКП] 6"
       - "🇳🇱 Нидерланды [#РКП] 36"
       - "🇳🇱 Нидерланды [#РКП] 39"
       - "🇨🇭 Швейцария [#РКП] 2"
       - "🇨🇭 Швейцария [#РКП] 4"
       - "🇩🇪 Германия [#РКП] 10"
       - "🇳🇱 Нидерланды [#РКП] 47"
-      - "🌐 Неизвестно [#РКП] 37"
+      - "🌐 Неизвестно [#РКП] 36"
       - "🇫🇷 Франция [#РКП] 10"
+      - "🌐 Неизвестно [#РКП] 47"
       - "🌐 Неизвестно [#РКП] 48"
-      - "🌐 Неизвестно [#РКП] 49"
-      - "🌐 Неизвестно [#РКП] 51"
+      - "🌐 Неизвестно [#РКП] 50"
       - "🇩🇪 Германия [#РКП] 14"
-      - "🌐 Неизвестно [#РКП] 60"
+      - "🌐 Неизвестно [#РКП] 59"
       - "🇩🇪 Германия [#РКП] 17"
       - "🇩🇪 Германия [#РКП] 19"
-      - "🌐 Неизвестно [#РКП] 64"
+      - "🌐 Неизвестно [#РКП] 63"
       - "🇩🇪 Германия [#РКП] 22"
       - "🇩🇪 Германия [#РКП] 23"
-      - "🌐 Неизвестно [#РКП] 66"
+      - "🌐 Неизвестно [#РКП] 65"
       - "🇫🇷 Франция [#РКП] 11"
       - "🇫🇷 Франция [#РКП] 12"
       - "🇫🇷 Франция [#РКП] 3"
@@ -80260,26 +80284,26 @@ proxy-groups:
       - "Global 🌐 | @Raydikalx | 1539"
       - "🇪🇸 Испания [#РКП]"
       - "🇳🇱 Нидерланды [#РКП] 49"
-      - "🌐 Неизвестно [#РКП] 50"
+      - "🌐 Неизвестно [#РКП] 49"
+      - "🌐 Неизвестно [#РКП] 51"
+      - "🇺🇸 США [#РКП] 7"
       - "🌐 Неизвестно [#РКП] 52"
-      - "🇺🇸 США [#РКП] 8"
       - "🌐 Неизвестно [#РКП] 53"
+      - "🇺🇸 США [#РКП] 8"
       - "🌐 Неизвестно [#РКП] 54"
       - "🇺🇸 США [#РКП] 9"
-      - "🌐 Неизвестно [#РКП] 55"
       - "🇺🇸 США [#РКП] 10"
       - "🇺🇸 США [#РКП] 11"
-      - "🇺🇸 США [#РКП] 12"
+      - "🌐 Неизвестно [#РКП] 55"
       - "🌐 Неизвестно [#РКП] 56"
       - "🌐 Неизвестно [#РКП] 57"
       - "🌐 Неизвестно [#РКП] 58"
-      - "🌐 Неизвестно [#РКП] 59"
-      - "🇺🇸 США [#РКП] 13"
+      - "🇺🇸 США [#РКП] 12"
       - "🇩🇪 Германия [#РКП] 15"
-      - "🌐 Неизвестно [#РКП] 61"
+      - "🌐 Неизвестно [#РКП] 60"
       - "🇩🇪 Германия [#РКП] 16"
+      - "🌐 Неизвестно [#РКП] 61"
       - "🌐 Неизвестно [#РКП] 62"
-      - "🌐 Неизвестно [#РКП] 63"
       - "🇩🇪 Германия [#РКП] 18"
       - "🇩🇪 Германия [#РКП] 20"
       - "🇩🇪 Германия [#РКП] 21"
@@ -80287,18 +80311,6 @@ proxy-groups:
       - "EPODONIOS 430"
       - "🇫🇷 Франция [#РКП] 2"
       - "🇩🇪 Германия [#РКП] 13"
-      - "🇨🇿 Czechia [*CIDR]"
-      - "🇩🇪 Germany | 🌐 | [*CIDR] 2"
-      - "🇩🇪 Germany | 🌐 [*CIDR]"
-      - "🇳🇱 The Netherlands | 🌐 | [*CIDR]"
-      - "🇦🇹 Austria [*CIDR] 2"
-      - "🇦🇹 Austria [*CIDR] 3"
-      - "🇨🇿 Czechia | [*CIDR] 3"
-      - "🇩🇪 Germany | 🌐 | [*CIDR]"
-      - "🇮🇹 Italy | [*CIDR]"
-      - "🇺🇸 United States | 🌐 [*CIDR]"
-      - "🇺🇸 United States | 🌐 | [*CIDR]"
-      - "🇩🇪 Germany | 🌐 | [*CIDR] 3"
       - "2821 | 🇰🇿 Kazakhstan | 🏳️ SNI-X5 | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3334 | 🇳🇱 Netherlands | 🏳️ SNI-Avito | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3534 | 🇫🇮 Finland | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -80689,7 +80701,6 @@ proxy-groups:
       - "[OpenRay] 🇵🇱 PL-1760"
       - "[OpenRay] 🇨🇭 CH-642"
       - "🇵🇱34797 | ⚡️Telegram = t.me/SOSkeyNET"
-      - "🇦🇹 Austria [*CIDR]"
       - "🌐 Anycast-IP | 🇨🇭 🇳🇱 [*CIDR]"
       - "0216 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0449 | 🇱🇹 Lithuania | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -81077,7 +81088,6 @@ proxy-groups:
       - "🇵🇱 PL | — | 156 | @ByeWhiteLists2"
       - "🇵🇱 PL | — | 157 | @ByeWhiteLists2"
       - "🇺🇸 US | — | 223 | @ByeWhiteLists2"
-      - "🇪🇪 EE | — | 493 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 7 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 11 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 21 | @ByeWhiteLists2"
@@ -82504,15 +82514,6 @@ proxy-groups:
       - "By EbraSha 1497"
       - "By EbraSha 1499"
       - "By EbraSha 1500"
-      - "By EbraSha 1501"
-      - "🇩🇪 Germany — #38 2"
-      - "🇩🇪 Germany — #99 3"
-      - "🇩🇪 Germany — #100 2"
-      - "🇪🇪 Estonia — #119"
-      - "🇪🇪 Estonia — #121"
-      - "🇬🇧 United Kingdom — #139 2"
-      - "🇬🇧 United Kingdom — #153"
-      - "🇱🇹 Lithuania — #201 2"
     url: "https://www.gstatic.com/generate_204"
     interval: 900
     tolerance: 100
@@ -82521,13 +82522,72 @@ proxy-groups:
     name: "MANUAL"
     type: "select"
     proxies:
-      - "🇱🇹 Lithuania — #163"
       - "🇳🇱 The Netherlands — #214"
-      - "🇸🇬 Singapore — #283"
-      - "6100 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "🇪🇪 Estonia — #113"
       - "🇩🇪 Germany — #48"
       - "🇩🇪 Germany — #53"
-      - "🇸🇪 Sweden — #270"
+      - "🇵🇱 Poland — #258"
+      - "🇸🇪 Sweden — #273"
+      - "🇺🇸 United States [*CIDR]"
+      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 2"
+      - "🇨🇿 Czechia [*CIDR]"
+      - "🇩🇪 Germany | 🌐 | [*CIDR]"
+      - "🇱🇹 Lithuania — #155"
+      - "🇱🇹 Lithuania — #159"
+      - "🇱🇹 Lithuania — #160"
+      - "🇪🇪 Estonia — #116"
+      - "🇵🇱 Poland — #251"
+      - "🇵🇱 Poland — #255"
+      - "🇪🇪 Estonia — #115"
+      - "🇵🇱 Poland — #254"
+      - "🇵🇱 Poland — #256"
+      - "🇵🇱 Poland — #257"
+      - "🇨🇭 Switzerland — #35"
+      - "🇸🇪 Sweden — #269"
+      - "🇸🇪 Sweden — #271"
+      - "🇸🇪 Sweden — #272"
+      - "🇨🇭 Switzerland — #34"
+      - "🇸🇪 Sweden — #275"
+      - "🇮🇹 Italy | [*CIDR] t.me/rjsxrd"
+      - "🇮🇹 Italy | [*CIDR]"
+      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 2"
+      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 3"
+      - "🇩🇪 Germany | 🌐 [*CIDR]"
+      - "🇩🇪 Germany — #58"
+      - "🇺🇸 United States | [*CIDR] 4"
+      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd"
+      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 3"
+      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 4"
+      - "🇸🇪 Sweden | [*CIDR] t.me/rjsxrd"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd"
+      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd"
+      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 4"
+      - "🇵🇱 Poland [*CIDR] t.me/rjsxrd"
+      - "🇦🇹 Austria [*CIDR]"
+      - "🇨🇿 Czechia [*CIDR] 2"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] 2"
+      - "🇸🇪 Sweden | [*CIDR] 2"
+      - "🇺🇸 United States | [*CIDR] 2"
+      - "🇺🇸 United States | 🌐 | [*CIDR]"
+      - "🇮🇹 Italy | [*CIDR] 2"
+      - "🇺🇸 United States | [*CIDR] 3"
+      - "🇺🇸 United States | [*CIDR] 5"
+      - "🇦🇹 Austria [*CIDR] 2"
+      - "🇨🇿 Czechia [*CIDR] 3"
+      - "🇨🇿 Czechia | [*CIDR]"
+      - "🇩🇪 Germany | [*CIDR]"
+      - "🇩🇪 Germany | [*CIDR] 2"
+      - "🇩🇪 Germany | [*CIDR] 3"
+      - "🇩🇪 Germany | [*CIDR] 4"
+      - "🇮🇹 Italy [*CIDR]"
+      - "🇸🇪 Sweden | [*CIDR]"
+      - "🇺🇸 United States | [*CIDR]"
+      - "🇺🇸 United States | 🌐 [*CIDR]"
+      - "🇺🇸 United States | 🌐 | [*CIDR] 2"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] 3"
+      - "🇪🇪 EE | — | 493 | @ByeWhiteLists2"
+      - "🇱🇹 Lithuania — #163"
+      - "6100 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0178 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0569 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0647 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -82539,8 +82599,6 @@ proxy-groups:
       - "3716 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "4276 | 🇺🇸 USA | 🏳️ SNI-Avito | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5179 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇵🇱 Poland — #258"
-      - "🇸🇪 Sweden — #273"
       - "1734 | 🌐 Unknown | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
       - "0023 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0067 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -82608,9 +82666,11 @@ proxy-groups:
       - "6159 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "6262 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "🇫🇷 France — #128"
+      - "🇸🇪 Sweden — #270"
       - "1291 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "🇫🇮 Finland — #122"
       - "🇳🇱 The Netherlands — #219"
+      - "🇸🇬 Singapore — #283"
       - "0021 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0403 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0545 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -82635,35 +82695,27 @@ proxy-groups:
       - "6027 | 🇩🇪 Germany | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "6276 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "1957 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
-      - "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd"
-      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 2"
-      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 2"
       - "🇨🇭 Switzerland — #33"
       - "US 🇺🇸 | @Raydikalx | 1575"
       - "3506 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "🇸🇪 瑞典 | SWE t.me/rjsxrd 3"
+      - "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd"
+      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 2"
       - "🇨🇭 Switzerland | TG: @HardVpn_robot t.me/rjsxrd"
       - "🇺🇸 [VL] США #2360 | РосТуннель t.me/rjsxrd"
       - "🇳🇱 Нидерланды | ip = 109.120.150.17 (CIDR) | 🔥 от катлер t.me/rjsxrd"
+      - "🇱🇹 Lithuania — #156"
       - "🇱🇹 Lithuania — #167"
       - "🇱🇹 Lithuania — #164"
       - "🇱🇹 Lithuania — #166"
-      - "🇱🇹 Lithuania — #172"
-      - "🇱🇹 Lithuania — #156"
       - "🇱🇹 Lithuania — #168"
       - "🇩🇪 Germany — #38"
-      - "🇱🇹 Lithuania — #155"
-      - "🇱🇹 Lithuania — #159"
       - "🇱🇹 Lithuania — #161"
-      - "🇱🇹 Lithuania — #160"
+      - "🇱🇹 Lithuania — #172"
       - "🇱🇹 Lithuania — #170"
-      - "🇪🇪 Estonia — #116"
       - "🇱🇹 Lithuania — #157"
       - "0794 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "2231 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇸🇪 Sweden — #269"
-      - "🇸🇪 Sweden — #271"
-      - "🇨🇭 Switzerland — #35"
       - "🇱🇹 Lithuania — #158"
       - "🇱🇹 Lithuania — #162"
       - "🇱🇹 Lithuania — #173"
@@ -82687,8 +82739,6 @@ proxy-groups:
       - "5294 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5401 | 🇧🇷 Brazil | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "4232 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
-      - "🇮🇹 Italy | [*CIDR] t.me/rjsxrd"
-      - "🇩🇪 Germany — #71"
       - "🇱🇹 Lithuania — #165"
       - "🇱🇹 Lithuania — #169"
       - "🇱🇹 Lithuania — #171"
@@ -82718,15 +82768,10 @@ proxy-groups:
       - "5963 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "6150 | 🇧🇷 Brazil | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "6182 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇸🇬 Singapore | [*CIDR] YA t.me/rjsxrd"
       - "3037 | 🌐 Unknown | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
       - "5548 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5579 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "6033 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd"
-      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 2"
-      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 3"
-      - "🇨🇭 Switzerland — #34"
       - "🇨🇭 Switzerland — #36"
       - "🇫🇮 Finland — #119"
       - "🇳🇱 The Netherlands — #217"
@@ -82738,26 +82783,13 @@ proxy-groups:
       - "4851 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5029 | 🇵🇭 Philippines | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "5365 | 🇺🇸 USA | 🏳️ SNI-Avito | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd"
-      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 2"
-      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 3"
-      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 4"
       - "0330 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "1766 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "2493 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3067 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "3176 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu"
       - "3772 | 🇧🇬 Bulgaria | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
-      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd"
-      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 3"
-      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd 4"
-      - "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd 2"
-      - "🇸🇪 Sweden | [*CIDR] t.me/rjsxrd"
-      - "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd"
-      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 3"
-      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd"
-      - "🇵🇱 Poland | [*CIDR] t.me/rjsxrd 4"
-      - "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd 2"
+      - "🇩🇪 Germany — #71"
       - "🇵🇱 Poland | TG: @HardVpn_robot t.me/rjsxrd"
       - "🇺🇸 United States | TG: @HardVpn_robot t.me/rjsxrd 2"
       - "AetrisVPN White list ┃ ✅ SNI: storage.yandex.net ┃ 🇩🇪 Германия t.me/rjsxrd"
@@ -82818,6 +82850,7 @@ proxy-groups:
       - "🌐 Unknown | @RaViraNet t.me/rjsxrd"
       - "🇳🇱 The Netherlands | БЕЛЫЙ IP | @RaViraNet t.me/rjsxrd"
       - "🇦🇪 ОАЭ [#РКП] t.me/rjsxrd"
+      - "🇺🇸 United States | 🌐 | [*CIDR] t.me/rjsxrd"
       - "🇸🇪 Sweden — #227 [Verified RU] t.me/rjsxrd"
       - "🇩🇪 [VL] Германия #1936 | РосТуннель t.me/rjsxrd"
       - "🇫🇷 [VL] Франция #4379 | РосТуннель t.me/rjsxrd"
@@ -82849,10 +82882,15 @@ proxy-groups:
       - "🇪🇪 爱沙尼亚 | EST t.me/rjsxrd"
       - "🇩🇪 德国 | DEU t.me/rjsxrd 6"
       - "🇺🇸 美国 | USA t.me/rjsxrd 2"
+      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd"
+      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 2"
+      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 3"
+      - "🇨🇭 Switzerland | [*CIDR] t.me/rjsxrd 4"
       - "🇩🇪 德国 | DEU t.me/rjsxrd 7"
       - "🇹🇷 土耳其 | TUR t.me/rjsxrd"
       - "🇺🇸_美国_17 t.me/rjsxrd"
       - "🇨🇭 瑞士 | CHE t.me/rjsxrd"
+      - "🇸🇬 Singapore | [*CIDR] YA t.me/rjsxrd"
       - "🇫🇮 [VL] Финляндия #3564 | РосТуннель t.me/rjsxrd"
       - "🇫🇮 [VL] Финляндия #3559 | РосТуннель t.me/rjsxrd"
       - "🇩🇪 Germany | TG: @HardVpn_robot t.me/rjsxrd"
@@ -82999,13 +83037,14 @@ proxy-groups:
       - "🇦🇹 LTE 123 | тгк: @rostunnel t.me/rjsxrd"
       - "🇺🇸 United States [*CIDR] t.me/rjsxrd"
       - "NL 🇳🇱 | @Raydikalx | 1429"
+      - "🇰🇿 Kazakhstan | [*CIDR] t.me/rjsxrd 2"
+      - "🇩🇪 Germany | [*CIDR] t.me/rjsxrd 3"
       - "🇨🇭 Switzerland | TG: @HardVpn_robot t.me/rjsxrd 2"
       - "🇧🇬 Bulgaria | TG: @HardVpn_robot t.me/rjsxrd"
       - "🇫🇷 [VL] Франция #4427 | РосТуннель t.me/rjsxrd"
       - "🇵🇱 [VL] Польша #5561 | РосТуннель t.me/rjsxrd"
       - "🇫🇷 [VL] Франция #4374 | РосТуннель t.me/rjsxrd"
       - "🇮🇹 Italy [03] MIFA t.me/rjsxrd"
-      - "🇵🇱 Poland [*CIDR] t.me/rjsxrd"
       - "🇩🇪 Join+Telegram:@SolVPN 🇩🇪 t.me/rjsxrd 5"
       - "AetrisVPN White list ┃ ✅ SNI: max.ru ┃ 🇩🇪 Германия t.me/rjsxrd"
       - "🇳🇱 [VL] Нидерланды #19246 | РосТуннель t.me/rjsxrd"
@@ -83119,6 +83158,7 @@ proxy-groups:
       - "t.me/Notorgames_0 - 292 🏳️ t.me/rjsxrd"
       - "🇽🇽XX(AzadNet.t.me) (379) t.me/rjsxrd"
       - "🇺🇸 United States | TG: @HardVpn_robot t.me/rjsxrd t.me/rjsxrd"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] t.me/rjsxrd 2"
       - "𝗝𝗼𝗶𝗻➠@PlanB_net t.me/rjsxrd t.me/rjsxrd t.me/rjsxrd"
       - "[OpenRay] Dynamic-25215 t.me/rjsxrd"
       - "🇺🇸 美国 | USA t.me/rjsxrd 6"
@@ -84307,7 +84347,7 @@ proxy-groups:
       - "By EbraSha 546"
       - "By EbraSha 672"
       - "By EbraSha 1290"
-      - "EPODONIOS 1270"
+      - "EPODONIOS 1269"
       - "gRPC, Яндекс Карты [V.O.I.D]"
       - "gRPC, Max [V.O.I.D]"
       - "gRPC, Яндекс [V.O.I.D] 3"
@@ -84330,7 +84370,7 @@ proxy-groups:
       - "gRPC, Яндекс Карты [V.O.I.D] 6"
       - "gRPC, Max [V.O.I.D] 6"
       - "gRPC, Яндекс Карты [V.O.I.D] 7"
-      - "EPODONIOS 1155"
+      - "EPODONIOS 1154"
       - "Reality, Ozon [V.O.I.D] 2"
       - "Reality, VK [V.O.I.D] 10"
       - "XHTTP, VK [V.O.I.D]"
@@ -84531,14 +84571,14 @@ proxy-groups:
       - "US 🇺🇸 | @Raydikalx | 1470"
       - "EPODONIOS 704"
       - "EPODONIOS 839"
-      - "EPODONIOS 1089"
-      - "EPODONIOS 1804"
+      - "EPODONIOS 1088"
+      - "EPODONIOS 1803"
       - "📯3@oneclickvpnkeys"
       - "@filembad 4"
       - "🇩🇪124355 | ⚡️Telegram = t.me/SOSkeyNET"
       - "🇩🇪124351 | ⚡️Telegram = t.me/SOSkeyNET"
       - "filembad-598"
-      - "🔥Join+Telegram:@Farah_VPN🟣 427"
+      - "🔥Join+Telegram:@Farah_VPN🟣 428"
       - "🔥Join+Telegram:@Farah_VPN🟣 700"
       - "TCP, Яндекс [V.O.I.D] 246"
       - "Reality, Яндекс [V.O.I.D] 29"
@@ -84860,7 +84900,6 @@ proxy-groups:
       - "XHTTP, ServerStats [V.O.I.D] 12"
       - "🇵🇱 Poland — #252"
       - "🇵🇱 Poland — #253"
-      - "🇪🇪 Estonia — #113"
       - "🇪🇪 Estonia — #112"
       - "🇳🇱 The Netherlands — #216"
       - "🇺🇸 United States — #285"
@@ -84873,20 +84912,12 @@ proxy-groups:
       - "🇩🇪 Germany — #47"
       - "🇰🇿 Kazakhstan — #153"
       - "🇪🇪 Estonia — #114"
+      - "🇳🇱 The Netherlands — #212"
       - "🇳🇱 The Netherlands — #213"
       - "🇳🇱 The Netherlands — #215"
-      - "🇵🇱 Poland — #251"
-      - "🇵🇱 Poland — #255"
-      - "🇪🇪 Estonia — #115"
-      - "🇵🇱 Poland — #254"
-      - "🇵🇱 Poland — #256"
-      - "🇵🇱 Poland — #257"
-      - "🇳🇱 The Netherlands — #212"
       - "🇳🇱 The Netherlands — #218"
-      - "🇸🇪 Sweden — #275"
-      - "🇩🇪 Germany — #55"
       - "🇫🇮 Finland — #123"
-      - "🇸🇪 Sweden — #272"
+      - "🇩🇪 Germany — #55"
       - "🇩🇪 Germany — #51"
       - "🇩🇪 Germany — #40"
       - "🇩🇪 Germany — #72"
@@ -85014,7 +85045,6 @@ proxy-groups:
       - "🇵🇱 Poland — #266"
       - "🇵🇱 Poland — #267"
       - "🇵🇱 Poland — #268"
-      - "🇩🇪 Germany — #58"
       - "🇩🇪 Germany — #60"
       - "🇩🇪 Germany — #63"
       - "🇩🇪 Germany — #65"
@@ -85070,19 +85100,15 @@ proxy-groups:
       - "🇩🇪 Germany — #49"
       - "🇩🇪 Germany — #54"
       - "4648 | 🌐 Unknown | 🏳️ SNI-Yandex | VLESS | TG: @YoutubeUnBlockRu"
-      - "🇳🇱 The Netherlands | 🌐 | [*CIDR] 2"
-      - "🇺🇸 United States [*CIDR]"
       - "🇫🇷 France | 🌐 [*CIDR] 3"
       - "🇩🇪[openproxylist.com] vless-DE"
       - "[OpenRay] 🇺🇸 US-21663"
+      - "🇳🇱 The Netherlands | 🌐 [*CIDR] 2"
       - "🇺🇸[openproxylist.com] vless-US"
       - "🇨🇭 Switzerland, Zurich | [BL]"
       - "🇺🇸 United States, Salt Lake | [BL]"
       - "🇫🇮 Finland [*CIDR]"
       - "162. 🇪🇪 VLESS | SNI: www.twitch.tv | CIDR: Yandex | TG: @wlrustg"
-      - "🇨🇿 Czechia | [*CIDR]"
-      - "🇨🇿 Czechia | [*CIDR] 2"
-      - "🇺🇸 United States | 🌐 | [*CIDR] 2"
       - "0223 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0355 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0464 | 🇧🇪 Belgium | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -85106,7 +85132,7 @@ proxy-groups:
       - "5627 | 🇫🇮 Finland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3287 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "🇫🇷 FR | 46.226.166.205"
-      - "EPODONIOS 1130"
+      - "EPODONIOS 1129"
       - "🇳🇱 Нидерланды [#РКП] 10"
       - "🇳🇱 Нидерланды [#РКП] 14"
       - "🇳🇱 Нидерланды [#РКП] 16"
@@ -85114,7 +85140,7 @@ proxy-groups:
       - "🇳🇱 Нидерланды [#РКП] 21"
       - "🇩🇪 Германия [#РКП] 5"
       - "🇵🇱 Польша [#РКП] 3"
-      - "🇸🇪 Швеция [#РКП] 6"
+      - "🇸🇪 Швеция [#РКП] 5"
       - "🇳🇱 Нидерланды [#РКП] 23"
       - "🇪🇪 Эстония [#РКП] 2"
       - "🇳🇱 Нидерланды [#РКП] 25"
@@ -85155,29 +85181,27 @@ proxy-groups:
       - "🇳🇱 Нидерланды [#РКП] 45"
       - "🇳🇱 Нидерланды [#РКП] 46"
       - "🇫🇮 Финляндия [#РКП] 22"
-      - "🇺🇸 США [#РКП] 7"
       - "🇩🇪 Германия [#РКП] 11"
       - "🇩🇪 Германия [#РКП] 12"
       - "🇪🇪 Эстония [#РКП] 4"
       - "🇳🇱 Нидерланды [#РКП] 48"
       - "🇵🇱 Польша [#РКП] 9"
-      - "🌐 Неизвестно [#РКП] 47"
+      - "🌐 Неизвестно [#РКП] 46"
       - "🇵🇱 Польша [#РКП] 10"
       - "🇫🇮 Финляндия [#РКП] 9"
       - "🇫🇷 Франция [#РКП] 5"
       - "🇳🇱 Нидерланды [#РКП] 8"
       - "🇦🇹 Австрия [#РКП] 8"
-      - "🇸🇪 Швеция [#РКП]"
       - "🇰🇿 Казахстан [#РКП]"
       - "🇵🇱 Польша [#РКП]"
       - "🇫🇷 Франция [#РКП] 7"
       - "🇬🇧 Великобритания [#РКП]"
       - "🇩🇪 Германия [#РКП] 4"
       - "🇳🇱 Нидерланды [#РКП] 9"
+      - "🇸🇪 Швеция [#РКП]"
       - "🇸🇪 Швеция [#РКП] 2"
       - "🇸🇪 Швеция [#РКП] 3"
       - "🇸🇪 Швеция [#РКП] 4"
-      - "🇸🇪 Швеция [#РКП] 5"
       - "🇵🇱 Польша [#РКП] 2"
       - "🇪🇪 Эстония [#РКП]"
       - "🇫🇷 Франция [#РКП]"
@@ -85185,7 +85209,7 @@ proxy-groups:
       - "🇩🇪 Германия [#РКП] 8"
       - "LV 🇱🇻 | @Raydikalx | 1364"
       - "NL 🇳🇱 | @Raydikalx | 1420"
-      - "🔥Join+Telegram:@Farah_VPN🟣 401"
+      - "🔥Join+Telegram:@Farah_VPN🟣 402"
       - "🇳🇱 Нидерланды [#РКП]"
       - "🇳🇱 Нидерланды [#РКП] 2"
       - "🇳🇱 Нидерланды [#РКП] 3"
@@ -85237,26 +85261,26 @@ proxy-groups:
       - "🇵🇱 Польша [#РКП] 8"
       - "🇳🇱 Нидерланды [#РКП] 30"
       - "🇪🇪 Эстония [#РКП] 3"
-      - "🇸🇪 Швеция [#РКП] 7"
+      - "🇸🇪 Швеция [#РКП] 6"
       - "🇳🇱 Нидерланды [#РКП] 36"
       - "🇳🇱 Нидерланды [#РКП] 39"
       - "🇨🇭 Швейцария [#РКП] 2"
       - "🇨🇭 Швейцария [#РКП] 4"
       - "🇩🇪 Германия [#РКП] 10"
       - "🇳🇱 Нидерланды [#РКП] 47"
-      - "🌐 Неизвестно [#РКП] 37"
+      - "🌐 Неизвестно [#РКП] 36"
       - "🇫🇷 Франция [#РКП] 10"
+      - "🌐 Неизвестно [#РКП] 47"
       - "🌐 Неизвестно [#РКП] 48"
-      - "🌐 Неизвестно [#РКП] 49"
-      - "🌐 Неизвестно [#РКП] 51"
+      - "🌐 Неизвестно [#РКП] 50"
       - "🇩🇪 Германия [#РКП] 14"
-      - "🌐 Неизвестно [#РКП] 60"
+      - "🌐 Неизвестно [#РКП] 59"
       - "🇩🇪 Германия [#РКП] 17"
       - "🇩🇪 Германия [#РКП] 19"
-      - "🌐 Неизвестно [#РКП] 64"
+      - "🌐 Неизвестно [#РКП] 63"
       - "🇩🇪 Германия [#РКП] 22"
       - "🇩🇪 Германия [#РКП] 23"
-      - "🌐 Неизвестно [#РКП] 66"
+      - "🌐 Неизвестно [#РКП] 65"
       - "🇫🇷 Франция [#РКП] 11"
       - "🇫🇷 Франция [#РКП] 12"
       - "🇫🇷 Франция [#РКП] 3"
@@ -85268,26 +85292,26 @@ proxy-groups:
       - "Global 🌐 | @Raydikalx | 1539"
       - "🇪🇸 Испания [#РКП]"
       - "🇳🇱 Нидерланды [#РКП] 49"
-      - "🌐 Неизвестно [#РКП] 50"
+      - "🌐 Неизвестно [#РКП] 49"
+      - "🌐 Неизвестно [#РКП] 51"
+      - "🇺🇸 США [#РКП] 7"
       - "🌐 Неизвестно [#РКП] 52"
-      - "🇺🇸 США [#РКП] 8"
       - "🌐 Неизвестно [#РКП] 53"
+      - "🇺🇸 США [#РКП] 8"
       - "🌐 Неизвестно [#РКП] 54"
       - "🇺🇸 США [#РКП] 9"
-      - "🌐 Неизвестно [#РКП] 55"
       - "🇺🇸 США [#РКП] 10"
       - "🇺🇸 США [#РКП] 11"
-      - "🇺🇸 США [#РКП] 12"
+      - "🌐 Неизвестно [#РКП] 55"
       - "🌐 Неизвестно [#РКП] 56"
       - "🌐 Неизвестно [#РКП] 57"
       - "🌐 Неизвестно [#РКП] 58"
-      - "🌐 Неизвестно [#РКП] 59"
-      - "🇺🇸 США [#РКП] 13"
+      - "🇺🇸 США [#РКП] 12"
       - "🇩🇪 Германия [#РКП] 15"
-      - "🌐 Неизвестно [#РКП] 61"
+      - "🌐 Неизвестно [#РКП] 60"
       - "🇩🇪 Германия [#РКП] 16"
+      - "🌐 Неизвестно [#РКП] 61"
       - "🌐 Неизвестно [#РКП] 62"
-      - "🌐 Неизвестно [#РКП] 63"
       - "🇩🇪 Германия [#РКП] 18"
       - "🇩🇪 Германия [#РКП] 20"
       - "🇩🇪 Германия [#РКП] 21"
@@ -85295,18 +85319,6 @@ proxy-groups:
       - "EPODONIOS 430"
       - "🇫🇷 Франция [#РКП] 2"
       - "🇩🇪 Германия [#РКП] 13"
-      - "🇨🇿 Czechia [*CIDR]"
-      - "🇩🇪 Germany | 🌐 | [*CIDR] 2"
-      - "🇩🇪 Germany | 🌐 [*CIDR]"
-      - "🇳🇱 The Netherlands | 🌐 | [*CIDR]"
-      - "🇦🇹 Austria [*CIDR] 2"
-      - "🇦🇹 Austria [*CIDR] 3"
-      - "🇨🇿 Czechia | [*CIDR] 3"
-      - "🇩🇪 Germany | 🌐 | [*CIDR]"
-      - "🇮🇹 Italy | [*CIDR]"
-      - "🇺🇸 United States | 🌐 [*CIDR]"
-      - "🇺🇸 United States | 🌐 | [*CIDR]"
-      - "🇩🇪 Germany | 🌐 | [*CIDR] 3"
       - "2821 | 🇰🇿 Kazakhstan | 🏳️ SNI-X5 | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3334 | 🇳🇱 Netherlands | 🏳️ SNI-Avito | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "3534 | 🇫🇮 Finland | 🏳️ SNI-MAX | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -85697,7 +85709,6 @@ proxy-groups:
       - "[OpenRay] 🇵🇱 PL-1760"
       - "[OpenRay] 🇨🇭 CH-642"
       - "🇵🇱34797 | ⚡️Telegram = t.me/SOSkeyNET"
-      - "🇦🇹 Austria [*CIDR]"
       - "🌐 Anycast-IP | 🇨🇭 🇳🇱 [*CIDR]"
       - "0216 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
       - "0449 | 🇱🇹 Lithuania | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
@@ -86085,7 +86096,6 @@ proxy-groups:
       - "🇵🇱 PL | — | 156 | @ByeWhiteLists2"
       - "🇵🇱 PL | — | 157 | @ByeWhiteLists2"
       - "🇺🇸 US | — | 223 | @ByeWhiteLists2"
-      - "🇪🇪 EE | — | 493 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 7 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 11 | @ByeWhiteLists2"
       - "🇩🇪 DE | — | 21 | @ByeWhiteLists2"
@@ -87512,15 +87522,6 @@ proxy-groups:
       - "By EbraSha 1497"
       - "By EbraSha 1499"
       - "By EbraSha 1500"
-      - "By EbraSha 1501"
-      - "🇩🇪 Germany — #38 2"
-      - "🇩🇪 Germany — #99 3"
-      - "🇩🇪 Germany — #100 2"
-      - "🇪🇪 Estonia — #119"
-      - "🇪🇪 Estonia — #121"
-      - "🇬🇧 United Kingdom — #139 2"
-      - "🇬🇧 United Kingdom — #153"
-      - "🇱🇹 Lithuania — #201 2"
   -
     name: "PROXY"
     type: "select"
