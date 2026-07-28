@@ -269,6 +269,9 @@ URL_TEST = "https://www.gstatic.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 UPDATE_HISTORY_LIMIT = 10
 GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
+BLOCKED_PROXY_KEYS = {
+    ("78.159.250.214", 443, "eb78e1f0-d921-4ca9-a889-261fcc5a0547"),
+}
 GLOBAL_SOURCE_PRIORITY = (
     "AVEN_MIRROR_26",
     "AVEN_26",
@@ -703,6 +706,18 @@ def dedupe_and_name(proxies: list[dict]) -> list[dict]:
         result.append(named_proxy)
 
     return result
+
+
+def blocked_proxy_key(proxy: dict) -> tuple[str, int, str]:
+    return (
+        str(proxy.get("server", "")).casefold(),
+        int(proxy.get("port", 0) or 0),
+        str(proxy.get("uuid", "")).casefold(),
+    )
+
+
+def drop_blocked_proxies(proxies: list[dict]) -> list[dict]:
+    return [proxy for proxy in proxies if blocked_proxy_key(proxy) not in BLOCKED_PROXY_KEYS]
 
 
 def flag_to_country_code(flag: str) -> str | None:
@@ -1870,6 +1885,11 @@ def main() -> int:
     if not parsed:
         raise RuntimeError("no valid VLESS servers were parsed")
     proxies = dedupe_and_name(parsed)
+    before_blocked = len(proxies)
+    proxies = drop_blocked_proxies(proxies)
+    blocked_count = before_blocked - len(proxies)
+    if blocked_count:
+        print(f"dropped {blocked_count} blocked proxy")
     ru_proxies, global_candidates = split_by_country(proxies)
     global_proxies = prioritize_global_proxies(global_candidates)
     global_5k_proxies = select_global_5k_proxies(global_proxies)
