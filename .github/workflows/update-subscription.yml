@@ -2,6 +2,12 @@ name: Regenerate subscription
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/update-subscription.yml"
+      - "scripts/build_subscription.py"
   schedule:
     # GitHub cron uses UTC: 06:00 and 18:00 UTC = 09:00 and 21:00 MSK.
     - cron: "0 6,18 * * *"
