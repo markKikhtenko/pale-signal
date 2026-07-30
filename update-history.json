@@ -1,53 +1,6 @@
 {
   "runs": [
     {
-      "updated_at": "2026-07-28 11:06:03 МСК",
-      "counts": {
-        "all": 12992,
-        "ru": 4412,
-        "global": 5000,
-        "global_5k": 5000,
-        "global_all": 8580
-      },
-      "changes": {
-        "all": {
-          "old": 12638,
-          "new": 12992,
-          "added": 2489,
-          "removed": 2135,
-          "delta": 354
-        },
-        "ru": {
-          "old": 4405,
-          "new": 4412,
-          "added": 890,
-          "removed": 883,
-          "delta": 7
-        },
-        "global": {
-          "old": 8233,
-          "new": 5000,
-          "added": 1073,
-          "removed": 4306,
-          "delta": -3233
-        },
-        "global_5k": {
-          "old": 5000,
-          "new": 5000,
-          "added": 1117,
-          "removed": 1117,
-          "delta": 0
-        },
-        "global_all": {
-          "old": 0,
-          "new": 8580,
-          "added": 8580,
-          "removed": 0,
-          "delta": 8580
-        }
-      }
-    },
-    {
       "updated_at": "2026-07-28 11:24:31 МСК",
       "counts": {
         "all": 13543,
@@ -394,6 +347,45 @@
           "new": 5000,
           "added": 1148,
           "removed": 1148,
+          "delta": 0
+        }
+      }
+    },
+    {
+      "updated_at": "2026-07-30 11:22:51 МСК",
+      "counts": {
+        "all": 12972,
+        "ru": 3944,
+        "global": 9028,
+        "global_5k": 5000
+      },
+      "changes": {
+        "all": {
+          "old": 12816,
+          "new": 12972,
+          "added": 2297,
+          "removed": 2141,
+          "delta": 156
+        },
+        "ru": {
+          "old": 3735,
+          "new": 3944,
+          "added": 823,
+          "removed": 614,
+          "delta": 209
+        },
+        "global": {
+          "old": 9081,
+          "new": 9028,
+          "added": 1537,
+          "removed": 1590,
+          "delta": -53
+        },
+        "global_5k": {
+          "old": 5000,
+          "new": 5000,
+          "added": 872,
+          "removed": 872,
           "delta": 0
         }
       }
