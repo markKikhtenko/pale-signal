@@ -196,11 +196,6 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/VOID-Anonymity/V.O.I.D-VPN_Bypass/main/url_work.txt",
     },
     {
-        "id": "RKP_WHITELIST",
-        "name": "RKP bypass whitelist.txt",
-        "url": "https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/main/whitelist.txt",
-    },
-    {
         "id": "WLUNLOCKER_WHITE_ALL",
         "name": "wlunlocker whitelist_all.txt",
         "url": "https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_all.txt",
@@ -250,7 +245,6 @@ BYPASS_SOURCE_IDS = {
     "AVEN_26",
     "AVEN_MIRROR_26",
     "VOID_URL_WORK",
-    "RKP_WHITELIST",
     "WLUNLOCKER_WHITE_ALL",
     "WLUNLOCKER_CIDR_1",
     "WLUNLOCKER_CIDR_2",
@@ -278,7 +272,6 @@ GLOBAL_SOURCE_PRIORITY = (
     "VOID_URL_WORK",
     "RJSXRD_BYPASS_ALL",
     "WLUNLOCKER_WHITE_ALL",
-    "RKP_WHITELIST",
     "WLRUS_WL",
     "ETONEYA_WHITELIST",
     "ETONEYA_GH_WHITELIST",
