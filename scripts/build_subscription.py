@@ -266,6 +266,9 @@ GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
 BLOCKED_PROXY_KEYS = {
     ("78.159.250.214", 443, "eb78e1f0-d921-4ca9-a889-261fcc5a0547"),
 }
+BLOCKED_PROXY_NAME_MARKERS = (
+    "\u0440\u043e\u0441\u0442\u0443\u043d\u043d\u0435\u043b\u044c",
+)
 GLOBAL_SOURCE_PRIORITY = (
     "AVEN_MIRROR_26",
     "AVEN_26",
@@ -709,8 +712,27 @@ def blocked_proxy_key(proxy: dict) -> tuple[str, int, str]:
     )
 
 
+def blocked_proxy_name(proxy: dict) -> bool:
+    name = str(proxy.get("name", "")).casefold()
+    return any(marker in name for marker in BLOCKED_PROXY_NAME_MARKERS)
+
+
 def drop_blocked_proxies(proxies: list[dict]) -> list[dict]:
-    return [proxy for proxy in proxies if blocked_proxy_key(proxy) not in BLOCKED_PROXY_KEYS]
+    return [
+        proxy
+        for proxy in proxies
+        if blocked_proxy_key(proxy) not in BLOCKED_PROXY_KEYS
+        and not blocked_proxy_name(proxy)
+    ]
+
+
+def count_blocked_proxies(proxies: list[dict]) -> int:
+    return sum(
+        1
+        for proxy in proxies
+        if blocked_proxy_key(proxy) in BLOCKED_PROXY_KEYS
+        or blocked_proxy_name(proxy)
+    )
 
 
 def flag_to_country_code(flag: str) -> str | None:
@@ -1878,9 +1900,8 @@ def main() -> int:
     if not parsed:
         raise RuntimeError("no valid VLESS servers were parsed")
     proxies = dedupe_and_name(parsed)
-    before_blocked = len(proxies)
+    blocked_count = count_blocked_proxies(proxies)
     proxies = drop_blocked_proxies(proxies)
-    blocked_count = before_blocked - len(proxies)
     if blocked_count:
         print(f"dropped {blocked_count} blocked proxy")
     ru_proxies, global_candidates = split_by_country(proxies)
