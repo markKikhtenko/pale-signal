@@ -257,6 +257,7 @@ OUTPUT_FILE = ROOT / "subscription.yaml"
 RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
 GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 GLOBAL_5K_OUTPUT_FILE = ROOT / "subscription-global-5k.yaml"
+GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
 README_FILE = ROOT / "README.md"
 UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://www.gstatic.com/generate_204"
@@ -999,8 +1000,40 @@ def select_global_5k_proxies(global_proxies: list[dict]) -> list[dict]:
     return candidates[:GLOBAL_5K_SUBSCRIPTION_LIMIT]
 
 
-def build_config(proxies: list[dict]) -> dict:
+def auto_endpoint_key(proxy: dict) -> tuple:
+    ws_opts = proxy.get("ws-opts") or {}
+    ws_headers = ws_opts.get("headers") or {}
+    grpc_opts = proxy.get("grpc-opts") or {}
+    reality_opts = proxy.get("reality-opts") or {}
+    return (
+        str(proxy.get("type", proxy.get("protocol", ""))),
+        str(proxy.get("server", "")),
+        int(proxy.get("port", 0) or 0),
+        str(proxy.get("network", "")),
+        str(proxy.get("servername", "")),
+        str(ws_opts.get("path", "")),
+        str(ws_headers.get("Host", ws_headers.get("host", ""))),
+        str(grpc_opts.get("grpc-service-name", "")),
+        str(reality_opts.get("public-key", "")),
+        str(reality_opts.get("short-id", "")),
+    )
+
+
+def dedupe_auto_proxies(proxies: list[dict]) -> list[dict]:
+    seen: set[tuple] = set()
+    result: list[dict] = []
+    for proxy in proxies:
+        key = auto_endpoint_key(proxy)
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(proxy)
+    return result
+
+
+def build_config(proxies: list[dict], auto_proxies: list[dict] | None = None) -> dict:
     names = [proxy["name"] for proxy in proxies]
+    auto_names = [proxy["name"] for proxy in auto_proxies] if auto_proxies is not None else names
     export_proxies = [{key: value for key, value in proxy.items() if not key.startswith("_")} for proxy in proxies]
 
     return {
@@ -1014,7 +1047,7 @@ def build_config(proxies: list[dict]) -> dict:
             {
                 "name": "AUTO",
                 "type": "url-test",
-                "proxies": names,
+                "proxies": auto_names,
                 "url": URL_TEST,
                 "interval": 900,
                 "tolerance": 100,
@@ -1883,7 +1916,7 @@ def msk_timestamp() -> str:
     return dt.datetime.now(MSK).replace(microsecond=0).strftime("%Y-%m-%d %H:%M:%S МСК")
 
 
-def main() -> int:
+def main(non_stable_only: bool = False) -> int:
     parsed = []
     for source in SOURCES:
         try:
@@ -1915,22 +1948,40 @@ def main() -> int:
     ru_config = build_config(ru_proxies)
     global_config = build_config(global_proxies)
     global_5k_config = build_config(global_5k_proxies)
+    global_non_stable_auto_proxies = dedupe_auto_proxies(global_5k_proxies)
+    global_non_stable_config = build_config(global_5k_proxies, global_non_stable_auto_proxies)
     validate_config(config)
     validate_config(ru_config)
     validate_config(global_config)
     validate_config(global_5k_config)
+    validate_config(global_non_stable_config)
 
     yaml_text = "\n".join(dump_yaml(config)) + "\n"
     ru_yaml_text = "\n".join(dump_yaml(ru_config)) + "\n"
     global_yaml_text = "\n".join(dump_yaml(global_config)) + "\n"
     global_5k_yaml_text = "\n".join(dump_yaml(global_5k_config)) + "\n"
+    global_non_stable_yaml_text = "\n".join(dump_yaml(global_non_stable_config)) + "\n"
     if (
         not yaml_text.strip()
         or not ru_yaml_text.strip()
         or not global_yaml_text.strip()
         or not global_5k_yaml_text.strip()
+        or not global_non_stable_yaml_text.strip()
     ):
         raise RuntimeError("empty YAML output")
+
+    if non_stable_only:
+        GLOBAL_NON_STABLE_OUTPUT_FILE.write_text(
+            global_non_stable_yaml_text,
+            encoding="utf-8",
+            newline="\n",
+        )
+        print(
+            "wrote subscription-global-non-stable.yaml with "
+            f"{len(global_5k_proxies)} proxies/manual entries and "
+            f"{len(global_non_stable_auto_proxies)} AUTO entries"
+        )
+        return 0
 
     now = msk_timestamp()
     changes = {
@@ -1951,18 +2002,28 @@ def main() -> int:
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_5K_OUTPUT_FILE.write_text(global_5k_yaml_text, encoding="utf-8", newline="\n")
+    GLOBAL_NON_STABLE_OUTPUT_FILE.write_text(
+        global_non_stable_yaml_text,
+        encoding="utf-8",
+        newline="\n",
+    )
     write_final_readme(proxies, now, changes, history, stats, global_stats, global_5k_stats)
     print(
         f"wrote subscription files with {len(proxies)} proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} global, "
-        f"{len(global_5k_proxies)} global 5k)"
+        f"{len(global_5k_proxies)} global 5k, "
+        f"{len(global_non_stable_auto_proxies)} non-stable AUTO)"
     )
     return 0
 
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(main())
+        arguments = set(sys.argv[1:])
+        unknown_arguments = arguments - {"--non-stable-only"}
+        if unknown_arguments:
+            raise RuntimeError(f"unknown arguments: {sorted(unknown_arguments)}")
+        raise SystemExit(main(non_stable_only="--non-stable-only" in arguments))
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)
         raise SystemExit(1)
