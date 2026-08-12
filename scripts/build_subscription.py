@@ -1155,7 +1155,30 @@ def select_bs_safe_auto_proxies(proxies: list[dict]) -> list[dict]:
     ]
     preferred_ids = {id(proxy) for proxy in preferred}
     fallback = [proxy for proxy in proxies if id(proxy) not in preferred_ids]
-    return (preferred + fallback)[:BS_SAFE_AUTO_LIMIT]
+    selected: list[dict] = []
+    seen_server_networks: set[str] = set()
+    seen_servernames: set[str] = set()
+
+    for proxy in preferred + fallback:
+        server = str(proxy.get("server", "")).strip().rstrip(".").casefold()
+        try:
+            address = ipaddress.ip_address(server)
+            prefix = 24 if address.version == 4 else 48
+            server_network = str(ipaddress.ip_network(f"{address}/{prefix}", strict=False))
+        except ValueError:
+            server_network = server
+        servername = str(proxy.get("servername", "")).strip().rstrip(".").casefold()
+        if not server_network or not servername:
+            continue
+        if server_network in seen_server_networks or servername in seen_servernames:
+            continue
+        selected.append(proxy)
+        seen_server_networks.add(server_network)
+        seen_servernames.add(servername)
+        if len(selected) >= BS_SAFE_AUTO_LIMIT:
+            break
+
+    return selected
 
 
 def auto_endpoint_key(proxy: dict) -> tuple:
@@ -2097,7 +2120,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | `MANUAL` | `select` | Ручной выбор сервера |
 | `PROXY` | `select` | Главная группа для правила `MATCH,PROXY` |
 
-В `BS Safe` группа `PROXY` по умолчанию открывает `MANUAL`. Для автоматического поиска среди {BS_SAFE_AUTO_LIMIT} нод выберите `AUTO`.
+В `BS Safe` группа `PROXY` по умолчанию открывает `MANUAL`. Для автоматического поиска выберите `AUTO`: в нём до {BS_SAFE_AUTO_LIMIT} нод из разных подсетей и с разными SNI.
 
 ### BS Safe в OpenClash
 
@@ -2105,6 +2128,8 @@ pale-signal автоматически собирает VLESS-подписки �
 2. В `Config Subscription` добавьте прямую ссылку на `subscription-bs-safe.yaml` из таблицы выше. Конвертацию включать не нужно.
 3. Обновите подписку, активируйте профиль и примените конфигурацию.
 4. В Dashboard выберите `PROXY` → `AUTO` для автоматического поиска или `PROXY` → `MANUAL` для ручного выбора.
+
+Не запускайте массовую проверку всех нод из `MANUAL`: тестируйте через `AUTO` или по одной ноде.
 
 ## Разделение по странам
 
