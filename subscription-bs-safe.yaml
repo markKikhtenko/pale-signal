@@ -1,0 +1,2041 @@
+mixed-port: 7890
+allow-lan: true
+mode: "rule"
+log-level: "info"
+ipv6: false
+proxies:
+  -
+    name: "🇺🇸 United States — #304"
+    type: "vless"
+    server: "5.189.223.90"
+    port: 9872
+    uuid: "553e3253-c454-431d-a7e6-42bc06ea5e14"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "bnRIb3Er1i-K6NGGByCO9UbGfOvu43ZoiK7ulPd1SzU"
+      short-id: "aabb"
+      spider-x: "/"
+    grpc-opts:
+      grpc-service-name: "grpc-tunnel"
+      max-connections: 1
+  -
+    name: "🇩🇪 Germany — #101"
+    type: "vless"
+    server: "147.45.48.135"
+    port: 443
+    uuid: "b1b3e430-ff52-44b8-b95d-27fa580fbc4f"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "id.vk.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
+    grpc-opts:
+      grpc-service-name: "vless-grpc-reality"
+      max-connections: 1
+  -
+    name: "AetrisVPN White list ┃ ✅ SNI: ads.x5.ru ┃ 🇫🇮 Финляндия t.me/rjsxrd"
+    type: "vless"
+    server: "78.17.40.188"
+    port: 2443
+    uuid: "d80cd696-ec21-4afd-ad8e-cb65893535a4"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ads.x5.ru"
+    client-fingerprint: "android"
+    reality-opts:
+      public-key: "rRg3JiP2006ldJYh2TDPAn7dtlXLcSHdgHgkGI_HZTE"
+      short-id: "ef567890"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "🇫🇷 France | [SNI-RU] ads.x5.ru t.me/rjsxrd"
+    type: "vless"
+    server: "194.55.137.138"
+    port: 2443
+    uuid: "d80cd696-ec21-4afd-ad8e-cb65893535a4"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ads.x5.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "rRg3JiP2006ldJYh2TDPAn7dtlXLcSHdgHgkGI_HZTE"
+      short-id: "ef567890"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "🇫🇮 Finland | [SNI-RU] ads.x5.ru t.me/rjsxrd"
+    type: "vless"
+    server: "78.17.96.52"
+    port: 2443
+    uuid: "d80cd696-ec21-4afd-ad8e-cb65893535a4"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ads.x5.ru"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "rRg3JiP2006ldJYh2TDPAn7dtlXLcSHdgHgkGI_HZTE"
+      short-id: "ef567890"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "🇲🇩 Moldova — #223"
+    type: "vless"
+    server: "45.151.101.103"
+    port: 8443
+    uuid: "95e8532b-cc69-42d4-9553-e3c23292b15b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "maps.apple.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "OMlQAFrCMZ3DX0xlnbEZiByLBFzpUE8XJHJsrBzLdlY"
+      short-id: "2da4299da566b7"
+    grpc-opts:
+      grpc-service-name: "your-custom-path"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇳🇱 NL-10369"
+    type: "vless"
+    server: "213.193.254.59"
+    port: 8443
+    uuid: "f885cecc-a6ea-4e9b-87da-c7dc4b745348"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "avatars.mds.yandex.net"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "sgFFdQvfeujBKh6g7N7klU_u0mKYlr800MFbko5FzUg"
+      short-id: "844352756c1fabba"
+    grpc-opts:
+      grpc-service-name: "grpc-yandex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇸🇪 SE-2117"
+    type: "vless"
+    server: "31.207.7.48"
+    port: 2096
+    uuid: "2181d0c8-448a-4f75-b848-1718029baef9"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "-Dg4mGAAM5Lwe9ri7Bx5WlYdPBsyYJy-Pai2Z0FGlyc"
+      short-id: "afee962d"
+    grpc-opts:
+      grpc-service-name: "grpc2"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇱🇻 LV-1291"
+    type: "vless"
+    server: "91.204.75.198"
+    port: 34499
+    uuid: "7b6c6542-f3f2-4ca8-aa37-38428cb3bc3a"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "m.vk.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "pXqtZamxC_qxublGTL8rVZqNI_tt3Ul_GHhcKJPaoQ0"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇱🇻 LV-1292"
+    type: "vless"
+    server: "91.204.75.198"
+    port: 24499
+    uuid: "7b6c6542-f3f2-4ca8-aa37-38428cb3bc3a"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "static.rutube.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "pXqtZamxC_qxublGTL8rVZqNI_tt3Ul_GHhcKJPaoQ0"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇨🇭 CH-642"
+    type: "vless"
+    server: "152.233.31.68"
+    port: 16923
+    uuid: "695d21df-7abf-423c-84f8-3a93382e5d46"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇨🇭 CH-787"
+    type: "vless"
+    server: "152.233.31.80"
+    port: 16923
+    uuid: "26e354ba-a3ee-45f0-bf68-422e27e12884"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇨🇭 CH-943"
+    type: "vless"
+    server: "chb.kosmosapp.ru"
+    port: 16923
+    uuid: "28863986-75fb-4b2f-b006-65e62194358d"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "images.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇨🇭 CH-944"
+    type: "vless"
+    server: "cha.kosmosapp.ru"
+    port: 16923
+    uuid: "cf0310b0-2cd6-4ae1-b4c4-e029e7fb0ee3"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "auto.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇨🇭 CH-945"
+    type: "vless"
+    server: "chc.kosmosapp.ru"
+    port: 16923
+    uuid: "0f4aeb95-32ae-457c-8d71-b66bb9ff1073"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "mail.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇨🇭 CH-947"
+    type: "vless"
+    server: "che.kosmosapp.ru"
+    port: 16923
+    uuid: "a6d52d0d-7ce6-4601-8de3-bfcf07646f58"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "images.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇰🇿 KZ-472"
+    type: "vless"
+    server: "45.94.23.46"
+    port: 16923
+    uuid: "83f76cc0-ebcd-4805-a408-f6c8e30ff3ee"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇦🇹 AT-294"
+    type: "vless"
+    server: "152.53.47.153"
+    port: 16923
+    uuid: "d5502031-63a4-4e7d-a4e7-775f31caeba3"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇭🇺 HU-492"
+    type: "vless"
+    server: "hua.kosmosapp.ru"
+    port: 16923
+    uuid: "cf0310b0-2cd6-4ae1-b4c4-e029e7fb0ee3"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "mail.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇭🇺 HU-493"
+    type: "vless"
+    server: "hue.kosmosapp.ru"
+    port: 16923
+    uuid: "a6d52d0d-7ce6-4601-8de3-bfcf07646f58"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "images.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇱🇻 LV-1044"
+    type: "vless"
+    server: "185.145.245.125"
+    port: 16923
+    uuid: "83f76cc0-ebcd-4805-a408-f6c8e30ff3ee"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇧🇬 BG-76"
+    type: "vless"
+    server: "nl2.vrsvpn.com"
+    port: 444
+    uuid: "0b9bcbc1-b289-4a64-86fa-a5b731b65384"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "web.max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "X-YL5VNtlMNIaBrwaHt3hJCeF_gMT9gPRDDlK1Qg7Tc"
+      short-id: "8321461729abcdef"
+    grpc-opts:
+      grpc-service-name: "web.max.ru"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇱🇻 LV-1045"
+    type: "vless"
+    server: "185.145.245.227"
+    port: 443
+    uuid: "a4a7b274-39e1-4d79-8122-66f96c0affad"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dzen.ru"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "epKxGHvul2A8tNMFsEDFN2P71B-WbEEwbqbPLyNlYFg"
+      short-id: "e549af0908"
+    grpc-opts:
+      grpc-service-name: "web-grpc"
+      max-connections: 1
+  -
+    name: "👉🆔@v2ray_configs_pool📡🇨🇭®️Switzerland©️Zurich🅿️ping:39.71ms"
+    type: "vless"
+    server: "152.233.31.71"
+    port: 16923
+    uuid: "732a3a5c-5dee-42c7-a898-139e35b78c5d"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "👉🆔@v2ray_configs_pool📡🇨🇭®️Switzerland©️Zurich🅿️ping:40.76ms"
+    type: "vless"
+    server: "152.233.31.72"
+    port: 16923
+    uuid: "732a3a5c-5dee-42c7-a898-139e35b78c5d"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇱🇹 LT-416"
+    type: "vless"
+    server: "lt4.maps-yandex.net"
+    port: 22231
+    uuid: "23798d8b-6bd1-4ddd-a5aa-bf1e3e1a621b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "apple.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "E-9l9PMGwPKHbnywXnuZQ6Qqt_HR6HQDLiEA7GBzSDc"
+      short-id: "a5e63a14efad45c2"
+    grpc-opts:
+      grpc-service-name: "api"
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇳🇴 NO-5"
+    type: "vless"
+    server: "87.120.104.85"
+    port: 444
+    uuid: "0b9bcbc1-b289-4a64-86fa-a5b731b65384"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "web.max.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "wZWnCuxyYwvyL-HJX40XqpJ8NAVTMYz5WLN9qpA_MyI"
+      short-id: "8321476719abcdef"
+    grpc-opts:
+      grpc-service-name: "web.max.ru"
+      max-connections: 1
+  -
+    name: "🇫🇮 Finland — #163"
+    type: "vless"
+    server: "95.163.232.183"
+    port: 443
+    uuid: "3197b79d-a63f-4438-bd5a-49cf721a75d0"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "5post-gate.x5.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "V6FabatADtcX7aO9KMjGCadJC4LuQ_5nRViab-z-nFQ"
+      short-id: "abcd"
+    grpc-opts:
+      grpc-service-name: "5post.gate.v1"
+      max-connections: 1
+  -
+    name: "DE 🇩🇪 | @Raydikalx | 5EEEEC"
+    type: "vless"
+    server: "95.85.233.181"
+    port: 443
+    uuid: "e0bb3250-1873-4b9d-b9b5-7aa6c863885f"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "c.primarymaster.online"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "S05RWQUVH-p3uqekd0iRpIeH__NpCt0XEN2xCiQJs3Y"
+      short-id: "c56c3ba3b9f676c5"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "[OpenRay] 🇭🇺 HU-482"
+    type: "vless"
+    server: "152.233.41.31"
+    port: 16923
+    uuid: "b8e74de0-42c6-4b84-8889-bf348f32730c"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "mail.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[🇩🇪]t.me/ConfigV2RayNG 4"
+    type: "vless"
+    server: "135.125.185.225"
+    port: 2053
+    uuid: "70f28a55-1e6c-4082-aef4-2dc2cfa78fca"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "play.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "GS0dfvzX-bVKBDl2brVxsrE6T2WyXXkfgP3x-mQC7BY"
+      short-id: "524efc1f88592266"
+    grpc-opts:
+      grpc-service-name: "api.v1.data"
+      max-connections: 1
+  -
+    name: "[🇦🇱]t.me/ConfigV2RayNG"
+    type: "vless"
+    server: "144.31.129.42"
+    port: 443
+    uuid: "7b81d175-d180-4ec8-bbc5-dfe80e8d3b68"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "morphbinerkkw.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "CxMPFpwhcR9Ocp-Xy_1J08mo-atdHKUf58WLOy_XlgM"
+      short-id: "d9662905"
+    grpc-opts:
+      grpc-service-name: "nexusGrpc"
+      max-connections: 1
+  -
+    name: "0069 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "150.241.92.91"
+    port: 8443
+    uuid: "a6d08a18-3244-471c-8af0-56ddecbb7897"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "ySGdExSQZ93z67nSi9jbIEdDkCjc1ZgnqXmH2qeBdE0"
+      short-id: "660cd5e2"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "0156 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "139.28.241.21"
+    port: 443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.telekom.de"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "faEedJtYwpjrjMXXhIMs3yT6BGIAdC-UCeX6TRC2ABs"
+      short-id: "312c0c39"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "0684 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "88.216.220.87"
+    port: 443
+    uuid: "a8e3155b-ceb1-4fcb-bc0c-2e77ec005401"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api.noneok.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "S8O8R938N960cpQfIIDXsJTxeGAkbVv6PlIqP0-d30w"
+      short-id: "1ea59febb8d4fc8e"
+    grpc-opts:
+      grpc-service-name: "api.v1.StreamService"
+      max-connections: 1
+  -
+    name: "0743 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "2.26.225.117"
+    port: 443
+    uuid: "8bbd4b7c-20d3-49c1-bdf1-1aef933a021b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "bshis.xanka.best"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "lQhPrhzCv3iS1ayqarGi46MlP6N43zAhPpzhvccwtRo"
+      short-id: "7d68fe7a"
+    grpc-opts:
+      grpc-service-name: "apisub"
+      max-connections: 1
+  -
+    name: "0808 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "94.125.103.105"
+    port: 8443
+    uuid: "a6d08a18-3244-471c-8af0-56ddecbb7897"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "ySGdExSQZ93z67nSi9jbIEdDkCjc1ZgnqXmH2qeBdE0"
+      short-id: "660cd5e2"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "0924 | 🇫🇮 Finland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "31.76.30.150"
+    port: 1337
+    uuid: "a0e1426b-8c67-40f2-95e7-f059ffec4305"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "base23.xanka.best"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "qCSI1Pp9J7PXZYtm8gr9CfkPz-S6YI1zi8FRGWI3yhE"
+      short-id: "667b3d4b"
+    grpc-opts:
+      grpc-service-name: "apisub"
+      max-connections: 1
+  -
+    name: "1041 | 🇱🇻 Latvia | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "193.124.254.60"
+    port: 10443
+    uuid: "f61025f4-7973-4e3e-883c-a0fe85f0489c"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "lv.rexten.cc"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "OFmJtVi6OB9E6KIc5QV5YmoouimRFc-Se9hICjtV8hQ"
+    grpc-opts:
+      grpc-service-name: "GunService"
+      max-connections: 1
+  -
+    name: "1173 | 🇱🇻 Latvia | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "72.56.53.66"
+    port: 10443
+    uuid: "f61025f4-7973-4e3e-883c-a0fe85f0489c"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "lv.rexten.cc"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "OFmJtVi6OB9E6KIc5QV5YmoouimRFc-Se9hICjtV8hQ"
+    grpc-opts:
+      grpc-service-name: "GunService"
+      max-connections: 1
+  -
+    name: "1631 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "194.238.57.38"
+    port: 2761
+    uuid: "8fecd05d-a813-45ca-8e4c-84ccaecaa923"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "adobe.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "dceVfMGiO2_ER1FpViwO2enwKMXJXxVDmURu3NLN5zU"
+      short-id: "57e7bb88"
+    grpc-opts:
+      grpc-service-name: "apisub"
+      max-connections: 1
+  -
+    name: "2606 | 🇱🇹 Lithuania | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "46.29.234.210"
+    port: 443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.tradingview.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "II9Tn-HPL7xcENiybDfQ_bSw31rSzQbIGYn-hCxdb2w"
+      short-id: "ccda00cc"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "2617 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "185.16.36.200"
+    port: 43439
+    uuid: "03446511-2806-4fc0-b02f-f10d2d3a33c6"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "cdn-up.perecbass.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "b4n1pcO8ST3JkGtj8YymXVrW17LEe2EHec5wY7hMMR4"
+      short-id: "ae99c61853e8a6ae"
+    grpc-opts:
+      grpc-service-name: "ws"
+      max-connections: 1
+  -
+    name: "4105 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "87.120.196.31"
+    port: 443
+    uuid: "860c29ef-ea15-4fa7-aa2e-249dcbb64c79"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ai.android"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "uE1WBdW9se1rQnx8Vh-a1jjaehzK-iUmCVrPui5KU3g"
+      short-id: "53499a662395"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "4583 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "87.120.196.135"
+    port: 443
+    uuid: "860c29ef-ea15-4fa7-aa2e-249dcbb64c79"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ai.android"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "uE1WBdW9se1rQnx8Vh-a1jjaehzK-iUmCVrPui5KU3g"
+      short-id: "53499a662395"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "0338 | 🇺🇸 USA | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "217.60.182.83"
+    port: 8113
+    uuid: "f5e5da05-ef1d-4a19-b75d-aaf30c93bb1a"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "westondigita.cloud"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "1XNcujMbWdVkVnPV4JvvIllMFdRXToudea_mqzXcMWg"
+      short-id: "a4f8c92d"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "0573 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "87.251.77.95"
+    port: 443
+    uuid: "61b08368-97cf-4f24-9e17-8c4a20cc2eea"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "S4n22MVLxeJL3E58_Jm6x5X2RtRvGZRi0fcGUZp27lQ"
+      short-id: "fa3c4d0d247a82d8"
+      spider-x: "/"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "🇸🇪 Sweden — #277"
+    type: "vless"
+    server: "185.91.53.4"
+    port: 443
+    uuid: "a86fa84e-d733-4488-8bbc-1655d3753c01"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "360.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "VaKp9XjMqT7lA4F3b6hpdF6fmsiY4B_hz6MzT6fv938"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "🇸🇪 Sweden — #278"
+    type: "vless"
+    server: "87.228.101.252"
+    port: 443
+    uuid: "a86fa84e-d733-4488-8bbc-1655d3753c01"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "360.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "VaKp9XjMqT7lA4F3b6hpdF6fmsiY4B_hz6MzT6fv938"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "🇸🇪 Sweden — #280"
+    type: "vless"
+    server: "81.163.22.164"
+    port: 443
+    uuid: "a86fa84e-d733-4488-8bbc-1655d3753c01"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "nc5dunLF2knU5PkMbQlklbp_tZPfOx6xuHu4mkdYPBc"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "🇸🇪 Sweden — #281"
+    type: "vless"
+    server: "5.188.115.159"
+    port: 8446
+    uuid: "a86fa84e-d733-4488-8bbc-1655d3753c01"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "360.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "rUCHk3_64Wv_f_v46OfVNYldKu9fUqHpX937bmGeeDs"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "🇵🇱 Poland | [SNI-RU] ads.x5.ru"
+    type: "vless"
+    server: "89.125.27.212"
+    port: 2443
+    uuid: "d80cd696-ec21-4afd-ad8e-cb65893535a4"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ads.x5.ru"
+    client-fingerprint: "android"
+    reality-opts:
+      public-key: "rRg3JiP2006ldJYh2TDPAn7dtlXLcSHdgHgkGI_HZTE"
+      short-id: "ef567890"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "🇩🇪 Germany | 🌐 | [*CIDR] 2"
+    type: "vless"
+    server: "194.93.0.28"
+    port: 443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "media2.tcpdoor.net"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "vxhkDXfYpz1OLqZ-_9QVoQr3_UJLtJFheb5bD5YH7z8"
+      short-id: "3303c7a5"
+    grpc-opts:
+      grpc-service-name: "grpc"
+      max-connections: 1
+  -
+    name: "1145. 🇫🇲 VLESS | SNI: eh.vk.com | CIDR: VK | TG: @wlrustg"
+    type: "vless"
+    server: "109.120.180.172"
+    port: 9443
+    uuid: "3cb9f2c2-cd60-4616-963e-6a1c5d1c8b02"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "eh.vk.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "FNtNmbNvEO0QNLB-8Dd021cLHODLPu4On1j-cpK16kI"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "🇸🇪 SE | — | 158 | @ByeWhiteLists2"
+    type: "vless"
+    server: "api.maps-yandex.net"
+    port: 22231
+    uuid: "d76dc366-09cf-4a8b-ae50-3be731ab1f03"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "deepl.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "9rRlBHQARx0diBZvXRNC1Tho8kgdj4iF6wBPJQXLjTc"
+      short-id: "cf2ef841ab42dc7d"
+    grpc-opts:
+      grpc-service-name: "api"
+      max-connections: 1
+  -
+    name: "42. 🇸🇪 VLESS | SNI: max.ru | CIDR: VK | TG: @wlrustg"
+    type: "vless"
+    server: "95.163.232.48"
+    port: 443
+    uuid: "602ab364-5c95-46ca-a0e0-7f5fc5a04787"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "ckjbqY3q3lxyJNYIRHm41n4QR7wlDrW1__GeFPNEzFE"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "1138. 🇲🇪 VLESS | SNI: 5post-gate.x5.ru | CIDR: ? | TG: @wlrustg"
+    type: "vless"
+    server: "212.233.72.45"
+    port: 4013
+    uuid: "249839ff-2a99-4ecb-a81d-b7e4d6c397b8"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "5post-gate.x5.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "t34YzMpTAdvac7xBSKvrIJKW04KJr4boRH_InVs_mWM"
+      short-id: "456434"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "NL 🇳🇱 | @Raydikalx | E493FD"
+    type: "vless"
+    server: "78.159.245.130"
+    port: 9001
+    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
+    grpc-opts:
+      grpc-service-name: "grpc-reality"
+      max-connections: 1
+  -
+    name: "gRPC, Max [V.O.I.D]"
+    type: "vless"
+    server: "86.109.75.147"
+    port: 444
+    uuid: "0b9bcbc1-b289-4a64-86fa-a5b731b65384"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "web.max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "MF_E-_CYAXdWxC1N_wTkdFyk3K7_1cNqNDPb0vnwl20"
+      short-id: "8311761729abcdef"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "gRPC, Яндекс [V.O.I.D] 4"
+    type: "vless"
+    server: "217.179.220.69"
+    port: 8443
+    uuid: "41da9cd0-b02c-427a-b74e-7e402c610ae4"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "avatars.mds.yandex.net"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "sgFFdQvfeujBKh6g7N7klU_u0mKYlr800MFbko5FzUg"
+      short-id: "844352756c1fabba"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "gRPC, Max [V.O.I.D] 2"
+    type: "vless"
+    server: "31.77.170.228"
+    port: 2096
+    uuid: "2181d0c8-448a-4f75-b848-1718029baef9"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "-Dg4mGAAM5Lwe9ri7Bx5WlYdPBsyYJy-Pai2Z0FGlyc"
+      short-id: "afee962d"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "Reality, VK [V.O.I.D] 19"
+    type: "vless"
+    server: "78.159.240.41"
+    port: 443
+    uuid: "39d927a4-b8c7-4dc7-91f1-8b2e05d8b6b6"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "id.vk.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
+    grpc-opts:
+      grpc-service-name: "vless-grpc-reality"
+      max-connections: 1
+  -
+    name: "Reality, Яндекс Карты [V.O.I.D] 5"
+    type: "vless"
+    server: "185.141.227.240"
+    port: 9002
+    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
+      short-id: "6ba85179e30d4fc2"
+    grpc-opts:
+      grpc-service-name: "grpc-reality"
+      max-connections: 1
+  -
+    name: "[47385][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+    type: "vless"
+    server: "pld.kosmosapp.ru"
+    port: 16923
+    uuid: "f078c1ff-ca5f-4e51-89a4-49f7c0d32758"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[13563][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+    type: "vless"
+    server: "152.233.43.74"
+    port: 16923
+    uuid: "4ab27adf-e13d-4eea-8cfc-a77f2a78c27b"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[3340][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+    type: "vless"
+    server: "152.233.43.84"
+    port: 16923
+    uuid: "1324e49f-18f6-4b10-bc3a-03e60785105f"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[6780][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+    type: "vless"
+    server: "plc.kosmosapp.ru"
+    port: 16923
+    uuid: "28863986-75fb-4b2f-b006-65e62194358d"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[6778][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+    type: "vless"
+    server: "152.233.43.90"
+    port: 16923
+    uuid: "28863986-75fb-4b2f-b006-65e62194358d"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "[2849][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+    type: "vless"
+    server: "pla.kosmosapp.ru"
+    port: 16923
+    uuid: "0f4aeb95-32ae-457c-8d71-b66bb9ff1073"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "By EbraSha 71"
+    type: "vless"
+    server: "152.53.31.54"
+    port: 16923
+    uuid: "081706ff-be35-4ff9-b12b-5a8e8d13fe85"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_QeslG3rHGM7DoM99pYC8-jpc16pM2MbNZ6NRMoxmHA"
+      short-id: "10ffb85da1c2d986"
+    grpc-opts:
+      grpc-service-name: "neurex"
+      max-connections: 1
+  -
+    name: "By EbraSha 361"
+    type: "vless"
+    server: "144.31.153.236"
+    port: 2053
+    uuid: "2b4881ac-79ef-440c-9f7e-02b3701e7a58"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "FtdsU_DLWDJ1Fk7NESJAy_S0ezFFL_gaslsFDF23KCw"
+      short-id: "7fe0c1c54e89aaae"
+    grpc-opts:
+      grpc-service-name: "ApiMapsYandex"
+      max-connections: 1
+  -
+    name: "By EbraSha 924"
+    type: "vless"
+    server: "146.0.75.144"
+    port: 443
+    uuid: "742e841d-140d-4795-9f16-3cf119129fec"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dzen.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "epKxGHvul2A8tNMFsEDFN2P71B-WbEEwbqbPLyNlYFg"
+      short-id: "e549af0908"
+    grpc-opts:
+      grpc-service-name: "web-grpc"
+      max-connections: 1
+  -
+    name: "By EbraSha 925"
+    type: "vless"
+    server: "45.155.102.46"
+    port: 443
+    uuid: "742e841d-140d-4795-9f16-3cf119129fec"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dzen.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "epKxGHvul2A8tNMFsEDFN2P71B-WbEEwbqbPLyNlYFg"
+      short-id: "e549af0908"
+    grpc-opts:
+      grpc-service-name: "web-grpc"
+      max-connections: 1
+  -
+    name: "By EbraSha 1599"
+    type: "vless"
+    server: "185.141.227.106"
+    port: 9443
+    uuid: "c87d9e18-5016-4a0b-b2e3-0558be683264"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "id.vk.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "cjLqnMfUlCEnGbKJT3v8wPgv81SLR1Pxq76HxrivUG8"
+      short-id: "afde73"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "By EbraSha 1600"
+    type: "vless"
+    server: "78.159.250.33"
+    port: 8334
+    uuid: "c87d9e18-5016-4a0b-b2e3-0558be683264"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "m1.vk.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "nBUckg-GybZqqubeQcCYmEOjajgCDfbckH8SqSN1GHA"
+      short-id: "abcd11"
+    grpc-opts:
+      max-connections: 1
+  -
+    name: "🇺🇸122Mb | NetCrafters OU"
+    type: "vless"
+    server: "138.124.123.96"
+    port: 443
+    uuid: "c35474ed-d6a8-4213-8edb-5c333e5b5f7c"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "cloud-api.yandex.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "SEUx3TGHAcwEfAD2DShY_YdpFHRH6UdTUBpKBrRdyEE"
+      short-id: "d435a0d34ef3b60e"
+    xhttp-opts:
+      path: "/maps_common/v1/data/subscriptions/web"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "1687 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "171.22.31.1"
+    port: 443
+    uuid: "5d577f62-28a8-4b7e-9441-9307b6132065"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "id.vk.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "M6i0GXlSHda9GxNaZ73Zz90-4Lim-jT0UxvHstDAmBw"
+      short-id: "3a478e6d44b84ab7"
+    xhttp-opts:
+      path: "/api/v1/events"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "3710 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "82.22.41.125"
+    port: 2083
+    uuid: "438b4dc4-57a4-4c09-a32a-6730ca071ca8"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "dzen.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "qQZ2JrvOorFCGldu8DzQ4qGF7LOdQGMxqklRgGAXUhU"
+      short-id: "5b"
+      spider-x: "/s8ca189wah1pkne"
+    xhttp-opts:
+      path: "/"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "[OpenRay] 🇦🇱 AL-21"
+    type: "vless"
+    server: "185.177.238.122"
+    port: 443
+    uuid: "210a6a43-bff6-5bc6-a1ef-67ba9958cebb"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.kinopoisk.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "UNTmfdXuKdlBYzHVrD0RvwT-ZfuA_KLKNMwqAWquV3E"
+      short-id: "295085d98f"
+    xhttp-opts:
+      path: "/sxKkFzZYxD4"
+      host: "www.kinopoisk.ru"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "🇳🇱 AetrisVPN"
+    type: "vless"
+    server: "5.253.59.220"
+    port: 450
+    uuid: "63f96e98-f83f-48d0-9cd0-f31e8071f67f"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "m.ok.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "tmAjOz--91FN1wLL3nP9A8JfsPa2ipvMZqLmNuUA0zA"
+      short-id: "cc02825c94e9d055"
+    xhttp-opts:
+      path: "/"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "🇪🇸 西班牙 | ESP"
+    type: "vless"
+    server: "fat-sp.arpozan.cloud"
+    port: 18443
+    uuid: "1f29762d-3f23-4207-9e39-f774de5d49ba"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "GPdxLu9G0BmcVKGBZC8lNISlc5WF1hBWs81rwFx7ZHo"
+      short-id: "a1b2c3d4e5f60718"
+    xhttp-opts:
+      path: "/"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "🇪🇪 Estonia — #155"
+    type: "vless"
+    server: "46.243.142.184"
+    port: 4443
+    uuid: "9dbb2fd6-0f2f-4f0b-b3a5-1c652f319046"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ee-3.nodes.ac"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "8Xi_qNddDpYrDXF4ucdmPZ6irc6XGYX8KDhYDaNxDFM"
+      short-id: "d437c1e27cb85f10"
+    xhttp-opts:
+      path: "/x"
+      host: "ee-3.nodes.ac"
+      mode: "stream-one"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "🇪🇪 Estonia — #156"
+    type: "vless"
+    server: "46.243.142.89"
+    port: 9443
+    uuid: "9dbb2fd6-0f2f-4f0b-b3a5-1c652f319046"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ee-3.nodes.ac"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "8Xi_qNddDpYrDXF4ucdmPZ6irc6XGYX8KDhYDaNxDFM"
+      short-id: "d437c1e27cb85f10"
+    xhttp-opts:
+      path: "/x"
+      host: "ee-3.nodes.ac"
+      mode: "stream-one"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "0582 | 🇫🇷 France | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "62.210.24.143"
+    port: 32202
+    uuid: "28148be2-61a7-4f36-8adb-030cc9f82bd0"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.amazon.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "bGe_-nAtOq6_w_2mv6pcmD8RzJP65Tti-vyMP2hAwDc"
+      short-id: "f57d8f26"
+    xhttp-opts:
+      path: "/G3EEoH63"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "2505 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "5.61.36.241"
+    port: 443
+    uuid: "56cdedf4-3e09-43fd-8108-d48f353c7b33"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "9ZzZZoBgBBaccMnatKoPV6vZTlYMw2swxSFbEsg4u3w"
+      short-id: "64f2"
+      spider-x: "/e77e593d4a928a4"
+    xhttp-opts:
+      path: "/"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "US 🇺🇸 | @Raydikalx | 74C3B2"
+    type: "vless"
+    server: "179.198.50.131"
+    port: 8443
+    uuid: "a34b5e88-cf0d-4c01-8199-2d1002d3c787"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "wikihow.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "p9ISfhV0uZpKSgrK_8R6Mm4A01tWdzpKMlFR2TIj81s"
+    xhttp-opts:
+      path: "/"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "0413 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "84.32.99.238"
+    port: 443
+    uuid: "f1c496bf-d2ab-45be-bc13-051d60d227b7"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "recaptcha.net.cn"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "UtbgFz4_cQT5v3SkjxgQ4QfOu7SLHkXXeO1pcxxTrT8"
+    xhttp-opts:
+      path: "/api/v1/data"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "0434 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "95.85.227.142"
+    port: 8443
+    uuid: "a34b5e88-cf0d-4c01-8199-2d1002d3c787"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "wikihow.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "p9ISfhV0uZpKSgrK_8R6Mm4A01tWdzpKMlFR2TIj81s"
+    xhttp-opts:
+      path: "/"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "0475 | 🇦🇱 Albania | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "130.49.189.186"
+    port: 7443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.samsung.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "r5fXlf3JIbEssj00ctp4zOXcGsMgHSmEaxAWWybQzEQ"
+      short-id: "04c702f0"
+    xhttp-opts:
+      path: "/6adf79bf-0b72-415b-9fd5-2fdc19eed1a2"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "0858 | 🇺🇸 USA | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "177.3.209.245"
+    port: 8443
+    uuid: "4cbefb4d-328c-411d-bf76-780df1082df8"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "wikihow.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "p9ISfhV0uZpKSgrK_8R6Mm4A01tWdzpKMlFR2TIj81s"
+    xhttp-opts:
+      path: "/"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "1079 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "144.31.120.141"
+    port: 8443
+    uuid: "a34b5e88-cf0d-4c01-8199-2d1002d3c787"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "wikihow.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "p9ISfhV0uZpKSgrK_8R6Mm4A01tWdzpKMlFR2TIj81s"
+    xhttp-opts:
+      path: "/"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "3646 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "2.27.56.216"
+    port: 443
+    uuid: "5d577f62-28a8-4b7e-9441-9307b6132065"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "sun10-67.vkuserphoto.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "8R416wHsKA_fipQLIw2gceCaTTBJIZRMwGjNTURAx3I"
+      short-id: "ad55857184e91aad"
+    xhttp-opts:
+      path: "/api/v1/events"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "3669 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "85.155.226.158"
+    port: 443
+    uuid: "39c42b0a-b823-4c93-bb99-74b4183e518d"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "api.getsavesafe.net"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "XyVDRn9DwbR6_bZPiGGz0jgCONpfH5LVbDaUejtiuTA"
+      short-id: "16f5b3bddf7f68ae"
+    xhttp-opts:
+      path: "/"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "🇫🇮 Finland — #175"
+    type: "vless"
+    server: "159.194.226.13"
+    port: 8443
+    uuid: "b6c29ae7-4748-4049-b642-b695c0d2c776"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ya.ru"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "167UuK8Oaxr23FtoB2a2UbzMRrdRyoHv8JeiIbt3yH4"
+      spider-x: "/ynaicof?from=search"
+    xhttp-opts:
+      path: "/"
+      mode: "stream-one"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "4387 | 🇩🇪 Germany | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "194.5.65.36"
+    port: 443
+    uuid: "d49e6f64-2a62-4fc6-8dde-9ab1bdf12c02"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ya.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "v_s3GW5_7jvB081tdUeyoDUUTq6fZwqKbVS7CdvLFA0"
+      short-id: "72cd47c079c0a3df"
+    xhttp-opts:
+      path: "/"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "4584 | 🇳🇱 Netherlands | 🏳️ SNI-VK | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+    type: "vless"
+    server: "91.84.117.29"
+    port: 443
+    uuid: "a4037b4c-6a9d-528c-9efb-7d801cce8adb"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "vk.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "PyV8IrAs0LkE2d_DdjvdCtpWG7MZyUKsYkb52GUmuDM"
+      short-id: "67"
+    xhttp-opts:
+      path: "/"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "EPODONIOS 2309"
+    type: "vless"
+    server: "38.7.145.182"
+    port: 8444
+    uuid: "dcba77d7-bb59-4802-b32c-37fd7011fca4"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "upDCW94g-pSYQrmXvOrTVYlwBUrSKhYFF9QwrqObdVo"
+      short-id: "3ca620a7ed5f3196"
+    xhttp-opts:
+      path: "/"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "EPODONIOS 2409"
+    type: "vless"
+    server: "de-01.gni-daed.ru"
+    port: 443
+    uuid: "7c0f30a2-a7c1-43b1-bc51-20f07036a76e"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "de-01.gni-daed.ru"
+    client-fingerprint: "firefox"
+    skip-cert-verify: true
+    reality-opts:
+      public-key: "Np5eNpCJdcXe4IvMs0stzE-sMtlphhTnZeuCkhjQXzQ"
+      short-id: "a8389289e18af5f4"
+    xhttp-opts:
+      path: "/"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "🇳🇱 The Netherlands [*CIDR] YA"
+    type: "vless"
+    server: "84.201.186.127"
+    port: 2443
+    uuid: "1cda4a0f-7515-49f6-aa13-10ab8746e8cd"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ads.x5.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "XqH-gNEL9eJfr1pglaI8WU3OvE654_5duXYBS35UXlM"
+      short-id: "ab"
+    xhttp-opts:
+      path: "/"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+  -
+    name: "🇩🇪 Germany [*CIDR] 2"
+    type: "vless"
+    server: "213.171.26.10"
+    port: 3443
+    uuid: "1cda4a0f-7515-49f6-aa13-10ab8746e8cd"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "XqH-gNEL9eJfr1pglaI8WU3OvE654_5duXYBS35UXlM"
+      short-id: "abcdef0123456789"
+    xhttp-opts:
+      path: "/"
+      mode: "auto"
+      reuse-settings:
+        max-connections: "1"
+proxy-groups:
+  -
+    name: "AUTO"
+    type: "url-test"
+    proxies:
+      - "🇺🇸 United States — #304"
+      - "🇩🇪 Germany — #101"
+      - "AetrisVPN White list ┃ ✅ SNI: ads.x5.ru ┃ 🇫🇮 Финляндия t.me/rjsxrd"
+      - "🇫🇷 France | [SNI-RU] ads.x5.ru t.me/rjsxrd"
+      - "🇫🇮 Finland | [SNI-RU] ads.x5.ru t.me/rjsxrd"
+      - "🇲🇩 Moldova — #223"
+      - "[OpenRay] 🇳🇱 NL-10369"
+      - "[OpenRay] 🇸🇪 SE-2117"
+      - "[OpenRay] 🇱🇻 LV-1291"
+      - "[OpenRay] 🇱🇻 LV-1292"
+      - "[OpenRay] 🇨🇭 CH-642"
+      - "[OpenRay] 🇨🇭 CH-787"
+      - "[OpenRay] 🇨🇭 CH-943"
+      - "[OpenRay] 🇨🇭 CH-944"
+      - "[OpenRay] 🇨🇭 CH-945"
+      - "[OpenRay] 🇨🇭 CH-947"
+      - "[OpenRay] 🇰🇿 KZ-472"
+      - "[OpenRay] 🇦🇹 AT-294"
+      - "[OpenRay] 🇭🇺 HU-492"
+      - "[OpenRay] 🇭🇺 HU-493"
+      - "[OpenRay] 🇱🇻 LV-1044"
+      - "[OpenRay] 🇧🇬 BG-76"
+      - "[OpenRay] 🇱🇻 LV-1045"
+      - "👉🆔@v2ray_configs_pool📡🇨🇭®️Switzerland©️Zurich🅿️ping:39.71ms"
+      - "👉🆔@v2ray_configs_pool📡🇨🇭®️Switzerland©️Zurich🅿️ping:40.76ms"
+      - "[OpenRay] 🇱🇹 LT-416"
+      - "[OpenRay] 🇳🇴 NO-5"
+      - "🇫🇮 Finland — #163"
+      - "DE 🇩🇪 | @Raydikalx | 5EEEEC"
+      - "[OpenRay] 🇭🇺 HU-482"
+      - "[🇩🇪]t.me/ConfigV2RayNG 4"
+      - "[🇦🇱]t.me/ConfigV2RayNG"
+      - "0069 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0156 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0684 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0743 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0808 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0924 | 🇫🇮 Finland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "1041 | 🇱🇻 Latvia | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "1173 | 🇱🇻 Latvia | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "1631 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "2606 | 🇱🇹 Lithuania | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "2617 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "4105 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "4583 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0338 | 🇺🇸 USA | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0573 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "🇸🇪 Sweden — #277"
+      - "🇸🇪 Sweden — #278"
+      - "🇸🇪 Sweden — #280"
+      - "🇸🇪 Sweden — #281"
+      - "🇵🇱 Poland | [SNI-RU] ads.x5.ru"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] 2"
+      - "1145. 🇫🇲 VLESS | SNI: eh.vk.com | CIDR: VK | TG: @wlrustg"
+      - "🇸🇪 SE | — | 158 | @ByeWhiteLists2"
+      - "42. 🇸🇪 VLESS | SNI: max.ru | CIDR: VK | TG: @wlrustg"
+      - "1138. 🇲🇪 VLESS | SNI: 5post-gate.x5.ru | CIDR: ? | TG: @wlrustg"
+      - "NL 🇳🇱 | @Raydikalx | E493FD"
+      - "gRPC, Max [V.O.I.D]"
+      - "gRPC, Яндекс [V.O.I.D] 4"
+      - "gRPC, Max [V.O.I.D] 2"
+      - "Reality, VK [V.O.I.D] 19"
+      - "Reality, Яндекс Карты [V.O.I.D] 5"
+      - "[47385][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[13563][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[3340][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[6780][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[6778][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[2849][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "By EbraSha 71"
+      - "By EbraSha 361"
+      - "By EbraSha 924"
+      - "By EbraSha 925"
+      - "By EbraSha 1599"
+      - "By EbraSha 1600"
+      - "🇺🇸122Mb | NetCrafters OU"
+      - "1687 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "3710 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "[OpenRay] 🇦🇱 AL-21"
+      - "🇳🇱 AetrisVPN"
+      - "🇪🇸 西班牙 | ESP"
+      - "🇪🇪 Estonia — #155"
+      - "🇪🇪 Estonia — #156"
+      - "0582 | 🇫🇷 France | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "2505 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "US 🇺🇸 | @Raydikalx | 74C3B2"
+      - "0413 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0434 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0475 | 🇦🇱 Albania | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0858 | 🇺🇸 USA | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "1079 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "3646 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "3669 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "🇫🇮 Finland — #175"
+      - "4387 | 🇩🇪 Germany | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "4584 | 🇳🇱 Netherlands | 🏳️ SNI-VK | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "EPODONIOS 2309"
+      - "EPODONIOS 2409"
+      - "🇳🇱 The Netherlands [*CIDR] YA"
+      - "🇩🇪 Germany [*CIDR] 2"
+    url: "https://www.gstatic.com/generate_204"
+    interval: 3600
+    tolerance: 100
+    lazy: true
+  -
+    name: "MANUAL"
+    type: "select"
+    proxies:
+      - "🇺🇸 United States — #304"
+      - "🇩🇪 Germany — #101"
+      - "AetrisVPN White list ┃ ✅ SNI: ads.x5.ru ┃ 🇫🇮 Финляндия t.me/rjsxrd"
+      - "🇫🇷 France | [SNI-RU] ads.x5.ru t.me/rjsxrd"
+      - "🇫🇮 Finland | [SNI-RU] ads.x5.ru t.me/rjsxrd"
+      - "🇲🇩 Moldova — #223"
+      - "[OpenRay] 🇳🇱 NL-10369"
+      - "[OpenRay] 🇸🇪 SE-2117"
+      - "[OpenRay] 🇱🇻 LV-1291"
+      - "[OpenRay] 🇱🇻 LV-1292"
+      - "[OpenRay] 🇨🇭 CH-642"
+      - "[OpenRay] 🇨🇭 CH-787"
+      - "[OpenRay] 🇨🇭 CH-943"
+      - "[OpenRay] 🇨🇭 CH-944"
+      - "[OpenRay] 🇨🇭 CH-945"
+      - "[OpenRay] 🇨🇭 CH-947"
+      - "[OpenRay] 🇰🇿 KZ-472"
+      - "[OpenRay] 🇦🇹 AT-294"
+      - "[OpenRay] 🇭🇺 HU-492"
+      - "[OpenRay] 🇭🇺 HU-493"
+      - "[OpenRay] 🇱🇻 LV-1044"
+      - "[OpenRay] 🇧🇬 BG-76"
+      - "[OpenRay] 🇱🇻 LV-1045"
+      - "👉🆔@v2ray_configs_pool📡🇨🇭®️Switzerland©️Zurich🅿️ping:39.71ms"
+      - "👉🆔@v2ray_configs_pool📡🇨🇭®️Switzerland©️Zurich🅿️ping:40.76ms"
+      - "[OpenRay] 🇱🇹 LT-416"
+      - "[OpenRay] 🇳🇴 NO-5"
+      - "🇫🇮 Finland — #163"
+      - "DE 🇩🇪 | @Raydikalx | 5EEEEC"
+      - "[OpenRay] 🇭🇺 HU-482"
+      - "[🇩🇪]t.me/ConfigV2RayNG 4"
+      - "[🇦🇱]t.me/ConfigV2RayNG"
+      - "0069 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0156 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0684 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0743 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0808 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0924 | 🇫🇮 Finland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "1041 | 🇱🇻 Latvia | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "1173 | 🇱🇻 Latvia | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "1631 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "2606 | 🇱🇹 Lithuania | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "2617 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "4105 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "4583 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0338 | 🇺🇸 USA | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0573 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "🇸🇪 Sweden — #277"
+      - "🇸🇪 Sweden — #278"
+      - "🇸🇪 Sweden — #280"
+      - "🇸🇪 Sweden — #281"
+      - "🇵🇱 Poland | [SNI-RU] ads.x5.ru"
+      - "🇩🇪 Germany | 🌐 | [*CIDR] 2"
+      - "1145. 🇫🇲 VLESS | SNI: eh.vk.com | CIDR: VK | TG: @wlrustg"
+      - "🇸🇪 SE | — | 158 | @ByeWhiteLists2"
+      - "42. 🇸🇪 VLESS | SNI: max.ru | CIDR: VK | TG: @wlrustg"
+      - "1138. 🇲🇪 VLESS | SNI: 5post-gate.x5.ru | CIDR: ? | TG: @wlrustg"
+      - "NL 🇳🇱 | @Raydikalx | E493FD"
+      - "gRPC, Max [V.O.I.D]"
+      - "gRPC, Яндекс [V.O.I.D] 4"
+      - "gRPC, Max [V.O.I.D] 2"
+      - "Reality, VK [V.O.I.D] 19"
+      - "Reality, Яндекс Карты [V.O.I.D] 5"
+      - "[47385][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[13563][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[3340][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[6780][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[6778][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "[2849][PL][0][VLESS][None][ext_raw.githubusercontent.com][2026-08-10][2026-08-10 00:49]"
+      - "By EbraSha 71"
+      - "By EbraSha 361"
+      - "By EbraSha 924"
+      - "By EbraSha 925"
+      - "By EbraSha 1599"
+      - "By EbraSha 1600"
+      - "🇺🇸122Mb | NetCrafters OU"
+      - "1687 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "3710 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "[OpenRay] 🇦🇱 AL-21"
+      - "🇳🇱 AetrisVPN"
+      - "🇪🇸 西班牙 | ESP"
+      - "🇪🇪 Estonia — #155"
+      - "🇪🇪 Estonia — #156"
+      - "0582 | 🇫🇷 France | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "2505 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "US 🇺🇸 | @Raydikalx | 74C3B2"
+      - "0413 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0434 | 🇵🇱 Poland | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0475 | 🇦🇱 Albania | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "0858 | 🇺🇸 USA | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "1079 | 🇩🇪 Germany | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "3646 | 🇸🇪 Sweden | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "3669 | 🇳🇱 Netherlands | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "🇫🇮 Finland — #175"
+      - "4387 | 🇩🇪 Germany | 🏳️ SNI-Yandex | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "4584 | 🇳🇱 Netherlands | 🏳️ SNI-VK | VLESS | 📺 YT | TG: @YoutubeUnBlockRu"
+      - "EPODONIOS 2309"
+      - "EPODONIOS 2409"
+      - "🇳🇱 The Netherlands [*CIDR] YA"
+      - "🇩🇪 Germany [*CIDR] 2"
+  -
+    name: "PROXY"
+    type: "select"
+    proxies:
+      - "MANUAL"
+      - "AUTO"
+rules:
+  - "MATCH,PROXY"
