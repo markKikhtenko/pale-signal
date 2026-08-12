@@ -32440,204 +32440,6 @@ proxies:
       headers:
         Host: "rzd.ru"
   -
-    name: "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 3"
-    type: "vless"
-    server: "78.159.245.130"
-    port: 9001
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-    grpc-opts:
-      grpc-service-name: "grpc-reality"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 4"
-    type: "vless"
-    server: "78.159.245.130"
-    port: 9001
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-    grpc-opts:
-      grpc-service-name: "grpc-reality"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 5"
-    type: "vless"
-    server: "78.159.245.130"
-    port: 9001
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-    grpc-opts:
-      grpc-service-name: "grpc-reality"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: gismeteo.ru ┃ 🇷🇺 Россия"
-    type: "vless"
-    server: "video.furrycdn.net"
-    port: 13443
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "gismeteo.ru"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-      short-id: "6ba85179e30d4fc2"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: gismeteo.ru ┃ 🇷🇺 Россия 2"
-    type: "vless"
-    server: "video.furrycdn.net"
-    port: 13443
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "gismeteo.ru"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-      short-id: "6ba85179e30d4fc2"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: gismeteo.ru ┃ 🇷🇺 Россия 3"
-    type: "vless"
-    server: "video.furrycdn.net"
-    port: 13443
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "gismeteo.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-      short-id: "6ba85179e30d4fc2"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 6"
-    type: "vless"
-    server: "185.141.227.240"
-    port: 9001
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "android"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-      short-id: "6ba85179e30d4fc2"
-    grpc-opts:
-      grpc-service-name: "grpc-reality"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 7"
-    type: "vless"
-    server: "185.141.227.240"
-    port: 9001
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-      short-id: "6ba85179e30d4fc2"
-    grpc-opts:
-      grpc-service-name: "grpc-reality"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 8"
-    type: "vless"
-    server: "185.141.227.240"
-    port: 9001
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-      short-id: "6ba85179e30d4fc2"
-    grpc-opts:
-      grpc-service-name: "grpc-reality"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 9"
-    type: "vless"
-    server: "video.furrycdn.net"
-    port: 9001
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "android"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-      short-id: "6ba85179e30d4fc2"
-    grpc-opts:
-      grpc-service-name: "grpc-reality"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 10"
-    type: "vless"
-    server: "video.furrycdn.net"
-    port: 9001
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-      short-id: "6ba85179e30d4fc2"
-    grpc-opts:
-      grpc-service-name: "grpc-reality"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 11"
-    type: "vless"
-    server: "video.furrycdn.net"
-    port: 9001
-    uuid: "76c37560-8f1b-4fa9-a5fc-c7cac064b681"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "Sb OEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
-      short-id: "6ba85179e30d4fc2"
-    grpc-opts:
-      grpc-service-name: "grpc-reality"
-  -
     name: "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия 2"
     type: "vless"
     server: "194.26.229.207"
@@ -34933,7 +34735,7 @@ proxies:
       headers:
         Host: "rzd.ru"
   -
-    name: "EPODONIOS 2256"
+    name: "EPODONIOS 2257"
     type: "vless"
     server: "45.67.215.233"
     port: 443
@@ -34950,7 +34752,7 @@ proxies:
       headers:
         Host: "rAyAn-cOnFiG-sg-1.pAriSa.dPdNs.oRg"
   -
-    name: "EPODONIOS 2391"
+    name: "EPODONIOS 2397"
     type: "vless"
     server: "72.56.32.211"
     port: 443
@@ -34968,7 +34770,7 @@ proxies:
     reality-opts:
       public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
   -
-    name: "EPODONIOS 2395"
+    name: "EPODONIOS 2401"
     type: "vless"
     server: "80.78.244.21"
     port: 80
@@ -34981,7 +34783,7 @@ proxies:
       headers:
         Host: "rutube.globaledgenet.com"
   -
-    name: "EPODONIOS 2397"
+    name: "EPODONIOS 2403"
     type: "vless"
     server: "72.56.245.170"
     port: 40443
@@ -35067,7 +34869,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 46"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 40"
     type: "vless"
     server: "85.234.114.53"
     port: 22231
@@ -35077,7 +34879,7 @@ proxies:
     encryption: "none"
     tls: true
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 79"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 69"
     type: "vless"
     server: "62.233.39.6"
     port: 8443
@@ -35086,7 +34888,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 83"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 73"
     type: "vless"
     server: "85.192.56.3"
     port: 443
@@ -35095,7 +34897,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 93"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 83"
     type: "vless"
     server: "217.149.30.124"
     port: 50054
@@ -35104,7 +34906,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 203"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 190"
     type: "vless"
     server: "104.171.132.232"
     port: 2200
@@ -35113,7 +34915,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 239"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 223"
     type: "vless"
     server: "185.148.106.56"
     port: 2087
@@ -35132,7 +34934,7 @@ proxies:
       headers:
         Host: "Tp3993VbRi.ScOrPiOnBiGpLaY.oRg"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 354"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 333"
     type: "vless"
     server: "147.45.253.97"
     port: 4100
@@ -35141,7 +34943,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 404"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 382"
     type: "vless"
     server: "46.235.186.50"
     port: 443
@@ -35150,7 +34952,7 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 433"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 409"
     type: "vless"
     server: "147.45.47.45"
     port: 443
@@ -35164,7 +34966,7 @@ proxies:
     reality-opts:
       public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 434"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 410"
     type: "vless"
     server: "31.172.67.215"
     port: 2200
@@ -35175,7 +34977,7 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 440"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 416"
     type: "vless"
     server: "147.45.47.38"
     port: 443
@@ -35189,7 +34991,7 @@ proxies:
     reality-opts:
       public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 451"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 427"
     type: "vless"
     server: "147.45.48.143"
     port: 443
@@ -35205,7 +35007,7 @@ proxies:
     grpc-opts:
       grpc-service-name: "vless-grpc-reality"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 452"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 428"
     type: "vless"
     server: "45.155.52.231"
     port: 443
@@ -35220,7 +35022,7 @@ proxies:
       public-key: "6p0aVCkOgd-xaxqSMANYABL6O4Tdbftnxjiy5qcmISQ"
       short-id: "0b"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 453"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 429"
     type: "vless"
     server: "45.151.102.99"
     port: 6443
@@ -35237,7 +35039,7 @@ proxies:
     grpc-opts:
       grpc-service-name: "your-custom-path"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 457"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 433"
     type: "vless"
     server: "status.netraidly.ru"
     port: 40443
@@ -35253,7 +35055,7 @@ proxies:
       public-key: "WRveYv8IuUyvai4jgnQ6nWCL971-wKboe8evES5arlg"
       short-id: "69d4"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 482"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 458"
     type: "vless"
     server: "147.45.47.46"
     port: 443
@@ -35267,7 +35069,7 @@ proxies:
     reality-opts:
       public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 486"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 462"
     type: "vless"
     server: "178.248.236.155"
     port: 18443
@@ -59420,18 +59222,6 @@ proxy-groups:
       - "AetrisVPN White list ┃ ✅ SNI: www.kaspersky.ru ┃ 🇷🇺 Россия 3"
       - "AetrisVPN White list ┃ ✅ SNI: live.ok.ru ┃ 🇷🇺 Россия 3"
       - "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 3"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 4"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 5"
-      - "AetrisVPN White list ┃ ✅ SNI: gismeteo.ru ┃ 🇷🇺 Россия"
-      - "AetrisVPN White list ┃ ✅ SNI: gismeteo.ru ┃ 🇷🇺 Россия 2"
-      - "AetrisVPN White list ┃ ✅ SNI: gismeteo.ru ┃ 🇷🇺 Россия 3"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 6"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 7"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 8"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 9"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 10"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 11"
       - "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия 2"
       - "AetrisVPN White list ┃ ✅ SNI: live.ok.ru ┃ 🇷🇺 Россия 4"
       - "AetrisVPN White list ┃ ✅ SNI: ads.x5.ru ┃ 🇷🇺 Россия"
@@ -59581,32 +59371,32 @@ proxy-groups:
       - "EPODONIOS 1928"
       - "EPODONIOS 2192"
       - "EPODONIOS 2218"
-      - "EPODONIOS 2256"
-      - "EPODONIOS 2391"
-      - "EPODONIOS 2395"
+      - "EPODONIOS 2257"
       - "EPODONIOS 2397"
+      - "EPODONIOS 2401"
+      - "EPODONIOS 2403"
       - "🇷🇺140736 | ⚡️Telegram = t.me/SOSkeyNET"
       - "🇷🇺 Join+Telegram:@Farah_VPN 🇷🇺"
       - "85.192.56.3:443"
       - "🇷🇺 Join+Telegram:@Farah_VPN 🇷🇺 2"
       - "🔥Join+Telegram:@Farah_VPN🟣 9"
-      - "🔥Join+Telegram:@Farah_VPN🟣 46"
-      - "🔥Join+Telegram:@Farah_VPN🟣 79"
+      - "🔥Join+Telegram:@Farah_VPN🟣 40"
+      - "🔥Join+Telegram:@Farah_VPN🟣 69"
+      - "🔥Join+Telegram:@Farah_VPN🟣 73"
       - "🔥Join+Telegram:@Farah_VPN🟣 83"
-      - "🔥Join+Telegram:@Farah_VPN🟣 93"
-      - "🔥Join+Telegram:@Farah_VPN🟣 203"
-      - "🔥Join+Telegram:@Farah_VPN🟣 239"
-      - "🔥Join+Telegram:@Farah_VPN🟣 354"
-      - "🔥Join+Telegram:@Farah_VPN🟣 404"
+      - "🔥Join+Telegram:@Farah_VPN🟣 190"
+      - "🔥Join+Telegram:@Farah_VPN🟣 223"
+      - "🔥Join+Telegram:@Farah_VPN🟣 333"
+      - "🔥Join+Telegram:@Farah_VPN🟣 382"
+      - "🔥Join+Telegram:@Farah_VPN🟣 409"
+      - "🔥Join+Telegram:@Farah_VPN🟣 410"
+      - "🔥Join+Telegram:@Farah_VPN🟣 416"
+      - "🔥Join+Telegram:@Farah_VPN🟣 427"
+      - "🔥Join+Telegram:@Farah_VPN🟣 428"
+      - "🔥Join+Telegram:@Farah_VPN🟣 429"
       - "🔥Join+Telegram:@Farah_VPN🟣 433"
-      - "🔥Join+Telegram:@Farah_VPN🟣 434"
-      - "🔥Join+Telegram:@Farah_VPN🟣 440"
-      - "🔥Join+Telegram:@Farah_VPN🟣 451"
-      - "🔥Join+Telegram:@Farah_VPN🟣 452"
-      - "🔥Join+Telegram:@Farah_VPN🟣 453"
-      - "🔥Join+Telegram:@Farah_VPN🟣 457"
-      - "🔥Join+Telegram:@Farah_VPN🟣 482"
-      - "🔥Join+Telegram:@Farah_VPN🟣 486"
+      - "🔥Join+Telegram:@Farah_VPN🟣 458"
+      - "🔥Join+Telegram:@Farah_VPN🟣 462"
       - "🇷🇺"
       - "https://t.me/VPNgoma 2"
       - "🏳️ 2"
@@ -63057,18 +62847,6 @@ proxy-groups:
       - "AetrisVPN White list ┃ ✅ SNI: www.kaspersky.ru ┃ 🇷🇺 Россия 3"
       - "AetrisVPN White list ┃ ✅ SNI: live.ok.ru ┃ 🇷🇺 Россия 3"
       - "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 3"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 4"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 5"
-      - "AetrisVPN White list ┃ ✅ SNI: gismeteo.ru ┃ 🇷🇺 Россия"
-      - "AetrisVPN White list ┃ ✅ SNI: gismeteo.ru ┃ 🇷🇺 Россия 2"
-      - "AetrisVPN White list ┃ ✅ SNI: gismeteo.ru ┃ 🇷🇺 Россия 3"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 6"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 7"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 8"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 9"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 10"
-      - "AetrisVPN White list ┃ ✅ SNI: api-maps.yandex.ru ┃ 🇷🇺 Россия 11"
       - "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия 2"
       - "AetrisVPN White list ┃ ✅ SNI: live.ok.ru ┃ 🇷🇺 Россия 4"
       - "AetrisVPN White list ┃ ✅ SNI: ads.x5.ru ┃ 🇷🇺 Россия"
@@ -63218,32 +62996,32 @@ proxy-groups:
       - "EPODONIOS 1928"
       - "EPODONIOS 2192"
       - "EPODONIOS 2218"
-      - "EPODONIOS 2256"
-      - "EPODONIOS 2391"
-      - "EPODONIOS 2395"
+      - "EPODONIOS 2257"
       - "EPODONIOS 2397"
+      - "EPODONIOS 2401"
+      - "EPODONIOS 2403"
       - "🇷🇺140736 | ⚡️Telegram = t.me/SOSkeyNET"
       - "🇷🇺 Join+Telegram:@Farah_VPN 🇷🇺"
       - "85.192.56.3:443"
       - "🇷🇺 Join+Telegram:@Farah_VPN 🇷🇺 2"
       - "🔥Join+Telegram:@Farah_VPN🟣 9"
-      - "🔥Join+Telegram:@Farah_VPN🟣 46"
-      - "🔥Join+Telegram:@Farah_VPN🟣 79"
+      - "🔥Join+Telegram:@Farah_VPN🟣 40"
+      - "🔥Join+Telegram:@Farah_VPN🟣 69"
+      - "🔥Join+Telegram:@Farah_VPN🟣 73"
       - "🔥Join+Telegram:@Farah_VPN🟣 83"
-      - "🔥Join+Telegram:@Farah_VPN🟣 93"
-      - "🔥Join+Telegram:@Farah_VPN🟣 203"
-      - "🔥Join+Telegram:@Farah_VPN🟣 239"
-      - "🔥Join+Telegram:@Farah_VPN🟣 354"
-      - "🔥Join+Telegram:@Farah_VPN🟣 404"
+      - "🔥Join+Telegram:@Farah_VPN🟣 190"
+      - "🔥Join+Telegram:@Farah_VPN🟣 223"
+      - "🔥Join+Telegram:@Farah_VPN🟣 333"
+      - "🔥Join+Telegram:@Farah_VPN🟣 382"
+      - "🔥Join+Telegram:@Farah_VPN🟣 409"
+      - "🔥Join+Telegram:@Farah_VPN🟣 410"
+      - "🔥Join+Telegram:@Farah_VPN🟣 416"
+      - "🔥Join+Telegram:@Farah_VPN🟣 427"
+      - "🔥Join+Telegram:@Farah_VPN🟣 428"
+      - "🔥Join+Telegram:@Farah_VPN🟣 429"
       - "🔥Join+Telegram:@Farah_VPN🟣 433"
-      - "🔥Join+Telegram:@Farah_VPN🟣 434"
-      - "🔥Join+Telegram:@Farah_VPN🟣 440"
-      - "🔥Join+Telegram:@Farah_VPN🟣 451"
-      - "🔥Join+Telegram:@Farah_VPN🟣 452"
-      - "🔥Join+Telegram:@Farah_VPN🟣 453"
-      - "🔥Join+Telegram:@Farah_VPN🟣 457"
-      - "🔥Join+Telegram:@Farah_VPN🟣 482"
-      - "🔥Join+Telegram:@Farah_VPN🟣 486"
+      - "🔥Join+Telegram:@Farah_VPN🟣 458"
+      - "🔥Join+Telegram:@Farah_VPN🟣 462"
       - "🇷🇺"
       - "https://t.me/VPNgoma 2"
       - "🏳️ 2"
