@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import base64
+import binascii
 import copy
 import datetime as dt
 import email.utils
@@ -578,6 +579,21 @@ def valid_reality_short_id(value: str) -> bool:
     )
 
 
+def valid_reality_public_key(value: str) -> bool:
+    public_key = value.strip()
+    if re.fullmatch(r"[A-Za-z0-9_-]{43}=?", public_key) is None:
+        return False
+    try:
+        decoded = base64.b64decode(
+            public_key + "=" * (-len(public_key) % 4),
+            altchars=b"-_",
+            validate=True,
+        )
+    except (ValueError, binascii.Error):
+        return False
+    return len(decoded) == 32
+
+
 def valid_server(server: str) -> bool:
     try:
         address = ipaddress.ip_address(server)
@@ -653,8 +669,8 @@ def parse_vless(line: str, source_id: str) -> dict | None:
                 proxy["skip-cert-verify"] = True
 
         if security == "reality":
-            public_key = first_param(params, "pbk", "public-key", "publicKey")
-            if not public_key:
+            public_key = first_param(params, "pbk", "public-key", "publicKey").strip()
+            if not valid_reality_public_key(public_key):
                 return None
             reality_opts = {"public-key": public_key}
             short_id = first_param(params, "sid", "short-id", "shortId")
