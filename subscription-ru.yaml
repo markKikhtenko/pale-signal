@@ -7,9 +7,99 @@ proxies:
   -
     name: "🇷🇺 VK — #1"
     type: "vless"
+    server: "89.208.199.252"
+    port: 443
+    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "obx1.vypnet.su"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
+  -
+    name: "🇷🇺 VK — #2"
+    type: "vless"
+    server: "89.208.199.252"
+    port: 443
+    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "obx1.vypnet.su"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
+  -
+    name: "🇷🇺 VK — #3"
+    type: "vless"
+    server: "89.208.199.252"
+    port: 443
+    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "obx1.vypnet.su"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
+  -
+    name: "🇷🇺 VK — #4"
+    type: "vless"
+    server: "89.208.199.252"
+    port: 443
+    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "obx1.vypnet.su"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
+  -
+    name: "🇷🇺 VK — #5"
+    type: "vless"
+    server: "89.208.199.252"
+    port: 443
+    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "obx1.vypnet.su"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
+  -
+    name: "🇷🇺 VK — #6"
+    type: "vless"
+    server: "89.208.199.252"
+    port: 443
+    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "obx1.vypnet.su"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
+  -
+    name: "🇷🇺 VK — #7"
+    type: "vless"
     server: "89.208.231.191"
     port: 8443
-    uuid: "d7141422-dfdc-07d0-8126-de27817cbce2"
+    uuid: "726d81d4-4b20-07d0-8862-82d0aa4ee9e8"
     network: "tcp"
     udp: true
     encryption: "none"
@@ -21,7 +111,7 @@ proxies:
       public-key: "4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik"
       short-id: "d8c6b58bcbb0c323"
   -
-    name: "🇷🇺 Yandex — #2"
+    name: "🇷🇺 Yandex — #8"
     type: "vless"
     server: "178.154.208.44"
     port: 443
@@ -35,6 +125,811 @@ proxies:
     reality-opts:
       public-key: "oX_8IyRmI_X4pPWaGTbduLyvlZWwLkZlxJKmtvjmqEg"
       short-id: "03a70b17f8036009"
+  -
+    name: "🇷🇺 4vps.su — #9"
+    type: "vless"
+    server: "77.110.113.103"
+    port: 443
+    uuid: "b17fa109-615f-4fcc-abee-8ac8358664e1"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "vk.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "YbSMmjuRFkilXmQH_RZ9uDFwA17yDulRSTBHRVilzXs"
+      short-id: "a3dbdfb829"
+  -
+    name: "🇷🇺 Aeza Group — #10"
+    type: "vless"
+    server: "45.146.131.97"
+    port: 4100
+    uuid: "5502312d-b5cf-4652-8c59-4d670dd047be"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Aeza Group — #11"
+    type: "vless"
+    server: "82.117.87.199"
+    port: 4100
+    uuid: "2a88091e-e3f8-4478-9751-6ce0557a7f2e"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Beget — #12"
+    type: "vless"
+    server: "31.129.96.186"
+    port: 2200
+    uuid: "112912a9-cedf-485d-b8ed-d8f8d4774437"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Beget — #13"
+    type: "vless"
+    server: "45.90.32.30"
+    port: 2200
+    uuid: "ea535a23-447f-4501-918c-de8a8b376bec"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "rzd.ru"
+  -
+    name: "🇷🇺 Beget — #14"
+    type: "vless"
+    server: "45.12.75.242"
+    port: 26424
+    uuid: "633f424e-2b11-48da-a6b3-a849dd71456f"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ya.ru"
+    reality-opts:
+      public-key: "l8AubqcxQO-HRFJy4pZL1vbLOo-eXit69s-XulSELE0"
+      short-id: "23103e1e"
+  -
+    name: "🇷🇺 Beget — #15"
+    type: "vless"
+    server: "45.12.75.242"
+    port: 26424
+    uuid: "633f424e-2b11-48da-a6b3-a849dd71456f"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ya.ru"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "l8AubqcxQO-HRFJy4pZL1vbLOo-eXit69s-XulSELE0"
+      short-id: "23103e1e"
+  -
+    name: "🇷🇺 Beget — #16"
+    type: "vless"
+    server: "45.12.75.242"
+    port: 26424
+    uuid: "633f424e-2b11-48da-a6b3-a849dd71456f"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ya.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "l8AubqcxQO-HRFJy4pZL1vbLOo-eXit69s-XulSELE0"
+      short-id: "23103e1e"
+  -
+    name: "🇷🇺 Beget — #17"
+    type: "vless"
+    server: "45.12.75.242"
+    port: 26424
+    uuid: "633f424e-2b11-48da-a6b3-a849dd71456f"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ya.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "l8AubqcxQO-HRFJy4pZL1vbLOo-eXit69s-XulSELE0"
+      short-id: "23103e1e"
+  -
+    name: "🇷🇺 Beget — #18"
+    type: "vless"
+    server: "193.168.46.180"
+    port: 443
+    uuid: "17db295e-695f-4dbd-acb8-aac7c450e0de"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "rruu.persik.host"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
+      short-id: "c1a7e9b4711d5f60"
+  -
+    name: "🇷🇺 Beget — #19"
+    type: "vless"
+    server: "193.168.46.180"
+    port: 443
+    uuid: "b621f91d-ff02-44e3-a788-9c84587773cc"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "rruu.persik.host"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
+      short-id: "c1a7e9b4711d5f60"
+  -
+    name: "🇷🇺 Beget — #20"
+    type: "vless"
+    server: "193.168.46.180"
+    port: 443
+    uuid: "3233c230-3036-4677-becb-002026c14f05"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "rruu.persik.host"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
+      short-id: "c1a7e9b4711d5f60"
+  -
+    name: "🇷🇺 Beget — #21"
+    type: "vless"
+    server: "193.168.46.180"
+    port: 443
+    uuid: "fd905adc-0e12-4993-a438-956a4065f8b3"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "rruu.persik.host"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
+      short-id: "c1a7e9b4711d5f60"
+  -
+    name: "🇷🇺 Beget — #22"
+    type: "vless"
+    server: "193.168.46.180"
+    port: 443
+    uuid: "e108bf33-e79b-4e21-bca9-cf44a488116b"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "rruu.persik.host"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
+      short-id: "c1a7e9b4711d5f60"
+  -
+    name: "🇷🇺 reg.ru — #23"
+    type: "vless"
+    server: "168.222.143.50"
+    port: 4100
+    uuid: "2aa7f4b1-e859-46d0-b8ac-8587811ab7b1"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Selectel — #24"
+    type: "vless"
+    server: "178.72.162.73"
+    port: 443
+    uuid: "60ba3369-9a78-40fe-98c3-233a6f107043"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ru6.ethicsdinnerpave.online"
+    client-fingerprint: "qq"
+    xhttp-opts:
+      path: "/assets/build/_app/immutable/chunks/stream-one/"
+      host: "ru6.ethicsdinnerpave.online"
+  -
+    name: "🇷🇺 Selectel — #25"
+    type: "vless"
+    server: "178.72.162.73"
+    port: 443
+    uuid: "60ba3369-9a78-40fe-98c3-233a6f107043"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ru6.ethicsdinnerpave.online"
+    client-fingerprint: "edge"
+    xhttp-opts:
+      path: "/assets/build/_app/immutable/chunks/stream-one/"
+      host: "ru6.ethicsdinnerpave.online"
+  -
+    name: "🇷🇺 Selectel — #26"
+    type: "vless"
+    server: "178.72.162.73"
+    port: 443
+    uuid: "60ba3369-9a78-40fe-98c3-233a6f107043"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "ru6.ethicsdinnerpave.online"
+    client-fingerprint: "qq"
+    xhttp-opts:
+      path: "/assets/build/_app/immutable/chunks/stream-one/"
+  -
+    name: "🇷🇺 Selectel — #27"
+    type: "vless"
+    server: "87.228.122.108"
+    port: 4100
+    uuid: "155e8dd4-a559-407a-9ea8-13a5e829f066"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Selectel — #28"
+    type: "vless"
+    server: "178.72.162.73"
+    port: 443
+    uuid: "60ba3369-9a78-40fe-98c3-233a6f107043"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "wqeds.denverpresents.top"
+    client-fingerprint: "ios"
+    xhttp-opts:
+      path: "/assets/build/_app/immutable/chunks/stream-one/"
+      host: "wqeds.denverpresents.top"
+  -
+    name: "🇷🇺 SpaceWeb — #29"
+    type: "vless"
+    server: "80.93.52.44"
+    port: 4100
+    uuid: "2216b0ee-b94a-4ea9-8780-ccc21c4b5f31"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 SpaceWeb — #30"
+    type: "vless"
+    server: "31.177.82.106"
+    port: 2200
+    uuid: "5d0fbb28-3be3-4044-bc5b-e4b7ca1916c7"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 SpaceWeb — #31"
+    type: "vless"
+    server: "168.222.202.187"
+    port: 4100
+    uuid: "55009b9b-7b9c-4830-86c6-cb058a7a2e2f"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 SpaceWeb — #32"
+    type: "vless"
+    server: "168.222.202.15"
+    port: 4100
+    uuid: "2001e98b-e06e-4244-910f-7ff640746eda"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #33"
+    type: "vless"
+    server: "5.129.194.34"
+    port: 4100
+    uuid: "af325624-e28d-44fd-a8a7-058a439d128f"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #34"
+    type: "vless"
+    server: "176.98.178.17"
+    port: 4100
+    uuid: "87f3bc47-ee10-4418-9260-7a4e43f28e00"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #35"
+    type: "vless"
+    server: "176.98.178.17"
+    port: 4100
+    uuid: "87f3bc47-ee10-4418-9260-7a4e43f28e00"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "live.ok.ru"
+  -
+    name: "🇷🇺 Timeweb — #36"
+    type: "vless"
+    server: "109.73.196.160"
+    port: 4100
+    uuid: "5d0206d9-fb42-4c8b-a84b-3d95ab0f42c7"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #37"
+    type: "vless"
+    server: "104.171.132.128"
+    port: 4100
+    uuid: "6c0ced37-dd9c-43f2-b474-6dafe036c44b"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #38"
+    type: "vless"
+    server: "72.56.7.195"
+    port: 2200
+    uuid: "31c2a8e8-0ab2-4f3f-8767-11f3a35d4228"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #39"
+    type: "vless"
+    server: "104.171.137.109"
+    port: 2200
+    uuid: "5502312d-b5cf-4652-8c59-4d670dd047be"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #40"
+    type: "vless"
+    server: "188.225.33.206"
+    port: 8443
+    uuid: "c124a209-d949-4951-8234-e2d918b3e6c0"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
+  -
+    name: "🇷🇺 Timeweb — #41"
+    type: "vless"
+    server: "72.56.246.91"
+    port: 4100
+    uuid: "a484645e-59df-4980-b649-92b71250ec60"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #42"
+    type: "vless"
+    server: "188.225.33.206"
+    port: 8443
+    uuid: "c124a209-d949-4951-8234-e2d918b3e6c0"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
+  -
+    name: "🇷🇺 Timeweb — #43"
+    type: "vless"
+    server: "104.171.137.141"
+    port: 4100
+    uuid: "d5d72f0a-42b0-4f43-b568-9cf7fbff073d"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #44"
+    type: "vless"
+    server: "193.188.23.170"
+    port: 2200
+    uuid: "b3d66abd-ea82-4616-92f0-1dec8d1e4cfc"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #45"
+    type: "vless"
+    server: "104.171.137.148"
+    port: 2200
+    uuid: "a484645e-59df-4980-b649-92b71250ec60"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #46"
+    type: "vless"
+    server: "201.51.0.38"
+    port: 4100
+    uuid: "e7299042-7d8f-440f-8368-2516b0e69341"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #47"
+    type: "vless"
+    server: "72.56.247.70"
+    port: 4100
+    uuid: "f2d2907c-1d74-43eb-8fd2-fc55dfd92427"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #48"
+    type: "vless"
+    server: "147.45.235.14"
+    port: 2200
+    uuid: "55009b9b-7b9c-4830-86c6-cb058a7a2e2f"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #49"
+    type: "vless"
+    server: "104.171.137.176"
+    port: 2200
+    uuid: "43874ef1-1f74-4b8b-bc84-1d13caabd71b"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #50"
+    type: "vless"
+    server: "186.246.6.234"
+    port: 2200
+    uuid: "2a88091e-e3f8-4478-9751-6ce0557a7f2e"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #51"
+    type: "vless"
+    server: "104.171.134.235"
+    port: 4100
+    uuid: "bceda826-c83c-45d0-891e-15c4bfec76bc"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #52"
+    type: "vless"
+    server: "5.129.252.140"
+    port: 4100
+    uuid: "eb135f2b-4b9e-4abb-9a89-78242613da61"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #53"
+    type: "vless"
+    server: "104.171.134.235"
+    port: 4100
+    uuid: "bceda826-c83c-45d0-891e-15c4bfec76bc"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "live.ok.ru"
+  -
+    name: "🇷🇺 Timeweb — #54"
+    type: "vless"
+    server: "201.51.5.253"
+    port: 2200
+    uuid: "ed1cd50f-ead9-4e01-b5ae-b7d2dfb532fc"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #55"
+    type: "vless"
+    server: "72.56.247.70"
+    port: 2200
+    uuid: "59525c39-e731-4c27-bc9e-6d8cef67572c"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #56"
+    type: "vless"
+    server: "186.246.6.234"
+    port: 2200
+    uuid: "2a88091e-e3f8-4478-9751-6ce0557a7f2e"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "rzd.ru"
+  -
+    name: "🇷🇺 Timeweb — #57"
+    type: "vless"
+    server: "83.217.192.58"
+    port: 2200
+    uuid: "a08968c9-6301-459c-b047-ac7c7be57c40"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #58"
+    type: "vless"
+    server: "104.171.136.112"
+    port: 2200
+    uuid: "bee21918-0933-430c-904b-c941b92256ba"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #59"
+    type: "vless"
+    server: "104.171.132.185"
+    port: 4100
+    uuid: "112912a9-cedf-485d-b8ed-d8f8d4774437"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Timeweb — #60"
+    type: "vless"
+    server: "72.56.36.96"
+    port: 40443
+    uuid: "598b823c-d3fc-4013-aae5-837f10080f7a"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "deepl.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "cZF84xUCciKRXxTA39vNnh0U8CjUZiUSjLzuNTMOzV8"
+      short-id: "33e48a03db900ff3"
+      spider-x: "/"
+  -
+    name: "🇷🇺 Timeweb — #61"
+    type: "vless"
+    server: "77.95.201.235"
+    port: 2200
+    uuid: "9b4ba157-f60b-4a5b-b326-4d561eb826d4"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "rzd.ru"
+  -
+    name: "🇷🇺 Timeweb — #62"
+    type: "vless"
+    server: "188.72.103.4"
+    port: 443
+    uuid: "11ebfbfc-c6fd-4b61-a922-c09c284ed84b"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "media.nodes.ac"
+    client-fingerprint: "qq"
+    alpn:
+      - "h2"
+      - "http/1.1"
+    xhttp-opts:
+      path: "/api/v3/attachments/upload/"
+      host: "media.nodes.ac"
+      mode: "packet-up"
+  -
+    name: "🇷🇺 Xorek.Cloud — #63"
+    type: "vless"
+    server: "194.26.229.214"
+    port: 4100
+    uuid: "a9f07ec1-bd8a-4c95-a281-3de7f0b76853"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Xorek.Cloud — #64"
+    type: "vless"
+    server: "194.26.229.211"
+    port: 4100
+    uuid: "1a2f7607-b36a-4996-b7a2-72359123c446"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "live.ok.ru"
+  -
+    name: "🇷🇺 Xorek.Cloud — #65"
+    type: "vless"
+    server: "194.26.229.219"
+    port: 4100
+    uuid: "099c6e3f-e8d3-41d4-95f2-ef2eafb51cdc"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Xorek.Cloud — #66"
+    type: "vless"
+    server: "194.26.229.214"
+    port: 2200
+    uuid: "a9f07ec1-bd8a-4c95-a281-3de7f0b76853"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "rzd.ru"
+  -
+    name: "🇷🇺 Xorek.Cloud — #67"
+    type: "vless"
+    server: "194.26.229.214"
+    port: 2200
+    uuid: "859ca789-2c75-472c-b02b-4b7af099f512"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Xorek.Cloud — #68"
+    type: "vless"
+    server: "194.26.229.214"
+    port: 2200
+    uuid: "a9f07ec1-bd8a-4c95-a281-3de7f0b76853"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Xorek.Cloud — #69"
+    type: "vless"
+    server: "194.26.229.218"
+    port: 2200
+    uuid: "af325624-e28d-44fd-a8a7-058a439d128f"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Xorek.Cloud — #70"
+    type: "vless"
+    server: "194.26.229.214"
+    port: 4100
+    uuid: "859ca789-2c75-472c-b02b-4b7af099f512"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 Xorek.Cloud — #71"
+    type: "vless"
+    server: "194.26.229.217"
+    port: 4100
+    uuid: "e58a0802-443e-4ba3-992b-73687bb5b9f0"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/v1"
+  -
+    name: "🇷🇺 VK — #1 2"
+    type: "vless"
+    server: "89.208.231.191"
+    port: 8443
+    uuid: "d7141422-dfdc-07d0-8126-de27817cbce2"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik"
+      short-id: "d8c6b58bcbb0c323"
   -
     name: "🇷🇺 4vps.su — #3"
     type: "vless"
@@ -53,198 +948,10 @@ proxies:
       short-id: "a3dbdfb829"
       spider-x: "/video"
   -
-    name: "🇷🇺 4vps.su — #4"
-    type: "vless"
-    server: "77.110.113.103"
-    port: 443
-    uuid: "b17fa109-615f-4fcc-abee-8ac8358664e1"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "vk.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "YbSMmjuRFkilXmQH_RZ9uDFwA17yDulRSTBHRVilzXs"
-      short-id: "a3dbdfb829"
-  -
-    name: "🇷🇺 Aeza Group — #5"
-    type: "vless"
-    server: "45.146.131.97"
-    port: 4100
-    uuid: "5502312d-b5cf-4652-8c59-4d670dd047be"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Aeza Group — #6"
-    type: "vless"
-    server: "82.117.87.199"
-    port: 4100
-    uuid: "2a88091e-e3f8-4478-9751-6ce0557a7f2e"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Beget — #7"
-    type: "vless"
-    server: "45.12.75.242"
-    port: 26424
-    uuid: "633f424e-2b11-48da-a6b3-a849dd71456f"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ya.ru"
-    reality-opts:
-      public-key: "l8AubqcxQO-HRFJy4pZL1vbLOo-eXit69s-XulSELE0"
-      short-id: "23103e1e"
-  -
-    name: "🇷🇺 Beget — #8"
-    type: "vless"
-    server: "45.12.75.242"
-    port: 26424
-    uuid: "633f424e-2b11-48da-a6b3-a849dd71456f"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ya.ru"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "l8AubqcxQO-HRFJy4pZL1vbLOo-eXit69s-XulSELE0"
-      short-id: "23103e1e"
-  -
-    name: "🇷🇺 Beget — #9"
-    type: "vless"
-    server: "45.12.75.242"
-    port: 26424
-    uuid: "633f424e-2b11-48da-a6b3-a849dd71456f"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ya.ru"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "l8AubqcxQO-HRFJy4pZL1vbLOo-eXit69s-XulSELE0"
-      short-id: "23103e1e"
-  -
-    name: "🇷🇺 Beget — #10"
-    type: "vless"
-    server: "45.12.75.242"
-    port: 26424
-    uuid: "633f424e-2b11-48da-a6b3-a849dd71456f"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ya.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "l8AubqcxQO-HRFJy4pZL1vbLOo-eXit69s-XulSELE0"
-      short-id: "23103e1e"
-  -
-    name: "🇷🇺 Beget — #11"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "17db295e-695f-4dbd-acb8-aac7c450e0de"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
-    name: "🇷🇺 Beget — #12"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "b621f91d-ff02-44e3-a788-9c84587773cc"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
-    name: "🇷🇺 Beget — #13"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "3233c230-3036-4677-becb-002026c14f05"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
-    name: "🇷🇺 Beget — #14"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "fd905adc-0e12-4993-a438-956a4065f8b3"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
-    name: "🇷🇺 Beget — #15"
-    type: "vless"
-    server: "193.168.46.180"
-    port: 443
-    uuid: "e108bf33-e79b-4e21-bca9-cf44a488116b"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "rruu.persik.host"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
-      short-id: "c1a7e9b4711d5f60"
-  -
     name: "🇷🇺 MegaMax Network — #16"
     type: "vless"
     server: "212.67.9.113"
     port: 2200
-    uuid: "2aa7f4b1-e859-46d0-b8ac-8587811ab7b1"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 reg.ru — #17"
-    type: "vless"
-    server: "168.222.143.50"
-    port: 4100
     uuid: "2aa7f4b1-e859-46d0-b8ac-8587811ab7b1"
     network: "ws"
     udp: true
@@ -263,21 +970,6 @@ proxies:
     tls: true
     servername: "ru6.ethicsdinnerpave.online"
     client-fingerprint: "safari"
-    xhttp-opts:
-      path: "/assets/build/_app/immutable/chunks/stream-one/"
-      host: "ru6.ethicsdinnerpave.online"
-  -
-    name: "🇷🇺 Selectel — #19"
-    type: "vless"
-    server: "178.72.162.73"
-    port: 443
-    uuid: "60ba3369-9a78-40fe-98c3-233a6f107043"
-    network: "xhttp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ru6.ethicsdinnerpave.online"
-    client-fingerprint: "qq"
     xhttp-opts:
       path: "/assets/build/_app/immutable/chunks/stream-one/"
       host: "ru6.ethicsdinnerpave.online"
@@ -333,17 +1025,6 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 SpaceWeb — #24"
-    type: "vless"
-    server: "31.177.82.106"
-    port: 2200
-    uuid: "5d0fbb28-3be3-4044-bc5b-e4b7ca1916c7"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
     name: "🇷🇺 SpaceWeb — #25"
     type: "vless"
     server: "168.222.140.155"
@@ -366,17 +1047,6 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 SpaceWeb — #27"
-    type: "vless"
-    server: "168.222.202.187"
-    port: 4100
-    uuid: "55009b9b-7b9c-4830-86c6-cb058a7a2e2f"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
     name: "🇷🇺 SpaceWeb — #28"
     type: "vless"
     server: "77.222.46.162"
@@ -388,22 +1058,11 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 SpaceWeb — #29"
+    name: "🇷🇺 SpaceWeb — #29 2"
     type: "vless"
     server: "77.222.37.89"
     port: 2200
     uuid: "b79c54f3-68e9-4e9d-8b57-22cbbe978730"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 SpaceWeb — #30"
-    type: "vless"
-    server: "168.222.202.15"
-    port: 4100
-    uuid: "2001e98b-e06e-4244-910f-7ff640746eda"
     network: "ws"
     udp: true
     encryption: "none"
@@ -432,33 +1091,7 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 Timeweb — #33"
-    type: "vless"
-    server: "72.56.246.91"
-    port: 4100
-    uuid: "a484645e-59df-4980-b649-92b71250ec60"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #34"
-    type: "vless"
-    server: "188.225.33.206"
-    port: 8443
-    uuid: "c124a209-d949-4951-8234-e2d918b3e6c0"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "max.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
-  -
-    name: "🇷🇺 Timeweb — #35"
+    name: "🇷🇺 Timeweb — #35 2"
     type: "vless"
     server: "104.171.132.102"
     port: 2200
@@ -469,29 +1102,7 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 Timeweb — #36"
-    type: "vless"
-    server: "104.171.137.141"
-    port: 4100
-    uuid: "d5d72f0a-42b0-4f43-b568-9cf7fbff073d"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #37"
-    type: "vless"
-    server: "193.188.23.170"
-    port: 2200
-    uuid: "b3d66abd-ea82-4616-92f0-1dec8d1e4cfc"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #38"
+    name: "🇷🇺 Timeweb — #38 2"
     type: "vless"
     server: "104.171.135.186"
     port: 4100
@@ -502,7 +1113,7 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 Timeweb — #39"
+    name: "🇷🇺 Timeweb — #39 2"
     type: "vless"
     server: "83.217.200.217"
     port: 4100
@@ -513,84 +1124,7 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 Timeweb — #40"
-    type: "vless"
-    server: "104.171.137.148"
-    port: 2200
-    uuid: "a484645e-59df-4980-b649-92b71250ec60"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #41"
-    type: "vless"
-    server: "201.51.0.38"
-    port: 4100
-    uuid: "e7299042-7d8f-440f-8368-2516b0e69341"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #42"
-    type: "vless"
-    server: "72.56.247.70"
-    port: 4100
-    uuid: "f2d2907c-1d74-43eb-8fd2-fc55dfd92427"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #43"
-    type: "vless"
-    server: "147.45.235.14"
-    port: 2200
-    uuid: "55009b9b-7b9c-4830-86c6-cb058a7a2e2f"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #44"
-    type: "vless"
-    server: "104.171.137.176"
-    port: 2200
-    uuid: "43874ef1-1f74-4b8b-bc84-1d13caabd71b"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #45"
-    type: "vless"
-    server: "186.246.6.234"
-    port: 2200
-    uuid: "2a88091e-e3f8-4478-9751-6ce0557a7f2e"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #46"
-    type: "vless"
-    server: "104.171.134.235"
-    port: 4100
-    uuid: "bceda826-c83c-45d0-891e-15c4bfec76bc"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #47"
+    name: "🇷🇺 Timeweb — #47 2"
     type: "vless"
     server: "109.73.193.169"
     port: 4100
@@ -601,31 +1135,7 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 Timeweb — #48"
-    type: "vless"
-    server: "5.129.252.140"
-    port: 4100
-    uuid: "eb135f2b-4b9e-4abb-9a89-78242613da61"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #49"
-    type: "vless"
-    server: "104.171.134.235"
-    port: 4100
-    uuid: "bceda826-c83c-45d0-891e-15c4bfec76bc"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-      headers:
-        Host: "live.ok.ru"
-  -
-    name: "🇷🇺 Timeweb — #50"
+    name: "🇷🇺 Timeweb — #50 2"
     type: "vless"
     server: "217.149.23.169"
     port: 2200
@@ -636,107 +1146,7 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 Timeweb — #51"
-    type: "vless"
-    server: "201.51.5.253"
-    port: 2200
-    uuid: "ed1cd50f-ead9-4e01-b5ae-b7d2dfb532fc"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #52"
-    type: "vless"
-    server: "72.56.247.70"
-    port: 2200
-    uuid: "59525c39-e731-4c27-bc9e-6d8cef67572c"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #53"
-    type: "vless"
-    server: "186.246.6.234"
-    port: 2200
-    uuid: "2a88091e-e3f8-4478-9751-6ce0557a7f2e"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-      headers:
-        Host: "rzd.ru"
-  -
-    name: "🇷🇺 Timeweb — #54"
-    type: "vless"
-    server: "188.225.33.206"
-    port: 8443
-    uuid: "c124a209-d949-4951-8234-e2d918b3e6c0"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "max.ru"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
-  -
-    name: "🇷🇺 Timeweb — #55"
-    type: "vless"
-    server: "83.217.192.58"
-    port: 2200
-    uuid: "a08968c9-6301-459c-b047-ac7c7be57c40"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #56"
-    type: "vless"
-    server: "104.171.136.112"
-    port: 2200
-    uuid: "bee21918-0933-430c-904b-c941b92256ba"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #57"
-    type: "vless"
-    server: "104.171.132.185"
-    port: 4100
-    uuid: "112912a9-cedf-485d-b8ed-d8f8d4774437"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Timeweb — #58"
-    type: "vless"
-    server: "72.56.36.96"
-    port: 40443
-    uuid: "598b823c-d3fc-4013-aae5-837f10080f7a"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "deepl.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "cZF84xUCciKRXxTA39vNnh0U8CjUZiUSjLzuNTMOzV8"
-      short-id: "33e48a03db900ff3"
-      spider-x: "/"
-  -
-    name: "🇷🇺 Timeweb — #59"
+    name: "🇷🇺 Timeweb — #59 2"
     type: "vless"
     server: "188.72.103.4"
     port: 443
@@ -766,17 +1176,6 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 Xorek.Cloud — #61"
-    type: "vless"
-    server: "194.26.229.219"
-    port: 4100
-    uuid: "099c6e3f-e8d3-41d4-95f2-ef2eafb51cdc"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
     name: "🇷🇺 Xorek.Cloud — #62"
     type: "vless"
     server: "194.26.229.209"
@@ -788,75 +1187,7 @@ proxies:
     ws-opts:
       path: "/v1"
   -
-    name: "🇷🇺 Xorek.Cloud — #63"
-    type: "vless"
-    server: "194.26.229.214"
-    port: 2200
-    uuid: "a9f07ec1-bd8a-4c95-a281-3de7f0b76853"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-      headers:
-        Host: "rzd.ru"
-  -
-    name: "🇷🇺 Xorek.Cloud — #64"
-    type: "vless"
-    server: "194.26.229.214"
-    port: 2200
-    uuid: "859ca789-2c75-472c-b02b-4b7af099f512"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Xorek.Cloud — #65"
-    type: "vless"
-    server: "194.26.229.214"
-    port: 2200
-    uuid: "a9f07ec1-bd8a-4c95-a281-3de7f0b76853"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Xorek.Cloud — #66"
-    type: "vless"
-    server: "194.26.229.218"
-    port: 2200
-    uuid: "af325624-e28d-44fd-a8a7-058a439d128f"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Xorek.Cloud — #67"
-    type: "vless"
-    server: "194.26.229.214"
-    port: 4100
-    uuid: "859ca789-2c75-472c-b02b-4b7af099f512"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Xorek.Cloud — #68"
-    type: "vless"
-    server: "194.26.229.217"
-    port: 4100
-    uuid: "e58a0802-443e-4ba3-992b-73687bb5b9f0"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
-    name: "🇷🇺 Xorek.Cloud — #69"
+    name: "🇷🇺 Xorek.Cloud — #69 2"
     type: "vless"
     server: "194.26.229.220"
     port: 4100
@@ -1101,17 +1432,6 @@ proxies:
     grpc-opts:
       grpc-service-name: "grpc"
   -
-    name: "RU 🇷🇺 | @Raydikalx | 6425E0"
-    type: "vless"
-    server: "80.93.52.44"
-    port: 4100
-    uuid: "2216b0ee-b94a-4ea9-8780-ccc21c4b5f31"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
     name: "RU 🇷🇺 | @Raydikalx | CC8163"
     type: "vless"
     server: "77.222.46.162"
@@ -1157,17 +1477,6 @@ proxies:
     reality-opts:
       public-key: "D0FqzTuVSzCF8IcFo64SFIpMsaGV47LW3el2GCCVoFY"
       short-id: "c1a7e9b4711d5f60"
-  -
-    name: "RU 🇷🇺 | @Raydikalx | 5CBDC8"
-    type: "vless"
-    server: "72.56.7.195"
-    port: 2200
-    uuid: "31c2a8e8-0ab2-4f3f-8767-11f3a35d4228"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
   -
     name: "RU 🇷🇺 | @Raydikalx | 882CE3"
     type: "vless"
@@ -1391,17 +1700,6 @@ proxies:
     reality-opts:
       public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
   -
-    name: "RU 🇷🇺 | @Raydikalx | E9CD3D"
-    type: "vless"
-    server: "104.171.137.109"
-    port: 2200
-    uuid: "5502312d-b5cf-4652-8c59-4d670dd047be"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-  -
     name: "RU 🇷🇺 | @Raydikalx | 49703A"
     type: "vless"
     server: "5.189.223.90"
@@ -1432,21 +1730,6 @@ proxies:
       path: "/v1"
       headers:
         Host: "live.ok.ru"
-  -
-    name: "RU 🇷🇺 | @Raydikalx | 881BD9"
-    type: "vless"
-    server: "178.72.162.73"
-    port: 443
-    uuid: "60ba3369-9a78-40fe-98c3-233a6f107043"
-    network: "xhttp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "wqeds.denverpresents.top"
-    client-fingerprint: "ios"
-    xhttp-opts:
-      path: "/assets/build/_app/immutable/chunks/stream-one/"
-      host: "wqeds.denverpresents.top"
   -
     name: "RU 🇷🇺 | @Raydikalx | 446E5B"
     type: "vless"
@@ -1507,22 +1790,6 @@ proxies:
       short-id: "9e2a6f4c3b7d1e8a"
     grpc-opts:
       grpc-service-name: "moktana.net.v1.StreamService"
-  -
-    name: "RU 🇷🇺 | @Raydikalx | 8AE528"
-    type: "vless"
-    server: "37.252.17.192"
-    port: 8449
-    uuid: "6d94a071-8084-413f-8317-bc9c7dbcbaf5"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.rumedia-cdn.com"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "GRsIfBNDoa_oKblyBwY5BDIjirktnzYFUL1_F9KaQVo"
-      short-id: "15154145b2244829"
   -
     name: "RU 🇷🇺 | @Raydikalx | A9AD0C"
     type: "vless"
@@ -1744,23 +2011,6 @@ proxies:
     grpc-opts:
       grpc-service-name: "your-custom-path"
   -
-    name: "RU 🇷🇺 | @Raydikalx | 6B2155"
-    type: "vless"
-    server: "45.151.101.103"
-    port: 8443
-    uuid: "95e8532b-cc69-42d4-9553-e3c23292b15b"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "maps.apple.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "OMlQAFrCMZ3DX0xlnbEZiByLBFzpUE8XJHJsrBzLdlY"
-      short-id: "2da4299da566b7"
-    grpc-opts:
-      grpc-service-name: "your-custom-path"
-  -
     name: "RU 🇷🇺 | @Raydikalx | 1CE5D8"
     type: "vless"
     server: "147.45.253.97"
@@ -1902,17 +2152,6 @@ proxies:
     reality-opts:
       public-key: "lh3qj3VX335HGH2T3xQ8RHZ4v3zEStbz6ENiPwkILSg"
       short-id: "cf43c0c197cd464a"
-  -
-    name: "RU 🇷🇺 | @Raydikalx | 9D3F75"
-    type: "vless"
-    server: "5.129.194.34"
-    port: 4100
-    uuid: "af325624-e28d-44fd-a8a7-058a439d128f"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
   -
     name: "RU 🇷🇺 | @Raydikalx | 7FAC8C"
     type: "vless"
@@ -10581,66 +10820,6 @@ proxies:
     tls: true
     servername: "obx1.vypnet.su"
     client-fingerprint: "android"
-    reality-opts:
-      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
-  -
-    name: "10. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-    type: "vless"
-    server: "89.208.199.252"
-    port: 443
-    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "obx1.vypnet.su"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
-  -
-    name: "11. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-    type: "vless"
-    server: "89.208.199.252"
-    port: 443
-    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "obx1.vypnet.su"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
-  -
-    name: "12. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-    type: "vless"
-    server: "89.208.199.252"
-    port: 443
-    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "obx1.vypnet.su"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
-  -
-    name: "13. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-    type: "vless"
-    server: "89.208.199.252"
-    port: 443
-    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "obx1.vypnet.su"
-    client-fingerprint: "ios"
     reality-opts:
       public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
   -
@@ -31441,22 +31620,6 @@ proxies:
     ws-opts:
       path: "/"
   -
-    name: "1757 | 🇷🇺 Russia | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu"
-    type: "vless"
-    server: "185.40.152.85"
-    port: 443
-    uuid: "2f39df59-0ec9-4b92-b6f7-10f746942c70"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "ads.x5.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "cw8LhvItjMQPL-LkGXbfLFJ_LShQRIx7ze9qnfgAZSI"
-      short-id: "6857a32e282e6794"
-  -
     name: "1929 | 🇷🇺 Russia | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
     type: "vless"
     server: "45.151.101.67"
@@ -33148,19 +33311,6 @@ proxies:
       headers:
         Host: "rzd.ru"
   -
-    name: "AetrisVPN White list ┃ ✅ SNI: live.ok.ru ┃ 🇷🇺 Россия 2"
-    type: "vless"
-    server: "194.26.229.211"
-    port: 4100
-    uuid: "1a2f7607-b36a-4996-b7a2-72359123c446"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-      headers:
-        Host: "live.ok.ru"
-  -
     name: "AetrisVPN White list ┃ ✅ SNI: max.ru ┃ 🇷🇺 Россия 4"
     type: "vless"
     server: "89.208.231.191"
@@ -33192,19 +33342,6 @@ proxies:
     reality-opts:
       public-key: "4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik"
       short-id: "d8c6b58bcbb0c323"
-  -
-    name: "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия 3"
-    type: "vless"
-    server: "45.90.32.30"
-    port: 2200
-    uuid: "ea535a23-447f-4501-918c-de8a8b376bec"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-      headers:
-        Host: "rzd.ru"
   -
     name: "AetrisVPN White list ┃ ✅ SNI: rruu.persik.host ┃ 🇷🇺 Россия 6"
     type: "vless"
@@ -33614,7 +33751,7 @@ proxies:
       public-key: "XguLRlc-hWqFhf8-KTxtCE434F6e4Hiqoc5cTBpLxnE"
       short-id: "111111"
   -
-    name: "🇷🇺 VK — #7"
+    name: "🇷🇺 VK — #7 2"
     type: "vless"
     server: "5.188.143.9"
     port: 443
@@ -33646,7 +33783,7 @@ proxies:
       public-key: "e4TzL8EKD8Ebhi9ZzZHtx9e3EcadTfGlqYqlJe2vlzg"
       short-id: "0e34bc8a"
   -
-    name: "🇷🇺 VK — #3"
+    name: "🇷🇺 VK — #3 2"
     type: "vless"
     server: "109.120.191.5"
     port: 443
@@ -33754,7 +33891,7 @@ proxies:
       public-key: "4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik"
       short-id: "d8c6b58bcbb0c323"
   -
-    name: "🇷🇺 VK — #2"
+    name: "🇷🇺 VK — #2 2"
     type: "vless"
     server: "5.188.142.134"
     port: 443
@@ -33881,7 +34018,7 @@ proxies:
       public-key: "4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik"
       short-id: "d8c6b58bcbb0c323"
   -
-    name: "🇷🇺 VK — #5"
+    name: "🇷🇺 VK — #5 2"
     type: "vless"
     server: "5.188.141.170"
     port: 443
@@ -34537,22 +34674,6 @@ proxies:
       short-id: "33e48a03db900ff3"
       spider-x: "/"
   -
-    name: "EPODONIOS 768"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 443
-    uuid: "5dc15e15-f285-4a9d-959b-0e4fbdd77b63"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "powered-by-surena.user68f797c2f3e1b.workers.dev"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/?ed"
-      headers:
-        Host: "powered-by-surena.user68f797c2f3e1b.workers.dev"
-  -
     name: "EPODONIOS 799"
     type: "vless"
     server: "ru6.ethicsdinnerpave.online"
@@ -34586,24 +34707,6 @@ proxies:
       path: "/?ed=2560"
       headers:
         Host: "sni.111000.indevs.in"
-  -
-    name: "EPODONIOS 863"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2096
-    uuid: "686c62d9-17a7-43c9-a40a-f6747df60a9f"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ca.adobe-connect.top"
-    client-fingerprint: "chrome"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "ca.adobe-connect.top"
   -
     name: "EPODONIOS 865"
     type: "vless"
@@ -34679,22 +34782,6 @@ proxies:
       short-id: "4294bfc2"
       spider-x: "/CUVGUaBl8cradcN"
   -
-    name: "EPODONIOS 905"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2053
-    uuid: "6e5aeb09-49db-4447-b7b4-d2af001f692d"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "paneluk.roomode.ir"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "paneluk.roomode.ir"
-  -
     name: "EPODONIOS 981"
     type: "vless"
     server: "185.137.232.194"
@@ -34728,22 +34815,6 @@ proxies:
     reality-opts:
       public-key: "QC03TEA8YdxpkQyJ8duwrqaP1dWAIlCjONzicWlWDjs"
       short-id: "b0d8f964b7ac8ac0"
-  -
-    name: "EPODONIOS 1048"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2053
-    uuid: "82e0462a-22d5-44f1-aa71-6482cec4a04b"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "fr.roomode.ir"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "fr.roomode.ir"
   -
     name: "EPODONIOS 1075"
     type: "vless"
@@ -35342,22 +35413,6 @@ proxies:
       public-key: "Lbug_wz0y9xgKeDK44D9kuUap0fXzNKyv_nMJxnZRzU"
       short-id: "28a059440d3d5ba1"
   -
-    name: "EPODONIOS 1709"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 443
-    uuid: "d057338f-0f7b-4245-80b3-6bcabd365b84"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "edgE26-TOPnET.TopnEt1127.wOrkErs.DeV"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/eyJqdW5rIjoicVZMOXFIcEN4UkI2azNnIiwicHJvdG9jb2wiOiJ2bCIsIm1vZGUiOiJwcm94eWlwIiwicGFuZWxJUHMiOltdfQ==?ed=2560"
-      headers:
-        Host: "edge26-topnet.topnet1127.workers.dev"
-  -
     name: "EPODONIOS 1730"
     type: "vless"
     server: "89.23.116.82"
@@ -35377,26 +35432,6 @@ proxies:
     encryption: "none"
     ws-opts:
       path: "/v1"
-  -
-    name: "EPODONIOS 1909"
-    type: "vless"
-    server: "chat.openai.com"
-    port: 443
-    uuid: "e5cc16a6-ea42-46b2-82ae-ad2157e1641b"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "hhlfy.twiladaphne.ndjp.net"
-    client-fingerprint: "chrome"
-    alpn:
-      - "h3"
-      - "h2"
-      - "http/1.1"
-    ws-opts:
-      path: "/fp"
-      headers:
-        Host: "hhlfy.twiladaphne.ndjp.net"
   -
     name: "EPODONIOS 1919"
     type: "vless"
@@ -35546,24 +35581,6 @@ proxies:
       public-key: "Y15uAAl8fpWhma1FIWyZujgRKdwxYaaF4zIyWyu9vSo"
       short-id: "5cc0"
   -
-    name: "@GozargahAzad|🏁"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 443
-    uuid: "30e88ba4-ce81-442f-80c5-0c1b43cad132"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "lEvikO.GodsaMAN.WORKERS.DeV"
-    client-fingerprint: "chrome"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/vl/NwxtaDG4X5UA0hTcoQpLq3VIr3"
-      headers:
-        Host: "leviko.godsaman.workers.dev"
-  -
     name: "🔥Join+Telegram:@Farah_VPN🟣 35"
     type: "vless"
     server: "31.76.34.146"
@@ -35679,37 +35696,18 @@ proxies:
     udp: true
     encryption: "none"
   -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 356"
+    name: "🔥Join+Telegram:@Farah_VPN🟣 388"
     type: "vless"
-    server: "chatgpt.com"
-    port: 2053
-    uuid: "2bd8e16e-ed15-49a8-9352-90ea8662174a"
-    network: "ws"
+    server: "mx.bexumconnect.ltd"
+    port: 443
+    uuid: "1e06c388-d31c-420e-916a-94a990648e34"
+    network: "tcp"
     udp: true
     encryption: "none"
+    flow: "xtls-rprx-vision"
     tls: true
-    servername: "fr.roomode.ir"
+    servername: "mx.bexumconnect.ltd"
     client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "fr.roomode.ir"
-  -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 378"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2053
-    uuid: "61aba7cc-02b5-49ef-8cb4-583465b6f098"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ca.roomode.ir"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "ca.roomode.ir"
   -
     name: "🔥Join+Telegram:@Farah_VPN🟣 428"
     type: "vless"
@@ -35747,22 +35745,6 @@ proxies:
       path: "/"
       headers:
         Host: "Tp3993VbRi.ScOrPiOnBiGpLaY.oRg"
-  -
-    name: "🔥Join+Telegram:@Farah_VPN🟣 457"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2053
-    uuid: "1b6410b4-0c59-4a91-9e5e-d74557677dbb"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "du.roomode.ir"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "du.roomode.ir"
   -
     name: "🔥Join+Telegram:@Farah_VPN🟣 471"
     type: "vless"
@@ -36011,20 +35993,14 @@ proxies:
     servername: "br-83-ru.netzrun.at"
     client-fingerprint: "firefox"
   -
-    name: "Telegram | @FNET00📱 2"
+    name: "@filembad 6"
     type: "vless"
-    server: "chat.openai.com"
+    server: "37.252.23.108"
     port: 443
-    uuid: "396c904b-4b62-4334-b793-ee25fc0c61cc"
-    network: "ws"
+    uuid: "dc9083be-4768-4225-8547-aa04eddc091a"
+    network: "tcp"
     udp: true
     encryption: "none"
-    tls: true
-    servername: "pages.dev"
-    ws-opts:
-      path: "/eyJqdW5rIjoiTHczMWlhREZIb0ljUDhoaCIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0=?ed=2560"
-      headers:
-        Host: "8vmU06cxdz59m931xnREgj8qpnoq1-06.pages.dev"
   -
     name: "Telegram | @FNET00📱 16"
     type: "vless"
@@ -36041,17 +36017,6 @@ proxies:
     reality-opts:
       public-key: "Qddpg8luihgzgx4g4uMJklXzlrMCd8L1igJSWrRUvSc"
       short-id: "1929ef620e9b34f5"
-  -
-    name: "UN【机场推荐：https://a9a.xyz】52"
-    type: "vless"
-    server: "176.98.178.17"
-    port: 4100
-    uuid: "87f3bc47-ee10-4418-9260-7a4e43f28e00"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
   -
     name: "👉🆔@v2ray_configs_pool📡🇷🇺®️Russia©️Obruchevo🅿️ping:36.05ms"
     type: "vless"
@@ -37372,19 +37337,6 @@ proxies:
     server: "104.171.132.128"
     port: 2200
     uuid: "6c0ced37-dd9c-43f2-b474-6dafe036c44b"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/v1"
-      headers:
-        Host: "rzd.ru"
-  -
-    name: "[🇷🇺] [vl-no-ws] [260812-114645.792]"
-    type: "vless"
-    server: "77.95.201.235"
-    port: 2200
-    uuid: "9b4ba157-f60b-4a5b-b326-4d561eb826d4"
     network: "ws"
     udp: true
     encryption: "none"
@@ -57404,7 +57356,7 @@ proxies:
   -
     name: "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK"
     type: "vless"
-    server: "89.208.199.252"
+    server: "obx1.vypnet.su"
     port: 443
     uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
     network: "tcp"
@@ -57413,7 +57365,7 @@ proxies:
     flow: "xtls-rprx-vision"
     tls: true
     servername: "obx1.vypnet.su"
-    client-fingerprint: "safari"
+    client-fingerprint: "android"
     reality-opts:
       public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
   -
@@ -57428,7 +57380,7 @@ proxies:
     flow: "xtls-rprx-vision"
     tls: true
     servername: "obx1.vypnet.su"
-    client-fingerprint: "android"
+    client-fingerprint: "edge"
     reality-opts:
       public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
   -
@@ -57443,7 +57395,7 @@ proxies:
     flow: "xtls-rprx-vision"
     tls: true
     servername: "obx1.vypnet.su"
-    client-fingerprint: "edge"
+    client-fingerprint: "ios"
     reality-opts:
       public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
   -
@@ -57458,26 +57410,11 @@ proxies:
     flow: "xtls-rprx-vision"
     tls: true
     servername: "obx1.vypnet.su"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
-  -
-    name: "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 5"
-    type: "vless"
-    server: "obx1.vypnet.su"
-    port: 443
-    uuid: "8f6085da-2a5f-4969-97c8-ee3e490ec75d"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "obx1.vypnet.su"
     client-fingerprint: "qq"
     reality-opts:
       public-key: "C819rM4M_c473A8glp-eBFh8Fm9O1cmEeXmivDhM1Fc"
   -
-    name: "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 6"
+    name: "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 5"
     type: "vless"
     server: "obx1.vypnet.su"
     port: 443
@@ -57657,37 +57594,37 @@ proxy-groups:
     type: "url-test"
     proxies:
       - "🇷🇺 VK — #1"
-      - "🇷🇺 Yandex — #2"
-      - "🇷🇺 4vps.su — #3"
-      - "🇷🇺 4vps.su — #4"
-      - "🇷🇺 Aeza Group — #5"
-      - "🇷🇺 Aeza Group — #6"
-      - "🇷🇺 Beget — #7"
-      - "🇷🇺 Beget — #8"
-      - "🇷🇺 Beget — #9"
-      - "🇷🇺 Beget — #10"
-      - "🇷🇺 Beget — #11"
+      - "🇷🇺 VK — #2"
+      - "🇷🇺 VK — #3"
+      - "🇷🇺 VK — #4"
+      - "🇷🇺 VK — #5"
+      - "🇷🇺 VK — #6"
+      - "🇷🇺 VK — #7"
+      - "🇷🇺 Yandex — #8"
+      - "🇷🇺 4vps.su — #9"
+      - "🇷🇺 Aeza Group — #10"
+      - "🇷🇺 Aeza Group — #11"
       - "🇷🇺 Beget — #12"
       - "🇷🇺 Beget — #13"
       - "🇷🇺 Beget — #14"
       - "🇷🇺 Beget — #15"
-      - "🇷🇺 MegaMax Network — #16"
-      - "🇷🇺 reg.ru — #17"
-      - "🇷🇺 Selectel — #18"
-      - "🇷🇺 Selectel — #19"
-      - "🇷🇺 Selectel — #20"
-      - "🇷🇺 Selectel — #21"
-      - "🇷🇺 SpaceWeb — #22"
-      - "🇷🇺 SpaceWeb — #23"
-      - "🇷🇺 SpaceWeb — #24"
-      - "🇷🇺 SpaceWeb — #25"
-      - "🇷🇺 SpaceWeb — #26"
-      - "🇷🇺 SpaceWeb — #27"
-      - "🇷🇺 SpaceWeb — #28"
+      - "🇷🇺 Beget — #16"
+      - "🇷🇺 Beget — #17"
+      - "🇷🇺 Beget — #18"
+      - "🇷🇺 Beget — #19"
+      - "🇷🇺 Beget — #20"
+      - "🇷🇺 Beget — #21"
+      - "🇷🇺 Beget — #22"
+      - "🇷🇺 reg.ru — #23"
+      - "🇷🇺 Selectel — #24"
+      - "🇷🇺 Selectel — #25"
+      - "🇷🇺 Selectel — #26"
+      - "🇷🇺 Selectel — #27"
+      - "🇷🇺 Selectel — #28"
       - "🇷🇺 SpaceWeb — #29"
       - "🇷🇺 SpaceWeb — #30"
-      - "🇷🇺 Timeweb — #31"
-      - "🇷🇺 Timeweb — #32"
+      - "🇷🇺 SpaceWeb — #31"
+      - "🇷🇺 SpaceWeb — #32"
       - "🇷🇺 Timeweb — #33"
       - "🇷🇺 Timeweb — #34"
       - "🇷🇺 Timeweb — #35"
@@ -57715,9 +57652,9 @@ proxy-groups:
       - "🇷🇺 Timeweb — #57"
       - "🇷🇺 Timeweb — #58"
       - "🇷🇺 Timeweb — #59"
-      - "🇷🇺 Xorek.Cloud — #60"
-      - "🇷🇺 Xorek.Cloud — #61"
-      - "🇷🇺 Xorek.Cloud — #62"
+      - "🇷🇺 Timeweb — #60"
+      - "🇷🇺 Timeweb — #61"
+      - "🇷🇺 Timeweb — #62"
       - "🇷🇺 Xorek.Cloud — #63"
       - "🇷🇺 Xorek.Cloud — #64"
       - "🇷🇺 Xorek.Cloud — #65"
@@ -57725,6 +57662,31 @@ proxy-groups:
       - "🇷🇺 Xorek.Cloud — #67"
       - "🇷🇺 Xorek.Cloud — #68"
       - "🇷🇺 Xorek.Cloud — #69"
+      - "🇷🇺 Xorek.Cloud — #70"
+      - "🇷🇺 Xorek.Cloud — #71"
+      - "🇷🇺 VK — #1 2"
+      - "🇷🇺 4vps.su — #3"
+      - "🇷🇺 MegaMax Network — #16"
+      - "🇷🇺 Selectel — #18"
+      - "🇷🇺 Selectel — #20"
+      - "🇷🇺 Selectel — #21"
+      - "🇷🇺 SpaceWeb — #22"
+      - "🇷🇺 SpaceWeb — #23"
+      - "🇷🇺 SpaceWeb — #25"
+      - "🇷🇺 SpaceWeb — #26"
+      - "🇷🇺 SpaceWeb — #28"
+      - "🇷🇺 SpaceWeb — #29 2"
+      - "🇷🇺 Timeweb — #31"
+      - "🇷🇺 Timeweb — #32"
+      - "🇷🇺 Timeweb — #35 2"
+      - "🇷🇺 Timeweb — #38 2"
+      - "🇷🇺 Timeweb — #39 2"
+      - "🇷🇺 Timeweb — #47 2"
+      - "🇷🇺 Timeweb — #50 2"
+      - "🇷🇺 Timeweb — #59 2"
+      - "🇷🇺 Xorek.Cloud — #60"
+      - "🇷🇺 Xorek.Cloud — #62"
+      - "🇷🇺 Xorek.Cloud — #69 2"
       - "RU 🇷🇺 | @Raydikalx | E75E36"
       - "RU 🇷🇺 | @Raydikalx | 31DEE0"
       - "RU 🇷🇺 | @Raydikalx | D25CF2"
@@ -57740,11 +57702,9 @@ proxy-groups:
       - "RU 🇷🇺 | @Raydikalx | 8C08F1"
       - "RU 🇷🇺 | @Raydikalx | B609F8"
       - "RU 🇷🇺 | @Raydikalx | 998905"
-      - "RU 🇷🇺 | @Raydikalx | 6425E0"
       - "RU 🇷🇺 | @Raydikalx | CC8163"
       - "RU 🇷🇺 | @Raydikalx | 1AC6EF"
       - "RU 🇷🇺 | @Raydikalx | 24A4BD"
-      - "RU 🇷🇺 | @Raydikalx | 5CBDC8"
       - "RU 🇷🇺 | @Raydikalx | 882CE3"
       - "RU 🇷🇺 | @Raydikalx | 6E5BE5"
       - "RU 🇷🇺 | @Raydikalx | DFC5F0"
@@ -57759,15 +57719,12 @@ proxy-groups:
       - "RU 🇷🇺 | @Raydikalx | 70310D"
       - "RU 🇷🇺 | @Raydikalx | BC96D4"
       - "RU 🇷🇺 | @Raydikalx | 41B478"
-      - "RU 🇷🇺 | @Raydikalx | E9CD3D"
       - "RU 🇷🇺 | @Raydikalx | 49703A"
       - "RU 🇷🇺 | @Raydikalx | B7E2E5"
-      - "RU 🇷🇺 | @Raydikalx | 881BD9"
       - "RU 🇷🇺 | @Raydikalx | 446E5B"
       - "RU 🇷🇺 | @Raydikalx | DBF1FD"
       - "RU 🇷🇺 | @Raydikalx | 4E3430"
       - "RU 🇷🇺 | @Raydikalx | C594A4"
-      - "RU 🇷🇺 | @Raydikalx | 8AE528"
       - "RU 🇷🇺 | @Raydikalx | A9AD0C"
       - "RU 🇷🇺 | @Raydikalx | 9F16CF"
       - "RU 🇷🇺 | @Raydikalx | 977C78"
@@ -57782,7 +57739,6 @@ proxy-groups:
       - "RU 🇷🇺 | @Raydikalx | F7DB48"
       - "RU 🇷🇺 | @Raydikalx | 6FA856"
       - "RU 🇷🇺 | @Raydikalx | E604A8"
-      - "RU 🇷🇺 | @Raydikalx | 6B2155"
       - "RU 🇷🇺 | @Raydikalx | 1CE5D8"
       - "RU 🇷🇺 | @Raydikalx | C1475E"
       - "RU 🇷🇺 | @Raydikalx | 0486BD"
@@ -57793,7 +57749,6 @@ proxy-groups:
       - "RU 🇷🇺 | @Raydikalx | 0C5F5E"
       - "RU 🇷🇺 | @Raydikalx | 588872"
       - "RU 🇷🇺 | @Raydikalx | 91112B"
-      - "RU 🇷🇺 | @Raydikalx | 9D3F75"
       - "RU 🇷🇺 | @Raydikalx | 7FAC8C"
       - "RU 🇷🇺 | @Raydikalx | E791C9"
       - "RU 🇷🇺 | @Raydikalx | 76849C"
@@ -58333,10 +58288,6 @@ proxy-groups:
       - "5. 🇷🇺 VLESS | SNI: cloudflare.vhub.pro | CIDR: Yandex | TG: @wlrustg | Thanks: @YoutubeUnBlockRu"
       - "6. 🇷🇺 VLESS | SNI: cloudflare.vhub.pro | CIDR: Yandex | TG: @wlrustg | Thanks: @YoutubeUnBlockRu"
       - "9. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-      - "10. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-      - "11. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-      - "12. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-      - "13. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
       - "48. 🇷🇺 VLESS | SNI: api-maps.yandex.ru | CIDR: Yandex | TG: @wlrustg"
       - "51. 🇷🇺 VLESS | SNI: vk.com | CIDR: ? | TG: @wlrustg"
       - "52. 🇷🇺 VLESS | SNI: rutube.ru | CIDR: ? | TG: @wlrustg"
@@ -59627,7 +59578,6 @@ proxy-groups:
       - "1462 | 🇷🇺 Russia | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
       - "1607 | 🇷🇺 Russia | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
       - "1718 | 🇷🇺 Russia | 🏳️ CIDR-IHC | VLESS | TG: @YoutubeUnBlockRu"
-      - "1757 | 🇷🇺 Russia | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu"
       - "1929 | 🇷🇺 Russia | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
       - "2369 | 🇷🇺 Russia | 🏳️ CIDR-Selectel | VLESS | TG: @YoutubeUnBlockRu"
       - "2596 | 🌐 Unknown | 🏳️ SNI-VK | VLESS | TG: @YoutubeUnBlockRu"
@@ -59740,10 +59690,8 @@ proxy-groups:
       - "AetrisVPN White list ┃ ✅ SNI: web.max.ru ┃ 🇷🇺 Россия 3"
       - "AetrisVPN White list ┃ ✅ SNI: id.vk.com ┃ 🇷🇺 Россия"
       - "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия 2"
-      - "AetrisVPN White list ┃ ✅ SNI: live.ok.ru ┃ 🇷🇺 Россия 2"
       - "AetrisVPN White list ┃ ✅ SNI: max.ru ┃ 🇷🇺 Россия 4"
       - "AetrisVPN White list ┃ ✅ SNI: max.ru ┃ 🇷🇺 Россия 5"
-      - "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия 3"
       - "AetrisVPN White list ┃ ✅ SNI: rruu.persik.host ┃ 🇷🇺 Россия 6"
       - "AetrisVPN White list ┃ ✅ SNI: rruu.persik.host ┃ 🇷🇺 Россия 7"
       - "AetrisVPN White list ┃ ✅ SNI: smartcaptcha.yandexcloud.net ┃ 🇷🇺 Россия"
@@ -59769,16 +59717,16 @@ proxy-groups:
       - "🇷🇺 Russia [*CIDR] VK 8"
       - "🇷🇺 Russia [*CIDR] VK 9"
       - "🌐 Anycast-IP | [IPv6] [*CIDR] VK"
-      - "🇷🇺 VK — #7"
+      - "🇷🇺 VK — #7 2"
       - "🇷🇺 Yandex — #31"
-      - "🇷🇺 VK — #3"
+      - "🇷🇺 VK — #3 2"
       - "🇷🇺 VK — #30"
       - "🇷🇺 VK — #8"
       - "🇷🇺 Yandex — #32"
       - "🇷🇺 VK — #20"
       - "🇷🇺 Yandex — #33"
       - "🇷🇺 VK — #25"
-      - "🇷🇺 VK — #2"
+      - "🇷🇺 VK — #2 2"
       - "🇷🇺 VK — #24"
       - "🇷🇺 Timeweb — #44 2"
       - "🇷🇺 Timeweb — #45 2"
@@ -59786,7 +59734,7 @@ proxy-groups:
       - "🇷🇺 VK — #15"
       - "🇷🇺 VK — #14"
       - "🇷🇺 VK — #16"
-      - "🇷🇺 VK — #5"
+      - "🇷🇺 VK — #5 2"
       - "🇷🇺 VK — #13"
       - "🇷🇺 VK — #11"
       - "🇷🇺 Yandex — #35"
@@ -59829,19 +59777,15 @@ proxy-groups:
       - "EPODONIOS 657"
       - "EPODONIOS 658"
       - "EPODONIOS 741"
-      - "EPODONIOS 768"
       - "EPODONIOS 799"
       - "EPODONIOS 829"
-      - "EPODONIOS 863"
       - "EPODONIOS 865"
       - "EPODONIOS 866"
       - "EPODONIOS 892"
       - "EPODONIOS 893"
       - "EPODONIOS 896"
-      - "EPODONIOS 905"
       - "EPODONIOS 981"
       - "EPODONIOS 986"
-      - "EPODONIOS 1048"
       - "EPODONIOS 1075"
       - "EPODONIOS 1076"
       - "EPODONIOS 1078"
@@ -59881,10 +59825,8 @@ proxy-groups:
       - "EPODONIOS 1617"
       - "EPODONIOS 1618"
       - "EPODONIOS 1634"
-      - "EPODONIOS 1709"
       - "EPODONIOS 1730"
       - "EPODONIOS 1747"
-      - "EPODONIOS 1909"
       - "EPODONIOS 1919"
       - "EPODONIOS 1929"
       - "EPODONIOS 1932"
@@ -59895,7 +59837,6 @@ proxy-groups:
       - "EPODONIOS 2411"
       - "EPODONIOS 2415"
       - "EPODONIOS 2417"
-      - "@GozargahAzad|🏁"
       - "🔥Join+Telegram:@Farah_VPN🟣 35"
       - "🔥Join+Telegram:@Farah_VPN🟣 41"
       - "🔥Join+Telegram:@Farah_VPN🟣 74"
@@ -59905,12 +59846,10 @@ proxy-groups:
       - "🔥Join+Telegram:@Farah_VPN🟣 234"
       - "🔥Join+Telegram:@Farah_VPN🟣 280"
       - "🔥Join+Telegram:@Farah_VPN🟣 322"
-      - "🔥Join+Telegram:@Farah_VPN🟣 356"
-      - "🔥Join+Telegram:@Farah_VPN🟣 378"
+      - "🔥Join+Telegram:@Farah_VPN🟣 388"
       - "🔥Join+Telegram:@Farah_VPN🟣 428"
       - "🔥Join+Telegram:@Farah_VPN🟣 431"
       - "🔥Join+Telegram:@Farah_VPN🟣 455"
-      - "🔥Join+Telegram:@Farah_VPN🟣 457"
       - "🔥Join+Telegram:@Farah_VPN🟣 471"
       - "🔥Join+Telegram:@Farah_VPN🟣 499"
       - "🔥Join+Telegram:@Farah_VPN🟣 510"
@@ -59928,9 +59867,8 @@ proxy-groups:
       - "俄罗斯"
       - "🇷🇺 V2RayyNGvpn 2"
       - "👁️🗨️ 4"
-      - "Telegram | @FNET00📱 2"
+      - "@filembad 6"
       - "Telegram | @FNET00📱 16"
-      - "UN【机场推荐：https://a9a.xyz】52"
       - "👉🆔@v2ray_configs_pool📡🇷🇺®️Russia©️Obruchevo🅿️ping:36.05ms"
       - "@nekopingbot_6572"
       - "@nekopingbot_6653"
@@ -60017,7 +59955,6 @@ proxy-groups:
       - "[🇷🇺] [vl-no-ws] [260812-114226.269]"
       - "[🇷🇺] [vl-no-ws] [260812-114231.454]"
       - "[🇷🇺] [vl-no-ws] [260812-114339.313]"
-      - "[🇷🇺] [vl-no-ws] [260812-114645.792]"
       - "[🇷🇺] [vl-no-ws] [260812-114725.520]"
       - "[🇷🇺] [vl-no-ws] [260812-114737.717]"
       - "[🇷🇺] [vl-no-ws] [260812-114809.354]"
@@ -61291,7 +61228,6 @@ proxy-groups:
       - "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 3"
       - "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 4"
       - "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 5"
-      - "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 6"
       - "🥥2🏝️ 142. 🇷🇺 Russia"
       - "🥥2🏝️ 173. 🇷🇺 Russia"
       - "🥥2🏝️ 178. 🇷🇺 Russia"
@@ -61311,37 +61247,37 @@ proxy-groups:
     type: "select"
     proxies:
       - "🇷🇺 VK — #1"
-      - "🇷🇺 Yandex — #2"
-      - "🇷🇺 4vps.su — #3"
-      - "🇷🇺 4vps.su — #4"
-      - "🇷🇺 Aeza Group — #5"
-      - "🇷🇺 Aeza Group — #6"
-      - "🇷🇺 Beget — #7"
-      - "🇷🇺 Beget — #8"
-      - "🇷🇺 Beget — #9"
-      - "🇷🇺 Beget — #10"
-      - "🇷🇺 Beget — #11"
+      - "🇷🇺 VK — #2"
+      - "🇷🇺 VK — #3"
+      - "🇷🇺 VK — #4"
+      - "🇷🇺 VK — #5"
+      - "🇷🇺 VK — #6"
+      - "🇷🇺 VK — #7"
+      - "🇷🇺 Yandex — #8"
+      - "🇷🇺 4vps.su — #9"
+      - "🇷🇺 Aeza Group — #10"
+      - "🇷🇺 Aeza Group — #11"
       - "🇷🇺 Beget — #12"
       - "🇷🇺 Beget — #13"
       - "🇷🇺 Beget — #14"
       - "🇷🇺 Beget — #15"
-      - "🇷🇺 MegaMax Network — #16"
-      - "🇷🇺 reg.ru — #17"
-      - "🇷🇺 Selectel — #18"
-      - "🇷🇺 Selectel — #19"
-      - "🇷🇺 Selectel — #20"
-      - "🇷🇺 Selectel — #21"
-      - "🇷🇺 SpaceWeb — #22"
-      - "🇷🇺 SpaceWeb — #23"
-      - "🇷🇺 SpaceWeb — #24"
-      - "🇷🇺 SpaceWeb — #25"
-      - "🇷🇺 SpaceWeb — #26"
-      - "🇷🇺 SpaceWeb — #27"
-      - "🇷🇺 SpaceWeb — #28"
+      - "🇷🇺 Beget — #16"
+      - "🇷🇺 Beget — #17"
+      - "🇷🇺 Beget — #18"
+      - "🇷🇺 Beget — #19"
+      - "🇷🇺 Beget — #20"
+      - "🇷🇺 Beget — #21"
+      - "🇷🇺 Beget — #22"
+      - "🇷🇺 reg.ru — #23"
+      - "🇷🇺 Selectel — #24"
+      - "🇷🇺 Selectel — #25"
+      - "🇷🇺 Selectel — #26"
+      - "🇷🇺 Selectel — #27"
+      - "🇷🇺 Selectel — #28"
       - "🇷🇺 SpaceWeb — #29"
       - "🇷🇺 SpaceWeb — #30"
-      - "🇷🇺 Timeweb — #31"
-      - "🇷🇺 Timeweb — #32"
+      - "🇷🇺 SpaceWeb — #31"
+      - "🇷🇺 SpaceWeb — #32"
       - "🇷🇺 Timeweb — #33"
       - "🇷🇺 Timeweb — #34"
       - "🇷🇺 Timeweb — #35"
@@ -61369,9 +61305,9 @@ proxy-groups:
       - "🇷🇺 Timeweb — #57"
       - "🇷🇺 Timeweb — #58"
       - "🇷🇺 Timeweb — #59"
-      - "🇷🇺 Xorek.Cloud — #60"
-      - "🇷🇺 Xorek.Cloud — #61"
-      - "🇷🇺 Xorek.Cloud — #62"
+      - "🇷🇺 Timeweb — #60"
+      - "🇷🇺 Timeweb — #61"
+      - "🇷🇺 Timeweb — #62"
       - "🇷🇺 Xorek.Cloud — #63"
       - "🇷🇺 Xorek.Cloud — #64"
       - "🇷🇺 Xorek.Cloud — #65"
@@ -61379,6 +61315,31 @@ proxy-groups:
       - "🇷🇺 Xorek.Cloud — #67"
       - "🇷🇺 Xorek.Cloud — #68"
       - "🇷🇺 Xorek.Cloud — #69"
+      - "🇷🇺 Xorek.Cloud — #70"
+      - "🇷🇺 Xorek.Cloud — #71"
+      - "🇷🇺 VK — #1 2"
+      - "🇷🇺 4vps.su — #3"
+      - "🇷🇺 MegaMax Network — #16"
+      - "🇷🇺 Selectel — #18"
+      - "🇷🇺 Selectel — #20"
+      - "🇷🇺 Selectel — #21"
+      - "🇷🇺 SpaceWeb — #22"
+      - "🇷🇺 SpaceWeb — #23"
+      - "🇷🇺 SpaceWeb — #25"
+      - "🇷🇺 SpaceWeb — #26"
+      - "🇷🇺 SpaceWeb — #28"
+      - "🇷🇺 SpaceWeb — #29 2"
+      - "🇷🇺 Timeweb — #31"
+      - "🇷🇺 Timeweb — #32"
+      - "🇷🇺 Timeweb — #35 2"
+      - "🇷🇺 Timeweb — #38 2"
+      - "🇷🇺 Timeweb — #39 2"
+      - "🇷🇺 Timeweb — #47 2"
+      - "🇷🇺 Timeweb — #50 2"
+      - "🇷🇺 Timeweb — #59 2"
+      - "🇷🇺 Xorek.Cloud — #60"
+      - "🇷🇺 Xorek.Cloud — #62"
+      - "🇷🇺 Xorek.Cloud — #69 2"
       - "RU 🇷🇺 | @Raydikalx | E75E36"
       - "RU 🇷🇺 | @Raydikalx | 31DEE0"
       - "RU 🇷🇺 | @Raydikalx | D25CF2"
@@ -61394,11 +61355,9 @@ proxy-groups:
       - "RU 🇷🇺 | @Raydikalx | 8C08F1"
       - "RU 🇷🇺 | @Raydikalx | B609F8"
       - "RU 🇷🇺 | @Raydikalx | 998905"
-      - "RU 🇷🇺 | @Raydikalx | 6425E0"
       - "RU 🇷🇺 | @Raydikalx | CC8163"
       - "RU 🇷🇺 | @Raydikalx | 1AC6EF"
       - "RU 🇷🇺 | @Raydikalx | 24A4BD"
-      - "RU 🇷🇺 | @Raydikalx | 5CBDC8"
       - "RU 🇷🇺 | @Raydikalx | 882CE3"
       - "RU 🇷🇺 | @Raydikalx | 6E5BE5"
       - "RU 🇷🇺 | @Raydikalx | DFC5F0"
@@ -61413,15 +61372,12 @@ proxy-groups:
       - "RU 🇷🇺 | @Raydikalx | 70310D"
       - "RU 🇷🇺 | @Raydikalx | BC96D4"
       - "RU 🇷🇺 | @Raydikalx | 41B478"
-      - "RU 🇷🇺 | @Raydikalx | E9CD3D"
       - "RU 🇷🇺 | @Raydikalx | 49703A"
       - "RU 🇷🇺 | @Raydikalx | B7E2E5"
-      - "RU 🇷🇺 | @Raydikalx | 881BD9"
       - "RU 🇷🇺 | @Raydikalx | 446E5B"
       - "RU 🇷🇺 | @Raydikalx | DBF1FD"
       - "RU 🇷🇺 | @Raydikalx | 4E3430"
       - "RU 🇷🇺 | @Raydikalx | C594A4"
-      - "RU 🇷🇺 | @Raydikalx | 8AE528"
       - "RU 🇷🇺 | @Raydikalx | A9AD0C"
       - "RU 🇷🇺 | @Raydikalx | 9F16CF"
       - "RU 🇷🇺 | @Raydikalx | 977C78"
@@ -61436,7 +61392,6 @@ proxy-groups:
       - "RU 🇷🇺 | @Raydikalx | F7DB48"
       - "RU 🇷🇺 | @Raydikalx | 6FA856"
       - "RU 🇷🇺 | @Raydikalx | E604A8"
-      - "RU 🇷🇺 | @Raydikalx | 6B2155"
       - "RU 🇷🇺 | @Raydikalx | 1CE5D8"
       - "RU 🇷🇺 | @Raydikalx | C1475E"
       - "RU 🇷🇺 | @Raydikalx | 0486BD"
@@ -61447,7 +61402,6 @@ proxy-groups:
       - "RU 🇷🇺 | @Raydikalx | 0C5F5E"
       - "RU 🇷🇺 | @Raydikalx | 588872"
       - "RU 🇷🇺 | @Raydikalx | 91112B"
-      - "RU 🇷🇺 | @Raydikalx | 9D3F75"
       - "RU 🇷🇺 | @Raydikalx | 7FAC8C"
       - "RU 🇷🇺 | @Raydikalx | E791C9"
       - "RU 🇷🇺 | @Raydikalx | 76849C"
@@ -61987,10 +61941,6 @@ proxy-groups:
       - "5. 🇷🇺 VLESS | SNI: cloudflare.vhub.pro | CIDR: Yandex | TG: @wlrustg | Thanks: @YoutubeUnBlockRu"
       - "6. 🇷🇺 VLESS | SNI: cloudflare.vhub.pro | CIDR: Yandex | TG: @wlrustg | Thanks: @YoutubeUnBlockRu"
       - "9. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-      - "10. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-      - "11. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-      - "12. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
-      - "13. 🇷🇺 VLESS | SNI: obx1.vypnet.su | CIDR: VK | TG: @wlrustg"
       - "48. 🇷🇺 VLESS | SNI: api-maps.yandex.ru | CIDR: Yandex | TG: @wlrustg"
       - "51. 🇷🇺 VLESS | SNI: vk.com | CIDR: ? | TG: @wlrustg"
       - "52. 🇷🇺 VLESS | SNI: rutube.ru | CIDR: ? | TG: @wlrustg"
@@ -63281,7 +63231,6 @@ proxy-groups:
       - "1462 | 🇷🇺 Russia | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
       - "1607 | 🇷🇺 Russia | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
       - "1718 | 🇷🇺 Russia | 🏳️ CIDR-IHC | VLESS | TG: @YoutubeUnBlockRu"
-      - "1757 | 🇷🇺 Russia | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu"
       - "1929 | 🇷🇺 Russia | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
       - "2369 | 🇷🇺 Russia | 🏳️ CIDR-Selectel | VLESS | TG: @YoutubeUnBlockRu"
       - "2596 | 🌐 Unknown | 🏳️ SNI-VK | VLESS | TG: @YoutubeUnBlockRu"
@@ -63394,10 +63343,8 @@ proxy-groups:
       - "AetrisVPN White list ┃ ✅ SNI: web.max.ru ┃ 🇷🇺 Россия 3"
       - "AetrisVPN White list ┃ ✅ SNI: id.vk.com ┃ 🇷🇺 Россия"
       - "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия 2"
-      - "AetrisVPN White list ┃ ✅ SNI: live.ok.ru ┃ 🇷🇺 Россия 2"
       - "AetrisVPN White list ┃ ✅ SNI: max.ru ┃ 🇷🇺 Россия 4"
       - "AetrisVPN White list ┃ ✅ SNI: max.ru ┃ 🇷🇺 Россия 5"
-      - "AetrisVPN White list ┃ ✅ SNI: rzd.ru ┃ 🇷🇺 Россия 3"
       - "AetrisVPN White list ┃ ✅ SNI: rruu.persik.host ┃ 🇷🇺 Россия 6"
       - "AetrisVPN White list ┃ ✅ SNI: rruu.persik.host ┃ 🇷🇺 Россия 7"
       - "AetrisVPN White list ┃ ✅ SNI: smartcaptcha.yandexcloud.net ┃ 🇷🇺 Россия"
@@ -63423,16 +63370,16 @@ proxy-groups:
       - "🇷🇺 Russia [*CIDR] VK 8"
       - "🇷🇺 Russia [*CIDR] VK 9"
       - "🌐 Anycast-IP | [IPv6] [*CIDR] VK"
-      - "🇷🇺 VK — #7"
+      - "🇷🇺 VK — #7 2"
       - "🇷🇺 Yandex — #31"
-      - "🇷🇺 VK — #3"
+      - "🇷🇺 VK — #3 2"
       - "🇷🇺 VK — #30"
       - "🇷🇺 VK — #8"
       - "🇷🇺 Yandex — #32"
       - "🇷🇺 VK — #20"
       - "🇷🇺 Yandex — #33"
       - "🇷🇺 VK — #25"
-      - "🇷🇺 VK — #2"
+      - "🇷🇺 VK — #2 2"
       - "🇷🇺 VK — #24"
       - "🇷🇺 Timeweb — #44 2"
       - "🇷🇺 Timeweb — #45 2"
@@ -63440,7 +63387,7 @@ proxy-groups:
       - "🇷🇺 VK — #15"
       - "🇷🇺 VK — #14"
       - "🇷🇺 VK — #16"
-      - "🇷🇺 VK — #5"
+      - "🇷🇺 VK — #5 2"
       - "🇷🇺 VK — #13"
       - "🇷🇺 VK — #11"
       - "🇷🇺 Yandex — #35"
@@ -63483,19 +63430,15 @@ proxy-groups:
       - "EPODONIOS 657"
       - "EPODONIOS 658"
       - "EPODONIOS 741"
-      - "EPODONIOS 768"
       - "EPODONIOS 799"
       - "EPODONIOS 829"
-      - "EPODONIOS 863"
       - "EPODONIOS 865"
       - "EPODONIOS 866"
       - "EPODONIOS 892"
       - "EPODONIOS 893"
       - "EPODONIOS 896"
-      - "EPODONIOS 905"
       - "EPODONIOS 981"
       - "EPODONIOS 986"
-      - "EPODONIOS 1048"
       - "EPODONIOS 1075"
       - "EPODONIOS 1076"
       - "EPODONIOS 1078"
@@ -63535,10 +63478,8 @@ proxy-groups:
       - "EPODONIOS 1617"
       - "EPODONIOS 1618"
       - "EPODONIOS 1634"
-      - "EPODONIOS 1709"
       - "EPODONIOS 1730"
       - "EPODONIOS 1747"
-      - "EPODONIOS 1909"
       - "EPODONIOS 1919"
       - "EPODONIOS 1929"
       - "EPODONIOS 1932"
@@ -63549,7 +63490,6 @@ proxy-groups:
       - "EPODONIOS 2411"
       - "EPODONIOS 2415"
       - "EPODONIOS 2417"
-      - "@GozargahAzad|🏁"
       - "🔥Join+Telegram:@Farah_VPN🟣 35"
       - "🔥Join+Telegram:@Farah_VPN🟣 41"
       - "🔥Join+Telegram:@Farah_VPN🟣 74"
@@ -63559,12 +63499,10 @@ proxy-groups:
       - "🔥Join+Telegram:@Farah_VPN🟣 234"
       - "🔥Join+Telegram:@Farah_VPN🟣 280"
       - "🔥Join+Telegram:@Farah_VPN🟣 322"
-      - "🔥Join+Telegram:@Farah_VPN🟣 356"
-      - "🔥Join+Telegram:@Farah_VPN🟣 378"
+      - "🔥Join+Telegram:@Farah_VPN🟣 388"
       - "🔥Join+Telegram:@Farah_VPN🟣 428"
       - "🔥Join+Telegram:@Farah_VPN🟣 431"
       - "🔥Join+Telegram:@Farah_VPN🟣 455"
-      - "🔥Join+Telegram:@Farah_VPN🟣 457"
       - "🔥Join+Telegram:@Farah_VPN🟣 471"
       - "🔥Join+Telegram:@Farah_VPN🟣 499"
       - "🔥Join+Telegram:@Farah_VPN🟣 510"
@@ -63582,9 +63520,8 @@ proxy-groups:
       - "俄罗斯"
       - "🇷🇺 V2RayyNGvpn 2"
       - "👁️🗨️ 4"
-      - "Telegram | @FNET00📱 2"
+      - "@filembad 6"
       - "Telegram | @FNET00📱 16"
-      - "UN【机场推荐：https://a9a.xyz】52"
       - "👉🆔@v2ray_configs_pool📡🇷🇺®️Russia©️Obruchevo🅿️ping:36.05ms"
       - "@nekopingbot_6572"
       - "@nekopingbot_6653"
@@ -63671,7 +63608,6 @@ proxy-groups:
       - "[🇷🇺] [vl-no-ws] [260812-114226.269]"
       - "[🇷🇺] [vl-no-ws] [260812-114231.454]"
       - "[🇷🇺] [vl-no-ws] [260812-114339.313]"
-      - "[🇷🇺] [vl-no-ws] [260812-114645.792]"
       - "[🇷🇺] [vl-no-ws] [260812-114725.520]"
       - "[🇷🇺] [vl-no-ws] [260812-114737.717]"
       - "[🇷🇺] [vl-no-ws] [260812-114809.354]"
@@ -64945,7 +64881,6 @@ proxy-groups:
       - "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 3"
       - "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 4"
       - "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 5"
-      - "🇷🇺 🥥11🏝️ Russia | [*CIDR] VK 6"
       - "🥥2🏝️ 142. 🇷🇺 Russia"
       - "🥥2🏝️ 173. 🇷🇺 Russia"
       - "🥥2🏝️ 178. 🇷🇺 Russia"
