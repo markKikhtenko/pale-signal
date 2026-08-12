@@ -9,11 +9,13 @@ proxy-providers:
     url: "https://markkikhtenko.github.io/pale-signal/subscription-bs-safe-manual.yaml"
     path: "./proxy_provider/pale-signal-bs-safe-manual.yaml"
     interval: 43200
+    proxy: "DIRECT"
   BS-SAFE-AUTO:
     type: "http"
     url: "https://markkikhtenko.github.io/pale-signal/subscription-bs-safe-auto.yaml"
     path: "./proxy_provider/pale-signal-bs-safe-auto.yaml"
     interval: 43200
+    proxy: "DIRECT"
 proxy-groups:
   -
     name: "AUTO"

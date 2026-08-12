@@ -1280,12 +1280,14 @@ def build_bs_safe_config() -> dict:
                 "url": BS_SAFE_MANUAL_PROVIDER_URL,
                 "path": "./proxy_provider/pale-signal-bs-safe-manual.yaml",
                 "interval": 43200,
+                "proxy": "DIRECT",
             },
             "BS-SAFE-AUTO": {
                 "type": "http",
                 "url": BS_SAFE_AUTO_PROVIDER_URL,
                 "path": "./proxy_provider/pale-signal-bs-safe-auto.yaml",
                 "interval": 43200,
+                "proxy": "DIRECT",
             },
         },
         "proxy-groups": [
@@ -1413,6 +1415,8 @@ def validate_bs_safe_config(config: dict) -> None:
         "BS-SAFE-AUTO",
     }:
         raise RuntimeError("BS Safe proxy providers are invalid")
+    if any(provider.get("proxy") != "DIRECT" for provider in providers.values()):
+        raise RuntimeError("BS Safe proxy providers must bootstrap through DIRECT")
     if not isinstance(groups, list) or [group.get("name") for group in groups] != [
         "AUTO",
         "MANUAL",
