@@ -282,8 +282,21 @@ UPDATE_HISTORY_LIMIT = 10
 GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
+BS_SAFE_RU_LIMIT = BS_SAFE_SUBSCRIPTION_LIMIT // 2
 BS_SAFE_FINGERPRINTS = {"firefox", "edge", "qq", "android"}
 BS_SAFE_NETWORKS = {"grpc", "xhttp"}
+BS_SAFE_MOBILE_SOURCE_IDS = {
+    "IGARECK_WHITE_MOBILE_1",
+    "IGARECK_WHITE_CIDR_CHECKED",
+    "IGARECK_WHITE_CIDR",
+    "IGARECK_WHITE_SNI",
+    "KIRILLO4KA_WHITE_MOBILE",
+    "KIRILLO4KA_WHITE_CIDR_CHECKED",
+    "KIRILLO4KA_WHITE_CIDR",
+    "KIRILLO4KA_WHITE_SNI",
+    "WLUNLOCKER_CIDR_1",
+    "WLUNLOCKER_CIDR_2",
+}
 BLOCKED_PROXY_KEYS = {
     ("78.159.250.214", 443, "eb78e1f0-d921-4ca9-a889-261fcc5a0547"),
 }
@@ -1071,11 +1084,15 @@ def bs_safe_rank(proxy: dict) -> tuple:
     priority_sources = [source for source in bypass_sources if source in GLOBAL_SOURCE_RANK]
     source_published = max((source_published_ts(source) for source in bypass_sources), default=0.0)
     source_rank = min((GLOBAL_SOURCE_RANK[source] for source in priority_sources), default=999)
+    mobile_source_rank = 0 if any(
+        source in BS_SAFE_MOBILE_SOURCE_IDS for source in sources
+    ) else 1
     fingerprint_rank = {"firefox": 0, "edge": 1, "qq": 2, "android": 3}.get(
         proxy.get("client-fingerprint", ""),
         9,
     )
     return (
+        mobile_source_rank,
         bs_safe_quality_rank(proxy),
         -source_published,
         source_rank,
@@ -1118,11 +1135,29 @@ def apply_bs_safe_transport_limits(proxy: dict) -> dict:
     return safe_proxy
 
 
-def select_bs_safe_proxies(global_proxies: list[dict]) -> list[dict]:
+def take_unique_bs_safe_proxies(
+    candidates: list[dict],
+    limit: int,
+    resolved_servers: dict[str, str],
+    seen_endpoints: set[tuple[str, str]],
+) -> list[dict]:
+    selected: list[dict] = []
+    for proxy in candidates:
+        if len(selected) >= limit:
+            break
+        endpoint = bs_safe_endpoint_key(proxy, resolved_servers)
+        if endpoint in seen_endpoints:
+            continue
+        seen_endpoints.add(endpoint)
+        selected.append(proxy)
+    return selected
+
+
+def select_bs_safe_proxies(proxies: list[dict]) -> list[dict]:
     candidates = [
         proxy
-        for proxy in global_proxies
-        if proxy.get("_country") not in {"RU", "UNKNOWN"}
+        for proxy in proxies
+        if proxy.get("_country") != "UNKNOWN"
         and any(source in BYPASS_SOURCE_IDS for source in proxy.get("_sources", []))
         and "reality-opts" in proxy
         and proxy.get("tls") is True
@@ -1130,54 +1165,68 @@ def select_bs_safe_proxies(global_proxies: list[dict]) -> list[dict]:
         and bool(str(proxy.get("servername", "")).strip())
     ]
     candidates.sort(key=bs_safe_rank)
+    ru_candidates = [proxy for proxy in candidates if proxy.get("_country") == "RU"]
+    global_candidates = [proxy for proxy in candidates if proxy.get("_country") != "RU"]
 
     resolved_servers: dict[str, str] = {}
     seen_endpoints: set[tuple[str, str]] = set()
-    selected: list[dict] = []
-
-    for proxy in candidates:
-        if len(selected) >= BS_SAFE_SUBSCRIPTION_LIMIT:
-            break
-        endpoint = bs_safe_endpoint_key(proxy, resolved_servers)
-        if endpoint in seen_endpoints:
-            continue
-        seen_endpoints.add(endpoint)
-        selected.append(proxy)
+    selected = take_unique_bs_safe_proxies(
+        ru_candidates,
+        BS_SAFE_RU_LIMIT,
+        resolved_servers,
+        seen_endpoints,
+    )
+    selected.extend(
+        take_unique_bs_safe_proxies(
+            global_candidates,
+            BS_SAFE_SUBSCRIPTION_LIMIT - len(selected),
+            resolved_servers,
+            seen_endpoints,
+        )
+    )
+    if len(selected) < BS_SAFE_SUBSCRIPTION_LIMIT:
+        selected.extend(
+            take_unique_bs_safe_proxies(
+                candidates,
+                BS_SAFE_SUBSCRIPTION_LIMIT - len(selected),
+                resolved_servers,
+                seen_endpoints,
+            )
+        )
 
     return [apply_bs_safe_transport_limits(proxy) for proxy in selected]
 
 
 def select_bs_safe_auto_proxies(proxies: list[dict]) -> list[dict]:
-    preferred = [
-        proxy
-        for proxy in proxies
-        if proxy.get("network") in BS_SAFE_NETWORKS
-        and proxy.get("client-fingerprint") in BS_SAFE_FINGERPRINTS
-    ]
-    preferred_ids = {id(proxy) for proxy in preferred}
-    fallback = [proxy for proxy in proxies if id(proxy) not in preferred_ids]
     selected: list[dict] = []
     seen_server_networks: set[str] = set()
     seen_servernames: set[str] = set()
 
-    for proxy in preferred + fallback:
-        server = str(proxy.get("server", "")).strip().rstrip(".").casefold()
-        try:
-            address = ipaddress.ip_address(server)
-            prefix = 24 if address.version == 4 else 48
-            server_network = str(ipaddress.ip_network(f"{address}/{prefix}", strict=False))
-        except ValueError:
-            server_network = server
-        servername = str(proxy.get("servername", "")).strip().rstrip(".").casefold()
-        if not server_network or not servername:
-            continue
-        if server_network in seen_server_networks or servername in seen_servernames:
-            continue
-        selected.append(proxy)
-        seen_server_networks.add(server_network)
-        seen_servernames.add(servername)
-        if len(selected) >= BS_SAFE_AUTO_LIMIT:
-            break
+    def append_diverse(candidates: list[dict], limit: int) -> None:
+        for proxy in candidates:
+            if len(selected) >= limit:
+                return
+            server = str(proxy.get("server", "")).strip().rstrip(".").casefold()
+            try:
+                address = ipaddress.ip_address(server)
+                prefix = 24 if address.version == 4 else 48
+                server_network = str(ipaddress.ip_network(f"{address}/{prefix}", strict=False))
+            except ValueError:
+                server_network = server
+            servername = str(proxy.get("servername", "")).strip().rstrip(".").casefold()
+            if not server_network or not servername:
+                continue
+            if server_network in seen_server_networks or servername in seen_servernames:
+                continue
+            selected.append(proxy)
+            seen_server_networks.add(server_network)
+            seen_servernames.add(servername)
+
+    ru_proxies = [proxy for proxy in proxies if proxy.get("_country") == "RU"]
+    global_proxies = [proxy for proxy in proxies if proxy.get("_country") != "RU"]
+    append_diverse(ru_proxies, BS_SAFE_AUTO_LIMIT // 2)
+    append_diverse(global_proxies, BS_SAFE_AUTO_LIMIT)
+    append_diverse(proxies, BS_SAFE_AUTO_LIMIT)
 
     return selected
 
@@ -2222,7 +2271,7 @@ def main(non_stable_only: bool = False) -> int:
         )
         return 0
 
-    bs_safe_proxies = select_bs_safe_proxies(global_proxies)
+    bs_safe_proxies = select_bs_safe_proxies(proxies)
     if not bs_safe_proxies:
         raise RuntimeError("no BS Safe VLESS servers were produced")
     bs_safe_auto_proxies = select_bs_safe_auto_proxies(bs_safe_proxies)

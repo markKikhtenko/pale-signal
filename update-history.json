@@ -1,53 +1,6 @@
 {
   "runs": [
     {
-      "updated_at": "2026-08-12 09:37:13 МСК",
-      "counts": {
-        "all": 12408,
-        "ru": 3672,
-        "global": 8736,
-        "global_5k": 4762,
-        "bs_safe": 100
-      },
-      "changes": {
-        "all": {
-          "old": 12513,
-          "new": 12408,
-          "added": 1392,
-          "removed": 1497,
-          "delta": -105
-        },
-        "ru": {
-          "old": 3590,
-          "new": 3672,
-          "added": 407,
-          "removed": 325,
-          "delta": 82
-        },
-        "global": {
-          "old": 8923,
-          "new": 8736,
-          "added": 1009,
-          "removed": 1196,
-          "delta": -187
-        },
-        "global_5k": {
-          "old": 4585,
-          "new": 4762,
-          "added": 590,
-          "removed": 413,
-          "delta": 177
-        },
-        "bs_safe": {
-          "old": 100,
-          "new": 100,
-          "added": 9,
-          "removed": 9,
-          "delta": 0
-        }
-      }
-    },
-    {
       "updated_at": "2026-08-12 10:23:00 МСК",
       "counts": {
         "all": 12412,
@@ -466,6 +419,53 @@
           "new": 2500,
           "added": 224,
           "removed": 224,
+          "delta": 0
+        }
+      }
+    },
+    {
+      "updated_at": "2026-08-12 14:11:56 МСК",
+      "counts": {
+        "all": 12707,
+        "ru": 3635,
+        "global": 9072,
+        "global_5k": 4967,
+        "bs_safe": 2500
+      },
+      "changes": {
+        "all": {
+          "old": 12535,
+          "new": 12707,
+          "added": 623,
+          "removed": 451,
+          "delta": 172
+        },
+        "ru": {
+          "old": 3589,
+          "new": 3635,
+          "added": 213,
+          "removed": 167,
+          "delta": 46
+        },
+        "global": {
+          "old": 8946,
+          "new": 9072,
+          "added": 571,
+          "removed": 445,
+          "delta": 126
+        },
+        "global_5k": {
+          "old": 4960,
+          "new": 4967,
+          "added": 437,
+          "removed": 430,
+          "delta": 7
+        },
+        "bs_safe": {
+          "old": 2500,
+          "new": 2500,
+          "added": 1304,
+          "removed": 1304,
           "delta": 0
         }
       }
