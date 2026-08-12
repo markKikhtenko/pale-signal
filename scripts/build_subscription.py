@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import base64
+import copy
 import datetime as dt
 import email.utils
 import hashlib
@@ -258,12 +259,17 @@ RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
 GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 GLOBAL_5K_OUTPUT_FILE = ROOT / "subscription-global-5k.yaml"
 GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
+BS_SAFE_OUTPUT_FILE = ROOT / "subscription-bs-safe.yaml"
 README_FILE = ROOT / "README.md"
 UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://www.gstatic.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 UPDATE_HISTORY_LIMIT = 10
 GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
+BS_SAFE_SUBSCRIPTION_LIMIT = 100
+BS_SAFE_GRPC_TARGET = 75
+BS_SAFE_FINGERPRINTS = {"firefox", "edge", "qq", "android"}
+BS_SAFE_NETWORKS = {"grpc", "xhttp"}
 BLOCKED_PROXY_KEYS = {
     ("78.159.250.214", 443, "eb78e1f0-d921-4ca9-a889-261fcc5a0547"),
 }
@@ -1000,6 +1006,103 @@ def select_global_5k_proxies(global_proxies: list[dict]) -> list[dict]:
     return candidates[:GLOBAL_5K_SUBSCRIPTION_LIMIT]
 
 
+def bs_safe_rank(proxy: dict) -> tuple:
+    sources = proxy.get("_sources", [])
+    bypass_sources = [source for source in sources if source in BYPASS_SOURCE_IDS]
+    priority_sources = [source for source in bypass_sources if source in GLOBAL_SOURCE_RANK]
+    source_published = max((source_published_ts(source) for source in bypass_sources), default=0.0)
+    source_rank = min((GLOBAL_SOURCE_RANK[source] for source in priority_sources), default=999)
+    fingerprint_rank = {"firefox": 0, "edge": 1, "qq": 2, "android": 3}.get(
+        proxy.get("client-fingerprint", ""),
+        9,
+    )
+    return (
+        -source_published,
+        source_rank,
+        -len(priority_sources),
+        fingerprint_rank,
+        proxy.get("_input_order", 0),
+        proxy.get("name", ""),
+        proxy.get("server", ""),
+        proxy.get("port", 0),
+    )
+
+
+def bs_safe_endpoint_key(proxy: dict, resolved_servers: dict[str, str]) -> tuple[str, str]:
+    server = str(proxy.get("server", "")).strip().rstrip(".").casefold()
+    if server not in resolved_servers:
+        resolved_servers[server] = resolve_server_ip(server) or server
+    server_ip = resolved_servers[server].casefold()
+    servername = str(proxy.get("servername", "")).strip().rstrip(".").casefold()
+    return server_ip, servername
+
+
+def apply_bs_safe_transport_limits(proxy: dict) -> dict:
+    safe_proxy = copy.deepcopy(proxy)
+    if safe_proxy.get("network") == "grpc":
+        grpc_opts = safe_proxy.get("grpc-opts")
+        if not isinstance(grpc_opts, dict):
+            grpc_opts = {}
+            safe_proxy["grpc-opts"] = grpc_opts
+        grpc_opts["max-connections"] = 1
+    elif safe_proxy.get("network") == "xhttp":
+        xhttp_opts = safe_proxy.get("xhttp-opts")
+        if not isinstance(xhttp_opts, dict):
+            xhttp_opts = {"path": "/"}
+            safe_proxy["xhttp-opts"] = xhttp_opts
+        reuse_settings = xhttp_opts.get("reuse-settings")
+        if not isinstance(reuse_settings, dict):
+            reuse_settings = {}
+            xhttp_opts["reuse-settings"] = reuse_settings
+        reuse_settings["max-connections"] = "1"
+    return safe_proxy
+
+
+def select_bs_safe_proxies(global_proxies: list[dict]) -> list[dict]:
+    candidates = [
+        proxy
+        for proxy in global_proxies
+        if proxy.get("_country") not in {"RU", "UNKNOWN"}
+        and any(source in BYPASS_SOURCE_IDS for source in proxy.get("_sources", []))
+        and "reality-opts" in proxy
+        and proxy.get("tls") is True
+        and proxy.get("network") in BS_SAFE_NETWORKS
+        and proxy.get("client-fingerprint") in BS_SAFE_FINGERPRINTS
+        and bool(str(proxy.get("servername", "")).strip())
+    ]
+    candidates.sort(key=bs_safe_rank)
+    grpc_candidates = [proxy for proxy in candidates if proxy.get("network") == "grpc"]
+    xhttp_candidates = [proxy for proxy in candidates if proxy.get("network") == "xhttp"]
+
+    resolved_servers: dict[str, str] = {}
+    seen_endpoints: set[tuple[str, str]] = set()
+    selected: list[dict] = []
+
+    def take(pool: list[dict], total_limit: int) -> None:
+        for proxy in pool:
+            if len(selected) >= total_limit:
+                break
+            endpoint = bs_safe_endpoint_key(proxy, resolved_servers)
+            if endpoint in seen_endpoints:
+                continue
+            seen_endpoints.add(endpoint)
+            selected.append(proxy)
+
+    take(grpc_candidates, min(BS_SAFE_GRPC_TARGET, BS_SAFE_SUBSCRIPTION_LIMIT))
+    take(xhttp_candidates, BS_SAFE_SUBSCRIPTION_LIMIT)
+    if len(selected) < BS_SAFE_SUBSCRIPTION_LIMIT:
+        remaining = sorted(
+            candidates,
+            key=lambda proxy: (
+                0 if proxy.get("network") == "grpc" else 1,
+                bs_safe_rank(proxy),
+            ),
+        )
+        take(remaining, BS_SAFE_SUBSCRIPTION_LIMIT)
+
+    return [apply_bs_safe_transport_limits(proxy) for proxy in selected]
+
+
 def auto_endpoint_key(proxy: dict) -> tuple:
     ws_opts = proxy.get("ws-opts") or {}
     ws_headers = ws_opts.get("headers") or {}
@@ -1062,6 +1165,42 @@ def build_config(proxies: list[dict], auto_proxies: list[dict] | None = None) ->
                 "name": "PROXY",
                 "type": "select",
                 "proxies": ["AUTO", "MANUAL"],
+            },
+        ],
+        "rules": ["MATCH,PROXY"],
+    }
+
+
+def build_bs_safe_config(proxies: list[dict]) -> dict:
+    names = [proxy["name"] for proxy in proxies]
+    export_proxies = [{key: value for key, value in proxy.items() if not key.startswith("_")} for proxy in proxies]
+
+    return {
+        "mixed-port": 7890,
+        "allow-lan": True,
+        "mode": "rule",
+        "log-level": "info",
+        "ipv6": False,
+        "proxies": export_proxies,
+        "proxy-groups": [
+            {
+                "name": "AUTO",
+                "type": "url-test",
+                "proxies": names,
+                "url": URL_TEST,
+                "interval": 3600,
+                "tolerance": 100,
+                "lazy": True,
+            },
+            {
+                "name": "MANUAL",
+                "type": "select",
+                "proxies": names,
+            },
+            {
+                "name": "PROXY",
+                "type": "select",
+                "proxies": ["MANUAL", "AUTO"],
             },
         ],
         "rules": ["MATCH,PROXY"],
@@ -1218,6 +1357,7 @@ def history_entry(now: str, stats: dict[str, int], changes: dict[str, dict[str, 
             "ru": stats["ru"],
             "global": stats["global"],
             "global_5k": stats.get("global_5k", stats["global"]),
+            "bs_safe": stats.get("bs_safe", 0),
         },
         "changes": changes,
     }
@@ -1826,6 +1966,7 @@ def write_final_readme(
     global_stats: dict[str, int] | None = None,
     global_5k_stats: dict[str, int] | None = None,
     global_non_stable_auto_count: int | None = None,
+    bs_safe_stats: dict[str, int] | None = None,
 ) -> None:
     if stats is None:
         stats = stats_for(proxies)
@@ -1850,6 +1991,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | **pale-signal подписка - Global** | Все иностранные non-RU серверы из общей подписки | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
 | **pale-signal подписка - Global 5K** | До {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих иностранных БС/whitelist/bypass серверов | https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) |
 | **pale-signal подписка - Global Non-Stable** | Тестовая Global 5K: полный MANUAL, AUTO без дублей endpoint | https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) |
+| **pale-signal подписка - BS Safe** | До {BS_SAFE_SUBSCRIPTION_LIMIT} консервативных Reality gRPC/XHTTP узлов без повторов IP+SNI | https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) |
 
 ## Статус
 
@@ -1861,6 +2003,8 @@ pale-signal автоматически собирает VLESS-подписки �
 | Global 5K | `{stats['global_5k']}` |
 | Global Non-Stable MANUAL | `{stats['global_5k']}` |
 | Global Non-Stable AUTO | `{global_non_stable_auto_count if global_non_stable_auto_count is not None else stats['global_5k']}` |
+| BS Safe | `{bs_safe_stats['total'] if bs_safe_stats is not None else stats.get('bs_safe', 0)}` |
+| BS Safe gRPC / XHTTP | `{bs_safe_stats['grpc'] if bs_safe_stats is not None else 0}` / `{bs_safe_stats['xhttp'] if bs_safe_stats is not None else 0}` |
 | Unknown | `{stats['unknown']}` |
 | Reality | `{stats['reality']}` |
 | TLS | `{stats['tls']}` |
@@ -1874,6 +2018,8 @@ pale-signal автоматически собирает VLESS-подписки �
 `subscription-global-5k.yaml` берёт до {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих узлов с подтверждённой страной не RU только из БС / whitelist / bypass источников. Проверка живости прокси в GitHub Actions отключена, чтобы GitHub не отбрасывал узлы, которые могут работать только из-под БС на роутере.
 
 `subscription-global-non-stable.yaml` использует тот же полный список, что и Global 5K. В `MANUAL` остаются все узлы, а только в `AUTO` одинаковые endpoint объединяются до первой ноды.
+
+`subscription-bs-safe.yaml` — маленький консервативный профиль для условий активной БС-фильтрации. В него попадают только подтверждённые non-RU Reality-узлы из bypass/whitelist-источников с транспортом gRPC или XHTTP и явно заданным fingerprint `firefox`, `edge`, `qq` или `android`. Повторы одного resolved IP + SNI удаляются независимо от порта, UUID и ключа; gRPC получает `max-connections: 1`, XHTTP — `reuse-settings.max-connections: 1`. Это фильтрация по метаданным, а не гарантия живости узла.
 
 <details>
 <summary>Источники</summary>
@@ -1900,6 +2046,17 @@ pale-signal автоматически собирает VLESS-подписки �
 | `PROXY` | `select` | Главная группа для правила `MATCH,PROXY` |
 
 Параметры `AUTO`: `interval: 900`, `tolerance: 100`, `lazy: true`.
+
+В BS Safe группа `PROXY` по умолчанию направлена в `MANUAL`, а ленивый `AUTO` запускается только при явном выборе и имеет `interval: 3600`. Для параметров ограничения соединений нужен Mihomo core v1.19.24 или новее.
+
+### BS Safe в OpenClash
+
+1. В `Plugin Settings` → `Version Update` обновите **Meta Core** минимум до Mihomo v1.19.24 и выберите тип ядра `Meta`.
+2. В `Config Subscription` добавьте прямой URL `subscription-bs-safe.yaml` как Clash/Mihomo-конфиг. Онлайн-конвертацию для этой ссылки включать не нужно.
+3. Обновите подписку, активируйте полученный профиль и примените конфигурацию.
+4. В Dashboard откройте группу `PROXY`: сначала оставьте `MANUAL` и проверьте ноды по одной. `AUTO` включайте только после появления рабочих нод — он намеренно не является выбором по умолчанию.
+
+OpenClash использует файл как самостоятельный YAML-профиль и может добавить в него свои настройки DNS, TUN и перехвата трафика при применении шаблона/override. Отбор BS Safe меняет только список прокси и три policy group, не системные параметры OpenClash.
 
 ## Разделение по странам
 
@@ -1989,20 +2146,32 @@ def main(non_stable_only: bool = False) -> int:
         )
         return 0
 
+    bs_safe_proxies = select_bs_safe_proxies(global_proxies)
+    if not bs_safe_proxies:
+        raise RuntimeError("no BS Safe VLESS servers were produced")
+    bs_safe_config = build_bs_safe_config(bs_safe_proxies)
+    validate_config(bs_safe_config)
+    bs_safe_yaml_text = "\n".join(dump_yaml(bs_safe_config)) + "\n"
+    if not bs_safe_yaml_text.strip():
+        raise RuntimeError("empty BS Safe YAML output")
+
     now = msk_timestamp()
     changes = {
         "all": compare_with_existing(OUTPUT_FILE, yaml_text),
         "ru": compare_with_existing(RU_OUTPUT_FILE, ru_yaml_text),
         "global": compare_with_existing(GLOBAL_OUTPUT_FILE, global_yaml_text),
         "global_5k": compare_with_existing(GLOBAL_5K_OUTPUT_FILE, global_5k_yaml_text),
+        "bs_safe": compare_with_existing(BS_SAFE_OUTPUT_FILE, bs_safe_yaml_text),
     }
     stats = stats_for(proxies)
     stats["ru"] = len(ru_proxies)
     stats["global"] = len(global_proxies)
     stats["global_5k"] = len(global_5k_proxies)
+    stats["bs_safe"] = len(bs_safe_proxies)
     stats["unknown"] = sum(1 for proxy in global_proxies if proxy.get("_country") == "UNKNOWN")
     global_stats = stats_for(global_proxies)
     global_5k_stats = stats_for(global_5k_proxies)
+    bs_safe_stats = stats_for(bs_safe_proxies)
     history = update_run_history(now, stats, changes)
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
@@ -2013,6 +2182,7 @@ def main(non_stable_only: bool = False) -> int:
         encoding="utf-8",
         newline="\n",
     )
+    BS_SAFE_OUTPUT_FILE.write_text(bs_safe_yaml_text, encoding="utf-8", newline="\n")
     write_final_readme(
         proxies,
         now,
@@ -2022,12 +2192,14 @@ def main(non_stable_only: bool = False) -> int:
         global_stats,
         global_5k_stats,
         len(global_non_stable_auto_proxies),
+        bs_safe_stats,
     )
     print(
         f"wrote subscription files with {len(proxies)} proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} global, "
         f"{len(global_5k_proxies)} global 5k, "
-        f"{len(global_non_stable_auto_proxies)} non-stable AUTO)"
+        f"{len(global_non_stable_auto_proxies)} non-stable AUTO, "
+        f"{len(bs_safe_proxies)} BS Safe)"
     )
     return 0
 

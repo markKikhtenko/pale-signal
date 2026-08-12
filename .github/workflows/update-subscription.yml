@@ -58,7 +58,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-global-non-stable.yaml
+          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else
@@ -88,6 +88,7 @@ jobs:
           cp subscription-global.yaml public/subscription-global.yaml
           cp subscription-global-5k.yaml public/subscription-global-5k.yaml
           cp subscription-global-non-stable.yaml public/subscription-global-non-stable.yaml
+          cp subscription-bs-safe.yaml public/subscription-bs-safe.yaml
 
       - name: Upload Pages artifact
         if: steps.freshness.outputs.stale != 'true'
