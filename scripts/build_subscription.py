@@ -274,8 +274,6 @@ GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 GLOBAL_5K_OUTPUT_FILE = ROOT / "subscription-global-5k.yaml"
 GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
 BS_SAFE_OUTPUT_FILE = ROOT / "subscription-bs-safe.yaml"
-BS_SAFE_MANUAL_PROVIDER_FILE = ROOT / "subscription-bs-safe-manual.yaml"
-BS_SAFE_AUTO_PROVIDER_FILE = ROOT / "subscription-bs-safe-auto.yaml"
 README_FILE = ROOT / "README.md"
 UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://www.gstatic.com/generate_204"
@@ -284,12 +282,6 @@ UPDATE_HISTORY_LIMIT = 10
 GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
-BS_SAFE_MANUAL_PROVIDER_URL = (
-    "https://markkikhtenko.github.io/pale-signal/subscription-bs-safe-manual.yaml"
-)
-BS_SAFE_AUTO_PROVIDER_URL = (
-    "https://markkikhtenko.github.io/pale-signal/subscription-bs-safe-auto.yaml"
-)
 BS_SAFE_FINGERPRINTS = {"firefox", "edge", "qq", "android"}
 BS_SAFE_NETWORKS = {"grpc", "xhttp"}
 BLOCKED_PROXY_KEYS = {
@@ -1258,43 +1250,26 @@ def build_config(proxies: list[dict], auto_proxies: list[dict] | None = None) ->
     }
 
 
-def build_proxy_provider(proxies: list[dict]) -> dict:
-    return {
-        "proxies": [
-            {key: value for key, value in proxy.items() if not key.startswith("_")}
-            for proxy in proxies
-        ]
-    }
+def build_bs_safe_config(proxies: list[dict], auto_proxies: list[dict]) -> dict:
+    names = [proxy["name"] for proxy in proxies]
+    auto_names = [proxy["name"] for proxy in auto_proxies]
+    export_proxies = [
+        {key: value for key, value in proxy.items() if not key.startswith("_")}
+        for proxy in proxies
+    ]
 
-
-def build_bs_safe_config() -> dict:
     return {
         "mixed-port": 7890,
         "allow-lan": True,
         "mode": "rule",
         "log-level": "info",
         "ipv6": False,
-        "proxy-providers": {
-            "BS-SAFE-MANUAL": {
-                "type": "http",
-                "url": BS_SAFE_MANUAL_PROVIDER_URL,
-                "path": "./proxy_provider/pale-signal-bs-safe-manual.yaml",
-                "interval": 43200,
-                "proxy": "DIRECT",
-            },
-            "BS-SAFE-AUTO": {
-                "type": "http",
-                "url": BS_SAFE_AUTO_PROVIDER_URL,
-                "path": "./proxy_provider/pale-signal-bs-safe-auto.yaml",
-                "interval": 43200,
-                "proxy": "DIRECT",
-            },
-        },
+        "proxies": export_proxies,
         "proxy-groups": [
             {
                 "name": "AUTO",
                 "type": "url-test",
-                "use": ["BS-SAFE-AUTO"],
+                "proxies": auto_names,
                 "url": URL_TEST,
                 "interval": 3600,
                 "tolerance": 100,
@@ -1303,7 +1278,7 @@ def build_bs_safe_config() -> dict:
             {
                 "name": "MANUAL",
                 "type": "select",
-                "use": ["BS-SAFE-MANUAL"],
+                "proxies": names,
             },
             {
                 "name": "PROXY",
@@ -1391,46 +1366,6 @@ def validate_config(config: dict) -> None:
         missing = [name for name in refs if name not in available or name == group.get("name")]
         if missing:
             raise RuntimeError(f"group {group.get('name')} references missing proxies: {missing}")
-
-
-def validate_proxy_provider(config: dict, expected_count: int) -> None:
-    proxies = config.get("proxies")
-    if not isinstance(proxies, list) or len(proxies) != expected_count:
-        raise RuntimeError(
-            f"proxy provider has {len(proxies) if isinstance(proxies, list) else 0} "
-            f"proxies instead of {expected_count}"
-        )
-    names = [proxy.get("name") for proxy in proxies]
-    if any(not isinstance(name, str) or not name for name in names):
-        raise RuntimeError("proxy provider contains an unnamed proxy")
-    if len(set(names)) != len(names):
-        raise RuntimeError("proxy provider names are not unique")
-
-
-def validate_bs_safe_config(config: dict) -> None:
-    providers = config.get("proxy-providers")
-    groups = config.get("proxy-groups")
-    if not isinstance(providers, dict) or set(providers) != {
-        "BS-SAFE-MANUAL",
-        "BS-SAFE-AUTO",
-    }:
-        raise RuntimeError("BS Safe proxy providers are invalid")
-    if any(provider.get("proxy") != "DIRECT" for provider in providers.values()):
-        raise RuntimeError("BS Safe proxy providers must bootstrap through DIRECT")
-    if not isinstance(groups, list) or [group.get("name") for group in groups] != [
-        "AUTO",
-        "MANUAL",
-        "PROXY",
-    ]:
-        raise RuntimeError("BS Safe proxy groups are invalid")
-    if groups[0].get("use") != ["BS-SAFE-AUTO"]:
-        raise RuntimeError("BS Safe AUTO provider is invalid")
-    if groups[1].get("use") != ["BS-SAFE-MANUAL"]:
-        raise RuntimeError("BS Safe MANUAL provider is invalid")
-    if groups[2].get("proxies") != ["MANUAL", "AUTO"]:
-        raise RuntimeError("BS Safe PROXY group is invalid")
-    if config.get("rules") != ["MATCH,PROXY"]:
-        raise RuntimeError("BS Safe rules are invalid")
 
 
 def proxy_key(proxy: dict) -> str:
@@ -2291,24 +2226,10 @@ def main(non_stable_only: bool = False) -> int:
     if not bs_safe_proxies:
         raise RuntimeError("no BS Safe VLESS servers were produced")
     bs_safe_auto_proxies = select_bs_safe_auto_proxies(bs_safe_proxies)
-    bs_safe_config = build_bs_safe_config()
-    bs_safe_manual_provider = build_proxy_provider(bs_safe_proxies)
-    bs_safe_auto_provider = build_proxy_provider(bs_safe_auto_proxies)
-    validate_bs_safe_config(bs_safe_config)
-    validate_proxy_provider(bs_safe_manual_provider, len(bs_safe_proxies))
-    validate_proxy_provider(bs_safe_auto_provider, len(bs_safe_auto_proxies))
+    bs_safe_config = build_bs_safe_config(bs_safe_proxies, bs_safe_auto_proxies)
+    validate_config(bs_safe_config)
     bs_safe_yaml_text = "\n".join(dump_yaml(bs_safe_config)) + "\n"
-    bs_safe_manual_provider_yaml_text = (
-        "\n".join(dump_yaml(bs_safe_manual_provider)) + "\n"
-    )
-    bs_safe_auto_provider_yaml_text = (
-        "\n".join(dump_yaml(bs_safe_auto_provider)) + "\n"
-    )
-    if (
-        not bs_safe_yaml_text.strip()
-        or not bs_safe_manual_provider_yaml_text.strip()
-        or not bs_safe_auto_provider_yaml_text.strip()
-    ):
+    if not bs_safe_yaml_text.strip():
         raise RuntimeError("empty BS Safe YAML output")
 
     now = msk_timestamp()
@@ -2317,10 +2238,7 @@ def main(non_stable_only: bool = False) -> int:
         "ru": compare_with_existing(RU_OUTPUT_FILE, ru_yaml_text),
         "global": compare_with_existing(GLOBAL_OUTPUT_FILE, global_yaml_text),
         "global_5k": compare_with_existing(GLOBAL_5K_OUTPUT_FILE, global_5k_yaml_text),
-        "bs_safe": compare_with_existing(
-            BS_SAFE_MANUAL_PROVIDER_FILE,
-            bs_safe_manual_provider_yaml_text,
-        ),
+        "bs_safe": compare_with_existing(BS_SAFE_OUTPUT_FILE, bs_safe_yaml_text),
     }
     stats = stats_for(proxies)
     stats["ru"] = len(ru_proxies)
@@ -2342,16 +2260,6 @@ def main(non_stable_only: bool = False) -> int:
         newline="\n",
     )
     BS_SAFE_OUTPUT_FILE.write_text(bs_safe_yaml_text, encoding="utf-8", newline="\n")
-    BS_SAFE_MANUAL_PROVIDER_FILE.write_text(
-        bs_safe_manual_provider_yaml_text,
-        encoding="utf-8",
-        newline="\n",
-    )
-    BS_SAFE_AUTO_PROVIDER_FILE.write_text(
-        bs_safe_auto_provider_yaml_text,
-        encoding="utf-8",
-        newline="\n",
-    )
     write_final_readme(
         proxies,
         now,
