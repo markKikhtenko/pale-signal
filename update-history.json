@@ -1,45 +1,6 @@
 {
   "runs": [
     {
-      "updated_at": "2026-08-09 21:38:52 МСК",
-      "counts": {
-        "all": 12945,
-        "ru": 3711,
-        "global": 9234,
-        "global_5k": 4688
-      },
-      "changes": {
-        "all": {
-          "old": 12729,
-          "new": 12945,
-          "added": 1372,
-          "removed": 1156,
-          "delta": 216
-        },
-        "ru": {
-          "old": 3652,
-          "new": 3711,
-          "added": 412,
-          "removed": 353,
-          "delta": 59
-        },
-        "global": {
-          "old": 9077,
-          "new": 9234,
-          "added": 1002,
-          "removed": 845,
-          "delta": 157
-        },
-        "global_5k": {
-          "old": 4827,
-          "new": 4688,
-          "added": 408,
-          "removed": 547,
-          "delta": -139
-        }
-      }
-    },
-    {
       "updated_at": "2026-08-10 10:28:09 МСК",
       "counts": {
         "all": 12831,
@@ -426,6 +387,53 @@
           "new": 2500,
           "added": 9,
           "removed": 9,
+          "delta": 0
+        }
+      }
+    },
+    {
+      "updated_at": "2026-08-12 12:01:39 МСК",
+      "counts": {
+        "all": 12567,
+        "ru": 3601,
+        "global": 8966,
+        "global_5k": 4995,
+        "bs_safe": 2500
+      },
+      "changes": {
+        "all": {
+          "old": 12614,
+          "new": 12567,
+          "added": 76,
+          "removed": 123,
+          "delta": -47
+        },
+        "ru": {
+          "old": 3617,
+          "new": 3601,
+          "added": 41,
+          "removed": 57,
+          "delta": -16
+        },
+        "global": {
+          "old": 8997,
+          "new": 8966,
+          "added": 38,
+          "removed": 69,
+          "delta": -31
+        },
+        "global_5k": {
+          "old": 5000,
+          "new": 4995,
+          "added": 70,
+          "removed": 75,
+          "delta": -5
+        },
+        "bs_safe": {
+          "old": 2500,
+          "new": 2500,
+          "added": 128,
+          "removed": 128,
           "delta": 0
         }
       }
