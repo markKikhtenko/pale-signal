@@ -283,8 +283,12 @@ GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
 BS_SAFE_RU_LIMIT = BS_SAFE_SUBSCRIPTION_LIMIT // 2
-BS_SAFE_FINGERPRINTS = {"firefox", "edge", "qq", "android"}
+BS_SAFE_MEGAFON_PROFILE_LIMIT = 12
+BS_SAFE_FINGERPRINTS = {"chrome", "firefox", "edge", "qq", "safari", "android"}
 BS_SAFE_NETWORKS = {"grpc", "xhttp"}
+BS_SAFE_CONFIRMED_MEGAFON_ENDPOINTS = {
+    ("5.188.140.194", 2053): "✅ MegaFon Иваново | EbraSha 399",
+}
 BS_SAFE_MOBILE_SOURCE_IDS = {
     "IGARECK_WHITE_MOBILE_1",
     "IGARECK_WHITE_CIDR_CHECKED",
@@ -1087,7 +1091,14 @@ def bs_safe_rank(proxy: dict) -> tuple:
     mobile_source_rank = 0 if any(
         source in BS_SAFE_MOBILE_SOURCE_IDS for source in sources
     ) else 1
-    fingerprint_rank = {"firefox": 0, "edge": 1, "qq": 2, "android": 3}.get(
+    fingerprint_rank = {
+        "chrome": 0,
+        "firefox": 1,
+        "edge": 2,
+        "qq": 3,
+        "safari": 4,
+        "android": 5,
+    }.get(
         proxy.get("client-fingerprint", ""),
         9,
     )
@@ -1116,6 +1127,13 @@ def bs_safe_endpoint_key(proxy: dict, resolved_servers: dict[str, str]) -> tuple
 
 def apply_bs_safe_transport_limits(proxy: dict) -> dict:
     safe_proxy = copy.deepcopy(proxy)
+    endpoint = (
+        str(safe_proxy.get("server", "")).strip().rstrip(".").casefold(),
+        int(safe_proxy.get("port", 0) or 0),
+    )
+    confirmed_name = BS_SAFE_CONFIRMED_MEGAFON_ENDPOINTS.get(endpoint)
+    if confirmed_name:
+        safe_proxy["name"] = confirmed_name
     if safe_proxy.get("network") == "grpc":
         grpc_opts = safe_proxy.get("grpc-opts")
         if not isinstance(grpc_opts, dict):
@@ -1199,31 +1217,76 @@ def select_bs_safe_proxies(proxies: list[dict]) -> list[dict]:
 
 def select_bs_safe_auto_proxies(proxies: list[dict]) -> list[dict]:
     selected: list[dict] = []
+    selected_names: set[str] = set()
     seen_server_networks: set[str] = set()
     seen_servernames: set[str] = set()
+
+    def server_network_for(proxy: dict) -> str:
+        server = str(proxy.get("server", "")).strip().rstrip(".").casefold()
+        try:
+            address = ipaddress.ip_address(server)
+            prefix = 24 if address.version == 4 else 48
+            return str(ipaddress.ip_network(f"{address}/{prefix}", strict=False))
+        except ValueError:
+            return server
+
+    def is_megafon_profile(proxy: dict) -> bool:
+        grpc_opts = proxy.get("grpc-opts") or {}
+        return (
+            proxy.get("network") == "grpc"
+            and proxy.get("port") == 2053
+            and str(proxy.get("servername", "")).strip().rstrip(".").casefold() == "hh.ru"
+            and str(grpc_opts.get("grpc-service-name", "")).strip() == "grpc-direct"
+        )
+
+    def megafon_profile_rank(proxy: dict) -> tuple:
+        endpoint = (
+            str(proxy.get("server", "")).strip().rstrip(".").casefold(),
+            int(proxy.get("port", 0) or 0),
+        )
+        return (
+            0 if endpoint in BS_SAFE_CONFIRMED_MEGAFON_ENDPOINTS else 1,
+            bs_safe_rank(proxy),
+        )
+
+    def append_megafon_profile(candidates: list[dict], limit: int) -> None:
+        for proxy in sorted(candidates, key=megafon_profile_rank):
+            if len(selected) >= limit:
+                return
+            name = str(proxy.get("name", ""))
+            if not name or name in selected_names:
+                continue
+            selected.append(proxy)
+            selected_names.add(name)
+            server_network = server_network_for(proxy)
+            servername = str(proxy.get("servername", "")).strip().rstrip(".").casefold()
+            if server_network:
+                seen_server_networks.add(server_network)
+            if servername:
+                seen_servernames.add(servername)
 
     def append_diverse(candidates: list[dict], limit: int) -> None:
         for proxy in candidates:
             if len(selected) >= limit:
                 return
-            server = str(proxy.get("server", "")).strip().rstrip(".").casefold()
-            try:
-                address = ipaddress.ip_address(server)
-                prefix = 24 if address.version == 4 else 48
-                server_network = str(ipaddress.ip_network(f"{address}/{prefix}", strict=False))
-            except ValueError:
-                server_network = server
+            name = str(proxy.get("name", ""))
+            if not name or name in selected_names:
+                continue
+            server_network = server_network_for(proxy)
             servername = str(proxy.get("servername", "")).strip().rstrip(".").casefold()
             if not server_network or not servername:
                 continue
             if server_network in seen_server_networks or servername in seen_servernames:
                 continue
             selected.append(proxy)
+            selected_names.add(name)
             seen_server_networks.add(server_network)
             seen_servernames.add(servername)
 
+    megafon_profile = [proxy for proxy in proxies if is_megafon_profile(proxy)]
     ru_proxies = [proxy for proxy in proxies if proxy.get("_country") == "RU"]
     global_proxies = [proxy for proxy in proxies if proxy.get("_country") != "RU"]
+    append_megafon_profile(megafon_profile, BS_SAFE_MEGAFON_PROFILE_LIMIT)
     append_diverse(ru_proxies, BS_SAFE_AUTO_LIMIT // 2)
     append_diverse(global_proxies, BS_SAFE_AUTO_LIMIT)
     append_diverse(proxies, BS_SAFE_AUTO_LIMIT)
