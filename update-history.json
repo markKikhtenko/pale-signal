@@ -1,45 +1,6 @@
 {
   "runs": [
     {
-      "updated_at": "2026-08-10 21:56:34 МСК",
-      "counts": {
-        "all": 13198,
-        "ru": 3644,
-        "global": 9554,
-        "global_5k": 5000
-      },
-      "changes": {
-        "all": {
-          "old": 12831,
-          "new": 13198,
-          "added": 1861,
-          "removed": 1494,
-          "delta": 367
-        },
-        "ru": {
-          "old": 3612,
-          "new": 3644,
-          "added": 440,
-          "removed": 408,
-          "delta": 32
-        },
-        "global": {
-          "old": 9219,
-          "new": 9554,
-          "added": 1482,
-          "removed": 1147,
-          "delta": 335
-        },
-        "global_5k": {
-          "old": 4961,
-          "new": 5000,
-          "added": 921,
-          "removed": 882,
-          "delta": 39
-        }
-      }
-    },
-    {
       "updated_at": "2026-08-11 10:03:25 МСК",
       "counts": {
         "all": 12249,
@@ -443,6 +404,53 @@
           "added": 2499,
           "removed": 0,
           "delta": 2499
+        }
+      }
+    },
+    {
+      "updated_at": "2026-08-12 12:33:56 МСК",
+      "counts": {
+        "all": 12673,
+        "ru": 3601,
+        "global": 9072,
+        "global_5k": 5000,
+        "bs_safe": 2500
+      },
+      "changes": {
+        "all": {
+          "old": 12673,
+          "new": 12673,
+          "added": 0,
+          "removed": 0,
+          "delta": 0
+        },
+        "ru": {
+          "old": 3608,
+          "new": 3601,
+          "added": 0,
+          "removed": 7,
+          "delta": -7
+        },
+        "global": {
+          "old": 9065,
+          "new": 9072,
+          "added": 7,
+          "removed": 0,
+          "delta": 7
+        },
+        "global_5k": {
+          "old": 5000,
+          "new": 5000,
+          "added": 0,
+          "removed": 0,
+          "delta": 0
+        },
+        "bs_safe": {
+          "old": 2499,
+          "new": 2499,
+          "added": 5,
+          "removed": 5,
+          "delta": 0
         }
       }
     }

@@ -6,7 +6,7 @@
 
 pale-signal автоматически собирает VLESS-подписки для Mihomo/OpenClash.
 
-**Последнее обновление:** `2026-08-12 12:26:02 МСК`
+**Последнее обновление:** `2026-08-12 12:33:56 МСК`
 
 ## Подписки
 
@@ -24,15 +24,15 @@ pale-signal автоматически собирает VLESS-подписки �
 | Показатель | Значение |
 |------------|----------|
 | Всего серверов | `12673` |
-| Россия | `3608` |
-| Global | `9065` |
+| Россия | `3601` |
+| Global | `9072` |
 | Global 5K | `5000` |
 | Global Non-Stable MANUAL | `5000` |
 | Global Non-Stable AUTO | `4077` |
 | BS Safe MANUAL | `2500` |
 | BS Safe AUTO | `50` |
 | BS Safe TCP / gRPC / XHTTP | `2250` / `186` / `64` |
-| Unknown | `412` |
+| Unknown | `421` |
 | Reality | `8640` |
 | TLS | `10972` |
 | TCP | `8594` |
@@ -88,18 +88,18 @@ pale-signal автоматически собирает VLESS-подписки �
 
 | Источник | Обновление источника | Серверов в общей подписке | В Global | В Global 5K | Ссылка |
 |----------|---------------------|---------------------------|-----------|---------------|--------|
-| ALIILAPRO v2rayNG-Config sub.txt | `2026-08-12 12:21 МСК` | `335` | `316` | `61` | [raw](https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt) |
+| 0xRadikal light/configs.txt | `2026-08-12 12:22 МСК` | `1055` | `924` | `180` | [raw](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/light/configs.txt) |
+| ALIILAPRO v2rayNG-Config sub.txt | `2026-08-12 12:21 МСК` | `336` | `317` | `61` | [raw](https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt) |
 | MahanKenway configs/vless.txt | `2026-08-12 12:16 МСК` | `139` | `136` | `18` | [raw](https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt) |
 | MatinGhanbari filtered vless.txt | `2026-08-12 12:09 МСК` | `213` | `203` | `39` | [raw](https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/filtered/subs/vless.txt) |
-| 0xRadikal light/configs.txt | `2026-08-12 12:06 МСК` | `1055` | `924` | `180` | [raw](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/light/configs.txt) |
-| SoliSpirit Protocols/vless.txt | `2026-08-12 12:06 МСК` | `3483` | `3353` | `273` | [raw](https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt) |
+| SoliSpirit Protocols/vless.txt | `2026-08-12 12:06 МСК` | `3483` | `3359` | `273` | [raw](https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt) |
 | Rayan-Config proxy.txt | `2026-08-12 12:02 МСК` | `53` | `52` | `0` | [raw](https://raw.githubusercontent.com/Rayan-Config/C-Sub/refs/heads/main/configs/proxy.txt) |
-| barry-far V2ray-config vless.txt | `2026-08-12 11:53 МСК` | `2863` | `2754` | `230` | [raw](https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt) |
-| Epodonios Splitted-By-Protocol/vless.txt | `2026-08-12 11:24 МСК` | `2816` | `2705` | `228` | [raw](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt) |
-| Surfboardv2ray TGParse mixed | `2026-08-12 09:10 МСК` | `2628` | `2528` | `204` | [raw](https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/mixed) |
-| liMilCo v2r pro/vless.txt | `2026-08-12 05:31 МСК` | `2803` | `2685` | `246` | [raw](https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt) |
+| barry-far V2ray-config vless.txt | `2026-08-12 11:53 МСК` | `2863` | `2760` | `230` | [raw](https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt) |
+| Epodonios Splitted-By-Protocol/vless.txt | `2026-08-12 11:24 МСК` | `2816` | `2711` | `228` | [raw](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt) |
+| Surfboardv2ray TGParse mixed | `2026-08-12 09:10 МСК` | `2628` | `2534` | `204` | [raw](https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/mixed) |
+| liMilCo v2r pro/vless.txt | `2026-08-12 05:31 МСК` | `2803` | `2689` | `246` | [raw](https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt) |
 | V2RayRoot Config/vless.txt | `2026-07-05 07:39 МСК` | `200` | `195` | `19` | [raw](https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt) |
-| FNET00 Config/Main | `2026-01-30 01:58 МСК` | `50` | `47` | `1` | [raw](https://raw.githubusercontent.com/FNET00bot/FNET00/Config/Main) |
+| FNET00 Config/Main | `2026-01-30 01:58 МСК` | `50` | `49` | `1` | [raw](https://raw.githubusercontent.com/FNET00bot/FNET00/Config/Main) |
 | MahsaNetConfigTopic xray_final.txt | `-` | `0` | `0` | `0` | [raw](https://raw.githubusercontent.com/MahsaNetConfigTopic/config/refs/heads/main/xray_final.txt) |
 
 </details>
@@ -109,13 +109,14 @@ pale-signal автоматически собирает VLESS-подписки �
 
 | Подписка | Тренд | Первое | Последнее | Разница |
 |----------|-------|--------|-----------|---------|
-| Общая | `↓` | `13198` | `12673` | `-525` |
-| Россия | `↓` | `3644` | `3608` | `-36` |
-| Global | `↓` | `9554` | `9065` | `-489` |
-| Global 5K | `→` | `5000` | `5000` | `0` |
+| Общая | `↑` | `12249` | `12673` | `+424` |
+| Россия | `↓` | `3649` | `3601` | `-48` |
+| Global | `↑` | `8600` | `9072` | `+472` |
+| Global 5K | `↑` | `4608` | `5000` | `+392` |
 
 | Обновление, МСК | Общая | Россия | Global | Global 5K | Δ общая | Δ Россия | Δ Global | Δ Global 5K |
 |-----------------|-------|--------|--------|------------|---------|----------|----------|--------------|
+| `2026-08-12 12:33:56 МСК` | `12673` | `3601` | `9072` | `5000` | `0` | `-7` | `+7` | `0` |
 | `2026-08-12 12:26:02 МСК` | `12673` | `3608` | `9065` | `5000` | `+106` | `+7` | `+99` | `+5` |
 | `2026-08-12 12:01:39 МСК` | `12567` | `3601` | `8966` | `4995` | `-47` | `-16` | `-31` | `-5` |
 | `2026-08-12 11:38:14 МСК` | `12614` | `3617` | `8997` | `5000` | `-42` | `-12` | `-30` | `0` |
@@ -125,7 +126,6 @@ pale-signal автоматически собирает VLESS-подписки �
 | `2026-08-12 09:37:13 МСК` | `12408` | `3672` | `8736` | `4762` | `-105` | `+82` | `-187` | `+177` |
 | `2026-08-11 22:01:41 МСК` | `12513` | `3590` | `8923` | `4585` | `+264` | `-59` | `+323` | `-23` |
 | `2026-08-11 10:03:25 МСК` | `12249` | `3649` | `8600` | `4608` | `-949` | `+5` | `-954` | `-392` |
-| `2026-08-10 21:56:34 МСК` | `13198` | `3644` | `9554` | `5000` | `+367` | `+32` | `+335` | `+39` |
 
 </details>
 

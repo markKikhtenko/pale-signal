@@ -33896,22 +33896,6 @@ proxies:
       public-key: "cZF84xUCciKRXxTA39vNnh0U8CjUZiUSjLzuNTMOzV8"
       short-id: "33e48a03db900ff3"
   -
-    name: "EPODONIOS 776"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 443
-    uuid: "5dc15e15-f285-4a9d-959b-0e4fbdd77b63"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "powered-by-surena.user68f797c2f3e1b.workers.dev"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/?ed"
-      headers:
-        Host: "powered-by-surena.user68f797c2f3e1b.workers.dev"
-  -
     name: "EPODONIOS 809"
     type: "vless"
     server: "ru6.ethicsdinnerpave.online"
@@ -33945,24 +33929,6 @@ proxies:
       path: "/?ed=2560"
       headers:
         Host: "sni.111000.indevs.in"
-  -
-    name: "EPODONIOS 865"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2096
-    uuid: "686c62d9-17a7-43c9-a40a-f6747df60a9f"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ca.adobe-connect.top"
-    client-fingerprint: "chrome"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "ca.adobe-connect.top"
   -
     name: "EPODONIOS 867"
     type: "vless"
@@ -34038,22 +34004,6 @@ proxies:
       short-id: "4294bfc2"
       spider-x: "/CUVGUaBl8cradcN"
   -
-    name: "EPODONIOS 906"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2053
-    uuid: "6e5aeb09-49db-4447-b7b4-d2af001f692d"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "paneluk.roomode.ir"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "paneluk.roomode.ir"
-  -
     name: "EPODONIOS 980"
     type: "vless"
     server: "185.137.232.194"
@@ -34087,22 +34037,6 @@ proxies:
     reality-opts:
       public-key: "QC03TEA8YdxpkQyJ8duwrqaP1dWAIlCjONzicWlWDjs"
       short-id: "b0d8f964b7ac8ac0"
-  -
-    name: "EPODONIOS 1044"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 2053
-    uuid: "82e0462a-22d5-44f1-aa71-6482cec4a04b"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "fr.roomode.ir"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "fr.roomode.ir"
   -
     name: "EPODONIOS 1076"
     type: "vless"
@@ -34661,22 +34595,6 @@ proxies:
       public-key: "ZSzB9TQPGNcCiC0WLmciF5Jc8doJDvdRgbqTi8SCoEM"
       short-id: "a1b2c3d4e5f6789a"
   -
-    name: "EPODONIOS 1706"
-    type: "vless"
-    server: "chatgpt.com"
-    port: 443
-    uuid: "d057338f-0f7b-4245-80b3-6bcabd365b84"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "edgE26-TOPnET.TopnEt1127.wOrkErs.DeV"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/eyJqdW5rIjoicVZMOXFIcEN4UkI2azNnIiwicHJvdG9jb2wiOiJ2bCIsIm1vZGUiOiJwcm94eWlwIiwicGFuZWxJUHMiOltdfQ==?ed=2560"
-      headers:
-        Host: "edge26-topnet.topnet1127.workers.dev"
-  -
     name: "EPODONIOS 1727"
     type: "vless"
     server: "89.23.116.82"
@@ -34696,26 +34614,6 @@ proxies:
     encryption: "none"
     ws-opts:
       path: "/v1"
-  -
-    name: "EPODONIOS 1905"
-    type: "vless"
-    server: "chat.openai.com"
-    port: 443
-    uuid: "e5cc16a6-ea42-46b2-82ae-ad2157e1641b"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "hhlfy.twiladaphne.ndjp.net"
-    client-fingerprint: "chrome"
-    alpn:
-      - "h3"
-      - "h2"
-      - "http/1.1"
-    ws-opts:
-      path: "/fp"
-      headers:
-        Host: "hhlfy.twiladaphne.ndjp.net"
   -
     name: "EPODONIOS 1915"
     type: "vless"
@@ -35210,21 +35108,6 @@ proxies:
     tls: true
     servername: "br-83-ru.netzrun.at"
     client-fingerprint: "firefox"
-  -
-    name: "Telegram | @FNET00📱 2"
-    type: "vless"
-    server: "chat.openai.com"
-    port: 443
-    uuid: "396c904b-4b62-4334-b793-ee25fc0c61cc"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "pages.dev"
-    ws-opts:
-      path: "/eyJqdW5rIjoiTHczMWlhREZIb0ljUDhoaCIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0=?ed=2560"
-      headers:
-        Host: "8vmU06cxdz59m931xnREgj8qpnoq1-06.pages.dev"
   -
     name: "Telegram | @FNET00📱 16"
     type: "vless"
@@ -59107,19 +58990,15 @@ proxy-groups:
       - "EPODONIOS 668"
       - "EPODONIOS 669"
       - "EPODONIOS 744"
-      - "EPODONIOS 776"
       - "EPODONIOS 809"
       - "EPODONIOS 832"
-      - "EPODONIOS 865"
       - "EPODONIOS 867"
       - "EPODONIOS 868"
       - "EPODONIOS 893"
       - "EPODONIOS 894"
       - "EPODONIOS 897"
-      - "EPODONIOS 906"
       - "EPODONIOS 980"
       - "EPODONIOS 985"
-      - "EPODONIOS 1044"
       - "EPODONIOS 1076"
       - "EPODONIOS 1197"
       - "EPODONIOS 1198"
@@ -59156,10 +59035,8 @@ proxy-groups:
       - "EPODONIOS 1609"
       - "EPODONIOS 1628"
       - "EPODONIOS 1685"
-      - "EPODONIOS 1706"
       - "EPODONIOS 1727"
       - "EPODONIOS 1744"
-      - "EPODONIOS 1905"
       - "EPODONIOS 1915"
       - "EPODONIOS 1926"
       - "EPODONIOS 1929"
@@ -59196,7 +59073,6 @@ proxy-groups:
       - "https://t.me/VPNgoma 2"
       - "🏳️ 2"
       - "👁️🗨️ 4"
-      - "Telegram | @FNET00📱 2"
       - "Telegram | @FNET00📱 16"
       - "🏳️ ShatakVPN 601959"
       - "🏳️ ShatakVPN 480048"
@@ -62723,19 +62599,15 @@ proxy-groups:
       - "EPODONIOS 668"
       - "EPODONIOS 669"
       - "EPODONIOS 744"
-      - "EPODONIOS 776"
       - "EPODONIOS 809"
       - "EPODONIOS 832"
-      - "EPODONIOS 865"
       - "EPODONIOS 867"
       - "EPODONIOS 868"
       - "EPODONIOS 893"
       - "EPODONIOS 894"
       - "EPODONIOS 897"
-      - "EPODONIOS 906"
       - "EPODONIOS 980"
       - "EPODONIOS 985"
-      - "EPODONIOS 1044"
       - "EPODONIOS 1076"
       - "EPODONIOS 1197"
       - "EPODONIOS 1198"
@@ -62772,10 +62644,8 @@ proxy-groups:
       - "EPODONIOS 1609"
       - "EPODONIOS 1628"
       - "EPODONIOS 1685"
-      - "EPODONIOS 1706"
       - "EPODONIOS 1727"
       - "EPODONIOS 1744"
-      - "EPODONIOS 1905"
       - "EPODONIOS 1915"
       - "EPODONIOS 1926"
       - "EPODONIOS 1929"
@@ -62812,7 +62682,6 @@ proxy-groups:
       - "https://t.me/VPNgoma 2"
       - "🏳️ 2"
       - "👁️🗨️ 4"
-      - "Telegram | @FNET00📱 2"
       - "Telegram | @FNET00📱 16"
       - "🏳️ ShatakVPN 601959"
       - "🏳️ ShatakVPN 480048"
