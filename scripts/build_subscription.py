@@ -233,7 +233,22 @@ SOURCES = [
         "name": "PrinceVSFX Adapt-Configs White_list.txt",
         "url": "https://raw.githubusercontent.com/PrinceVSFX/Adapt-Configs/main/Configs/White_list.txt",
     },
+    {
+        "id": "SOLOVYOV_ALL_SUBS",
+        "name": "solovyov-jenya2004 all_subs final_sorted",
+        "url": "https://raw.githubusercontent.com/solovyov-jenya2004/all_subs/main/final_sorted",
+    },
+    {
+        "id": "VESTRANET_VLESS",
+        "name": "VestraNet Nodes protocols/vless.txt",
+        "url": "https://raw.githubusercontent.com/MustafaBaqer/VestraNet-Nodes/main/protocols/vless.txt",
+        "scope": "lan_only",
+    },
 ]
+
+BASE_SOURCE_IDS = {
+    source["id"] for source in SOURCES if source.get("scope", "base") == "base"
+}
 
 BYPASS_SOURCE_IDS = {
     "FULL",
@@ -265,6 +280,7 @@ BYPASS_SOURCE_IDS = {
     "WLUNLOCKER_CIDR_2",
     "VLADVARP_WHITELIST_VLESS",
     "PRINCE_WHITE_LIST",
+    "SOLOVYOV_ALL_SUBS",
 }
 
 # Regular public VLESS pools suitable for ordinary wired Internet. Keep this
@@ -284,7 +300,9 @@ LAN_SOURCE_IDS = {
     "MAHSANET_XRAY_FINAL",
     "RAYAN_PROXY",
     "FNET_MAIN",
+    "VESTRANET_VLESS",
 }
+BS_SAFE_SOURCE_IDS = BYPASS_SOURCE_IDS
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
@@ -321,6 +339,7 @@ BS_SAFE_MOBILE_SOURCE_IDS = {
     "KIRILLO4KA_WHITE_SNI",
     "WLUNLOCKER_CIDR_1",
     "WLUNLOCKER_CIDR_2",
+    "SOLOVYOV_ALL_SUBS",
 }
 BLOCKED_PROXY_KEYS = {
     ("78.159.250.214", 443, "eb78e1f0-d921-4ca9-a889-261fcc5a0547"),
@@ -330,6 +349,7 @@ BLOCKED_PROXY_NAME_MARKERS = (
 )
 GLOBAL_SOURCE_PRIORITY = (
     "RKP_BYPASS",
+    "SOLOVYOV_ALL_SUBS",
     "AETRIS_BYPASS",
     "AVEN_MIRROR_26",
     "AVEN_26",
@@ -1133,7 +1153,7 @@ def bs_safe_quality_rank(proxy: dict) -> int:
 
 def bs_safe_rank(proxy: dict) -> tuple:
     sources = proxy.get("_sources", [])
-    bypass_sources = [source for source in sources if source in BYPASS_SOURCE_IDS]
+    bypass_sources = [source for source in sources if source in BS_SAFE_SOURCE_IDS]
     priority_sources = [source for source in bypass_sources if source in GLOBAL_SOURCE_RANK]
     source_published = max((source_published_ts(source) for source in bypass_sources), default=0.0)
     source_rank = min((GLOBAL_SOURCE_RANK[source] for source in priority_sources), default=999)
@@ -1225,7 +1245,7 @@ def select_bs_safe_proxies(proxies: list[dict]) -> list[dict]:
         proxy
         for proxy in proxies
         if proxy.get("_country") != "UNKNOWN"
-        and any(source in BYPASS_SOURCE_IDS for source in proxy.get("_sources", []))
+        and any(source in BS_SAFE_SOURCE_IDS for source in proxy.get("_sources", []))
         and "reality-opts" in proxy
         and proxy.get("tls") is True
         and proxy.get("skip-cert-verify") is not True
@@ -1704,17 +1724,24 @@ def source_table(
     stats: dict[str, int],
     global_stats: dict[str, int] | None = None,
     global_5k_stats: dict[str, int] | None = None,
+    lan_5k_stats: dict[str, int] | None = None,
 ) -> str:
     global_stats = global_stats or {}
     global_5k_stats = global_5k_stats or {}
+    lan_5k_stats = lan_5k_stats or {}
     global_shortlist_sources = [source for source in SOURCES if source["id"] in GLOBAL_SOURCE_RANK]
     other_bypass_sources = [
         source
         for source in SOURCES
         if source["id"] in BYPASS_SOURCE_IDS and source["id"] not in GLOBAL_SOURCE_RANK
     ]
-    global_sources = [source for source in SOURCES if source["id"] not in BYPASS_SOURCE_IDS]
+    global_sources = [
+        source
+        for source in SOURCES
+        if source["id"] in BASE_SOURCE_IDS and source["id"] not in BYPASS_SOURCE_IDS
+    ]
     lan_sources = [source for source in SOURCES if source["id"] in LAN_SOURCE_IDS]
+    specialized_sources = [source for source in SOURCES if source["id"] not in BASE_SOURCE_IDS]
 
     def rows_for(sources: list[dict], show_global: bool = False) -> list[str]:
         if show_global:
@@ -1758,9 +1785,10 @@ def source_table(
     lan_sources_text = source_ids(lan_sources)
 
     lines = [
-        "`subscription-global.yaml` берёт все non-RU узлы из всех источников и остаётся полным большим global-списком.",
+        "`subscription-global.yaml` берёт все non-RU узлы из базовых источников и остаётся полным большим global-списком. Специализированные LAN-only источники в него не попадают.",
         f"`subscription-global-5k.yaml` берёт до {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих узлов с подтверждённой страной не RU только из БС / whitelist / bypass источников ({global_shortlist_text}). Проверок живости в GitHub Actions нет.",
         f"`subscription-lan-5k.yaml` берёт до {LAN_5K_SUBSCRIPTION_LIMIT} узлов с подтверждённой страной не RU только из обычных проводных пулов ({lan_sources_text}); БС, whitelist, mobile и CIDR-источники исключены.",
+        "`SOLOVYOV_ALL_SUBS` — базовый LTE/whitelist-источник: его узлы участвуют в общей, RU, Global, Global 5K, Global Non-Stable и BS Safe, но исключены из LAN 5K.",
         "",
         "### Приоритетные БС / whitelist / bypass источники",
         "",
@@ -1781,6 +1809,23 @@ def source_table(
         "",
         *rows_for(global_sources, show_global=True),
     ])
+    if specialized_sources:
+        lines.extend(
+            [
+                "",
+                "### Специализированные источники",
+                "",
+                "| Источник | Область | Обновление источника | В LAN 5K | Ссылка |",
+                "|----------|---------|---------------------|----------|--------|",
+            ]
+        )
+        for source in specialized_sources:
+            scope = "только LAN" if source.get("scope") == "lan_only" else "только BS Safe"
+            source_id = source["id"].lower()
+            lines.append(
+                f"| {source['name']} | {scope} | `{source_published_label(source['id'])}` | "
+                f"`{lan_5k_stats.get(source_id, 0)}` | [raw]({source['url']}) |"
+            )
     return "\n".join(lines)
 
 
@@ -2218,6 +2263,7 @@ def write_final_readme(
     stats: dict[str, int] | None = None,
     global_stats: dict[str, int] | None = None,
     global_5k_stats: dict[str, int] | None = None,
+    lan_5k_stats: dict[str, int] | None = None,
     global_non_stable_auto_count: int | None = None,
     bs_safe_stats: dict[str, int] | None = None,
     bs_safe_auto_count: int | None = None,
@@ -2225,7 +2271,12 @@ def write_final_readme(
     if stats is None:
         stats = stats_for(proxies)
     history_table = history_lines(history)
-    sources_markdown = source_table(stats, global_stats, global_5k_stats)
+    sources_markdown = source_table(
+        stats,
+        global_stats,
+        global_5k_stats,
+        lan_5k_stats,
+    )
     text = f"""# pale-signal подписки
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
@@ -2257,10 +2308,12 @@ pale-signal автоматически собирает VLESS-подписки �
 | Global | `{stats['global']}` |
 | Global 5K | `{stats['global_5k']}` |
 | LAN 5K | `{stats['lan_5k']}` |
+| LAN 5K из VestraNet | `{lan_5k_stats.get('vestranet_vless', 0) if lan_5k_stats is not None else 0}` |
 | Global Non-Stable MANUAL | `{stats['global_5k']}` |
 | Global Non-Stable AUTO | `{global_non_stable_auto_count if global_non_stable_auto_count is not None else stats['global_5k']}` |
 | BS Safe MANUAL | `{bs_safe_stats['total'] if bs_safe_stats is not None else stats.get('bs_safe', 0)}` |
 | BS Safe AUTO | `{bs_safe_auto_count if bs_safe_auto_count is not None else 0}` |
+| BS Safe из all_subs | `{bs_safe_stats.get('solovyov_all_subs', 0) if bs_safe_stats is not None else 0}` |
 | BS Safe TCP / gRPC / XHTTP | `{bs_safe_stats['tcp'] if bs_safe_stats is not None else 0}` / `{bs_safe_stats['grpc'] if bs_safe_stats is not None else 0}` / `{bs_safe_stats['xhttp'] if bs_safe_stats is not None else 0}` |
 | Unknown | `{stats['unknown']}` |
 | Reality | `{stats['reality']}` |
@@ -2270,9 +2323,9 @@ pale-signal автоматически собирает VLESS-подписки �
 | gRPC | `{stats['grpc']}` |
 | XHTTP | `{stats['xhttp']}` |
 
-Для OpenClash при активных блокировках используйте `BS Safe`: в `MANUAL` доступно до {BS_SAFE_SUBSCRIPTION_LIMIT} Reality-узлов, а `AUTO` проверяет только {BS_SAFE_AUTO_LIMIT}, чтобы не перегружать роутер.
+Для OpenClash при активных блокировках используйте `BS Safe`: в `MANUAL` доступно до {BS_SAFE_SUBSCRIPTION_LIMIT} Reality-узлов из базовых LTE/whitelist/bypass-источников, включая `all_subs`, а `AUTO` проверяет только {BS_SAFE_AUTO_LIMIT}, чтобы не перегружать роутер.
 
-Для обычного домашнего или офисного проводного подключения используйте `LAN 5K`. В неё не входят узлы, специально собранные под белые списки и CIDR-ограничения мобильных операторов.
+Для обычного домашнего или офисного проводного подключения используйте `LAN 5K`. Она дополнена проводным пулом VestraNet; узлы, специально собранные под белые списки и CIDR-ограничения мобильных операторов, в неё не входят.
 
 Подписка собирает и фильтрует узлы, но не может гарантировать их работу у конкретного провайдера.
 
@@ -2324,13 +2377,20 @@ def msk_timestamp() -> str:
     return dt.datetime.now(MSK).replace(microsecond=0).strftime("%Y-%m-%d %H:%M:%S МСК")
 
 
-def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
+def main(
+    non_stable_only: bool = False,
+    lan_only: bool = False,
+    bs_safe_only: bool = False,
+) -> int:
     parsed = []
-    selected_sources = (
-        [source for source in SOURCES if source["id"] in LAN_SOURCE_IDS]
-        if lan_only
-        else SOURCES
-    )
+    if lan_only:
+        selected_sources = [source for source in SOURCES if source["id"] in LAN_SOURCE_IDS]
+    elif bs_safe_only:
+        selected_sources = [source for source in SOURCES if source["id"] in BS_SAFE_SOURCE_IDS]
+    elif non_stable_only:
+        selected_sources = [source for source in SOURCES if source["id"] in BASE_SOURCE_IDS]
+    else:
+        selected_sources = SOURCES
     for source in selected_sources:
         try:
             source_texts = fetch_source_texts(source)
@@ -2350,10 +2410,25 @@ def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
     proxies = drop_blocked_proxies(proxies)
     if blocked_count:
         print(f"dropped {blocked_count} blocked proxy")
-    ru_proxies, global_candidates = split_by_country(proxies)
+    base_proxies = [
+        proxy
+        for proxy in proxies
+        if any(source in BASE_SOURCE_IDS for source in proxy.get("_sources", []))
+    ]
+    all_ru_proxies, all_global_candidates = split_by_country(proxies)
+    ru_proxies = [
+        proxy
+        for proxy in all_ru_proxies
+        if any(source in BASE_SOURCE_IDS for source in proxy.get("_sources", []))
+    ]
+    global_candidates = [
+        proxy
+        for proxy in all_global_candidates
+        if any(source in BASE_SOURCE_IDS for source in proxy.get("_sources", []))
+    ]
     global_proxies = prioritize_global_proxies(global_candidates)
     if lan_only:
-        lan_5k_proxies = select_lan_5k_proxies(global_proxies)
+        lan_5k_proxies = select_lan_5k_proxies(all_global_candidates)
         if not lan_5k_proxies:
             raise RuntimeError("no LAN 5K VLESS servers were produced")
         lan_5k_config = build_config(lan_5k_proxies)
@@ -2362,7 +2437,38 @@ def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
         if not lan_5k_yaml_text.strip():
             raise RuntimeError("empty LAN 5K YAML output")
         LAN_5K_OUTPUT_FILE.write_text(lan_5k_yaml_text, encoding="utf-8", newline="\n")
-        print(f"wrote subscription-lan-5k.yaml with {len(lan_5k_proxies)} proxies")
+        specialized_count = sum(
+            1
+            for proxy in lan_5k_proxies
+            if any(source not in BASE_SOURCE_IDS for source in proxy.get("_sources", []))
+        )
+        print(
+            f"wrote subscription-lan-5k.yaml with {len(lan_5k_proxies)} proxies "
+            f"({specialized_count} from LAN-only sources)"
+        )
+        return 0
+
+    if bs_safe_only:
+        bs_safe_proxies = select_bs_safe_proxies(proxies)
+        if not bs_safe_proxies:
+            raise RuntimeError("no BS Safe VLESS servers were produced")
+        bs_safe_auto_proxies = select_bs_safe_auto_proxies(bs_safe_proxies)
+        bs_safe_config = build_bs_safe_config(bs_safe_proxies, bs_safe_auto_proxies)
+        validate_config(bs_safe_config)
+        bs_safe_yaml_text = "\n".join(dump_yaml(bs_safe_config)) + "\n"
+        if not bs_safe_yaml_text.strip():
+            raise RuntimeError("empty BS Safe YAML output")
+        BS_SAFE_OUTPUT_FILE.write_text(bs_safe_yaml_text, encoding="utf-8", newline="\n")
+        all_subs_count = sum(
+            1
+            for proxy in bs_safe_proxies
+            if "SOLOVYOV_ALL_SUBS" in proxy.get("_sources", [])
+        )
+        print(
+            f"wrote subscription-bs-safe.yaml with {len(bs_safe_proxies)} MANUAL, "
+            f"{len(bs_safe_auto_proxies)} AUTO and "
+            f"{all_subs_count} from all_subs"
+        )
         return 0
 
     global_5k_proxies = select_global_5k_proxies(global_proxies)
@@ -2370,7 +2476,7 @@ def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
         raise RuntimeError("no global VLESS servers were produced")
     if not global_5k_proxies:
         raise RuntimeError("no global 5k VLESS servers were produced")
-    config = build_config(proxies)
+    config = build_config(base_proxies)
     ru_config = build_config(ru_proxies)
     global_config = build_config(global_proxies)
     global_5k_config = build_config(global_5k_proxies)
@@ -2409,7 +2515,7 @@ def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
         )
         return 0
 
-    lan_5k_proxies = select_lan_5k_proxies(global_proxies)
+    lan_5k_proxies = select_lan_5k_proxies(all_global_candidates)
     if not lan_5k_proxies:
         raise RuntimeError("no LAN 5K VLESS servers were produced")
     lan_5k_config = build_config(lan_5k_proxies)
@@ -2437,7 +2543,7 @@ def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
         "lan_5k": compare_with_existing(LAN_5K_OUTPUT_FILE, lan_5k_yaml_text),
         "bs_safe": compare_with_existing(BS_SAFE_OUTPUT_FILE, bs_safe_yaml_text),
     }
-    stats = stats_for(proxies)
+    stats = stats_for(base_proxies)
     stats["ru"] = len(ru_proxies)
     stats["global"] = len(global_proxies)
     stats["global_5k"] = len(global_5k_proxies)
@@ -2446,6 +2552,7 @@ def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
     stats["unknown"] = sum(1 for proxy in global_proxies if proxy.get("_country") == "UNKNOWN")
     global_stats = stats_for(global_proxies)
     global_5k_stats = stats_for(global_5k_proxies)
+    lan_5k_stats = stats_for(lan_5k_proxies)
     bs_safe_stats = stats_for(bs_safe_proxies)
     history = update_run_history(now, stats, changes)
     OUTPUT_FILE.write_text(yaml_text, encoding="utf-8", newline="\n")
@@ -2460,19 +2567,20 @@ def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
     )
     BS_SAFE_OUTPUT_FILE.write_text(bs_safe_yaml_text, encoding="utf-8", newline="\n")
     write_final_readme(
-        proxies,
+        base_proxies,
         now,
         changes,
         history,
         stats,
         global_stats,
         global_5k_stats,
+        lan_5k_stats,
         len(global_non_stable_auto_proxies),
         bs_safe_stats,
         len(bs_safe_auto_proxies),
     )
     print(
-        f"wrote subscription files with {len(proxies)} proxies "
+        f"wrote subscription files with {len(base_proxies)} base proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} global, "
         f"{len(global_5k_proxies)} global 5k, "
         f"{len(lan_5k_proxies)} LAN 5K, "
@@ -2486,15 +2594,18 @@ def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
 if __name__ == "__main__":
     try:
         arguments = set(sys.argv[1:])
-        unknown_arguments = arguments - {"--non-stable-only", "--lan-only"}
+        known_modes = {"--non-stable-only", "--lan-only", "--bs-safe-only"}
+        unknown_arguments = arguments - known_modes
         if unknown_arguments:
             raise RuntimeError(f"unknown arguments: {sorted(unknown_arguments)}")
-        if {"--non-stable-only", "--lan-only"}.issubset(arguments):
-            raise RuntimeError("--non-stable-only and --lan-only cannot be combined")
+        selected_modes = arguments & known_modes
+        if len(selected_modes) > 1:
+            raise RuntimeError(f"subscription-only modes cannot be combined: {sorted(selected_modes)}")
         raise SystemExit(
             main(
                 non_stable_only="--non-stable-only" in arguments,
                 lan_only="--lan-only" in arguments,
+                bs_safe_only="--bs-safe-only" in arguments,
             )
         )
     except Exception as exc:
