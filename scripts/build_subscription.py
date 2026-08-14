@@ -267,11 +267,31 @@ BYPASS_SOURCE_IDS = {
     "PRINCE_WHITE_LIST",
 }
 
+# Regular public VLESS pools suitable for ordinary wired Internet. Keep this
+# list explicit so mobile whitelist and CIDR bypass sources cannot leak into
+# the LAN subscription when SOURCES changes.
+LAN_SOURCE_IDS = {
+    "RADIKAL_LIGHT",
+    "MAHAN_VLESS",
+    "EPODONIOS_VLESS",
+    "BARRY_FAR_VLESS",
+    "SOLISPIRIT_VLESS",
+    "MATIN_VLESS",
+    "LIMILCO_VLESS",
+    "V2RAYROOT_VLESS",
+    "SURFBOARD_MIXED",
+    "ALIILAPRO_SUB",
+    "MAHSANET_XRAY_FINAL",
+    "RAYAN_PROXY",
+    "FNET_MAIN",
+}
+
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
 RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
 GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 GLOBAL_5K_OUTPUT_FILE = ROOT / "subscription-global-5k.yaml"
+LAN_5K_OUTPUT_FILE = ROOT / "subscription-lan-5k.yaml"
 GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
 BS_SAFE_OUTPUT_FILE = ROOT / "subscription-bs-safe.yaml"
 README_FILE = ROOT / "README.md"
@@ -280,6 +300,7 @@ URL_TEST = "https://cp.cloudflare.com/generate_204"
 MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 UPDATE_HISTORY_LIMIT = 10
 GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
+LAN_5K_SUBSCRIPTION_LIMIT = 5000
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
 BS_SAFE_RU_LIMIT = BS_SAFE_SUBSCRIPTION_LIMIT // 2
@@ -1054,6 +1075,34 @@ def select_global_5k_proxies(global_proxies: list[dict]) -> list[dict]:
     return candidates[:GLOBAL_5K_SUBSCRIPTION_LIMIT]
 
 
+def lan_5k_rank(proxy: dict) -> tuple:
+    sources = [source for source in proxy.get("_sources", []) if source in LAN_SOURCE_IDS]
+    source_published = max((source_published_ts(source) for source in sources), default=0.0)
+    transport_rank = {"tcp": 0, "grpc": 1, "ws": 2, "xhttp": 3}.get(proxy.get("network", "tcp"), 9)
+    return (
+        -source_published,
+        -len(sources),
+        0 if "reality-opts" in proxy else 1,
+        0 if proxy.get("tls") else 1,
+        transport_rank,
+        proxy.get("_input_order", 0),
+        proxy.get("name", ""),
+        proxy.get("server", ""),
+        proxy.get("port", 0),
+    )
+
+
+def select_lan_5k_proxies(global_proxies: list[dict]) -> list[dict]:
+    candidates = [
+        proxy
+        for proxy in global_proxies
+        if proxy.get("_country") not in {"RU", "UNKNOWN"}
+        and any(source in LAN_SOURCE_IDS for source in proxy.get("_sources", []))
+    ]
+    candidates.sort(key=lan_5k_rank)
+    return candidates[:LAN_5K_SUBSCRIPTION_LIMIT]
+
+
 def bs_safe_quality_rank(proxy: dict) -> int:
     network = proxy.get("network", "tcp")
     safe_fingerprint = proxy.get("client-fingerprint") in BS_SAFE_FINGERPRINTS
@@ -1557,6 +1606,7 @@ def history_entry(now: str, stats: dict[str, int], changes: dict[str, dict[str, 
             "ru": stats["ru"],
             "global": stats["global"],
             "global_5k": stats.get("global_5k", stats["global"]),
+            "lan_5k": stats.get("lan_5k", 0),
             "bs_safe": stats.get("bs_safe", 0),
         },
         "changes": changes,
@@ -1664,6 +1714,7 @@ def source_table(
         if source["id"] in BYPASS_SOURCE_IDS and source["id"] not in GLOBAL_SOURCE_RANK
     ]
     global_sources = [source for source in SOURCES if source["id"] not in BYPASS_SOURCE_IDS]
+    lan_sources = [source for source in SOURCES if source["id"] in LAN_SOURCE_IDS]
 
     def rows_for(sources: list[dict], show_global: bool = False) -> list[str]:
         if show_global:
@@ -1704,10 +1755,12 @@ def source_table(
     global_shortlist_text = source_ids(
         sorted(global_shortlist_sources, key=lambda item: GLOBAL_SOURCE_RANK.get(item["id"], 999))
     )
+    lan_sources_text = source_ids(lan_sources)
 
     lines = [
         "`subscription-global.yaml` берёт все non-RU узлы из всех источников и остаётся полным большим global-списком.",
         f"`subscription-global-5k.yaml` берёт до {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих узлов с подтверждённой страной не RU только из БС / whitelist / bypass источников ({global_shortlist_text}). Проверок живости в GitHub Actions нет.",
+        f"`subscription-lan-5k.yaml` берёт до {LAN_5K_SUBSCRIPTION_LIMIT} узлов с подтверждённой страной не RU только из обычных проводных пулов ({lan_sources_text}); БС, whitelist, mobile и CIDR-источники исключены.",
         "",
         "### Приоритетные БС / whitelist / bypass источники",
         "",
@@ -1724,7 +1777,7 @@ def source_table(
         )
     lines.extend([
         "",
-        "### Остальные global-пулы",
+        "### Обычные LAN/global-пулы",
         "",
         *rows_for(global_sources, show_global=True),
     ])
@@ -2191,6 +2244,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | **pale-signal подписка - Россия** | Серверы, физически расположенные в России | https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
 | **pale-signal подписка - Global** | Все иностранные non-RU серверы из общей подписки | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
 | **pale-signal подписка - Global 5K** | До {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих иностранных БС/whitelist/bypass серверов | https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) |
+| **pale-signal подписка - LAN 5K** | До {LAN_5K_SUBSCRIPTION_LIMIT} иностранных узлов для проводного интернета; без БС/whitelist/mobile/CIDR-пулов | https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml | [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) |
 | **pale-signal подписка - Global Non-Stable** | Тестовая Global 5K: полный MANUAL, AUTO без дублей endpoint | https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) |
 | **pale-signal подписка - BS Safe** | До {BS_SAFE_SUBSCRIPTION_LIMIT} свежих Reality-узлов из БС-источников; AUTO ограничен {BS_SAFE_AUTO_LIMIT} нодами | https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) |
 
@@ -2202,6 +2256,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | Россия | `{stats['ru']}` |
 | Global | `{stats['global']}` |
 | Global 5K | `{stats['global_5k']}` |
+| LAN 5K | `{stats['lan_5k']}` |
 | Global Non-Stable MANUAL | `{stats['global_5k']}` |
 | Global Non-Stable AUTO | `{global_non_stable_auto_count if global_non_stable_auto_count is not None else stats['global_5k']}` |
 | BS Safe MANUAL | `{bs_safe_stats['total'] if bs_safe_stats is not None else stats.get('bs_safe', 0)}` |
@@ -2216,6 +2271,8 @@ pale-signal автоматически собирает VLESS-подписки �
 | XHTTP | `{stats['xhttp']}` |
 
 Для OpenClash при активных блокировках используйте `BS Safe`: в `MANUAL` доступно до {BS_SAFE_SUBSCRIPTION_LIMIT} Reality-узлов, а `AUTO` проверяет только {BS_SAFE_AUTO_LIMIT}, чтобы не перегружать роутер.
+
+Для обычного домашнего или офисного проводного подключения используйте `LAN 5K`. В неё не входят узлы, специально собранные под белые списки и CIDR-ограничения мобильных операторов.
 
 Подписка собирает и фильтрует узлы, но не может гарантировать их работу у конкретного провайдера.
 
@@ -2267,9 +2324,14 @@ def msk_timestamp() -> str:
     return dt.datetime.now(MSK).replace(microsecond=0).strftime("%Y-%m-%d %H:%M:%S МСК")
 
 
-def main(non_stable_only: bool = False) -> int:
+def main(non_stable_only: bool = False, lan_only: bool = False) -> int:
     parsed = []
-    for source in SOURCES:
+    selected_sources = (
+        [source for source in SOURCES if source["id"] in LAN_SOURCE_IDS]
+        if lan_only
+        else SOURCES
+    )
+    for source in selected_sources:
         try:
             source_texts = fetch_source_texts(source)
         except Exception as exc:
@@ -2290,6 +2352,19 @@ def main(non_stable_only: bool = False) -> int:
         print(f"dropped {blocked_count} blocked proxy")
     ru_proxies, global_candidates = split_by_country(proxies)
     global_proxies = prioritize_global_proxies(global_candidates)
+    if lan_only:
+        lan_5k_proxies = select_lan_5k_proxies(global_proxies)
+        if not lan_5k_proxies:
+            raise RuntimeError("no LAN 5K VLESS servers were produced")
+        lan_5k_config = build_config(lan_5k_proxies)
+        validate_config(lan_5k_config)
+        lan_5k_yaml_text = "\n".join(dump_yaml(lan_5k_config)) + "\n"
+        if not lan_5k_yaml_text.strip():
+            raise RuntimeError("empty LAN 5K YAML output")
+        LAN_5K_OUTPUT_FILE.write_text(lan_5k_yaml_text, encoding="utf-8", newline="\n")
+        print(f"wrote subscription-lan-5k.yaml with {len(lan_5k_proxies)} proxies")
+        return 0
+
     global_5k_proxies = select_global_5k_proxies(global_proxies)
     if not global_proxies:
         raise RuntimeError("no global VLESS servers were produced")
@@ -2334,6 +2409,15 @@ def main(non_stable_only: bool = False) -> int:
         )
         return 0
 
+    lan_5k_proxies = select_lan_5k_proxies(global_proxies)
+    if not lan_5k_proxies:
+        raise RuntimeError("no LAN 5K VLESS servers were produced")
+    lan_5k_config = build_config(lan_5k_proxies)
+    validate_config(lan_5k_config)
+    lan_5k_yaml_text = "\n".join(dump_yaml(lan_5k_config)) + "\n"
+    if not lan_5k_yaml_text.strip():
+        raise RuntimeError("empty LAN 5K YAML output")
+
     bs_safe_proxies = select_bs_safe_proxies(proxies)
     if not bs_safe_proxies:
         raise RuntimeError("no BS Safe VLESS servers were produced")
@@ -2350,12 +2434,14 @@ def main(non_stable_only: bool = False) -> int:
         "ru": compare_with_existing(RU_OUTPUT_FILE, ru_yaml_text),
         "global": compare_with_existing(GLOBAL_OUTPUT_FILE, global_yaml_text),
         "global_5k": compare_with_existing(GLOBAL_5K_OUTPUT_FILE, global_5k_yaml_text),
+        "lan_5k": compare_with_existing(LAN_5K_OUTPUT_FILE, lan_5k_yaml_text),
         "bs_safe": compare_with_existing(BS_SAFE_OUTPUT_FILE, bs_safe_yaml_text),
     }
     stats = stats_for(proxies)
     stats["ru"] = len(ru_proxies)
     stats["global"] = len(global_proxies)
     stats["global_5k"] = len(global_5k_proxies)
+    stats["lan_5k"] = len(lan_5k_proxies)
     stats["bs_safe"] = len(bs_safe_proxies)
     stats["unknown"] = sum(1 for proxy in global_proxies if proxy.get("_country") == "UNKNOWN")
     global_stats = stats_for(global_proxies)
@@ -2366,6 +2452,7 @@ def main(non_stable_only: bool = False) -> int:
     RU_OUTPUT_FILE.write_text(ru_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_5K_OUTPUT_FILE.write_text(global_5k_yaml_text, encoding="utf-8", newline="\n")
+    LAN_5K_OUTPUT_FILE.write_text(lan_5k_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_NON_STABLE_OUTPUT_FILE.write_text(
         global_non_stable_yaml_text,
         encoding="utf-8",
@@ -2388,6 +2475,7 @@ def main(non_stable_only: bool = False) -> int:
         f"wrote subscription files with {len(proxies)} proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} global, "
         f"{len(global_5k_proxies)} global 5k, "
+        f"{len(lan_5k_proxies)} LAN 5K, "
         f"{len(global_non_stable_auto_proxies)} non-stable AUTO, "
         f"{len(bs_safe_proxies)} BS Safe MANUAL, "
         f"{len(bs_safe_auto_proxies)} BS Safe AUTO)"
@@ -2398,10 +2486,17 @@ def main(non_stable_only: bool = False) -> int:
 if __name__ == "__main__":
     try:
         arguments = set(sys.argv[1:])
-        unknown_arguments = arguments - {"--non-stable-only"}
+        unknown_arguments = arguments - {"--non-stable-only", "--lan-only"}
         if unknown_arguments:
             raise RuntimeError(f"unknown arguments: {sorted(unknown_arguments)}")
-        raise SystemExit(main(non_stable_only="--non-stable-only" in arguments))
+        if {"--non-stable-only", "--lan-only"}.issubset(arguments):
+            raise RuntimeError("--non-stable-only and --lan-only cannot be combined")
+        raise SystemExit(
+            main(
+                non_stable_only="--non-stable-only" in arguments,
+                lan_only="--lan-only" in arguments,
+            )
+        )
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)
         raise SystemExit(1)
