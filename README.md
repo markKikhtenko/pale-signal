@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-15188-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-15496-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 pale-signal автоматически собирает VLESS-подписки для Mihomo/OpenClash.
 
-**Последнее обновление:** `2026-09-09 13:51:02 МСК`
+**Последнее обновление:** `2026-09-09 23:30:59 МСК`
 
 ## Подписки
 
@@ -24,25 +24,25 @@ pale-signal автоматически собирает VLESS-подписки �
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `15188` |
-| Россия | `3553` |
-| Global | `11635` |
+| Всего серверов | `15496` |
+| Россия | `3513` |
+| Global | `11983` |
 | Global 5K | `5000` |
 | LAN 5K | `5000` |
-| LAN 5K из VestraNet | `1556` |
+| LAN 5K из VestraNet | `1394` |
 | Global Non-Stable MANUAL | `5000` |
-| Global Non-Stable AUTO | `4535` |
+| Global Non-Stable AUTO | `4461` |
 | BS Safe MANUAL | `2500` |
 | BS Safe AUTO | `50` |
-| BS Safe из all_subs | `312` |
-| BS Safe TCP / gRPC / XHTTP | `1861` / `419` / `220` |
-| Unknown | `474` |
-| Reality | `9125` |
-| TLS | `12394` |
-| TCP | `8993` |
-| WebSocket | `4023` |
-| gRPC | `1048` |
-| XHTTP | `1124` |
+| BS Safe из all_subs | `324` |
+| BS Safe TCP / gRPC / XHTTP | `1860` / `412` / `228` |
+| Unknown | `476` |
+| Reality | `9296` |
+| TLS | `12660` |
+| TCP | `9249` |
+| WebSocket | `4047` |
+| gRPC | `1031` |
+| XHTTP | `1169` |
 
 Для OpenClash при активных блокировках используйте `BS Safe`: в `MANUAL` доступно до 2500 Reality-узлов из базовых LTE/whitelist/bypass-источников, включая `all_subs`, а `AUTO` проверяет только 50, чтобы не перегружать роутер.
 
@@ -62,26 +62,26 @@ pale-signal автоматически собирает VLESS-подписки �
 
 | Источник | Обновление источника | Серверов в общей подписке | В Global | В Global 5K | Ссылка |
 |----------|---------------------|---------------------------|-----------|---------------|--------|
-| AvenCores 26_urls.json | `2026-09-09 13:39 МСК` | `2341` | `497` | `497` | [raw](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json) |
-| etoneya whitelist | `2026-09-09 13:39 МСК` | `56` | `33` | `33` | [raw](https://etoneya.su/whitelist) |
-| solovyov-jenya2004 all_subs final_sorted | `2026-09-09 13:39 МСК` | `904` | `741` | `741` | [raw](https://raw.githubusercontent.com/solovyov-jenya2004/all_subs/main/final_sorted) |
-| AetrisVPN whitelist pool | `2026-09-09 13:14 МСК` | `493` | `434` | `434` | [raw](https://raw.githubusercontent.com/flaafix/AetrisVPN/refs/heads/main/AetrisVPN.txt) |
-| igareck WHITE-CIDR-RU-all.txt | `2026-09-09 13:10 МСК` | `10` | `0` | `0` | [raw](https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt) |
-| igareck WHITE-SNI-RU-all.txt | `2026-09-09 13:10 МСК` | `0` | `0` | `0` | [raw](https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-SNI-RU-all.txt) |
-| igareck WHITE-CIDR-RU-checked.txt | `2026-09-09 13:10 МСК` | `5` | `0` | `0` | [raw](https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt) |
-| igareck Vless-Reality-White-Lists-Rus-Mobile.txt | `2026-09-09 13:10 МСК` | `10` | `0` | `0` | [raw](https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt) |
-| rjsxrd bypass-all | `2026-09-09 13:06 МСК` | `179` | `145` | `145` | [raw](https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt) |
-| FLEXIY0 matryoshka-vpn russia_whitelist.txt | `2026-09-09 13:02 МСК` | `2219` | `2204` | `2204` | [raw](https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt) |
-| zieng2 vless_lite.txt | `2026-09-09 12:59 МСК` | `84` | `71` | `71` | [raw](https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt) |
-| zieng2 vless_universal.txt | `2026-09-09 12:59 МСК` | `84` | `71` | `71` | [raw](https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt) |
-| wlunlocker whitelist_cidr1_ru.txt | `2026-09-09 12:31 МСК` | `91` | `43` | `43` | [raw](https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_cidr1_ru.txt) |
-| wlunlocker whitelist_cidr2_ru.txt | `2026-09-09 12:28 МСК` | `115` | `1` | `1` | [raw](https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_cidr2_ru.txt) |
-| wlrus wl.txt | `2026-09-09 11:54 МСК` | `1597` | `272` | `272` | [raw](https://s3c3.001.gpucloud.ru/wlr/wl.txt) |
-| wlunlocker whitelist_all.txt | `2026-09-09 10:50 МСК` | `484` | `82` | `82` | [raw](https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_all.txt) |
-| V.O.I.D VPN Bypass url_work.txt | `2026-09-09 10:09 МСК` | `767` | `428` | `428` | [raw](https://raw.githubusercontent.com/VOID-Anonymity/V.O.I.D-VPN_Bypass/main/url_work.txt) |
-| AvenCores githubmirror/26.txt | `2026-09-09 09:20 МСК` | `4660` | `2683` | `2579` | [raw](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/githubmirror/26.txt) |
-| vladvarp Prometheus WhiteList/vless.txt | `2026-09-09 07:52 МСК` | `171` | `107` | `107` | [raw](https://raw.githubusercontent.com/vladvarp/Prometheus/main/WhiteList/vless.txt) |
-| RKPchannel whitelist.txt | `2026-09-03 02:40 МСК` | `1433` | `1193` | `308` | [raw](https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/refs/heads/main/whitelist.txt) |
+| solovyov-jenya2004 all_subs final_sorted | `2026-09-09 23:19 МСК` | `877` | `727` | `727` | [raw](https://raw.githubusercontent.com/solovyov-jenya2004/all_subs/main/final_sorted) |
+| igareck WHITE-CIDR-RU-all.txt | `2026-09-09 23:18 МСК` | `0` | `0` | `0` | [raw](https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt) |
+| igareck WHITE-SNI-RU-all.txt | `2026-09-09 23:18 МСК` | `0` | `0` | `0` | [raw](https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-SNI-RU-all.txt) |
+| igareck WHITE-CIDR-RU-checked.txt | `2026-09-09 23:18 МСК` | `0` | `0` | `0` | [raw](https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt) |
+| igareck Vless-Reality-White-Lists-Rus-Mobile.txt | `2026-09-09 23:18 МСК` | `0` | `0` | `0` | [raw](https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt) |
+| rjsxrd bypass-all | `2026-09-09 23:12 МСК` | `89` | `81` | `81` | [raw](https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt) |
+| AetrisVPN whitelist pool | `2026-09-09 23:02 МСК` | `486` | `436` | `436` | [raw](https://raw.githubusercontent.com/flaafix/AetrisVPN/refs/heads/main/AetrisVPN.txt) |
+| zieng2 vless_lite.txt | `2026-09-09 22:59 МСК` | `86` | `81` | `81` | [raw](https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt) |
+| zieng2 vless_universal.txt | `2026-09-09 22:59 МСК` | `86` | `81` | `81` | [raw](https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt) |
+| V.O.I.D VPN Bypass url_work.txt | `2026-09-09 22:16 МСК` | `1048` | `737` | `737` | [raw](https://raw.githubusercontent.com/VOID-Anonymity/V.O.I.D-VPN_Bypass/main/url_work.txt) |
+| AvenCores 26_urls.json | `2026-09-09 22:10 МСК` | `2328` | `495` | `495` | [raw](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json) |
+| wlrus wl.txt | `2026-09-09 22:10 МСК` | `1575` | `259` | `259` | [raw](https://s3c3.001.gpucloud.ru/wlr/wl.txt) |
+| etoneya whitelist | `2026-09-09 21:51 МСК` | `62` | `33` | `33` | [raw](https://etoneya.su/whitelist) |
+| AvenCores githubmirror/26.txt | `2026-09-09 21:41 МСК` | `4662` | `2680` | `2574` | [raw](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/githubmirror/26.txt) |
+| wlunlocker whitelist_cidr1_ru.txt | `2026-09-09 21:26 МСК` | `91` | `43` | `43` | [raw](https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_cidr1_ru.txt) |
+| wlunlocker whitelist_cidr2_ru.txt | `2026-09-09 21:24 МСК` | `115` | `1` | `1` | [raw](https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_cidr2_ru.txt) |
+| FLEXIY0 matryoshka-vpn russia_whitelist.txt | `2026-09-09 20:58 МСК` | `2201` | `2185` | `2185` | [raw](https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt) |
+| wlunlocker whitelist_all.txt | `2026-09-09 20:00 МСК` | `476` | `97` | `97` | [raw](https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/whitelist_all.txt) |
+| vladvarp Prometheus WhiteList/vless.txt | `2026-09-09 19:39 МСК` | `162` | `115` | `115` | [raw](https://raw.githubusercontent.com/vladvarp/Prometheus/main/WhiteList/vless.txt) |
+| RKPchannel whitelist.txt | `2026-09-03 02:40 МСК` | `1433` | `1193` | `250` | [raw](https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/refs/heads/main/whitelist.txt) |
 | Epodonios Sub26.txt | `2026-06-30 14:20 МСК` | `119` | `116` | `2` | [raw](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt) |
 | 55prosek vpn_config_for_russia whitelist.txt | `2026-04-06 02:25 МСК` | `46` | `35` | `0` | [raw](https://raw.githubusercontent.com/55prosek-lgtm/vpn_config_for_russia/refs/heads/main/whitelist.txt) |
 | ByeWhiteLists2 | `2026-03-28 02:29 МСК` | `633` | `143` | `143` | [raw](https://raw.githubusercontent.com/ByeWhiteLists/ByeWhiteLists2/refs/heads/main/ByeWhiteLists2.txt) |
@@ -97,17 +97,17 @@ pale-signal автоматически собирает VLESS-подписки �
 
 | Источник | Обновление источника | Серверов в общей подписке | В Global | В Global 5K | Ссылка |
 |----------|---------------------|---------------------------|-----------|---------------|--------|
-| 0xRadikal light/configs.txt | `2026-09-09 13:28 МСК` | `1108` | `1085` | `102` | [raw](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/light/configs.txt) |
-| ALIILAPRO v2rayNG-Config sub.txt | `2026-09-09 13:12 МСК` | `433` | `413` | `33` | [raw](https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt) |
-| SoliSpirit Protocols/vless.txt | `2026-09-09 13:07 МСК` | `4204` | `4057` | `227` | [raw](https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt) |
-| barry-far V2ray-config vless.txt | `2026-09-09 12:37 МСК` | `3313` | `3197` | `191` | [raw](https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt) |
-| MahanKenway configs/vless.txt | `2026-09-09 11:49 МСК` | `131` | `125` | `8` | [raw](https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt) |
-| MatinGhanbari filtered vless.txt | `2026-09-09 11:36 МСК` | `291` | `282` | `22` | [raw](https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/filtered/subs/vless.txt) |
-| Surfboardv2ray TGParse mixed | `2026-09-09 10:50 МСК` | `3170` | `3069` | `182` | [raw](https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/mixed) |
-| Epodonios Splitted-By-Protocol/vless.txt | `2026-09-09 09:49 МСК` | `3343` | `3223` | `190` | [raw](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt) |
-| liMilCo v2r pro/vless.txt | `2026-09-09 07:22 МСК` | `4279` | `4151` | `240` | [raw](https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt) |
+| 0xRadikal light/configs.txt | `2026-09-09 23:18 МСК` | `898` | `876` | `112` | [raw](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/light/configs.txt) |
+| ALIILAPRO v2rayNG-Config sub.txt | `2026-09-09 23:17 МСК` | `416` | `400` | `30` | [raw](https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt) |
+| barry-far V2ray-config vless.txt | `2026-09-09 23:07 МСК` | `3305` | `3193` | `185` | [raw](https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt) |
+| SoliSpirit Protocols/vless.txt | `2026-09-09 23:06 МСК` | `4114` | `3980` | `215` | [raw](https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt) |
+| Epodonios Splitted-By-Protocol/vless.txt | `2026-09-09 22:41 МСК` | `3323` | `3211` | `188` | [raw](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt) |
+| Surfboardv2ray TGParse mixed | `2026-09-09 22:40 МСК` | `3153` | `3054` | `173` | [raw](https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/mixed) |
+| MahanKenway configs/vless.txt | `2026-09-09 22:11 МСК` | `144` | `139` | `14` | [raw](https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt) |
+| MatinGhanbari filtered vless.txt | `2026-09-09 22:04 МСК` | `282` | `270` | `24` | [raw](https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/filtered/subs/vless.txt) |
+| liMilCo v2r pro/vless.txt | `2026-09-09 07:22 МСК` | `4280` | `4160` | `246` | [raw](https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt) |
 | Rayan-Config proxy.txt | `2026-08-17 13:30 МСК` | `31` | `30` | `1` | [raw](https://raw.githubusercontent.com/Rayan-Config/C-Sub/refs/heads/main/configs/proxy.txt) |
-| V2RayRoot Config/vless.txt | `2026-07-05 07:39 МСК` | `201` | `197` | `25` | [raw](https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt) |
+| V2RayRoot Config/vless.txt | `2026-07-05 07:39 МСК` | `201` | `197` | `26` | [raw](https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt) |
 | FNET00 Config/Main | `2026-01-30 01:58 МСК` | `50` | `48` | `0` | [raw](https://raw.githubusercontent.com/FNET00bot/FNET00/Config/Main) |
 | MahsaNetConfigTopic xray_final.txt | `-` | `0` | `0` | `0` | [raw](https://raw.githubusercontent.com/MahsaNetConfigTopic/config/refs/heads/main/xray_final.txt) |
 
@@ -115,7 +115,7 @@ pale-signal автоматически собирает VLESS-подписки �
 
 | Источник | Область | Обновление источника | В LAN 5K | Ссылка |
 |----------|---------|---------------------|----------|--------|
-| VestraNet Nodes protocols/vless.txt | только LAN | `2026-09-09 13:26 МСК` | `1556` | [raw](https://raw.githubusercontent.com/MustafaBaqer/VestraNet-Nodes/main/protocols/vless.txt) |
+| VestraNet Nodes protocols/vless.txt | только LAN | `2026-09-09 23:11 МСК` | `1394` | [raw](https://raw.githubusercontent.com/MustafaBaqer/VestraNet-Nodes/main/protocols/vless.txt) |
 
 </details>
 
@@ -124,13 +124,14 @@ pale-signal автоматически собирает VLESS-подписки �
 
 | Подписка | Тренд | Первое | Последнее | Разница |
 |----------|-------|--------|-----------|---------|
-| Общая | `↑` | `14765` | `15188` | `+423` |
-| Россия | `↑` | `3443` | `3553` | `+110` |
-| Global | `↑` | `11322` | `11635` | `+313` |
+| Общая | `↑` | `14555` | `15496` | `+941` |
+| Россия | `↑` | `3411` | `3513` | `+102` |
+| Global | `↑` | `11144` | `11983` | `+839` |
 | Global 5K | `→` | `5000` | `5000` | `0` |
 
 | Обновление, МСК | Общая | Россия | Global | Global 5K | Δ общая | Δ Россия | Δ Global | Δ Global 5K |
 |-----------------|-------|--------|--------|------------|---------|----------|----------|--------------|
+| `2026-09-09 23:30:59 МСК` | `15496` | `3513` | `11983` | `5000` | `+308` | `-40` | `+348` | `0` |
 | `2026-09-09 13:51:02 МСК` | `15188` | `3553` | `11635` | `5000` | `+612` | `+109` | `+503` | `0` |
 | `2026-09-08 23:47:40 МСК` | `14576` | `3444` | `11132` | `5000` | `+122` | `-28` | `+150` | `0` |
 | `2026-09-08 13:41:18 МСК` | `14454` | `3472` | `10982` | `5000` | `-110` | `+43` | `-153` | `0` |
@@ -140,7 +141,6 @@ pale-signal автоматически собирает VLESS-подписки �
 | `2026-09-06 13:19:33 МСК` | `14661` | `3477` | `11184` | `5000` | `-23` | `+109` | `-132` | `0` |
 | `2026-09-05 23:02:01 МСК` | `14684` | `3368` | `11316` | `5000` | `+129` | `-43` | `+172` | `0` |
 | `2026-09-05 13:03:54 МСК` | `14555` | `3411` | `11144` | `5000` | `-210` | `-32` | `-178` | `0` |
-| `2026-09-04 23:21:47 МСК` | `14765` | `3443` | `11322` | `5000` | `+188` | `+8` | `+180` | `0` |
 
 </details>
 
