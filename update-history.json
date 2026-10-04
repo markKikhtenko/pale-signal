@@ -1,61 +1,6 @@
 {
   "runs": [
     {
-      "updated_at": "2026-09-30 00:55:07 МСК",
-      "counts": {
-        "all": 10073,
-        "ru": 2649,
-        "global": 7424,
-        "global_5k": 2151,
-        "lan_5k": 5000,
-        "bs_safe": 2220
-      },
-      "changes": {
-        "all": {
-          "old": 9915,
-          "new": 10073,
-          "added": 905,
-          "removed": 747,
-          "delta": 158
-        },
-        "ru": {
-          "old": 2746,
-          "new": 2649,
-          "added": 167,
-          "removed": 264,
-          "delta": -97
-        },
-        "global": {
-          "old": 7169,
-          "new": 7424,
-          "added": 843,
-          "removed": 588,
-          "delta": 255
-        },
-        "global_5k": {
-          "old": 2232,
-          "new": 2151,
-          "added": 411,
-          "removed": 492,
-          "delta": -81
-        },
-        "lan_5k": {
-          "old": 5000,
-          "new": 5000,
-          "added": 1655,
-          "removed": 1655,
-          "delta": 0
-        },
-        "bs_safe": {
-          "old": 2248,
-          "new": 2220,
-          "added": 269,
-          "removed": 297,
-          "delta": -28
-        }
-      }
-    },
-    {
       "updated_at": "2026-09-30 14:55:57 МСК",
       "counts": {
         "all": 9675,
@@ -547,6 +492,61 @@
           "added": 236,
           "removed": 242,
           "delta": -6
+        }
+      }
+    },
+    {
+      "updated_at": "2026-10-04 23:55:16 МСК",
+      "counts": {
+        "all": 9579,
+        "ru": 2761,
+        "global": 6818,
+        "global_5k": 1705,
+        "lan_5k": 5000,
+        "bs_safe": 1997
+      },
+      "changes": {
+        "all": {
+          "old": 9282,
+          "new": 9579,
+          "added": 822,
+          "removed": 525,
+          "delta": 297
+        },
+        "ru": {
+          "old": 2735,
+          "new": 2761,
+          "added": 186,
+          "removed": 160,
+          "delta": 26
+        },
+        "global": {
+          "old": 6547,
+          "new": 6818,
+          "added": 729,
+          "removed": 458,
+          "delta": 271
+        },
+        "global_5k": {
+          "old": 1621,
+          "new": 1705,
+          "added": 434,
+          "removed": 350,
+          "delta": 84
+        },
+        "lan_5k": {
+          "old": 5000,
+          "new": 5000,
+          "added": 1538,
+          "removed": 1538,
+          "delta": 0
+        },
+        "bs_safe": {
+          "old": 1972,
+          "new": 1997,
+          "added": 251,
+          "removed": 226,
+          "delta": 25
         }
       }
     }
