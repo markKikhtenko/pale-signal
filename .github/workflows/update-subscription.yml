@@ -48,10 +48,14 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check PyYAML==6.0.3
           mkdir -p .tools/mihomo/home
-          asset_url="$(gh api repos/MetaCubeX/mihomo/releases/latest --jq '[.assets[].browser_download_url | select(test("^mihomo-linux-amd64-compatible-v.*\\.gz$"))][0]')"
+          curl -fsSL --retry 5 --retry-all-errors \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            https://api.github.com/repos/MetaCubeX/mihomo/releases/latest \
+            -o .tools/mihomo/release.json
+          asset_url="$(python -c 'import json,re,sys; assets=json.load(open(".tools/mihomo/release.json", encoding="utf-8")).get("assets", []); matches=[asset["browser_download_url"] for asset in assets if re.fullmatch(r"mihomo-linux-amd64-compatible-v.*\.gz", asset.get("name", ""))]; print(matches[0]) if len(matches) == 1 else sys.exit(f"expected exactly one Mihomo compatible asset, found {len(matches)}")')"
           test -n "$asset_url"
-          test "$asset_url" != "null"
-          curl -fsSL "$asset_url" -o .tools/mihomo/mihomo.gz
+          curl -fsSL --retry 5 --retry-all-errors "$asset_url" -o .tools/mihomo/mihomo.gz
           gzip -dc .tools/mihomo/mihomo.gz > .tools/mihomo/mihomo
           chmod +x .tools/mihomo/mihomo
           .tools/mihomo/mihomo -t -f subscription-lan-global.yaml -d .tools/mihomo/home
