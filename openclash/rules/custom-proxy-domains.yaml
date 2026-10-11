@@ -1,0 +1,4 @@
+# Custom domains forced through PROXY. Replace the reserved .invalid placeholder
+# or append real entries; "+.example.com" includes the apex and all subdomains.
+payload:
+  - "+.example.invalid"

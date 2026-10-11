@@ -8,6 +8,8 @@ on:
     paths:
       - ".github/workflows/update-subscription.yml"
       - "scripts/build_subscription.py"
+      - "scripts/validate_openclash_module.py"
+      - "openclash/**"
   schedule:
     # GitHub cron uses UTC: 06:00 and 18:00 UTC = 09:00 and 21:00 MSK.
     - cron: "0 6,18 * * *"
@@ -40,6 +42,39 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: python scripts/build_subscription.py
 
+      - name: Validate generated configs and OpenClash module
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python -m pip install --disable-pip-version-check PyYAML==6.0.3
+          mkdir -p .tools/mihomo/home
+          asset_url="$(gh api repos/MetaCubeX/mihomo/releases/latest --jq '[.assets[].browser_download_url | select(test("^mihomo-linux-amd64-compatible-v.*\\.gz$"))][0]')"
+          test -n "$asset_url"
+          test "$asset_url" != "null"
+          curl -fsSL "$asset_url" -o .tools/mihomo/mihomo.gz
+          gzip -dc .tools/mihomo/mihomo.gz > .tools/mihomo/mihomo
+          chmod +x .tools/mihomo/mihomo
+          .tools/mihomo/mihomo -t -f subscription-lan-global.yaml -d .tools/mihomo/home
+          mkdir -p .tools/openclash-merged
+          python scripts/validate_openclash_module.py \
+            --module openclash/blacklist-routing.conf \
+            --output-dir .tools/openclash-merged \
+            subscription*.yaml
+          for config in .tools/openclash-merged/*.yaml; do
+            .tools/mihomo/mihomo -t -f "$config" -d .tools/mihomo/home
+          done
+          .tools/mihomo/mihomo convert-ruleset domain yaml openclash/rules/custom-direct-domains.yaml .tools/mihomo/custom-direct-domains.mrs
+          .tools/mihomo/mihomo convert-ruleset domain yaml openclash/rules/custom-proxy-domains.yaml .tools/mihomo/custom-proxy-domains.mrs
+          .tools/mihomo/mihomo convert-ruleset ipcidr yaml openclash/rules/custom-direct-ip.yaml .tools/mihomo/custom-direct-ip.mrs
+          .tools/mihomo/mihomo convert-ruleset ipcidr yaml openclash/rules/custom-proxy-ip.yaml .tools/mihomo/custom-proxy-ip.mrs
+          server_count="$(awk '/^proxies:/{inside=1; next} /^proxy-groups:/{inside=0} inside && $0 == "  -"{count++} END{print count+0}' subscription-lan-global.yaml)"
+          echo "LAN Global servers: $server_count"
+          echo "### LAN Global" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Servers: $server_count" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Mihomo config test: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- OpenClash merged configs: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Custom rule providers: passed" >> "$GITHUB_STEP_SUMMARY"
+
       - name: Check checkout freshness
         id: freshness
         run: |
@@ -58,7 +93,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml
+          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else
@@ -88,8 +123,15 @@ jobs:
           cp subscription-global.yaml public/subscription-global.yaml
           cp subscription-global-5k.yaml public/subscription-global-5k.yaml
           cp subscription-lan-5k.yaml public/subscription-lan-5k.yaml
+          cp subscription-lan-global.yaml public/subscription-lan-global.yaml
           cp subscription-global-non-stable.yaml public/subscription-global-non-stable.yaml
           cp subscription-bs-safe.yaml public/subscription-bs-safe.yaml
+          cp -R openclash public/openclash
+          test -f public/openclash/blacklist-routing.conf
+          test -f public/openclash/rules/custom-direct-domains.yaml
+          test -f public/openclash/rules/custom-proxy-domains.yaml
+          test -f public/openclash/rules/custom-direct-ip.yaml
+          test -f public/openclash/rules/custom-proxy-ip.yaml
 
       - name: Upload Pages artifact
         if: steps.freshness.outputs.stale != 'true'

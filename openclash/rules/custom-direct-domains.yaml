@@ -1,0 +1,6 @@
+# Custom DIRECT exceptions. Edit this file through GitHub when needed.
+# A leading "+." matches both a domain and all its subdomains.
+payload:
+  - localhost
+  - "+.lan"
+  - "+.local"

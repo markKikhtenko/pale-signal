@@ -310,6 +310,7 @@ RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
 GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 GLOBAL_5K_OUTPUT_FILE = ROOT / "subscription-global-5k.yaml"
 LAN_5K_OUTPUT_FILE = ROOT / "subscription-lan-5k.yaml"
+LAN_GLOBAL_OUTPUT_FILE = ROOT / "subscription-lan-global.yaml"
 GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
 BS_SAFE_OUTPUT_FILE = ROOT / "subscription-bs-safe.yaml"
 README_FILE = ROOT / "README.md"
@@ -1113,6 +1114,10 @@ def lan_5k_rank(proxy: dict) -> tuple:
 
 
 def select_lan_5k_proxies(global_proxies: list[dict]) -> list[dict]:
+    return select_lan_global_proxies(global_proxies)[:LAN_5K_SUBSCRIPTION_LIMIT]
+
+
+def select_lan_global_proxies(global_proxies: list[dict]) -> list[dict]:
     candidates = [
         proxy
         for proxy in global_proxies
@@ -1120,7 +1125,7 @@ def select_lan_5k_proxies(global_proxies: list[dict]) -> list[dict]:
         and any(source in LAN_SOURCE_IDS for source in proxy.get("_sources", []))
     ]
     candidates.sort(key=lan_5k_rank)
-    return candidates[:LAN_5K_SUBSCRIPTION_LIMIT]
+    return candidates
 
 
 def bs_safe_quality_rank(proxy: dict) -> int:
@@ -1627,6 +1632,7 @@ def history_entry(now: str, stats: dict[str, int], changes: dict[str, dict[str, 
             "global": stats["global"],
             "global_5k": stats.get("global_5k", stats["global"]),
             "lan_5k": stats.get("lan_5k", 0),
+            "lan_global": stats.get("lan_global", 0),
             "bs_safe": stats.get("bs_safe", 0),
         },
         "changes": changes,
@@ -1788,7 +1794,8 @@ def source_table(
         "`subscription-global.yaml` берёт все non-RU узлы из базовых источников и остаётся полным большим global-списком. Специализированные LAN-only источники в него не попадают.",
         f"`subscription-global-5k.yaml` берёт до {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих узлов с подтверждённой страной не RU только из БС / whitelist / bypass источников ({global_shortlist_text}). Проверок живости в GitHub Actions нет.",
         f"`subscription-lan-5k.yaml` берёт до {LAN_5K_SUBSCRIPTION_LIMIT} узлов с подтверждённой страной не RU только из обычных проводных пулов ({lan_sources_text}); БС, whitelist, mobile и CIDR-источники исключены.",
-        "`SOLOVYOV_ALL_SUBS` — базовый LTE/whitelist-источник: его узлы участвуют в общей, RU, Global, Global 5K, Global Non-Stable и BS Safe, но исключены из LAN 5K.",
+        "`subscription-lan-global.yaml` использует те же LAN-пулы и фильтры, но включает все доступные узлы без искусственного лимита.",
+        "`SOLOVYOV_ALL_SUBS` — базовый LTE/whitelist-источник: его узлы участвуют в общей, RU, Global, Global 5K, Global Non-Stable и BS Safe, но исключены из LAN 5K и LAN Global.",
         "",
         "### Приоритетные БС / whitelist / bypass источники",
         "",
@@ -2296,6 +2303,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | **pale-signal подписка - Global** | Все иностранные non-RU серверы из общей подписки | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
 | **pale-signal подписка - Global 5K** | До {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих иностранных БС/whitelist/bypass серверов | https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) |
 | **pale-signal подписка - LAN 5K** | До {LAN_5K_SUBSCRIPTION_LIMIT} иностранных узлов для проводного интернета; без БС/whitelist/mobile/CIDR-пулов | https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml | [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) |
+| **pale-signal подписка - LAN Global** | Все доступные иностранные узлы из тех же LAN-пулов, без лимита 5000 | https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml | [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) |
 | **pale-signal подписка - Global Non-Stable** | Тестовая Global 5K: полный MANUAL, AUTO без дублей endpoint | https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) |
 | **pale-signal подписка - BS Safe** | До {BS_SAFE_SUBSCRIPTION_LIMIT} свежих Reality-узлов из БС-источников; AUTO ограничен {BS_SAFE_AUTO_LIMIT} нодами | https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) |
 
@@ -2308,6 +2316,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | Global | `{stats['global']}` |
 | Global 5K | `{stats['global_5k']}` |
 | LAN 5K | `{stats['lan_5k']}` |
+| LAN Global | `{stats['lan_global']}` |
 | LAN 5K из VestraNet | `{lan_5k_stats.get('vestranet_vless', 0) if lan_5k_stats is not None else 0}` |
 | Global Non-Stable MANUAL | `{stats['global_5k']}` |
 | Global Non-Stable AUTO | `{global_non_stable_auto_count if global_non_stable_auto_count is not None else stats['global_5k']}` |
@@ -2325,7 +2334,13 @@ pale-signal автоматически собирает VLESS-подписки �
 
 Для OpenClash при активных блокировках используйте `BS Safe`: в `MANUAL` доступно до {BS_SAFE_SUBSCRIPTION_LIMIT} Reality-узлов из базовых LTE/whitelist/bypass-источников, включая `all_subs`, а `AUTO` проверяет только {BS_SAFE_AUTO_LIMIT}, чтобы не перегружать роутер.
 
-Для обычного домашнего или офисного проводного подключения используйте `LAN 5K`. Она дополнена проводным пулом VestraNet; узлы, специально собранные под белые списки и CIDR-ограничения мобильных операторов, в неё не входят.
+Для обычного домашнего или офисного проводного подключения используйте `LAN 5K` или полную `LAN Global`. Обе подписки используют одинаковые LAN-пулы и исключают узлы, специально собранные под белые списки и CIDR-ограничения мобильных операторов; `LAN Global` отличается только отсутствием лимита 5000.
+
+## Маршрутизация по чёрным спискам
+
+Отдельный [Overwrite Module](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) оставляет обычный трафик на `DIRECT`, а ресурсы из автоматически обновляемых Re:filter-списков направляет в существующую группу `PROXY`. Пользовательские исключения находятся в `openclash/rules/custom-direct-*.yaml`, а принудительное проксирование — в `openclash/rules/custom-proxy-*.yaml`.
+
+В OpenClash добавьте URL модуля в `Overwrite Modules` и включите его для нужной конфигурации. Если используются другие модули, добавляющие правила, применяйте этот модуль последним: он сохраняет существующие специальные правила, затем добавляет пользовательские DIRECT/PROXY, внешние списки и единственный финальный `MATCH,DIRECT`. Внутри блока модуля пользовательские списки имеют приоритет над внешними. Модуль не задаёт `dns.nameserver`, `dns.fallback` или `dns.proxy-server-nameserver`, поэтому существующие DNS-серверы не заменяются.
 
 Подписка собирает и фильтрует узлы, но не может гарантировать их работу у конкретного провайдера.
 
@@ -2428,15 +2443,22 @@ def main(
     ]
     global_proxies = prioritize_global_proxies(global_candidates)
     if lan_only:
+        lan_global_proxies = select_lan_global_proxies(all_global_candidates)
         lan_5k_proxies = select_lan_5k_proxies(all_global_candidates)
         if not lan_5k_proxies:
             raise RuntimeError("no LAN 5K VLESS servers were produced")
+        if not lan_global_proxies:
+            raise RuntimeError("no LAN Global VLESS servers were produced")
         lan_5k_config = build_config(lan_5k_proxies)
+        lan_global_config = build_config(lan_global_proxies)
         validate_config(lan_5k_config)
+        validate_config(lan_global_config)
         lan_5k_yaml_text = "\n".join(dump_yaml(lan_5k_config)) + "\n"
-        if not lan_5k_yaml_text.strip():
-            raise RuntimeError("empty LAN 5K YAML output")
+        lan_global_yaml_text = "\n".join(dump_yaml(lan_global_config)) + "\n"
+        if not lan_5k_yaml_text.strip() or not lan_global_yaml_text.strip():
+            raise RuntimeError("empty LAN YAML output")
         LAN_5K_OUTPUT_FILE.write_text(lan_5k_yaml_text, encoding="utf-8", newline="\n")
+        LAN_GLOBAL_OUTPUT_FILE.write_text(lan_global_yaml_text, encoding="utf-8", newline="\n")
         specialized_count = sum(
             1
             for proxy in lan_5k_proxies
@@ -2444,7 +2466,8 @@ def main(
         )
         print(
             f"wrote subscription-lan-5k.yaml with {len(lan_5k_proxies)} proxies "
-            f"({specialized_count} from LAN-only sources)"
+            f"({specialized_count} from LAN-only sources) and "
+            f"subscription-lan-global.yaml with {len(lan_global_proxies)} proxies"
         )
         return 0
 
@@ -2515,14 +2538,20 @@ def main(
         )
         return 0
 
+    lan_global_proxies = select_lan_global_proxies(all_global_candidates)
     lan_5k_proxies = select_lan_5k_proxies(all_global_candidates)
     if not lan_5k_proxies:
         raise RuntimeError("no LAN 5K VLESS servers were produced")
+    if not lan_global_proxies:
+        raise RuntimeError("no LAN Global VLESS servers were produced")
     lan_5k_config = build_config(lan_5k_proxies)
+    lan_global_config = build_config(lan_global_proxies)
     validate_config(lan_5k_config)
+    validate_config(lan_global_config)
     lan_5k_yaml_text = "\n".join(dump_yaml(lan_5k_config)) + "\n"
-    if not lan_5k_yaml_text.strip():
-        raise RuntimeError("empty LAN 5K YAML output")
+    lan_global_yaml_text = "\n".join(dump_yaml(lan_global_config)) + "\n"
+    if not lan_5k_yaml_text.strip() or not lan_global_yaml_text.strip():
+        raise RuntimeError("empty LAN YAML output")
 
     bs_safe_proxies = select_bs_safe_proxies(proxies)
     if not bs_safe_proxies:
@@ -2541,6 +2570,7 @@ def main(
         "global": compare_with_existing(GLOBAL_OUTPUT_FILE, global_yaml_text),
         "global_5k": compare_with_existing(GLOBAL_5K_OUTPUT_FILE, global_5k_yaml_text),
         "lan_5k": compare_with_existing(LAN_5K_OUTPUT_FILE, lan_5k_yaml_text),
+        "lan_global": compare_with_existing(LAN_GLOBAL_OUTPUT_FILE, lan_global_yaml_text),
         "bs_safe": compare_with_existing(BS_SAFE_OUTPUT_FILE, bs_safe_yaml_text),
     }
     stats = stats_for(base_proxies)
@@ -2548,6 +2578,7 @@ def main(
     stats["global"] = len(global_proxies)
     stats["global_5k"] = len(global_5k_proxies)
     stats["lan_5k"] = len(lan_5k_proxies)
+    stats["lan_global"] = len(lan_global_proxies)
     stats["bs_safe"] = len(bs_safe_proxies)
     stats["unknown"] = sum(1 for proxy in global_proxies if proxy.get("_country") == "UNKNOWN")
     global_stats = stats_for(global_proxies)
@@ -2560,6 +2591,7 @@ def main(
     GLOBAL_OUTPUT_FILE.write_text(global_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_5K_OUTPUT_FILE.write_text(global_5k_yaml_text, encoding="utf-8", newline="\n")
     LAN_5K_OUTPUT_FILE.write_text(lan_5k_yaml_text, encoding="utf-8", newline="\n")
+    LAN_GLOBAL_OUTPUT_FILE.write_text(lan_global_yaml_text, encoding="utf-8", newline="\n")
     GLOBAL_NON_STABLE_OUTPUT_FILE.write_text(
         global_non_stable_yaml_text,
         encoding="utf-8",
@@ -2584,6 +2616,7 @@ def main(
         f"({len(ru_proxies)} ru, {len(global_proxies)} global, "
         f"{len(global_5k_proxies)} global 5k, "
         f"{len(lan_5k_proxies)} LAN 5K, "
+        f"{len(lan_global_proxies)} LAN Global, "
         f"{len(global_non_stable_auto_proxies)} non-stable AUTO, "
         f"{len(bs_safe_proxies)} BS Safe MANUAL, "
         f"{len(bs_safe_auto_proxies)} BS Safe AUTO)"
