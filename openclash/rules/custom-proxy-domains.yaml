@@ -1,5 +1,7 @@
 # Custom domains forced through PROXY. Replace the reserved .invalid placeholder
 # or append real entries; "+.example.com" includes the apex and all subdomains.
+# Version: 2026.10.11-1
+# Updated: 2026-10-11 - OpenAI allowlist with explicit ChatGPT file transfers.
 payload:
   - "+.example.invalid"
 
@@ -13,6 +15,9 @@ payload:
   - "+.intercom.io"
   - "+.intercomcdn.com"
   - "+.oaistatic.com"
+  # Explicit ChatGPT attachment upload/download endpoint. The suffix rule below
+  # also covers this host and any other current or future oaiusercontent hosts.
+  - "files.oaiusercontent.com"
   - "+.oaiusercontent.com"
   - "+.openai.com"
   - "+.oaistatsig.com"
