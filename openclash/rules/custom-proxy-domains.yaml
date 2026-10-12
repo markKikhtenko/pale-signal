@@ -1,7 +1,14 @@
-# Custom domains forced through PROXY. Replace the reserved .invalid placeholder
-# or append real entries; "+.example.com" includes the apex and all subdomains.
-# Version: 2026.10.11-1
-# Updated: 2026-10-11 - OpenAI allowlist with explicit ChatGPT file transfers.
+# ============================================================
+# Pale Signal - Custom PROXY Domain Rules
+# Purpose: Domains forced through PROXY by OpenClash/Mihomo
+# Version: 2026.10.12-1
+# Created: 2026-10-11T08:12:00+03:00
+# Updated: 2026-10-12T11:25:41+03:00
+# Changes: Added Strava website, mobile app and API routing through PROXY
+# Maintainer: markKikhtenko
+# ============================================================
+# Replace the reserved .invalid placeholder or append real entries;
+# "+.example.com" includes the apex and all subdomains.
 payload:
   - "+.example.invalid"
 
@@ -42,3 +49,6 @@ payload:
   - "+.setup.workos.com"
   - "+.tcr9i.chat.openai.com"
   - "+.workos.imgix.net"
+
+  # Strava — website, mobile app and API
+  - "+.strava.com"
