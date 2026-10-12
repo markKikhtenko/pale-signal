@@ -2321,19 +2321,10 @@ def experimental_source_table(experimental_stats: dict) -> str:
 
 def experimental_readme_section(experimental_stats: dict) -> str:
     validate_experimental_stats(experimental_stats)
-    experimental_sources_markdown = experimental_source_table(experimental_stats)
     return f"""{LAN_EXPERIMENTAL_README_START}
 ## LAN Experimental
 
-`LAN Experimental` собирается только из отдельного набора источников, исключает RU, `UNKNOWN`, непубличные адреса, заблокированные конфигурации, нормализованные дубли и совпадения `server + port + UUID` внутри Experimental и с актуальным `LAN Global`. Ни один экспериментальный источник не входит в рабочие группы источников.
-
-{experimental_sources_markdown}
-
-Всего серверов: `{experimental_stats['total']}`. В `AUTO`: `{experimental_stats['auto']}` (весь набор без лимита). Исключено дублей внутри Experimental: `{experimental_stats.get('duplicates', 0)}`. Новые узлы источников учитываются по первому появлению в порядке таблицы; повторы последующих источников отражаются как дубли.
-
-`AUTO` — обычная группа Mihomo [`url-test`](https://wiki.metacubex.one/ru/config/proxy-groups/url-test/) с `interval: 900`, `tolerance: 100`, `lazy: true`. Все узлы входят в группу, однако согласно [документации общих полей групп](https://wiki.metacubex.one/ru/config/proxy-groups/) `lazy: true` отключает проверки, пока группа не выбрана. После активации Mihomo проверяет задержку с заданным интервалом и выбирает доступный узел с учётом tolerance; это не гарантирует мгновенное переключение при каждом обрыве.
-
-На NanoPi R3S большой полный `AUTO` может заметно расходовать CPU, RAM, таблицу соединений и канал во время циклов health-check. Подписка не подключается к OpenClash автоматически; оцените нагрузку на своём размере списка перед постоянным использованием.
+Изолированная тестовая подписка: `{experimental_stats['total']}` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия.
 {LAN_EXPERIMENTAL_README_END}"""
 
 
@@ -2821,38 +2812,31 @@ def write_final_readme(
 ) -> None:
     if stats is None:
         stats = stats_for(proxies)
-    history_table = history_lines(history)
-    sources_markdown = source_table(
-        stats,
-        global_stats,
-        global_5k_stats,
-        lan_5k_stats,
-    )
     experimental_stats = experimental_stats or load_experimental_stats()
     validate_experimental_stats(experimental_stats)
-    text = f"""# pale-signal подписки
+    text = f"""# pale-signal
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Servers](https://img.shields.io/badge/servers-{stats['total']}-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
-pale-signal автоматически собирает VLESS-подписки для Mihomo/OpenClash.
+Автоматически обновляемые VLESS-подписки для Mihomo и OpenClash.
 
 **Последнее обновление:** `{now}`
 
 ## Подписки
 
-| Подписка | Что внутри | Ссылка для OpenClash | Скачать |
-|----------|------------|----------------------|---------|
-| **pale-signal подписка - общая** | Все серверы | https://markkikhtenko.github.io/pale-signal/subscription.yaml | [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) |
-| **pale-signal подписка - Россия** | Серверы, физически расположенные в России | https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) |
-| **pale-signal подписка - Global** | Все иностранные non-RU серверы из общей подписки | https://markkikhtenko.github.io/pale-signal/subscription-global.yaml | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) |
-| **pale-signal подписка - Global 5K** | До {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих иностранных БС/whitelist/bypass серверов | https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) |
-| **pale-signal подписка - LAN 5K** | До {LAN_5K_SUBSCRIPTION_LIMIT} иностранных узлов для проводного интернета; без БС/whitelist/mobile/CIDR-пулов | https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml | [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) |
-| **pale-signal подписка - LAN Global** | Все доступные иностранные узлы из тех же LAN-пулов, без лимита 5000 | https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml | [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) |
-| **pale-signal подписка - LAN Experimental** | Только новые non-RU узлы из независимых экспериментальных источников; без пересечений с LAN Global | https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml | [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) |
-| **pale-signal подписка - Global Non-Stable** | Тестовая Global 5K: полный MANUAL, AUTO без дублей endpoint | https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) |
-| **pale-signal подписка - BS Safe** | До {BS_SAFE_SUBSCRIPTION_LIMIT} свежих Reality-узлов из БС-источников; AUTO ограничен {BS_SAFE_AUTO_LIMIT} нодами | https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) |
+| Файл | Назначение |
+|------|------------|
+| [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) | Все серверы |
+| [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) | Россия |
+| [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) | Все non-RU серверы |
+| [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) | Global, до {GLOBAL_5K_SUBSCRIPTION_LIMIT} серверов |
+| [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | LAN, до {LAN_5K_SUBSCRIPTION_LIMIT} серверов |
+| [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | LAN без лимита |
+| [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) | Изолированная тестовая LAN-подписка |
+| [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) | Тестовая Global |
+| [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима блокировок |
 
 ## Статус
 
@@ -2867,75 +2851,26 @@ pale-signal автоматически собирает VLESS-подписки �
 | LAN Experimental | `{experimental_stats['total']}` |
 | LAN Experimental AUTO | `{experimental_stats['auto']}` |
 | Исключено пересечений Experimental с LAN Global | `{experimental_stats['lan_global_overlap']}` |
-| LAN 5K из VestraNet | `{lan_5k_stats.get('vestranet_vless', 0) if lan_5k_stats is not None else 0}` |
-| Global Non-Stable MANUAL | `{stats['global_5k']}` |
-| Global Non-Stable AUTO | `{global_non_stable_auto_count if global_non_stable_auto_count is not None else stats['global_5k']}` |
 | BS Safe MANUAL | `{bs_safe_stats['total'] if bs_safe_stats is not None else stats.get('bs_safe', 0)}` |
 | BS Safe AUTO | `{bs_safe_auto_count if bs_safe_auto_count is not None else 0}` |
-| BS Safe из all_subs | `{bs_safe_stats.get('solovyov_all_subs', 0) if bs_safe_stats is not None else 0}` |
-| BS Safe TCP / gRPC / XHTTP | `{bs_safe_stats['tcp'] if bs_safe_stats is not None else 0}` / `{bs_safe_stats['grpc'] if bs_safe_stats is not None else 0}` / `{bs_safe_stats['xhttp'] if bs_safe_stats is not None else 0}` |
-| Unknown | `{stats['unknown']}` |
-| Reality | `{stats['reality']}` |
-| TLS | `{stats['tls']}` |
-| TCP | `{stats['tcp']}` |
-| WebSocket | `{stats['ws']}` |
-| gRPC | `{stats['grpc']}` |
-| XHTTP | `{stats['xhttp']}` |
-
-Для OpenClash при активных блокировках используйте `BS Safe`: в `MANUAL` доступно до {BS_SAFE_SUBSCRIPTION_LIMIT} Reality-узлов из базовых LTE/whitelist/bypass-источников, включая `all_subs`, а `AUTO` проверяет только {BS_SAFE_AUTO_LIMIT}, чтобы не перегружать роутер.
-
-Для обычного домашнего или офисного проводного подключения используйте `LAN 5K` или полную `LAN Global`. Обе подписки используют одинаковые LAN-пулы и исключают узлы, специально собранные под белые списки и CIDR-ограничения мобильных операторов; `LAN Global` отличается только отсутствием лимита 5000.
 
 {experimental_readme_section(experimental_stats)}
 
-## Маршрутизация по чёрным спискам
+## Подключение
 
-Отдельный [Overwrite Module](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) оставляет обычный трафик на `DIRECT`, а ресурсы из автоматически обновляемых Re:filter-списков направляет в существующую группу `PROXY`. Пользовательские исключения находятся в `openclash/rules/custom-direct-*.yaml`, а принудительное проксирование — в `openclash/rules/custom-proxy-*.yaml`.
+1. Скопируйте нужную ссылку из таблицы.
+2. Добавьте её в `Config Subscription` OpenClash без конвертации.
+3. Используйте `PROXY` → `AUTO` для автовыбора или `MANUAL` для ручного выбора.
 
-В OpenClash добавьте URL модуля в `Overwrite Modules` и включите его для нужной конфигурации. Если используются другие модули, добавляющие правила, применяйте этот модуль последним: он сохраняет существующие специальные правила, затем добавляет пользовательские DIRECT/PROXY, внешние списки и единственный финальный `MATCH,DIRECT`. Внутри блока модуля пользовательские списки имеют приоритет над внешними. Модуль не задаёт `dns.nameserver`, `dns.fallback` или `dns.proxy-server-nameserver`, поэтому существующие DNS-серверы не заменяются.
+Для `BS Safe` требуется Mihomo/Meta Core v1.19.24 или новее.
 
-Подписка собирает и фильтрует узлы, но не может гарантировать их работу у конкретного провайдера.
+## Маршрутизация
 
-<details>
-<summary>Источники</summary>
-
-{sources_markdown}
-
-</details>
-
-<details>
-<summary>Последние {UPDATE_HISTORY_LIMIT} обновлений и тренд</summary>
-
-{history_table}
-
-</details>
-
-## Группы
-
-| Группа | Тип | Назначение |
-|--------|-----|------------|
-| `AUTO` | `url-test` | Автовыбор серверов через URL Test |
-| `MANUAL` | `select` | Ручной выбор сервера |
-| `PROXY` | `select` | Главная группа для правила `MATCH,PROXY` |
-
-В `BS Safe` группа `PROXY` по умолчанию открывает `MANUAL`. Для автоматического поиска выберите `AUTO`: в нём до {BS_SAFE_AUTO_LIMIT} нод из разных подсетей и с разными SNI.
-
-### BS Safe в OpenClash
-
-1. В `Plugin Settings` → `Version Update` обновите **Meta Core** до Mihomo v1.19.24 или новее и выберите ядро `Meta`.
-2. В `Config Subscription` добавьте прямую ссылку на `subscription-bs-safe.yaml` из таблицы выше. Конвертацию включать не нужно.
-3. Обновите подписку, активируйте профиль и примените конфигурацию.
-4. В Dashboard выберите `PROXY` → `AUTO` для автоматического поиска или `PROXY` → `MANUAL` для ручного выбора.
-
-Не запускайте массовую проверку всех нод из `MANUAL`: тестируйте через `AUTO` или по одной ноде.
-
-## Разделение по странам
-
-Страна берётся из имени узла. Если её там нет, используется GeoIP адреса `server`. Неопределённые узлы получают `[UNKNOWN]` и попадают в Global.
+[OpenClash Overwrite Module](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) направляет заблокированные ресурсы в `PROXY`, остальной трафик оставляет на `DIRECT` и не меняет DNS.
 
 ## Обновление
 
-Подписки обновляются каждый день в 09:00 и 21:00 МСК. Недоступные источники пропускаются, а некорректная сборка не публикуется.
+Сборка запускается ежедневно в 09:00 и 21:00 МСК. Некорректные конфигурации не публикуются. Наличие сервера в списке не гарантирует его доступность у конкретного провайдера.
 """
     README_FILE.write_text(text, encoding="utf-8", newline="\n")
 

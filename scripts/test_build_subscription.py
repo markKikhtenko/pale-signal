@@ -211,20 +211,15 @@ class LanExperimentalTests(unittest.TestCase):
     def test_readme_statistics_match_artifact_stats(self) -> None:
         stats = builder.load_experimental_stats()
         builder.validate_experimental_stats(stats)
-        section = builder.experimental_readme_section(stats)
-        readme = (
-            f"| LAN Experimental | `{stats['total']}` |\n"
-            f"| LAN Experimental AUTO | `{stats['auto']}` |\n"
+        readme = builder.README_FILE.read_text(encoding="utf-8")
+        self.assertIn(builder.experimental_readme_section(stats), readme)
+        self.assertIn(f"| LAN Experimental | `{stats['total']}` |", readme)
+        self.assertIn(f"| LAN Experimental AUTO | `{stats['auto']}` |", readme)
+        self.assertIn(
             "| Исключено пересечений Experimental с LAN Global | "
-            f"`{stats['lan_global_overlap']}` |\n\n{section}\n"
+            f"`{stats['lan_global_overlap']}` |",
+            readme,
         )
-        with tempfile.TemporaryDirectory() as temp_dir:
-            path = Path(temp_dir) / "README.md"
-            path.write_text(readme, encoding="utf-8")
-            parsed = builder.parse_experimental_stats_from_readme(path)
-        self.assertEqual(parsed["total"], stats["total"])
-        self.assertEqual(parsed["auto"], stats["auto"])
-        self.assertEqual(parsed["sources"], stats["sources"])
 
 
 if __name__ == "__main__":
