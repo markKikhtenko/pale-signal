@@ -1,12 +1,12 @@
 # LAN Experimental
-# Version: 1.20261012.200253
+# Version: 1.20261012.202638
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-12 19:59:15 МСК
+# Updated: 2026-10-12 20:24:22 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
 #   - Au1rxx Verified: https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt
-# Servers: 1430
+# Servers: 1435
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -2063,17 +2063,6 @@ proxies:
       headers:
         Host: "server19.aibox.tv"
   -
-    name: "@DeltaKroneckerGithub 149"
-    type: "vless"
-    server: "185.229.191.57"
-    port: 8443
-    uuid: "394f6981-a782-4779-9a85-e6cf22935d93"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "ams1.fromblancwithlove.com"
-  -
     name: "@DeltaKroneckerGithub 150"
     type: "vless"
     server: "201.51.10.240"
@@ -2166,6 +2155,22 @@ proxies:
       path: "/?ed=2048"
       headers:
         Host: "xeeqi.kevani8800.workers.dev"
+  -
+    name: "@DeltaKroneckerGithub 156"
+    type: "vless"
+    server: "172.64.229.31"
+    port: 443
+    uuid: "d342d11e-d424-4583-b36e-524ab1f0afa4"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "cdn8848.776676.xyz"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/events/code/zh-cn?ed=2560fp=chrome"
+      headers:
+        Host: "cdn8848.776676.xyz"
   -
     name: "@DeltaKroneckerGithub 157"
     type: "vless"
@@ -3837,6 +3842,19 @@ proxies:
     reality-opts:
       public-key: "b44WWZKNstoOsdz0aw5W-ozYpwNm_HNYVaHqIMmBCgU"
       short-id: "b3f8a1c6"
+  -
+    name: "@DeltaKroneckerGithub 273"
+    type: "vless"
+    server: "166.88.35.245"
+    port: 80
+    uuid: "e13cf851-b4fd-413b-8d49-146e6eb8e5d4"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/platform117"
+      headers:
+        Host: "platform117.halalkhor.info"
   -
     name: "@DeltaKroneckerGithub 274"
     type: "vless"
@@ -6226,6 +6244,22 @@ proxies:
       headers:
         Host: "ad1.xiqpanelz.com"
   -
+    name: "@DeltaKroneckerGithub 443"
+    type: "vless"
+    server: "103.75.118.228"
+    port: 12683
+    uuid: "814bd064-544d-4255-a070-5705c03f6da9"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "k2hPp0tTW0Da-HK94wYpSCLbuK44LfGqC2MSJIM1Ti0"
+      short-id: "48050fab"
+  -
     name: "@DeltaKroneckerGithub 444"
     type: "vless"
     server: "154.19.242.19"
@@ -6275,6 +6309,19 @@ proxies:
       path: "/proxyip=ProxyIP.US.cmliussss.net"
       headers:
         Host: "image.evan00.dpdns.org"
+  -
+    name: "@DeltaKroneckerGithub 447"
+    type: "vless"
+    server: "cmcc.cloudflare.seeck.cn"
+    port: 443
+    uuid: "8ce3af34-308f-456c-93a6-e6dff9f03d77"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/security=tls"
+      headers:
+        Host: "zdy.vavava.kdns.fr"
   -
     name: "@DeltaKroneckerGithub 448"
     type: "vless"
@@ -8240,21 +8287,6 @@ proxies:
       path: "/"
       headers:
         Host: "shuma.ccwu.cc"
-  -
-    name: "@DeltaKroneckerGithub 585"
-    type: "vless"
-    server: "104.18.16.56"
-    port: 2053
-    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "sni.111000.dynv6.net"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "sni.111000.dynv6.net"
   -
     name: "@DeltaKroneckerGithub 586"
     type: "vless"
@@ -10546,6 +10578,21 @@ proxies:
       public-key: "v0qz2dJb5tmR8eeRTMJJ3g5m1wwUyhutkaOMNFLnAns"
       short-id: "01"
   -
+    name: "@DeltaKroneckerGithub 749"
+    type: "vless"
+    server: "193.151.108.143"
+    port: 443
+    uuid: "d78c12c4-6927-40b8-8550-ed9be00334da"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "shveccxc1.twilightparadox.com"
+    reality-opts:
+      public-key: "wPBLToF6GA4jIb7C7yu0UMlCXlxTV9UlEh1R-EdCzRU"
+      short-id: "2e5b7512fc1d69be"
+  -
     name: "@DeltaKroneckerGithub 750"
     type: "vless"
     server: "142.93.226.43"
@@ -12451,6 +12498,19 @@ proxies:
       headers:
         Host: "cloud.ghostdev.lk"
   -
+    name: "@DeltaKroneckerGithub 894"
+    type: "vless"
+    server: "gerardo.ns.cloudflare.com"
+    port: 80
+    uuid: "f7e3ff36-276c-4477-b6d4-47257500d869"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/?ed=3000"
+      headers:
+        Host: "pon.antalmani.mm.am"
+  -
     name: "@DeltaKroneckerGithub 895"
     type: "vless"
     server: "185.146.173.37"
@@ -13250,6 +13310,19 @@ proxies:
       - "http/1.1"
     ws-opts:
       path: "/ws/99f02f61-f4c2-44ee-b1bb-d4b0a757c9bf"
+  -
+    name: "@DeltaKroneckerGithub 950"
+    type: "vless"
+    server: "joinm.servernett.shop"
+    port: 443
+    uuid: "d6271fcb-f53f-477b-caba-87c5e4af2515"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "irancell.servernett.shop"
+    grpc-opts:
+      grpc-service-name: "irancell.servernett.shop"
   -
     name: "@DeltaKroneckerGithub 951"
     type: "vless"
@@ -18544,6 +18617,19 @@ proxies:
       headers:
         Host: "kb.lii2010.us.kg"
   -
+    name: "@DeltaKroneckerGithub 1325"
+    type: "vless"
+    server: "www.speedtest.org"
+    port: 8080
+    uuid: "0058c215-ab1e-400c-a403-b5b2fda7e846"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "tr-cd.sublink-vip2.com"
+  -
     name: "@DeltaKroneckerGithub 1326"
     type: "vless"
     server: "59.125.69.19"
@@ -20838,37 +20924,21 @@ proxies:
       headers:
         Host: "n2.whuiy.xyz"
   -
-    name: "vless-1773037051"
+    name: "vless-470978001"
     type: "vless"
-    server: "156.224.77.171"
-    port: 9443
-    uuid: "fe0721ac-c577-4938-b7ca-8ab5f43bb8da"
+    server: "3.0.111.82"
+    port: 17623
+    uuid: "814bd064-544d-4255-a070-5705c03f6da9"
     network: "tcp"
     udp: true
     encryption: "none"
     flow: "xtls-rprx-vision"
     tls: true
-    servername: "www.amazon.com"
-    client-fingerprint: "edge"
+    servername: "www.apple.com"
+    client-fingerprint: "firefox"
     reality-opts:
-      public-key: "0hIFPaEn4RdFib8_eP8HYxMywR5izEwM3JA2W1Zo8U4"
-      short-id: "b390142456517acc"
-  -
-    name: "vless-1772308928"
-    type: "vless"
-    server: "45.207.157.24"
-    port: 9443
-    uuid: "fe0721ac-c577-4938-b7ca-8ab5f43bb8da"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.amazon.com"
-    client-fingerprint: "random"
-    reality-opts:
-      public-key: "0hIFPaEn4RdFib8_eP8HYxMywR5izEwM3JA2W1Zo8U4"
-      short-id: "b390142456517acc"
+      public-key: "k2hPp0tTW0Da-HK94wYpSCLbuK44LfGqC2MSJIM1Ti0"
+      short-id: "48050fab"
   -
     name: "vless-656168799"
     type: "vless"
@@ -20883,7 +20953,7 @@ proxies:
     ws-opts:
       path: "/81574b6b-c9d7-44a0-b83d-dad56e8cb530"
   -
-    name: "vless-12945894"
+    name: "vless-1128668021"
     type: "vless"
     server: "3.0.111.82"
     port: 10574
@@ -20899,23 +20969,7 @@ proxies:
       public-key: "k2hPp0tTW0Da-HK94wYpSCLbuK44LfGqC2MSJIM1Ti0"
       short-id: "48050fab"
   -
-    name: "vless-480356407"
-    type: "vless"
-    server: "3.0.111.82"
-    port: 17623
-    uuid: "814bd064-544d-4255-a070-5705c03f6da9"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.apple.com"
-    client-fingerprint: "edge"
-    reality-opts:
-      public-key: "k2hPp0tTW0Da-HK94wYpSCLbuK44LfGqC2MSJIM1Ti0"
-      short-id: "48050fab"
-  -
-    name: "vless-1636626767"
+    name: "vless-1631955737"
     type: "vless"
     server: "45.32.69.110"
     port: 443
@@ -20925,7 +20979,6 @@ proxies:
     encryption: "none"
     tls: true
     servername: "itunes.apple.com"
-    client-fingerprint: "chrome"
     reality-opts:
       public-key: "6l-Yq_zkVrnExw8AVv85VwoYnfNc8-dRSpoj_AA-fxY"
       short-id: "c5cde18f"
@@ -20953,6 +21006,24 @@ proxies:
       headers:
         Host: "itunes.apple.com"
   -
+    name: "vless-1663154502"
+    type: "vless"
+    server: "154.9.241.170"
+    port: 443
+    uuid: "30b98a28-ed4e-46eb-8548-54c25f4db53c"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "itunes.apple.com"
+    reality-opts:
+      public-key: "_E8d7s7B7xYfZImOkKmESW6MJDxwKxnsscu56jhE2EM"
+      short-id: "3fb4e08c"
+    ws-opts:
+      path: "/ws"
+      headers:
+        Host: "itunes.apple.com"
+  -
     name: "vless-1772308905"
     type: "vless"
     server: "43.255.157.234"
@@ -20968,6 +21039,105 @@ proxies:
     reality-opts:
       public-key: "ztQ8VYq_dVDc3x-QM8LXjup2161CirYrIBE1F7loVzQ"
       short-id: "6772eb2b7a"
+  -
+    name: "vless-1793402557"
+    type: "vless"
+    server: "31.77.29.47"
+    port: 443
+    uuid: "9ee57d03-dcf5-488b-aff7-305301879353"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "jp-akn-1.movietop24.site"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "ZrHDiON568oDDRIl0XXBL5kBK5bNnkadKFzt6UYIoUs"
+      short-id: "ee2fb8a902f1fa2b"
+  -
+    name: "vless-1544826432"
+    type: "vless"
+    server: "104.18.37.127"
+    port: 443
+    uuid: "4e4f1f70-5e56-4a76-bb9d-db087f4690c4"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "jp3.yohototo.top"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+  -
+    name: "vless-1784780850"
+    type: "vless"
+    server: "44.248.233.99"
+    port: 443
+    uuid: "37615d66-5467-44a3-bc23-f2c3bef7f761"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "p8VhFzvFOBAhWAEAeWmwDxT3xBSRsGYixqi0qnLFnBM"
+      short-id: "21270a66"
+  -
+    name: "vless-1663152503"
+    type: "vless"
+    server: "144.202.126.147"
+    port: 443
+    uuid: "45d51389-0c38-4843-8ae8-cffb94e97a72"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "itunes.apple.com"
+    reality-opts:
+      public-key: "jO7THaLxz0Oz3kePAJcuwcKNTlsWoEWGh18zzRmiXgo"
+      short-id: "77c4230d"
+    ws-opts:
+      path: "/ws"
+      headers:
+        Host: "itunes.apple.com"
+  -
+    name: "vless-1632449710"
+    type: "vless"
+    server: "154.12.38.202"
+    port: 443
+    uuid: "2a9ab69b-26e7-44d0-a325-e5056d849900"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "itunes.apple.com"
+    reality-opts:
+      public-key: "iJDZHJQcTGl2VIwbsRmlOG9JGbbmxNY5wmv1hc6OwQM"
+      short-id: "c31176b6"
+    ws-opts:
+      path: "/ws"
+      headers:
+        Host: "itunes.apple.com"
+  -
+    name: "vless-1782532400"
+    type: "vless"
+    server: "xray2-direct-mci1-fs-ce.freesocks.work"
+    port: 443
+    uuid: "a3d69868-9dfd-45fa-b278-d52f5c863a21"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "7j3hmlHrEDk3Kjx-dFG3E3jf0c6PZF45trIPFsuKWmI"
   -
     name: "vless-825595682"
     type: "vless"
@@ -21028,42 +21198,6 @@ proxies:
       public-key: "f6Tj8-uvWsLv3V-lGLuPciArp5oKqUImBg-U7-WJ-0A"
       short-id: "bb82c8"
   -
-    name: "vless-1663152503"
-    type: "vless"
-    server: "144.202.126.147"
-    port: 443
-    uuid: "45d51389-0c38-4843-8ae8-cffb94e97a72"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "itunes.apple.com"
-    reality-opts:
-      public-key: "jO7THaLxz0Oz3kePAJcuwcKNTlsWoEWGh18zzRmiXgo"
-      short-id: "77c4230d"
-    ws-opts:
-      path: "/ws"
-      headers:
-        Host: "itunes.apple.com"
-  -
-    name: "vless-1632449710"
-    type: "vless"
-    server: "154.12.38.202"
-    port: 443
-    uuid: "2a9ab69b-26e7-44d0-a325-e5056d849900"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "itunes.apple.com"
-    reality-opts:
-      public-key: "iJDZHJQcTGl2VIwbsRmlOG9JGbbmxNY5wmv1hc6OwQM"
-      short-id: "c31176b6"
-    ws-opts:
-      path: "/ws"
-      headers:
-        Host: "itunes.apple.com"
-  -
     name: "vless-1665784892"
     type: "vless"
     server: "45.63.53.81"
@@ -21082,6 +21216,22 @@ proxies:
       headers:
         Host: "itunes.apple.com"
   -
+    name: "vless-1786729700"
+    type: "vless"
+    server: "178.130.47.207"
+    port: 43000
+    uuid: "1f6e3cb6-fa3a-4ae4-95ae-31218438110c"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "178.130.47.207"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "ZvqA2ahoKgy2MelXnu7ImC8pgbu4VoLz5U3EuW2AjQ8"
+      short-id: "657a8281"
+  -
     name: "vless-1789229439"
     type: "vless"
     server: "43.247.132.42"
@@ -21098,40 +21248,18 @@ proxies:
       public-key: "HrcXRHtsitc_AVlN-_8fZuRgaP-Mqa_9JJotI9OnkVc"
       short-id: "25c79e5856c7"
   -
-    name: "vless-1769782700"
+    name: "vless-1616310374"
     type: "vless"
-    server: "154.21.203.106"
-    port: 21033
-    uuid: "57beeeb0-03fc-4fc9-94da-7604488a7134"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.kaidee.com"
-    client-fingerprint: "random"
-    reality-opts:
-      public-key: "EG-jzQw1RyOwAM4L9rMKondSx7cyFmPyv1OP7xXkIk4"
-      short-id: "cbd39bea0805e2"
-  -
-    name: "vless-1670786121"
-    type: "vless"
-    server: "154.9.241.170"
+    server: "59.125.69.23"
     port: 443
-    uuid: "30b98a28-ed4e-46eb-8548-54c25f4db53c"
+    uuid: "c1c04450-bf71-4049-ad0c-9cf6d94d9f1f"
     network: "ws"
     udp: true
     encryption: "none"
     tls: true
-    servername: "itunes.apple.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "_E8d7s7B7xYfZImOkKmESW6MJDxwKxnsscu56jhE2EM"
-      short-id: "3fb4e08c"
+    servername: "ty986gfazs.cainiaohub.xyz"
     ws-opts:
-      path: "/ws"
-      headers:
-        Host: "itunes.apple.com"
+      path: "/81574b6b-c9d7-44a0-b83d-dad56e8cb530"
   -
     name: "vless-1781602546"
     type: "vless"
@@ -21167,21 +21295,6 @@ proxies:
       path: "/ws"
       headers:
         Host: "itunes.apple.com"
-  -
-    name: "vless-1789231464"
-    type: "vless"
-    server: "cucc.cloudflare.seeck.cn"
-    port: 443
-    uuid: "a2e79b0b-d293-4231-92cb-863585184f3a"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "6g4z6.t3bq.cql.hh.hhyf.kdns.fr"
-    ws-opts:
-      path: "/glasspanel/guest000_0_5de14443985f/"
-      headers:
-        Host: "6g4z6.t3bq.cql.hh.hhyf.kdns.fr"
   -
     name: "vless-1787683004"
     type: "vless"
@@ -21240,19 +21353,6 @@ proxies:
       public-key: "aYz4_13W8gtAXGBrWeqJXtExahAJ9kUPDapqeyAlYCk"
     grpc-opts:
       grpc-service-name: "gdd-grpc"
-  -
-    name: "vless-48500240"
-    type: "vless"
-    server: "104.21.55.229"
-    port: 8880
-    uuid: "2efeba50-78fe-4729-9821-1fb9819ed9e8"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/pyip=ProxyIP.KR.CMLiussss.net"
-      headers:
-        Host: "dark-dew-c3ed.48-97c.workers.dev"
   -
     name: "vless-1162311187"
     type: "vless"
@@ -21324,22 +21424,6 @@ proxies:
       headers:
         Host: "seaseus.zoomgov.pp.ua"
   -
-    name: "vless-1789231465"
-    type: "vless"
-    server: "cf-ip-site.vov.moe"
-    port: 443
-    uuid: "a2e79b0b-d293-4231-92cb-863585184f3a"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "6g4z6.t3bq.cql.hh.hhyf.kdns.fr"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/glasspanel/f6665c29_1794359090_308c0a2513c7/"
-      headers:
-        Host: "6g4z6.t3bq.cql.hh.hhyf.kdns.fr"
-  -
     name: "vless-1748616601"
     type: "vless"
     server: "154.40.55.185"
@@ -21355,22 +21439,6 @@ proxies:
     reality-opts:
       public-key: "XY0OTrgnRWxHbqBC8u4qFWvZakjNZY83AAnL_lwHu1M"
       short-id: "e726fb"
-  -
-    name: "vless-1786729700"
-    type: "vless"
-    server: "178.130.47.207"
-    port: 43000
-    uuid: "1f6e3cb6-fa3a-4ae4-95ae-31218438110c"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "178.130.47.207"
-    client-fingerprint: "random"
-    reality-opts:
-      public-key: "ZvqA2ahoKgy2MelXnu7ImC8pgbu4VoLz5U3EuW2AjQ8"
-      short-id: "657a8281"
 proxy-groups:
   -
     name: "AUTO"
@@ -21515,13 +21583,13 @@ proxy-groups:
       - "@DeltaKroneckerGithub 145"
       - "@DeltaKroneckerGithub 146"
       - "@DeltaKroneckerGithub 147"
-      - "@DeltaKroneckerGithub 149"
       - "@DeltaKroneckerGithub 150"
       - "@DeltaKroneckerGithub 151"
       - "@DeltaKroneckerGithub 152"
       - "@DeltaKroneckerGithub 153"
       - "@DeltaKroneckerGithub 154"
       - "@DeltaKroneckerGithub 155"
+      - "@DeltaKroneckerGithub 156"
       - "@DeltaKroneckerGithub 157"
       - "@DeltaKroneckerGithub 158"
       - "@DeltaKroneckerGithub 160"
@@ -21632,6 +21700,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 269"
       - "@DeltaKroneckerGithub 270"
       - "@DeltaKroneckerGithub 271"
+      - "@DeltaKroneckerGithub 273"
       - "@DeltaKroneckerGithub 274"
       - "@DeltaKroneckerGithub 275"
       - "@DeltaKroneckerGithub 276"
@@ -21791,9 +21860,11 @@ proxy-groups:
       - "@DeltaKroneckerGithub 439"
       - "@DeltaKroneckerGithub 440"
       - "@DeltaKroneckerGithub 442"
+      - "@DeltaKroneckerGithub 443"
       - "@DeltaKroneckerGithub 444"
       - "@DeltaKroneckerGithub 445"
       - "@DeltaKroneckerGithub 446"
+      - "@DeltaKroneckerGithub 447"
       - "@DeltaKroneckerGithub 448"
       - "@DeltaKroneckerGithub 449"
       - "@DeltaKroneckerGithub 450"
@@ -21925,7 +21996,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 582"
       - "@DeltaKroneckerGithub 583"
       - "@DeltaKroneckerGithub 584"
-      - "@DeltaKroneckerGithub 585"
       - "@DeltaKroneckerGithub 586"
       - "@DeltaKroneckerGithub 588"
       - "@DeltaKroneckerGithub 589"
@@ -22080,6 +22150,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 746"
       - "@DeltaKroneckerGithub 747"
       - "@DeltaKroneckerGithub 748"
+      - "@DeltaKroneckerGithub 749"
       - "@DeltaKroneckerGithub 750"
       - "@DeltaKroneckerGithub 751"
       - "@DeltaKroneckerGithub 752"
@@ -22210,6 +22281,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 891"
       - "@DeltaKroneckerGithub 892"
       - "@DeltaKroneckerGithub 893"
+      - "@DeltaKroneckerGithub 894"
       - "@DeltaKroneckerGithub 895"
       - "@DeltaKroneckerGithub 896"
       - "@DeltaKroneckerGithub 897"
@@ -22263,6 +22335,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 947"
       - "@DeltaKroneckerGithub 948"
       - "@DeltaKroneckerGithub 949"
+      - "@DeltaKroneckerGithub 950"
       - "@DeltaKroneckerGithub 951"
       - "@DeltaKroneckerGithub 953"
       - "@DeltaKroneckerGithub 954"
@@ -22617,6 +22690,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 1322"
       - "@DeltaKroneckerGithub 1323"
       - "@DeltaKroneckerGithub 1324"
+      - "@DeltaKroneckerGithub 1325"
       - "@DeltaKroneckerGithub 1326"
       - "@DeltaKroneckerGithub 1327"
       - "@DeltaKroneckerGithub 1328"
@@ -22772,40 +22846,39 @@ proxy-groups:
       - "188.114.97.6:443 4"
       - "207.148.71.119:443"
       - "188.114.97.6:443 7"
-      - "vless-1773037051"
-      - "vless-1772308928"
+      - "vless-470978001"
       - "vless-656168799"
-      - "vless-12945894"
-      - "vless-480356407"
-      - "vless-1636626767"
+      - "vless-1128668021"
+      - "vless-1631955737"
       - "vless-1636626764"
+      - "vless-1663154502"
       - "vless-1772308905"
+      - "vless-1793402557"
+      - "vless-1544826432"
+      - "vless-1784780850"
+      - "vless-1663152503"
+      - "vless-1632449710"
+      - "vless-1782532400"
       - "vless-825595682"
       - "vless-1790446053"
       - "vless-1680311954"
       - "vless-1777039004"
-      - "vless-1663152503"
-      - "vless-1632449710"
       - "vless-1665784892"
+      - "vless-1786729700"
       - "vless-1789229439"
-      - "vless-1769782700"
-      - "vless-1670786121"
+      - "vless-1616310374"
       - "vless-1781602546"
       - "vless-1636626766"
-      - "vless-1789231464"
       - "vless-1787683004"
       - "vless-1792931762"
       - "vless-1459596948"
       - "vless-1790829695"
-      - "vless-48500240"
       - "vless-1162311187"
       - "vless-2323714"
       - "vless-1709236004"
       - "vless-2299770"
       - "vless-1792667455"
-      - "vless-1789231465"
       - "vless-1748616601"
-      - "vless-1786729700"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -22953,13 +23026,13 @@ proxy-groups:
       - "@DeltaKroneckerGithub 145"
       - "@DeltaKroneckerGithub 146"
       - "@DeltaKroneckerGithub 147"
-      - "@DeltaKroneckerGithub 149"
       - "@DeltaKroneckerGithub 150"
       - "@DeltaKroneckerGithub 151"
       - "@DeltaKroneckerGithub 152"
       - "@DeltaKroneckerGithub 153"
       - "@DeltaKroneckerGithub 154"
       - "@DeltaKroneckerGithub 155"
+      - "@DeltaKroneckerGithub 156"
       - "@DeltaKroneckerGithub 157"
       - "@DeltaKroneckerGithub 158"
       - "@DeltaKroneckerGithub 160"
@@ -23070,6 +23143,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 269"
       - "@DeltaKroneckerGithub 270"
       - "@DeltaKroneckerGithub 271"
+      - "@DeltaKroneckerGithub 273"
       - "@DeltaKroneckerGithub 274"
       - "@DeltaKroneckerGithub 275"
       - "@DeltaKroneckerGithub 276"
@@ -23229,9 +23303,11 @@ proxy-groups:
       - "@DeltaKroneckerGithub 439"
       - "@DeltaKroneckerGithub 440"
       - "@DeltaKroneckerGithub 442"
+      - "@DeltaKroneckerGithub 443"
       - "@DeltaKroneckerGithub 444"
       - "@DeltaKroneckerGithub 445"
       - "@DeltaKroneckerGithub 446"
+      - "@DeltaKroneckerGithub 447"
       - "@DeltaKroneckerGithub 448"
       - "@DeltaKroneckerGithub 449"
       - "@DeltaKroneckerGithub 450"
@@ -23363,7 +23439,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 582"
       - "@DeltaKroneckerGithub 583"
       - "@DeltaKroneckerGithub 584"
-      - "@DeltaKroneckerGithub 585"
       - "@DeltaKroneckerGithub 586"
       - "@DeltaKroneckerGithub 588"
       - "@DeltaKroneckerGithub 589"
@@ -23518,6 +23593,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 746"
       - "@DeltaKroneckerGithub 747"
       - "@DeltaKroneckerGithub 748"
+      - "@DeltaKroneckerGithub 749"
       - "@DeltaKroneckerGithub 750"
       - "@DeltaKroneckerGithub 751"
       - "@DeltaKroneckerGithub 752"
@@ -23648,6 +23724,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 891"
       - "@DeltaKroneckerGithub 892"
       - "@DeltaKroneckerGithub 893"
+      - "@DeltaKroneckerGithub 894"
       - "@DeltaKroneckerGithub 895"
       - "@DeltaKroneckerGithub 896"
       - "@DeltaKroneckerGithub 897"
@@ -23701,6 +23778,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 947"
       - "@DeltaKroneckerGithub 948"
       - "@DeltaKroneckerGithub 949"
+      - "@DeltaKroneckerGithub 950"
       - "@DeltaKroneckerGithub 951"
       - "@DeltaKroneckerGithub 953"
       - "@DeltaKroneckerGithub 954"
@@ -24055,6 +24133,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 1322"
       - "@DeltaKroneckerGithub 1323"
       - "@DeltaKroneckerGithub 1324"
+      - "@DeltaKroneckerGithub 1325"
       - "@DeltaKroneckerGithub 1326"
       - "@DeltaKroneckerGithub 1327"
       - "@DeltaKroneckerGithub 1328"
@@ -24210,40 +24289,39 @@ proxy-groups:
       - "188.114.97.6:443 4"
       - "207.148.71.119:443"
       - "188.114.97.6:443 7"
-      - "vless-1773037051"
-      - "vless-1772308928"
+      - "vless-470978001"
       - "vless-656168799"
-      - "vless-12945894"
-      - "vless-480356407"
-      - "vless-1636626767"
+      - "vless-1128668021"
+      - "vless-1631955737"
       - "vless-1636626764"
+      - "vless-1663154502"
       - "vless-1772308905"
+      - "vless-1793402557"
+      - "vless-1544826432"
+      - "vless-1784780850"
+      - "vless-1663152503"
+      - "vless-1632449710"
+      - "vless-1782532400"
       - "vless-825595682"
       - "vless-1790446053"
       - "vless-1680311954"
       - "vless-1777039004"
-      - "vless-1663152503"
-      - "vless-1632449710"
       - "vless-1665784892"
+      - "vless-1786729700"
       - "vless-1789229439"
-      - "vless-1769782700"
-      - "vless-1670786121"
+      - "vless-1616310374"
       - "vless-1781602546"
       - "vless-1636626766"
-      - "vless-1789231464"
       - "vless-1787683004"
       - "vless-1792931762"
       - "vless-1459596948"
       - "vless-1790829695"
-      - "vless-48500240"
       - "vless-1162311187"
       - "vless-2323714"
       - "vless-1709236004"
       - "vless-2299770"
       - "vless-1792667455"
-      - "vless-1789231465"
       - "vless-1748616601"
-      - "vless-1786729700"
   -
     name: "PROXY"
     type: "select"

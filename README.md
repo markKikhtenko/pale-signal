@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-10638-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-10645-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo и OpenClash.
 
-**Последнее обновление:** `2026-10-12 19:58:23 МСК`
+**Последнее обновление:** `2026-10-12 20:23:17 МСК`
 
 ## Подписки
 
@@ -26,22 +26,22 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `10638` |
-| Россия | `3068` |
-| Global | `7570` |
-| Global 5K | `2793` |
+| Всего серверов | `10645` |
+| Россия | `3070` |
+| Global | `7575` |
+| Global 5K | `2810` |
 | LAN 5K | `5000` |
-| LAN Global | `5761` |
-| LAN Experimental | `1430` |
-| LAN Experimental AUTO | `1430` |
-| Исключено пересечений Experimental с LAN Global | `396` |
-| BS Safe MANUAL | `2400` |
+| LAN Global | `5800` |
+| LAN Experimental | `1435` |
+| LAN Experimental AUTO | `1435` |
+| Исключено пересечений Experimental с LAN Global | `394` |
+| BS Safe MANUAL | `2404` |
 | BS Safe AUTO | `50` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `1430` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия.
+Изолированная тестовая подписка: `1435` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия.
 <!-- LAN-EXPERIMENTAL:END -->
 
 ## Подключение
