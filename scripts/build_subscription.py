@@ -246,6 +246,27 @@ SOURCES = [
     },
 ]
 
+# Experimental sources are deliberately kept outside SOURCES. This prevents
+# them from entering any production subscription when source groups evolve.
+EXPERIMENTAL_SOURCES = [
+    {
+        "id": "MORPHEUSADAM_BEST",
+        "name": "MorpheusAdam Best",
+        "url": "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt",
+    },
+    {
+        "id": "MEHRTAT_VLESS",
+        "name": "Mehrtat VLESS",
+        "url": "https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt",
+    },
+    {
+        "id": "AU1RXX_VERIFIED",
+        "name": "Au1rxx Verified",
+        "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
+    },
+]
+EXPERIMENTAL_SOURCE_IDS = {source["id"] for source in EXPERIMENTAL_SOURCES}
+
 BASE_SOURCE_IDS = {
     source["id"] for source in SOURCES if source.get("scope", "base") == "base"
 }
@@ -304,6 +325,9 @@ LAN_SOURCE_IDS = {
 }
 BS_SAFE_SOURCE_IDS = BYPASS_SOURCE_IDS
 
+if EXPERIMENTAL_SOURCE_IDS & (BASE_SOURCE_IDS | LAN_SOURCE_IDS | BYPASS_SOURCE_IDS | BS_SAFE_SOURCE_IDS):
+    raise RuntimeError("experimental sources must not belong to production source groups")
+
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
 RU_OUTPUT_FILE = ROOT / "subscription-ru.yaml"
@@ -311,6 +335,7 @@ GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 GLOBAL_5K_OUTPUT_FILE = ROOT / "subscription-global-5k.yaml"
 LAN_5K_OUTPUT_FILE = ROOT / "subscription-lan-5k.yaml"
 LAN_GLOBAL_OUTPUT_FILE = ROOT / "subscription-lan-global.yaml"
+LAN_EXPERIMENTAL_OUTPUT_FILE = ROOT / "subscription-lan-experimental.yaml"
 GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
 BS_SAFE_OUTPUT_FILE = ROOT / "subscription-bs-safe.yaml"
 README_FILE = ROOT / "README.md"
@@ -322,6 +347,7 @@ GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
 LAN_5K_SUBSCRIPTION_LIMIT = 5000
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
+LAN_EXPERIMENTAL_SCHEMA_VERSION = 1
 BS_SAFE_RU_LIMIT = BS_SAFE_SUBSCRIPTION_LIMIT // 2
 BS_SAFE_MEGAFON_PROFILE_LIMIT = 12
 BS_SAFE_FINGERPRINTS = {"chrome", "firefox", "edge", "qq", "safari", "android"}
@@ -1554,6 +1580,266 @@ def validate_config(config: dict) -> None:
             raise RuntimeError(f"group {group.get('name')} references missing proxies: {missing}")
 
 
+def canonical_proxy_config(proxy: dict) -> str:
+    """Return a stable config identity without display/build-only fields."""
+    normalized = {
+        key: copy.deepcopy(value)
+        for key, value in proxy.items()
+        if key != "name" and not key.startswith("_")
+    }
+    if "server" in normalized:
+        normalized["server"] = str(normalized["server"]).casefold()
+    if "uuid" in normalized:
+        normalized["uuid"] = str(normalized["uuid"]).casefold()
+    return json.dumps(normalized, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+
+
+def endpoint_identity_key(proxy: dict) -> tuple[str, int, str]:
+    return (
+        str(proxy.get("server", "")).casefold(),
+        int(proxy.get("port", 0) or 0),
+        str(proxy.get("uuid", "")).casefold(),
+    )
+
+
+PUBLIC_SERVER_CACHE: dict[str, bool] = {}
+
+
+def is_public_remote_server(server: str) -> bool:
+    cached = PUBLIC_SERVER_CACHE.get(server.casefold())
+    if cached is not None:
+        return cached
+
+    try:
+        result = ipaddress.ip_address(server).is_global
+    except ValueError:
+        try:
+            addresses = socket.getaddrinfo(server, None, family=socket.AF_UNSPEC, type=socket.SOCK_STREAM)
+        except OSError:
+            result = False
+        else:
+            result = any(ipaddress.ip_address(item[4][0]).is_global for item in addresses)
+    PUBLIC_SERVER_CACHE[server.casefold()] = result
+    return result
+
+
+def prepare_experimental_proxy(proxy: dict, input_order: int) -> dict:
+    prepared = copy.deepcopy(proxy)
+    source_name = prepared.pop("_source_name")
+    source_id = prepared.pop("_source_id")
+    prepared["name"] = source_name
+    return {
+        "name": prepared.pop("name"),
+        "_sources": [source_id],
+        "_experimental_owner": source_id,
+        "_input_order": input_order,
+        **prepared,
+    }
+
+
+def validate_lan_experimental_config(config: dict, lan_global_proxies: list[dict]) -> None:
+    validate_config(config)
+    proxies = config["proxies"]
+    groups = {group["name"]: group for group in config["proxy-groups"]}
+    names = [proxy["name"] for proxy in proxies]
+
+    if groups["AUTO"].get("type") != "url-test":
+        raise RuntimeError("LAN Experimental AUTO is not url-test")
+    if groups["AUTO"].get("proxies") != names:
+        raise RuntimeError("LAN Experimental AUTO must contain every proxy exactly once")
+    if groups["MANUAL"].get("proxies") != names:
+        raise RuntimeError("LAN Experimental MANUAL must contain every proxy exactly once")
+    if groups["PROXY"].get("proxies", [None])[0] != "AUTO":
+        raise RuntimeError("LAN Experimental PROXY must select AUTO by default")
+    if (
+        groups["AUTO"].get("interval") != 900
+        or groups["AUTO"].get("tolerance") != 100
+        or groups["AUTO"].get("lazy") is not True
+    ):
+        raise RuntimeError("LAN Experimental AUTO health-check settings are invalid")
+
+    config_keys = [canonical_proxy_config(proxy) for proxy in proxies]
+    if len(config_keys) != len(set(config_keys)):
+        raise RuntimeError("LAN Experimental contains duplicate normalized configs")
+
+    lan_config_keys = {canonical_proxy_config(proxy) for proxy in lan_global_proxies}
+    lan_endpoint_keys = {endpoint_identity_key(proxy) for proxy in lan_global_proxies}
+    for proxy, config_key in zip(proxies, config_keys):
+        if config_key in lan_config_keys or endpoint_identity_key(proxy) in lan_endpoint_keys:
+            raise RuntimeError("LAN Experimental intersects LAN Global")
+
+
+def experimental_metadata(yaml_text: str, now: str, proxy_count: int) -> str:
+    created = now
+    if LAN_EXPERIMENTAL_OUTPUT_FILE.exists():
+        existing = LAN_EXPERIMENTAL_OUTPUT_FILE.read_text(encoding="utf-8", errors="replace")
+        match = re.search(r"^# Created: (.+)$", existing, flags=re.MULTILINE)
+        if match:
+            created = match.group(1).strip()
+    version_stamp = dt.datetime.now(MSK).strftime("%Y%m%d.%H%M%S")
+    lines = [
+        "# LAN Experimental",
+        f"# Version: {LAN_EXPERIMENTAL_SCHEMA_VERSION}.{version_stamp}",
+        f"# Created: {created}",
+        f"# Updated: {now}",
+        "# Sources:",
+        *(f"#   - {source['name']}: {source['url']}" for source in EXPERIMENTAL_SOURCES),
+        f"# Servers: {proxy_count}",
+    ]
+    return "\n".join(lines) + "\n" + yaml_text
+
+
+def build_lan_experimental(
+    lan_global_proxies: list[dict],
+    sources: list[dict] | None = None,
+    fetcher=None,
+    now: str | None = None,
+) -> tuple[str, dict]:
+    sources = EXPERIMENTAL_SOURCES if sources is None else sources
+    fetcher = fetch_source_texts if fetcher is None else fetcher
+    now = msk_timestamp() if now is None else now
+    source_stats = {
+        source["id"]: {
+            "received": 0,
+            "valid_format": 0,
+            "filtered": 0,
+            "duplicates": 0,
+            "lan_global_overlap": 0,
+            "added": 0,
+        }
+        for source in sources
+    }
+    parsed: list[dict] = []
+    available_sources = 0
+
+    for source in sources:
+        source_id = source["id"]
+        try:
+            source_texts = fetcher(source)
+        except Exception as exc:
+            print(f"warning: skipped experimental source {source['name']}: {exc}", file=sys.stderr)
+            continue
+        available_sources += 1
+        for source_text in source_texts:
+            for line in source_text.splitlines():
+                if not line.strip().startswith("vless://"):
+                    continue
+                source_stats[source_id]["received"] += 1
+                proxy = parse_vless(line, source_id)
+                if proxy is None:
+                    continue
+                source_stats[source_id]["valid_format"] += 1
+                parsed.append(proxy)
+
+    if available_sources == 0:
+        raise RuntimeError("all LAN Experimental sources are unavailable")
+    if not parsed:
+        raise RuntimeError("LAN Experimental sources produced no valid VLESS configs")
+
+    candidates = [prepare_experimental_proxy(proxy, index) for index, proxy in enumerate(parsed)]
+    ensure_unique_names(candidates)
+    safe_candidates: list[dict] = []
+    for proxy in candidates:
+        source_id = proxy["_experimental_owner"]
+        if (
+            blocked_proxy_key(proxy) in BLOCKED_PROXY_KEYS
+            or blocked_proxy_name(proxy)
+            or not is_public_remote_server(str(proxy.get("server", "")))
+        ):
+            source_stats[source_id]["filtered"] += 1
+            continue
+        safe_candidates.append(proxy)
+
+    if not safe_candidates:
+        raise RuntimeError("LAN Experimental has no safe public VLESS configs")
+
+    ru_proxies, non_ru_proxies = split_by_country(safe_candidates)
+    del ru_proxies
+    country_candidates: list[dict] = []
+    for proxy in non_ru_proxies:
+        source_id = proxy["_experimental_owner"]
+        if proxy.get("_country") == "UNKNOWN":
+            source_stats[source_id]["filtered"] += 1
+            continue
+        country_candidates.append(proxy)
+    for proxy in safe_candidates:
+        if proxy.get("_country") == "RU":
+            source_stats[proxy["_experimental_owner"]]["filtered"] += 1
+
+    unique_candidates: list[dict] = []
+    seen_configs: dict[str, dict] = {}
+    for proxy in country_candidates:
+        source_id = proxy["_experimental_owner"]
+        key = canonical_proxy_config(proxy)
+        if key in seen_configs:
+            source_stats[source_id]["duplicates"] += 1
+            existing_sources = seen_configs[key].setdefault("_sources", [])
+            if source_id not in existing_sources:
+                existing_sources.append(source_id)
+            continue
+        seen_configs[key] = proxy
+        unique_candidates.append(proxy)
+
+    lan_config_keys = {canonical_proxy_config(proxy) for proxy in lan_global_proxies}
+    lan_endpoint_keys = {endpoint_identity_key(proxy) for proxy in lan_global_proxies}
+    experimental_proxies: list[dict] = []
+    for proxy in unique_candidates:
+        source_id = proxy["_experimental_owner"]
+        if (
+            canonical_proxy_config(proxy) in lan_config_keys
+            or endpoint_identity_key(proxy) in lan_endpoint_keys
+        ):
+            source_stats[source_id]["lan_global_overlap"] += 1
+            continue
+        source_stats[source_id]["added"] += 1
+        experimental_proxies.append(proxy)
+
+    if not experimental_proxies:
+        raise RuntimeError("LAN Experimental has no new proxies after LAN Global deduplication")
+
+    config = build_config(experimental_proxies)
+    validate_lan_experimental_config(config, lan_global_proxies)
+    yaml_text = "\n".join(dump_yaml(config)) + "\n"
+    if not yaml_text.strip():
+        raise RuntimeError("empty LAN Experimental YAML output")
+    yaml_text = experimental_metadata(yaml_text, now, len(experimental_proxies))
+    stats = {
+        "sources": source_stats,
+        "total": len(experimental_proxies),
+        "auto": len(config["proxy-groups"][0]["proxies"]),
+        "lan_global_overlap": sum(item["lan_global_overlap"] for item in source_stats.values()),
+        "available_sources": available_sources,
+    }
+    return yaml_text, stats
+
+
+def atomic_write_text(path: Path, text: str) -> None:
+    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+    try:
+        temporary.write_text(text, encoding="utf-8", newline="\n")
+        os.replace(temporary, path)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+
+
+def write_lan_experimental_file(
+    lan_global_proxies: list[dict],
+    path: Path = LAN_EXPERIMENTAL_OUTPUT_FILE,
+    sources: list[dict] | None = None,
+    fetcher=None,
+    now: str | None = None,
+) -> dict:
+    yaml_text, stats = build_lan_experimental(
+        lan_global_proxies,
+        sources=sources,
+        fetcher=fetcher,
+        now=now,
+    )
+    atomic_write_text(path, yaml_text)
+    return stats
+
+
 def proxy_key(proxy: dict) -> str:
     parts = [
         str(proxy.get("type", "")),
@@ -1833,6 +2119,24 @@ def source_table(
                 f"| {source['name']} | {scope} | `{source_published_label(source['id'])}` | "
                 f"`{lan_5k_stats.get(source_id, 0)}` | [raw]({source['url']}) |"
             )
+    return "\n".join(lines)
+
+
+def experimental_source_table(experimental_stats: dict) -> str:
+    lines = [
+        "| Источник | URL | Обновление источника | Получено VLESS | Прошло формат | Отфильтровано | Дубли Experimental | Совпало с LAN Global | Добавлено новых |",
+        "|----------|-----|---------------------|-----------------|----------------|----------------|---------------------|----------------------|-----------------|",
+    ]
+    stats_by_source = experimental_stats.get("sources", {})
+    for source in EXPERIMENTAL_SOURCES:
+        stats = stats_by_source.get(source["id"], {})
+        lines.append(
+            f"| {source['name']} | [raw]({source['url']}) | "
+            f"`{source_published_label(source['id'])}` | "
+            f"`{stats.get('received', 0)}` | `{stats.get('valid_format', 0)}` | "
+            f"`{stats.get('filtered', 0)}` | `{stats.get('duplicates', 0)}` | "
+            f"`{stats.get('lan_global_overlap', 0)}` | `{stats.get('added', 0)}` |"
+        )
     return "\n".join(lines)
 
 
@@ -2274,6 +2578,7 @@ def write_final_readme(
     global_non_stable_auto_count: int | None = None,
     bs_safe_stats: dict[str, int] | None = None,
     bs_safe_auto_count: int | None = None,
+    experimental_stats: dict | None = None,
 ) -> None:
     if stats is None:
         stats = stats_for(proxies)
@@ -2284,6 +2589,13 @@ def write_final_readme(
         global_5k_stats,
         lan_5k_stats,
     )
+    experimental_stats = experimental_stats or {
+        "sources": {},
+        "total": 0,
+        "auto": 0,
+        "lan_global_overlap": 0,
+    }
+    experimental_sources_markdown = experimental_source_table(experimental_stats)
     text = f"""# pale-signal подписки
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
@@ -2304,6 +2616,7 @@ pale-signal автоматически собирает VLESS-подписки �
 | **pale-signal подписка - Global 5K** | До {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих иностранных БС/whitelist/bypass серверов | https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) |
 | **pale-signal подписка - LAN 5K** | До {LAN_5K_SUBSCRIPTION_LIMIT} иностранных узлов для проводного интернета; без БС/whitelist/mobile/CIDR-пулов | https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml | [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) |
 | **pale-signal подписка - LAN Global** | Все доступные иностранные узлы из тех же LAN-пулов, без лимита 5000 | https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml | [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) |
+| **pale-signal подписка - LAN Experimental** | Только новые non-RU узлы из независимых экспериментальных источников; без пересечений с LAN Global | https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml | [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) |
 | **pale-signal подписка - Global Non-Stable** | Тестовая Global 5K: полный MANUAL, AUTO без дублей endpoint | https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) |
 | **pale-signal подписка - BS Safe** | До {BS_SAFE_SUBSCRIPTION_LIMIT} свежих Reality-узлов из БС-источников; AUTO ограничен {BS_SAFE_AUTO_LIMIT} нодами | https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) |
 
@@ -2317,6 +2630,9 @@ pale-signal автоматически собирает VLESS-подписки �
 | Global 5K | `{stats['global_5k']}` |
 | LAN 5K | `{stats['lan_5k']}` |
 | LAN Global | `{stats['lan_global']}` |
+| LAN Experimental | `{experimental_stats['total']}` |
+| LAN Experimental AUTO | `{experimental_stats['auto']}` |
+| Исключено пересечений Experimental с LAN Global | `{experimental_stats['lan_global_overlap']}` |
 | LAN 5K из VestraNet | `{lan_5k_stats.get('vestranet_vless', 0) if lan_5k_stats is not None else 0}` |
 | Global Non-Stable MANUAL | `{stats['global_5k']}` |
 | Global Non-Stable AUTO | `{global_non_stable_auto_count if global_non_stable_auto_count is not None else stats['global_5k']}` |
@@ -2335,6 +2651,18 @@ pale-signal автоматически собирает VLESS-подписки �
 Для OpenClash при активных блокировках используйте `BS Safe`: в `MANUAL` доступно до {BS_SAFE_SUBSCRIPTION_LIMIT} Reality-узлов из базовых LTE/whitelist/bypass-источников, включая `all_subs`, а `AUTO` проверяет только {BS_SAFE_AUTO_LIMIT}, чтобы не перегружать роутер.
 
 Для обычного домашнего или офисного проводного подключения используйте `LAN 5K` или полную `LAN Global`. Обе подписки используют одинаковые LAN-пулы и исключают узлы, специально собранные под белые списки и CIDR-ограничения мобильных операторов; `LAN Global` отличается только отсутствием лимита 5000.
+
+## LAN Experimental
+
+`LAN Experimental` собирается только из отдельного набора источников, исключает RU, `UNKNOWN`, непубличные адреса, заблокированные конфигурации, нормализованные дубли и совпадения `server + port + UUID` с актуальным `LAN Global`. Ни один экспериментальный источник не входит в рабочие группы источников.
+
+{experimental_sources_markdown}
+
+Всего серверов: `{experimental_stats['total']}`. В `AUTO`: `{experimental_stats['auto']}` (весь набор без лимита). Новые узлы источников учитываются по первому появлению в порядке таблицы; повторы последующих источников отражаются как дубли.
+
+`AUTO` — обычная группа Mihomo [`url-test`](https://wiki.metacubex.one/ru/config/proxy-groups/url-test/) с `interval: 900`, `tolerance: 100`, `lazy: true`. Все узлы входят в группу, однако согласно [документации общих полей групп](https://wiki.metacubex.one/ru/config/proxy-groups/) `lazy: true` отключает проверки, пока группа не выбрана. После активации Mihomo проверяет задержку с заданным интервалом и выбирает доступный узел с учётом tolerance; это не гарантирует мгновенное переключение при каждом обрыве.
+
+На NanoPi R3S большой полный `AUTO` может заметно расходовать CPU, RAM, таблицу соединений и канал во время циклов health-check. Подписка не подключается к OpenClash автоматически; оцените нагрузку на своём размере списка перед постоянным использованием.
 
 ## Маршрутизация по чёрным спискам
 
@@ -2564,6 +2892,10 @@ def main(
         raise RuntimeError("empty BS Safe YAML output")
 
     now = msk_timestamp()
+    lan_experimental_yaml_text, experimental_stats = build_lan_experimental(
+        lan_global_proxies,
+        now=now,
+    )
     changes = {
         "all": compare_with_existing(OUTPUT_FILE, yaml_text),
         "ru": compare_with_existing(RU_OUTPUT_FILE, ru_yaml_text),
@@ -2571,6 +2903,10 @@ def main(
         "global_5k": compare_with_existing(GLOBAL_5K_OUTPUT_FILE, global_5k_yaml_text),
         "lan_5k": compare_with_existing(LAN_5K_OUTPUT_FILE, lan_5k_yaml_text),
         "lan_global": compare_with_existing(LAN_GLOBAL_OUTPUT_FILE, lan_global_yaml_text),
+        "lan_experimental": compare_with_existing(
+            LAN_EXPERIMENTAL_OUTPUT_FILE,
+            lan_experimental_yaml_text,
+        ),
         "bs_safe": compare_with_existing(BS_SAFE_OUTPUT_FILE, bs_safe_yaml_text),
     }
     stats = stats_for(base_proxies)
@@ -2592,6 +2928,7 @@ def main(
     GLOBAL_5K_OUTPUT_FILE.write_text(global_5k_yaml_text, encoding="utf-8", newline="\n")
     LAN_5K_OUTPUT_FILE.write_text(lan_5k_yaml_text, encoding="utf-8", newline="\n")
     LAN_GLOBAL_OUTPUT_FILE.write_text(lan_global_yaml_text, encoding="utf-8", newline="\n")
+    atomic_write_text(LAN_EXPERIMENTAL_OUTPUT_FILE, lan_experimental_yaml_text)
     GLOBAL_NON_STABLE_OUTPUT_FILE.write_text(
         global_non_stable_yaml_text,
         encoding="utf-8",
@@ -2610,6 +2947,7 @@ def main(
         len(global_non_stable_auto_proxies),
         bs_safe_stats,
         len(bs_safe_auto_proxies),
+        experimental_stats,
     )
     print(
         f"wrote subscription files with {len(base_proxies)} base proxies "
@@ -2617,6 +2955,7 @@ def main(
         f"{len(global_5k_proxies)} global 5k, "
         f"{len(lan_5k_proxies)} LAN 5K, "
         f"{len(lan_global_proxies)} LAN Global, "
+        f"{experimental_stats['total']} LAN Experimental/AUTO, "
         f"{len(global_non_stable_auto_proxies)} non-stable AUTO, "
         f"{len(bs_safe_proxies)} BS Safe MANUAL, "
         f"{len(bs_safe_auto_proxies)} BS Safe AUTO)"

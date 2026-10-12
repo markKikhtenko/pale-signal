@@ -47,6 +47,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           python -m pip install --disable-pip-version-check PyYAML==6.0.3
+          python -m unittest discover -s scripts -p 'test_*.py'
           mkdir -p .tools/mihomo/home
           curl -fsSL --retry 5 --retry-all-errors \
             -H "Accept: application/vnd.github+json" \
@@ -63,7 +64,14 @@ jobs:
           python scripts/validate_openclash_module.py \
             --module openclash/blacklist-routing.conf \
             --output-dir .tools/openclash-merged \
-            subscription*.yaml
+            subscription.yaml \
+            subscription-ru.yaml \
+            subscription-global.yaml \
+            subscription-global-5k.yaml \
+            subscription-lan-5k.yaml \
+            subscription-lan-global.yaml \
+            subscription-global-non-stable.yaml \
+            subscription-bs-safe.yaml
           for config in .tools/openclash-merged/*.yaml; do
             .tools/mihomo/mihomo -t -f "$config" -d .tools/mihomo/home
           done
@@ -78,6 +86,31 @@ jobs:
           echo "- Mihomo config test: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- OpenClash merged configs: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- Custom rule providers: passed" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Validate LAN Experimental independently
+        run: |
+          python scripts/verify_lan_experimental.py \
+            --experimental subscription-lan-experimental.yaml \
+            --lan-global subscription-lan-global.yaml
+          .tools/mihomo/mihomo -t \
+            -f subscription-lan-experimental.yaml \
+            -d .tools/mihomo/home
+          mkdir -p .tools/openclash-experimental
+          python scripts/validate_openclash_module.py \
+            --module openclash/blacklist-routing.conf \
+            --output-dir .tools/openclash-experimental \
+            subscription-lan-experimental.yaml
+          .tools/mihomo/mihomo -t \
+            -f .tools/openclash-experimental/subscription-lan-experimental.yaml \
+            -d .tools/mihomo/home
+          experimental_count="$(python -c 'import yaml; data=yaml.safe_load(open("subscription-lan-experimental.yaml", encoding="utf-8")); print(len(data["proxies"]))')"
+          auto_count="$(python -c 'import yaml; data=yaml.safe_load(open("subscription-lan-experimental.yaml", encoding="utf-8")); groups={group["name"]: group for group in data["proxy-groups"]}; print(len(groups["AUTO"]["proxies"]))')"
+          echo "### LAN Experimental" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Servers: $experimental_count" >> "$GITHUB_STEP_SUMMARY"
+          echo "- AUTO entries: $auto_count (all servers)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- LAN Global intersections: 0" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Mihomo config test: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Unavailable-source preservation test: passed" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Check checkout freshness
         id: freshness
@@ -97,7 +130,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml
+          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else
@@ -128,6 +161,7 @@ jobs:
           cp subscription-global-5k.yaml public/subscription-global-5k.yaml
           cp subscription-lan-5k.yaml public/subscription-lan-5k.yaml
           cp subscription-lan-global.yaml public/subscription-lan-global.yaml
+          cp subscription-lan-experimental.yaml public/subscription-lan-experimental.yaml
           cp subscription-global-non-stable.yaml public/subscription-global-non-stable.yaml
           cp subscription-bs-safe.yaml public/subscription-bs-safe.yaml
           cp -R openclash public/openclash
@@ -136,6 +170,7 @@ jobs:
           test -f public/openclash/rules/custom-proxy-domains.yaml
           test -f public/openclash/rules/custom-direct-ip.yaml
           test -f public/openclash/rules/custom-proxy-ip.yaml
+          test -s public/subscription-lan-experimental.yaml
 
       - name: Upload Pages artifact
         if: steps.freshness.outputs.stale != 'true'
