@@ -7,6 +7,7 @@ import email.utils
 import hashlib
 import ipaddress
 import json
+import math
 import os
 import re
 import socket
@@ -253,16 +254,19 @@ EXPERIMENTAL_SOURCES = [
         "id": "MORPHEUSADAM_BEST",
         "name": "MorpheusAdam Best",
         "url": "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt",
+        "minimum_vless": 100,
     },
     {
         "id": "MEHRTAT_VLESS",
         "name": "Mehrtat VLESS",
         "url": "https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt",
+        "minimum_vless": 100,
     },
     {
         "id": "AU1RXX_VERIFIED",
         "name": "Au1rxx Verified",
         "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
+        "minimum_vless": 100,
     },
 ]
 EXPERIMENTAL_SOURCE_IDS = {source["id"] for source in EXPERIMENTAL_SOURCES}
@@ -336,6 +340,10 @@ GLOBAL_5K_OUTPUT_FILE = ROOT / "subscription-global-5k.yaml"
 LAN_5K_OUTPUT_FILE = ROOT / "subscription-lan-5k.yaml"
 LAN_GLOBAL_OUTPUT_FILE = ROOT / "subscription-lan-global.yaml"
 LAN_EXPERIMENTAL_OUTPUT_FILE = ROOT / "subscription-lan-experimental.yaml"
+LAN_EXPERIMENTAL_STATS_FILE = ROOT / "lan-experimental-stats.json"
+LAN_EXPERIMENTAL_CANDIDATE_DIR = ROOT / ".tools" / "lan-experimental-candidate"
+LAN_EXPERIMENTAL_CANDIDATE_FILE = LAN_EXPERIMENTAL_CANDIDATE_DIR / "subscription-lan-experimental.yaml"
+LAN_EXPERIMENTAL_CANDIDATE_STATS_FILE = LAN_EXPERIMENTAL_CANDIDATE_DIR / "lan-experimental-stats.json"
 GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
 BS_SAFE_OUTPUT_FILE = ROOT / "subscription-bs-safe.yaml"
 README_FILE = ROOT / "README.md"
@@ -348,6 +356,9 @@ LAN_5K_SUBSCRIPTION_LIMIT = 5000
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
 LAN_EXPERIMENTAL_SCHEMA_VERSION = 1
+LAN_EXPERIMENTAL_MIN_SOURCE_RATIO = 0.5
+LAN_EXPERIMENTAL_README_START = "<!-- LAN-EXPERIMENTAL:START -->"
+LAN_EXPERIMENTAL_README_END = "<!-- LAN-EXPERIMENTAL:END -->"
 BS_SAFE_RU_LIMIT = BS_SAFE_SUBSCRIPTION_LIMIT // 2
 BS_SAFE_MEGAFON_PROFILE_LIMIT = 12
 BS_SAFE_FINGERPRINTS = {"chrome", "firefox", "edge", "qq", "safari", "android"}
@@ -1580,6 +1591,25 @@ def validate_config(config: dict) -> None:
             raise RuntimeError(f"group {group.get('name')} references missing proxies: {missing}")
 
 
+def normalized_server_identity(server: object) -> str:
+    value = str(server).strip().rstrip(".")
+    try:
+        return ipaddress.ip_address(value).compressed.casefold()
+    except ValueError:
+        try:
+            return value.encode("idna").decode("ascii").casefold()
+        except UnicodeError:
+            return value.casefold()
+
+
+def normalized_uuid_identity(user_id: object) -> str:
+    value = str(user_id).strip()
+    try:
+        return str(uuid.UUID(value))
+    except (ValueError, AttributeError):
+        return value.casefold()
+
+
 def canonical_proxy_config(proxy: dict) -> str:
     """Return a stable config identity without display/build-only fields."""
     normalized = {
@@ -1588,17 +1618,17 @@ def canonical_proxy_config(proxy: dict) -> str:
         if key != "name" and not key.startswith("_")
     }
     if "server" in normalized:
-        normalized["server"] = str(normalized["server"]).casefold()
+        normalized["server"] = normalized_server_identity(normalized["server"])
     if "uuid" in normalized:
-        normalized["uuid"] = str(normalized["uuid"]).casefold()
+        normalized["uuid"] = normalized_uuid_identity(normalized["uuid"])
     return json.dumps(normalized, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
 
 
 def endpoint_identity_key(proxy: dict) -> tuple[str, int, str]:
     return (
-        str(proxy.get("server", "")).casefold(),
+        normalized_server_identity(proxy.get("server", "")),
         int(proxy.get("port", 0) or 0),
-        str(proxy.get("uuid", "")).casefold(),
+        normalized_uuid_identity(proxy.get("uuid", "")),
     )
 
 
@@ -1661,6 +1691,9 @@ def validate_lan_experimental_config(config: dict, lan_global_proxies: list[dict
     config_keys = [canonical_proxy_config(proxy) for proxy in proxies]
     if len(config_keys) != len(set(config_keys)):
         raise RuntimeError("LAN Experimental contains duplicate normalized configs")
+    endpoint_keys = [endpoint_identity_key(proxy) for proxy in proxies]
+    if len(endpoint_keys) != len(set(endpoint_keys)):
+        raise RuntimeError("LAN Experimental contains duplicate server + port + UUID endpoints")
 
     lan_config_keys = {canonical_proxy_config(proxy) for proxy in lan_global_proxies}
     lan_endpoint_keys = {endpoint_identity_key(proxy) for proxy in lan_global_proxies}
@@ -1694,6 +1727,7 @@ def build_lan_experimental(
     sources: list[dict] | None = None,
     fetcher=None,
     now: str | None = None,
+    baseline_stats: dict | None = None,
 ) -> tuple[str, dict]:
     sources = EXPERIMENTAL_SOURCES if sources is None else sources
     fetcher = fetch_source_texts if fetcher is None else fetcher
@@ -1706,20 +1740,28 @@ def build_lan_experimental(
             "duplicates": 0,
             "lan_global_overlap": 0,
             "added": 0,
+            "last_updated": "-",
         }
         for source in sources
     }
     parsed: list[dict] = []
-    available_sources = 0
+    source_failures: list[str] = []
+    baseline_sources = (baseline_stats or {}).get("sources", {})
 
     for source in sources:
         source_id = source["id"]
         try:
             source_texts = fetcher(source)
         except Exception as exc:
-            print(f"warning: skipped experimental source {source['name']}: {exc}", file=sys.stderr)
+            source_failures.append(f"{source['name']}: unavailable ({exc})")
             continue
-        available_sources += 1
+        published_label = source_published_label(source_id)
+        source_stats[source_id]["last_updated"] = (
+            published_label
+            if published_label != "-"
+            else baseline_sources.get(source_id, {}).get("last_updated", "-")
+        )
+        source_parsed: list[dict] = []
         for source_text in source_texts:
             for line in source_text.splitlines():
                 if not line.strip().startswith("vless://"):
@@ -1729,10 +1771,32 @@ def build_lan_experimental(
                 if proxy is None:
                     continue
                 source_stats[source_id]["valid_format"] += 1
-                parsed.append(proxy)
+                source_parsed.append(proxy)
 
-    if available_sources == 0:
+        received = source_stats[source_id]["received"]
+        valid_format = source_stats[source_id]["valid_format"]
+        baseline = baseline_sources.get(source_id, {})
+        minimum_received = max(
+            int(source.get("minimum_vless", 1)),
+            math.ceil(int(baseline.get("received", 0)) * LAN_EXPERIMENTAL_MIN_SOURCE_RATIO),
+        )
+        minimum_valid = max(
+            1,
+            math.ceil(int(baseline.get("valid_format", 0)) * LAN_EXPERIMENTAL_MIN_SOURCE_RATIO),
+        )
+        if received < minimum_received or valid_format < minimum_valid:
+            source_failures.append(
+                f"{source['name']}: truncated or empty "
+                f"(received={received}, required={minimum_received}; "
+                f"valid={valid_format}, required={minimum_valid})"
+            )
+            continue
+        parsed.extend(source_parsed)
+
+    if len(source_failures) == len(sources) and all("unavailable" in item for item in source_failures):
         raise RuntimeError("all LAN Experimental sources are unavailable")
+    if source_failures:
+        raise RuntimeError("LAN Experimental source validation failed: " + "; ".join(source_failures))
     if not parsed:
         raise RuntimeError("LAN Experimental sources produced no valid VLESS configs")
 
@@ -1768,16 +1832,20 @@ def build_lan_experimental(
 
     unique_candidates: list[dict] = []
     seen_configs: dict[str, dict] = {}
+    seen_endpoints: dict[tuple[str, int, str], dict] = {}
     for proxy in country_candidates:
         source_id = proxy["_experimental_owner"]
-        key = canonical_proxy_config(proxy)
-        if key in seen_configs:
+        config_key = canonical_proxy_config(proxy)
+        endpoint_key = endpoint_identity_key(proxy)
+        existing = seen_configs.get(config_key) or seen_endpoints.get(endpoint_key)
+        if existing is not None:
             source_stats[source_id]["duplicates"] += 1
-            existing_sources = seen_configs[key].setdefault("_sources", [])
+            existing_sources = existing.setdefault("_sources", [])
             if source_id not in existing_sources:
                 existing_sources.append(source_id)
             continue
-        seen_configs[key] = proxy
+        seen_configs[config_key] = proxy
+        seen_endpoints[endpoint_key] = proxy
         unique_candidates.append(proxy)
 
     lan_config_keys = {canonical_proxy_config(proxy) for proxy in lan_global_proxies}
@@ -1808,12 +1876,16 @@ def build_lan_experimental(
         "total": len(experimental_proxies),
         "auto": len(config["proxy-groups"][0]["proxies"]),
         "lan_global_overlap": sum(item["lan_global_overlap"] for item in source_stats.values()),
-        "available_sources": available_sources,
+        "duplicates": sum(item["duplicates"] for item in source_stats.values()),
+        "available_sources": len(sources),
+        "updated": now,
+        "schema_version": LAN_EXPERIMENTAL_SCHEMA_VERSION,
     }
     return yaml_text, stats
 
 
 def atomic_write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
     try:
         temporary.write_text(text, encoding="utf-8", newline="\n")
@@ -1823,18 +1895,125 @@ def atomic_write_text(path: Path, text: str) -> None:
             temporary.unlink()
 
 
+def validate_experimental_stats(stats: dict, proxy_count: int | None = None) -> None:
+    if not isinstance(stats, dict):
+        raise RuntimeError("LAN Experimental statistics are not a mapping")
+    sources = stats.get("sources")
+    if not isinstance(sources, dict):
+        raise RuntimeError("LAN Experimental source statistics are missing")
+    missing_sources = EXPERIMENTAL_SOURCE_IDS - set(sources)
+    if missing_sources:
+        raise RuntimeError(f"LAN Experimental statistics miss sources: {sorted(missing_sources)}")
+    total = int(stats.get("total", -1))
+    auto = int(stats.get("auto", -1))
+    added = sum(int(sources[source_id].get("added", 0)) for source_id in EXPERIMENTAL_SOURCE_IDS)
+    duplicates = sum(int(sources[source_id].get("duplicates", 0)) for source_id in EXPERIMENTAL_SOURCE_IDS)
+    overlaps = sum(
+        int(sources[source_id].get("lan_global_overlap", 0))
+        for source_id in EXPERIMENTAL_SOURCE_IDS
+    )
+    if total <= 0 or auto != total or added != total:
+        raise RuntimeError(
+            f"LAN Experimental statistics are inconsistent: total={total}, AUTO={auto}, added={added}"
+        )
+    if int(stats.get("duplicates", duplicates)) != duplicates:
+        raise RuntimeError("LAN Experimental duplicate total is inconsistent")
+    if int(stats.get("lan_global_overlap", overlaps)) != overlaps:
+        raise RuntimeError("LAN Experimental overlap total is inconsistent")
+    if proxy_count is not None and total != proxy_count:
+        raise RuntimeError(
+            f"LAN Experimental statistics report {total} proxies, YAML contains {proxy_count}"
+        )
+
+
+def parse_experimental_stats_from_readme(path: Path = README_FILE) -> dict:
+    text = path.read_text(encoding="utf-8")
+
+    def status_value(label: str) -> int:
+        match = re.search(rf"^\| {re.escape(label)} \| `(\d+)` \|$", text, flags=re.MULTILINE)
+        if not match:
+            raise RuntimeError(f"README is missing LAN Experimental status: {label}")
+        return int(match.group(1))
+
+    source_stats: dict[str, dict] = {}
+    for source in EXPERIMENTAL_SOURCES:
+        row = next(
+            (line for line in text.splitlines() if line.startswith(f"| {source['name']} |")),
+            None,
+        )
+        if row is None:
+            raise RuntimeError(f"README is missing LAN Experimental source row: {source['name']}")
+        cells = [cell.strip().strip("`") for cell in row.strip().strip("|").split("|")]
+        if len(cells) != 9:
+            raise RuntimeError(f"README has an invalid LAN Experimental row: {source['name']}")
+        source_stats[source["id"]] = {
+            "last_updated": cells[2],
+            "received": int(cells[3]),
+            "valid_format": int(cells[4]),
+            "filtered": int(cells[5]),
+            "duplicates": int(cells[6]),
+            "lan_global_overlap": int(cells[7]),
+            "added": int(cells[8]),
+        }
+    stats = {
+        "schema_version": LAN_EXPERIMENTAL_SCHEMA_VERSION,
+        "sources": source_stats,
+        "total": status_value("LAN Experimental"),
+        "auto": status_value("LAN Experimental AUTO"),
+        "lan_global_overlap": status_value("Исключено пересечений Experimental с LAN Global"),
+        "duplicates": sum(item["duplicates"] for item in source_stats.values()),
+        "available_sources": len(EXPERIMENTAL_SOURCES),
+    }
+    validate_experimental_stats(stats)
+    return stats
+
+
+def load_experimental_stats(
+    path: Path = LAN_EXPERIMENTAL_STATS_FILE,
+    *,
+    strict: bool = False,
+) -> dict:
+    try:
+        stats = json.loads(path.read_text(encoding="utf-8"))
+        validate_experimental_stats(stats)
+        return stats
+    except Exception as exc:
+        if strict:
+            raise RuntimeError(f"could not load LAN Experimental statistics from {path}: {exc}") from exc
+        print(f"warning: {exc}; recovering LAN Experimental statistics from README", file=sys.stderr)
+        return parse_experimental_stats_from_readme()
+
+
+def write_experimental_stats(path: Path, stats: dict) -> None:
+    validate_experimental_stats(stats)
+    atomic_write_text(path, json.dumps(stats, ensure_ascii=False, indent=2) + "\n")
+
+
+def load_yaml_mapping(path: Path) -> dict:
+    try:
+        import yaml
+    except ImportError as exc:
+        raise RuntimeError("PyYAML is required for LAN Experimental candidate operations") from exc
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise RuntimeError(f"{path} does not contain a YAML mapping")
+    return data
+
+
 def write_lan_experimental_file(
     lan_global_proxies: list[dict],
     path: Path = LAN_EXPERIMENTAL_OUTPUT_FILE,
     sources: list[dict] | None = None,
     fetcher=None,
     now: str | None = None,
+    baseline_stats: dict | None = None,
 ) -> dict:
     yaml_text, stats = build_lan_experimental(
         lan_global_proxies,
         sources=sources,
         fetcher=fetcher,
         now=now,
+        baseline_stats=baseline_stats,
     )
     atomic_write_text(path, yaml_text)
     return stats
@@ -2132,12 +2311,72 @@ def experimental_source_table(experimental_stats: dict) -> str:
         stats = stats_by_source.get(source["id"], {})
         lines.append(
             f"| {source['name']} | [raw]({source['url']}) | "
-            f"`{source_published_label(source['id'])}` | "
+            f"`{stats.get('last_updated') or source_published_label(source['id'])}` | "
             f"`{stats.get('received', 0)}` | `{stats.get('valid_format', 0)}` | "
             f"`{stats.get('filtered', 0)}` | `{stats.get('duplicates', 0)}` | "
             f"`{stats.get('lan_global_overlap', 0)}` | `{stats.get('added', 0)}` |"
         )
     return "\n".join(lines)
+
+
+def experimental_readme_section(experimental_stats: dict) -> str:
+    validate_experimental_stats(experimental_stats)
+    experimental_sources_markdown = experimental_source_table(experimental_stats)
+    return f"""{LAN_EXPERIMENTAL_README_START}
+## LAN Experimental
+
+`LAN Experimental` собирается только из отдельного набора источников, исключает RU, `UNKNOWN`, непубличные адреса, заблокированные конфигурации, нормализованные дубли и совпадения `server + port + UUID` внутри Experimental и с актуальным `LAN Global`. Ни один экспериментальный источник не входит в рабочие группы источников.
+
+{experimental_sources_markdown}
+
+Всего серверов: `{experimental_stats['total']}`. В `AUTO`: `{experimental_stats['auto']}` (весь набор без лимита). Исключено дублей внутри Experimental: `{experimental_stats.get('duplicates', 0)}`. Новые узлы источников учитываются по первому появлению в порядке таблицы; повторы последующих источников отражаются как дубли.
+
+`AUTO` — обычная группа Mihomo [`url-test`](https://wiki.metacubex.one/ru/config/proxy-groups/url-test/) с `interval: 900`, `tolerance: 100`, `lazy: true`. Все узлы входят в группу, однако согласно [документации общих полей групп](https://wiki.metacubex.one/ru/config/proxy-groups/) `lazy: true` отключает проверки, пока группа не выбрана. После активации Mihomo проверяет задержку с заданным интервалом и выбирает доступный узел с учётом tolerance; это не гарантирует мгновенное переключение при каждом обрыве.
+
+На NanoPi R3S большой полный `AUTO` может заметно расходовать CPU, RAM, таблицу соединений и канал во время циклов health-check. Подписка не подключается к OpenClash автоматически; оцените нагрузку на своём размере списка перед постоянным использованием.
+{LAN_EXPERIMENTAL_README_END}"""
+
+
+def refresh_readme_experimental(
+    experimental_stats: dict,
+    path: Path = README_FILE,
+) -> None:
+    validate_experimental_stats(experimental_stats)
+    text = path.read_text(encoding="utf-8")
+    replacement = experimental_readme_section(experimental_stats)
+    marker_pattern = (
+        re.escape(LAN_EXPERIMENTAL_README_START)
+        + r".*?"
+        + re.escape(LAN_EXPERIMENTAL_README_END)
+    )
+    if re.search(marker_pattern, text, flags=re.DOTALL):
+        text = re.sub(marker_pattern, lambda _match: replacement, text, count=1, flags=re.DOTALL)
+    else:
+        legacy_pattern = r"## LAN Experimental\n.*?(?=\n## Маршрутизация по чёрным спискам)"
+        if not re.search(legacy_pattern, text, flags=re.DOTALL):
+            raise RuntimeError("README LAN Experimental section was not found")
+        text = re.sub(legacy_pattern, lambda _match: replacement, text, count=1, flags=re.DOTALL)
+
+    status_values = {
+        "LAN Experimental": int(experimental_stats["total"]),
+        "LAN Experimental AUTO": int(experimental_stats["auto"]),
+        "Исключено пересечений Experimental с LAN Global": int(
+            experimental_stats["lan_global_overlap"]
+        ),
+    }
+    for label, value in status_values.items():
+        pattern = rf"^\| {re.escape(label)} \| `\d+` \|$"
+        replacement_row = f"| {label} | `{value}` |"
+        text, replacements = re.subn(
+            pattern,
+            lambda _match, row=replacement_row: row,
+            text,
+            count=1,
+            flags=re.MULTILINE,
+        )
+        if replacements != 1:
+            raise RuntimeError(f"README status row was not found: {label}")
+    atomic_write_text(path, text)
 
 
 def stats_for(proxies: list[dict]) -> dict[str, int]:
@@ -2589,13 +2828,8 @@ def write_final_readme(
         global_5k_stats,
         lan_5k_stats,
     )
-    experimental_stats = experimental_stats or {
-        "sources": {},
-        "total": 0,
-        "auto": 0,
-        "lan_global_overlap": 0,
-    }
-    experimental_sources_markdown = experimental_source_table(experimental_stats)
+    experimental_stats = experimental_stats or load_experimental_stats()
+    validate_experimental_stats(experimental_stats)
     text = f"""# pale-signal подписки
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
@@ -2652,17 +2886,7 @@ pale-signal автоматически собирает VLESS-подписки �
 
 Для обычного домашнего или офисного проводного подключения используйте `LAN 5K` или полную `LAN Global`. Обе подписки используют одинаковые LAN-пулы и исключают узлы, специально собранные под белые списки и CIDR-ограничения мобильных операторов; `LAN Global` отличается только отсутствием лимита 5000.
 
-## LAN Experimental
-
-`LAN Experimental` собирается только из отдельного набора источников, исключает RU, `UNKNOWN`, непубличные адреса, заблокированные конфигурации, нормализованные дубли и совпадения `server + port + UUID` с актуальным `LAN Global`. Ни один экспериментальный источник не входит в рабочие группы источников.
-
-{experimental_sources_markdown}
-
-Всего серверов: `{experimental_stats['total']}`. В `AUTO`: `{experimental_stats['auto']}` (весь набор без лимита). Новые узлы источников учитываются по первому появлению в порядке таблицы; повторы последующих источников отражаются как дубли.
-
-`AUTO` — обычная группа Mihomo [`url-test`](https://wiki.metacubex.one/ru/config/proxy-groups/url-test/) с `interval: 900`, `tolerance: 100`, `lazy: true`. Все узлы входят в группу, однако согласно [документации общих полей групп](https://wiki.metacubex.one/ru/config/proxy-groups/) `lazy: true` отключает проверки, пока группа не выбрана. После активации Mihomo проверяет задержку с заданным интервалом и выбирает доступный узел с учётом tolerance; это не гарантирует мгновенное переключение при каждом обрыве.
-
-На NanoPi R3S большой полный `AUTO` может заметно расходовать CPU, RAM, таблицу соединений и канал во время циклов health-check. Подписка не подключается к OpenClash автоматически; оцените нагрузку на своём размере списка перед постоянным использованием.
+{experimental_readme_section(experimental_stats)}
 
 ## Маршрутизация по чёрным спискам
 
@@ -2718,6 +2942,77 @@ pale-signal автоматически собирает VLESS-подписки �
 
 def msk_timestamp() -> str:
     return dt.datetime.now(MSK).replace(microsecond=0).strftime("%Y-%m-%d %H:%M:%S МСК")
+
+
+def validate_experimental_artifacts(
+    experimental_path: Path,
+    lan_global_path: Path,
+    stats_path: Path,
+    readme_path: Path | None = None,
+) -> tuple[dict, dict]:
+    experimental = load_yaml_mapping(experimental_path)
+    lan_global = load_yaml_mapping(lan_global_path)
+    lan_global_proxies = lan_global.get("proxies")
+    if not isinstance(lan_global_proxies, list) or not lan_global_proxies:
+        raise RuntimeError("LAN Global contains no proxies")
+    validate_lan_experimental_config(experimental, lan_global_proxies)
+    proxies = experimental["proxies"]
+    stats = load_experimental_stats(stats_path, strict=True)
+    validate_experimental_stats(stats, len(proxies))
+    text = experimental_path.read_text(encoding="utf-8")
+    if re.search(rf"^# Servers: {len(proxies)}$", text, flags=re.MULTILINE) is None:
+        raise RuntimeError("LAN Experimental metadata server count is inconsistent")
+    if readme_path is not None:
+        readme = readme_path.read_text(encoding="utf-8")
+        if experimental_readme_section(stats) not in readme:
+            raise RuntimeError("README LAN Experimental statistics do not match published statistics")
+    return experimental, stats
+
+
+def build_experimental_candidate() -> int:
+    lan_global = load_yaml_mapping(LAN_GLOBAL_OUTPUT_FILE)
+    lan_global_proxies = lan_global.get("proxies")
+    if not isinstance(lan_global_proxies, list) or not lan_global_proxies:
+        raise RuntimeError("LAN Global contains no proxies")
+    baseline_stats = load_experimental_stats()
+    yaml_text, stats = build_lan_experimental(
+        lan_global_proxies,
+        now=msk_timestamp(),
+        baseline_stats=baseline_stats,
+    )
+    validate_experimental_stats(stats, stats["total"])
+    atomic_write_text(LAN_EXPERIMENTAL_CANDIDATE_FILE, yaml_text)
+    write_experimental_stats(LAN_EXPERIMENTAL_CANDIDATE_STATS_FILE, stats)
+    validate_experimental_artifacts(
+        LAN_EXPERIMENTAL_CANDIDATE_FILE,
+        LAN_GLOBAL_OUTPUT_FILE,
+        LAN_EXPERIMENTAL_CANDIDATE_STATS_FILE,
+    )
+    print(
+        f"wrote LAN Experimental candidate with {stats['total']} proxies/AUTO, "
+        f"duplicates={stats['duplicates']}, LAN Global overlaps removed={stats['lan_global_overlap']}"
+    )
+    return 0
+
+
+def promote_experimental_candidate() -> int:
+    _config, stats = validate_experimental_artifacts(
+        LAN_EXPERIMENTAL_CANDIDATE_FILE,
+        LAN_GLOBAL_OUTPUT_FILE,
+        LAN_EXPERIMENTAL_CANDIDATE_STATS_FILE,
+    )
+    candidate_text = LAN_EXPERIMENTAL_CANDIDATE_FILE.read_text(encoding="utf-8")
+    atomic_write_text(LAN_EXPERIMENTAL_OUTPUT_FILE, candidate_text)
+    write_experimental_stats(LAN_EXPERIMENTAL_STATS_FILE, stats)
+    refresh_readme_experimental(stats)
+    validate_experimental_artifacts(
+        LAN_EXPERIMENTAL_OUTPUT_FILE,
+        LAN_GLOBAL_OUTPUT_FILE,
+        LAN_EXPERIMENTAL_STATS_FILE,
+        README_FILE,
+    )
+    print(f"promoted validated LAN Experimental candidate with {stats['total']} proxies/AUTO")
+    return 0
 
 
 def main(
@@ -2892,9 +3187,12 @@ def main(
         raise RuntimeError("empty BS Safe YAML output")
 
     now = msk_timestamp()
-    lan_experimental_yaml_text, experimental_stats = build_lan_experimental(
-        lan_global_proxies,
-        now=now,
+    # Experimental has a separate candidate/validation/promotion lifecycle. Loading
+    # its last-known-good statistics is read-only and cannot block production source work.
+    experimental_stats = load_experimental_stats()
+    existing_experimental_text = LAN_EXPERIMENTAL_OUTPUT_FILE.read_text(
+        encoding="utf-8",
+        errors="replace",
     )
     changes = {
         "all": compare_with_existing(OUTPUT_FILE, yaml_text),
@@ -2905,7 +3203,7 @@ def main(
         "lan_global": compare_with_existing(LAN_GLOBAL_OUTPUT_FILE, lan_global_yaml_text),
         "lan_experimental": compare_with_existing(
             LAN_EXPERIMENTAL_OUTPUT_FILE,
-            lan_experimental_yaml_text,
+            existing_experimental_text,
         ),
         "bs_safe": compare_with_existing(BS_SAFE_OUTPUT_FILE, bs_safe_yaml_text),
     }
@@ -2928,7 +3226,6 @@ def main(
     GLOBAL_5K_OUTPUT_FILE.write_text(global_5k_yaml_text, encoding="utf-8", newline="\n")
     LAN_5K_OUTPUT_FILE.write_text(lan_5k_yaml_text, encoding="utf-8", newline="\n")
     LAN_GLOBAL_OUTPUT_FILE.write_text(lan_global_yaml_text, encoding="utf-8", newline="\n")
-    atomic_write_text(LAN_EXPERIMENTAL_OUTPUT_FILE, lan_experimental_yaml_text)
     GLOBAL_NON_STABLE_OUTPUT_FILE.write_text(
         global_non_stable_yaml_text,
         encoding="utf-8",
@@ -2966,13 +3263,23 @@ def main(
 if __name__ == "__main__":
     try:
         arguments = set(sys.argv[1:])
-        known_modes = {"--non-stable-only", "--lan-only", "--bs-safe-only"}
+        known_modes = {
+            "--non-stable-only",
+            "--lan-only",
+            "--bs-safe-only",
+            "--experimental-only",
+            "--promote-experimental",
+        }
         unknown_arguments = arguments - known_modes
         if unknown_arguments:
             raise RuntimeError(f"unknown arguments: {sorted(unknown_arguments)}")
         selected_modes = arguments & known_modes
         if len(selected_modes) > 1:
             raise RuntimeError(f"subscription-only modes cannot be combined: {sorted(selected_modes)}")
+        if "--experimental-only" in arguments:
+            raise SystemExit(build_experimental_candidate())
+        if "--promote-experimental" in arguments:
+            raise SystemExit(promote_experimental_candidate())
         raise SystemExit(
             main(
                 non_stable_only="--non-stable-only" in arguments,

@@ -35,6 +35,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--experimental", type=Path, default=builder.LAN_EXPERIMENTAL_OUTPUT_FILE)
     parser.add_argument("--lan-global", type=Path, default=builder.LAN_GLOBAL_OUTPUT_FILE)
+    parser.add_argument("--stats", type=Path, default=builder.LAN_EXPERIMENTAL_STATS_FILE)
+    parser.add_argument("--readme", type=Path)
     args = parser.parse_args()
 
     experimental_text, experimental = load_config(args.experimental)
@@ -46,6 +48,13 @@ def main() -> int:
     builder.validate_lan_experimental_config(experimental, lan_global_proxies)
     proxies = experimental["proxies"]
     require_metadata(experimental_text, len(proxies))
+    stats = builder.load_experimental_stats(args.stats, strict=True)
+    builder.validate_experimental_stats(stats, len(proxies))
+
+    if args.readme is not None:
+        readme = args.readme.read_text(encoding="utf-8")
+        if builder.experimental_readme_section(stats) not in readme:
+            raise RuntimeError("README LAN Experimental statistics do not match the YAML/statistics")
 
     if any("[UNKNOWN]" in str(proxy.get("name", "")) for proxy in proxies):
         raise RuntimeError("LAN Experimental contains UNKNOWN nodes")
@@ -54,6 +63,7 @@ def main() -> int:
     print(
         "LAN Experimental verification passed: "
         f"servers={len(proxies)}, AUTO={len(group_map['AUTO']['proxies'])}, "
+        f"duplicates_removed={stats['duplicates']}, "
         f"LAN Global={len(lan_global_proxies)}, intersections=0"
     )
     return 0

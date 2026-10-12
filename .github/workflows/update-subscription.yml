@@ -8,7 +8,10 @@ on:
     paths:
       - ".github/workflows/update-subscription.yml"
       - "scripts/build_subscription.py"
+      - "scripts/test_build_subscription.py"
+      - "scripts/verify_lan_experimental.py"
       - "scripts/validate_openclash_module.py"
+      - "lan-experimental-stats.json"
       - "openclash/**"
   schedule:
     # GitHub cron uses UTC: 06:00 and 18:00 UTC = 09:00 and 21:00 MSK.
@@ -87,30 +90,77 @@ jobs:
           echo "- OpenClash merged configs: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- Custom rule providers: passed" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Validate LAN Experimental independently
+      - name: Build LAN Experimental candidate independently
+        id: experimental_build
+        continue-on-error: true
+        timeout-minutes: 20
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/build_subscription.py --experimental-only
+
+      - name: Validate LAN Experimental candidate independently
+        id: experimental_validation
+        if: steps.experimental_build.outcome == 'success'
+        continue-on-error: true
         run: |
           python scripts/verify_lan_experimental.py \
-            --experimental subscription-lan-experimental.yaml \
-            --lan-global subscription-lan-global.yaml
+            --experimental .tools/lan-experimental-candidate/subscription-lan-experimental.yaml \
+            --lan-global subscription-lan-global.yaml \
+            --stats .tools/lan-experimental-candidate/lan-experimental-stats.json
           .tools/mihomo/mihomo -t \
-            -f subscription-lan-experimental.yaml \
+            -f .tools/lan-experimental-candidate/subscription-lan-experimental.yaml \
             -d .tools/mihomo/home
           mkdir -p .tools/openclash-experimental
           python scripts/validate_openclash_module.py \
             --module openclash/blacklist-routing.conf \
             --output-dir .tools/openclash-experimental \
-            subscription-lan-experimental.yaml
+            .tools/lan-experimental-candidate/subscription-lan-experimental.yaml
           .tools/mihomo/mihomo -t \
             -f .tools/openclash-experimental/subscription-lan-experimental.yaml \
+            -d .tools/mihomo/home
+
+      - name: Promote validated LAN Experimental candidate
+        id: experimental_promotion
+        if: >-
+          steps.experimental_build.outcome == 'success' &&
+          steps.experimental_validation.outcome == 'success'
+        run: python scripts/build_subscription.py --promote-experimental
+
+      - name: Validate saved LAN Experimental and publication metadata
+        run: |
+          if [ "${{ steps.experimental_promotion.outcome }}" = "success" ]; then
+            comparison_lan="subscription-lan-global.yaml"
+            experimental_status="new candidate promoted"
+          else
+            git show HEAD:subscription-lan-global.yaml > .tools/lan-global-last-known-good.yaml
+            comparison_lan=".tools/lan-global-last-known-good.yaml"
+            experimental_status="candidate rejected; retained last-known-good"
+          fi
+          python scripts/verify_lan_experimental.py \
+            --experimental subscription-lan-experimental.yaml \
+            --lan-global "$comparison_lan" \
+            --stats lan-experimental-stats.json \
+            --readme README.md
+          .tools/mihomo/mihomo -t \
+            -f subscription-lan-experimental.yaml \
+            -d .tools/mihomo/home
+          mkdir -p .tools/openclash-experimental-saved
+          python scripts/validate_openclash_module.py \
+            --module openclash/blacklist-routing.conf \
+            --output-dir .tools/openclash-experimental-saved \
+            subscription-lan-experimental.yaml
+          .tools/mihomo/mihomo -t \
+            -f .tools/openclash-experimental-saved/subscription-lan-experimental.yaml \
             -d .tools/mihomo/home
           experimental_count="$(python -c 'import yaml; data=yaml.safe_load(open("subscription-lan-experimental.yaml", encoding="utf-8")); print(len(data["proxies"]))')"
           auto_count="$(python -c 'import yaml; data=yaml.safe_load(open("subscription-lan-experimental.yaml", encoding="utf-8")); groups={group["name"]: group for group in data["proxy-groups"]}; print(len(groups["AUTO"]["proxies"]))')"
           echo "### LAN Experimental" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Status: $experimental_status" >> "$GITHUB_STEP_SUMMARY"
           echo "- Servers: $experimental_count" >> "$GITHUB_STEP_SUMMARY"
           echo "- AUTO entries: $auto_count (all servers)" >> "$GITHUB_STEP_SUMMARY"
-          echo "- LAN Global intersections: 0" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Intersections with validated LAN snapshot: 0" >> "$GITHUB_STEP_SUMMARY"
           echo "- Mihomo config test: passed" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Unavailable-source preservation test: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- README/statistics consistency: passed" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Check checkout freshness
         id: freshness
@@ -130,7 +180,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md update-history.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml
+          git add README.md update-history.json lan-experimental-stats.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else

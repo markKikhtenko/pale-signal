@@ -32,9 +32,9 @@ pale-signal автоматически собирает VLESS-подписки �
 | Global 5K | `2540` |
 | LAN 5K | `5000` |
 | LAN Global | `5635` |
-| LAN Experimental | `1538` |
-| LAN Experimental AUTO | `1538` |
-| Исключено пересечений Experimental с LAN Global | `718` |
+| LAN Experimental | `1463` |
+| LAN Experimental AUTO | `1463` |
+| Исключено пересечений Experimental с LAN Global | `361` |
 | LAN 5K из VestraNet | `1383` |
 | Global Non-Stable MANUAL | `2540` |
 | Global Non-Stable AUTO | `1846` |
@@ -54,22 +54,23 @@ pale-signal автоматически собирает VLESS-подписки �
 
 Для обычного домашнего или офисного проводного подключения используйте `LAN 5K` или полную `LAN Global`. Обе подписки используют одинаковые LAN-пулы и исключают узлы, специально собранные под белые списки и CIDR-ограничения мобильных операторов; `LAN Global` отличается только отсутствием лимита 5000.
 
+<!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-`LAN Experimental` собирается только из отдельного набора источников, исключает RU, `UNKNOWN`, непубличные адреса, заблокированные конфигурации, нормализованные дубли и совпадения `server + port + UUID` с актуальным `LAN Global`. Ни один экспериментальный источник не входит в рабочие группы источников.
+`LAN Experimental` собирается только из отдельного набора источников, исключает RU, `UNKNOWN`, непубличные адреса, заблокированные конфигурации, нормализованные дубли и совпадения `server + port + UUID` внутри Experimental и с актуальным `LAN Global`. Ни один экспериментальный источник не входит в рабочие группы источников.
 
 | Источник | URL | Обновление источника | Получено VLESS | Прошло формат | Отфильтровано | Дубли Experimental | Совпало с LAN Global | Добавлено новых |
 |----------|-----|---------------------|-----------------|----------------|----------------|---------------------|----------------------|-----------------|
-| MorpheusAdam Best | [raw](https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt) | `2026-10-11 21:27 МСК` | `1610` | `1517` | `84` | `0` | `44` | `1389` |
-| Mehrtat VLESS | [raw](https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt) | `2026-10-12 09:47 МСК` | `405` | `400` | `25` | `0` | `337` | `38` |
-| Au1rxx Verified | [raw](https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt) | `2026-10-12 17:05 МСК` | `780` | `760` | `2` | `310` | `337` | `111` |
+| MorpheusAdam Best | [raw](https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt) | `2026-10-11 21:27 МСК` | `1610` | `1517` | `86` | `0` | `44` | `1387` |
+| Mehrtat VLESS | [raw](https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt) | `2026-10-12 19:19 МСК` | `299` | `297` | `22` | `4` | `254` | `17` |
+| Au1rxx Verified | [raw](https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt) | `2026-10-12 19:04 МСК` | `826` | `810` | `0` | `688` | `63` | `59` |
 
-Всего серверов: `1538`. В `AUTO`: `1538` (весь набор без лимита). Новые узлы источников учитываются по первому появлению в порядке таблицы; повторы последующих источников отражаются как дубли.
+Всего серверов: `1463`. В `AUTO`: `1463` (весь набор без лимита). Исключено дублей внутри Experimental: `692`. Новые узлы источников учитываются по первому появлению в порядке таблицы; повторы последующих источников отражаются как дубли.
 
 `AUTO` — обычная группа Mihomo [`url-test`](https://wiki.metacubex.one/ru/config/proxy-groups/url-test/) с `interval: 900`, `tolerance: 100`, `lazy: true`. Все узлы входят в группу, однако согласно [документации общих полей групп](https://wiki.metacubex.one/ru/config/proxy-groups/) `lazy: true` отключает проверки, пока группа не выбрана. После активации Mihomo проверяет задержку с заданным интервалом и выбирает доступный узел с учётом tolerance; это не гарантирует мгновенное переключение при каждом обрыве.
 
 На NanoPi R3S большой полный `AUTO` может заметно расходовать CPU, RAM, таблицу соединений и канал во время циклов health-check. Подписка не подключается к OpenClash автоматически; оцените нагрузку на своём размере списка перед постоянным использованием.
-
+<!-- LAN-EXPERIMENTAL:END -->
 ## Маршрутизация по чёрным спискам
 
 Отдельный [Overwrite Module](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) оставляет обычный трафик на `DIRECT`, а ресурсы из автоматически обновляемых Re:filter-списков направляет в существующую группу `PROXY`. Пользовательские исключения находятся в `openclash/rules/custom-direct-*.yaml`, а принудительное проксирование — в `openclash/rules/custom-proxy-*.yaml`.
