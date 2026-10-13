@@ -1,12 +1,12 @@
 # LAN Experimental
-# Version: 1.20261013.165434
+# Version: 1.20261013.170309
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-13 16:54:33 МСК
+# Updated: 2026-10-13 17:03:09 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
 #   - Au1rxx Verified: https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt
-# Servers: 1418
+# Servers: 1409
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -18017,25 +18017,6 @@ proxies:
     ws-opts:
       path: "/?ed="
   -
-    name: "@DeltaKroneckerGithub 1290"
-    type: "vless"
-    server: "103.31.4.140"
-    port: 8443
-    uuid: "cc3806e9-a9df-4902-ad96-c56b6a171656"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "panel.singoshop.ir"
-    client-fingerprint: "chrome"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "panel.singoshop.ir"
-  -
     name: "@DeltaKroneckerGithub 1292"
     type: "vless"
     server: "104.27.203.169"
@@ -20451,22 +20432,6 @@ proxies:
       headers:
         Host: "us3.rtacg.com"
   -
-    name: "@DeltaKroneckerGithub 1475"
-    type: "vless"
-    server: "141.101.121.196"
-    port: 443
-    uuid: "2bcfbfba-b446-4ad5-93ad-72af9e008f61"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "blackshadow.dpdns.org"
-    skip-cert-verify: true
-    ws-opts:
-      path: "/44.209.52.7-443"
-      headers:
-        Host: "blackshadow.dpdns.org"
-  -
     name: "@DeltaKroneckerGithub 1476"
     type: "vless"
     server: "190.93.247.155"
@@ -20837,22 +20802,6 @@ proxies:
       public-key: "ztQ8VYq_dVDc3x-QM8LXjup2161CirYrIBE1F7loVzQ"
       short-id: "6772eb2b7a"
   -
-    name: "vless-1793402557"
-    type: "vless"
-    server: "31.77.29.47"
-    port: 443
-    uuid: "9ee57d03-dcf5-488b-aff7-305301879353"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "jp-akn-1.movietop24.site"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "ZrHDiON568oDDRIl0XXBL5kBK5bNnkadKFzt6UYIoUs"
-      short-id: "ee2fb8a902f1fa2b"
-  -
     name: "vless-1544826432"
     type: "vless"
     server: "104.18.37.127"
@@ -20951,34 +20900,6 @@ proxies:
     reality-opts:
       public-key: "hTweFDvbSucrGERtiiwDfoqD3vo_Z9cuaqboff3FTXQ"
   -
-    name: "vless-1680311954"
-    type: "vless"
-    server: "129.150.51.127"
-    port: 49289
-    uuid: "0590ab38-cb22-41d3-8312-6f396a5cec58"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "www.microsoft.com"
-    client-fingerprint: "chrome"
-  -
-    name: "vless-1777039004"
-    type: "vless"
-    server: "154.21.203.106"
-    port: 51279
-    uuid: "57beeeb0-03fc-4fc9-94da-7604488a7134"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.tesla.com"
-    client-fingerprint: "random"
-    reality-opts:
-      public-key: "f6Tj8-uvWsLv3V-lGLuPciArp5oKqUImBg-U7-WJ-0A"
-      short-id: "bb82c8"
-  -
     name: "vless-1665784892"
     type: "vless"
     server: "45.63.53.81"
@@ -21012,22 +20933,6 @@ proxies:
     reality-opts:
       public-key: "ZvqA2ahoKgy2MelXnu7ImC8pgbu4VoLz5U3EuW2AjQ8"
       short-id: "657a8281"
-  -
-    name: "vless-1781602546"
-    type: "vless"
-    server: "39.109.110.80"
-    port: 27916
-    uuid: "57beeeb0-03fc-4fc9-94da-7604488a7134"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "cdn-dynmedia-1.microsoft.com"
-    client-fingerprint: "random"
-    reality-opts:
-      public-key: "ztQ8VYq_dVDc3x-QM8LXjup2161CirYrIBE1F7loVzQ"
-      short-id: "6772eb2b7a"
   -
     name: "vless-1636626766"
     type: "vless"
@@ -21073,38 +20978,6 @@ proxies:
     servername: "ty986gfazs.cainiaohub.xyz"
     ws-opts:
       path: "/81574b6b-c9d7-44a0-b83d-dad56e8cb530"
-  -
-    name: "vless-1790829695"
-    type: "vless"
-    server: "31.58.95.10"
-    port: 443
-    uuid: "c6e3c24c-ce20-4ad5-8c8c-68cb05890ea8"
-    network: "grpc"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "de-gdd-1.unturned-rust-dead.lol"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "aYz4_13W8gtAXGBrWeqJXtExahAJ9kUPDapqeyAlYCk"
-    grpc-opts:
-      grpc-service-name: "gdd-grpc"
-  -
-    name: "vless-1162311187"
-    type: "vless"
-    server: "172.67.217.240"
-    port: 443
-    uuid: "4e4f1f70-5e56-4a76-bb9d-db087f4690c4"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "jp3.yohototo.top"
-    client-fingerprint: "android"
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
   -
     name: "vless-2323714"
     type: "vless"
@@ -21159,22 +21032,6 @@ proxies:
       path: "/seaseus"
       headers:
         Host: "seaseus.zoomgov.pp.ua"
-  -
-    name: "vless-1748616601"
-    type: "vless"
-    server: "154.40.55.185"
-    port: 443
-    uuid: "52919204-4ed9-42c8-97a0-0f01d007f898"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.oracle.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "XY0OTrgnRWxHbqBC8u4qFWvZakjNZY83AAnL_lwHu1M"
-      short-id: "e726fb"
 proxy-groups:
   -
     name: "AUTO"
@@ -22386,7 +22243,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 1287"
       - "@DeltaKroneckerGithub 1288"
       - "@DeltaKroneckerGithub 1289"
-      - "@DeltaKroneckerGithub 1290"
       - "@DeltaKroneckerGithub 1292"
       - "@DeltaKroneckerGithub 1293"
       - "@DeltaKroneckerGithub 1294"
@@ -22551,7 +22407,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 1472"
       - "@DeltaKroneckerGithub 1473"
       - "@DeltaKroneckerGithub 1474"
-      - "@DeltaKroneckerGithub 1475"
       - "@DeltaKroneckerGithub 1476"
       - "@DeltaKroneckerGithub 1477"
       - "@DeltaKroneckerGithub 1478"
@@ -22576,28 +22431,21 @@ proxy-groups:
       - "vless-1636626764"
       - "vless-1663154502"
       - "vless-1772308905"
-      - "vless-1793402557"
       - "vless-1544826432"
       - "vless-1663152503"
       - "vless-1632449710"
       - "vless-1782532400"
       - "vless-825595682"
       - "vless-1790446053"
-      - "vless-1680311954"
-      - "vless-1777039004"
       - "vless-1665784892"
       - "vless-1786729700"
-      - "vless-1781602546"
       - "vless-1636626766"
       - "vless-1787683004"
       - "vless-1459596948"
-      - "vless-1790829695"
-      - "vless-1162311187"
       - "vless-2323714"
       - "vless-1709236004"
       - "vless-2299770"
       - "vless-1792667455"
-      - "vless-1748616601"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -23812,7 +23660,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 1287"
       - "@DeltaKroneckerGithub 1288"
       - "@DeltaKroneckerGithub 1289"
-      - "@DeltaKroneckerGithub 1290"
       - "@DeltaKroneckerGithub 1292"
       - "@DeltaKroneckerGithub 1293"
       - "@DeltaKroneckerGithub 1294"
@@ -23977,7 +23824,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 1472"
       - "@DeltaKroneckerGithub 1473"
       - "@DeltaKroneckerGithub 1474"
-      - "@DeltaKroneckerGithub 1475"
       - "@DeltaKroneckerGithub 1476"
       - "@DeltaKroneckerGithub 1477"
       - "@DeltaKroneckerGithub 1478"
@@ -24002,28 +23848,21 @@ proxy-groups:
       - "vless-1636626764"
       - "vless-1663154502"
       - "vless-1772308905"
-      - "vless-1793402557"
       - "vless-1544826432"
       - "vless-1663152503"
       - "vless-1632449710"
       - "vless-1782532400"
       - "vless-825595682"
       - "vless-1790446053"
-      - "vless-1680311954"
-      - "vless-1777039004"
       - "vless-1665784892"
       - "vless-1786729700"
-      - "vless-1781602546"
       - "vless-1636626766"
       - "vless-1787683004"
       - "vless-1459596948"
-      - "vless-1790829695"
-      - "vless-1162311187"
       - "vless-2323714"
       - "vless-1709236004"
       - "vless-2299770"
       - "vless-1792667455"
-      - "vless-1748616601"
   -
     name: "PROXY"
     type: "select"
