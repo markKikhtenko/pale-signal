@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-10645-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-9527-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo и OpenClash.
 
-**Последнее обновление:** `2026-10-12 20:23:17 МСК`
+**Последнее обновление:** `2026-10-13 03:10:25 МСК`
 
 ## Подписки
 
@@ -26,16 +26,16 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `10645` |
-| Россия | `3070` |
-| Global | `7575` |
-| Global 5K | `2810` |
+| Всего серверов | `9527` |
+| Россия | `2797` |
+| Global | `6730` |
+| Global 5K | `1710` |
 | LAN 5K | `5000` |
-| LAN Global | `5800` |
+| LAN Global | `5922` |
 | LAN Experimental | `1435` |
 | LAN Experimental AUTO | `1435` |
 | Исключено пересечений Experimental с LAN Global | `394` |
-| BS Safe MANUAL | `2404` |
+| BS Safe MANUAL | `2031` |
 | BS Safe AUTO | `50` |
 
 <!-- LAN-EXPERIMENTAL:START -->
