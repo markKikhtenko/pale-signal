@@ -126,19 +126,20 @@ jobs:
           steps.experimental_validation.outcome == 'success'
         run: python scripts/build_subscription.py --promote-experimental
 
+      - name: Reconcile retained LAN Experimental with current LAN Global
+        if: steps.experimental_promotion.outcome != 'success'
+        run: python scripts/build_subscription.py --reconcile-experimental
+
       - name: Validate saved LAN Experimental and publication metadata
         run: |
           if [ "${{ steps.experimental_promotion.outcome }}" = "success" ]; then
-            comparison_lan="subscription-lan-global.yaml"
             experimental_status="new candidate promoted"
           else
-            git show HEAD:subscription-lan-global.yaml > .tools/lan-global-last-known-good.yaml
-            comparison_lan=".tools/lan-global-last-known-good.yaml"
-            experimental_status="candidate rejected; retained last-known-good"
+            experimental_status="candidate rejected; retained set reconciled with current LAN Global"
           fi
           python scripts/verify_lan_experimental.py \
             --experimental subscription-lan-experimental.yaml \
-            --lan-global "$comparison_lan" \
+            --lan-global subscription-lan-global.yaml \
             --stats lan-experimental-stats.json \
             --readme README.md
           .tools/mihomo/mihomo -t \

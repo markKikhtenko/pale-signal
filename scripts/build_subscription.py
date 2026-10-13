@@ -1702,10 +1702,15 @@ def validate_lan_experimental_config(config: dict, lan_global_proxies: list[dict
             raise RuntimeError("LAN Experimental intersects LAN Global")
 
 
-def experimental_metadata(yaml_text: str, now: str, proxy_count: int) -> str:
+def experimental_metadata(
+    yaml_text: str,
+    now: str,
+    proxy_count: int,
+    existing_path: Path = LAN_EXPERIMENTAL_OUTPUT_FILE,
+) -> str:
     created = now
-    if LAN_EXPERIMENTAL_OUTPUT_FILE.exists():
-        existing = LAN_EXPERIMENTAL_OUTPUT_FILE.read_text(encoding="utf-8", errors="replace")
+    if existing_path.exists():
+        existing = existing_path.read_text(encoding="utf-8", errors="replace")
         match = re.search(r"^# Created: (.+)$", existing, flags=re.MULTILINE)
         if match:
             created = match.group(1).strip()
@@ -1906,19 +1911,21 @@ def validate_experimental_stats(stats: dict, proxy_count: int | None = None) -> 
         raise RuntimeError(f"LAN Experimental statistics miss sources: {sorted(missing_sources)}")
     total = int(stats.get("total", -1))
     auto = int(stats.get("auto", -1))
+    retained_pruned = int(stats.get("retained_pruned", 0))
     added = sum(int(sources[source_id].get("added", 0)) for source_id in EXPERIMENTAL_SOURCE_IDS)
     duplicates = sum(int(sources[source_id].get("duplicates", 0)) for source_id in EXPERIMENTAL_SOURCE_IDS)
     overlaps = sum(
         int(sources[source_id].get("lan_global_overlap", 0))
         for source_id in EXPERIMENTAL_SOURCE_IDS
     )
-    if total <= 0 or auto != total or added != total:
+    if retained_pruned < 0 or total <= 0 or auto != total or added - retained_pruned != total:
         raise RuntimeError(
-            f"LAN Experimental statistics are inconsistent: total={total}, AUTO={auto}, added={added}"
+            "LAN Experimental statistics are inconsistent: "
+            f"total={total}, AUTO={auto}, added={added}, retained_pruned={retained_pruned}"
         )
     if int(stats.get("duplicates", duplicates)) != duplicates:
         raise RuntimeError("LAN Experimental duplicate total is inconsistent")
-    if int(stats.get("lan_global_overlap", overlaps)) != overlaps:
+    if int(stats.get("lan_global_overlap", overlaps + retained_pruned)) != overlaps + retained_pruned:
         raise RuntimeError("LAN Experimental overlap total is inconsistent")
     if proxy_count is not None and total != proxy_count:
         raise RuntimeError(
@@ -2324,7 +2331,7 @@ def experimental_readme_section(experimental_stats: dict) -> str:
     return f"""{LAN_EXPERIMENTAL_README_START}
 ## LAN Experimental
 
-Изолированная тестовая подписка: `{experimental_stats['total']}` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия.
+Изолированная тестовая подписка: `{experimental_stats['total']}` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
 {LAN_EXPERIMENTAL_README_END}"""
 
 
@@ -2950,6 +2957,82 @@ def promote_experimental_candidate() -> int:
     return 0
 
 
+def reconcile_retained_experimental(
+    experimental_path: Path = LAN_EXPERIMENTAL_OUTPUT_FILE,
+    lan_global_path: Path = LAN_GLOBAL_OUTPUT_FILE,
+    stats_path: Path = LAN_EXPERIMENTAL_STATS_FILE,
+    readme_path: Path = README_FILE,
+    now: str | None = None,
+) -> int:
+    """Keep the last good Experimental set while removing new LAN overlaps."""
+    experimental = load_yaml_mapping(experimental_path)
+    lan_global = load_yaml_mapping(lan_global_path)
+    proxies = experimental.get("proxies")
+    lan_global_proxies = lan_global.get("proxies")
+    if not isinstance(proxies, list) or not proxies:
+        raise RuntimeError("retained LAN Experimental contains no proxies")
+    if not isinstance(lan_global_proxies, list) or not lan_global_proxies:
+        raise RuntimeError("LAN Global contains no proxies")
+
+    stats = load_experimental_stats(stats_path, strict=True)
+    validate_experimental_stats(stats, len(proxies))
+    lan_config_keys = {canonical_proxy_config(proxy) for proxy in lan_global_proxies}
+    lan_endpoint_keys = {endpoint_identity_key(proxy) for proxy in lan_global_proxies}
+    retained = [
+        proxy
+        for proxy in proxies
+        if canonical_proxy_config(proxy) not in lan_config_keys
+        and endpoint_identity_key(proxy) not in lan_endpoint_keys
+    ]
+    removed = len(proxies) - len(retained)
+    if not retained:
+        raise RuntimeError("retained LAN Experimental is empty after LAN Global reconciliation")
+
+    if removed:
+        now = msk_timestamp() if now is None else now
+        config = build_config(retained)
+        validate_lan_experimental_config(config, lan_global_proxies)
+        yaml_text = "\n".join(dump_yaml(config)) + "\n"
+        yaml_text = experimental_metadata(
+            yaml_text,
+            now,
+            len(retained),
+            existing_path=experimental_path,
+        )
+        reconciled_stats = copy.deepcopy(stats)
+        retained_pruned = int(reconciled_stats.get("retained_pruned", 0)) + removed
+        source_overlaps = sum(
+            int(reconciled_stats["sources"][source_id].get("lan_global_overlap", 0))
+            for source_id in EXPERIMENTAL_SOURCE_IDS
+        )
+        reconciled_stats.update(
+            {
+                "total": len(retained),
+                "auto": len(retained),
+                "retained_pruned": retained_pruned,
+                "lan_global_overlap": source_overlaps + retained_pruned,
+                "updated": now,
+                "schema_version": LAN_EXPERIMENTAL_SCHEMA_VERSION,
+            }
+        )
+        atomic_write_text(experimental_path, yaml_text)
+        write_experimental_stats(stats_path, reconciled_stats)
+        stats = reconciled_stats
+
+    refresh_readme_experimental(stats, path=readme_path)
+    validate_experimental_artifacts(
+        experimental_path,
+        lan_global_path,
+        stats_path,
+        readme_path,
+    )
+    print(
+        "reconciled retained LAN Experimental with current LAN Global: "
+        f"removed={removed}, remaining={stats['total']}"
+    )
+    return removed
+
+
 def main(
     non_stable_only: bool = False,
     lan_only: bool = False,
@@ -3204,6 +3287,7 @@ if __name__ == "__main__":
             "--bs-safe-only",
             "--experimental-only",
             "--promote-experimental",
+            "--reconcile-experimental",
         }
         unknown_arguments = arguments - known_modes
         if unknown_arguments:
@@ -3215,6 +3299,9 @@ if __name__ == "__main__":
             raise SystemExit(build_experimental_candidate())
         if "--promote-experimental" in arguments:
             raise SystemExit(promote_experimental_candidate())
+        if "--reconcile-experimental" in arguments:
+            reconcile_retained_experimental()
+            raise SystemExit(0)
         raise SystemExit(
             main(
                 non_stable_only="--non-stable-only" in arguments,

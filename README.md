@@ -32,16 +32,16 @@
 | Global 5K | `1710` |
 | LAN 5K | `5000` |
 | LAN Global | `5922` |
-| LAN Experimental | `1435` |
-| LAN Experimental AUTO | `1435` |
-| Исключено пересечений Experimental с LAN Global | `394` |
+| LAN Experimental | `1418` |
+| LAN Experimental AUTO | `1418` |
+| Исключено пересечений Experimental с LAN Global | `411` |
 | BS Safe MANUAL | `2031` |
 | BS Safe AUTO | `50` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `1435` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия.
+Изолированная тестовая подписка: `1418` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
 <!-- LAN-EXPERIMENTAL:END -->
 
 ## Подключение

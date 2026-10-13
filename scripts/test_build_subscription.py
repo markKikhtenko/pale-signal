@@ -205,6 +205,56 @@ class LanExperimentalTests(unittest.TestCase):
         self.assertIs(groups["AUTO"]["lazy"], True)
         self.assertEqual(groups["PROXY"]["proxies"][0], "AUTO")
 
+    def test_retained_fallback_prunes_new_lan_overlap(self) -> None:
+        text, stats, config = self.build({"A": [self.vless(1), self.vless(2)]})
+        source = self.source("A")
+        with (
+            tempfile.TemporaryDirectory() as temp_dir,
+            mock.patch.object(builder, "EXPERIMENTAL_SOURCES", [source]),
+            mock.patch.object(builder, "EXPERIMENTAL_SOURCE_IDS", {"A"}),
+        ):
+            root = Path(temp_dir)
+            experimental_path = root / "subscription-lan-experimental.yaml"
+            lan_global_path = root / "subscription-lan-global.yaml"
+            stats_path = root / "lan-experimental-stats.json"
+            readme_path = root / "README.md"
+            experimental_path.write_text(text, encoding="utf-8")
+            lan_global_path.write_text(
+                "\n".join(builder.dump_yaml(builder.build_config([config["proxies"][0]]))) + "\n",
+                encoding="utf-8",
+            )
+            builder.write_experimental_stats(stats_path, stats)
+            readme_path.write_text(
+                "# test\n\n"
+                f"| LAN Experimental | `{stats['total']}` |\n"
+                f"| LAN Experimental AUTO | `{stats['auto']}` |\n"
+                "| Исключено пересечений Experimental с LAN Global | "
+                f"`{stats['lan_global_overlap']}` |\n\n"
+                f"{builder.experimental_readme_section(stats)}\n",
+                encoding="utf-8",
+            )
+
+            removed = builder.reconcile_retained_experimental(
+                experimental_path=experimental_path,
+                lan_global_path=lan_global_path,
+                stats_path=stats_path,
+                readme_path=readme_path,
+                now="2026-10-13 17:00:00 МСК",
+            )
+
+            self.assertEqual(removed, 1)
+            reconciled, reconciled_stats = builder.validate_experimental_artifacts(
+                experimental_path,
+                lan_global_path,
+                stats_path,
+                readme_path,
+            )
+            self.assertEqual(len(reconciled["proxies"]), 1)
+            self.assertEqual(reconciled_stats["total"], 1)
+            self.assertEqual(reconciled_stats["auto"], 1)
+            self.assertEqual(reconciled_stats["retained_pruned"], 1)
+            self.assertEqual(reconciled_stats["lan_global_overlap"], 1)
+
     def test_production_main_does_not_call_experimental_builder(self) -> None:
         self.assertNotIn("build_lan_experimental(", inspect.getsource(builder.main))
 
