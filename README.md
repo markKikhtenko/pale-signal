@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-9098-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-9001-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo и OpenClash.
 
-**Последнее обновление:** `2026-10-15 00:20:58 МСК`
+**Последнее обновление:** `2026-10-15 13:51:56 МСК`
 
 ## Подписки
 
@@ -26,22 +26,22 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `9098` |
-| Россия | `2685` |
-| Global | `6413` |
-| Global 5K | `1615` |
+| Всего серверов | `9001` |
+| Россия | `2667` |
+| Global | `6334` |
+| Global 5K | `1813` |
 | LAN 5K | `5000` |
-| LAN Global | `5844` |
-| LAN Experimental | `1433` |
-| LAN Experimental AUTO | `1433` |
-| Исключено пересечений Experimental с LAN Global | `411` |
-| BS Safe MANUAL | `1963` |
+| LAN Global | `5485` |
+| LAN Experimental | `1518` |
+| LAN Experimental AUTO | `1518` |
+| Исключено пересечений Experimental с LAN Global | `572` |
+| BS Safe MANUAL | `2032` |
 | BS Safe AUTO | `50` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `1433` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
+Изолированная тестовая подписка: `1518` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
 <!-- LAN-EXPERIMENTAL:END -->
 
 ## Подключение
