@@ -4,7 +4,7 @@
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Servers](https://img.shields.io/badge/servers-9139-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
-Автоматически обновляемые VLESS-подписки для Mihomo и OpenClash.
+Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
 **Последнее обновление:** `2026-10-16 00:00:19 МСК`
 
@@ -21,6 +21,7 @@
 | [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) | Изолированная тестовая LAN-подписка |
 | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) | Тестовая Global |
 | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима блокировок |
+| [subscription-mobile.txt](https://markkikhtenko.github.io/pale-signal/subscription-mobile.txt) | Компактная мобильная Reality-подписка для Happ/Happ Plus |
 
 ## Статус
 
@@ -37,6 +38,7 @@
 | Исключено пересечений Experimental с LAN Global | `607` |
 | BS Safe MANUAL | `2039` |
 | BS Safe AUTO | `50` |
+| Happ Mobile | `427` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
@@ -46,11 +48,17 @@
 
 ## Подключение
 
+### Mihomo/OpenClash
+
 1. Скопируйте нужную ссылку из таблицы.
 2. Добавьте её в `Config Subscription` OpenClash без конвертации.
 3. Используйте `PROXY` → `AUTO` для автовыбора или `MANUAL` для ручного выбора.
 
 Для `BS Safe` требуется Mihomo/Meta Core v1.19.24 или новее.
+
+### Happ/Happ Plus
+
+Добавьте URL `subscription-mobile.txt` как обычную подписку. Файл содержит только VLESS-ссылки без YAML, групп и правил; выбор сервера и проверка задержки выполняются в приложении.
 
 ## Маршрутизация
 

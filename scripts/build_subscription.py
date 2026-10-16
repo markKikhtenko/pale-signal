@@ -109,26 +109,6 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt",
     },
     {
-        "id": "KIRILLO4KA_WHITE_MOBILE",
-        "name": "Kirillo4ka eavevpn Vless-Reality-White-Lists-Rus-Mobile.txt",
-        "url": "https://raw.githubusercontent.com/Kirillo4ka/eavevpn-configs/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
-    },
-    {
-        "id": "KIRILLO4KA_WHITE_CIDR_CHECKED",
-        "name": "Kirillo4ka eavevpn WHITE-CIDR-RU-checked.txt",
-        "url": "https://raw.githubusercontent.com/Kirillo4ka/eavevpn-configs/main/WHITE-CIDR-RU-checked.txt",
-    },
-    {
-        "id": "KIRILLO4KA_WHITE_SNI",
-        "name": "Kirillo4ka eavevpn WHITE-SNI-RU-all.txt",
-        "url": "https://raw.githubusercontent.com/Kirillo4ka/eavevpn-configs/main/WHITE-SNI-RU-all.txt",
-    },
-    {
-        "id": "KIRILLO4KA_WHITE_CIDR",
-        "name": "Kirillo4ka eavevpn WHITE-CIDR-RU-all.txt",
-        "url": "https://raw.githubusercontent.com/Kirillo4ka/eavevpn-configs/main/WHITE-CIDR-RU-all.txt",
-    },
-    {
         "id": "MAHAN_VLESS",
         "name": "MahanKenway configs/vless.txt",
         "url": "https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt",
@@ -292,10 +272,6 @@ BYPASS_SOURCE_IDS = {
     "IGARECK_WHITE_CIDR_CHECKED",
     "IGARECK_WHITE_SNI",
     "IGARECK_WHITE_CIDR",
-    "KIRILLO4KA_WHITE_MOBILE",
-    "KIRILLO4KA_WHITE_CIDR_CHECKED",
-    "KIRILLO4KA_WHITE_SNI",
-    "KIRILLO4KA_WHITE_CIDR",
     "EPODONIOS_26",
     "AVEN_26",
     "AVEN_MIRROR_26",
@@ -346,6 +322,7 @@ LAN_EXPERIMENTAL_CANDIDATE_FILE = LAN_EXPERIMENTAL_CANDIDATE_DIR / "subscription
 LAN_EXPERIMENTAL_CANDIDATE_STATS_FILE = LAN_EXPERIMENTAL_CANDIDATE_DIR / "lan-experimental-stats.json"
 GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
 BS_SAFE_OUTPUT_FILE = ROOT / "subscription-bs-safe.yaml"
+MOBILE_OUTPUT_FILE = ROOT / "subscription-mobile.txt"
 README_FILE = ROOT / "README.md"
 UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://cp.cloudflare.com/generate_204"
@@ -355,6 +332,7 @@ GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
 LAN_5K_SUBSCRIPTION_LIMIT = 5000
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
+MOBILE_SUBSCRIPTION_LIMIT = 500
 LAN_EXPERIMENTAL_SCHEMA_VERSION = 1
 LAN_EXPERIMENTAL_MIN_SOURCE_RATIO = 0.5
 LAN_EXPERIMENTAL_README_START = "<!-- LAN-EXPERIMENTAL:START -->"
@@ -371,14 +349,11 @@ BS_SAFE_MOBILE_SOURCE_IDS = {
     "IGARECK_WHITE_CIDR_CHECKED",
     "IGARECK_WHITE_CIDR",
     "IGARECK_WHITE_SNI",
-    "KIRILLO4KA_WHITE_MOBILE",
-    "KIRILLO4KA_WHITE_CIDR_CHECKED",
-    "KIRILLO4KA_WHITE_CIDR",
-    "KIRILLO4KA_WHITE_SNI",
     "WLUNLOCKER_CIDR_1",
     "WLUNLOCKER_CIDR_2",
     "SOLOVYOV_ALL_SUBS",
 }
+MOBILE_SOURCE_IDS = BS_SAFE_MOBILE_SOURCE_IDS
 BLOCKED_PROXY_KEYS = {
     ("78.159.250.214", 443, "eb78e1f0-d921-4ca9-a889-261fcc5a0547"),
 }
@@ -411,10 +386,6 @@ GLOBAL_SOURCE_PRIORITY = (
     "IGARECK_WHITE_SNI",
     "IGARECK_WHITE_CIDR_CHECKED",
     "IGARECK_WHITE_MOBILE_1",
-    "KIRILLO4KA_WHITE_CIDR",
-    "KIRILLO4KA_WHITE_SNI",
-    "KIRILLO4KA_WHITE_CIDR_CHECKED",
-    "KIRILLO4KA_WHITE_MOBILE",
     "PRINCE_WHITE_LIST",
 )
 GLOBAL_SOURCE_RANK = {source_id: index for index, source_id in enumerate(GLOBAL_SOURCE_PRIORITY)}
@@ -810,6 +781,72 @@ def parse_vless(line: str, source_id: str) -> dict | None:
         return proxy
     except Exception:
         return None
+
+
+def proxy_to_vless_uri(proxy: dict) -> str:
+    """Serialize a parsed VLESS proxy to a standard share link for Happ."""
+    server = str(proxy.get("server", "")).strip()
+    try:
+        if ipaddress.ip_address(server).version == 6:
+            server = f"[{server}]"
+    except ValueError:
+        pass
+
+    security = "reality" if "reality-opts" in proxy else "tls" if proxy.get("tls") else "none"
+    query: list[tuple[str, str]] = [
+        ("encryption", str(proxy.get("encryption", "none"))),
+        ("security", security),
+        ("type", str(proxy.get("network", "tcp"))),
+    ]
+
+    if proxy.get("flow"):
+        query.append(("flow", str(proxy["flow"])))
+    if security in {"tls", "reality"}:
+        if proxy.get("servername"):
+            query.append(("sni", str(proxy["servername"])))
+        if proxy.get("client-fingerprint"):
+            query.append(("fp", str(proxy["client-fingerprint"])))
+        if proxy.get("alpn"):
+            query.append(("alpn", ",".join(str(item) for item in proxy["alpn"])))
+        if proxy.get("skip-cert-verify") is True:
+            query.append(("allowInsecure", "1"))
+
+    reality_opts = proxy.get("reality-opts") or {}
+    if security == "reality":
+        query.append(("pbk", str(reality_opts.get("public-key", ""))))
+        if "short-id" in reality_opts:
+            query.append(("sid", str(reality_opts["short-id"])))
+        if reality_opts.get("spider-x"):
+            query.append(("spx", str(reality_opts["spider-x"])))
+
+    network = str(proxy.get("network", "tcp"))
+    if network == "ws":
+        ws_opts = proxy.get("ws-opts") or {}
+        query.append(("path", str(ws_opts.get("path", "/"))))
+        ws_headers = ws_opts.get("headers") or {}
+        host = ws_headers.get("Host", ws_headers.get("host"))
+        if host:
+            query.append(("host", str(host)))
+    elif network == "grpc":
+        grpc_opts = proxy.get("grpc-opts") or {}
+        if grpc_opts.get("grpc-service-name"):
+            query.append(("serviceName", str(grpc_opts["grpc-service-name"])))
+    elif network == "xhttp":
+        xhttp_opts = proxy.get("xhttp-opts") or {}
+        query.append(("path", str(xhttp_opts.get("path", "/"))))
+        if xhttp_opts.get("host"):
+            query.append(("host", str(xhttp_opts["host"])))
+        if xhttp_opts.get("mode"):
+            query.append(("mode", str(xhttp_opts["mode"])))
+
+    encoded_query = urllib.parse.urlencode(
+        query,
+        doseq=True,
+        quote_via=urllib.parse.quote,
+        safe="",
+    )
+    name = urllib.parse.quote(str(proxy.get("name", f"{server}:{proxy.get('port', '')}")), safe="")
+    return f"vless://{proxy['uuid']}@{server}:{proxy['port']}?{encoded_query}#{name}"
 
 
 def dedupe_and_name(proxies: list[dict]) -> list[dict]:
@@ -1324,6 +1361,67 @@ def select_bs_safe_proxies(proxies: list[dict]) -> list[dict]:
         )
 
     return [apply_bs_safe_transport_limits(proxy) for proxy in selected]
+
+
+def mobile_rank(proxy: dict) -> tuple:
+    endpoint = (
+        str(proxy.get("server", "")).strip().rstrip(".").casefold(),
+        int(proxy.get("port", 0) or 0),
+    )
+    return (
+        0 if endpoint in BS_SAFE_CONFIRMED_MEGAFON_ENDPOINTS else 1,
+        bs_safe_rank(proxy),
+    )
+
+
+def select_mobile_proxies(proxies: list[dict]) -> list[dict]:
+    """Build a compact whitelist-oriented Reality list for Happ/Happ Plus."""
+    candidates = [
+        proxy
+        for proxy in proxies
+        if any(source in MOBILE_SOURCE_IDS for source in proxy.get("_sources", []))
+        and "reality-opts" in proxy
+        and proxy.get("tls") is True
+        and proxy.get("skip-cert-verify") is not True
+        and bool(str(proxy.get("servername", "")).strip())
+    ]
+    candidates.sort(key=mobile_rank)
+    return take_unique_bs_safe_proxies(
+        candidates,
+        MOBILE_SUBSCRIPTION_LIMIT,
+        resolved_servers={},
+        seen_endpoints=set(),
+    )
+
+
+def build_happ_subscription(proxies: list[dict]) -> str:
+    lines = [
+        "#profile-title: pale-signal mobile",
+        "#subscription-auto-update-enable: 1",
+        "#subscription-ping-onopen-enabled: 1",
+        *(proxy_to_vless_uri(proxy) for proxy in proxies),
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def validate_happ_subscription(text: str, expected_count: int | None = None) -> int:
+    links = [
+        line.strip()
+        for line in text.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    if not links:
+        raise RuntimeError("Happ mobile subscription contains no VLESS links")
+    if expected_count is not None and len(links) != expected_count:
+        raise RuntimeError(
+            f"Happ mobile subscription contains {len(links)} links, expected {expected_count}"
+        )
+    if len(links) != len(set(links)):
+        raise RuntimeError("Happ mobile subscription contains duplicate VLESS links")
+    for line in links:
+        if parse_vless(line, "MOBILE_OUTPUT") is None:
+            raise RuntimeError("Happ mobile subscription contains an invalid VLESS link")
+    return len(links)
 
 
 def select_bs_safe_auto_proxies(proxies: list[dict]) -> list[dict]:
@@ -2106,6 +2204,7 @@ def history_entry(now: str, stats: dict[str, int], changes: dict[str, dict[str, 
             "lan_5k": stats.get("lan_5k", 0),
             "lan_global": stats.get("lan_global", 0),
             "bs_safe": stats.get("bs_safe", 0),
+            "mobile": stats.get("mobile", 0),
         },
         "changes": changes,
     }
@@ -2815,6 +2914,7 @@ def write_final_readme(
     global_non_stable_auto_count: int | None = None,
     bs_safe_stats: dict[str, int] | None = None,
     bs_safe_auto_count: int | None = None,
+    mobile_count: int | None = None,
     experimental_stats: dict | None = None,
 ) -> None:
     if stats is None:
@@ -2827,7 +2927,7 @@ def write_final_readme(
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Servers](https://img.shields.io/badge/servers-{stats['total']}-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
-Автоматически обновляемые VLESS-подписки для Mihomo и OpenClash.
+Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
 **Последнее обновление:** `{now}`
 
@@ -2844,6 +2944,7 @@ def write_final_readme(
 | [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) | Изолированная тестовая LAN-подписка |
 | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) | Тестовая Global |
 | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима блокировок |
+| [subscription-mobile.txt](https://markkikhtenko.github.io/pale-signal/subscription-mobile.txt) | Компактная мобильная Reality-подписка для Happ/Happ Plus |
 
 ## Статус
 
@@ -2860,16 +2961,23 @@ def write_final_readme(
 | Исключено пересечений Experimental с LAN Global | `{experimental_stats['lan_global_overlap']}` |
 | BS Safe MANUAL | `{bs_safe_stats['total'] if bs_safe_stats is not None else stats.get('bs_safe', 0)}` |
 | BS Safe AUTO | `{bs_safe_auto_count if bs_safe_auto_count is not None else 0}` |
+| Happ Mobile | `{mobile_count if mobile_count is not None else stats.get('mobile', 0)}` |
 
 {experimental_readme_section(experimental_stats)}
 
 ## Подключение
+
+### Mihomo/OpenClash
 
 1. Скопируйте нужную ссылку из таблицы.
 2. Добавьте её в `Config Subscription` OpenClash без конвертации.
 3. Используйте `PROXY` → `AUTO` для автовыбора или `MANUAL` для ручного выбора.
 
 Для `BS Safe` требуется Mihomo/Meta Core v1.19.24 или новее.
+
+### Happ/Happ Plus
+
+Добавьте URL `subscription-mobile.txt` как обычную подписку. Файл содержит только VLESS-ссылки без YAML, групп и правил; выбор сервера и проверка задержки выполняются в приложении.
 
 ## Маршрутизация
 
@@ -3037,12 +3145,15 @@ def main(
     non_stable_only: bool = False,
     lan_only: bool = False,
     bs_safe_only: bool = False,
+    mobile_only: bool = False,
 ) -> int:
     parsed = []
     if lan_only:
         selected_sources = [source for source in SOURCES if source["id"] in LAN_SOURCE_IDS]
     elif bs_safe_only:
         selected_sources = [source for source in SOURCES if source["id"] in BS_SAFE_SOURCE_IDS]
+    elif mobile_only:
+        selected_sources = [source for source in SOURCES if source["id"] in MOBILE_SOURCE_IDS]
     elif non_stable_only:
         selected_sources = [source for source in SOURCES if source["id"] in BASE_SOURCE_IDS]
     else:
@@ -3071,6 +3182,16 @@ def main(
         for proxy in proxies
         if any(source in BASE_SOURCE_IDS for source in proxy.get("_sources", []))
     ]
+    if mobile_only:
+        mobile_proxies = select_mobile_proxies(proxies)
+        if not mobile_proxies:
+            raise RuntimeError("no mobile VLESS servers were produced")
+        mobile_text = build_happ_subscription(mobile_proxies)
+        validate_happ_subscription(mobile_text, len(mobile_proxies))
+        MOBILE_OUTPUT_FILE.write_text(mobile_text, encoding="utf-8", newline="\n")
+        print(f"wrote subscription-mobile.txt with {len(mobile_proxies)} VLESS links for Happ")
+        return 0
+
     all_ru_proxies, all_global_candidates = split_by_country(proxies)
     ru_proxies = [
         proxy
@@ -3204,6 +3325,12 @@ def main(
     if not bs_safe_yaml_text.strip():
         raise RuntimeError("empty BS Safe YAML output")
 
+    mobile_proxies = select_mobile_proxies(proxies)
+    if not mobile_proxies:
+        raise RuntimeError("no mobile VLESS servers were produced")
+    mobile_text = build_happ_subscription(mobile_proxies)
+    validate_happ_subscription(mobile_text, len(mobile_proxies))
+
     now = msk_timestamp()
     # Experimental has a separate candidate/validation/promotion lifecycle. Loading
     # its last-known-good statistics is read-only and cannot block production source work.
@@ -3232,6 +3359,7 @@ def main(
     stats["lan_5k"] = len(lan_5k_proxies)
     stats["lan_global"] = len(lan_global_proxies)
     stats["bs_safe"] = len(bs_safe_proxies)
+    stats["mobile"] = len(mobile_proxies)
     stats["unknown"] = sum(1 for proxy in global_proxies if proxy.get("_country") == "UNKNOWN")
     global_stats = stats_for(global_proxies)
     global_5k_stats = stats_for(global_5k_proxies)
@@ -3250,6 +3378,7 @@ def main(
         newline="\n",
     )
     BS_SAFE_OUTPUT_FILE.write_text(bs_safe_yaml_text, encoding="utf-8", newline="\n")
+    MOBILE_OUTPUT_FILE.write_text(mobile_text, encoding="utf-8", newline="\n")
     write_final_readme(
         base_proxies,
         now,
@@ -3262,6 +3391,7 @@ def main(
         len(global_non_stable_auto_proxies),
         bs_safe_stats,
         len(bs_safe_auto_proxies),
+        len(mobile_proxies),
         experimental_stats,
     )
     print(
@@ -3273,7 +3403,8 @@ def main(
         f"{experimental_stats['total']} LAN Experimental/AUTO, "
         f"{len(global_non_stable_auto_proxies)} non-stable AUTO, "
         f"{len(bs_safe_proxies)} BS Safe MANUAL, "
-        f"{len(bs_safe_auto_proxies)} BS Safe AUTO)"
+        f"{len(bs_safe_auto_proxies)} BS Safe AUTO, "
+        f"{len(mobile_proxies)} Happ mobile)"
     )
     return 0
 
@@ -3285,6 +3416,7 @@ if __name__ == "__main__":
             "--non-stable-only",
             "--lan-only",
             "--bs-safe-only",
+            "--mobile-only",
             "--experimental-only",
             "--promote-experimental",
             "--reconcile-experimental",
@@ -3307,6 +3439,7 @@ if __name__ == "__main__":
                 non_stable_only="--non-stable-only" in arguments,
                 lan_only="--lan-only" in arguments,
                 bs_safe_only="--bs-safe-only" in arguments,
+                mobile_only="--mobile-only" in arguments,
             )
         )
     except Exception as exc:

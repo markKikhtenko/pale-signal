@@ -272,5 +272,77 @@ class LanExperimentalTests(unittest.TestCase):
         )
 
 
+class HappMobileSubscriptionTests(unittest.TestCase):
+    @staticmethod
+    def proxy(
+        number: int,
+        *,
+        source: str = "IGARECK_WHITE_MOBILE_1",
+        server: str = "203.0.113.10",
+        port: int = 443,
+        network: str = "grpc",
+        insecure: bool = False,
+    ) -> dict:
+        proxy = {
+            "name": f"Mobile node {number}",
+            "_sources": [source],
+            "_input_order": number,
+            "type": "vless",
+            "server": server,
+            "port": port,
+            "uuid": str(uuid.UUID(int=number)),
+            "network": network,
+            "udp": True,
+            "encryption": "none",
+            "tls": True,
+            "servername": "example.com",
+            "client-fingerprint": "chrome",
+            "reality-opts": {
+                "public-key": "A" * 43,
+                "short-id": "12ab",
+            },
+        }
+        if network == "grpc":
+            proxy["grpc-opts"] = {"grpc-service-name": "mobile"}
+        if insecure:
+            proxy["skip-cert-verify"] = True
+        return proxy
+
+    def test_vless_serializer_round_trips_happ_fields(self) -> None:
+        proxy = self.proxy(1, server="2001:db8::1")
+        link = builder.proxy_to_vless_uri(proxy)
+        parsed = builder.parse_vless(link, "ROUND_TRIP")
+
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["server"], "2001:db8::1")
+        self.assertEqual(parsed["network"], "grpc")
+        self.assertEqual(parsed["servername"], "example.com")
+        self.assertEqual(parsed["grpc-opts"]["grpc-service-name"], "mobile")
+        self.assertEqual(parsed["reality-opts"]["short-id"], "12ab")
+
+    def test_mobile_selection_is_strict_and_has_no_country_requirement(self) -> None:
+        valid = self.proxy(1)
+        valid["_country"] = "UNKNOWN"
+        non_mobile = self.proxy(2, source="FULL", server="203.0.113.11")
+        insecure = self.proxy(3, server="203.0.113.12", insecure=True)
+
+        selected = builder.select_mobile_proxies([non_mobile, insecure, valid])
+
+        self.assertEqual(selected, [valid])
+
+    def test_happ_subscription_is_plain_vless_without_groups(self) -> None:
+        proxies = [
+            self.proxy(1),
+            self.proxy(2, server="203.0.113.11"),
+        ]
+        text = builder.build_happ_subscription(proxies)
+
+        self.assertIn("#profile-title: pale-signal mobile", text)
+        self.assertNotIn("proxy-groups", text)
+        self.assertEqual(builder.validate_happ_subscription(text, 2), 2)
+        links = [line for line in text.splitlines() if line.startswith("vless://")]
+        self.assertEqual(len(links), 2)
+
+
 if __name__ == "__main__":
     unittest.main()
