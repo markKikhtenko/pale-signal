@@ -1,12 +1,12 @@
 # LAN Experimental
-# Version: 1.20261016.101828
+# Version: 1.20261016.134304
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-16 10:18:28 МСК
+# Updated: 2026-10-16 13:43:03 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
 #   - Au1rxx Verified: https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt
-# Servers: 1398
+# Servers: 1392
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -20139,22 +20139,6 @@ proxies:
       headers:
         Host: "vp21.cc.cd"
   -
-    name: "vless-1827619964"
-    type: "vless"
-    server: "172.64.152.52"
-    port: 443
-    uuid: "2d4b819d-6fa6-4db2-8434-61e7db0fe93c"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "cf.zhahui.de5.net"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "cf.zhahui.de5.net"
-  -
     name: "vless-1828140787"
     type: "vless"
     server: "www.speedtest.net"
@@ -20202,19 +20186,6 @@ proxies:
     reality-opts:
       public-key: "x8aCD8cJtkDvAjcRrcMG05MNiwh11LaKg70KIRvfN0g"
       short-id: "819a87bf1651bf44"
-  -
-    name: "vless-1827967636"
-    type: "vless"
-    server: "172.67.71.187"
-    port: 8080
-    uuid: "e5cc16a6-ea42-46b2-82ae-ad2157e1641b"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/sg-melbi"
-      headers:
-        Host: "hhlfy.twiladaphne.ndjp.net"
   -
     name: "vless-1828138094"
     type: "vless"
@@ -20529,19 +20500,6 @@ proxies:
       headers:
         Host: "vpn-1fj.pages.dev"
   -
-    name: "vless-1827155613"
-    type: "vless"
-    server: "104.18.0.181"
-    port: 8080
-    uuid: "e5cc16a6-ea42-46b2-82ae-ad2157e1641b"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/sg-melbi"
-      headers:
-        Host: "hhlfy.twiladaphne.ndjp.net"
-  -
     name: "vless-1827622567"
     type: "vless"
     server: "epam.com"
@@ -20591,19 +20549,6 @@ proxies:
       public-key: "MbRONgV8ADD5B_aKDBv15LAW2a8QZok5bkkZexRRVAs"
       short-id: "2301ac8aee8bf6d4"
       spider-x: "/"
-  -
-    name: "vless-1827154961"
-    type: "vless"
-    server: "104.21.93.52"
-    port: 2052
-    uuid: "e3fb01b6-69b4-41d7-babf-696d992de194"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/@BlueKnight_net--@BlueKnight_net"
-      headers:
-        Host: "uwu.blueknightnet.qzz.io"
   -
     name: "vless-1827152227"
     type: "vless"
@@ -20848,22 +20793,6 @@ proxies:
       headers:
         Host: "uwu.blueknightnet.qzz.io"
   -
-    name: "vless-1827155580"
-    type: "vless"
-    server: "104.17.189.184"
-    port: 2096
-    uuid: "da30a28c-5c01-4c93-8da8-c8d39d58bfb9"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "hk.yindu.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "hk.yindu.cc.cd"
-  -
     name: "vless-1827975143"
     type: "vless"
     server: "83.147.216.223"
@@ -20895,22 +20824,6 @@ proxies:
       path: "/@Marisa_kristi"
       headers:
         Host: "wkytah9k8oggj60.qzfi0skkopy875xhtc0l9pwds.workers.dev"
-  -
-    name: "vless-1827151900"
-    type: "vless"
-    server: "26uusapi.mate-fox.com"
-    port: 16586
-    uuid: "57beeeb0-03fc-4fc9-94da-7604488a7134"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "us1p1.xn--ghq880n3na965a.com"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "tBvlo8F8hKRXSK-EHRAfzEH-x3e4uvheGloO-9bPKx4"
-      short-id: "70ab6d813e"
   -
     name: "vless-1827622564"
     type: "vless"
@@ -22352,11 +22265,9 @@ proxy-groups:
       - "nat3.outsidemyheart.space:443"
       - "vless-1828247547"
       - "vless-1828139013"
-      - "vless-1827619964"
       - "vless-1828140787"
       - "vless-1828138090"
       - "vless-1828139034"
-      - "vless-1827967636"
       - "vless-1828138094"
       - "vless-1828140786"
       - "vless-1828140790"
@@ -22377,11 +22288,9 @@ proxy-groups:
       - "vless-1828174691"
       - "vless-1828139025"
       - "vless-1827619960"
-      - "vless-1827155613"
       - "vless-1827622567"
       - "vless-1827152738"
       - "vless-1827156212"
-      - "vless-1827154961"
       - "vless-1827152227"
       - "vless-1827155491"
       - "vless-1828142561"
@@ -22397,10 +22306,8 @@ proxy-groups:
       - "vless-1827975363"
       - "vless-1828004211"
       - "vless-1827154971"
-      - "vless-1827155580"
       - "vless-1827975143"
       - "vless-1827975606"
-      - "vless-1827151900"
       - "vless-1827622564"
       - "vless-1827152447"
       - "vless-1827154493"
@@ -23758,11 +23665,9 @@ proxy-groups:
       - "nat3.outsidemyheart.space:443"
       - "vless-1828247547"
       - "vless-1828139013"
-      - "vless-1827619964"
       - "vless-1828140787"
       - "vless-1828138090"
       - "vless-1828139034"
-      - "vless-1827967636"
       - "vless-1828138094"
       - "vless-1828140786"
       - "vless-1828140790"
@@ -23783,11 +23688,9 @@ proxy-groups:
       - "vless-1828174691"
       - "vless-1828139025"
       - "vless-1827619960"
-      - "vless-1827155613"
       - "vless-1827622567"
       - "vless-1827152738"
       - "vless-1827156212"
-      - "vless-1827154961"
       - "vless-1827152227"
       - "vless-1827155491"
       - "vless-1828142561"
@@ -23803,10 +23706,8 @@ proxy-groups:
       - "vless-1827975363"
       - "vless-1828004211"
       - "vless-1827154971"
-      - "vless-1827155580"
       - "vless-1827975143"
       - "vless-1827975606"
-      - "vless-1827151900"
       - "vless-1827622564"
       - "vless-1827152447"
       - "vless-1827154493"
