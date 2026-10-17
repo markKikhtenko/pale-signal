@@ -1,76 +1,6 @@
 {
   "runs": [
     {
-      "updated_at": "2026-10-13 17:01:50 МСК",
-      "counts": {
-        "all": 9223,
-        "ru": 2786,
-        "global": 6437,
-        "global_5k": 1806,
-        "lan_5k": 5000,
-        "lan_global": 5459,
-        "bs_safe": 2006
-      },
-      "changes": {
-        "all": {
-          "old": 9527,
-          "new": 9223,
-          "added": 949,
-          "removed": 1253,
-          "delta": -304
-        },
-        "ru": {
-          "old": 2797,
-          "new": 2786,
-          "added": 257,
-          "removed": 268,
-          "delta": -11
-        },
-        "global": {
-          "old": 6730,
-          "new": 6437,
-          "added": 770,
-          "removed": 1063,
-          "delta": -293
-        },
-        "global_5k": {
-          "old": 1710,
-          "new": 1806,
-          "added": 453,
-          "removed": 357,
-          "delta": 96
-        },
-        "lan_5k": {
-          "old": 5000,
-          "new": 5000,
-          "added": 1336,
-          "removed": 1336,
-          "delta": 0
-        },
-        "lan_global": {
-          "old": 5922,
-          "new": 5459,
-          "added": 1224,
-          "removed": 1687,
-          "delta": -463
-        },
-        "lan_experimental": {
-          "old": 1418,
-          "new": 1418,
-          "added": 0,
-          "removed": 0,
-          "delta": 0
-        },
-        "bs_safe": {
-          "old": 2031,
-          "new": 2006,
-          "added": 280,
-          "removed": 305,
-          "delta": -25
-        }
-      }
-    },
-    {
       "updated_at": "2026-10-14 01:20:44 МСК",
       "counts": {
         "all": 9431,
@@ -701,6 +631,77 @@
           "added": 302,
           "removed": 304,
           "delta": -2
+        }
+      }
+    },
+    {
+      "updated_at": "2026-10-17 23:06:13 МСК",
+      "counts": {
+        "all": 9891,
+        "ru": 2795,
+        "global": 7096,
+        "global_5k": 2082,
+        "lan_5k": 5000,
+        "lan_global": 6012,
+        "bs_safe": 2017,
+        "mobile": 434
+      },
+      "changes": {
+        "all": {
+          "old": 9659,
+          "new": 9891,
+          "added": 1062,
+          "removed": 830,
+          "delta": 232
+        },
+        "ru": {
+          "old": 2697,
+          "new": 2795,
+          "added": 230,
+          "removed": 132,
+          "delta": 98
+        },
+        "global": {
+          "old": 6962,
+          "new": 7096,
+          "added": 900,
+          "removed": 766,
+          "delta": 134
+        },
+        "global_5k": {
+          "old": 2214,
+          "new": 2082,
+          "added": 447,
+          "removed": 579,
+          "delta": -132
+        },
+        "lan_5k": {
+          "old": 5000,
+          "new": 5000,
+          "added": 536,
+          "removed": 536,
+          "delta": 0
+        },
+        "lan_global": {
+          "old": 5800,
+          "new": 6012,
+          "added": 531,
+          "removed": 319,
+          "delta": 212
+        },
+        "lan_experimental": {
+          "old": 1110,
+          "new": 1110,
+          "added": 0,
+          "removed": 0,
+          "delta": 0
+        },
+        "bs_safe": {
+          "old": 2011,
+          "new": 2017,
+          "added": 283,
+          "removed": 277,
+          "delta": 6
         }
       }
     }
