@@ -1,12 +1,12 @@
 # LAN Experimental
-# Version: 1.20261017.230904
+# Version: 1.20261018.132505
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-17 23:07:30 МСК
+# Updated: 2026-10-18 13:23:53 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
 #   - Au1rxx Verified: https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt
-# Servers: 1012
+# Servers: 1077
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -1807,6 +1807,21 @@ proxies:
     udp: true
     encryption: "none"
   -
+    name: "@DeltaKroneckerGithub 137"
+    type: "vless"
+    server: "45.66.11.167"
+    port: 443
+    uuid: "16403c2a-541f-4215-9bd5-b43a32f089d0"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.amd.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "8fXNiQXCGEDSkgXAQWVpdC7dh4ORt3BeF_BOR2FxdCg"
+  -
     name: "@DeltaKroneckerGithub 138"
     type: "vless"
     server: "172.67.75.218"
@@ -3172,19 +3187,6 @@ proxies:
       headers:
         Host: "orange-math-9c83.371.workers.dev"
   -
-    name: "@DeltaKroneckerGithub 233"
-    type: "vless"
-    server: "iran-001-join.outline-vpn.cloud"
-    port: 80
-    uuid: "27c5483f-17f4-48ae-9a04-def53d88440d"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    ws-opts:
-      path: "/safe/"
-      headers:
-        Host: "de1.rtacg.com"
-  -
     name: "@DeltaKroneckerGithub 234"
     type: "vless"
     server: "v2tl4tjvwm.lightfastpro.ir"
@@ -3605,6 +3607,26 @@ proxies:
       path: "/V2rayCUSTOMIZE?ed=1024"
       headers:
         Host: "V2ray-_-_-_-_-_-VPNCUSTOMIZE.keLLekcoLLection.com."
+  -
+    name: "@DeltaKroneckerGithub 264"
+    type: "vless"
+    server: "tr1-tun.dnetopps.ir"
+    port: 10050
+    uuid: "e61b56a2-247a-86bc-0b47-4a4a41101b2c"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "reality1.dnetopps.ir"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "Zw1ap_N7O4W5nesSwi9LtCCpyTqP3TQoX0oCkhPWYUY"
+      short-id: "9573"
+      spider-x: "/"
+    xhttp-opts:
+      path: "/Path"
+      host: "HostName"
+      mode: "auto"
   -
     name: "@DeltaKroneckerGithub 265"
     type: "vless"
@@ -5743,6 +5765,25 @@ proxies:
       headers:
         Host: "sadasdsdsaads阿斯達十點三十分.boxiaa.shop."
   -
+    name: "@DeltaKroneckerGithub 421"
+    type: "vless"
+    server: "64.188.124.143"
+    port: 2096
+    uuid: "fce27c3a-629e-411b-92cc-8822d655ff91"
+    network: "xhttp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.nvidia.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "CxjnGHCI3HXN2RAXwytela7jXyOGDCBqzMAqTfm60D0"
+      short-id: "766ef89e321597e5"
+    xhttp-opts:
+      path: "/xhttp"
+      host: "www.nvidia.com"
+      mode: "auto"
+  -
     name: "@DeltaKroneckerGithub 422"
     type: "vless"
     server: "151.101.64.154"
@@ -6730,23 +6771,6 @@ proxies:
       path: "/?ed=2048"
       headers:
         Host: "pmpmppm.pages.dev"
-  -
-    name: "@DeltaKroneckerGithub 495"
-    type: "vless"
-    server: "64.176.60.226"
-    port: 443
-    uuid: "d342d11e-d424-4583-b36e-524ab1f0afa4"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "cdn8848.776676.xyz"
-    client-fingerprint: "chrome"
-    skip-cert-verify: true
-    ws-opts:
-      path: "/documents?ed=2560"
-      headers:
-        Host: "cdn8848.776676.xyz"
   -
     name: "@DeltaKroneckerGithub 497"
     type: "vless"
@@ -8195,6 +8219,17 @@ proxies:
       path: "/?proxyip=proxyip.sg.cmliussss.net"
       headers:
         Host: "sp1.hhhhh.eu.org"
+  -
+    name: "@DeltaKroneckerGithub 599"
+    type: "vless"
+    server: "172.64.229.170"
+    port: 2082
+    uuid: "47fcef29-ab4e-4aa6-932b-d95a18f28a4e"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    ws-opts:
+      path: "/"
   -
     name: "@DeltaKroneckerGithub 600"
     type: "vless"
@@ -13662,6 +13697,24 @@ proxies:
     xhttp-opts:
       path: "/api/v1"
   -
+    name: "@DeltaKroneckerGithub 992"
+    type: "vless"
+    server: "172.67.148.163"
+    port: 443
+    uuid: "682d30e4-3dfc-49f2-a017-9049119e3497"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "free.server7peekconfig.workers.dev"
+    client-fingerprint: "chrome"
+    alpn:
+      - "http/1.1"
+    ws-opts:
+      path: "/eyJqdW5rIjoiRm5kaUkxZVFtRVJBIiwicHJvdG9jb2wiOiJ2bCIsIm1vZGUiOiJwcmVmaXgiLCJwYW5lbElQcyI6WyJbMmEwMjo4OTg6MTQ2OjY0OjpdIl19"
+      headers:
+        Host: "free.server7peekconfig.workers.dev"
+  -
     name: "@DeltaKroneckerGithub 993"
     type: "vless"
     server: "s2318.okgg.top"
@@ -14950,9 +15003,9 @@ proxies:
       headers:
         Host: "hhlfy.twiladaphne.ndjp.net"
   -
-    name: "104.17.148.22:443"
+    name: "saas.sin.fan:443"
     type: "vless"
-    server: "104.17.148.22"
+    server: "saas.sin.fan"
     port: 443
     uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
     network: "ws"
@@ -14961,15 +15014,93 @@ proxies:
     tls: true
     servername: "snip.edgeoneai.cc.cd"
     alpn:
-      - "http/1.1"
+      - "h3"
+      - "h2"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443?ed=2560fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "104.248.107.186:2053"
+    type: "vless"
+    server: "104.248.107.186"
+    port: 2053
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
     ws-opts:
       path: "/fp=chrome"
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
-    name: "104.17.147.22:443"
+    name: "179.255.125.93:8443"
     type: "vless"
-    server: "104.17.147.22"
+    server: "179.255.125.93"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "179.253.239.46:8443"
+    type: "vless"
+    server: "179.253.239.46"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "179.255.140.146:443"
+    type: "vless"
+    server: "179.255.140.146"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "45.39.60.236:8443"
+    type: "vless"
+    server: "45.39.60.236"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "179.253.235.175:443"
+    type: "vless"
+    server: "179.253.235.175"
     port: 443
     uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
     network: "ws"
@@ -14978,30 +15109,153 @@ proxies:
     tls: true
     servername: "snip.edgeoneai.cc.cd"
     client-fingerprint: "chrome"
-    alpn:
-      - "http/1.1"
     ws-opts:
       path: "/"
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
-    name: "51.15.16.68:2053"
+    name: "45.61.149.205:8443"
     type: "vless"
-    server: "51.15.16.68"
-    port: 2053
-    uuid: "7d0fd363-16d2-43ce-9d6d-ed2c15d2cb7c"
+    server: "45.61.149.205"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "s3.shardshop.cc:443"
+    type: "vless"
+    server: "s3.shardshop.cc"
+    port: 443
+    uuid: "aeffee83-4a56-4e01-ad8b-9bae65cb8d70"
     network: "tcp"
     udp: true
     encryption: "none"
+    flow: "xtls-rprx-vision"
     tls: true
-    servername: "www.apple.com"
+    servername: "backup.shardtech.pro"
+    client-fingerprint: "chrome"
     reality-opts:
-      public-key: "Zotx4F9CI6_q9yeKCKIHDjwzCv_Aq7WSo7N0Zc1A6Sc"
-      short-id: "3c99c85cbb6b3b44"
+      public-key: "4Uo8fbVgDnt_Z7FMneUnANHfU9Q_VD_ZpLtYZCGt73k"
+      short-id: "c9e3a7d1b4f80256"
   -
-    name: "103.160.59.198:443"
+    name: "104.252.111.38:8443"
     type: "vless"
-    server: "103.160.59.198"
+    server: "104.252.111.38"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "82.39.212.230:443"
+    type: "vless"
+    server: "82.39.212.230"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "apiv2.shardtech.pro:443"
+    type: "vless"
+    server: "apiv2.shardtech.pro"
+    port: 443
+    uuid: "aeffee83-4a56-4e01-ad8b-9bae65cb8d70"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "apiv2.shardtech.pro"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "xEuwFRJX6HJoqnkAYOg30loSgxbzZ0g5AauMe9uiSzE"
+      short-id: "24fac479e28a5320"
+  -
+    name: "s3.shardtech.pro:443"
+    type: "vless"
+    server: "s3.shardtech.pro"
+    port: 443
+    uuid: "aeffee83-4a56-4e01-ad8b-9bae65cb8d70"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "media.shardshop.cc"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "jzDMZqyTEBy3N-JQ42jO9Tqgpr75qTZ2OsCEx2aYzRc"
+      short-id: "b4e8c1a7d3f29056"
+  -
+    name: "195.133.17.250:443"
+    type: "vless"
+    server: "195.133.17.250"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "141.98.233.6:443"
+    type: "vless"
+    server: "141.98.233.6"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "104.245.245.16:8443"
+    type: "vless"
+    server: "104.245.245.16"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "130.78.190.134:443"
+    type: "vless"
+    server: "130.78.190.134"
     port: 443
     uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
     network: "ws"
@@ -15015,54 +15269,332 @@ proxies:
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
-    name: "cf.130519.xyz:443"
+    name: "45.76.208.253:443"
     type: "vless"
-    server: "cf.130519.xyz"
+    server: "45.76.208.253"
     port: 443
-    uuid: "e6df2095-a73c-4043-8693-8d5a03686870"
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
     network: "ws"
     udp: true
     encryption: "none"
     tls: true
-    servername: "lucasjow.us.ci"
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
     ws-opts:
-      path: "/cart/docs/www/proxyip=108.160.132.132fp=qq"
+      path: "/"
       headers:
-        Host: "lucasjow.us.ci"
+        Host: "snip.edgeoneai.cc.cd"
   -
-    name: "45.9.156.28:443"
+    name: "en.shardtech.pro:443"
     type: "vless"
-    server: "45.9.156.28"
+    server: "en.shardtech.pro"
     port: 443
-    uuid: "2f35965a-9a9b-45fd-ba32-987296dfb6be"
-    network: "grpc"
+    uuid: "aeffee83-4a56-4e01-ad8b-9bae65cb8d70"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "en.shardtech.pro"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "wAxnbclboLyQshErT1Aav-9B4NXwj8z2cdkO3aX-4XE"
+      short-id: "e982e66f88d43c6c"
+  -
+    name: "209.33.172.78:8443"
+    type: "vless"
+    server: "209.33.172.78"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
     udp: true
     encryption: "none"
     tls: true
-    servername: "bg4.univesalsrv.com"
+    servername: "snip.edgeoneai.cc.cd"
     client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "k-vH6pkyAv26L1_dXKOFhp0Kesur9-FCUDoj-IIpVhc"
-      short-id: "51f45d4fd58cc319"
-    grpc-opts:
-      grpc-service-name: "cloud.v1.RelayService"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
   -
-    name: "150.40.126.21:443"
+    name: "195.66.24.121:8443"
     type: "vless"
-    server: "150.40.126.21"
-    port: 443
-    uuid: "2f35965a-9a9b-45fd-ba32-987296dfb6be"
-    network: "grpc"
+    server: "195.66.24.121"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
     udp: true
     encryption: "none"
     tls: true
-    servername: "rs3.univesalsrv.com"
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "103.27.187.148:443"
+    type: "vless"
+    server: "103.27.187.148"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "3.113.232.245:443"
+    type: "vless"
+    server: "3.113.232.245"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
     client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "gHDoSWGWMVZKWNKONWHw-Cpl0-bdI6GaKusgJIQ-vWQ"
-      short-id: "35d05b666e2c6cdf"
-    grpc-opts:
-      grpc-service-name: "edge.v2.FeedService"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "45.92.159.236:443"
+    type: "vless"
+    server: "45.92.159.236"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "139.180.194.242:443"
+    type: "vless"
+    server: "139.180.194.242"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "213.176.94.31:443"
+    type: "vless"
+    server: "213.176.94.31"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "156.246.89.172:443"
+    type: "vless"
+    server: "156.246.89.172"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "104.64.59.9:443"
+    type: "vless"
+    server: "104.64.59.9"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "60.130.209.253:443"
+    type: "vless"
+    server: "60.130.209.253"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "152.89.254.48:8443"
+    type: "vless"
+    server: "152.89.254.48"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "185.112.249.201:2053"
+    type: "vless"
+    server: "185.112.249.201"
+    port: 2053
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "209.33.161.104:443"
+    type: "vless"
+    server: "209.33.161.104"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "191.223.210.79:8443"
+    type: "vless"
+    server: "191.223.210.79"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "185.206.171.43:2053"
+    type: "vless"
+    server: "185.206.171.43"
+    port: 2053
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "43.174.195.1:443"
+    type: "vless"
+    server: "43.174.195.1"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "45.38.60.153:8443"
+    type: "vless"
+    server: "45.38.60.153"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "51.79.156.240:8443"
+    type: "vless"
+    server: "51.79.156.240"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "103.167.151.85:8443"
+    type: "vless"
+    server: "103.167.151.85"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
   -
     name: "45.9.156.27:443"
     type: "vless"
@@ -15081,6 +15613,129 @@ proxies:
     grpc-opts:
       grpc-service-name: "home.v1.ApiService"
   -
+    name: "152.67.198.36:443"
+    type: "vless"
+    server: "152.67.198.36"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "149.118.155.105:8443"
+    type: "vless"
+    server: "149.118.155.105"
+    port: 8443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "54.179.212.2:443"
+    type: "vless"
+    server: "54.179.212.2"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "140.245.65.12:2053"
+    type: "vless"
+    server: "140.245.65.12"
+    port: 2053
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "103.161.179.171:443"
+    type: "vless"
+    server: "103.161.179.171"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "103.161.178.215:443"
+    type: "vless"
+    server: "103.161.178.215"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    client-fingerprint: "chrome"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "103.161.178.72:443"
+    type: "vless"
+    server: "103.161.178.72"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "104.238.24.185:443"
+    type: "vless"
+    server: "104.238.24.185"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
     name: "89.35.14.34:443"
     type: "vless"
     server: "89.35.14.34"
@@ -15097,6 +15752,350 @@ proxies:
       short-id: "aa9884f2982b7d3c"
     grpc-opts:
       grpc-service-name: "app.v1.PushService"
+  -
+    name: "179.255.99.75:443"
+    type: "vless"
+    server: "179.255.99.75"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "38.55.199.128:443"
+    type: "vless"
+    server: "38.55.199.128"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "213.165.37.102:443"
+    type: "vless"
+    server: "213.165.37.102"
+    port: 443
+    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "snip.edgeoneai.cc.cd"
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "snip.edgeoneai.cc.cd"
+  -
+    name: "185.141.227.223:443"
+    type: "vless"
+    server: "185.141.227.223"
+    port: 443
+    uuid: "c720cb74-4c84-4fce-b8ae-637dbaa16199"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "z1q3pv4g78.rucdncomp.pro"
+    client-fingerprint: "firefox"
+    ws-opts:
+      path: "/useraction/events/b892639b7195/"
+      headers:
+        Host: "z1q3pv4g78.rucdncomp.pro"
+  -
+    name: "vless-1856195269"
+    type: "vless"
+    server: "xray1-direct-mci1-fs-ce.freesocks.work"
+    port: 443
+    uuid: "081d669a-c84f-4e4c-b312-bbeac59a85b9"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "7j3hmlHrEDk3Kjx-dFG3E3jf0c6PZF45trIPFsuKWmI"
+  -
+    name: "vless-1860511819"
+    type: "vless"
+    server: "45.207.153.218"
+    port: 44300
+    uuid: "fed0730f-5631-442f-b156-79d2909920fb"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_hz0-dqFSrZI_AAh7cecoZHwQhAkiecpXO7hHDDlUlw"
+      short-id: "c9185a41"
+  -
+    name: "vless-1854032398"
+    type: "vless"
+    server: "104.18.47.140"
+    port: 2096
+    uuid: "341832cc-ba98-425b-8225-b3db621a0da3"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "rainfall0705.cc.cd"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "rainfall0705.cc.cd"
+  -
+    name: "vless-1860640780"
+    type: "vless"
+    server: "multipanel-production-722f.up.railway.app"
+    port: 443
+    uuid: "262b2d08-bff9-58a2-605e-81b1f4120f26"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "multipanel-production-722f.up.railway.app"
+    client-fingerprint: "chrome"
+    alpn:
+      - "http/1.1"
+    ws-opts:
+      path: "/ws/262b2d08-bff9-58a2-605e-81b1f4120f26"
+      headers:
+        Host: "multipanel-production-722f.up.railway.app"
+  -
+    name: "vless-1859957299"
+    type: "vless"
+    server: "funagfrdfs.alixxplay.com"
+    port: 54528
+    uuid: "57beeeb0-03fc-4fc9-94da-7604488a7134"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "7GvJVbR6BRhtrc8-rcZvB8qTFUF1LPeM_MmoZ04mBxo"
+      short-id: "54cca3c1c1c7"
+  -
+    name: "vless-1859400271"
+    type: "vless"
+    server: "3.11.104.202"
+    port: 22224
+    uuid: "e4514801-0d5a-42ba-869f-39bd605aef9e"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+  -
+    name: "vless-1856014436"
+    type: "vless"
+    server: "151.243.176.211"
+    port: 8443
+    uuid: "92f990cf-c974-4b82-9062-8a0db43fb71a"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.rutube.ru"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "wOlCK7E9U4Y4954Z5DKBLY_Hkh57ZakVJ19JSny0J0s"
+      short-id: "c36c2d8b90e2162f"
+      spider-x: "/"
+    grpc-opts:
+      grpc-service-name: "api.v1.Sync"
+  -
+    name: "vless-1858696444"
+    type: "vless"
+    server: "177.3.217.102"
+    port: 443
+    uuid: "e01667cf-8410-4a79-ade9-9bd68894dccd"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "test.bostnet.xyz"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "kMd3f5a0XaEk8BS6BRxMc7LS7rfkXdjbOln3ydRYOh0"
+      short-id: "1e4a26676eb853ce"
+  -
+    name: "vless-1853341803"
+    type: "vless"
+    server: "94.103.168.52"
+    port: 2087
+    uuid: "a5db5ab5-8d28-49c0-ad55-0ad4724e4c0d"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "fert1qswdfegrthy.localip.ir"
+    client-fingerprint: "firefox"
+    ws-opts:
+      path: "/hokm"
+      headers:
+        Host: "fert1qswdfegrthy.localip.ir"
+  -
+    name: "vless-1856199588"
+    type: "vless"
+    server: "164.37.224.220"
+    port: 25454
+    uuid: "68c3d665-b2b5-4ffb-9f37-9f3d8c47324d"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.ns.nl"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "YOgsoXtChX3RvA0Gf9SSsP8VLP4GGk7dytVBo9qZCH4"
+      short-id: "221ba0d14384ccf1"
+    grpc-opts:
+      grpc-service-name: "becc6caf9bea"
+  -
+    name: "vless-1859957259"
+    type: "vless"
+    server: "196.198.111.107"
+    port: 8443
+    uuid: "b3441cc7-1e5f-4eb6-8207-90788eeca21e"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "api-6ad3c751.adhil.uk"
+    client-fingerprint: "firefox"
+  -
+    name: "vless-1856198739"
+    type: "vless"
+    server: "196.198.111.138"
+    port: 8443
+    uuid: "b3441cc7-1e5f-4eb6-8207-90788eeca21e"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "api-6ad3c751.adhil.uk"
+    client-fingerprint: "safari"
+  -
+    name: "vless-1853993727"
+    type: "vless"
+    server: "46.225.46.136"
+    port: 2087
+    uuid: "a5db5ab5-8d28-49c0-ad55-0ad4724e4c0d"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "hoert1rert.localip.ir"
+    alpn:
+      - "http/1.1"
+    ws-opts:
+      path: "/hokm"
+      headers:
+        Host: "hoert1rert.localip.ir"
+  -
+    name: "vless-1854025651"
+    type: "vless"
+    server: "164.37.224.220"
+    port: 25452
+    uuid: "68c3d665-b2b5-4ffb-9f37-9f3d8c47324d"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "www.ns.nl"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "zJI16_ywLd4clshY0IQQPxQ_YBbIq2b0XTO_dnTJOy4"
+      short-id: "fe51f413b9646e97"
+  -
+    name: "vless-1858721893"
+    type: "vless"
+    server: "194.110.24.99"
+    port: 52721
+    uuid: "f72af8e5-8640-4878-920f-70923aca9e6e"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+  -
+    name: "vless-1856013877"
+    type: "vless"
+    server: "109.248.42.106"
+    port: 8476
+    uuid: "4cb9157c-cd6f-451f-b786-1c92edec32cb"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "ru.tradingview.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "n3BiVX_oDQXcqC0OmOm5o0RuOaXoHHhdiQ2s-xqkayA"
+      short-id: "d7c8227902c1d878"
+  -
+    name: "vless-1859775608"
+    type: "vless"
+    server: "67.220.73.204"
+    port: 16016
+    uuid: "814bd064-544d-4255-a070-5705c03f6da9"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "k2hPp0tTW0Da-HK94wYpSCLbuK44LfGqC2MSJIM1Ti0"
+      short-id: "48050fab"
+  -
+    name: "vless-1859957328"
+    type: "vless"
+    server: "165.231.170.18"
+    port: 8443
+    uuid: "b3441cc7-1e5f-4eb6-8207-90788eeca21e"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "api-6ad3c751.adhil.uk"
+    client-fingerprint: "firefox"
+  -
+    name: "vless-1853993808"
+    type: "vless"
+    server: "104.17.70.206"
+    port: 8443
+    uuid: "c136a12c-4260-48a7-a1e6-fbda83a11045"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "free.sahanwickramasinghe.me"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "free.sahanwickramasinghe.me"
 proxy-groups:
   -
     name: "AUTO"
@@ -15223,6 +16222,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 133"
       - "@DeltaKroneckerGithub 134"
       - "@DeltaKroneckerGithub 135"
+      - "@DeltaKroneckerGithub 137"
       - "@DeltaKroneckerGithub 138"
       - "@DeltaKroneckerGithub 139"
       - "@DeltaKroneckerGithub 140"
@@ -15314,7 +16314,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 230"
       - "@DeltaKroneckerGithub 231"
       - "@DeltaKroneckerGithub 232"
-      - "@DeltaKroneckerGithub 233"
       - "@DeltaKroneckerGithub 234"
       - "@DeltaKroneckerGithub 235"
       - "@DeltaKroneckerGithub 236"
@@ -15343,6 +16342,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 261"
       - "@DeltaKroneckerGithub 262"
       - "@DeltaKroneckerGithub 263"
+      - "@DeltaKroneckerGithub 264"
       - "@DeltaKroneckerGithub 265"
       - "@DeltaKroneckerGithub 266"
       - "@DeltaKroneckerGithub 267"
@@ -15486,6 +16486,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 418"
       - "@DeltaKroneckerGithub 419"
       - "@DeltaKroneckerGithub 420"
+      - "@DeltaKroneckerGithub 421"
       - "@DeltaKroneckerGithub 422"
       - "@DeltaKroneckerGithub 424"
       - "@DeltaKroneckerGithub 425"
@@ -15552,7 +16553,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 492"
       - "@DeltaKroneckerGithub 493"
       - "@DeltaKroneckerGithub 494"
-      - "@DeltaKroneckerGithub 495"
       - "@DeltaKroneckerGithub 497"
       - "@DeltaKroneckerGithub 498"
       - "@DeltaKroneckerGithub 499"
@@ -15649,6 +16649,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 595"
       - "@DeltaKroneckerGithub 596"
       - "@DeltaKroneckerGithub 597"
+      - "@DeltaKroneckerGithub 599"
       - "@DeltaKroneckerGithub 600"
       - "@DeltaKroneckerGithub 601"
       - "@DeltaKroneckerGithub 602"
@@ -16019,6 +17020,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 989"
       - "@DeltaKroneckerGithub 990"
       - "@DeltaKroneckerGithub 991"
+      - "@DeltaKroneckerGithub 992"
       - "@DeltaKroneckerGithub 993"
       - "@DeltaKroneckerGithub 994"
       - "@DeltaKroneckerGithub 995"
@@ -16105,15 +17107,77 @@ proxy-groups:
       - "@DeltaKroneckerGithub 1086"
       - "@DeltaKroneckerGithub 1087"
       - "104.18.35.86:2082"
-      - "104.17.148.22:443"
-      - "104.17.147.22:443"
-      - "51.15.16.68:2053"
-      - "103.160.59.198:443"
-      - "cf.130519.xyz:443"
-      - "45.9.156.28:443"
-      - "150.40.126.21:443"
+      - "saas.sin.fan:443"
+      - "104.248.107.186:2053"
+      - "179.255.125.93:8443"
+      - "179.253.239.46:8443"
+      - "179.255.140.146:443"
+      - "45.39.60.236:8443"
+      - "179.253.235.175:443"
+      - "45.61.149.205:8443"
+      - "s3.shardshop.cc:443"
+      - "104.252.111.38:8443"
+      - "82.39.212.230:443"
+      - "apiv2.shardtech.pro:443"
+      - "s3.shardtech.pro:443"
+      - "195.133.17.250:443"
+      - "141.98.233.6:443"
+      - "104.245.245.16:8443"
+      - "130.78.190.134:443"
+      - "45.76.208.253:443"
+      - "en.shardtech.pro:443"
+      - "209.33.172.78:8443"
+      - "195.66.24.121:8443"
+      - "103.27.187.148:443"
+      - "3.113.232.245:443"
+      - "45.92.159.236:443"
+      - "139.180.194.242:443"
+      - "213.176.94.31:443"
+      - "156.246.89.172:443"
+      - "104.64.59.9:443"
+      - "60.130.209.253:443"
+      - "152.89.254.48:8443"
+      - "185.112.249.201:2053"
+      - "209.33.161.104:443"
+      - "191.223.210.79:8443"
+      - "185.206.171.43:2053"
+      - "43.174.195.1:443"
+      - "45.38.60.153:8443"
+      - "51.79.156.240:8443"
+      - "103.167.151.85:8443"
       - "45.9.156.27:443"
+      - "152.67.198.36:443"
+      - "149.118.155.105:8443"
+      - "54.179.212.2:443"
+      - "140.245.65.12:2053"
+      - "103.161.179.171:443"
+      - "103.161.178.215:443"
+      - "103.161.178.72:443"
+      - "104.238.24.185:443"
       - "89.35.14.34:443"
+      - "179.255.99.75:443"
+      - "38.55.199.128:443"
+      - "213.165.37.102:443"
+      - "185.141.227.223:443"
+      - "vless-1856195269"
+      - "vless-1860511819"
+      - "vless-1854032398"
+      - "vless-1860640780"
+      - "vless-1859957299"
+      - "vless-1859400271"
+      - "vless-1856014436"
+      - "vless-1858696444"
+      - "vless-1853341803"
+      - "vless-1856199588"
+      - "vless-1859957259"
+      - "vless-1856198739"
+      - "vless-1853993727"
+      - "vless-1854025651"
+      - "vless-1858721893"
+      - "vless-1856013877"
+      - "vless-1859775608"
+      - "vless-1859957328"
+      - "vless-1853993808"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -16243,6 +17307,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 133"
       - "@DeltaKroneckerGithub 134"
       - "@DeltaKroneckerGithub 135"
+      - "@DeltaKroneckerGithub 137"
       - "@DeltaKroneckerGithub 138"
       - "@DeltaKroneckerGithub 139"
       - "@DeltaKroneckerGithub 140"
@@ -16334,7 +17399,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 230"
       - "@DeltaKroneckerGithub 231"
       - "@DeltaKroneckerGithub 232"
-      - "@DeltaKroneckerGithub 233"
       - "@DeltaKroneckerGithub 234"
       - "@DeltaKroneckerGithub 235"
       - "@DeltaKroneckerGithub 236"
@@ -16363,6 +17427,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 261"
       - "@DeltaKroneckerGithub 262"
       - "@DeltaKroneckerGithub 263"
+      - "@DeltaKroneckerGithub 264"
       - "@DeltaKroneckerGithub 265"
       - "@DeltaKroneckerGithub 266"
       - "@DeltaKroneckerGithub 267"
@@ -16506,6 +17571,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 418"
       - "@DeltaKroneckerGithub 419"
       - "@DeltaKroneckerGithub 420"
+      - "@DeltaKroneckerGithub 421"
       - "@DeltaKroneckerGithub 422"
       - "@DeltaKroneckerGithub 424"
       - "@DeltaKroneckerGithub 425"
@@ -16572,7 +17638,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 492"
       - "@DeltaKroneckerGithub 493"
       - "@DeltaKroneckerGithub 494"
-      - "@DeltaKroneckerGithub 495"
       - "@DeltaKroneckerGithub 497"
       - "@DeltaKroneckerGithub 498"
       - "@DeltaKroneckerGithub 499"
@@ -16669,6 +17734,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 595"
       - "@DeltaKroneckerGithub 596"
       - "@DeltaKroneckerGithub 597"
+      - "@DeltaKroneckerGithub 599"
       - "@DeltaKroneckerGithub 600"
       - "@DeltaKroneckerGithub 601"
       - "@DeltaKroneckerGithub 602"
@@ -17039,6 +18105,7 @@ proxy-groups:
       - "@DeltaKroneckerGithub 989"
       - "@DeltaKroneckerGithub 990"
       - "@DeltaKroneckerGithub 991"
+      - "@DeltaKroneckerGithub 992"
       - "@DeltaKroneckerGithub 993"
       - "@DeltaKroneckerGithub 994"
       - "@DeltaKroneckerGithub 995"
@@ -17125,15 +18192,77 @@ proxy-groups:
       - "@DeltaKroneckerGithub 1086"
       - "@DeltaKroneckerGithub 1087"
       - "104.18.35.86:2082"
-      - "104.17.148.22:443"
-      - "104.17.147.22:443"
-      - "51.15.16.68:2053"
-      - "103.160.59.198:443"
-      - "cf.130519.xyz:443"
-      - "45.9.156.28:443"
-      - "150.40.126.21:443"
+      - "saas.sin.fan:443"
+      - "104.248.107.186:2053"
+      - "179.255.125.93:8443"
+      - "179.253.239.46:8443"
+      - "179.255.140.146:443"
+      - "45.39.60.236:8443"
+      - "179.253.235.175:443"
+      - "45.61.149.205:8443"
+      - "s3.shardshop.cc:443"
+      - "104.252.111.38:8443"
+      - "82.39.212.230:443"
+      - "apiv2.shardtech.pro:443"
+      - "s3.shardtech.pro:443"
+      - "195.133.17.250:443"
+      - "141.98.233.6:443"
+      - "104.245.245.16:8443"
+      - "130.78.190.134:443"
+      - "45.76.208.253:443"
+      - "en.shardtech.pro:443"
+      - "209.33.172.78:8443"
+      - "195.66.24.121:8443"
+      - "103.27.187.148:443"
+      - "3.113.232.245:443"
+      - "45.92.159.236:443"
+      - "139.180.194.242:443"
+      - "213.176.94.31:443"
+      - "156.246.89.172:443"
+      - "104.64.59.9:443"
+      - "60.130.209.253:443"
+      - "152.89.254.48:8443"
+      - "185.112.249.201:2053"
+      - "209.33.161.104:443"
+      - "191.223.210.79:8443"
+      - "185.206.171.43:2053"
+      - "43.174.195.1:443"
+      - "45.38.60.153:8443"
+      - "51.79.156.240:8443"
+      - "103.167.151.85:8443"
       - "45.9.156.27:443"
+      - "152.67.198.36:443"
+      - "149.118.155.105:8443"
+      - "54.179.212.2:443"
+      - "140.245.65.12:2053"
+      - "103.161.179.171:443"
+      - "103.161.178.215:443"
+      - "103.161.178.72:443"
+      - "104.238.24.185:443"
       - "89.35.14.34:443"
+      - "179.255.99.75:443"
+      - "38.55.199.128:443"
+      - "213.165.37.102:443"
+      - "185.141.227.223:443"
+      - "vless-1856195269"
+      - "vless-1860511819"
+      - "vless-1854032398"
+      - "vless-1860640780"
+      - "vless-1859957299"
+      - "vless-1859400271"
+      - "vless-1856014436"
+      - "vless-1858696444"
+      - "vless-1853341803"
+      - "vless-1856199588"
+      - "vless-1859957259"
+      - "vless-1856198739"
+      - "vless-1853993727"
+      - "vless-1854025651"
+      - "vless-1858721893"
+      - "vless-1856013877"
+      - "vless-1859775608"
+      - "vless-1859957328"
+      - "vless-1853993808"
   -
     name: "PROXY"
     type: "select"

@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-9891-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-9864-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-10-17 23:06:13 МСК`
+**Последнее обновление:** `2026-10-18 13:23:09 МСК`
 
 ## Подписки
 
@@ -27,23 +27,23 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `9891` |
-| Россия | `2795` |
-| Global | `7096` |
-| Global 5K | `2082` |
+| Всего серверов | `9864` |
+| Россия | `2796` |
+| Global | `7068` |
+| Global 5K | `2100` |
 | LAN 5K | `5000` |
-| LAN Global | `6012` |
-| LAN Experimental | `1012` |
-| LAN Experimental AUTO | `1012` |
-| Исключено пересечений Experimental с LAN Global | `606` |
-| BS Safe MANUAL | `2017` |
+| LAN Global | `5952` |
+| LAN Experimental | `1077` |
+| LAN Experimental AUTO | `1077` |
+| Исключено пересечений Experimental с LAN Global | `557` |
+| BS Safe MANUAL | `2018` |
 | BS Safe AUTO | `50` |
-| Happ Mobile | `434` |
+| Happ Mobile | `416` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `1012` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
+Изолированная тестовая подписка: `1077` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
 <!-- LAN-EXPERIMENTAL:END -->
 
 ## Подключение
