@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-10031-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-9537-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-10-18 23:07:03 МСК`
+**Последнее обновление:** `2026-10-20 09:22:17 МСК`
 
 ## Подписки
 
@@ -27,23 +27,23 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `10031` |
-| Россия | `2808` |
-| Global | `7223` |
-| Global 5K | `2139` |
+| Всего серверов | `9537` |
+| Россия | `2708` |
+| Global | `6829` |
+| Global 5K | `2152` |
 | LAN 5K | `5000` |
-| LAN Global | `6065` |
-| LAN Experimental | `874` |
-| LAN Experimental AUTO | `874` |
-| Исключено пересечений Experimental с LAN Global | `499` |
-| BS Safe MANUAL | `2021` |
+| LAN Global | `5634` |
+| LAN Experimental | `873` |
+| LAN Experimental AUTO | `873` |
+| Исключено пересечений Experimental с LAN Global | `500` |
+| BS Safe MANUAL | `2040` |
 | BS Safe AUTO | `50` |
-| Happ Mobile | `407` |
+| Happ Mobile | `405` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `874` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
+Изолированная тестовая подписка: `873` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
 <!-- LAN-EXPERIMENTAL:END -->
 
 ## Подключение

@@ -1,12 +1,12 @@
 # LAN Experimental
-# Version: 1.20261018.230914
+# Version: 1.20261020.092311
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-18 23:08:02 МСК
+# Updated: 2026-10-20 09:23:11 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
 #   - Au1rxx Verified: https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt
-# Servers: 874
+# Servers: 873
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -3848,25 +3848,6 @@ proxies:
       path: "/?ed=2048"
       headers:
         Host: "test75.pages.dev"
-  -
-    name: "@DeltaKroneckerGithub 290"
-    type: "vless"
-    server: "fitindoor.net"
-    port: 2053
-    uuid: "95a608b6-bff1-4e10-bb61-0a39f221bb7d"
-    network: "xhttp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "fitindoor.net"
-    client-fingerprint: "firefox"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    xhttp-opts:
-      path: "/api/v1/upload"
-      host: "fitindoor.net"
-      mode: "auto"
   -
     name: "@DeltaKroneckerGithub 291"
     type: "vless"
@@ -13235,7 +13216,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 287"
       - "@DeltaKroneckerGithub 288"
       - "@DeltaKroneckerGithub 289"
-      - "@DeltaKroneckerGithub 290"
       - "@DeltaKroneckerGithub 291"
       - "@DeltaKroneckerGithub 292"
       - "@DeltaKroneckerGithub 293"
@@ -14117,7 +14097,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 287"
       - "@DeltaKroneckerGithub 288"
       - "@DeltaKroneckerGithub 289"
-      - "@DeltaKroneckerGithub 290"
       - "@DeltaKroneckerGithub 291"
       - "@DeltaKroneckerGithub 292"
       - "@DeltaKroneckerGithub 293"
