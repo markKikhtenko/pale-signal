@@ -394,6 +394,7 @@ GITHUB_PUBLICATION_CACHE: dict[str, tuple[float, str]] = {}
 
 TRUE_VALUES = {"1", "true", "yes", "on"}
 SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
+SUPPORTED_XHTTP_MODES = {"auto", "stream-one", "stream-up", "packet-up"}
 GEOIP_BATCH_URL = "http://ip-api.com/batch?fields=status,countryCode,query,message"
 GEOIP_BATCH_SIZE = int(os.environ.get("GEOIP_BATCH_SIZE", "100"))
 GEOIP_RETRIES = int(os.environ.get("GEOIP_RETRIES", "6"))
@@ -770,7 +771,9 @@ def parse_vless(line: str, source_id: str) -> dict | None:
             xhttp_opts: dict = {"path": path or "/"}
             if host:
                 xhttp_opts["host"] = host
-            mode = first_param(params, "mode")
+            mode = first_param(params, "mode").lower()
+            if mode and mode not in SUPPORTED_XHTTP_MODES:
+                return None
             if mode:
                 xhttp_opts["mode"] = mode
             proxy["xhttp-opts"] = xhttp_opts

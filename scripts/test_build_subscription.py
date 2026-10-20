@@ -272,6 +272,25 @@ class LanExperimentalTests(unittest.TestCase):
         )
 
 
+class VlessParsingTests(unittest.TestCase):
+    @staticmethod
+    def xhttp_link(mode: str) -> str:
+        return (
+            f"vless://{uuid.UUID(int=1)}@example.com:443"
+            f"?encryption=none&security=tls&type=xhttp&path=%2F&mode={mode}#xhttp"
+        )
+
+    def test_supported_xhttp_modes_are_normalized_and_retained(self) -> None:
+        for mode in sorted(builder.SUPPORTED_XHTTP_MODES):
+            with self.subTest(mode=mode):
+                proxy = builder.parse_vless(self.xhttp_link(mode.upper()), "TEST")
+                self.assertIsNotNone(proxy)
+                self.assertEqual(proxy["xhttp-opts"]["mode"], mode)
+
+    def test_unsupported_xhttp_mode_is_rejected(self) -> None:
+        self.assertIsNone(builder.parse_vless(self.xhttp_link("s"), "TEST"))
+
+
 class HappMobileSubscriptionTests(unittest.TestCase):
     @staticmethod
     def proxy(
