@@ -272,6 +272,136 @@ class LanExperimentalTests(unittest.TestCase):
         )
 
 
+class LanGlobalFastCheckTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.proxies = [
+            {
+                "name": "LAN node 1",
+                "type": "vless",
+                "server": "one.example.com",
+                "port": 443,
+                "uuid": str(uuid.UUID(int=1)),
+                "_sources": ["LAN_SOURCE"],
+            },
+            {
+                "name": "LAN node 2",
+                "type": "vless",
+                "server": "two.example.com",
+                "port": 8443,
+                "uuid": str(uuid.UUID(int=2)),
+                "_sources": ["LAN_SOURCE"],
+            },
+        ]
+        self.lan_global, self.fast_check = builder.build_lan_global_configs(self.proxies)
+        self.lan_groups = {
+            group["name"]: group for group in self.lan_global["proxy-groups"]
+        }
+        self.fast_groups = {
+            group["name"]: group for group in self.fast_check["proxy-groups"]
+        }
+
+    def test_proxy_composition_order_and_parameters_are_identical(self) -> None:
+        self.assertEqual(self.fast_check["proxies"], self.lan_global["proxies"])
+        self.assertEqual(
+            [proxy["name"] for proxy in self.fast_check["proxies"]],
+            ["LAN node 1", "LAN node 2"],
+        )
+        builder.validate_lan_global_fast_check_config(self.lan_global, self.fast_check)
+
+    def test_every_fast_check_proxy_is_in_auto_exactly_once(self) -> None:
+        proxy_names = [proxy["name"] for proxy in self.fast_check["proxies"]]
+        auto_names = self.fast_groups["AUTO"]["proxies"]
+        self.assertEqual(auto_names, proxy_names)
+        self.assertEqual(len(auto_names), len(set(auto_names)))
+
+    def test_fast_check_auto_contract(self) -> None:
+        auto = self.fast_groups["AUTO"]
+        self.assertEqual(auto["type"], "url-test")
+        self.assertEqual(auto["url"], "https://cp.cloudflare.com/generate_204")
+        self.assertEqual(auto["interval"], 600)
+        self.assertEqual(auto["tolerance"], 50)
+        self.assertEqual(auto["timeout"], 3000)
+        self.assertEqual(auto["max-failed-times"], 3)
+        self.assertIs(auto["lazy"], True)
+
+    def test_proxy_defaults_to_auto_then_manual(self) -> None:
+        self.assertEqual(self.fast_groups["PROXY"]["proxies"], ["AUTO", "MANUAL"])
+        self.assertEqual(
+            self.fast_groups["MANUAL"]["proxies"],
+            [proxy["name"] for proxy in self.fast_check["proxies"]],
+        )
+
+    def test_existing_lan_global_keeps_original_auto_settings(self) -> None:
+        auto = self.lan_groups["AUTO"]
+        self.assertEqual(auto["type"], "url-test")
+        self.assertEqual(auto["interval"], 900)
+        self.assertEqual(auto["tolerance"], 100)
+        self.assertIs(auto["lazy"], True)
+        self.assertNotIn("timeout", auto)
+        self.assertNotIn("max-failed-times", auto)
+
+    def test_fast_check_does_not_limit_proxy_count(self) -> None:
+        proxies = [
+            {
+                "name": f"LAN node {number}",
+                "type": "vless",
+                "server": f"node-{number}.example.com",
+                "port": 443,
+            }
+            for number in range(5001)
+        ]
+        _lan_global, fast_check = builder.build_lan_global_configs(proxies)
+        auto = next(
+            group for group in fast_check["proxy-groups"] if group["name"] == "AUTO"
+        )
+        self.assertEqual(len(fast_check["proxies"]), 5001)
+        self.assertEqual(len(auto["proxies"]), 5001)
+
+    def test_validator_rejects_changes_outside_fast_check_auto_settings(self) -> None:
+        changed = {**self.fast_check, "ipv6": True}
+        with self.assertRaisesRegex(RuntimeError, "outside the allowed AUTO settings"):
+            builder.validate_lan_global_fast_check_config(self.lan_global, changed)
+
+    def test_default_build_config_and_custom_auto_list_are_unchanged(self) -> None:
+        config = builder.build_config(self.proxies, [self.proxies[1]])
+        self.assertEqual(
+            config,
+            {
+                "mixed-port": 7890,
+                "allow-lan": True,
+                "mode": "rule",
+                "log-level": "info",
+                "ipv6": False,
+                "proxies": [
+                    {key: value for key, value in proxy.items() if not key.startswith("_")}
+                    for proxy in self.proxies
+                ],
+                "proxy-groups": [
+                    {
+                        "name": "AUTO",
+                        "type": "url-test",
+                        "proxies": ["LAN node 2"],
+                        "url": "https://cp.cloudflare.com/generate_204",
+                        "interval": 900,
+                        "tolerance": 100,
+                        "lazy": True,
+                    },
+                    {
+                        "name": "MANUAL",
+                        "type": "select",
+                        "proxies": ["LAN node 1", "LAN node 2"],
+                    },
+                    {
+                        "name": "PROXY",
+                        "type": "select",
+                        "proxies": ["AUTO", "MANUAL"],
+                    },
+                ],
+                "rules": ["MATCH,PROXY"],
+            },
+        )
+
+
 class VlessParsingTests(unittest.TestCase):
     @staticmethod
     def xhttp_link(mode: str) -> str:

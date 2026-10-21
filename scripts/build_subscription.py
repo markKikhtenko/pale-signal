@@ -315,6 +315,7 @@ GLOBAL_OUTPUT_FILE = ROOT / "subscription-global.yaml"
 GLOBAL_5K_OUTPUT_FILE = ROOT / "subscription-global-5k.yaml"
 LAN_5K_OUTPUT_FILE = ROOT / "subscription-lan-5k.yaml"
 LAN_GLOBAL_OUTPUT_FILE = ROOT / "subscription-lan-global.yaml"
+LAN_GLOBAL_FAST_CHECK_OUTPUT_FILE = ROOT / "subscription-lan-global-fast-check.yaml"
 LAN_EXPERIMENTAL_OUTPUT_FILE = ROOT / "subscription-lan-experimental.yaml"
 LAN_EXPERIMENTAL_STATS_FILE = ROOT / "lan-experimental-stats.json"
 LAN_EXPERIMENTAL_CANDIDATE_DIR = ROOT / ".tools" / "lan-experimental-candidate"
@@ -330,6 +331,10 @@ MSK = dt.timezone(dt.timedelta(hours=3), "MSK")
 UPDATE_HISTORY_LIMIT = 10
 GLOBAL_5K_SUBSCRIPTION_LIMIT = 5000
 LAN_5K_SUBSCRIPTION_LIMIT = 5000
+LAN_GLOBAL_FAST_CHECK_INTERVAL = 600
+LAN_GLOBAL_FAST_CHECK_TOLERANCE = 50
+LAN_GLOBAL_FAST_CHECK_TIMEOUT = 3000
+LAN_GLOBAL_FAST_CHECK_MAX_FAILED_TIMES = 3
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
 MOBILE_SUBSCRIPTION_LIMIT = 500
@@ -1537,10 +1542,33 @@ def dedupe_auto_proxies(proxies: list[dict]) -> list[dict]:
     return result
 
 
-def build_config(proxies: list[dict], auto_proxies: list[dict] | None = None) -> dict:
+def build_config(
+    proxies: list[dict],
+    auto_proxies: list[dict] | None = None,
+    *,
+    auto_url: str = URL_TEST,
+    auto_interval: int = 900,
+    auto_tolerance: int = 100,
+    auto_timeout: int | None = None,
+    auto_max_failed_times: int | None = None,
+    auto_lazy: bool = True,
+) -> dict:
     names = [proxy["name"] for proxy in proxies]
     auto_names = [proxy["name"] for proxy in auto_proxies] if auto_proxies is not None else names
     export_proxies = [{key: value for key, value in proxy.items() if not key.startswith("_")} for proxy in proxies]
+    auto_group = {
+        "name": "AUTO",
+        "type": "url-test",
+        "proxies": auto_names,
+        "url": auto_url,
+        "interval": auto_interval,
+        "tolerance": auto_tolerance,
+    }
+    if auto_timeout is not None:
+        auto_group["timeout"] = auto_timeout
+    if auto_max_failed_times is not None:
+        auto_group["max-failed-times"] = auto_max_failed_times
+    auto_group["lazy"] = auto_lazy
 
     return {
         "mixed-port": 7890,
@@ -1550,15 +1578,7 @@ def build_config(proxies: list[dict], auto_proxies: list[dict] | None = None) ->
         "ipv6": False,
         "proxies": export_proxies,
         "proxy-groups": [
-            {
-                "name": "AUTO",
-                "type": "url-test",
-                "proxies": auto_names,
-                "url": URL_TEST,
-                "interval": 900,
-                "tolerance": 100,
-                "lazy": True,
-            },
+            auto_group,
             {
                 "name": "MANUAL",
                 "type": "select",
@@ -1572,6 +1592,18 @@ def build_config(proxies: list[dict], auto_proxies: list[dict] | None = None) ->
         ],
         "rules": ["MATCH,PROXY"],
     }
+
+
+def build_lan_global_configs(proxies: list[dict]) -> tuple[dict, dict]:
+    lan_global_config = build_config(proxies)
+    fast_check_config = build_config(
+        proxies,
+        auto_interval=LAN_GLOBAL_FAST_CHECK_INTERVAL,
+        auto_tolerance=LAN_GLOBAL_FAST_CHECK_TOLERANCE,
+        auto_timeout=LAN_GLOBAL_FAST_CHECK_TIMEOUT,
+        auto_max_failed_times=LAN_GLOBAL_FAST_CHECK_MAX_FAILED_TIMES,
+    )
+    return lan_global_config, fast_check_config
 
 
 def build_bs_safe_config(proxies: list[dict], auto_proxies: list[dict]) -> dict:
@@ -1690,6 +1722,32 @@ def validate_config(config: dict) -> None:
         missing = [name for name in refs if name not in available or name == group.get("name")]
         if missing:
             raise RuntimeError(f"group {group.get('name')} references missing proxies: {missing}")
+
+
+def validate_lan_global_fast_check_config(lan_global: dict, fast_check: dict) -> None:
+    validate_config(lan_global)
+    validate_config(fast_check)
+    if fast_check.get("proxies") != lan_global.get("proxies"):
+        raise RuntimeError("LAN Global and Fast Check proxies differ")
+
+    expected = copy.deepcopy(lan_global)
+    auto_group = next(
+        group for group in expected["proxy-groups"] if group.get("name") == "AUTO"
+    )
+    auto_group.update(
+        {
+            "url": URL_TEST,
+            "interval": LAN_GLOBAL_FAST_CHECK_INTERVAL,
+            "tolerance": LAN_GLOBAL_FAST_CHECK_TOLERANCE,
+            "timeout": LAN_GLOBAL_FAST_CHECK_TIMEOUT,
+            "max-failed-times": LAN_GLOBAL_FAST_CHECK_MAX_FAILED_TIMES,
+            "lazy": True,
+        }
+    )
+    if fast_check != expected:
+        raise RuntimeError(
+            "LAN Global Fast Check differs from LAN Global outside the allowed AUTO settings"
+        )
 
 
 def normalized_server_identity(server: object) -> str:
@@ -2944,6 +3002,7 @@ def write_final_readme(
 | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) | Global, до {GLOBAL_5K_SUBSCRIPTION_LIMIT} серверов |
 | [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | LAN, до {LAN_5K_SUBSCRIPTION_LIMIT} серверов |
 | [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | LAN без лимита |
+| [subscription-lan-global-fast-check.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global-fast-check.yaml) | LAN Global Fast Check — те же серверы LAN Global, более активная автоматическая проверка |
 | [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) | Изолированная тестовая LAN-подписка |
 | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) | Тестовая Global |
 | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима блокировок |
@@ -2967,6 +3026,20 @@ def write_final_readme(
 | Happ Mobile | `{mobile_count if mobile_count is not None else stats.get('mobile', 0)}` |
 
 {experimental_readme_section(experimental_stats)}
+
+## LAN Global и Fast Check
+
+Обе подписки содержат одинаковые серверы в одинаковом порядке и используют один URL проверки: `{URL_TEST}`.
+
+| Параметр `AUTO` | LAN Global | LAN Global Fast Check |
+|-----------------|------------|-----------------------|
+| `interval` | `900` | `{LAN_GLOBAL_FAST_CHECK_INTERVAL}` |
+| `tolerance` | `100` | `{LAN_GLOBAL_FAST_CHECK_TOLERANCE}` |
+| `timeout` | значение Mihomo по умолчанию | `{LAN_GLOBAL_FAST_CHECK_TIMEOUT}` мс |
+| `max-failed-times` | значение Mihomo по умолчанию | `{LAN_GLOBAL_FAST_CHECK_MAX_FAILED_TIMES}` |
+| `lazy` | `true` | `true` |
+
+`url-test` измеряет доступность узла и задержку ответа на тестовый URL. Он не измеряет реальную скорость передачи данных до Instagram, ChatGPT или других приложений.
 
 ## Подключение
 
@@ -3215,15 +3288,32 @@ def main(
         if not lan_global_proxies:
             raise RuntimeError("no LAN Global VLESS servers were produced")
         lan_5k_config = build_config(lan_5k_proxies)
-        lan_global_config = build_config(lan_global_proxies)
+        lan_global_config, lan_global_fast_check_config = build_lan_global_configs(
+            lan_global_proxies
+        )
         validate_config(lan_5k_config)
-        validate_config(lan_global_config)
+        validate_lan_global_fast_check_config(
+            lan_global_config,
+            lan_global_fast_check_config,
+        )
         lan_5k_yaml_text = "\n".join(dump_yaml(lan_5k_config)) + "\n"
         lan_global_yaml_text = "\n".join(dump_yaml(lan_global_config)) + "\n"
-        if not lan_5k_yaml_text.strip() or not lan_global_yaml_text.strip():
+        lan_global_fast_check_yaml_text = (
+            "\n".join(dump_yaml(lan_global_fast_check_config)) + "\n"
+        )
+        if (
+            not lan_5k_yaml_text.strip()
+            or not lan_global_yaml_text.strip()
+            or not lan_global_fast_check_yaml_text.strip()
+        ):
             raise RuntimeError("empty LAN YAML output")
         LAN_5K_OUTPUT_FILE.write_text(lan_5k_yaml_text, encoding="utf-8", newline="\n")
         LAN_GLOBAL_OUTPUT_FILE.write_text(lan_global_yaml_text, encoding="utf-8", newline="\n")
+        LAN_GLOBAL_FAST_CHECK_OUTPUT_FILE.write_text(
+            lan_global_fast_check_yaml_text,
+            encoding="utf-8",
+            newline="\n",
+        )
         specialized_count = sum(
             1
             for proxy in lan_5k_proxies
@@ -3232,7 +3322,8 @@ def main(
         print(
             f"wrote subscription-lan-5k.yaml with {len(lan_5k_proxies)} proxies "
             f"({specialized_count} from LAN-only sources) and "
-            f"subscription-lan-global.yaml with {len(lan_global_proxies)} proxies"
+            f"subscription-lan-global.yaml and subscription-lan-global-fast-check.yaml "
+            f"with {len(lan_global_proxies)} proxies each"
         )
         return 0
 
@@ -3310,12 +3401,24 @@ def main(
     if not lan_global_proxies:
         raise RuntimeError("no LAN Global VLESS servers were produced")
     lan_5k_config = build_config(lan_5k_proxies)
-    lan_global_config = build_config(lan_global_proxies)
+    lan_global_config, lan_global_fast_check_config = build_lan_global_configs(
+        lan_global_proxies
+    )
     validate_config(lan_5k_config)
-    validate_config(lan_global_config)
+    validate_lan_global_fast_check_config(
+        lan_global_config,
+        lan_global_fast_check_config,
+    )
     lan_5k_yaml_text = "\n".join(dump_yaml(lan_5k_config)) + "\n"
     lan_global_yaml_text = "\n".join(dump_yaml(lan_global_config)) + "\n"
-    if not lan_5k_yaml_text.strip() or not lan_global_yaml_text.strip():
+    lan_global_fast_check_yaml_text = (
+        "\n".join(dump_yaml(lan_global_fast_check_config)) + "\n"
+    )
+    if (
+        not lan_5k_yaml_text.strip()
+        or not lan_global_yaml_text.strip()
+        or not lan_global_fast_check_yaml_text.strip()
+    ):
         raise RuntimeError("empty LAN YAML output")
 
     bs_safe_proxies = select_bs_safe_proxies(proxies)
@@ -3375,6 +3478,11 @@ def main(
     GLOBAL_5K_OUTPUT_FILE.write_text(global_5k_yaml_text, encoding="utf-8", newline="\n")
     LAN_5K_OUTPUT_FILE.write_text(lan_5k_yaml_text, encoding="utf-8", newline="\n")
     LAN_GLOBAL_OUTPUT_FILE.write_text(lan_global_yaml_text, encoding="utf-8", newline="\n")
+    LAN_GLOBAL_FAST_CHECK_OUTPUT_FILE.write_text(
+        lan_global_fast_check_yaml_text,
+        encoding="utf-8",
+        newline="\n",
+    )
     GLOBAL_NON_STABLE_OUTPUT_FILE.write_text(
         global_non_stable_yaml_text,
         encoding="utf-8",

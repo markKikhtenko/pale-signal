@@ -65,6 +65,7 @@ jobs:
           gzip -dc .tools/mihomo/mihomo.gz > .tools/mihomo/mihomo
           chmod +x .tools/mihomo/mihomo
           .tools/mihomo/mihomo -t -f subscription-lan-global.yaml -d .tools/mihomo/home
+          .tools/mihomo/mihomo -t -f subscription-lan-global-fast-check.yaml -d .tools/mihomo/home
           mkdir -p .tools/openclash-merged
           python scripts/validate_openclash_module.py \
             --module openclash/blacklist-routing.conf \
@@ -75,6 +76,7 @@ jobs:
             subscription-global-5k.yaml \
             subscription-lan-5k.yaml \
             subscription-lan-global.yaml \
+            subscription-lan-global-fast-check.yaml \
             subscription-global-non-stable.yaml \
             subscription-bs-safe.yaml
           for config in .tools/openclash-merged/*.yaml; do
@@ -86,9 +88,11 @@ jobs:
           .tools/mihomo/mihomo convert-ruleset ipcidr yaml openclash/rules/custom-proxy-ip.yaml .tools/mihomo/custom-proxy-ip.mrs
           server_count="$(awk '/^proxies:/{inside=1; next} /^proxy-groups:/{inside=0} inside && $0 == "  -"{count++} END{print count+0}' subscription-lan-global.yaml)"
           echo "LAN Global servers: $server_count"
-          echo "### LAN Global" >> "$GITHUB_STEP_SUMMARY"
+          echo "### LAN Global and Fast Check" >> "$GITHUB_STEP_SUMMARY"
           echo "- Servers: $server_count" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Mihomo config test: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Identical proxy list and order: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Fast Check AUTO: url-test, interval=600, tolerance=50, timeout=3000, max-failed-times=3, lazy=true" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Mihomo config tests: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- OpenClash merged configs: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- Custom rule providers: passed" >> "$GITHUB_STEP_SUMMARY"
 
@@ -183,7 +187,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md update-history.json lan-experimental-stats.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml subscription-mobile.txt
+          git add README.md update-history.json lan-experimental-stats.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-global-fast-check.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml subscription-mobile.txt
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else
@@ -214,6 +218,7 @@ jobs:
           cp subscription-global-5k.yaml public/subscription-global-5k.yaml
           cp subscription-lan-5k.yaml public/subscription-lan-5k.yaml
           cp subscription-lan-global.yaml public/subscription-lan-global.yaml
+          cp subscription-lan-global-fast-check.yaml public/subscription-lan-global-fast-check.yaml
           cp subscription-lan-experimental.yaml public/subscription-lan-experimental.yaml
           cp subscription-global-non-stable.yaml public/subscription-global-non-stable.yaml
           cp subscription-bs-safe.yaml public/subscription-bs-safe.yaml
@@ -224,6 +229,7 @@ jobs:
           test -f public/openclash/rules/custom-proxy-domains.yaml
           test -f public/openclash/rules/custom-direct-ip.yaml
           test -f public/openclash/rules/custom-proxy-ip.yaml
+          test -s public/subscription-lan-global-fast-check.yaml
           test -s public/subscription-lan-experimental.yaml
 
       - name: Upload Pages artifact

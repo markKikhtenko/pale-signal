@@ -18,6 +18,7 @@
 | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) | Global, до 5000 серверов |
 | [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | LAN, до 5000 серверов |
 | [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | LAN без лимита |
+| [subscription-lan-global-fast-check.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global-fast-check.yaml) | LAN Global Fast Check — те же серверы LAN Global, более активная автоматическая проверка |
 | [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) | Изолированная тестовая LAN-подписка |
 | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) | Тестовая Global |
 | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима блокировок |
@@ -45,6 +46,20 @@
 
 Изолированная тестовая подписка: `974` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
 <!-- LAN-EXPERIMENTAL:END -->
+
+## LAN Global и Fast Check
+
+Обе подписки содержат одинаковые серверы в одинаковом порядке и используют один URL проверки: `https://cp.cloudflare.com/generate_204`.
+
+| Параметр `AUTO` | LAN Global | LAN Global Fast Check |
+|-----------------|------------|-----------------------|
+| `interval` | `900` | `600` |
+| `tolerance` | `100` | `50` |
+| `timeout` | значение Mihomo по умолчанию | `3000` мс |
+| `max-failed-times` | значение Mihomo по умолчанию | `3` |
+| `lazy` | `true` | `true` |
+
+`url-test` измеряет доступность узла и задержку ответа на тестовый URL. Он не измеряет реальную скорость передачи данных до Instagram, ChatGPT или других приложений.
 
 ## Подключение
 

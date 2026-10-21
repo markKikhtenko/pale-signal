@@ -17,6 +17,8 @@ from pathlib import Path
 
 import yaml
 
+import build_subscription as builder
+
 
 MATCH_RULE = re.compile(r"^MATCH,.*$")
 
@@ -278,6 +280,17 @@ def validate_lan_global(configs: dict[str, dict]) -> tuple[int, int]:
     return len(proxies), duplicate_count
 
 
+def validate_lan_global_fast_check(configs: dict[str, dict]) -> int:
+    fast_check = configs.get("subscription-lan-global-fast-check.yaml")
+    if fast_check is None:
+        return 0
+    lan_global = configs.get("subscription-lan-global.yaml")
+    if lan_global is None:
+        raise RuntimeError("LAN Global is required to validate Fast Check")
+    builder.validate_lan_global_fast_check_config(lan_global, fast_check)
+    return len(fast_check["proxies"])
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--module", type=Path, required=True)
@@ -330,9 +343,11 @@ def main() -> int:
     )
 
     server_count, duplicates = validate_lan_global(loaded_configs)
+    fast_check_count = validate_lan_global_fast_check(loaded_configs)
     print(
         f"validated {len(loaded_configs)} merged subscriptions; "
-        f"LAN Global servers={server_count}, exact_duplicates={duplicates}"
+        f"LAN Global servers={server_count}, exact_duplicates={duplicates}; "
+        f"Fast Check servers={fast_check_count}, AUTO settings=passed"
     )
     return 0
 
