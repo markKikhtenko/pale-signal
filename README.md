@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-9810-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-9577-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-10-21 00:18:10 МСК`
+**Последнее обновление:** `2026-10-21 09:32:13 МСК`
 
 ## Подписки
 
@@ -28,23 +28,23 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `9810` |
-| Россия | `2666` |
-| Global | `7144` |
-| Global 5K | `2126` |
+| Всего серверов | `9577` |
+| Россия | `2549` |
+| Global | `7028` |
+| Global 5K | `2362` |
 | LAN 5K | `5000` |
-| LAN Global | `5972` |
-| LAN Experimental | `974` |
-| LAN Experimental AUTO | `974` |
-| Исключено пересечений Experimental с LAN Global | `398` |
-| BS Safe MANUAL | `2021` |
+| LAN Global | `5665` |
+| LAN Experimental | `1000` |
+| LAN Experimental AUTO | `1000` |
+| Исключено пересечений Experimental с LAN Global | `456` |
+| BS Safe MANUAL | `1981` |
 | BS Safe AUTO | `50` |
-| Happ Mobile | `388` |
+| Happ Mobile | `406` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `974` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
+Изолированная тестовая подписка: `1000` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
 <!-- LAN-EXPERIMENTAL:END -->
 
 ## LAN Global и Fast Check
