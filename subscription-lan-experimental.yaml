@@ -1,12 +1,12 @@
 # LAN Experimental
-# Version: 1.20261022.140819
+# Version: 1.20261023.001510
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-22 14:08:19 МСК
+# Updated: 2026-10-23 00:15:10 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
 #   - Au1rxx Verified: https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt
-# Servers: 985
+# Servers: 973
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -14164,54 +14164,6 @@ proxies:
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
-    name: "138.2.41.8:443"
-    type: "vless"
-    server: "138.2.41.8"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
-    name: "45.95.212.186:443"
-    type: "vless"
-    server: "45.95.212.186"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
-    name: "179.253.246.191:443"
-    type: "vless"
-    server: "179.253.246.191"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
     name: "188.114.98.0:443 6"
     type: "vless"
     server: "188.114.98.0"
@@ -14310,22 +14262,6 @@ proxies:
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
-    name: "64.176.230.50:443"
-    type: "vless"
-    server: "64.176.230.50"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
     name: "141.164.44.60:443"
     type: "vless"
     server: "141.164.44.60"
@@ -14339,22 +14275,6 @@ proxies:
     client-fingerprint: "chrome"
     ws-opts:
       path: "/fp=chrome"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
-    name: "77.239.104.229:443"
-    type: "vless"
-    server: "77.239.104.229"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
@@ -14456,22 +14376,6 @@ proxies:
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
-    name: "103.71.22.158:443"
-    type: "vless"
-    server: "103.71.22.158"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
     name: "31.70.89.136:8443"
     type: "vless"
     server: "31.70.89.136"
@@ -14504,22 +14408,6 @@ proxies:
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
-    name: "185.71.230.237:443"
-    type: "vless"
-    server: "185.71.230.237"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
     name: "195.133.92.228:443"
     type: "vless"
     server: "195.133.92.228"
@@ -14533,38 +14421,6 @@ proxies:
     client-fingerprint: "chrome"
     ws-opts:
       path: "/fdip=sstp://vpn:vpn@public-vpn-200.opengw.net:443"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
-    name: "13.143.182.82:443"
-    type: "vless"
-    server: "13.143.182.82"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
-    name: "141.11.187.33:8443"
-    type: "vless"
-    server: "141.11.187.33"
-    port: 8443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
@@ -14586,22 +14442,6 @@ proxies:
       headers:
         Host: "fi1.merky.one"
   -
-    name: "130.78.185.4:443"
-    type: "vless"
-    server: "130.78.185.4"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
     name: "103.161.179.171:443"
     type: "vless"
     server: "103.161.179.171"
@@ -14621,38 +14461,6 @@ proxies:
     name: "216.23.93.27:443"
     type: "vless"
     server: "216.23.93.27"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
-    name: "72.56.106.210:443"
-    type: "vless"
-    server: "72.56.106.210"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
-    name: "103.114.201.154:443"
-    type: "vless"
-    server: "103.114.201.154"
     port: 443
     uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
     network: "ws"
@@ -15639,37 +15447,25 @@ proxy-groups:
       - "104.105.128.249:443"
       - "45.77.131.33:8443"
       - "104.105.140.77:443"
-      - "138.2.41.8:443"
-      - "45.95.212.186:443"
-      - "179.253.246.191:443"
       - "188.114.98.0:443 6"
       - "206.189.56.164:443"
       - "146.56.151.92:443"
       - "177.1.187.183:443"
       - "188.166.164.73:443"
       - "178.105.215.151:2053"
-      - "64.176.230.50:443"
       - "141.164.44.60:443"
-      - "77.239.104.229:443"
       - "searchjappro2.xyy123.date:443"
       - "193.122.115.184:443"
       - "131.186.26.94:443"
       - "188.114.98.0:443 9"
       - "91.107.189.117:443"
       - "84.32.22.205:443"
-      - "103.71.22.158:443"
       - "31.70.89.136:8443"
       - "110.172.148.33:443"
-      - "185.71.230.237:443"
       - "195.133.92.228:443"
-      - "13.143.182.82:443"
-      - "141.11.187.33:8443"
       - "188.114.98.0:443 10"
-      - "130.78.185.4:443"
       - "103.161.179.171:443"
       - "216.23.93.27:443"
-      - "72.56.106.210:443"
-      - "103.114.201.154:443"
       - "103.161.178.205:443"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
@@ -16632,37 +16428,25 @@ proxy-groups:
       - "104.105.128.249:443"
       - "45.77.131.33:8443"
       - "104.105.140.77:443"
-      - "138.2.41.8:443"
-      - "45.95.212.186:443"
-      - "179.253.246.191:443"
       - "188.114.98.0:443 6"
       - "206.189.56.164:443"
       - "146.56.151.92:443"
       - "177.1.187.183:443"
       - "188.166.164.73:443"
       - "178.105.215.151:2053"
-      - "64.176.230.50:443"
       - "141.164.44.60:443"
-      - "77.239.104.229:443"
       - "searchjappro2.xyy123.date:443"
       - "193.122.115.184:443"
       - "131.186.26.94:443"
       - "188.114.98.0:443 9"
       - "91.107.189.117:443"
       - "84.32.22.205:443"
-      - "103.71.22.158:443"
       - "31.70.89.136:8443"
       - "110.172.148.33:443"
-      - "185.71.230.237:443"
       - "195.133.92.228:443"
-      - "13.143.182.82:443"
-      - "141.11.187.33:8443"
       - "188.114.98.0:443 10"
-      - "130.78.185.4:443"
       - "103.161.179.171:443"
       - "216.23.93.27:443"
-      - "72.56.106.210:443"
-      - "103.114.201.154:443"
       - "103.161.178.205:443"
   -
     name: "PROXY"
