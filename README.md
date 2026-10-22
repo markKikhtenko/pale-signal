@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-9810-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-9984-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-10-22 00:17:47 МСК`
+**Последнее обновление:** `2026-10-22 09:54:54 МСК`
 
 ## Подписки
 
@@ -28,18 +28,18 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `9810` |
-| Россия | `2586` |
-| Global | `7224` |
-| Global 5K | `2183` |
+| Всего серверов | `9984` |
+| Россия | `2582` |
+| Global | `7402` |
+| Global 5K | `2546` |
 | LAN 5K | `2178` |
 | LAN Global | `2178` |
 | LAN Experimental | `989` |
 | LAN Experimental AUTO | `989` |
 | Исключено пересечений Experimental с LAN Global | `462` |
-| BS Safe MANUAL | `1976` |
+| BS Safe MANUAL | `2015` |
 | BS Safe AUTO | `50` |
-| Happ Mobile | `402` |
+| Happ Mobile | `428` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
