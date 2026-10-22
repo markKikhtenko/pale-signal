@@ -262,6 +262,11 @@ class LanExperimentalTests(unittest.TestCase):
         stats = builder.load_experimental_stats()
         builder.validate_experimental_stats(stats)
         readme = builder.README_FILE.read_text(encoding="utf-8")
+        lan_global = builder.load_yaml_mapping(builder.LAN_GLOBAL_OUTPUT_FILE)
+        self.assertIn(
+            f"| LAN Global Fast Check | `{len(lan_global['proxies'])}` |",
+            readme,
+        )
         self.assertIn(builder.experimental_readme_section(stats), readme)
         self.assertIn(f"| LAN Experimental | `{stats['total']}` |", readme)
         self.assertIn(f"| LAN Experimental AUTO | `{stats['auto']}` |", readme)

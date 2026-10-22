@@ -3058,6 +3058,7 @@ def write_final_readme(
 | Global 5K | `{stats['global_5k']}` |
 | LAN 5K | `{stats['lan_5k']}` |
 | LAN Global | `{stats['lan_global']}` |
+| LAN Global Fast Check | `{stats['lan_global']}` |
 | LAN Experimental | `{experimental_stats['total']}` |
 | LAN Experimental AUTO | `{experimental_stats['auto']}` |
 | Исключено пересечений Experimental с LAN Global | `{experimental_stats['lan_global_overlap']}` |

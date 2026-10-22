@@ -34,6 +34,7 @@
 | Global 5K | `2546` |
 | LAN 5K | `2178` |
 | LAN Global | `2178` |
+| LAN Global Fast Check | `2178` |
 | LAN Experimental | `989` |
 | LAN Experimental AUTO | `989` |
 | Исключено пересечений Experimental с LAN Global | `462` |
