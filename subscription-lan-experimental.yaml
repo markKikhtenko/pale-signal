@@ -1,12 +1,12 @@
 # LAN Experimental
-# Version: 1.20261022.094236
+# Version: 1.20261022.140819
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-22 09:42:36 МСК
+# Updated: 2026-10-22 14:08:19 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
 #   - Au1rxx Verified: https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt
-# Servers: 989
+# Servers: 985
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -12413,19 +12413,6 @@ proxies:
       headers:
         Host: "mmdv2.pages.dev"
   -
-    name: "@DeltaKroneckerGithub 882"
-    type: "vless"
-    server: "vu1us4xuhv387.87544899.xyz"
-    port: 443
-    uuid: "fb26530b-c9ca-4bb2-b726-6cddfa3afe66"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "maps.apple.com"
-    client-fingerprint: "chrome"
-  -
     name: "@DeltaKroneckerGithub 883"
     type: "vless"
     server: "104.21.0.97"
@@ -14113,24 +14100,6 @@ proxies:
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
-    name: "172.67.118.45:443"
-    type: "vless"
-    server: "172.67.118.45"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/fdip#TELEGRAM--MARAMBASHI--MARAMBASHI--MARAMBASHI--MARAMBASHI?ed=2560"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
     name: "141.98.41.20:443"
     type: "vless"
     server: "141.98.41.20"
@@ -14260,22 +14229,6 @@ proxies:
       path: "/9d9fdbc18c834cffab4276811501fbae"
       headers:
         Host: "alman.5f2vvtqh5syot.info"
-  -
-    name: "62.133.60.134:8443"
-    type: "vless"
-    server: "62.133.60.134"
-    port: 8443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
   -
     name: "206.189.56.164:443"
     type: "vless"
@@ -14548,22 +14501,6 @@ proxies:
     client-fingerprint: "chrome"
     ws-opts:
       path: "/fp=chrome"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
-    name: "13.140.29.45:443"
-    type: "vless"
-    server: "13.140.29.45"
-    port: 443
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
@@ -15585,7 +15522,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 879"
       - "@DeltaKroneckerGithub 880"
       - "@DeltaKroneckerGithub 881"
-      - "@DeltaKroneckerGithub 882"
       - "@DeltaKroneckerGithub 883"
       - "@DeltaKroneckerGithub 884"
       - "@DeltaKroneckerGithub 885"
@@ -15699,7 +15635,6 @@ proxy-groups:
       - "美国(yudou66.com 玉豆免费节点) 54"
       - "104.17.148.22:443"
       - "104.17.147.22:443"
-      - "172.67.118.45:443"
       - "141.98.41.20:443"
       - "104.105.128.249:443"
       - "45.77.131.33:8443"
@@ -15708,7 +15643,6 @@ proxy-groups:
       - "45.95.212.186:443"
       - "179.253.246.191:443"
       - "188.114.98.0:443 6"
-      - "62.133.60.134:8443"
       - "206.189.56.164:443"
       - "146.56.151.92:443"
       - "177.1.187.183:443"
@@ -15726,7 +15660,6 @@ proxy-groups:
       - "103.71.22.158:443"
       - "31.70.89.136:8443"
       - "110.172.148.33:443"
-      - "13.140.29.45:443"
       - "185.71.230.237:443"
       - "195.133.92.228:443"
       - "13.143.182.82:443"
@@ -16582,7 +16515,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 879"
       - "@DeltaKroneckerGithub 880"
       - "@DeltaKroneckerGithub 881"
-      - "@DeltaKroneckerGithub 882"
       - "@DeltaKroneckerGithub 883"
       - "@DeltaKroneckerGithub 884"
       - "@DeltaKroneckerGithub 885"
@@ -16696,7 +16628,6 @@ proxy-groups:
       - "美国(yudou66.com 玉豆免费节点) 54"
       - "104.17.148.22:443"
       - "104.17.147.22:443"
-      - "172.67.118.45:443"
       - "141.98.41.20:443"
       - "104.105.128.249:443"
       - "45.77.131.33:8443"
@@ -16705,7 +16636,6 @@ proxy-groups:
       - "45.95.212.186:443"
       - "179.253.246.191:443"
       - "188.114.98.0:443 6"
-      - "62.133.60.134:8443"
       - "206.189.56.164:443"
       - "146.56.151.92:443"
       - "177.1.187.183:443"
@@ -16723,7 +16653,6 @@ proxy-groups:
       - "103.71.22.158:443"
       - "31.70.89.136:8443"
       - "110.172.148.33:443"
-      - "13.140.29.45:443"
       - "185.71.230.237:443"
       - "195.133.92.228:443"
       - "13.143.182.82:443"
