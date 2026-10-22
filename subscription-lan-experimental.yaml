@@ -1,12 +1,12 @@
 # LAN Experimental
-# Version: 1.20261022.001901
+# Version: 1.20261022.094236
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-22 00:19:01 МСК
+# Updated: 2026-10-22 09:42:36 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
 #   - Au1rxx Verified: https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt
-# Servers: 993
+# Servers: 989
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -9192,22 +9192,6 @@ proxies:
       public-key: "7gzxsxnqwoh1HEfp02BQpEmMaIFHqz4RL8h68hZqsjc"
       short-id: "6ea3daaac3d6bede"
   -
-    name: "@DeltaKroneckerGithub 657"
-    type: "vless"
-    server: "104.16.111.193"
-    port: 443
-    uuid: "3c52e091-6714-4915-949f-2149fe69951b"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "v2ray.simspeedup.com"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "v2ray.simspeedup.com"
-  -
     name: "@DeltaKroneckerGithub 658"
     type: "vless"
     server: "104.167.24.174"
@@ -10636,21 +10620,6 @@ proxies:
       path: "/Telegram:@v2raylandd-Telegram:@v2raylandd-Telegram:@v2raylandd?ed=1024"
       headers:
         Host: "v2raylandd-irancell.upftsx.workers.DeV"
-  -
-    name: "@DeltaKroneckerGithub 755"
-    type: "vless"
-    server: "139.64.235.7"
-    port: 8443
-    uuid: "7967bf59-57e3-4cde-9898-527b0fe60022"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "speed.dulacloud.store"
-    ws-opts:
-      path: "/dula?Telegram-WangCai2fp=chrome"
-      headers:
-        Host: "speed.dulacloud.store"
   -
     name: "@DeltaKroneckerGithub 756"
     type: "vless"
@@ -12371,22 +12340,6 @@ proxies:
       path: "/%3Fed%3D2560%26Telegram%F0%9F%87%A8%F0%9F%87%B3%2B%40WangCai2"
       headers:
         Host: "sni.jpmj.dev"
-  -
-    name: "@DeltaKroneckerGithub 876"
-    type: "vless"
-    server: "45.128.76.7"
-    port: 8443
-    uuid: "7967bf59-57e3-4cde-9898-527b0fe60022"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "speed.dulacloud.store"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/dula?Telegram-WangCai2"
-      headers:
-        Host: "speed.dulacloud.store"
   -
     name: "@DeltaKroneckerGithub 877"
     type: "vless"
@@ -14404,22 +14357,6 @@ proxies:
       headers:
         Host: "snip.edgeoneai.cc.cd"
   -
-    name: "89.127.210.245:2053"
-    type: "vless"
-    server: "89.127.210.245"
-    port: 2053
-    uuid: "495c7195-85b8-498a-bf20-2ea9ce9175b5"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "snip.edgeoneai.cc.cd"
-    client-fingerprint: "chrome"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "snip.edgeoneai.cc.cd"
-  -
     name: "64.176.230.50:443"
     type: "vless"
     server: "64.176.230.50"
@@ -15430,7 +15367,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 652"
       - "@DeltaKroneckerGithub 654"
       - "@DeltaKroneckerGithub 655"
-      - "@DeltaKroneckerGithub 657"
       - "@DeltaKroneckerGithub 658"
       - "@DeltaKroneckerGithub 659"
       - "@DeltaKroneckerGithub 660"
@@ -15528,7 +15464,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 752"
       - "@DeltaKroneckerGithub 753"
       - "@DeltaKroneckerGithub 754"
-      - "@DeltaKroneckerGithub 755"
       - "@DeltaKroneckerGithub 756"
       - "@DeltaKroneckerGithub 757"
       - "@DeltaKroneckerGithub 758"
@@ -15645,7 +15580,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 873"
       - "@DeltaKroneckerGithub 874"
       - "@DeltaKroneckerGithub 875"
-      - "@DeltaKroneckerGithub 876"
       - "@DeltaKroneckerGithub 877"
       - "@DeltaKroneckerGithub 878"
       - "@DeltaKroneckerGithub 879"
@@ -15780,7 +15714,6 @@ proxy-groups:
       - "177.1.187.183:443"
       - "188.166.164.73:443"
       - "178.105.215.151:2053"
-      - "89.127.210.245:2053"
       - "64.176.230.50:443"
       - "141.164.44.60:443"
       - "77.239.104.229:443"
@@ -16431,7 +16364,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 652"
       - "@DeltaKroneckerGithub 654"
       - "@DeltaKroneckerGithub 655"
-      - "@DeltaKroneckerGithub 657"
       - "@DeltaKroneckerGithub 658"
       - "@DeltaKroneckerGithub 659"
       - "@DeltaKroneckerGithub 660"
@@ -16529,7 +16461,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 752"
       - "@DeltaKroneckerGithub 753"
       - "@DeltaKroneckerGithub 754"
-      - "@DeltaKroneckerGithub 755"
       - "@DeltaKroneckerGithub 756"
       - "@DeltaKroneckerGithub 757"
       - "@DeltaKroneckerGithub 758"
@@ -16646,7 +16577,6 @@ proxy-groups:
       - "@DeltaKroneckerGithub 873"
       - "@DeltaKroneckerGithub 874"
       - "@DeltaKroneckerGithub 875"
-      - "@DeltaKroneckerGithub 876"
       - "@DeltaKroneckerGithub 877"
       - "@DeltaKroneckerGithub 878"
       - "@DeltaKroneckerGithub 879"
@@ -16781,7 +16711,6 @@ proxy-groups:
       - "177.1.187.183:443"
       - "188.166.164.73:443"
       - "178.105.215.151:2053"
-      - "89.127.210.245:2053"
       - "64.176.230.50:443"
       - "141.164.44.60:443"
       - "77.239.104.229:443"

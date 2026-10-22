@@ -300,6 +300,51 @@ class LanGlobalFastCheckTests(unittest.TestCase):
             group["name"]: group for group in self.fast_check["proxy-groups"]
         }
 
+    def test_lan_source_policy_uses_only_wired_blacklist_pools(self) -> None:
+        self.assertEqual(
+            builder.LAN_SOURCE_IDS,
+            {
+                "WIREVEIL_VLESS",
+                "WLUNLOCKER_BLACK_ALL",
+                "APEX_BLACKLIST_WIFI",
+                "FLAT447_BLACK_FULL",
+                "IGARECK_BLACK_VLESS",
+                "MOONISHE_BLACKLIST",
+            },
+        )
+        self.assertTrue(builder.LAN_SOURCE_IDS.isdisjoint(builder.BYPASS_SOURCE_IDS))
+        self.assertTrue(builder.LAN_SOURCE_IDS.isdisjoint(builder.MOBILE_SOURCE_IDS))
+        lan_sources = [
+            source for source in builder.SOURCES if source["id"] in builder.LAN_SOURCE_IDS
+        ]
+        self.assertEqual(len(lan_sources), len(builder.LAN_SOURCE_IDS))
+        self.assertTrue(all(source.get("scope") == "lan_only" for source in lan_sources))
+        wireveil = next(source for source in lan_sources if source["id"] == "WIREVEIL_VLESS")
+        self.assertEqual(
+            wireveil["url"],
+            "https://raw.githubusercontent.com/markKikhtenko/WireVeil/main/vless.txt",
+        )
+
+    def test_lan_selection_rejects_whitelist_only_sources(self) -> None:
+        wired = {**self.proxies[0], "_sources": ["WIREVEIL_VLESS"], "_country": "US"}
+        whitelist = {**self.proxies[1], "_sources": ["BYEWL2"], "_country": "US"}
+
+        self.assertEqual(builder.select_lan_global_proxies([whitelist, wired]), [wired])
+
+    def test_lan_pool_keeps_lan_name_when_same_config_appears_in_whitelist(self) -> None:
+        link = (
+            f"vless://{uuid.UUID(int=42)}@one.example.com:443"
+            "?encryption=none&security=tls&type=tcp#LAN%20node"
+        )
+        whitelist = builder.parse_vless(link.replace("LAN%20node", "WhiteList%20node"), "BYEWL2")
+        wired = builder.parse_vless(link, "WIREVEIL_VLESS")
+
+        selected = builder.dedupe_source_pool([whitelist, wired], builder.LAN_SOURCE_IDS)
+
+        self.assertEqual(len(selected), 1)
+        self.assertEqual(selected[0]["name"], "LAN node")
+        self.assertEqual(selected[0]["_sources"], ["WIREVEIL_VLESS"])
+
     def test_proxy_composition_order_and_parameters_are_identical(self) -> None:
         self.assertEqual(self.fast_check["proxies"], self.lan_global["proxies"])
         self.assertEqual(

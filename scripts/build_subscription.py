@@ -220,9 +220,39 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/solovyov-jenya2004/all_subs/main/final_sorted",
     },
     {
-        "id": "VESTRANET_VLESS",
-        "name": "VestraNet Nodes protocols/vless.txt",
-        "url": "https://raw.githubusercontent.com/MustafaBaqer/VestraNet-Nodes/main/protocols/vless.txt",
+        "id": "WIREVEIL_VLESS",
+        "name": "WireVeil VLESS (wired blacklist mode)",
+        "url": "https://raw.githubusercontent.com/markKikhtenko/WireVeil/main/vless.txt",
+        "scope": "lan_only",
+    },
+    {
+        "id": "WLUNLOCKER_BLACK_ALL",
+        "name": "WLUnlocker Blacklist All",
+        "url": "https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/blacklist_all.txt",
+        "scope": "lan_only",
+    },
+    {
+        "id": "APEX_BLACKLIST_WIFI",
+        "name": "Apex Parser BlackList (Wi-Fi)",
+        "url": "https://raw.githubusercontent.com/Diversan313/apex-parser/main/subs/main/alive_plain_bl.txt",
+        "scope": "lan_only",
+    },
+    {
+        "id": "FLAT447_BLACK_FULL",
+        "name": "FLAT447 BlackList Full",
+        "url": "https://raw.githubusercontent.com/FLAT447/v2ray-lists/main/BLACK_FULL.txt",
+        "scope": "lan_only",
+    },
+    {
+        "id": "IGARECK_BLACK_VLESS",
+        "name": "igareck Black VLESS Russia",
+        "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/BLACK_VLESS_RUS.txt",
+        "scope": "lan_only",
+    },
+    {
+        "id": "MOONISHE_BLACKLIST",
+        "name": "Moonishe checked blacklist",
+        "url": "https://raw.githubusercontent.com/Moonishe/vpnparser/main/output/subscription-blacklist.txt",
         "scope": "lan_only",
     },
 ]
@@ -284,24 +314,16 @@ BYPASS_SOURCE_IDS = {
     "SOLOVYOV_ALL_SUBS",
 }
 
-# Regular public VLESS pools suitable for ordinary wired Internet. Keep this
-# list explicit so mobile whitelist and CIDR bypass sources cannot leak into
-# the LAN subscription when SOURCES changes.
+# WireVeil is the authoritative ordinary-wired/blacklist-mode VLESS pool.
+# Keep the LAN allowlist explicit so pale-signal's whitelist/CIDR bypass pools
+# cannot leak into LAN Global or LAN Global Fast Check when SOURCES changes.
 LAN_SOURCE_IDS = {
-    "RADIKAL_LIGHT",
-    "MAHAN_VLESS",
-    "EPODONIOS_VLESS",
-    "BARRY_FAR_VLESS",
-    "SOLISPIRIT_VLESS",
-    "MATIN_VLESS",
-    "LIMILCO_VLESS",
-    "V2RAYROOT_VLESS",
-    "SURFBOARD_MIXED",
-    "ALIILAPRO_SUB",
-    "MAHSANET_XRAY_FINAL",
-    "RAYAN_PROXY",
-    "FNET_MAIN",
-    "VESTRANET_VLESS",
+    "WIREVEIL_VLESS",
+    "WLUNLOCKER_BLACK_ALL",
+    "APEX_BLACKLIST_WIFI",
+    "FLAT447_BLACK_FULL",
+    "IGARECK_BLACK_VLESS",
+    "MOONISHE_BLACKLIST",
 }
 BS_SAFE_SOURCE_IDS = BYPASS_SOURCE_IDS
 
@@ -409,6 +431,14 @@ GEOIP_RETRY_BASE_SECONDS = float(os.environ.get("GEOIP_RETRY_BASE_SECONDS", "2.0
 
 def source_urls() -> str:
     return "\n".join(f"- {source['name']}: {source['url']}" for source in SOURCES)
+
+
+def lan_source_urls() -> str:
+    return "\n".join(
+        f"- [{source['name']}]({source['url']})"
+        for source in SOURCES
+        if source["id"] in LAN_SOURCE_IDS
+    )
 
 
 def parse_http_datetime(value: str) -> float:
@@ -881,6 +911,16 @@ def dedupe_and_name(proxies: list[dict]) -> list[dict]:
         result.append(named_proxy)
 
     return result
+
+
+def dedupe_source_pool(proxies: list[dict], source_ids: set[str]) -> list[dict]:
+    """Deduplicate one source family without inheriting names from other pools."""
+    selected = [
+        copy.deepcopy(proxy)
+        for proxy in proxies
+        if proxy.get("_source_id") in source_ids
+    ]
+    return drop_blocked_proxies(dedupe_and_name(selected))
 
 
 def blocked_proxy_key(proxy: dict) -> tuple[str, int, str]:
@@ -3000,8 +3040,8 @@ def write_final_readme(
 | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) | Россия |
 | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) | Все non-RU серверы |
 | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) | Global, до {GLOBAL_5K_SUBSCRIPTION_LIMIT} серверов |
-| [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | LAN, до {LAN_5K_SUBSCRIPTION_LIMIT} серверов |
-| [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | LAN без лимита |
+| [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | Основная LAN-подписка для проводного интернета, до {LAN_5K_SUBSCRIPTION_LIMIT} серверов; при меньшем пуле совпадает с LAN Global |
+| [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | Полный LAN-пул для проводного интернета без лимита |
 | [subscription-lan-global-fast-check.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global-fast-check.yaml) | LAN Global Fast Check — те же серверы LAN Global, более активная автоматическая проверка |
 | [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) | Изолированная тестовая LAN-подписка |
 | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) | Тестовая Global |
@@ -3030,6 +3070,10 @@ def write_final_readme(
 ## LAN Global и Fast Check
 
 Обе подписки содержат одинаковые серверы в одинаковом порядке и используют один URL проверки: `{URL_TEST}`.
+Сейчас специализированный пул меньше лимита {LAN_5K_SUBSCRIPTION_LIMIT}, поэтому LAN 5K также содержит все серверы LAN Global.
+Используются только отдельные пулы для обычного проводного подключения и режима чёрных списков. Whitelist/CIDR-источники pale-signal в эти LAN-подписки не входят:
+
+{lan_source_urls()}
 
 | Параметр `AUTO` | LAN Global | LAN Global Fast Check |
 |-----------------|------------|-----------------------|
@@ -3248,6 +3292,7 @@ def main(
             )
     if not parsed:
         raise RuntimeError("no valid VLESS servers were parsed")
+    isolated_lan_proxies = dedupe_source_pool(parsed, LAN_SOURCE_IDS)
     proxies = dedupe_and_name(parsed)
     blocked_count = count_blocked_proxies(proxies)
     proxies = drop_blocked_proxies(proxies)
@@ -3269,6 +3314,9 @@ def main(
         return 0
 
     all_ru_proxies, all_global_candidates = split_by_country(proxies)
+    lan_global_candidates: list[dict] = []
+    if isolated_lan_proxies:
+        _, lan_global_candidates = split_by_country(isolated_lan_proxies)
     ru_proxies = [
         proxy
         for proxy in all_ru_proxies
@@ -3281,8 +3329,8 @@ def main(
     ]
     global_proxies = prioritize_global_proxies(global_candidates)
     if lan_only:
-        lan_global_proxies = select_lan_global_proxies(all_global_candidates)
-        lan_5k_proxies = select_lan_5k_proxies(all_global_candidates)
+        lan_global_proxies = select_lan_global_proxies(lan_global_candidates)
+        lan_5k_proxies = select_lan_5k_proxies(lan_global_candidates)
         if not lan_5k_proxies:
             raise RuntimeError("no LAN 5K VLESS servers were produced")
         if not lan_global_proxies:
@@ -3394,8 +3442,8 @@ def main(
         )
         return 0
 
-    lan_global_proxies = select_lan_global_proxies(all_global_candidates)
-    lan_5k_proxies = select_lan_5k_proxies(all_global_candidates)
+    lan_global_proxies = select_lan_global_proxies(lan_global_candidates)
+    lan_5k_proxies = select_lan_5k_proxies(lan_global_candidates)
     if not lan_5k_proxies:
         raise RuntimeError("no LAN 5K VLESS servers were produced")
     if not lan_global_proxies:
