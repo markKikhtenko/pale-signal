@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-9835-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-9583-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-10-23 00:14:26 МСК`
+**Последнее обновление:** `2026-10-23 14:01:45 МСК`
 
 ## Подписки
 
@@ -28,24 +28,24 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `9835` |
-| Россия | `2499` |
-| Global | `7336` |
-| Global 5K | `2329` |
-| LAN 5K | `2088` |
-| LAN Global | `2088` |
-| LAN Global Fast Check | `2088` |
-| LAN Experimental | `973` |
-| LAN Experimental AUTO | `973` |
-| Исключено пересечений Experimental с LAN Global | `478` |
-| BS Safe MANUAL | `1959` |
+| Всего серверов | `9583` |
+| Россия | `2439` |
+| Global | `7144` |
+| Global 5K | `2232` |
+| LAN 5K | `2307` |
+| LAN Global | `2307` |
+| LAN Global Fast Check | `2307` |
+| LAN Experimental | `960` |
+| LAN Experimental AUTO | `960` |
+| Исключено пересечений Experimental с LAN Global | `491` |
+| BS Safe MANUAL | `1938` |
 | BS Safe AUTO | `50` |
-| Happ Mobile | `411` |
+| Happ Mobile | `399` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `973` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
+Изолированная тестовая подписка: `960` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
 <!-- LAN-EXPERIMENTAL:END -->
 
 ## LAN Global и Fast Check
