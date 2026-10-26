@@ -135,13 +135,14 @@ def validate_general_contract(module_path: Path) -> None:
     required = {
         "CORE_TYPE": "Meta",
         "PROXY_MODE": "rule",
-        "ENABLE_REDIRECT_DNS": "1",
-        "ENABLE_RESPECT_RULES": "1",
     }
     for key, expected in required.items():
         if settings.get(key) != expected:
             raise RuntimeError(f"{module_path}: {key} must be {expected}")
+    # DNS must be controlled by OpenClash settings, never by routing module.
     forbidden_dns_overrides = {
+        "ENABLE_REDIRECT_DNS",
+        "ENABLE_RESPECT_RULES",
         "ENABLE_CUSTOM_DNS",
         "APPEND_DEFAULT_DNS",
         "APPEND_WAN_DNS",
