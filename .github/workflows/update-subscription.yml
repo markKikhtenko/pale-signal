@@ -8,6 +8,7 @@ on:
     paths:
       - ".github/workflows/update-subscription.yml"
       - "scripts/build_subscription.py"
+      - "scripts/check_lan_new_sources.py"
       - "scripts/test_build_subscription.py"
       - "scripts/verify_lan_experimental.py"
       - "scripts/validate_openclash_module.py"
@@ -40,6 +41,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
+
       - name: Regenerate subscription files
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -49,7 +53,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          python -m pip install --disable-pip-version-check PyYAML==6.0.3
           python -m unittest discover -s scripts -p 'test_*.py'
           test -s subscription-mobile.txt
           python -c 'import sys; sys.path.insert(0, "scripts"); import build_subscription as b; text=open("subscription-mobile.txt", encoding="utf-8").read(); print(f"Happ mobile links: {b.validate_happ_subscription(text)}")'
@@ -95,6 +98,16 @@ jobs:
           echo "- Mihomo config tests: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- OpenClash merged configs: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- Custom rule providers: passed" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Sample new LAN sources through Mihomo
+        id: lan_source_health
+        continue-on-error: true
+        timeout-minutes: 10
+        run: |
+          python scripts/check_lan_new_sources.py \
+            --mihomo .tools/mihomo/mihomo \
+            --max-per-source 3 \
+            --timeout 12
 
       - name: Build LAN Experimental candidate independently
         id: experimental_build
@@ -187,7 +200,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md update-history.json lan-experimental-stats.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-global-fast-check.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml subscription-mobile.txt
+          git add README.md update-history.json lan-experimental-stats.json lan-source-stats.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-global-fast-check.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml subscription-mobile.txt
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import inspect
+import json
 import tempfile
 import unittest
 import uuid
@@ -305,9 +306,9 @@ class LanGlobalFastCheckTests(unittest.TestCase):
             group["name"]: group for group in self.fast_check["proxy-groups"]
         }
 
-    def test_lan_source_policy_uses_only_wired_blacklist_pools(self) -> None:
+    def test_lan_source_policy_preserves_legacy_and_isolates_new_pools(self) -> None:
         self.assertEqual(
-            builder.LAN_SOURCE_IDS,
+            builder.LEGACY_LAN_SOURCE_IDS,
             {
                 "WIREVEIL_VLESS",
                 "WLUNLOCKER_BLACK_ALL",
@@ -317,6 +318,14 @@ class LanGlobalFastCheckTests(unittest.TestCase):
                 "MOONISHE_BLACKLIST",
             },
         )
+        self.assertEqual(
+            builder.NEW_LAN_SOURCE_IDS,
+            {"RADIKAL_FAST", "V2GO_LIVE_VLESS", "PULSECONFIGS_FAST"},
+        )
+        self.assertEqual(
+            builder.LAN_SOURCE_IDS,
+            builder.LEGACY_LAN_SOURCE_IDS | builder.NEW_LAN_SOURCE_IDS,
+        )
         self.assertTrue(builder.LAN_SOURCE_IDS.isdisjoint(builder.BYPASS_SOURCE_IDS))
         self.assertTrue(builder.LAN_SOURCE_IDS.isdisjoint(builder.MOBILE_SOURCE_IDS))
         lan_sources = [
@@ -324,10 +333,39 @@ class LanGlobalFastCheckTests(unittest.TestCase):
         ]
         self.assertEqual(len(lan_sources), len(builder.LAN_SOURCE_IDS))
         self.assertTrue(all(source.get("scope") == "lan_only" for source in lan_sources))
-        wireveil = next(source for source in lan_sources if source["id"] == "WIREVEIL_VLESS")
+        expected_legacy_urls = {
+            "WIREVEIL_VLESS": "https://raw.githubusercontent.com/markKikhtenko/WireVeil/main/vless.txt",
+            "WLUNLOCKER_BLACK_ALL": "https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/blacklist_all.txt",
+            "APEX_BLACKLIST_WIFI": "https://raw.githubusercontent.com/Diversan313/apex-parser/main/subs/main/alive_plain_bl.txt",
+            "FLAT447_BLACK_FULL": "https://raw.githubusercontent.com/FLAT447/v2ray-lists/main/BLACK_FULL.txt",
+            "IGARECK_BLACK_VLESS": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/BLACK_VLESS_RUS.txt",
+            "MOONISHE_BLACKLIST": "https://raw.githubusercontent.com/Moonishe/vpnparser/main/output/subscription-blacklist.txt",
+        }
         self.assertEqual(
-            wireveil["url"],
-            "https://raw.githubusercontent.com/markKikhtenko/WireVeil/main/vless.txt",
+            {
+                source["id"]: source["url"]
+                for source in lan_sources
+                if source["id"] in builder.LEGACY_LAN_SOURCE_IDS
+            },
+            expected_legacy_urls,
+        )
+        source_positions = {source["id"]: index for index, source in enumerate(builder.SOURCES)}
+        self.assertLess(
+            max(source_positions[source_id] for source_id in builder.LEGACY_LAN_SOURCE_IDS),
+            min(source_positions[source_id] for source_id in builder.NEW_LAN_SOURCE_IDS),
+        )
+        expected_urls = {
+            "RADIKAL_FAST": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/fast/configs.txt",
+            "V2GO_LIVE_VLESS": "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Protocol/vless.txt",
+            "PULSECONFIGS_FAST": "https://raw.githubusercontent.com/drmikecrypto/PulseConfigs/main/fast/configs.txt",
+        }
+        self.assertEqual(
+            {
+                source["id"]: source["url"]
+                for source in lan_sources
+                if source["id"] in builder.NEW_LAN_SOURCE_IDS
+            },
+            expected_urls,
         )
 
     def test_lan_selection_rejects_whitelist_only_sources(self) -> None:
@@ -349,6 +387,124 @@ class LanGlobalFastCheckTests(unittest.TestCase):
         self.assertEqual(len(selected), 1)
         self.assertEqual(selected[0]["name"], "LAN node")
         self.assertEqual(selected[0]["_sources"], ["WIREVEIL_VLESS"])
+
+    def test_new_endpoint_duplicate_is_rejected_without_changing_legacy(self) -> None:
+        user_id = uuid.UUID(int=42)
+        legacy = builder.parse_vless(
+            f"vless://{user_id}@one.example.com:443?encryption=none&security=tls"
+            "&type=ws&host=legacy.example.com#Legacy%20name",
+            "WIREVEIL_VLESS",
+        )
+        added = builder.parse_vless(
+            f"vless://{str(user_id).upper()}@ONE.EXAMPLE.COM:443?encryption=none&security=tls"
+            "&type=ws&host=new.example.com#New%20name",
+            "RADIKAL_FAST",
+        )
+
+        legacy_baseline = builder.dedupe_source_pool(
+            [legacy], builder.LEGACY_LAN_SOURCE_IDS
+        )
+        legacy_before = json.loads(json.dumps(legacy_baseline))
+        selected, duplicates = builder.dedupe_new_lan_candidates(
+            [added], legacy_baseline
+        )
+
+        self.assertEqual(selected, [])
+        self.assertEqual(legacy_baseline, legacy_before)
+        self.assertEqual(duplicates["RADIKAL_FAST"], 1)
+
+    def test_experimental_overlap_is_removed_without_changing_experimental(self) -> None:
+        experimental_proxy = {
+            "name": "Experimental",
+            "type": "vless",
+            "server": "203.0.113.20",
+            "port": 443,
+            "uuid": str(uuid.UUID(int=20)),
+            "network": "tcp",
+        }
+        added = {
+            **experimental_proxy,
+            "name": "Added",
+            "_sources": ["RADIKAL_FAST"],
+        }
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "experimental.yaml"
+            path.write_text(
+                "\n".join(builder.dump_yaml(builder.build_config([experimental_proxy]))) + "\n",
+                encoding="utf-8",
+            )
+            retained, overlaps = builder.exclude_lan_experimental_overlaps(
+                [added], path
+            )
+
+        self.assertEqual(retained, [])
+        self.assertEqual(overlaps["RADIKAL_FAST"], 1)
+
+    def test_public_filter_rejects_non_public_ip(self) -> None:
+        public = {**self.proxies[0], "server": "8.8.8.8", "_sources": ["RADIKAL_FAST"]}
+        private = {**self.proxies[1], "server": "10.0.0.1", "_sources": ["RADIKAL_FAST"]}
+
+        retained, filtered = builder.filter_public_lan_proxies([private, public])
+
+        self.assertEqual(retained, [public])
+        self.assertEqual(filtered["RADIKAL_FAST"], 1)
+
+    def test_unavailable_new_source_does_not_remove_legacy_pool(self) -> None:
+        legacy = {
+            **self.proxies[0],
+            "_sources": ["WIREVEIL_VLESS"],
+            "_country": "US",
+        }
+        stats = builder.build_lan_source_stats(
+            {
+                "RADIKAL_FAST": {
+                    "available": False,
+                    "error": "offline",
+                    "received_vless": 0,
+                    "valid": 0,
+                }
+            },
+            [legacy],
+            [legacy],
+            {},
+            {},
+            {},
+            "2026-10-26 12:00:00 МСК",
+            1,
+        )
+
+        self.assertEqual(stats["lan_global_after"], 1)
+        self.assertEqual(stats["legacy_preserved"], 1)
+        self.assertEqual(stats["new_added"], 0)
+        self.assertEqual(stats["sources"]["RADIKAL_FAST"]["status"], "unavailable")
+
+    def test_lan_source_stats_match_published_artifact_and_readme(self) -> None:
+        stats = json.loads(builder.LAN_SOURCE_STATS_FILE.read_text(encoding="utf-8"))
+        lan = yaml.safe_load(builder.LAN_GLOBAL_OUTPUT_FILE.read_text(encoding="utf-8"))
+        endpoints = [builder.endpoint_identity_key(proxy) for proxy in lan["proxies"]]
+        readme = builder.README_FILE.read_text(encoding="utf-8")
+
+        self.assertEqual(stats["lan_global_after"], len(lan["proxies"]))
+        self.assertEqual(stats["unique_endpoints_after"], len(set(endpoints)))
+        self.assertEqual(
+            set(stats["legacy_source_ids_preserved"]), builder.LEGACY_LAN_SOURCE_IDS
+        )
+        baseline = builder.load_lan_legacy_baseline()
+        self.assertEqual(stats["legacy_preserved"], builder.LAN_LEGACY_BASELINE_COUNT)
+        self.assertEqual(stats["legacy_baseline_digest"], builder.LAN_LEGACY_BASELINE_DIGEST)
+        self.assertEqual(lan["proxies"][: len(baseline)], baseline)
+        self.assertEqual(stats["new_added"], len(lan["proxies"]) - len(baseline))
+        self.assertEqual(set(stats["sources"]), builder.NEW_LAN_SOURCE_IDS)
+        self.assertIn(builder.lan_source_stats_readme_section(stats), readme)
+
+    def test_new_names_are_changed_only_when_they_collide_with_legacy(self) -> None:
+        legacy = [{"name": "same"}, {"name": "same 2"}]
+        new = [{"name": "same"}, {"name": "unique"}]
+
+        builder.ensure_new_names_unique_against_legacy(new, legacy)
+
+        self.assertEqual(legacy, [{"name": "same"}, {"name": "same 2"}])
+        self.assertEqual(new, [{"name": "same 3"}, {"name": "unique"}])
 
     def test_proxy_composition_order_and_parameters_are_identical(self) -> None:
         self.assertEqual(self.fast_check["proxies"], self.lan_global["proxies"])
@@ -411,6 +567,35 @@ class LanGlobalFastCheckTests(unittest.TestCase):
         changed = {**self.fast_check, "ipv6": True}
         with self.assertRaisesRegex(RuntimeError, "outside the allowed AUTO settings"):
             builder.validate_lan_global_fast_check_config(self.lan_global, changed)
+
+    def test_validator_rejects_duplicate_normalized_endpoint(self) -> None:
+        duplicate = {
+            **self.proxies[0],
+            "name": "duplicate",
+            "server": "ONE.EXAMPLE.COM.",
+            "uuid": str(uuid.UUID(self.proxies[0]["uuid"])).upper(),
+            "tls": True,
+        }
+        lan, fast = builder.build_lan_global_configs([self.proxies[0], duplicate])
+
+        with self.assertRaisesRegex(RuntimeError, r"server \+ port \+ UUID"):
+            builder.validate_lan_global_fast_check_config(lan, fast)
+
+    def test_validator_allows_preexisting_duplicates_only_inside_legacy_prefix(self) -> None:
+        duplicate = {
+            **self.proxies[0],
+            "name": "legacy duplicate",
+            "server": "ONE.EXAMPLE.COM.",
+            "uuid": str(uuid.UUID(self.proxies[0]["uuid"])).upper(),
+            "tls": True,
+        }
+        legacy = [
+            {key: value for key, value in proxy.items() if not key.startswith("_")}
+            for proxy in [self.proxies[0], duplicate]
+        ]
+        lan, fast = builder.build_lan_global_configs(legacy + [self.proxies[1]])
+
+        builder.validate_lan_global_fast_check_config(lan, fast, legacy)
 
     def test_default_build_config_and_custom_auto_list_are_unchanged(self) -> None:
         config = builder.build_config(self.proxies, [self.proxies[1]])

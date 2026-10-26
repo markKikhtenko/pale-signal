@@ -32,9 +32,9 @@
 | Россия | `2666` |
 | Global | `6873` |
 | Global 5K | `1872` |
-| LAN 5K | `2002` |
-| LAN Global | `2002` |
-| LAN Global Fast Check | `2002` |
+| LAN 5K | `2159` |
+| LAN Global | `2159` |
+| LAN Global Fast Check | `2159` |
 | LAN Experimental | `960` |
 | LAN Experimental AUTO | `960` |
 | Исключено пересечений Experimental с LAN Global | `491` |
@@ -48,6 +48,18 @@
 Изолированная тестовая подписка: `960` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
 <!-- LAN-EXPERIMENTAL:END -->
 
+<!-- LAN-SOURCE-STATS:START -->
+## Новые LAN-источники
+
+Эталонные `2002` записей из опубликованного LAN Global сохранены без изменения имён, параметров и порядка. Добавлено `157` новых конфигураций; исключено `584` новых дублей. Итого `2159` записей и `1270` уникальных `server + port + UUID` (в старом пуле: `1113`). Статус «проверено» присваивается только после успешного HTTPS через VLESS.
+
+| Источник | Получено VLESS | Валидных | Новых дублей | Добавлено | SOCKS принят | HTTPS | 64 КиБ | Статус |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| [0xRadikal FAST](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/fast/configs.txt) | `515` | `509` | `398` | `91` | `3/3` | `0/3` | `0/0` | не проверено |
+| [v2go Live-tested VLESS](https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Protocol/vless.txt) | `254` | `247` | `186` | `56` | `3/3` | `0/3` | `0/0` | не проверено |
+| [PulseConfigs FAST](https://raw.githubusercontent.com/drmikecrypto/PulseConfigs/main/fast/configs.txt) | `10` | `10` | `0` | `10` | `3/3` | `0/3` | `0/0` | не проверено |
+<!-- LAN-SOURCE-STATS:END -->
+
 ## LAN Global и Fast Check
 
 Обе подписки содержат одинаковые серверы в одинаковом порядке и используют один URL проверки: `https://cp.cloudflare.com/generate_204`.
@@ -60,6 +72,9 @@
 - [FLAT447 BlackList Full](https://raw.githubusercontent.com/FLAT447/v2ray-lists/main/BLACK_FULL.txt)
 - [igareck Black VLESS Russia](https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/BLACK_VLESS_RUS.txt)
 - [Moonishe checked blacklist](https://raw.githubusercontent.com/Moonishe/vpnparser/main/output/subscription-blacklist.txt)
+- [0xRadikal FAST](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/fast/configs.txt)
+- [v2go Live-tested VLESS](https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Protocol/vless.txt)
+- [PulseConfigs FAST](https://raw.githubusercontent.com/drmikecrypto/PulseConfigs/main/fast/configs.txt)
 
 | Параметр `AUTO` | LAN Global | LAN Global Fast Check |
 |-----------------|------------|-----------------------|

@@ -275,8 +275,9 @@ def validate_lan_global(configs: dict[str, dict]) -> tuple[int, int]:
         raise RuntimeError(f"LAN Global contains {duplicate_count} exact duplicate proxies")
     if lan_5k is not None:
         lan_5k_proxies = lan_5k.get("proxies") or []
-        if len(proxies) < len(lan_5k_proxies):
-            raise RuntimeError("LAN Global is unexpectedly smaller than LAN 5K")
+        expected = proxies[: builder.LAN_5K_SUBSCRIPTION_LIMIT]
+        if lan_5k_proxies != expected:
+            raise RuntimeError("LAN 5K is not the first 5000 LAN Global proxies")
     return len(proxies), duplicate_count
 
 
@@ -287,7 +288,13 @@ def validate_lan_global_fast_check(configs: dict[str, dict]) -> int:
     lan_global = configs.get("subscription-lan-global.yaml")
     if lan_global is None:
         raise RuntimeError("LAN Global is required to validate Fast Check")
-    builder.validate_lan_global_fast_check_config(lan_global, fast_check)
+    proxies = lan_global.get("proxies") or []
+    legacy_baseline = proxies[: builder.LAN_LEGACY_BASELINE_COUNT]
+    if builder.lan_legacy_digest(legacy_baseline) != builder.LAN_LEGACY_BASELINE_DIGEST:
+        raise RuntimeError("LAN Global legacy prefix does not match origin/main")
+    builder.validate_lan_global_fast_check_config(
+        lan_global, fast_check, legacy_baseline
+    )
     return len(fast_check["proxies"])
 
 
