@@ -2,6 +2,7 @@
 """Diagnose a small HTTPS sample through newly appended LAN VLESS proxies."""
 
 import argparse
+import concurrent.futures
 import json
 import os
 import socket
@@ -489,6 +490,7 @@ def main() -> int:
     )
     parser.add_argument("--legacy-controls", type=int, default=3)
     parser.add_argument("--max-per-source", type=int, default=3)
+    parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--timeout", type=float, default=12.0)
     args = parser.parse_args()
 
@@ -497,25 +499,54 @@ def main() -> int:
     stats = json.loads(args.stats.read_text(encoding="utf-8"))
     candidates = json.loads(args.candidates.read_text(encoding="utf-8"))
     results: dict[str, list[dict]] = {}
+    jobs: list[tuple[str, int, str, dict]] = []
     for source in builder.SOURCES:
         source_id = source["id"]
         if source_id not in builder.NEW_LAN_SOURCE_IDS:
             continue
         source_candidates = candidates.get(source_id, [])[: max(0, args.max_per_source)]
         results[source_id] = []
-        for proxy in source_candidates:
-            result = test_proxy(args.mihomo.resolve(), proxy, args.timeout)
-            results[source_id].append(result)
-            if result["https"]:
-                outcome = "HTTPS подтверждён"
-            else:
-                outcome = f"не проверено: {result['error']}"
-            print(f"{source['name']} / {result['name']}: {outcome}")
+        for index, proxy in enumerate(source_candidates):
+            jobs.append((source_id, index, source["name"], proxy))
 
     legacy_baseline = builder.load_lan_legacy_baseline(args.legacy_baseline)
+    legacy_candidates = legacy_baseline[: max(0, args.legacy_controls)]
+    completed: dict[tuple[str, int], dict] = {}
+    max_workers = max(1, args.workers)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_jobs = {
+            executor.submit(
+                test_proxy, args.mihomo.resolve(), proxy, args.timeout
+            ): (source_id, index, source_name)
+            for source_id, index, source_name, proxy in jobs
+        }
+        legacy_futures = {
+            executor.submit(
+                test_proxy, args.mihomo.resolve(), proxy, args.timeout
+            ): index
+            for index, proxy in enumerate(legacy_candidates)
+        }
+        for future in concurrent.futures.as_completed(
+            [*future_jobs.keys(), *legacy_futures.keys()]
+        ):
+            if future in future_jobs:
+                source_id, index, source_name = future_jobs[future]
+                result = future.result()
+                completed[(source_id, index)] = result
+                outcome = (
+                    "HTTPS подтверждён"
+                    if result["https"]
+                    else f"не проверено: {result['error']}"
+                )
+                print(f"{source_name} / {result['name']}: {outcome}")
+            else:
+                index = legacy_futures[future]
+                completed[("__legacy__", index)] = future.result()
+
+    for source_id, index, _source_name, _proxy in jobs:
+        results[source_id].append(completed[(source_id, index)])
     legacy_results = [
-        test_proxy(args.mihomo.resolve(), proxy, args.timeout)
-        for proxy in legacy_baseline[: max(0, args.legacy_controls)]
+        completed[("__legacy__", index)] for index in range(len(legacy_candidates))
     ]
     diagnostics = diagnose_environment(args.timeout)
     assess_environment(diagnostics, results, legacy_results)

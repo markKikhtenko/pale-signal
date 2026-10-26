@@ -289,11 +289,21 @@ def validate_lan_global_fast_check(configs: dict[str, dict]) -> int:
     if lan_global is None:
         raise RuntimeError("LAN Global is required to validate Fast Check")
     proxies = lan_global.get("proxies") or []
-    legacy_baseline = proxies[: builder.LAN_LEGACY_BASELINE_COUNT]
-    if builder.lan_legacy_digest(legacy_baseline) != builder.LAN_LEGACY_BASELINE_DIGEST:
+    preserved_baseline = proxies[: builder.LAN_PRESERVED_BASELINE_COUNT]
+    if (
+        builder.lan_legacy_digest(
+            preserved_baseline[: builder.LAN_LEGACY_BASELINE_COUNT]
+        )
+        != builder.LAN_LEGACY_BASELINE_DIGEST
+    ):
         raise RuntimeError("LAN Global legacy prefix does not match origin/main")
+    if (
+        builder.lan_legacy_digest(preserved_baseline)
+        != builder.LAN_PRESERVED_BASELINE_DIGEST
+    ):
+        raise RuntimeError("LAN Global preserved 2159-entry prefix changed")
     builder.validate_lan_global_fast_check_config(
-        lan_global, fast_check, legacy_baseline
+        lan_global, fast_check, preserved_baseline
     )
     return len(fast_check["proxies"])
 

@@ -107,6 +107,7 @@ jobs:
           python scripts/check_lan_new_sources.py \
             --mihomo .tools/mihomo/mihomo \
             --max-per-source 3 \
+            --workers 4 \
             --timeout 12
 
       - name: Build LAN Experimental candidate independently

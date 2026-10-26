@@ -320,7 +320,30 @@ class LanGlobalFastCheckTests(unittest.TestCase):
         )
         self.assertEqual(
             builder.NEW_LAN_SOURCE_IDS,
-            {"RADIKAL_FAST", "V2GO_LIVE_VLESS", "PULSECONFIGS_FAST"},
+            {
+                "RADIKAL_FAST",
+                "V2GO_LIVE_VLESS",
+                "PULSECONFIGS_FAST",
+                "FREE_XRAY_GCP",
+                "MULTI_PROXY_TESTED",
+                "PATTERNIHA_FREE_CONFIGS",
+                "CAPTCHAQ_WORKING_ALL",
+                "NODESRADAR_V2RAY",
+                "MRDEVMOHAMED_VLESS",
+                "BAARCUDA_TOP100_VLESS",
+                "MAHAN_VLESS",
+                "EPODONIOS_VLESS",
+                "BARRY_FAR_VLESS",
+                "SOLISPIRIT_VLESS",
+                "LIMILCO_VLESS",
+                "V2RAYROOT_VLESS",
+            },
+        )
+        self.assertEqual(
+            set(builder.NEW_LAN_SOURCE_PRIORITY), builder.NEW_LAN_SOURCE_IDS
+        )
+        self.assertEqual(
+            len(builder.NEW_LAN_SOURCE_PRIORITY), len(builder.NEW_LAN_SOURCE_IDS)
         )
         self.assertEqual(
             builder.LAN_SOURCE_IDS,
@@ -332,7 +355,9 @@ class LanGlobalFastCheckTests(unittest.TestCase):
             source for source in builder.SOURCES if source["id"] in builder.LAN_SOURCE_IDS
         ]
         self.assertEqual(len(lan_sources), len(builder.LAN_SOURCE_IDS))
-        self.assertTrue(all(source.get("scope") == "lan_only" for source in lan_sources))
+        self.assertTrue(
+            all(source.get("scope", "base") in {"base", "lan_only"} for source in lan_sources)
+        )
         expected_legacy_urls = {
             "WIREVEIL_VLESS": "https://raw.githubusercontent.com/markKikhtenko/WireVeil/main/vless.txt",
             "WLUNLOCKER_BLACK_ALL": "https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/blacklist_all.txt",
@@ -349,15 +374,23 @@ class LanGlobalFastCheckTests(unittest.TestCase):
             },
             expected_legacy_urls,
         )
-        source_positions = {source["id"]: index for index, source in enumerate(builder.SOURCES)}
-        self.assertLess(
-            max(source_positions[source_id] for source_id in builder.LEGACY_LAN_SOURCE_IDS),
-            min(source_positions[source_id] for source_id in builder.NEW_LAN_SOURCE_IDS),
-        )
         expected_urls = {
             "RADIKAL_FAST": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/fast/configs.txt",
             "V2GO_LIVE_VLESS": "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Protocol/vless.txt",
             "PULSECONFIGS_FAST": "https://raw.githubusercontent.com/drmikecrypto/PulseConfigs/main/fast/configs.txt",
+            "FREE_XRAY_GCP": "https://raw.githubusercontent.com/noahclanman/free-xray-gcp/main/output/protocols/vless.txt",
+            "MULTI_PROXY_TESTED": "https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs_tested.txt",
+            "PATTERNIHA_FREE_CONFIGS": "https://raw.githubusercontent.com/patterniha/Free-Configs/main/configs.txt",
+            "CAPTCHAQ_WORKING_ALL": "https://raw.githubusercontent.com/CaptchaQ/vless-servers/main/working_all.txt",
+            "NODESRADAR_V2RAY": "https://radarhub.top/v2ray.txt",
+            "MRDEVMOHAMED_VLESS": "https://raw.githubusercontent.com/mrdevmohamed/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
+            "BAARCUDA_TOP100_VLESS": "https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt",
+            "MAHAN_VLESS": "https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt",
+            "EPODONIOS_VLESS": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
+            "BARRY_FAR_VLESS": "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt",
+            "SOLISPIRIT_VLESS": "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt",
+            "LIMILCO_VLESS": "https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt",
+            "V2RAYROOT_VLESS": "https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt",
         }
         self.assertEqual(
             {
@@ -412,6 +445,21 @@ class LanGlobalFastCheckTests(unittest.TestCase):
         self.assertEqual(selected, [])
         self.assertEqual(legacy_baseline, legacy_before)
         self.assertEqual(duplicates["RADIKAL_FAST"], 1)
+
+    def test_empty_new_pool_keeps_all_2159_preserved_entries(self) -> None:
+        preserved = builder.load_lan_preserved_baseline()
+        before = json.loads(json.dumps(preserved))
+
+        selected, duplicates = builder.dedupe_new_lan_candidates([], preserved)
+        result = preserved + selected
+
+        self.assertEqual(selected, [])
+        self.assertEqual(sum(duplicates.values()), 0)
+        self.assertEqual(preserved, before)
+        self.assertEqual(len(result), builder.LAN_PRESERVED_BASELINE_COUNT)
+        self.assertEqual(
+            builder.lan_legacy_digest(result), builder.LAN_PRESERVED_BASELINE_DIGEST
+        )
 
     def test_experimental_overlap_is_removed_without_changing_experimental(self) -> None:
         experimental_proxy = {
@@ -489,9 +537,19 @@ class LanGlobalFastCheckTests(unittest.TestCase):
         self.assertEqual(
             set(stats["legacy_source_ids_preserved"]), builder.LEGACY_LAN_SOURCE_IDS
         )
-        baseline = builder.load_lan_legacy_baseline()
+        legacy_baseline = builder.load_lan_legacy_baseline()
+        baseline = builder.load_lan_preserved_baseline()
         self.assertEqual(stats["legacy_preserved"], builder.LAN_LEGACY_BASELINE_COUNT)
+        self.assertEqual(
+            stats["previous_additions_preserved"],
+            builder.LAN_PRESERVED_BASELINE_COUNT - builder.LAN_LEGACY_BASELINE_COUNT,
+        )
+        self.assertEqual(stats["preserved_total"], builder.LAN_PRESERVED_BASELINE_COUNT)
         self.assertEqual(stats["legacy_baseline_digest"], builder.LAN_LEGACY_BASELINE_DIGEST)
+        self.assertEqual(
+            stats["preserved_baseline_digest"], builder.LAN_PRESERVED_BASELINE_DIGEST
+        )
+        self.assertEqual(baseline[: len(legacy_baseline)], legacy_baseline)
         self.assertEqual(lan["proxies"][: len(baseline)], baseline)
         self.assertEqual(stats["new_added"], len(lan["proxies"]) - len(baseline))
         self.assertEqual(set(stats["sources"]), builder.NEW_LAN_SOURCE_IDS)

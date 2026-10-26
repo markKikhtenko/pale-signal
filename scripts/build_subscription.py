@@ -276,6 +276,54 @@ SOURCES = [
         "scope": "lan_only",
         "prechecked": "HTTP fast pool",
     },
+    {
+        "id": "FREE_XRAY_GCP",
+        "name": "free-xray-gcp VLESS",
+        "url": "https://raw.githubusercontent.com/noahclanman/free-xray-gcp/main/output/protocols/vless.txt",
+        "scope": "lan_only",
+        "prechecked": "real HTTP request through Xray before publication",
+    },
+    {
+        "id": "MULTI_PROXY_TESTED",
+        "name": "multi-proxy-config-fetcher tested",
+        "url": "https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs_tested.txt",
+        "scope": "lan_only",
+        "prechecked": "mixed tested pool; VLESS entries only",
+    },
+    {
+        "id": "PATTERNIHA_FREE_CONFIGS",
+        "name": "patterniha Free-Configs",
+        "url": "https://raw.githubusercontent.com/patterniha/Free-Configs/main/configs.txt",
+        "scope": "lan_only",
+    },
+    {
+        "id": "CAPTCHAQ_WORKING_ALL",
+        "name": "CaptchaQ working_all",
+        "url": "https://raw.githubusercontent.com/CaptchaQ/vless-servers/main/working_all.txt",
+        "scope": "lan_only",
+        "prechecked": "hourly live VLESS list",
+    },
+    {
+        "id": "NODESRADAR_V2RAY",
+        "name": "NodesRadar v2ray",
+        "url": "https://radarhub.top/v2ray.txt",
+        "scope": "lan_only",
+        "prechecked": "tested public mixed pool; VLESS entries only",
+    },
+    {
+        "id": "MRDEVMOHAMED_VLESS",
+        "name": "mrdevmohamed VLESS",
+        "url": "https://raw.githubusercontent.com/mrdevmohamed/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
+        "scope": "lan_only",
+        "prechecked": "protocol-aware LiteSpeedTest validation",
+    },
+    {
+        "id": "BAARCUDA_TOP100_VLESS",
+        "name": "Baarcuda top100 VLESS",
+        "url": "https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt",
+        "scope": "lan_only",
+        "prechecked": "100 fastest VLESS candidates by source latency",
+    },
 ]
 
 # Experimental sources are deliberately kept outside SOURCES. This prevents
@@ -346,11 +394,25 @@ LEGACY_LAN_SOURCE_IDS = {
     "IGARECK_BLACK_VLESS",
     "MOONISHE_BLACKLIST",
 }
-NEW_LAN_SOURCE_IDS = {
+NEW_LAN_SOURCE_PRIORITY = (
     "RADIKAL_FAST",
     "V2GO_LIVE_VLESS",
     "PULSECONFIGS_FAST",
-}
+    "FREE_XRAY_GCP",
+    "MULTI_PROXY_TESTED",
+    "PATTERNIHA_FREE_CONFIGS",
+    "CAPTCHAQ_WORKING_ALL",
+    "NODESRADAR_V2RAY",
+    "MRDEVMOHAMED_VLESS",
+    "BAARCUDA_TOP100_VLESS",
+    "MAHAN_VLESS",
+    "EPODONIOS_VLESS",
+    "BARRY_FAR_VLESS",
+    "SOLISPIRIT_VLESS",
+    "LIMILCO_VLESS",
+    "V2RAYROOT_VLESS",
+)
+NEW_LAN_SOURCE_IDS = set(NEW_LAN_SOURCE_PRIORITY)
 LAN_SOURCE_IDS = LEGACY_LAN_SOURCE_IDS | NEW_LAN_SOURCE_IDS
 BS_SAFE_SOURCE_IDS = BYPASS_SOURCE_IDS
 
@@ -388,6 +450,8 @@ LAN_GLOBAL_FAST_CHECK_TIMEOUT = 3000
 LAN_GLOBAL_FAST_CHECK_MAX_FAILED_TIMES = 3
 LAN_LEGACY_BASELINE_COUNT = 2002
 LAN_LEGACY_BASELINE_DIGEST = "ea19b358fe1d1daef52c9619fe4ff1139ccc289ffb341196e7bc7b9fd2da010d"
+LAN_PRESERVED_BASELINE_COUNT = 2159
+LAN_PRESERVED_BASELINE_DIGEST = "5597d0bbcbab37dd410a0dee1ca2abe2f3208d6eaaa551cac566015903f0914b"
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
 MOBILE_SUBSCRIPTION_LIMIT = 500
@@ -1800,7 +1864,7 @@ def validate_config(config: dict) -> None:
 def validate_lan_global_fast_check_config(
     lan_global: dict,
     fast_check: dict,
-    legacy_baseline: list[dict] | None = None,
+    preserved_baseline: list[dict] | None = None,
 ) -> None:
     validate_config(lan_global)
     validate_config(fast_check)
@@ -1808,17 +1872,17 @@ def validate_lan_global_fast_check_config(
         raise RuntimeError("LAN Global and Fast Check proxies differ")
 
     proxies = lan_global.get("proxies", [])
-    legacy_count = 0
-    if legacy_baseline is not None:
-        legacy_count = len(legacy_baseline)
-        if proxies[:legacy_count] != legacy_baseline:
-            raise RuntimeError("LAN Global changed the immutable legacy prefix")
-    suffix = proxies[legacy_count:]
+    preserved_count = 0
+    if preserved_baseline is not None:
+        preserved_count = len(preserved_baseline)
+        if proxies[:preserved_count] != preserved_baseline:
+            raise RuntimeError("LAN Global changed the immutable preserved prefix")
+    suffix = proxies[preserved_count:]
     existing_config_keys = {
-        canonical_proxy_config(proxy) for proxy in proxies[:legacy_count]
+        canonical_proxy_config(proxy) for proxy in proxies[:preserved_count]
     }
     existing_endpoint_keys = {
-        endpoint_identity_key(proxy) for proxy in proxies[:legacy_count]
+        endpoint_identity_key(proxy) for proxy in proxies[:preserved_count]
     }
     for proxy in suffix:
         config_key = canonical_proxy_config(proxy)
@@ -1919,16 +1983,50 @@ def load_lan_legacy_baseline(path: Path = LAN_GLOBAL_OUTPUT_FILE) -> list[dict]:
     return baseline
 
 
+def load_lan_preserved_baseline(path: Path = LAN_GLOBAL_OUTPUT_FILE) -> list[dict]:
+    """Load the fixed 2002 legacy entries plus the previously accepted 157 entries."""
+    data = load_yaml_mapping(path)
+    proxies = data.get("proxies")
+    if not isinstance(proxies, list) or len(proxies) < LAN_PRESERVED_BASELINE_COUNT:
+        raise RuntimeError(
+            f"LAN preserved baseline must contain at least {LAN_PRESERVED_BASELINE_COUNT} proxies"
+        )
+    baseline = copy.deepcopy(proxies[:LAN_PRESERVED_BASELINE_COUNT])
+    legacy_digest = lan_legacy_digest(baseline[:LAN_LEGACY_BASELINE_COUNT])
+    if legacy_digest != LAN_LEGACY_BASELINE_DIGEST:
+        raise RuntimeError(
+            "LAN preserved baseline changed the origin/main legacy prefix: "
+            f"expected {LAN_LEGACY_BASELINE_DIGEST}, got {legacy_digest}"
+        )
+    digest = lan_legacy_digest(baseline)
+    if digest != LAN_PRESERVED_BASELINE_DIGEST:
+        raise RuntimeError(
+            "LAN preserved baseline differs from the accepted 2159-entry snapshot: "
+            f"expected {LAN_PRESERVED_BASELINE_DIGEST}, got {digest}"
+        )
+    return baseline
+
+
 def dedupe_new_lan_candidates(
     proxies: list[dict],
-    legacy_baseline: list[dict],
+    preserved_baseline: list[dict],
 ) -> tuple[list[dict], dict[str, int]]:
-    """Deduplicate only new LAN candidates, never the immutable legacy pool."""
+    """Deduplicate only new LAN candidates, never the immutable preserved pool."""
     duplicate_counts = {source_id: 0 for source_id in NEW_LAN_SOURCE_IDS}
-    seen_configs = {canonical_proxy_config(proxy) for proxy in legacy_baseline}
-    seen_endpoints = {endpoint_identity_key(proxy) for proxy in legacy_baseline}
+    seen_configs = {canonical_proxy_config(proxy) for proxy in preserved_baseline}
+    seen_endpoints = {endpoint_identity_key(proxy) for proxy in preserved_baseline}
+    source_rank = {
+        source_id: index for index, source_id in enumerate(NEW_LAN_SOURCE_PRIORITY)
+    }
+    ordered_candidates = sorted(
+        enumerate(proxies),
+        key=lambda item: (
+            source_rank.get(str(item[1].get("_source_id", "")), len(source_rank)),
+            item[0],
+        ),
+    )
     retained: list[dict] = []
-    for proxy in proxies:
+    for _input_index, proxy in ordered_candidates:
         source_id = proxy.get("_source_id")
         if source_id not in NEW_LAN_SOURCE_IDS:
             continue
@@ -2308,19 +2406,24 @@ def atomic_write_text(path: Path, text: str) -> None:
 def build_lan_source_stats(
     fetch_stats: dict[str, dict],
     lan_global_proxies: list[dict],
-    legacy_baseline: list[dict],
+    preserved_baseline: list[dict],
     duplicate_counts: dict[str, int],
     experimental_overlap_counts: dict[str, int],
     non_public_counts: dict[str, int],
     now: str,
     lan_5k_count: int | None = None,
 ) -> dict:
+    legacy_preserved_count = min(LAN_LEGACY_BASELINE_COUNT, len(preserved_baseline))
     added_counts = {source_id: 0 for source_id in NEW_LAN_SOURCE_IDS}
-    for proxy in lan_global_proxies[len(legacy_baseline) :]:
+    added_transport_counts = {source_id: {} for source_id in NEW_LAN_SOURCE_IDS}
+    for proxy in lan_global_proxies[len(preserved_baseline) :]:
         sources = proxy.get("_sources", [])
         owner = next(iter(sources), "")
         if owner in added_counts:
             added_counts[owner] += 1
+            transport = str(proxy.get("network", "tcp"))
+            transports = added_transport_counts[owner]
+            transports[transport] = int(transports.get(transport, 0)) + 1
 
     source_stats: dict[str, dict] = {}
     for source in SOURCES:
@@ -2331,18 +2434,39 @@ def build_lan_source_stats(
         valid = int(fetched.get("valid", 0))
         duplicates = int(duplicate_counts.get(source_id, 0))
         added = int(added_counts.get(source_id, 0))
+        unique = max(0, valid - duplicates)
+        experimental_overlap = int(experimental_overlap_counts.get(source_id, 0))
+        non_public = int(non_public_counts.get(source_id, 0))
+        parser_invalid = int(fetched.get("parser_invalid", 0))
+        other_policy = max(
+            0,
+            unique - experimental_overlap - non_public - added,
+        )
         source_stats[source_id] = {
             "name": source["name"],
             "url": source["url"],
+            "last_updated": str(fetched.get("last_updated", "-")),
             "status": "available" if fetched.get("available") else "unavailable",
             "error": str(fetched.get("error", "")),
+            "download_errors": [str(fetched.get("error"))] if fetched.get("error") else [],
+            "received": int(fetched.get("received", 0)),
             "received_vless": int(fetched.get("received_vless", 0)),
             "valid": valid,
+            "unique": unique,
             "duplicates": duplicates,
-            "filtered": max(0, valid - duplicates - added),
-            "experimental_overlap": int(experimental_overlap_counts.get(source_id, 0)),
-            "non_public": int(non_public_counts.get(source_id, 0)),
+            "filtered": max(0, unique - added),
+            "experimental_overlap": experimental_overlap,
+            "non_public": non_public,
             "added": added,
+            "transports": dict(fetched.get("transports", {})),
+            "added_transports": added_transport_counts[source_id],
+            "rejection_reasons": {
+                "parser_invalid": parser_invalid,
+                "duplicate_config_or_endpoint": duplicates,
+                "lan_experimental_overlap": experimental_overlap,
+                "non_public_endpoint": non_public,
+                "ru_unknown_blocked_or_other_policy": other_policy,
+            },
             "verification_status": "не проверено",
             "socks_accepted_tested": 0,
             "socks_accepted_success": 0,
@@ -2355,19 +2479,25 @@ def build_lan_source_stats(
         }
     return {
         "updated": now,
-        "lan_global_before": len(legacy_baseline),
+        "lan_global_before": len(preserved_baseline),
         "lan_global_after": len(lan_global_proxies),
-        "legacy_preserved": len(legacy_baseline),
-        "new_added": len(lan_global_proxies) - len(legacy_baseline),
+        "legacy_preserved": legacy_preserved_count,
+        "previous_additions_preserved": len(preserved_baseline)
+        - legacy_preserved_count,
+        "preserved_total": len(preserved_baseline),
+        "new_added": len(lan_global_proxies) - len(preserved_baseline),
         "new_duplicates_excluded": sum(duplicate_counts.values()),
         "unique_endpoints_before": len(
-            {endpoint_identity_key(proxy) for proxy in legacy_baseline}
+            {endpoint_identity_key(proxy) for proxy in preserved_baseline}
         ),
         "unique_endpoints_after": len({endpoint_identity_key(proxy) for proxy in lan_global_proxies}),
-        "preexisting_duplicate_entries": len(legacy_baseline)
-        - len({endpoint_identity_key(proxy) for proxy in legacy_baseline}),
+        "preexisting_duplicate_entries": len(preserved_baseline)
+        - len({endpoint_identity_key(proxy) for proxy in preserved_baseline}),
         "lan_5k_after": len(lan_global_proxies) if lan_5k_count is None else lan_5k_count,
-        "legacy_baseline_digest": lan_legacy_digest(legacy_baseline),
+        "legacy_baseline_digest": lan_legacy_digest(
+            preserved_baseline[:legacy_preserved_count]
+        ),
+        "preserved_baseline_digest": lan_legacy_digest(preserved_baseline),
         "legacy_source_ids_preserved": sorted(LEGACY_LAN_SOURCE_IDS),
         "sources": source_stats,
     }
@@ -2837,8 +2967,10 @@ def lan_source_stats_readme_section(stats: dict) -> str:
         "## Новые LAN-источники",
         "",
         (
-            f"Эталонные `{stats.get('legacy_preserved', 0)}` записей из опубликованного "
-            "LAN Global сохранены без изменения имён, параметров и порядка. "
+            f"Эталонные `{stats.get('legacy_preserved', 0)}` записей из `origin/main` и "
+            f"ранее добавленные `{stats.get('previous_additions_preserved', 0)}` записей "
+            f"(всего `{stats.get('preserved_total', stats.get('lan_global_before', 0))}`) "
+            "сохранены без изменения имён, параметров и порядка. "
             f"Добавлено `{stats.get('new_added', 0)}` новых конфигураций; исключено "
             f"`{stats.get('new_duplicates_excluded', 0)}` новых дублей. Итого "
             f"`{stats.get('lan_global_after', 0)}` записей и `{unique_after}` уникальных "
@@ -2846,7 +2978,20 @@ def lan_source_stats_readme_section(stats: dict) -> str:
             "Статус «проверено» присваивается только после успешного HTTPS через VLESS."
         ),
         "",
-        "| Источник | Получено VLESS | Валидных | Новых дублей | Добавлено | SOCKS принят | HTTPS | 64 КиБ | Статус |",
+        (
+            "Полные URL, время обновления, ошибки загрузки, причины отбраковки, "
+            "транспорты и результаты стадий HTTPS сохранены в "
+            "[`lan-source-stats.json`](lan-source-stats.json)."
+        ),
+        "",
+        (
+            "Политика дальнейшего обновления: фиксированный префикс из 2159 записей "
+            "не накапливается заново; при каждом запуске пересобирается только текущий "
+            "суффикс из доступных источников. Удаление или замена узлов фиксированного "
+            "префикса требует отдельной проверяемой миграции."
+        ),
+        "",
+        "| Источник | Получено | VLESS | Валидных | Уникальных | Дубли | Добавлено | HTTPS | Статус |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
     source_stats = stats.get("sources", {})
@@ -2857,11 +3002,10 @@ def lan_source_stats_readme_section(stats: dict) -> str:
         item = source_stats.get(source_id, {})
         lines.append(
             f"| [{source['name']}]({source['url']}) | "
-            f"`{item.get('received_vless', 0)}` | `{item.get('valid', 0)}` | "
+            f"`{item.get('received', 0)}` | `{item.get('received_vless', 0)}` | "
+            f"`{item.get('valid', 0)}` | `{item.get('unique', 0)}` | "
             f"`{item.get('duplicates', 0)}` | `{item.get('added', 0)}` | "
-            f"`{item.get('socks_accepted_success', 0)}/{item.get('socks_accepted_tested', 0)}` | "
             f"`{item.get('https_success', 0)}/{item.get('https_tested', 0)}` | "
-            f"`{item.get('transfer_success', 0)}/{item.get('transfer_tested', 0)}` | "
             f"{item.get('verification_status', 'не проверено')} |"
         )
     lines.append(LAN_SOURCE_STATS_README_END)
@@ -3649,8 +3793,8 @@ def main(
     builds_lan = lan_only or not (
         non_stable_only or bs_safe_only or mobile_only
     )
-    lan_legacy_proxies = (
-        load_lan_legacy_baseline(lan_baseline_path or LAN_GLOBAL_OUTPUT_FILE)
+    lan_preserved_proxies = (
+        load_lan_preserved_baseline(lan_baseline_path or LAN_GLOBAL_OUTPUT_FILE)
         if builds_lan
         else []
     )
@@ -3658,8 +3802,12 @@ def main(
         source_id: {
             "available": False,
             "error": "not fetched",
+            "received": 0,
             "received_vless": 0,
             "valid": 0,
+            "parser_invalid": 0,
+            "transports": {},
+            "last_updated": "-",
         }
         for source_id in NEW_LAN_SOURCE_IDS
     }
@@ -3682,10 +3830,14 @@ def main(
             print(f"warning: skipped source {source['name']}: {exc}", file=sys.stderr)
             continue
         source_parsed: list[dict] = []
+        received = 0
         received_vless = 0
         for source_text in source_texts:
             for line in source_text.splitlines():
-                if line.strip().startswith("vless://"):
+                stripped = line.strip()
+                if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*://", stripped):
+                    received += 1
+                if stripped.startswith("vless://"):
                     received_vless += 1
                 proxy = parse_vless(line, source["id"])
                 if proxy is not None:
@@ -3695,13 +3847,24 @@ def main(
             lan_fetch_stats[source["id"]] = {
                 "available": True,
                 "error": "",
+                "received": received,
                 "received_vless": received_vless,
                 "valid": len(source_parsed),
+                "parser_invalid": max(0, received_vless - len(source_parsed)),
+                "transports": {
+                    network: sum(
+                        1 for proxy in source_parsed if proxy.get("network", "tcp") == network
+                    )
+                    for network in sorted(
+                        {str(proxy.get("network", "tcp")) for proxy in source_parsed}
+                    )
+                },
+                "last_updated": source_published_label(source["id"]),
             }
     if not parsed and not lan_only:
         raise RuntimeError("no valid VLESS servers were parsed")
     new_lan_proxies, lan_duplicate_counts = dedupe_new_lan_candidates(
-        parsed, lan_legacy_proxies
+        parsed, lan_preserved_proxies
     )
     new_lan_proxies, experimental_overlap_counts = exclude_lan_experimental_overlaps(
         new_lan_proxies
@@ -3745,9 +3908,9 @@ def main(
     if lan_only:
         new_lan_global_proxies = select_lan_global_proxies(new_lan_global_candidates)
         ensure_new_names_unique_against_legacy(
-            new_lan_global_proxies, lan_legacy_proxies
+            new_lan_global_proxies, lan_preserved_proxies
         )
-        lan_global_proxies = lan_legacy_proxies + new_lan_global_proxies
+        lan_global_proxies = lan_preserved_proxies + new_lan_global_proxies
         lan_5k_proxies = lan_global_proxies[:LAN_5K_SUBSCRIPTION_LIMIT]
         if not lan_5k_proxies:
             raise RuntimeError("no LAN 5K VLESS servers were produced")
@@ -3761,13 +3924,13 @@ def main(
         validate_lan_global_fast_check_config(
             lan_global_config,
             lan_global_fast_check_config,
-            lan_legacy_proxies,
+            lan_preserved_proxies,
         )
         now = msk_timestamp()
         lan_source_stats = build_lan_source_stats(
             lan_fetch_stats,
             lan_global_proxies,
-            lan_legacy_proxies,
+            lan_preserved_proxies,
             lan_duplicate_counts,
             experimental_overlap_counts,
             non_public_counts,
@@ -3876,8 +4039,8 @@ def main(
         return 0
 
     new_lan_global_proxies = select_lan_global_proxies(new_lan_global_candidates)
-    ensure_new_names_unique_against_legacy(new_lan_global_proxies, lan_legacy_proxies)
-    lan_global_proxies = lan_legacy_proxies + new_lan_global_proxies
+    ensure_new_names_unique_against_legacy(new_lan_global_proxies, lan_preserved_proxies)
+    lan_global_proxies = lan_preserved_proxies + new_lan_global_proxies
     lan_5k_proxies = lan_global_proxies[:LAN_5K_SUBSCRIPTION_LIMIT]
     if not lan_5k_proxies:
         raise RuntimeError("no LAN 5K VLESS servers were produced")
@@ -3891,7 +4054,7 @@ def main(
     validate_lan_global_fast_check_config(
         lan_global_config,
         lan_global_fast_check_config,
-        lan_legacy_proxies,
+        lan_preserved_proxies,
     )
     lan_5k_yaml_text = "\n".join(dump_yaml(lan_5k_config)) + "\n"
     lan_global_yaml_text = "\n".join(dump_yaml(lan_global_config)) + "\n"
@@ -3925,7 +4088,7 @@ def main(
     lan_source_stats = build_lan_source_stats(
         lan_fetch_stats,
         lan_global_proxies,
-        lan_legacy_proxies,
+        lan_preserved_proxies,
         lan_duplicate_counts,
         experimental_overlap_counts,
         non_public_counts,
