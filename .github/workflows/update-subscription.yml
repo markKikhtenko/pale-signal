@@ -47,7 +47,12 @@ jobs:
       - name: Regenerate subscription files
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: python scripts/build_subscription.py
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            python scripts/build_subscription.py --lan-only
+          else
+            python scripts/build_subscription.py
+          fi
 
       - name: Validate generated configs and OpenClash module
         env:
