@@ -333,19 +333,95 @@ EXPERIMENTAL_SOURCES = [
         "id": "MORPHEUSADAM_BEST",
         "name": "MorpheusAdam Best",
         "url": "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt",
+        "format": "share_uri",
+        "required": True,
         "minimum_vless": 100,
     },
     {
         "id": "MEHRTAT_VLESS",
         "name": "Mehrtat VLESS",
         "url": "https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt",
+        "format": "share_uri",
+        "required": True,
         "minimum_vless": 100,
     },
     {
         "id": "AU1RXX_VERIFIED",
         "name": "Au1rxx Verified",
         "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
+        "format": "share_uri",
+        "required": True,
         "minimum_vless": 100,
+    },
+    {
+        "id": "GO4SHARING_SUB",
+        "name": "go4sharing/sub",
+        "url": "https://raw.githubusercontent.com/go4sharing/sub/main/sub.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "max_imported": 50,
+        "audit_https_2_of_2": "5/15",
+        "audit_good": 5,
+    },
+    {
+        "id": "RUK1NG001_FREESUB",
+        "name": "Ruk1ng001/freeSub",
+        "url": "https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "max_imported": 50,
+        "audit_https_2_of_2": "20/63",
+        "audit_good": 9,
+    },
+    {
+        "id": "AWESOME_VPN",
+        "name": "awesome-vpn/awesome-vpn",
+        "url": "https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "max_imported": 50,
+        "audit_https_2_of_2": "10/41",
+        "audit_good": 6,
+    },
+    {
+        "id": "MISAKA_CHROMEGO_MERGE",
+        "name": "Misaka-blog/chromego_merge",
+        "url": "https://raw.githubusercontent.com/Misaka-blog/chromego_merge/main/sub/merged_proxies_new.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "max_imported": 50,
+        "audit_https_2_of_2": "20/101",
+        "audit_good": 6,
+    },
+    {
+        "id": "SUNMIAO4458_FREE_PROXY_AIRPORT",
+        "name": "sunmiao4458/free-proxy-airport",
+        "url": "https://raw.githubusercontent.com/sunmiao4458/free-proxy-airport/main/output/clash.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "max_imported": 50,
+        "audit_https_2_of_2": "8/47",
+        "audit_good": 2,
+    },
+    {
+        "id": "ERMAOZI_GET_SUBSCRIBE",
+        "name": "ermaozi/get_subscribe",
+        "url": "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml",
+        "format": "clash_yaml",
+        "required": False,
+        "max_imported": 50,
+        "audit_https_2_of_2": "46/346",
+        "audit_good": 11,
+    },
+    {
+        "id": "PEASOFT_NOMOREWALLS",
+        "name": "peasoft/NoMoreWalls",
+        "url": "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml",
+        "format": "clash_yaml",
+        "required": False,
+        "max_imported": 50,
+        "audit_https_2_of_2": "28/280",
+        "audit_good": 6,
     },
 ]
 EXPERIMENTAL_SOURCE_IDS = {source["id"] for source in EXPERIMENTAL_SOURCES}
@@ -455,8 +531,18 @@ LAN_PRESERVED_BASELINE_DIGEST = "5597d0bbcbab37dd410a0dee1ca2abe2f3208d6eaaa551c
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
 MOBILE_SUBSCRIPTION_LIMIT = 500
-LAN_EXPERIMENTAL_SCHEMA_VERSION = 1
+LAN_EXPERIMENTAL_SCHEMA_VERSION = 2
 LAN_EXPERIMENTAL_MIN_SOURCE_RATIO = 0.5
+LAN_EXPERIMENTAL_SUPPORTED_PROTOCOLS = {"vless", "ss", "trojan"}
+LAN_EXPERIMENTAL_EXPLICITLY_UNSUPPORTED_PROTOCOLS = {
+    "http",
+    "socks5",
+    "ssr",
+    "anytls",
+    "vmess",
+    "hysteria2",
+    "tuic",
+}
 LAN_EXPERIMENTAL_README_START = "<!-- LAN-EXPERIMENTAL:START -->"
 LAN_EXPERIMENTAL_README_END = "<!-- LAN-EXPERIMENTAL:END -->"
 LAN_SOURCE_STATS_README_START = "<!-- LAN-SOURCE-STATS:START -->"
@@ -2156,6 +2242,329 @@ def is_public_remote_server(server: str) -> bool:
     return result
 
 
+EXPERIMENTAL_COMMON_PROXY_FIELDS = {
+    "name",
+    "type",
+    "server",
+    "port",
+    "udp",
+    "ip-version",
+    "tfo",
+    "mptcp",
+    "smux",
+    "dialer-proxy",
+}
+EXPERIMENTAL_PROTOCOL_FIELDS = {
+    "vless": {
+        "uuid",
+        "flow",
+        "packet-encoding",
+        "encryption",
+        "tls",
+        "servername",
+        "sni",
+        "alpn",
+        "fingerprint",
+        "client-fingerprint",
+        "skip-cert-verify",
+        "name-cert-verify",
+        "reality-opts",
+        "network",
+        "ws-opts",
+        "grpc-opts",
+        "http-opts",
+        "h2-opts",
+        "xhttp-opts",
+    },
+    "ss": {
+        "cipher",
+        "password",
+        "udp-over-tcp",
+        "udp-over-tcp-version",
+        "plugin",
+        "plugin-opts",
+        "client-fingerprint",
+    },
+    "trojan": {
+        "password",
+        "tls",
+        "sni",
+        "servername",
+        "alpn",
+        "fingerprint",
+        "client-fingerprint",
+        "skip-cert-verify",
+        "name-cert-verify",
+        "shadow-tls-opts",
+        "restls-opts",
+        "jls-opts",
+        "ss-opts",
+        "reality-opts",
+        "network",
+        "ws-opts",
+        "grpc-opts",
+    },
+}
+EXPERIMENTAL_VLESS_NETWORKS = {"tcp", "ws", "http", "h2", "grpc", "xhttp"}
+EXPERIMENTAL_TROJAN_NETWORKS = {"tcp", "ws", "grpc"}
+EXPERIMENTAL_SS_CIPHERS = {
+    "aes-128-ctr",
+    "aes-192-ctr",
+    "aes-256-ctr",
+    "aes-128-cfb",
+    "aes-192-cfb",
+    "aes-256-cfb",
+    "aes-128-gcm",
+    "aes-192-gcm",
+    "aes-256-gcm",
+    "aes-128-ccm",
+    "aes-192-ccm",
+    "aes-256-ccm",
+    "aes-128-gcm-siv",
+    "aes-256-gcm-siv",
+    "chacha20-ietf",
+    "chacha20",
+    "xchacha20",
+    "chacha20-ietf-poly1305",
+    "xchacha20-ietf-poly1305",
+    "chacha8-ietf-poly1305",
+    "xchacha8-ietf-poly1305",
+    "2022-blake3-aes-128-gcm",
+    "2022-blake3-aes-256-gcm",
+    "2022-blake3-chacha20-poly1305",
+    "lea-128-gcm",
+    "lea-192-gcm",
+    "lea-256-gcm",
+    "rabbit128-poly1305",
+    "aegis-128l",
+    "aegis-256",
+    "aez-384",
+    "deoxys-ii-256-128",
+    "rc4-md5",
+    "none",
+}
+EXPERIMENTAL_SS_PLUGINS = {
+    "obfs",
+    "v2ray-plugin",
+    "gost-plugin",
+    "shadow-tls",
+    "restls",
+    "kcptun",
+    "jls",
+}
+EXPERIMENTAL_SOURCE_METADATA_FIELDS = {"country", "delay"}
+
+
+def add_exclusion_reason(stats: dict, reason: str, count: int = 1) -> None:
+    reasons = stats.setdefault("exclusion_reasons", {})
+    reasons[reason] = int(reasons.get(reason, 0)) + count
+
+
+def validate_experimental_yaml_proxy(
+    value: object,
+    source_id: str,
+    source_name: str,
+) -> tuple[dict | None, str | None, bool]:
+    """Validate one untrusted Clash/Mihomo proxy without importing global settings."""
+    if not isinstance(value, dict):
+        return None, "invalid:not_mapping", False
+
+    protocol = str(value.get("type", "")).strip().casefold()
+    if not protocol:
+        return None, "invalid:missing_type", False
+    if protocol not in LAN_EXPERIMENTAL_SUPPORTED_PROTOCOLS:
+        return None, f"unsupported:{protocol}", True
+
+    allowed_fields = EXPERIMENTAL_COMMON_PROXY_FIELDS | EXPERIMENTAL_PROTOCOL_FIELDS[protocol]
+    unknown_fields = sorted(
+        str(key)
+        for key in value
+        if key not in allowed_fields and key not in EXPERIMENTAL_SOURCE_METADATA_FIELDS
+    )
+    if unknown_fields:
+        return None, f"invalid:unsupported_parameter:{unknown_fields[0]}", False
+    if "dialer-proxy" in value:
+        return None, "invalid:external_proxy_reference", False
+
+    server = str(value.get("server", "")).strip()
+    if not server or not valid_server(server):
+        return None, "invalid:server", False
+    port_value = value.get("port")
+    if isinstance(port_value, bool):
+        return None, "invalid:port", False
+    try:
+        port = int(port_value)
+    except (TypeError, ValueError):
+        return None, "invalid:port", False
+    if not 1 <= port <= 65535:
+        return None, "invalid:port", False
+
+    for boolean_field in (
+        "udp",
+        "tfo",
+        "mptcp",
+        "tls",
+        "skip-cert-verify",
+        "udp-over-tcp",
+    ):
+        if boolean_field in value and not isinstance(value[boolean_field], bool):
+            return None, f"invalid:{boolean_field}", False
+
+    if protocol == "vless":
+        try:
+            user_id = uuid.UUID(str(value.get("uuid", "")).strip())
+        except (ValueError, AttributeError):
+            return None, "invalid:uuid", False
+        if user_id.int == 0:
+            return None, "invalid:uuid", False
+        network = str(value.get("network", "tcp")).strip().casefold() or "tcp"
+        if network not in EXPERIMENTAL_VLESS_NETWORKS:
+            return None, "invalid:network", False
+        encryption = str(value.get("encryption", "none")).strip().casefold()
+        if encryption != "none":
+            return None, "invalid:encryption", False
+    elif protocol == "ss":
+        cipher = str(value.get("cipher", "")).strip().casefold()
+        if cipher not in EXPERIMENTAL_SS_CIPHERS:
+            return None, "invalid:cipher", False
+        if cipher != "none" and not isinstance(value.get("password"), str):
+            return None, "invalid:password", False
+        plugin = str(value.get("plugin", "")).strip().casefold()
+        if plugin and plugin not in EXPERIMENTAL_SS_PLUGINS:
+            return None, "invalid:plugin", False
+        if plugin and not isinstance(value.get("plugin-opts"), dict):
+            return None, "invalid:plugin-opts", False
+        if "udp-over-tcp-version" in value and value["udp-over-tcp-version"] not in {1, 2}:
+            return None, "invalid:udp-over-tcp-version", False
+    else:
+        password = value.get("password")
+        if not isinstance(password, str) or not password:
+            return None, "invalid:password", False
+        network = str(value.get("network", "tcp")).strip().casefold() or "tcp"
+        if network not in EXPERIMENTAL_TROJAN_NETWORKS:
+            return None, "invalid:network", False
+
+    proxy = copy.deepcopy(value)
+    for metadata_field in EXPERIMENTAL_SOURCE_METADATA_FIELDS:
+        proxy.pop(metadata_field, None)
+    original_name = clean_name(str(proxy.pop("name", "")), f"{server}:{port}")
+    proxy["type"] = protocol
+    proxy["server"] = server
+    proxy["port"] = port
+    proxy["_source_name"] = f"[{source_name}] {original_name}"
+    proxy["_source_id"] = source_id
+    return proxy, None, False
+
+
+def parse_experimental_yaml(text: str, source: dict, stats: dict) -> list[dict]:
+    try:
+        import yaml
+    except ImportError as exc:
+        raise RuntimeError("PyYAML is required for Clash/Mihomo experimental sources") from exc
+    try:
+        document = yaml.safe_load(text)
+    except yaml.YAMLError:
+        add_exclusion_reason(stats, "invalid:yaml")
+        return []
+    if not isinstance(document, dict):
+        add_exclusion_reason(stats, "invalid:document")
+        return []
+    values = document.get("proxies")
+    if not isinstance(values, list):
+        add_exclusion_reason(stats, "invalid:missing_proxies")
+        return []
+
+    parsed: list[dict] = []
+    for value in values:
+        stats["received"] += 1
+        proxy, reason, unsupported = validate_experimental_yaml_proxy(
+            value,
+            source["id"],
+            source["name"],
+        )
+        if proxy is not None:
+            stats["valid_format"] += 1
+            parsed.append(proxy)
+            continue
+        if unsupported:
+            stats["unsupported_protocols"] += 1
+            protocol = reason.split(":", 1)[1] if reason else "unknown"
+            unsupported_by_protocol = stats.setdefault("unsupported_by_protocol", {})
+            unsupported_by_protocol[protocol] = int(unsupported_by_protocol.get(protocol, 0)) + 1
+        else:
+            stats["invalid"] += 1
+        add_exclusion_reason(stats, reason or "invalid:unknown")
+    return parsed
+
+
+def experimental_endpoint_identity_key(proxy: dict) -> tuple:
+    """Protocol-aware endpoint identity used only by LAN Experimental."""
+    protocol = str(proxy.get("type", "")).casefold()
+    common = (
+        protocol,
+        normalized_server_identity(proxy.get("server", "")),
+        int(proxy.get("port", 0) or 0),
+    )
+    if protocol in {"vless", "vmess"}:
+        return (*common, normalized_uuid_identity(proxy.get("uuid", "")))
+    if protocol == "ss":
+        return (
+            *common,
+            str(proxy.get("cipher", "")).casefold(),
+            str(proxy.get("password", "")),
+        )
+    if protocol == "trojan":
+        return (*common, str(proxy.get("password", "")))
+    return (*common, canonical_proxy_config(proxy))
+
+
+def load_experimental_source_fallbacks(
+    sources: list[dict],
+    path: Path = LAN_EXPERIMENTAL_OUTPUT_FILE,
+) -> dict[str, list[dict]]:
+    fallbacks = {source["id"]: [] for source in sources}
+    fallbacks["__legacy__"] = []
+    if not path.exists():
+        return fallbacks
+    try:
+        document = load_yaml_mapping(path)
+    except Exception:
+        return fallbacks
+    proxies = document.get("proxies")
+    if not isinstance(proxies, list):
+        return fallbacks
+    optional_sources = [
+        source for source in sources if not source.get("required", True)
+    ]
+    for proxy in proxies:
+        if not isinstance(proxy, dict):
+            continue
+        name = str(proxy.get("name", ""))
+        source = next(
+            (
+                item
+                for item in optional_sources
+                if name.startswith(f"[{item['name']}] ")
+            ),
+            None,
+        )
+        if source is None:
+            retained = copy.deepcopy(proxy)
+            retained["_source_name"] = retained.pop("name")
+            fallbacks["__legacy__"].append(retained)
+            continue
+        retained = copy.deepcopy(proxy)
+        retained["_source_name"] = retained.pop("name")
+        retained["_source_id"] = source["id"]
+        fallbacks[source["id"]].append(retained)
+    return fallbacks
+
+
+def deterministic_experimental_rank(proxy: dict) -> tuple[str, str]:
+    identity = canonical_proxy_config(proxy)
+    return hashlib.sha256(identity.encode("utf-8")).hexdigest(), identity
+
+
 def prepare_experimental_proxy(proxy: dict, input_order: int) -> dict:
     prepared = copy.deepcopy(proxy)
     source_name = prepared.pop("_source_name")
@@ -2194,14 +2603,19 @@ def validate_lan_experimental_config(config: dict, lan_global_proxies: list[dict
     config_keys = [canonical_proxy_config(proxy) for proxy in proxies]
     if len(config_keys) != len(set(config_keys)):
         raise RuntimeError("LAN Experimental contains duplicate normalized configs")
-    endpoint_keys = [endpoint_identity_key(proxy) for proxy in proxies]
+    endpoint_keys = [experimental_endpoint_identity_key(proxy) for proxy in proxies]
     if len(endpoint_keys) != len(set(endpoint_keys)):
-        raise RuntimeError("LAN Experimental contains duplicate server + port + UUID endpoints")
+        raise RuntimeError("LAN Experimental contains duplicate protocol-aware endpoints")
 
     lan_config_keys = {canonical_proxy_config(proxy) for proxy in lan_global_proxies}
-    lan_endpoint_keys = {endpoint_identity_key(proxy) for proxy in lan_global_proxies}
+    lan_endpoint_keys = {
+        experimental_endpoint_identity_key(proxy) for proxy in lan_global_proxies
+    }
     for proxy, config_key in zip(proxies, config_keys):
-        if config_key in lan_config_keys or endpoint_identity_key(proxy) in lan_endpoint_keys:
+        if (
+            config_key in lan_config_keys
+            or experimental_endpoint_identity_key(proxy) in lan_endpoint_keys
+        ):
             raise RuntimeError("LAN Experimental intersects LAN Global")
 
 
@@ -2236,56 +2650,106 @@ def build_lan_experimental(
     fetcher=None,
     now: str | None = None,
     baseline_stats: dict | None = None,
+    fallback_proxies_by_source: dict[str, list[dict]] | None = None,
 ) -> tuple[str, dict]:
+    using_default_sources = sources is None
     sources = EXPERIMENTAL_SOURCES if sources is None else sources
     fetcher = fetch_source_texts if fetcher is None else fetcher
     now = msk_timestamp() if now is None else now
+    baseline_sources = (baseline_stats or {}).get("sources", {})
+    fallbacks = (
+        load_experimental_source_fallbacks(sources)
+        if fallback_proxies_by_source is None and using_default_sources
+        else fallback_proxies_by_source
+    )
+    if fallbacks is None:
+        fallbacks = {}
     source_stats = {
         source["id"]: {
             "received": 0,
             "valid_format": 0,
+            "unsupported_protocols": 0,
+            "unsupported_by_protocol": {},
+            "invalid": 0,
             "filtered": 0,
             "duplicates": 0,
             "lan_global_overlap": 0,
+            "limited": 0,
             "added": 0,
-            "last_updated": "-",
+            "protocols": {},
+            "exclusion_reasons": {},
+            "status": "pending",
+            "error": "",
+            "last_successful_update": str(
+                baseline_sources.get(source["id"], {}).get(
+                    "last_successful_update",
+                    baseline_sources.get(source["id"], {}).get("last_updated", "-"),
+                )
+            ),
+            "last_updated": str(
+                baseline_sources.get(source["id"], {}).get("last_updated", "-")
+            ),
         }
         for source in sources
     }
     parsed: list[dict] = []
-    source_failures: list[str] = []
-    baseline_sources = (baseline_stats or {}).get("sources", {})
+    required_failures: list[str] = []
+    required_unavailable = 0
+    successful_sources = 0
+    fallback_sources = 0
+
+    def retain_optional_fallback(source: dict, message: str, reason: str) -> None:
+        nonlocal fallback_sources
+        source_id = source["id"]
+        retained = [copy.deepcopy(proxy) for proxy in fallbacks.get(source_id, [])]
+        source_stats[source_id]["error"] = message
+        add_exclusion_reason(source_stats[source_id], reason)
+        if retained:
+            source_stats[source_id]["status"] = "fallback"
+            fallback_sources += 1
+            parsed.extend(retained)
+        else:
+            source_stats[source_id]["status"] = "unavailable"
 
     for source in sources:
         source_id = source["id"]
+        stats = source_stats[source_id]
         try:
             source_texts = fetcher(source)
         except Exception as exc:
-            source_failures.append(f"{source['name']}: unavailable ({exc})")
+            message = f"{source['name']}: unavailable ({exc})"
+            if source.get("required", True):
+                required_failures.append(message)
+                required_unavailable += 1
+                stats["status"] = "unavailable"
+                stats["error"] = str(exc)
+                add_exclusion_reason(stats, "source:unavailable")
+            else:
+                retain_optional_fallback(source, str(exc), "source:unavailable")
             continue
-        published_label = source_published_label(source_id)
-        source_stats[source_id]["last_updated"] = (
-            published_label
-            if published_label != "-"
-            else baseline_sources.get(source_id, {}).get("last_updated", "-")
-        )
+        successful_update = now
         source_parsed: list[dict] = []
         for source_text in source_texts:
+            if source.get("format", "share_uri") == "clash_yaml":
+                source_parsed.extend(parse_experimental_yaml(source_text, source, stats))
+                continue
             for line in source_text.splitlines():
                 if not line.strip().startswith("vless://"):
                     continue
-                source_stats[source_id]["received"] += 1
+                stats["received"] += 1
                 proxy = parse_vless(line, source_id)
                 if proxy is None:
+                    stats["invalid"] += 1
+                    add_exclusion_reason(stats, "invalid:vless")
                     continue
-                source_stats[source_id]["valid_format"] += 1
+                stats["valid_format"] += 1
                 source_parsed.append(proxy)
 
-        received = source_stats[source_id]["received"]
-        valid_format = source_stats[source_id]["valid_format"]
+        received = stats["received"]
+        valid_format = stats["valid_format"]
         baseline = baseline_sources.get(source_id, {})
         minimum_received = max(
-            int(source.get("minimum_vless", 1)),
+            int(source.get("minimum_vless", source.get("minimum_received", 1))),
             math.ceil(int(baseline.get("received", 0)) * LAN_EXPERIMENTAL_MIN_SOURCE_RATIO),
         )
         minimum_valid = max(
@@ -2293,20 +2757,72 @@ def build_lan_experimental(
             math.ceil(int(baseline.get("valid_format", 0)) * LAN_EXPERIMENTAL_MIN_SOURCE_RATIO),
         )
         if received < minimum_received or valid_format < minimum_valid:
-            source_failures.append(
+            message = (
                 f"{source['name']}: truncated or empty "
                 f"(received={received}, required={minimum_received}; "
                 f"valid={valid_format}, required={minimum_valid})"
             )
+            if source.get("required", True):
+                required_failures.append(message)
+                stats["status"] = "invalid"
+                stats["error"] = message
+                add_exclusion_reason(stats, "source:truncated")
+            else:
+                retain_optional_fallback(source, message, "source:truncated")
             continue
+        successful_sources += 1
+        stats["last_successful_update"] = successful_update
+        stats["last_updated"] = successful_update
+        stats["status"] = "ok"
         parsed.extend(source_parsed)
 
-    if len(source_failures) == len(sources) and all("unavailable" in item for item in source_failures):
-        raise RuntimeError("all LAN Experimental sources are unavailable")
-    if source_failures:
-        raise RuntimeError("LAN Experimental source validation failed: " + "; ".join(source_failures))
+    required_sources = [source for source in sources if source.get("required", True)]
+    if required_failures:
+        legacy_fallback = [
+            copy.deepcopy(proxy) for proxy in fallbacks.get("__legacy__", [])
+        ]
+        if not legacy_fallback:
+            if required_sources and required_unavailable == len(required_sources):
+                raise RuntimeError("all LAN Experimental sources are unavailable")
+            raise RuntimeError(
+                "LAN Experimental source validation failed: " + "; ".join(required_failures)
+            )
+
+        required_ids = {source["id"] for source in required_sources}
+        parsed = [
+            proxy for proxy in parsed if proxy.get("_source_id") not in required_ids
+        ]
+        legacy_parsed: list[dict] = []
+        remaining = len(legacy_fallback)
+        fallback_index = 0
+        for source_index, source in enumerate(required_sources):
+            source_id = source["id"]
+            baseline = baseline_sources.get(source_id, {})
+            if source_index == len(required_sources) - 1:
+                quota = remaining
+            else:
+                quota = min(max(0, int(baseline.get("added", 0))), remaining)
+            for proxy in legacy_fallback[fallback_index : fallback_index + quota]:
+                proxy["_source_id"] = source_id
+                legacy_parsed.append(proxy)
+            fallback_index += quota
+            remaining -= quota
+            stats = source_stats[source_id]
+            stats["status"] = "fallback"
+            stats["last_successful_update"] = str(
+                baseline.get(
+                    "last_successful_update",
+                    baseline.get("last_updated", stats["last_successful_update"]),
+                )
+            )
+            stats["last_updated"] = stats["last_successful_update"]
+            if not stats["error"]:
+                stats["error"] = "another required legacy source failed validation"
+            add_exclusion_reason(stats, "source:legacy_pool_fallback")
+        parsed = legacy_parsed + parsed
+        fallback_sources += len(required_sources)
     if not parsed:
-        raise RuntimeError("LAN Experimental sources produced no valid VLESS configs")
+        raise RuntimeError("LAN Experimental sources produced no valid supported configs")
 
     candidates = [prepare_experimental_proxy(proxy, index) for index, proxy in enumerate(parsed)]
     ensure_unique_names(candidates)
@@ -2316,14 +2832,18 @@ def build_lan_experimental(
         if (
             blocked_proxy_key(proxy) in BLOCKED_PROXY_KEYS
             or blocked_proxy_name(proxy)
-            or not is_public_remote_server(str(proxy.get("server", "")))
         ):
             source_stats[source_id]["filtered"] += 1
+            add_exclusion_reason(source_stats[source_id], "filtered:blocklist")
+            continue
+        if not is_public_remote_server(str(proxy.get("server", ""))):
+            source_stats[source_id]["filtered"] += 1
+            add_exclusion_reason(source_stats[source_id], "filtered:non_public")
             continue
         safe_candidates.append(proxy)
 
     if not safe_candidates:
-        raise RuntimeError("LAN Experimental has no safe public VLESS configs")
+        raise RuntimeError("LAN Experimental has no safe public supported configs")
 
     ru_proxies, non_ru_proxies = split_by_country(safe_candidates)
     del ru_proxies
@@ -2332,22 +2852,26 @@ def build_lan_experimental(
         source_id = proxy["_experimental_owner"]
         if proxy.get("_country") == "UNKNOWN":
             source_stats[source_id]["filtered"] += 1
+            add_exclusion_reason(source_stats[source_id], "filtered:unknown_country")
             continue
         country_candidates.append(proxy)
     for proxy in safe_candidates:
         if proxy.get("_country") == "RU":
-            source_stats[proxy["_experimental_owner"]]["filtered"] += 1
+            source_id = proxy["_experimental_owner"]
+            source_stats[source_id]["filtered"] += 1
+            add_exclusion_reason(source_stats[source_id], "filtered:ru")
 
     unique_candidates: list[dict] = []
     seen_configs: dict[str, dict] = {}
-    seen_endpoints: dict[tuple[str, int, str], dict] = {}
+    seen_endpoints: dict[tuple, dict] = {}
     for proxy in country_candidates:
         source_id = proxy["_experimental_owner"]
         config_key = canonical_proxy_config(proxy)
-        endpoint_key = endpoint_identity_key(proxy)
+        endpoint_key = experimental_endpoint_identity_key(proxy)
         existing = seen_configs.get(config_key) or seen_endpoints.get(endpoint_key)
         if existing is not None:
             source_stats[source_id]["duplicates"] += 1
+            add_exclusion_reason(source_stats[source_id], "duplicate:experimental")
             existing_sources = existing.setdefault("_sources", [])
             if source_id not in existing_sources:
                 existing_sources.append(source_id)
@@ -2357,18 +2881,42 @@ def build_lan_experimental(
         unique_candidates.append(proxy)
 
     lan_config_keys = {canonical_proxy_config(proxy) for proxy in lan_global_proxies}
-    lan_endpoint_keys = {endpoint_identity_key(proxy) for proxy in lan_global_proxies}
-    experimental_proxies: list[dict] = []
+    lan_endpoint_keys = {
+        experimental_endpoint_identity_key(proxy) for proxy in lan_global_proxies
+    }
+    eligible_by_source = {source["id"]: [] for source in sources}
     for proxy in unique_candidates:
         source_id = proxy["_experimental_owner"]
         if (
             canonical_proxy_config(proxy) in lan_config_keys
-            or endpoint_identity_key(proxy) in lan_endpoint_keys
+            or experimental_endpoint_identity_key(proxy) in lan_endpoint_keys
         ):
             source_stats[source_id]["lan_global_overlap"] += 1
+            add_exclusion_reason(source_stats[source_id], "overlap:lan_global")
             continue
-        source_stats[source_id]["added"] += 1
-        experimental_proxies.append(proxy)
+        eligible_by_source[source_id].append(proxy)
+
+    experimental_proxies: list[dict] = []
+    for source in sources:
+        source_id = source["id"]
+        eligible = eligible_by_source[source_id]
+        limit = source.get("max_imported")
+        if limit is not None and len(eligible) > int(limit):
+            eligible = sorted(eligible, key=deterministic_experimental_rank)
+            source_stats[source_id]["limited"] = len(eligible) - int(limit)
+            add_exclusion_reason(
+                source_stats[source_id],
+                "limited:per_source",
+                source_stats[source_id]["limited"],
+            )
+            eligible = eligible[: int(limit)]
+        source_stats[source_id]["added"] = len(eligible)
+        protocols: dict[str, int] = {}
+        for proxy in eligible:
+            protocol = str(proxy.get("type", "unknown")).casefold()
+            protocols[protocol] = protocols.get(protocol, 0) + 1
+        source_stats[source_id]["protocols"] = protocols
+        experimental_proxies.extend(eligible)
 
     if not experimental_proxies:
         raise RuntimeError("LAN Experimental has no new proxies after LAN Global deduplication")
@@ -2379,13 +2927,34 @@ def build_lan_experimental(
     if not yaml_text.strip():
         raise RuntimeError("empty LAN Experimental YAML output")
     yaml_text = experimental_metadata(yaml_text, now, len(experimental_proxies))
+    protocols: dict[str, int] = {}
+    unsupported_by_protocol: dict[str, int] = {}
+    invalid = 0
+    unsupported_protocols = 0
+    limited = 0
+    for item in source_stats.values():
+        invalid += int(item["invalid"])
+        unsupported_protocols += int(item["unsupported_protocols"])
+        limited += int(item["limited"])
+        for protocol, count in item["protocols"].items():
+            protocols[protocol] = protocols.get(protocol, 0) + int(count)
+        for protocol, count in item["unsupported_by_protocol"].items():
+            unsupported_by_protocol[protocol] = (
+                unsupported_by_protocol.get(protocol, 0) + int(count)
+            )
     stats = {
         "sources": source_stats,
         "total": len(experimental_proxies),
         "auto": len(config["proxy-groups"][0]["proxies"]),
         "lan_global_overlap": sum(item["lan_global_overlap"] for item in source_stats.values()),
         "duplicates": sum(item["duplicates"] for item in source_stats.values()),
-        "available_sources": len(sources),
+        "unsupported_protocols": unsupported_protocols,
+        "unsupported_by_protocol": unsupported_by_protocol,
+        "invalid": invalid,
+        "limited": limited,
+        "protocols": protocols,
+        "available_sources": successful_sources,
+        "fallback_sources": fallback_sources,
         "updated": now,
         "schema_version": LAN_EXPERIMENTAL_SCHEMA_VERSION,
     }
@@ -2532,6 +3101,8 @@ def validate_experimental_stats(stats: dict, proxy_count: int | None = None) -> 
     missing_sources = EXPERIMENTAL_SOURCE_IDS - set(sources)
     if missing_sources:
         raise RuntimeError(f"LAN Experimental statistics miss sources: {sorted(missing_sources)}")
+    if int(stats.get("schema_version", -1)) != LAN_EXPERIMENTAL_SCHEMA_VERSION:
+        raise RuntimeError("LAN Experimental statistics schema version is unsupported")
     total = int(stats.get("total", -1))
     auto = int(stats.get("auto", -1))
     retained_pruned = int(stats.get("retained_pruned", 0))
@@ -2550,6 +3121,27 @@ def validate_experimental_stats(stats: dict, proxy_count: int | None = None) -> 
         raise RuntimeError("LAN Experimental duplicate total is inconsistent")
     if int(stats.get("lan_global_overlap", overlaps + retained_pruned)) != overlaps + retained_pruned:
         raise RuntimeError("LAN Experimental overlap total is inconsistent")
+    protocols = stats.get("protocols")
+    if not isinstance(protocols, dict) or sum(int(value) for value in protocols.values()) != total:
+        raise RuntimeError("LAN Experimental protocol distribution is inconsistent")
+    unsupported = sum(
+        int(sources[source_id].get("unsupported_protocols", 0))
+        for source_id in EXPERIMENTAL_SOURCE_IDS
+    )
+    invalid = sum(
+        int(sources[source_id].get("invalid", 0))
+        for source_id in EXPERIMENTAL_SOURCE_IDS
+    )
+    limited = sum(
+        int(sources[source_id].get("limited", 0))
+        for source_id in EXPERIMENTAL_SOURCE_IDS
+    )
+    if int(stats.get("unsupported_protocols", unsupported)) != unsupported:
+        raise RuntimeError("LAN Experimental unsupported protocol total is inconsistent")
+    if int(stats.get("invalid", invalid)) != invalid:
+        raise RuntimeError("LAN Experimental invalid configuration total is inconsistent")
+    if int(stats.get("limited", limited)) != limited:
+        raise RuntimeError("LAN Experimental source limit total is inconsistent")
     if proxy_count is not None and total != proxy_count:
         raise RuntimeError(
             f"LAN Experimental statistics report {total} proxies, YAML contains {proxy_count}"
@@ -2567,24 +3159,51 @@ def parse_experimental_stats_from_readme(path: Path = README_FILE) -> dict:
 
     source_stats: dict[str, dict] = {}
     for source in EXPERIMENTAL_SOURCES:
+        matching_rows = [
+            line
+            for line in text.splitlines()
+            if line.startswith(f"| [{source['name']}]({source['url']}) |")
+        ]
         row = next(
-            (line for line in text.splitlines() if line.startswith(f"| {source['name']} |")),
+            (
+                line
+                for line in matching_rows
+                if len(line.strip().strip("|").split("|")) == 14
+            ),
             None,
         )
         if row is None:
             raise RuntimeError(f"README is missing LAN Experimental source row: {source['name']}")
         cells = [cell.strip().strip("`") for cell in row.strip().strip("|").split("|")]
-        if len(cells) != 9:
+        if len(cells) != 14:
             raise RuntimeError(f"README has an invalid LAN Experimental row: {source['name']}")
+        protocols = {}
+        if cells[12] != "-":
+            for item in cells[12].split(","):
+                protocol, count = item.strip().split(":", 1)
+                protocols[protocol.strip()] = int(count.strip())
         source_stats[source["id"]] = {
+            "status": cells[1],
+            "last_successful_update": cells[2],
             "last_updated": cells[2],
             "received": int(cells[3]),
             "valid_format": int(cells[4]),
-            "filtered": int(cells[5]),
-            "duplicates": int(cells[6]),
-            "lan_global_overlap": int(cells[7]),
-            "added": int(cells[8]),
+            "unsupported_protocols": int(cells[5]),
+            "unsupported_by_protocol": {},
+            "invalid": int(cells[6]),
+            "filtered": int(cells[7]),
+            "duplicates": int(cells[8]),
+            "lan_global_overlap": int(cells[9]),
+            "limited": int(cells[10]),
+            "added": int(cells[11]),
+            "protocols": protocols,
+            "exclusion_reasons": {},
+            "error": "",
         }
+    protocols: dict[str, int] = {}
+    for source_stats_item in source_stats.values():
+        for protocol, count in source_stats_item["protocols"].items():
+            protocols[protocol] = protocols.get(protocol, 0) + count
     stats = {
         "schema_version": LAN_EXPERIMENTAL_SCHEMA_VERSION,
         "sources": source_stats,
@@ -2592,7 +3211,17 @@ def parse_experimental_stats_from_readme(path: Path = README_FILE) -> dict:
         "auto": status_value("LAN Experimental AUTO"),
         "lan_global_overlap": status_value("Исключено пересечений Experimental с LAN Global"),
         "duplicates": sum(item["duplicates"] for item in source_stats.values()),
+        "unsupported_protocols": sum(
+            item["unsupported_protocols"] for item in source_stats.values()
+        ),
+        "unsupported_by_protocol": {},
+        "invalid": sum(item["invalid"] for item in source_stats.values()),
+        "limited": sum(item["limited"] for item in source_stats.values()),
+        "protocols": protocols,
         "available_sources": len(EXPERIMENTAL_SOURCES),
+        "fallback_sources": sum(
+            item["status"] == "fallback" for item in source_stats.values()
+        ),
     }
     validate_experimental_stats(stats)
     return stats
@@ -2934,28 +3563,65 @@ def source_table(
 
 def experimental_source_table(experimental_stats: dict) -> str:
     lines = [
-        "| Источник | URL | Обновление источника | Получено VLESS | Прошло формат | Отфильтровано | Дубли Experimental | Совпало с LAN Global | Добавлено новых |",
-        "|----------|-----|---------------------|-----------------|----------------|----------------|---------------------|----------------------|-----------------|",
+        "| Источник | Статус | Последнее успешное обновление | Получено | Валидных | Неподдерживаемых | Невалидных | Отфильтровано | Дубли | LAN Global | Лимит | Добавлено | Протоколы | Причины исключения |",
+        "|----------|--------|------------------------------|---------:|---------:|------------------:|-----------:|---------------:|-------:|-----------:|------:|---------:|-----------|--------------------|",
     ]
     stats_by_source = experimental_stats.get("sources", {})
     for source in EXPERIMENTAL_SOURCES:
         stats = stats_by_source.get(source["id"], {})
+        protocols = ", ".join(
+            f"{protocol}: {count}"
+            for protocol, count in sorted(stats.get("protocols", {}).items())
+        ) or "-"
+        reasons = ", ".join(
+            f"{reason}: {count}"
+            for reason, count in sorted(stats.get("exclusion_reasons", {}).items())
+        ) or "-"
         lines.append(
-            f"| {source['name']} | [raw]({source['url']}) | "
-            f"`{stats.get('last_updated') or source_published_label(source['id'])}` | "
+            f"| [{source['name']}]({source['url']}) | `{stats.get('status', '-')}` | "
+            f"`{stats.get('last_successful_update') or stats.get('last_updated') or '-'}` | "
             f"`{stats.get('received', 0)}` | `{stats.get('valid_format', 0)}` | "
+            f"`{stats.get('unsupported_protocols', 0)}` | `{stats.get('invalid', 0)}` | "
             f"`{stats.get('filtered', 0)}` | `{stats.get('duplicates', 0)}` | "
-            f"`{stats.get('lan_global_overlap', 0)}` | `{stats.get('added', 0)}` |"
+            f"`{stats.get('lan_global_overlap', 0)}` | `{stats.get('limited', 0)}` | "
+            f"`{stats.get('added', 0)}` | `{protocols}` | `{reasons}` |"
+        )
+    return "\n".join(lines)
+
+
+def experimental_audit_table() -> str:
+    lines = [
+        "| Источник из аудита 27.10.2026 | HTTPS 2/2 | Good |",
+        "|---------------------------------|-----------:|-----:|",
+    ]
+    for source in EXPERIMENTAL_SOURCES:
+        if "audit_good" not in source:
+            continue
+        lines.append(
+            f"| [{source['name']}]({source['url']}) | "
+            f"`{source['audit_https_2_of_2']}` | `{source['audit_good']}` |"
         )
     return "\n".join(lines)
 
 
 def experimental_readme_section(experimental_stats: dict) -> str:
     validate_experimental_stats(experimental_stats)
+    protocols = ", ".join(
+        f"{protocol}: {count}"
+        for protocol, count in sorted(experimental_stats.get("protocols", {}).items())
+    )
     return f"""{LAN_EXPERIMENTAL_README_START}
 ## LAN Experimental
 
-Изолированная тестовая подписка: `{experimental_stats['total']}` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
+Изолированная тестовая подписка: `{experimental_stats['total']}` серверов, все входят в `AUTO`. Протоколы: `{protocols}`. Дубли и совпадения с `LAN Global` удаляются до публикации. Новые YAML-источники ограничены 50 узлами каждый и выбираются детерминированно; при их временной недоступности используется последний опубликованный пул этого источника. Старые три источника остаются обязательными.
+
+Результаты выбора источников основаны на одном историческом сетевом аудите от 27.10.2026:
+
+{experimental_audit_table()}
+
+Эти числа описывают только тот сетевой прогон, а не все узлы источников. Валидный YAML и успешный `mihomo -t` подтверждают совместимость конфигурации, но не гарантируют сетевую доступность узла.
+
+{experimental_source_table(experimental_stats)}
 {LAN_EXPERIMENTAL_README_END}"""
 
 
@@ -3665,7 +4331,12 @@ def build_experimental_candidate() -> int:
     lan_global_proxies = lan_global.get("proxies")
     if not isinstance(lan_global_proxies, list) or not lan_global_proxies:
         raise RuntimeError("LAN Global contains no proxies")
-    baseline_stats = load_experimental_stats()
+    try:
+        baseline_stats = json.loads(
+            LAN_EXPERIMENTAL_STATS_FILE.read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError):
+        baseline_stats = {}
     yaml_text, stats = build_lan_experimental(
         lan_global_proxies,
         now=msk_timestamp(),
@@ -3726,12 +4397,14 @@ def reconcile_retained_experimental(
     stats = load_experimental_stats(stats_path, strict=True)
     validate_experimental_stats(stats, len(proxies))
     lan_config_keys = {canonical_proxy_config(proxy) for proxy in lan_global_proxies}
-    lan_endpoint_keys = {endpoint_identity_key(proxy) for proxy in lan_global_proxies}
+    lan_endpoint_keys = {
+        experimental_endpoint_identity_key(proxy) for proxy in lan_global_proxies
+    }
     retained = [
         proxy
         for proxy in proxies
         if canonical_proxy_config(proxy) not in lan_config_keys
-        and endpoint_identity_key(proxy) not in lan_endpoint_keys
+        and experimental_endpoint_identity_key(proxy) not in lan_endpoint_keys
     ]
     removed = len(proxies) - len(retained)
     if not retained:
@@ -3758,6 +4431,19 @@ def reconcile_retained_experimental(
             {
                 "total": len(retained),
                 "auto": len(retained),
+                "protocols": {
+                    protocol: sum(
+                        1
+                        for proxy in retained
+                        if str(proxy.get("type", "")).casefold() == protocol
+                    )
+                    for protocol in sorted(
+                        {
+                            str(proxy.get("type", "")).casefold()
+                            for proxy in retained
+                        }
+                    )
+                },
                 "retained_pruned": retained_pruned,
                 "lan_global_overlap": source_overlaps + retained_pruned,
                 "updated": now,
