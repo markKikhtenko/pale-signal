@@ -24,11 +24,11 @@
       "last_updated": "2026-10-20 21:16 МСК"
     },
     "MEHRTAT_VLESS": {
-      "received": 237,
-      "valid_format": 229,
+      "received": 207,
+      "valid_format": 202,
       "unsupported_protocols": 0,
       "unsupported_by_protocol": {},
-      "invalid": 8,
+      "invalid": 5,
       "filtered": 0,
       "duplicates": 0,
       "lan_global_overlap": 0,
@@ -38,7 +38,7 @@
         "vless": 9
       },
       "exclusion_reasons": {
-        "invalid:vless": 8,
+        "invalid:vless": 5,
         "source:legacy_pool_fallback": 1
       },
       "status": "fallback",
@@ -47,8 +47,8 @@
       "last_updated": "2026-10-21 09:47 МСК"
     },
     "AU1RXX_VERIFIED": {
-      "received": 1124,
-      "valid_format": 1099,
+      "received": 1122,
+      "valid_format": 1097,
       "unsupported_protocols": 0,
       "unsupported_by_protocol": {},
       "invalid": 25,
@@ -89,8 +89,8 @@
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-10-27 21:55:22 МСК",
-      "last_updated": "2026-10-27 21:55:22 МСК"
+      "last_successful_update": "2026-10-27 22:42:59 МСК",
+      "last_updated": "2026-10-27 22:42:59 МСК"
     },
     "RUK1NG001_FREESUB": {
       "received": 500,
@@ -135,8 +135,8 @@
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-10-27 21:55:22 МСК",
-      "last_updated": "2026-10-27 21:55:22 МСК"
+      "last_successful_update": "2026-10-27 22:42:59 МСК",
+      "last_updated": "2026-10-27 22:42:59 МСК"
     },
     "AWESOME_VPN": {
       "received": 41,
@@ -148,23 +148,23 @@
       "invalid": 0,
       "filtered": 1,
       "duplicates": 1,
-      "lan_global_overlap": 14,
+      "lan_global_overlap": 13,
       "limited": 0,
-      "added": 24,
+      "added": 25,
       "protocols": {
-        "vless": 2,
+        "vless": 3,
         "ss": 22
       },
       "exclusion_reasons": {
         "unsupported:hysteria2": 1,
         "filtered:ru": 1,
         "duplicate:experimental": 1,
-        "overlap:lan_global": 14
+        "overlap:lan_global": 13
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-10-27 21:55:22 МСК",
-      "last_updated": "2026-10-27 21:55:22 МСК"
+      "last_successful_update": "2026-10-27 22:42:59 МСК",
+      "last_updated": "2026-10-27 22:42:59 МСК"
     },
     "MISAKA_CHROMEGO_MERGE": {
       "received": 218,
@@ -191,8 +191,8 @@
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-10-27 21:55:22 МСК",
-      "last_updated": "2026-10-27 21:55:22 МСК"
+      "last_successful_update": "2026-10-27 22:42:59 МСК",
+      "last_updated": "2026-10-27 22:42:59 МСК"
     },
     "SUNMIAO4458_FREE_PROXY_AIRPORT": {
       "received": 49,
@@ -221,8 +221,8 @@
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-10-27 21:55:22 МСК",
-      "last_updated": "2026-10-27 21:55:22 МСК"
+      "last_successful_update": "2026-10-27 22:42:59 МСК",
+      "last_updated": "2026-10-27 22:42:59 МСК"
     },
     "ERMAOZI_GET_SUBSCRIBE": {
       "received": 379,
@@ -238,12 +238,12 @@
       "invalid": 11,
       "filtered": 6,
       "duplicates": 86,
-      "lan_global_overlap": 99,
-      "limited": 16,
+      "lan_global_overlap": 95,
+      "limited": 20,
       "added": 50,
       "protocols": {
-        "vless": 42,
-        "trojan": 4,
+        "vless": 43,
+        "trojan": 3,
         "ss": 4
       },
       "exclusion_reasons": {
@@ -256,13 +256,13 @@
         "invalid:encryption": 1,
         "filtered:ru": 6,
         "duplicate:experimental": 86,
-        "overlap:lan_global": 99,
-        "limited:per_source": 16
+        "overlap:lan_global": 95,
+        "limited:per_source": 20
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-10-27 21:55:22 МСК",
-      "last_updated": "2026-10-27 21:55:22 МСК"
+      "last_successful_update": "2026-10-27 22:42:59 МСК",
+      "last_updated": "2026-10-27 22:42:59 МСК"
     },
     "PEASOFT_NOMOREWALLS": {
       "received": 307,
@@ -277,11 +277,11 @@
       "invalid": 1,
       "filtered": 7,
       "duplicates": 189,
-      "lan_global_overlap": 14,
+      "lan_global_overlap": 13,
       "limited": 0,
-      "added": 6,
+      "added": 7,
       "protocols": {
-        "vless": 6
+        "vless": 7
       },
       "exclusion_reasons": {
         "unsupported:vmess": 26,
@@ -291,17 +291,17 @@
         "invalid:encryption": 1,
         "filtered:ru": 7,
         "duplicate:experimental": 189,
-        "overlap:lan_global": 14
+        "overlap:lan_global": 13
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-10-27 21:55:22 МСК",
-      "last_updated": "2026-10-27 21:55:22 МСК"
+      "last_successful_update": "2026-10-27 22:42:59 МСК",
+      "last_updated": "2026-10-27 22:42:59 МСК"
     }
   },
-  "total": 1138,
-  "auto": 1138,
-  "lan_global_overlap": 151,
+  "total": 1140,
+  "auto": 1140,
+  "lan_global_overlap": 145,
   "duplicates": 395,
   "unsupported_protocols": 701,
   "unsupported_by_protocol": {
@@ -314,15 +314,15 @@
     "tuic": 1,
     "hysteria": 5
   },
-  "invalid": 63,
-  "limited": 33,
+  "invalid": 60,
+  "limited": 37,
   "protocols": {
-    "vless": 1026,
-    "trojan": 52,
+    "vless": 1029,
+    "trojan": 51,
     "ss": 60
   },
   "available_sources": 9,
   "fallback_sources": 3,
-  "updated": "2026-10-27 21:55:22 МСК",
+  "updated": "2026-10-27 22:42:59 МСК",
   "schema_version": 2
 }

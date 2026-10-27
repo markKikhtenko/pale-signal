@@ -1,7 +1,7 @@
 # LAN Experimental
-# Version: 2.20261027.215609
+# Version: 2.20261027.224358
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-27 21:55:22 МСК
+# Updated: 2026-10-27 22:42:59 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
@@ -13,7 +13,7 @@
 #   - sunmiao4458/free-proxy-airport: https://raw.githubusercontent.com/sunmiao4458/free-proxy-airport/main/output/clash.yaml
 #   - ermaozi/get_subscribe: https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml
 #   - peasoft/NoMoreWalls: https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml
-# Servers: 1138
+# Servers: 1140
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -14782,6 +14782,18 @@ proxies:
     cipher: "aes-128-gcm"
     udp: true
   -
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG] #3"
+    type: "vless"
+    server: "8.6.112.50"
+    port: 8880
+    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
+    udp: true
+    network: "ws"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "vms.lifetime08.workers.dev"
+  -
     name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Staten Island [GH:barry-far/V2r]"
     type: "ss"
     server: "198.98.53.130"
@@ -15595,6 +15607,21 @@ proxies:
         Host: "www.pleadcourt.org"
       path: "/assignment"
   -
+    name: "[ermaozi/get_subscribe] 🇵🇱 波兰 | POL"
+    server: "150.251.112.44"
+    port: 12443
+    type: "vless"
+    uuid: "3edfab95-a259-45f2-846c-3a1ca12c9b60"
+    tls: true
+    flow: "xtls-rprx-vision"
+    reality-opts:
+      public-key: "pmuJt78YwO4hmuVE-d1fxgYRtRho7Cb36CcR9ynt9jQ"
+      short-id: "886cda2e22e571d1"
+    servername: "94bffb5c3f23.j.cloudfront.hls.ttvnw.net"
+    client-fingerprint: "chrome"
+    network: "tcp"
+    udp: true
+  -
     name: "[ermaozi/get_subscribe] 🇺🇸_US_美国"
     type: "vless"
     server: "18.213.218.149"
@@ -15620,6 +15647,21 @@ proxies:
     network: "tcp"
     udp: true
   -
+    name: "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #3"
+    client-fingerprint: "chrome"
+    network: "ws"
+    port: 8443
+    server: "103.180.20.108"
+    servername: "ty986gfazs.cainiaohub.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "c1c04450-bf71-4049-ad0c-9cf6d94d9f1f"
+    ws-opts:
+      headers:
+        Host: "ty986gfazs.cainiaohub.xyz"
+      path: "/81574b6b-c9d7-44a0-b83d-dad56e8cb530"
+  -
     name: "[ermaozi/get_subscribe] 🇦🇪[www.v2nodes.com] vless-AE-1... #2"
     network: "ws"
     port: 2053
@@ -15632,6 +15674,20 @@ proxies:
       headers:
         Host: "free.cndyw.ggff.net"
       path: "pyip=bpb.yousef.isegaro.comfp=chrome"
+  -
+    name: "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL"
+    client-fingerprint: "chrome"
+    network: "ws"
+    port: 443
+    server: "198.211.123.90"
+    servername: "ccc.010304.xyz"
+    tls: true
+    type: "vless"
+    uuid: "d342d11e-d224-4463-b982-532309285094"
+    ws-opts:
+      headers:
+        Host: "ccc.010304.xyz"
+      path: "/fp=unsafe"
   -
     name: "[ermaozi/get_subscribe] 🇮🇱[www.v2nodes.com] vless-IL-1..."
     network: "ws"
@@ -15958,6 +16014,21 @@ proxies:
     type: "vless"
     uuid: "7f6adf9d-42f1-4fec-ab22-fb7f66bf3adc"
   -
+    name: "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU #6"
+    client-fingerprint: "chrome"
+    network: "ws"
+    port: 2096
+    server: "2.27.13.152"
+    servername: "st4834a.rumedia-cdn.com"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "d1641bc6-3757-43db-815a-9b3f4d9b0d7e"
+    ws-opts:
+      headers:
+        Host: "st4834a.rumedia-cdn.com"
+      path: "/cdn/v3/live"
+  -
     name: "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 2"
     server: "norw-mori-5.failspace.top"
     port: 443
@@ -16030,48 +16101,16 @@ proxies:
         Host: "23g-lively-resonance-96b9hsf.msc633k2.workers.dev"
       path: "/"
   -
-    name: "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] trojan-NL-..."
-    password: "happybirthdaydaniel"
-    port: 25267
-    server: "de-bots4.h1cloud.net"
-    skip-cert-verify: true
-    sni: "t.me/FuckTheWall"
-    type: "trojan"
-  -
-    name: "[ermaozi/get_subscribe] 🇺🇸_US_美国 (2)"
-    type: "vless"
-    server: "44.201.37.147"
-    port: 443
-    uuid: "7060231d-b9ba-495f-a218-bf427940cf3e"
-    tls: false
-    skip-cert-verify: false
-    network: "http"
-    http-opts:
-  -
-    name: "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 3"
-    server: "viper-23.moriarty-web.com"
-    port: 443
-    type: "vless"
-    uuid: "cd3bb7d9-7df3-4644-ac05-c260990ac277"
-    tls: true
-    flow: "xtls-rprx-vision"
-    servername: "viper-23.moriarty-web.com"
-    client-fingerprint: "chrome"
-    network: "tcp"
-    udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #2"
-    client-fingerprint: "chrome"
+    name: "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #2"
     network: "ws"
-    port: 2096
-    server: "104.18.47.140"
-    servername: "rainfall0705.cc.cd"
-    tls: true
+    port: 8880
+    server: "103.116.7.30"
+    tls: false
     type: "vless"
-    uuid: "341832cc-ba98-425b-8225-b3db621a0da3"
+    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
     ws-opts:
       headers:
-        Host: "rainfall0705.cc.cd"
+        Host: "vms.lifetime35.workers.dev"
       path: "/"
   -
     name: "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #3"
@@ -17166,6 +17205,7 @@ proxy-groups:
       - "[Ruk1ng001/freeSub] D🔴🇩🇪hos[🎬🤖📺🎭]_dokng.com_1d61e4fd"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG]"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG] #3"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Staten Island [GH:barry-far/V2r]"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro]"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro] #2"
@@ -17254,9 +17294,12 @@ proxy-groups:
       - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR"
       - "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #3"
       - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 3"
+      - "[ermaozi/get_subscribe] 🇵🇱 波兰 | POL"
       - "[ermaozi/get_subscribe] 🇺🇸_US_美国"
       - "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR 3"
+      - "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #3"
       - "[ermaozi/get_subscribe] 🇦🇪[www.v2nodes.com] vless-AE-1... #2"
+      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL"
       - "[ermaozi/get_subscribe] 🇮🇱[www.v2nodes.com] vless-IL-1..."
       - "[ermaozi/get_subscribe] 🇸🇪[www.v2nodes.com] vless-SE-1..."
       - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #1"
@@ -17283,15 +17326,13 @@ proxy-groups:
       - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-9..."
       - "[ermaozi/get_subscribe] 🇪🇸 西班牙 | ESP"
       - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #7"
+      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU #6"
       - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 2"
       - "[ermaozi/get_subscribe] 🇫🇮[www.v2nodes.com] vless-FI-1... #1"
       - "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #2"
       - "[ermaozi/get_subscribe] 🇦🇹_AT_奥地利->🇺🇸_US_美国"
       - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #5"
-      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] trojan-NL-..."
-      - "[ermaozi/get_subscribe] 🇺🇸_US_美国 (2)"
-      - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 3"
-      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #2"
+      - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #2"
       - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #3"
       - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #4"
       - "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] vless- #8"
@@ -18312,6 +18353,7 @@ proxy-groups:
       - "[Ruk1ng001/freeSub] D🔴🇩🇪hos[🎬🤖📺🎭]_dokng.com_1d61e4fd"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG]"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG] #3"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Staten Island [GH:barry-far/V2r]"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro]"
       - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro] #2"
@@ -18400,9 +18442,12 @@ proxy-groups:
       - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR"
       - "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #3"
       - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 3"
+      - "[ermaozi/get_subscribe] 🇵🇱 波兰 | POL"
       - "[ermaozi/get_subscribe] 🇺🇸_US_美国"
       - "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR 3"
+      - "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #3"
       - "[ermaozi/get_subscribe] 🇦🇪[www.v2nodes.com] vless-AE-1... #2"
+      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL"
       - "[ermaozi/get_subscribe] 🇮🇱[www.v2nodes.com] vless-IL-1..."
       - "[ermaozi/get_subscribe] 🇸🇪[www.v2nodes.com] vless-SE-1..."
       - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #1"
@@ -18429,15 +18474,13 @@ proxy-groups:
       - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-9..."
       - "[ermaozi/get_subscribe] 🇪🇸 西班牙 | ESP"
       - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #7"
+      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU #6"
       - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 2"
       - "[ermaozi/get_subscribe] 🇫🇮[www.v2nodes.com] vless-FI-1... #1"
       - "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #2"
       - "[ermaozi/get_subscribe] 🇦🇹_AT_奥地利->🇺🇸_US_美国"
       - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #5"
-      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] trojan-NL-..."
-      - "[ermaozi/get_subscribe] 🇺🇸_US_美国 (2)"
-      - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 3"
-      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #2"
+      - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #2"
       - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #3"
       - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #4"
       - "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] vless- #8"
