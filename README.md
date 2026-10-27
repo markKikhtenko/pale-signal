@@ -35,9 +35,9 @@
 | LAN 5K | `5000` |
 | LAN Global | `5119` |
 | LAN Global Fast Check | `5119` |
-| LAN Experimental | `960` |
-| LAN Experimental AUTO | `960` |
-| Исключено пересечений Experimental с LAN Global | `491` |
+| LAN Experimental | `1138` |
+| LAN Experimental AUTO | `1138` |
+| Исключено пересечений Experimental с LAN Global | `151` |
 | BS Safe MANUAL | `2011` |
 | BS Safe AUTO | `50` |
 | Happ Mobile | `439` |
@@ -45,7 +45,34 @@
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `960` серверов, все входят в `AUTO`. Дубли и совпадения с `LAN Global` удаляются до публикации. При ошибке источника сохраняется последняя проверенная версия без новых пересечений.
+Изолированная тестовая подписка: `1138` серверов, все входят в `AUTO`. Протоколы: `ss: 60, trojan: 52, vless: 1026`. Дубли и совпадения с `LAN Global` удаляются до публикации. Новые YAML-источники ограничены 50 узлами каждый и выбираются детерминированно; при их временной недоступности используется последний опубликованный пул этого источника. Старые три источника остаются обязательными.
+
+Результаты выбора источников основаны на одном историческом сетевом аудите от 27.10.2026:
+
+| Источник из аудита 27.10.2026 | HTTPS 2/2 | Good |
+|---------------------------------|-----------:|-----:|
+| [go4sharing/sub](https://raw.githubusercontent.com/go4sharing/sub/main/sub.yaml) | `5/15` | `5` |
+| [Ruk1ng001/freeSub](https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml) | `20/63` | `9` |
+| [awesome-vpn/awesome-vpn](https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml) | `10/41` | `6` |
+| [Misaka-blog/chromego_merge](https://raw.githubusercontent.com/Misaka-blog/chromego_merge/main/sub/merged_proxies_new.yaml) | `20/101` | `6` |
+| [sunmiao4458/free-proxy-airport](https://raw.githubusercontent.com/sunmiao4458/free-proxy-airport/main/output/clash.yaml) | `8/47` | `2` |
+| [ermaozi/get_subscribe](https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml) | `46/346` | `11` |
+| [peasoft/NoMoreWalls](https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml) | `28/280` | `6` |
+
+Эти числа описывают только тот сетевой прогон, а не все узлы источников. Валидный YAML и успешный `mihomo -t` подтверждают совместимость конфигурации, но не гарантируют сетевую доступность узла.
+
+| Источник | Статус | Последнее успешное обновление | Получено | Валидных | Неподдерживаемых | Невалидных | Отфильтровано | Дубли | LAN Global | Лимит | Добавлено | Протоколы | Причины исключения |
+|----------|--------|------------------------------|---------:|---------:|------------------:|-----------:|---------------:|-------:|-----------:|------:|---------:|-----------|--------------------|
+| [MorpheusAdam Best](https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt) | `fallback` | `2026-10-20 21:16 МСК` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `948` | `vless: 948` | `source:legacy_pool_fallback: 1, source:truncated: 1` |
+| [Mehrtat VLESS](https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt) | `fallback` | `2026-10-21 09:47 МСК` | `237` | `229` | `0` | `8` | `0` | `0` | `0` | `0` | `9` | `vless: 9` | `invalid:vless: 8, source:legacy_pool_fallback: 1` |
+| [Au1rxx Verified](https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt) | `fallback` | `2026-10-21 13:01 МСК` | `1124` | `1099` | `0` | `25` | `0` | `0` | `0` | `0` | `0` | `-` | `invalid:vless: 25, source:legacy_pool_fallback: 1` |
+| [go4sharing/sub](https://raw.githubusercontent.com/go4sharing/sub/main/sub.yaml) | `ok` | `2026-10-27 21:55:22 МСК` | `15` | `14` | `1` | `0` | `0` | `0` | `0` | `0` | `14` | `ss: 5, trojan: 9` | `unsupported:vmess: 1` |
+| [Ruk1ng001/freeSub](https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml) | `ok` | `2026-10-27 21:55:22 МСК` | `500` | `41` | `443` | `16` | `1` | `1` | `6` | `0` | `33` | `ss: 6, trojan: 11, vless: 16` | `duplicate:experimental: 1, filtered:ru: 1, invalid:network: 2, invalid:unsupported_parameter:alterId: 2, invalid:unsupported_parameter:xudp: 12, overlap:lan_global: 6, unsupported:anytls: 5, unsupported:http: 406, unsupported:hysteria: 1, unsupported:hysteria2: 3, unsupported:socks5: 18, unsupported:ssr: 8, unsupported:tuic: 1, unsupported:vmess: 1` |
+| [awesome-vpn/awesome-vpn](https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml) | `ok` | `2026-10-27 21:55:22 МСК` | `41` | `40` | `1` | `0` | `1` | `1` | `14` | `0` | `24` | `ss: 22, vless: 2` | `duplicate:experimental: 1, filtered:ru: 1, overlap:lan_global: 14, unsupported:hysteria2: 1` |
+| [Misaka-blog/chromego_merge](https://raw.githubusercontent.com/Misaka-blog/chromego_merge/main/sub/merged_proxies_new.yaml) | `ok` | `2026-10-27 21:55:22 МСК` | `218` | `166` | `52` | `0` | `2` | `97` | `0` | `17` | `50` | `ss: 23, trojan: 27` | `duplicate:experimental: 97, filtered:ru: 2, limited:per_source: 17, unsupported:vmess: 52` |
+| [sunmiao4458/free-proxy-airport](https://raw.githubusercontent.com/sunmiao4458/free-proxy-airport/main/output/clash.yaml) | `ok` | `2026-10-27 21:55:22 МСК` | `49` | `44` | `3` | `2` | `1` | `21` | `18` | `0` | `4` | `trojan: 1, vless: 3` | `duplicate:experimental: 21, filtered:ru: 1, invalid:encryption: 1, invalid:uuid: 1, overlap:lan_global: 18, unsupported:hysteria2: 3` |
+| [ermaozi/get_subscribe](https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml) | `ok` | `2026-10-27 21:55:22 МСК` | `379` | `257` | `111` | `11` | `6` | `86` | `99` | `16` | `50` | `ss: 4, trojan: 4, vless: 42` | `duplicate:experimental: 86, filtered:ru: 6, invalid:encryption: 1, invalid:unsupported_parameter:skip-cert-verify: 10, limited:per_source: 16, overlap:lan_global: 99, unsupported:anytls: 4, unsupported:http: 29, unsupported:hysteria: 2, unsupported:hysteria2: 45, unsupported:vmess: 31` |
+| [peasoft/NoMoreWalls](https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml) | `ok` | `2026-10-27 21:55:22 МСК` | `307` | `216` | `90` | `1` | `7` | `189` | `14` | `0` | `6` | `vless: 6` | `duplicate:experimental: 189, filtered:ru: 7, invalid:encryption: 1, overlap:lan_global: 14, unsupported:http: 22, unsupported:hysteria: 2, unsupported:hysteria2: 40, unsupported:vmess: 26` |
 <!-- LAN-EXPERIMENTAL:END -->
 
 <!-- LAN-SOURCE-STATS:START -->

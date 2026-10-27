@@ -22,7 +22,20 @@ class LanExperimentalTests(unittest.TestCase):
             "id": source_id,
             "name": source_id,
             "url": f"https://example.test/{source_id}",
+            "format": "share_uri",
+            "required": True,
             "minimum_vless": 1,
+        }
+
+    @staticmethod
+    def yaml_source(source_id: str, *, limit: int = 50, required: bool = False) -> dict:
+        return {
+            "id": source_id,
+            "name": source_id,
+            "url": f"https://example.test/{source_id}.yaml",
+            "format": "clash_yaml",
+            "required": required,
+            "max_imported": limit,
         }
 
     @staticmethod
@@ -140,6 +153,243 @@ class LanExperimentalTests(unittest.TestCase):
         baseline = {"sources": {"A": {"received": 10, "valid_format": 10}}}
         with self.assertRaisesRegex(RuntimeError, "required=5"):
             self.build({"A": [self.vless(number) for number in range(1, 5)]}, baseline_stats=baseline)
+
+    def test_mixed_yaml_imports_only_supported_proxy_entries(self) -> None:
+        source = self.yaml_source("MIXED")
+        document = {
+            "mixed-port": 1234,
+            "dns": {"enable": True},
+            "proxy-groups": [{"name": "foreign", "type": "select", "proxies": []}],
+            "rules": ["MATCH,DIRECT"],
+            "proxies": [
+                {
+                    "name": "vless original",
+                    "type": "vless",
+                    "server": "one.example.com",
+                    "port": 443,
+                    "uuid": str(uuid.UUID(int=1)),
+                    "network": "ws",
+                    "tls": True,
+                    "ws-opts": {"path": "/one", "headers": {"Host": "cdn.example.com"}},
+                },
+                {
+                    "name": "ss one",
+                    "type": "ss",
+                    "server": "one.example.com",
+                    "port": 443,
+                    "cipher": "aes-128-gcm",
+                    "password": "first",
+                },
+                {
+                    "name": "ss two",
+                    "type": "ss",
+                    "server": "one.example.com",
+                    "port": 443,
+                    "cipher": "aes-128-gcm",
+                    "password": "second",
+                },
+                {
+                    "name": "trojan original",
+                    "type": "trojan",
+                    "server": "one.example.com",
+                    "port": 443,
+                    "password": "trojan-secret",
+                    "sni": "cdn.example.com",
+                },
+                {"name": "vmess", "type": "vmess", "server": "one.example.com", "port": 443},
+                {"name": "http", "type": "http", "server": "one.example.com", "port": 443},
+                {"name": "anytls", "type": "anytls", "server": "one.example.com", "port": 443},
+                {
+                    "name": "bad vless",
+                    "type": "vless",
+                    "server": "one.example.com",
+                    "port": 443,
+                    "uuid": "not-a-uuid",
+                },
+            ],
+        }
+
+        with (
+            mock.patch.object(builder, "is_public_remote_server", return_value=True),
+            mock.patch.object(builder, "split_by_country", side_effect=self.mark_non_ru),
+        ):
+            text, stats = builder.build_lan_experimental(
+                [],
+                sources=[source],
+                fetcher=lambda _source: [yaml.safe_dump(document, allow_unicode=True)],
+                now="2026-10-27 12:00:00 МСК",
+                fallback_proxies_by_source={},
+            )
+
+        config = yaml.safe_load(text)
+        self.assertEqual(stats["protocols"], {"vless": 1, "ss": 2, "trojan": 1})
+        self.assertEqual(stats["unsupported_protocols"], 3)
+        self.assertEqual(stats["invalid"], 1)
+        self.assertEqual(len(config["proxies"]), 4)
+        self.assertNotIn("dns", config)
+        self.assertNotIn("foreign", {group["name"] for group in config["proxy-groups"]})
+        self.assertTrue(all(proxy["name"].startswith("[MIXED] ") for proxy in config["proxies"]))
+
+    def test_protocol_identity_preserves_different_ss_and_trojan_credentials(self) -> None:
+        common = {"server": "one.example.com", "port": 443}
+        proxies = [
+            {**common, "type": "ss", "cipher": "aes-128-gcm", "password": "one"},
+            {**common, "type": "ss", "cipher": "aes-128-gcm", "password": "two"},
+            {**common, "type": "trojan", "password": "one"},
+            {**common, "type": "trojan", "password": "two"},
+        ]
+        keys = [builder.experimental_endpoint_identity_key(proxy) for proxy in proxies]
+        self.assertEqual(len(keys), len(set(keys)))
+
+    def test_yaml_source_limit_is_deterministic(self) -> None:
+        source = self.yaml_source("LIMITED", limit=2)
+        proxies = [
+            {
+                "name": f"node-{number}",
+                "type": "ss",
+                "server": f"node-{number}.example.com",
+                "port": 443,
+                "cipher": "aes-128-gcm",
+                "password": f"password-{number}",
+            }
+            for number in range(5)
+        ]
+
+        def build(values: list[dict]) -> tuple[set[str], dict]:
+            with (
+                mock.patch.object(builder, "is_public_remote_server", return_value=True),
+                mock.patch.object(builder, "split_by_country", side_effect=self.mark_non_ru),
+            ):
+                text, stats = builder.build_lan_experimental(
+                    [],
+                    sources=[source],
+                    fetcher=lambda _source: [yaml.safe_dump({"proxies": values})],
+                    now="2026-10-27 12:00:00 МСК",
+                    fallback_proxies_by_source={},
+                )
+            config = yaml.safe_load(text)
+            return {proxy["password"] for proxy in config["proxies"]}, stats
+
+        forward, forward_stats = build(proxies)
+        reverse, reverse_stats = build(list(reversed(proxies)))
+        self.assertEqual(forward, reverse)
+        self.assertEqual(forward_stats["limited"], 3)
+        self.assertEqual(reverse_stats["sources"]["LIMITED"]["added"], 2)
+
+    def test_optional_yaml_outage_uses_last_published_source_pool(self) -> None:
+        required = self.source("REQUIRED")
+        optional = self.yaml_source("OPTIONAL")
+        fallback = {
+            "type": "ss",
+            "server": "fallback.example.com",
+            "port": 443,
+            "cipher": "aes-128-gcm",
+            "password": "retained",
+            "_source_name": "[OPTIONAL] retained node",
+            "_source_id": "OPTIONAL",
+        }
+
+        def fetcher(source: dict) -> list[str]:
+            if source["id"] == "OPTIONAL":
+                raise OSError("offline")
+            return [self.vless(1)]
+
+        with (
+            mock.patch.object(builder, "is_public_remote_server", return_value=True),
+            mock.patch.object(builder, "split_by_country", side_effect=self.mark_non_ru),
+        ):
+            text, stats = builder.build_lan_experimental(
+                [],
+                sources=[required, optional],
+                fetcher=fetcher,
+                now="2026-10-27 12:00:00 МСК",
+                fallback_proxies_by_source={"OPTIONAL": [fallback]},
+            )
+
+        config = yaml.safe_load(text)
+        self.assertEqual(stats["sources"]["OPTIONAL"]["status"], "fallback")
+        self.assertEqual(stats["fallback_sources"], 1)
+        self.assertEqual({proxy["type"] for proxy in config["proxies"]}, {"vless", "ss"})
+
+    def test_legacy_fallback_keeps_priority_over_new_yaml_duplicates(self) -> None:
+        required = self.source("REQUIRED")
+        optional = self.yaml_source("OPTIONAL")
+        legacy = {
+            "type": "vless",
+            "server": "one.example.com",
+            "port": 443,
+            "uuid": str(uuid.UUID(int=1)),
+            "network": "ws",
+            "udp": True,
+            "encryption": "none",
+            "tls": True,
+            "ws-opts": {"path": "/", "headers": {"Host": "cdn.example.com"}},
+            "_source_name": "legacy node",
+        }
+        duplicate = {
+            key: value
+            for key, value in legacy.items()
+            if not key.startswith("_")
+        }
+        duplicate["name"] = "new duplicate"
+
+        def fetcher(source: dict) -> list[str]:
+            if source["id"] == "REQUIRED":
+                raise OSError("offline")
+            return [yaml.safe_dump({"proxies": [duplicate]})]
+
+        with (
+            mock.patch.object(builder, "is_public_remote_server", return_value=True),
+            mock.patch.object(builder, "split_by_country", side_effect=self.mark_non_ru),
+        ):
+            text, stats = builder.build_lan_experimental(
+                [],
+                sources=[required, optional],
+                fetcher=fetcher,
+                now="2026-10-27 12:00:00 МСК",
+                baseline_stats={"sources": {"REQUIRED": {"added": 1}}},
+                fallback_proxies_by_source={"__legacy__": [legacy]},
+            )
+
+        config = yaml.safe_load(text)
+        self.assertEqual([proxy["name"] for proxy in config["proxies"]], ["legacy node"])
+        self.assertEqual(stats["sources"]["OPTIONAL"]["duplicates"], 1)
+        self.assertEqual(stats["sources"]["REQUIRED"]["status"], "fallback")
+
+    def test_incompatible_yaml_parameter_is_rejected_and_counted(self) -> None:
+        source = self.yaml_source("BAD")
+        document = {
+            "proxies": [
+                {
+                    "name": "bad reference",
+                    "type": "trojan",
+                    "server": "one.example.com",
+                    "port": 443,
+                    "password": "secret",
+                    "dialer-proxy": "foreign-group",
+                },
+                {
+                    "name": "good",
+                    "type": "trojan",
+                    "server": "two.example.com",
+                    "port": 443,
+                    "password": "secret",
+                },
+            ]
+        }
+        with (
+            mock.patch.object(builder, "is_public_remote_server", return_value=True),
+            mock.patch.object(builder, "split_by_country", side_effect=self.mark_non_ru),
+        ):
+            _text, stats = builder.build_lan_experimental(
+                [],
+                sources=[source],
+                fetcher=lambda _source: [yaml.safe_dump(document)],
+                now="2026-10-27 12:00:00 МСК",
+                fallback_proxies_by_source={},
+            )
+        self.assertEqual(stats["invalid"], 1)
+        self.assertEqual(stats["sources"]["BAD"]["added"], 1)
 
     def test_exact_config_duplicates_are_removed_and_counted(self) -> None:
         first = self.vless(1, name="first")
