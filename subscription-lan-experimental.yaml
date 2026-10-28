@@ -1,7 +1,7 @@
 # LAN Experimental
-# Version: 2.20261028.010015
+# Version: 2.20261028.151455
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-10-28 00:59:15 МСК
+# Updated: 2026-10-28 15:13:48 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
@@ -13,7 +13,7 @@
 #   - sunmiao4458/free-proxy-airport: https://raw.githubusercontent.com/sunmiao4458/free-proxy-airport/main/output/clash.yaml
 #   - ermaozi/get_subscribe: https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml
 #   - peasoft/NoMoreWalls: https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml
-# Servers: 1148
+# Servers: 1142
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -14621,6 +14621,22 @@ proxies:
         Host: "coding.grok2.indevs.in"
       path: "/proxyip=ProxyIP.SG.CMLiussss.Net"
   -
+    name: "[Ruk1ng001/freeSub] C🟠🇳🇱hos[🎬🤖📺🎭]_dokng.com_1c6da372"
+    client-fingerprint: "firefox"
+    grpc-opts:
+      grpc-service-name: "grpcx1"
+    network: "grpc"
+    port: 2087
+    reality-opts:
+      public-key: "cHJfClQkyUnSxMCi9kmfC8j5OpMrUpyvrjVboO50YXM"
+      short-id: "27abb0897222ef3a"
+    server: "13.143.172.34"
+    servername: "ya.ru"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "fafc7c16-f890-45ee-a856-02df225172dd"
+  -
     name: "[Ruk1ng001/freeSub] D🔴🇳🇱hos[🎬🤖📺🎭]_dokng.com_2808c140"
     client-fingerprint: "chrome"
     network: "ws"
@@ -14760,31 +14776,9 @@ proxies:
         Host: "coding.grok2.indevs.in"
       path: "/proxyip=ProxyIP.SG.CMLiussss.Net"
   -
-    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG]"
+    name: "[awesome-vpn/awesome-vpn] 🇷🇴 Romania [TG]"
     type: "vless"
-    server: "172.67.65.56"
-    port: 2053
-    uuid: "099244b9-2168-4dbd-870e-cbbe9d6eb573"
-    udp: true
-    tls: true
-    servername: "whitecreeper.pages.dev"
-    network: "ws"
-    ws-opts:
-      path: "/proxyip"
-      headers:
-        Host: "whitecreeper.pages.dev"
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro]"
-    type: "ss"
-    server: "37.19.198.160"
-    port: 443
-    password: "shadowsocks"
-    cipher: "aes-128-gcm"
-    udp: true
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG] #3"
-    type: "vless"
-    server: "8.6.112.50"
+    server: "45.12.30.30"
     port: 8880
     uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
     udp: true
@@ -14792,30 +14786,14 @@ proxies:
     ws-opts:
       path: "/"
       headers:
-        Host: "vms.lifetime08.workers.dev"
+        Host: "vms.lifetime28.workers.dev"
   -
-    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Staten Island [GH:barry-far/V2r]"
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Staten Island [TG]"
     type: "ss"
     server: "198.98.53.130"
     port: 443
     password: "eDfN7SODQceIOmIAbtJJtK"
     cipher: "chacha20-ietf-poly1305"
-    udp: true
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro]"
-    type: "ss"
-    server: "173.244.56.9"
-    port: 443
-    password: "shadowsocks"
-    cipher: "aes-128-gcm"
-    udp: true
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro] #2"
-    type: "ss"
-    server: "173.244.56.6"
-    port: 443
-    password: "shadowsocks"
-    cipher: "aes-128-gcm"
     udp: true
   -
     name: "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG]"
@@ -14826,21 +14804,25 @@ proxies:
     cipher: "chacha20-ietf-poly1305"
     udp: true
   -
-    name: "[awesome-vpn/awesome-vpn] 🇦🇪 United Arab Emirates [TG]"
-    type: "vless"
-    server: "185.158.133.30"
-    port: 8880
-    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
-    udp: true
-    network: "ws"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "vms.lifetime58.workers.dev"
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇳🇱 The Netherlands [GH:Mahdi0024/Pro]"
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro]"
     type: "ss"
-    server: "193.29.139.202"
+    server: "37.19.198.236"
+    port: 443
+    password: "shadowsocks"
+    cipher: "aes-128-gcm"
+    udp: true
+  -
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro]"
+    type: "ss"
+    server: "173.244.56.6"
+    port: 443
+    password: "shadowsocks"
+    cipher: "aes-128-gcm"
+    udp: true
+  -
+    name: "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG] #2"
+    type: "ss"
+    server: "82.38.31.35"
     port: 8080
     password: "oZIoA69Q8yhcQV8ka3Pa3A"
     cipher: "chacha20-ietf-poly1305"
@@ -14854,20 +14836,12 @@ proxies:
     cipher: "aes-256-gcm"
     udp: true
   -
-    name: "[awesome-vpn/awesome-vpn] 🇳🇱 The Netherlands/Rozendaal [GH:Mahdi0024/Pro]"
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Ashburn [GH:barry-far/V2r]"
     type: "ss"
-    server: "109.201.152.181"
-    port: 443
-    password: "shadowsocks"
-    cipher: "aes-128-cfb"
-    udp: true
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro] #2"
-    type: "ss"
-    server: "37.19.198.244"
-    port: 443
-    password: "shadowsocks"
-    cipher: "aes-128-gcm"
+    server: "45.86.51.18"
+    port: 19999
+    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+    cipher: "aes-256-gcm"
     udp: true
   -
     name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Dallas [GH:Mahdi0024/Pro]"
@@ -14878,17 +14852,33 @@ proxies:
     cipher: "aes-128-gcm"
     udp: true
   -
-    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Dallas [GH:Mahdi0024/Pro] #2"
+    name: "[awesome-vpn/awesome-vpn] 🇨🇭 Switzerland/Zurich [GH:Mahdi0024/Pro]"
     type: "ss"
-    server: "156.146.38.168"
-    port: 443
-    password: "shadowsocks"
-    cipher: "aes-128-gcm"
+    server: "132.243.175.144"
+    port: 8388
+    password: "e8KgS8fD0yDqYFpgN4G5piCOt9aFyqA3"
+    cipher: "chacha20-ietf-poly1305"
     udp: true
   -
-    name: "[awesome-vpn/awesome-vpn] 🇮🇹 Italy/Milan [TG]"
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Washington [GH:barry-far/V2r]"
     type: "ss"
-    server: "202.50.253.18"
+    server: "185.230.230.18"
+    port: 19999
+    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+    cipher: "aes-256-gcm"
+    udp: true
+  -
+    name: "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG] #3"
+    type: "ss"
+    server: "82.38.31.54"
+    port: 8080
+    password: "oZIoA69Q8yhcQV8ka3Pa3A"
+    cipher: "chacha20-ietf-poly1305"
+    udp: true
+  -
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Miami [GH:barry-far/V2r]"
+    type: "ss"
+    server: "193.151.160.9"
     port: 19999
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     cipher: "aes-256-gcm"
@@ -14896,90 +14886,59 @@ proxies:
   -
     name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Jose [GH:Mahdi0024/Pro]"
     type: "ss"
-    server: "107.155.57.11"
+    server: "107.155.57.51"
     port: 8080
     password: "14fFPrbezE3HDZzsMOr6"
     cipher: "rc4-md5"
     udp: true
   -
-    name: "[awesome-vpn/awesome-vpn] 🇯🇵 Japan/Tokyo [TG]"
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Los Angeles [GH:Mahdi0024/Pro]"
     type: "ss"
-    server: "84.247.155.196"
-    port: 80
-    password: "3eOFeNssde7PYYMv"
-    cipher: "aes-256-gcm"
+    server: "107.151.182.253"
+    port: 8080
+    password: "14fFPrbezE3HDZzsMOr6"
+    cipher: "rc4-md5"
     udp: true
   -
-    name: "[awesome-vpn/awesome-vpn] 🇮🇹 Italy/Milan [TG] #2"
+    name: "[awesome-vpn/awesome-vpn] 🇨🇦 Canada/Toronto [GH:Mahdi0024/Pro]"
     type: "ss"
-    server: "202.50.253.72"
-    port: 19999
-    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
-    cipher: "aes-256-gcm"
+    server: "138.197.141.58"
+    port: 8080
+    password: "14fFPrbezE3HDZzsMOr6"
+    cipher: "rc4-md5"
     udp: true
   -
-    name: "[awesome-vpn/awesome-vpn] 🇩🇪 Germany/Frankfurt am Main [TG]"
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Chicago [GH:Mahdi0024/Pro]"
     type: "ss"
-    server: "185.176.204.18"
-    port: 19999
-    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
-    cipher: "aes-256-gcm"
+    server: "138.199.42.68"
+    port: 8080
+    password: "14fFPrbezE3HDZzsMOr6"
+    cipher: "rc4-md5"
+    udp: true
+  -
+    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Las Vegas [GH:Mahdi0024/Pro]"
+    type: "ss"
+    server: "79.110.53.169"
+    port: 8080
+    password: "14fFPrbezE3HDZzsMOr6"
+    cipher: "rc4-md5"
     udp: true
   -
     name: "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [GH:Mahdi0024/Pro]"
     type: "ss"
-    server: "178.83.185.156"
-    port: 8080
-    password: "oZIoA69Q8yhcQV8ka3Pa3A"
-    cipher: "chacha20-ietf-poly1305"
-    udp: true
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG] #2"
-    type: "ss"
-    server: "82.38.31.176"
+    server: "82.38.31.204"
     port: 8080
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     cipher: "chacha20-ietf-poly1305"
-    udp: true
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Reston [GH:Mahdi0024/Pro]"
-    type: "ss"
-    server: "15.204.247.175"
-    port: 8008
-    password: "XKFKl2rULjIp74"
-    cipher: "aes-256-gcm"
-    udp: true
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG] #3"
-    type: "ss"
-    server: "82.38.31.218"
-    port: 8080
-    password: "k1dBOmOB4oqi7Ump37a1bQ"
-    cipher: "chacha20-ietf-poly1305"
-    udp: true
-  -
-    name: "[awesome-vpn/awesome-vpn] 🇩🇪 Germany [GH:Mahdi0024/Pro]"
-    type: "ss"
-    server: "213.202.208.199"
-    port: 7001
-    password: "RexnBgU7EV5ADxG"
-    cipher: "aes-256-gcm"
     udp: true
   -
     name: "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [GH:Mahdi0024/Pro] #2"
     type: "ss"
-    server: "82.38.31.219"
+    server: "82.38.31.194"
     port: 8080
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     cipher: "chacha20-ietf-poly1305"
     udp: true
-  -
-    name: "[Misaka-blog/chromego_merge] Brazil_Brasília_ss_1039"
-    cipher: "aes-256-gcm"
-    password: "JuD6MNgtX3nVpCzFzXYVYjDTZ7nsmaTv"
-    port: 8388
-    server: "191.223.221.53"
-    type: "ss"
   -
     name: "[Misaka-blog/chromego_merge] Denmark_None_ss_1025"
     cipher: "aes-128-gcm"
@@ -14995,54 +14954,49 @@ proxies:
     server: "51.222.155.113"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] Germany_Frankfurt am Main_ss_1093"
-    cipher: "chacha20-ietf-poly1305"
-    password: "uvKNudV-N8AUCrykPiyznA"
-    port: 56137
-    server: "37.153.158.167"
-    type: "ss"
-    udp: true
-  -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_10104"
-    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
-    port: 443
-    server: "216.152.156.212"
+    name: "[Misaka-blog/chromego_merge] None_None_trojan_11111"
+    network: "ws"
+    password: "9d033eb1-22c7-4ae9-9d59-783e40c8eec3"
+    port: 8443
+    server: "www.visa.com.sg"
     skip-cert-verify: true
-    sni: "courses.healthcarejobshubenhancemedicalprofessionalskillstoday.com"
+    sni: "au5.yang-1989.xyz"
+    type: "trojan"
+    udp: true
+    ws-opts:
+      headers:
+        Host: "au5.yang-1989.xyz"
+      path: "/iw8i"
+  -
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1054"
+    password: "happybirthdaydaniel"
+    port: 25267
+    server: "de-bots4.h1cloud.net"
+    skip-cert-verify: true
+    sni: "t.me/FuckTheWall"
     type: "trojan"
     udp: true
   -
-    name: "[Misaka-blog/chromego_merge] United States_Santa Clara_trojan_10102"
-    password: "WCwRcLxlKIeyXKHkppTmQIGXeRfIYYmE"
-    port: 9213
-    server: "45.32.135.70"
-    skip-cert-verify: true
-    sni: "hotspot-unlimited.com"
-    type: "trojan"
-    udp: true
-  -
-    name: "[Misaka-blog/chromego_merge] South Africa_None_ss_1046"
+    name: "[Misaka-blog/chromego_merge] South Africa_None_ss_1051"
     cipher: "chacha20-ietf-poly1305"
     password: "tfAcRikawhNoZAhu"
     port: 8388
     server: "139.84.247.164"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] Israel_None_trojan_1096"
-    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
-    port: 443
-    server: "64.176.163.182"
-    skip-cert-verify: true
-    sni: "exploreeducationsectoropportunitiestodayandadvancecareers.com"
-    type: "trojan"
-    udp: true
-  -
-    name: "[Misaka-blog/chromego_merge] United States_None_ss_1044"
+    name: "[Misaka-blog/chromego_merge] United States_None_ss_1049"
     cipher: "chacha20-ietf-poly1305"
     password: "QFWzCw2uX9B9i6qAYeFBIE"
     port: 443
     server: "bogging-eyeteeth-fly.freesocks.work"
     type: "ss"
+  -
+    name: "[Misaka-blog/chromego_merge] United Kingdom_Newport_trojan_1068"
+    password: "XuMweB2PWs"
+    port: 45464
+    server: "2.27.109.179"
+    sni: "2.27.109.179.sslip.io"
+    type: "trojan"
   -
     name: "[Misaka-blog/chromego_merge] Canada_None_ss_1013"
     cipher: "aes-256-gcm"
@@ -15051,7 +15005,7 @@ proxies:
     server: "51.79.85.185"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1084"
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1097"
     network: "tcp"
     password: "AA885B42-133C-3828-FB69-E45105C06092"
     port: 10115
@@ -15060,14 +15014,22 @@ proxies:
     sni: "m.ctrip.com"
     type: "trojan"
   -
-    name: "[Misaka-blog/chromego_merge] Italy_None_ss_1027"
+    name: "[Misaka-blog/chromego_merge] Italy_None_ss_1028"
     cipher: "aes-256-gcm"
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     port: 19999
     server: "202.50.253.63"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] Germany_None_trojan_1051"
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1078"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "216.152.156.42"
+    skip-cert-verify: true
+    sni: "blog.healthcarejobshubenhancemedicalprofessionalskillstoday.com"
+    type: "trojan"
+  -
+    name: "[Misaka-blog/chromego_merge] Germany_None_trojan_1061"
     network: "ws"
     password: "humanity"
     port: 443
@@ -15080,70 +15042,35 @@ proxies:
         Host: "www.calmlunch.com"
       path: "%2Fassignment"
   -
-    name: "[Misaka-blog/chromego_merge] Brazil_Curitiba_ss_1098"
-    cipher: "chacha20-ietf-poly1305"
-    password: "uvKNudV-N8AUCrykPiyznA"
-    port: 56134
-    server: "177.202.111.24"
-    type: "ss"
-    udp: true
-  -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_10100"
-    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
-    port: 443
-    server: "216.152.156.42"
-    skip-cert-verify: true
-    sni: "blog.healthcarejobshubenhancemedicalprofessionalskillstoday.com"
-    type: "trojan"
-    udp: true
-  -
-    name: "[Misaka-blog/chromego_merge] United States_Santa Clara_trojan_10109"
-    password: "pCgkPBgBBpKdPLeRyFSgXXjeiQeNiCLm"
-    port: 8911
-    server: "144.126.223.93"
-    skip-cert-verify: true
-    sni: "hotspot-unlimited.com"
-    type: "trojan"
-    udp: true
-  -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_10107"
-    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
-    port: 443
-    server: "66.163.114.166"
-    skip-cert-verify: true
-    sni: "blog.findconnectwithemployersandbuildprofessionalnetwork.com"
-    type: "trojan"
-    udp: true
-  -
-    name: "[Misaka-blog/chromego_merge] United States_None_ss_1021"
-    cipher: "chacha20-ietf-poly1305"
-    password: "e8KgS8fD0yDqYFpgN4G5piCOt9aFyqA3"
-    port: 8388
-    server: "132.243.175.144"
+    name: "[Misaka-blog/chromego_merge] United States_None_ss_1046"
+    cipher: "aes-256-gcm"
+    password: "kDWvXYZoTBcGkC4"
+    port: 8882
+    server: "149.104.109.252"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] Italy_None_ss_1033"
+    name: "[Misaka-blog/chromego_merge] Italy_None_ss_1035"
     cipher: "aes-256-gcm"
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     port: 19999
     server: "202.50.253.81"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] Romania_Bucharest_ss_1043"
+    name: "[Misaka-blog/chromego_merge] Romania_Bucharest_ss_1048"
     cipher: "chacha20-ietf-poly1305"
     password: "U83u9OGpvSatIUW7LsWffr"
     port: 64546
     server: "194.68.44.42"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] Sweden_Spanga_ss_1045"
+    name: "[Misaka-blog/chromego_merge] Sweden_Spanga_ss_1050"
     cipher: "aes-256-gcm"
     password: "AxIYWtskJWIIaefW"
     port: 8388
     server: "70.34.212.124"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] None_None_trojan_1053"
+    name: "[Misaka-blog/chromego_merge] None_None_trojan_1058"
     network: "ws"
     password: "humanity"
     port: 443
@@ -15155,42 +15082,57 @@ proxies:
         Host: "www.calmlunch.com"
       path: "/assignment"
   -
-    name: "[Misaka-blog/chromego_merge] Norway_Oslo_ss_1042"
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1075"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "66.163.114.166"
+    skip-cert-verify: true
+    sni: "blog.findconnectwithemployersandbuildprofessionalnetwork.com"
+    type: "trojan"
+  -
+    name: "[Misaka-blog/chromego_merge] South Korea_Seoul_ss_1042"
+    cipher: "aes-256-gcm"
+    password: "TEzjfAYq2IjtuoS"
+    port: 6697
+    server: "141.164.45.187"
+    type: "ss"
+  -
+    name: "[Misaka-blog/chromego_merge] Norway_Oslo_ss_1045"
     cipher: "chacha20-ietf-poly1305"
     password: "ARgvGZywA+gacgGV26Bvmu05+wZmRW/j+AdU+Z8Bt44="
     port: 990
     server: "185.213.23.63"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] United States_Ashburn_ss_1036"
+    name: "[Misaka-blog/chromego_merge] United States_Ashburn_ss_1038"
     cipher: "aes-256-gcm"
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     port: 19999
     server: "185.164.175.81"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] Japan_None_trojan_1063"
+    name: "[Misaka-blog/chromego_merge] Japan_None_trojan_1070"
     password: "e26a229d-e8f2-4ff9-8c7d-58a9d83ee437"
     port: 8886
     server: "45.32.52.173"
     sni: "45.32.52.173"
     type: "trojan"
   -
-    name: "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1048"
+    name: "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1053"
     cipher: "chacha20-ietf-poly1305"
     password: "Xsy8Ox4yOV3xLlpxtjzs3X"
     port: 16233
     server: "102.133.165.160"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1047"
+    name: "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1052"
     cipher: "chacha20-ietf-poly1305"
     password: "aduB9HGxQHjA2SBMRjkHX6"
     port: 443
     server: "102.37.156.224"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1055"
+    name: "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1060"
     network: "ws"
     password: "humanity"
     port: 443
@@ -15203,7 +15145,23 @@ proxies:
         Host: "www.calmlunch.com"
       path: "%2Fassignment"
   -
-    name: "[Misaka-blog/chromego_merge] Austria_Vienna_trojan_1059"
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1080"
+    network: "tcp"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "216.152.155.23"
+    skip-cert-verify: false
+    sni: "courses.nextjobopportunityandclaimyouridealrole.com"
+    type: "trojan"
+  -
+    name: "[Misaka-blog/chromego_merge] United Kingdom_None_ss_1022"
+    cipher: "aes-256-gcm"
+    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+    port: 19999
+    server: "185.176.204.18"
+    type: "ss"
+  -
+    name: "[Misaka-blog/chromego_merge] Austria_Vienna_trojan_1065"
     network: "ws"
     password: "humanity"
     port: 443
@@ -15229,22 +15187,18 @@ proxies:
     server: "51.222.136.236"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] Austria_Vienna_trojan_1065"
+    name: "[Misaka-blog/chromego_merge] Hungary_Budapest_trojan_1056"
+    network: "ws"
     password: "humanity"
     port: 443
-    server: "8.6.112.206"
+    server: "185.225.68.232"
+    skip-cert-verify: false
+    sni: "www.calmlunch.com"
     type: "trojan"
     ws-opts:
-      path: "%2Fassignment"
-  -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1099"
-    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
-    port: 443
-    server: "216.152.156.81"
-    skip-cert-verify: true
-    sni: "www.healthcarejobshubenhancemedicalprofessionalskillstoday.com"
-    type: "trojan"
-    udp: true
+      headers:
+        Host: "www.calmlunch.com"
+      path: "/assignment"
   -
     name: "[Misaka-blog/chromego_merge] Canada_None_ss_1020"
     cipher: "aes-256-gcm"
@@ -15253,7 +15207,7 @@ proxies:
     server: "51.222.12.127"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1083"
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1096"
     network: "tcp"
     password: "AA885B42-133C-3828-FB69-E45105C06092"
     port: 12103
@@ -15262,7 +15216,7 @@ proxies:
     sni: "m.ctrip.com"
     type: "trojan"
   -
-    name: "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1054"
+    name: "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1059"
     network: "ws"
     password: "humanity"
     port: 2053
@@ -15275,14 +15229,29 @@ proxies:
         Host: "www.calmlunch.com"
       path: "/assignment"
   -
-    name: "[Misaka-blog/chromego_merge] Singapore_Singapore_trojan_1066"
+    name: "[Misaka-blog/chromego_merge] Israel_None_trojan_1069"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "64.176.163.182"
+    skip-cert-verify: true
+    sni: "exploreeducationsectoropportunitiestodayandadvancecareers.com"
+    type: "trojan"
+  -
+    name: "[Misaka-blog/chromego_merge] Italy_None_ss_1030"
+    cipher: "aes-256-gcm"
+    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+    port: 19999
+    server: "202.50.253.72"
+    type: "ss"
+  -
+    name: "[Misaka-blog/chromego_merge] Singapore_Singapore_trojan_1073"
     password: "e26a229d-e8f2-4ff9-8c7d-58a9d83ee437"
     port: 8886
     server: "139.180.146.200"
     sni: "139.180.146.200"
     type: "trojan"
   -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1091"
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_10104"
     network: "tcp"
     password: "AA885B42-133C-3828-FB69-E45105C06092"
     port: 12142
@@ -15291,14 +15260,20 @@ proxies:
     sni: "m.ctrip.com"
     type: "trojan"
   -
-    name: "[Misaka-blog/chromego_merge] United States_Saratoga_ss_1038"
+    name: "[Misaka-blog/chromego_merge] Taiwan_None_trojan_1074"
+    password: "29086912-33e4-4e06-ba2b-60f1a195864f"
+    port: 24999
+    server: "188.253.7.44"
+    type: "trojan"
+  -
+    name: "[Misaka-blog/chromego_merge] United States_Saratoga_ss_1040"
     cipher: "aes-256-gcm"
     password: "BeaUf9c0AEWH40Pu"
     port: 8388
     server: "154.36.158.197"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] The Netherlands_Groningen_trojan_1052"
+    name: "[Misaka-blog/chromego_merge] The Netherlands_Groningen_trojan_1057"
     network: "ws"
     password: "humanity"
     port: 443
@@ -15311,7 +15286,16 @@ proxies:
         Host: "www.calmlunch.com"
       path: "/assignment"
   -
-    name: "[Misaka-blog/chromego_merge] Latvia_Riga_trojan_1050"
+    name: "[Misaka-blog/chromego_merge] China_None_trojan_10113"
+    password: "298c5651d3015d7cee9e8411eaa0bd72"
+    port: 12010
+    server: "124.151.45.214"
+    skip-cert-verify: true
+    sni: "apis.99912345.xyz"
+    type: "trojan"
+    udp: true
+  -
+    name: "[Misaka-blog/chromego_merge] Latvia_Riga_trojan_1055"
     network: "ws"
     password: "humanity"
     port: 443
@@ -15324,7 +15308,7 @@ proxies:
         Host: "www.calmlunch.com"
       path: "/assignment"
   -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1085"
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1098"
     network: "tcp"
     password: "AA885B42-133C-3828-FB69-E45105C06092"
     port: 12107
@@ -15333,7 +15317,15 @@ proxies:
     sni: "m.ctrip.com"
     type: "trojan"
   -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1090"
+    name: "[Misaka-blog/chromego_merge] Iran_None_ss_11107"
+    cipher: "chacha20-ietf-poly1305"
+    password: "x2A6AsyZ-rAllz0wbKHzWA"
+    port: 8388
+    server: "ams1.rvpn.app"
+    type: "ss"
+    udp: true
+  -
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_10103"
     network: "tcp"
     password: "AA885B42-133C-3828-FB69-E45105C06092"
     port: 12122
@@ -15342,14 +15334,28 @@ proxies:
     sni: "m.ctrip.com"
     type: "trojan"
   -
-    name: "[Misaka-blog/chromego_merge] United States_None_ss_1068"
+    name: "[Misaka-blog/chromego_merge] Seychelles_None_trojan_10116"
+    network: "ws"
+    password: "humanity"
+    port: 443
+    server: "45.130.125.126"
+    skip-cert-verify: true
+    sni: "www.calmlunch.com"
+    type: "trojan"
+    udp: true
+    ws-opts:
+      headers:
+        Host: "www.calmlunch.com"
+      path: "/assignment"
+  -
+    name: "[Misaka-blog/chromego_merge] United States_None_ss_1081"
     cipher: "aes-256-cfb"
     password: "amazonskr05"
     port: 443
     server: "63.180.254.10"
     type: "ss"
   -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1056"
+    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1062"
     password: "humanity"
     port: 443
     server: "165.215.250.14"
@@ -15357,51 +15363,43 @@ proxies:
     ws-opts:
       path: "%2Fassignment"
   -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_10108"
-    password: "mMIywuxBtHHOAwAkkpwiCmBXIlKOysGv"
-    port: 6105
-    server: "209.38.66.47"
-    skip-cert-verify: true
-    sni: "hotspot-unlimited.com"
-    type: "trojan"
+    name: "[Misaka-blog/chromego_merge] Italy_None_ss_1031"
+    cipher: "aes-256-gcm"
+    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+    port: 19999
+    server: "202.50.253.18"
+    type: "ss"
     udp: true
   -
-    name: "[Misaka-blog/chromego_merge] India_Noida_ss_1026"
-    cipher: "aes-256-gcm"
-    password: "GEdoeeqLZtkJRgSa"
-    port: 8388
-    server: "139.84.166.47"
-    type: "ss"
-  -
-    name: "[Misaka-blog/chromego_merge] None_None_trojan_1057"
-    network: "ws"
-    password: "humanity"
-    port: 443
-    server: "104.19.229.21"
-    skip-cert-verify: false
-    sni: "www.calmlunch.com"
-    type: "trojan"
-    ws-opts:
-      headers:
-        Host: "www.calmlunch.com"
-      path: "%2Fassignment"
-  -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1089"
+    name: "[sunmiao4458/free-proxy-airport] 🇭🇰 香港 | HKG 5"
+    server: "213.152.165.195"
+    port: 2091
+    type: "vless"
+    uuid: "ce17d29c-3587-4d8c-b09d-e03437df8bbd"
+    tls: true
+    flow: "xtls-rprx-vision"
+    reality-opts:
+      public-key: "1N6AW5YuEwBoYcZK5KuugDzBHsa0NKZMT8QI-EmyL0k"
+      short-id: "08a4b1f473932632"
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
     network: "tcp"
-    password: "AA885B42-133C-3828-FB69-E45105C06092"
-    port: 10155
-    server: "63182sh8-4d7b.aws-agent.net"
-    skip-cert-verify: true
-    sni: "m.ctrip.com"
-    type: "trojan"
+    udp: true
   -
-    name: "[Misaka-blog/chromego_merge] United States_None_trojan_1049"
-    password: "happybirthdaydaniel"
-    port: 25267
-    server: "de-bots4.h1cloud.net"
-    skip-cert-verify: true
-    sni: "t.me/FuckTheWall"
-    type: "trojan"
+    name: "[sunmiao4458/free-proxy-airport] 🇭🇰 香港 | HKG 9"
+    server: "156.226.173.88"
+    port: 9443
+    type: "vless"
+    uuid: "4a270d3e-27b4-497d-8c8c-28f1f54958d9"
+    tls: true
+    flow: "xtls-rprx-vision"
+    reality-opts:
+      public-key: "0hIFPaEn4RdFib8_eP8HYxMywR5izEwM3JA2W1Zo8U4"
+      short-id: "b390142456517acc"
+    servername: "www.amazon.com"
+    client-fingerprint: "chrome"
+    network: "tcp"
+    udp: true
   -
     name: "[sunmiao4458/free-proxy-airport] 🇺🇸US美国丨yoyapai.com_2"
     type: "trojan"
@@ -15414,36 +15412,6 @@ proxies:
     skip-cert-verify: false
     ws-opts:
       path: "/assignment"
-    udp: true
-  -
-    name: "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 11"
-    server: "104.18.33.209"
-    port: 443
-    type: "vless"
-    uuid: "45ceaca9-30f4-4035-85b7-8f83493911d8"
-    tls: true
-    servername: "tamoai.ccwu.cc"
-    client-fingerprint: "chrome"
-    network: "ws"
-    ws-opts:
-      path: "/proxyip=163.192.47.40,47.57.181.17,34.83.245.149,4.155.83.212,64.227.62.172,24.144.68.139,161.35.232.123,107.170.248.68"
-      headers:
-        Host: "tamoai.ccwu.cc"
-    udp: true
-  -
-    name: "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 3"
-    server: "172.66.3.157"
-    port: 443
-    type: "vless"
-    uuid: "45ceaca9-30f4-4035-85b7-8f83493911d8"
-    tls: true
-    servername: "tamoai.ccwu.cc"
-    client-fingerprint: "chrome"
-    network: "ws"
-    ws-opts:
-      path: "/proxyip=163.192.47.40,47.57.181.17,34.83.245.149,4.155.83.212,64.227.62.172,24.144.68.139,161.35.232.123,107.170.248.68"
-      headers:
-        Host: "tamoai.ccwu.cc"
     udp: true
   -
     name: "[sunmiao4458/free-proxy-airport] 🇺🇸US美国丨yoyapai.com_20"
@@ -15460,6 +15428,50 @@ proxies:
     skip-cert-verify: false
     udp: true
   -
+    name: "[sunmiao4458/free-proxy-airport] 🇨🇦 加拿大 | CAN 2"
+    server: "213.152.180.55"
+    port: 2093
+    type: "vless"
+    uuid: "7e5c47fb-69a5-4d9e-af57-1d80db594e88"
+    tls: true
+    flow: "xtls-rprx-vision"
+    reality-opts:
+      public-key: "C_GA8wVjeLmyqLK6em5OHn4WPlsbndA-RyvyNU1aGFM"
+      short-id: "8a9725533854a7e8"
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    network: "tcp"
+    udp: true
+  -
+    name: "[sunmiao4458/free-proxy-airport] 🇦🇹 奥地利 | AUT 2"
+    server: "tau1.freerunet.online"
+    port: 443
+    type: "vless"
+    uuid: "ca14493b-b984-4ffb-bc0e-9cb5da969e15"
+    tls: true
+    flow: "xtls-rprx-vision"
+    reality-opts:
+      public-key: "l1mx_plNc2oiWxJCcZLh3SGfFU-5QxYpgQ__Ea59WEg"
+      short-id: "4a7b1c8d"
+    servername: "tau1.freerunet.online"
+    client-fingerprint: "chrome"
+    network: "tcp"
+  -
+    name: "[sunmiao4458/free-proxy-airport] 🇪🇸 西班牙 | ESP"
+    server: "213.152.180.104"
+    port: 2095
+    type: "vless"
+    uuid: "16107a06-1b5e-4060-8b48-e13a04b15e56"
+    tls: true
+    flow: "xtls-rprx-vision"
+    reality-opts:
+      public-key: "OKksVHWL5JepTv7if7Ta_L_7vn8OxW0INwV71HJM1jI"
+      short-id: "3869d49a9a79e06a"
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    network: "tcp"
+    udp: true
+  -
     name: "[ermaozi/get_subscribe] 🇧🇾[www.v2nodes.com] vless-BY-1... #1"
     client-fingerprint: "firefox"
     grpc-opts:
@@ -15472,32 +15484,84 @@ proxies:
     type: "vless"
     uuid: "7f6adf9d-42f1-4fec-ab22-fb7f66bf3adc"
   -
-    name: "[ermaozi/get_subscribe] 🇦🇹 奥地利 | AUT"
-    server: "50.7.36.28"
+    name: "[ermaozi/get_subscribe] 🇰🇷 韩国 | KOR"
+    server: "43.201.146.134"
     port: 443
     type: "vless"
-    uuid: "cd3bb7d9-7df3-4644-ac05-c260990ac277"
+    uuid: "7e68e32f-8015-4f37-9082-70e8b0b58043"
     tls: true
     flow: "xtls-rprx-vision"
-    servername: "at-new-ded.failspace.top"
+    reality-opts:
+      public-key: "DHOrfoin7TeRpnIoU3d6qT5Yrq3QPVFp49kApATA4iE"
+      short-id: "e04a526b0b09c765"
+    servername: "api.lumini-b2b.com"
     client-fingerprint: "chrome"
     network: "tcp"
     udp: true
   -
-    name: "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 9"
-    server: "18.159.45.125"
+    name: "[ermaozi/get_subscribe] 🇨🇳_CN_中国->🇺🇸_US_美国_2"
+    type: "vless"
+    server: "jp.sofast.live"
+    port: 52683
+    uuid: "399b6b23-cc40-4831-a494-61948e2df133"
+    tls: false
+    skip-cert-verify: true
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #8"
+    password: "WCwRcLxlKIeyXKHkppTmQIGXeRfIYYmE"
+    port: 9213
+    server: "45.32.135.70"
+    skip-cert-verify: true
+    sni: "hotspot-unlimited.com"
+    type: "trojan"
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #3"
+    client-fingerprint: "chrome"
+    network: "ws"
+    port: 443
+    server: "172.66.3.157"
+    servername: "tamoai.ccwu.cc"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "45ceaca9-30f4-4035-85b7-8f83493911d8"
+    ws-opts:
+      headers:
+        Host: "tamoai.ccwu.cc"
+      path: "/proxyip=163.192.47.40,47.57.181.17,34.83.245.149,4.155.83.212,64.227.62.172,24.144.68.139,161.35.232.123,107.170.248.68"
+  -
+    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 2"
+    server: "piracy-android.video-streams.org"
     port: 443
     type: "vless"
-    uuid: "7060231d-b9ba-495f-a218-bf427940cf3e"
-    tls: false
-    network: "http"
-    http-opts:
-      method: "GET"
-      path:
-        - "/"
+    uuid: "909259b0-0a30-4ef5-bfd8-5ffe5d99cb56"
+    tls: true
+    alpn:
+      - "http/1.1"
+    servername: "piracy-android.video-streams.org"
+    client-fingerprint: "chrome"
+    network: "ws"
+    ws-opts:
+      path: "/ws"
       headers:
-        Host:
-          - "play.googleapis.com"
+        Host: "piracy-android.video-streams.org"
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 5"
+    server: "875f9760-be1a-4dfe-8c2b-3f080b5ab158.node1.runet.network"
+    port: 20065
+    type: "vless"
+    uuid: "2446e2e2-1ce3-4502-9050-1dd32bacc68c"
+    tls: true
+    alpn:
+      - "h2"
+      - "http/1.1"
+    flow: "xtls-rprx-vision"
+    servername: "875f9760-be1a-4dfe-8c2b-3f080b5ab158.node1.runet.network"
+    client-fingerprint: "chrome"
+    network: "tcp"
     udp: true
   -
     name: "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #4"
@@ -15512,20 +15576,6 @@ proxies:
     type: "vless"
     uuid: "7f6adf9d-42f1-4fec-ab22-fb7f66bf3adc"
   -
-    name: "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #9"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "kclx.eu.org"
-    servername: "kclx.eu.org"
-    tls: true
-    type: "vless"
-    uuid: "0575005f-0ba9-4d6d-85e0-4a6a8cbafc1b"
-    ws-opts:
-      headers:
-        Host: "kclx.eu.org"
-      path: "/154.16.10.34-8080"
-  -
     name: "[ermaozi/get_subscribe] 🇨🇱[www.v2nodes.com] vless-CL-1..."
     network: "ws"
     port: 443
@@ -15539,15 +15589,6 @@ proxies:
         Host: "free.cndyw.ggff.net"
       path: "pyip=bpb.yousef.isegaro.comfp=chrome"
   -
-    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 12"
-    server: "66.163.122.81"
-    port: 443
-    type: "trojan"
-    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
-    sni: "courses.searchnationwidecareerchangehelperandguidancetoday.com"
-    skip-cert-verify: true
-    udp: true
-  -
     name: "[ermaozi/get_subscribe] 🇭🇺[www.v2nodes.com] vless-HU-1..."
     client-fingerprint: "firefox"
     grpc-opts:
@@ -15559,21 +15600,6 @@ proxies:
     tls: true
     type: "vless"
     uuid: "7f6adf9d-42f1-4fec-ab22-fb7f66bf3adc"
-  -
-    name: "[ermaozi/get_subscribe] 🇲🇩[www.v2nodes.com] vless-MD-4..."
-    client-fingerprint: "chrome"
-    encryption: "none"
-    network: "ws"
-    port: 443
-    server: "185.153.198.86"
-    servername: "vlso5.1d.mom"
-    tls: true
-    type: "vless"
-    uuid: "a1de0630-5786-48a0-84f6-dc6f2de10d6d"
-    ws-opts:
-      headers:
-        Host: "vlso5.1d.mom"
-      path: "/socks5=888:888@hkip.1d.mom:1080"
   -
     name: "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR"
     server: "31.76.5.137"
@@ -15587,71 +15613,52 @@ proxies:
     network: "tcp"
     udp: true
   -
-    name: "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #3"
+    name: "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR #1"
     cipher: "chacha20-ietf-poly1305"
     password: "uvKNudV-N8AUCrykPiyznA"
-    port: 56137
-    server: "177.202.111.19"
+    port: 56134
+    server: "177.202.111.24"
     type: "ss"
     udp: true
   -
-    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 3"
-    alpn:
-      - "http/1.1"
-    network: "ws"
-    password: "humanity"
-    port: 443
-    server: "172.66.1.36"
+    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #20"
+    password: "pCgkPBgBBpKdPLeRyFSgXXjeiQeNiCLm"
+    port: 8911
+    server: "144.126.223.93"
     skip-cert-verify: true
-    sni: "www.pleadcourt.org"
+    sni: "hotspot-unlimited.com"
     type: "trojan"
     udp: true
-    ws-opts:
-      headers:
-        Host: "www.pleadcourt.org"
-      path: "/assignment"
   -
-    name: "[ermaozi/get_subscribe] 🇵🇱 波兰 | POL"
-    server: "150.251.112.44"
-    port: 12443
+    name: "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 6"
+    server: "31.76.5.2"
+    port: 443
     type: "vless"
-    uuid: "3edfab95-a259-45f2-846c-3a1ca12c9b60"
+    uuid: "cd3bb7d9-7df3-4644-ac05-c260990ac277"
     tls: true
+    alpn:
+      - "v2rayNplus--v2rayNplus--v2rayNplus--v2rayNplus--v2rayNplus--v2rayNplus--v2rayNplus--v2rayNplus"
     flow: "xtls-rprx-vision"
-    reality-opts:
-      public-key: "pmuJt78YwO4hmuVE-d1fxgYRtRho7Cb36CcR9ynt9jQ"
-      short-id: "886cda2e22e571d1"
-    servername: "94bffb5c3f23.j.cloudfront.hls.ttvnw.net"
+    servername: "viper-25.moriarty-web.com"
+    client-fingerprint: "firefox"
+    network: "tcp"
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #1"
+    alpn:
+      - "h2"
+      - "http/1.1"
     client-fingerprint: "chrome"
+    encryption: "none"
     network: "tcp"
-    udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇺🇸_US_美国"
-    type: "vless"
-    server: "18.213.218.149"
     port: 443
-    uuid: "7060231d-b9ba-495f-a218-bf427940cf3e"
-    tls: false
-    skip-cert-verify: false
-    network: "http"
-    http-opts:
-  -
-    name: "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR 3"
-    server: "194.135.34.223"
-    port: 443
-    type: "vless"
-    uuid: "4deb9957-e037-4ae2-8892-da357cc6f99f"
+    server: "swz.proxyplankton.ru"
+    servername: "swz.proxyplankton.ru"
     tls: true
-    flow: "xtls-rprx-vision"
-    reality-opts:
-      public-key: "t_qv0VOfWhKZJV_giGC55-ipgHYWo44Yfvik_B8T8ik"
-      short-id: "4a46213c935e2ee4"
-    servername: "baltic.cendora.ru"
-    client-fingerprint: "qq"
-    network: "tcp"
-    udp: true
+    type: "vless"
+    uuid: "054362fb-e485-4a3f-9568-4c5b0f60e074"
   -
-    name: "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #3"
+    name: "[ermaozi/get_subscribe] 🇭🇰[www.v2nodes.com] vless-HK-1... #4"
     client-fingerprint: "chrome"
     network: "ws"
     port: 8443
@@ -15659,7 +15666,6 @@ proxies:
     servername: "ty986gfazs.cainiaohub.xyz"
     tls: true
     type: "vless"
-    udp: true
     uuid: "c1c04450-bf71-4049-ad0c-9cf6d94d9f1f"
     ws-opts:
       headers:
@@ -15693,18 +15699,19 @@ proxies:
         Host: "ccc.010304.xyz"
       path: "/fp=unsafe"
   -
-    name: "[ermaozi/get_subscribe] 🇮🇱[www.v2nodes.com] vless-IL-1..."
+    name: "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #4"
+    encryption: "none"
     network: "ws"
-    port: 443
-    server: "185.253.75.119"
-    servername: "ccc.010304.xyz"
-    tls: true
+    port: 8080
+    server: "104.21.70.21"
+    servername: "nautica-cff.kloningstrife002.workers.dev"
+    tls: false
     type: "vless"
-    uuid: "d342d11e-d224-4463-b982-532309285094"
+    uuid: "fc60147e-76b8-4bc5-b691-90b2da79e3d2"
     ws-opts:
       headers:
-        Host: "ccc.010304.xyz"
-      path: "/fp=chrome"
+        Host: "nautica-cff.kloningstrife002.workers.dev"
+      path: "/138.2.74.219-28616"
   -
     name: "[ermaozi/get_subscribe] 🇸🇪[www.v2nodes.com] vless-SE-1..."
     client-fingerprint: "firefox"
@@ -15735,56 +15742,7 @@ proxies:
         Host: "stf839dvvyog9d2qa4-b8z6ahgn7b7qi.pages.dev"
       path: "/9BozNyvQ8VdRvsYX?ed=2560"
   -
-    name: "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #12"
-    alpn:
-      - "http/1.1"
-    client-fingerprint: "chrome"
-    port: 443
-    server: "186.190.211.188"
-    servername: "186.190.211.188"
-    skip-cert-verify: true
-    tls: true
-    type: "vless"
-    uuid: "03fcc618-b93d-6796-6aed-8a38c975d581"
-  -
-    name: "[ermaozi/get_subscribe] 🇪🇪 爱沙尼亚 | EST"
-    server: "103.88.243.28"
-    port: 443
-    type: "vless"
-    uuid: "c9c219dc-50da-4135-8e5b-67020291f0ec"
-    tls: true
-    flow: "xtls-rprx-vision"
-    reality-opts:
-      public-key: "fJnm6-PhJGSwHaAdJOzXkYOfCPPCWSlaZrtfm1XsqhA"
-      short-id: "6ba85179e30d4fc2"
-    servername: "l1i17qfl.cachecore.space"
-    client-fingerprint: "firefox"
-    network: "tcp"
-    udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] trojan-SG-..."
-    password: "WvH8ooM9hom4KOOJHFJz1x5umE0aV4R0"
-    port: 443
-    server: "43.156.36.253"
-    type: "trojan"
-  -
-    name: "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #6"
-    cipher: "chacha20-ietf-poly1305"
-    password: "uvKNudV-N8AUCrykPiyznA"
-    port: 56137
-    server: "177.202.111.21"
-    type: "ss"
-    udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 10"
-    server: "91.107.128.44"
-    port: 53185
-    type: "ss"
-    cipher: "2022-blake3-aes-256-gcm"
-    password: "U/jVh1z5NQ0cFCiCeLLxNAFBjmLBo/ECQ0dICfRFLbQ=:cZkXr9v4dFpHUetNse9xo72JumvR4N2GLz3bxiEh6Rk="
-    udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #5"
+    name: "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #7"
     client-fingerprint: "ios"
     network: "ws"
     port: 8443
@@ -15798,32 +15756,57 @@ proxies:
         Host: "nl8.pad-service.com"
       path: "/NL8W"
   -
-    name: "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-1... #11"
-    encryption: "none"
-    network: "ws"
-    port: 8880
-    server: "63.141.128.30"
-    tls: false
-    type: "vless"
-    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
-    ws-opts:
-      headers:
-        Host: "vms.lifetime42.workers.dev"
-      path: "/"
+    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #1"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "216.152.156.81"
+    skip-cert-verify: true
+    sni: "www.healthcarejobshubenhancemedicalprofessionalskillstoday.com"
+    type: "trojan"
+    udp: true
   -
-    name: "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR 2"
-    server: "31.210.43.142"
+    name: "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 2"
+    server: "31.76.5.51"
     port: 443
     type: "vless"
-    uuid: "ef328563-cda1-4530-9b0a-988cc5a74d78"
+    uuid: "cd3bb7d9-7df3-4644-ac05-c260990ac277"
     tls: true
     flow: "xtls-rprx-vision"
-    servername: "flooraccount.net"
-    client-fingerprint: "ios"
+    servername: "norw-mori-5.failspace.top"
+    client-fingerprint: "chrome"
     network: "tcp"
     udp: true
   -
-    name: "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #7"
+    name: "[ermaozi/get_subscribe] 🇨🇳_CN_中国->🇺🇸_US_美国"
+    type: "vless"
+    server: "us22.sofast.live"
+    port: 58011
+    uuid: "0afc6426-606c-48e7-bd70-3c424a416842"
+    tls: false
+    skip-cert-verify: true
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] ss-SG-1559..."
+    cipher: "aes-256-gcm"
+    password: "qpSevKaUXYQKvSjp"
+    port: 8388
+    server: "139.180.220.175"
+    type: "ss"
+  -
+    name: "[ermaozi/get_subscribe] 🇲🇩[www.v2nodes.com] vless-MD-4..."
+    network: "ws"
+    port: 443
+    server: "185.153.198.86"
+    servername: "vlso5.1d.mom"
+    tls: true
+    type: "vless"
+    uuid: "a1de0630-5786-48a0-84f6-dc6f2de10d6d"
+    ws-opts:
+      headers:
+        Host: "vlso5.1d.mom"
+      path: "/socks5=888:888@hkip.1d.mom:1080fp=chrome"
+  -
+    name: "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #13"
     client-fingerprint: "random"
     network: "ws"
     port: 8443
@@ -15837,7 +15820,7 @@ proxies:
         Host: "free.cndyw.ggff.net"
       path: "pyip=bpb.yousef.isegaro.com"
   -
-    name: "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #7"
+    name: "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #5"
     alpn:
       - "http/1.1"
     client-fingerprint: "chrome"
@@ -15854,385 +15837,20 @@ proxies:
         Host: "vpn.kovira.site"
       path: "/ws-738d2d0c5eba7609f3c37de2"
   -
-    name: "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #6"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "chrome"
-    encryption: "none"
+    name: "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #1"
     network: "tcp"
-    port: 11907
-    server: "195.58.144.56"
-    skip-cert-verify: false
-    tls: true
+    port: 41432
+    server: "rabin.142.251.153.7.savfasf.ir"
+    tls: false
     type: "vless"
-    uuid: "07cb07b9-0c4d-46c1-a15a-b147511b6b07"
-  -
-    name: "[ermaozi/get_subscribe] 🇳🇱 荷兰 | NLD"
-    server: "72.56.242.232"
-    port: 443
-    type: "vless"
-    uuid: "27653b37-603c-4c90-b1f5-25c4d23f8932"
-    tls: true
-    servername: "renderer-bridge-1-881.mirra.now"
-    client-fingerprint: "firefox"
-    network: "grpc"
-    grpc-opts:
-      grpc-mode: "gun"
-      grpc-service-name: "VideoRenderer"
     udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #4"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "wwww.qarvian.ir"
-    servername: "firefox.com"
-    tls: true
-    type: "vless"
-    uuid: "9f5f0438-0d05-44a0-b9bd-a2b91780b2a0"
+    uuid: "09931b77-0f40-4734-9b36-5df6e2308e4e"
     ws-opts:
       headers:
-        Host: "albaniaoijji.global.ssl.fastly.net"
+        Host: "rabin.142.251.153.7.savfasf.ir"
       path: "/"
   -
-    name: "[ermaozi/get_subscribe] 🇬🇷[www.v2nodes.com] vless-GR-3..."
-    client-fingerprint: "random"
-    network: "ws"
-    port: 443
-    server: "85.90.197.156"
-    servername: "free.cndyw.ggff.net"
-    tls: true
-    type: "vless"
-    uuid: "04c808e2-0b59-47b0-a54b-32fc7ef1c902"
-    ws-opts:
-      headers:
-        Host: "free.cndyw.ggff.net"
-      path: "pyip=bpb.yousef.isegaro.com"
-  -
-    name: "[ermaozi/get_subscribe] 🇮🇹[www.v2nodes.com] ss-IT-1559..."
-    cipher: "aes-256-gcm"
-    password: "qMvJmCbMduKUoeHq"
-    port: 8388
-    server: "66.245.207.70"
-    type: "ss"
-  -
-    name: "[ermaozi/get_subscribe] 🇮🇪 爱尔兰 | IRL"
-    server: "50.7.5.165"
-    port: 443
-    type: "vless"
-    uuid: "cd3bb7d9-7df3-4644-ac05-c260990ac277"
-    tls: true
-    flow: "xtls-rprx-vision"
-    servername: "ir-new1.failspace.top"
-    client-fingerprint: "chrome"
-    network: "tcp"
-    udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇫🇷[www.v2nodes.com] vless-FR-1..."
-    client-fingerprint: "firefox"
-    network: "ws"
-    port: 8443
-    server: "179.255.176.28"
-    servername: "fra.yandex-api.store"
-    tls: true
-    type: "vless"
-    uuid: "69da3674-4941-468b-96f0-c17cf5b0a047"
-    ws-opts:
-      path: "/assets"
-  -
-    name: "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU"
-    server: "81.19.136.167"
-    port: 443
-    type: "vless"
-    uuid: "c9c219dc-50da-4135-8e5b-67020291f0ec"
-    tls: true
-    flow: "xtls-rprx-vision"
-    reality-opts:
-      public-key: "fJnm6-PhJGSwHaAdJOzXkYOfCPPCWSlaZrtfm1XsqhA"
-    servername: "v2qvr3dsv5e.altrexon-net76.cfd"
-    client-fingerprint: "chrome"
-    network: "tcp"
-    udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #10"
-    client-fingerprint: "unsafe"
-    network: "ws"
-    port: 8443
-    server: "95.130.84.36"
-    servername: "aio.eth0.dpdns.org"
-    tls: true
-    type: "vless"
-    uuid: "8d42d29a-ed53-4684-a9ff-6b33826149de"
-    ws-opts:
-      headers:
-        Host: "aio.eth0.dpdns.org"
-      path: "/aioproxybot/94.23.144.99-2053"
-  -
-    name: "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 4"
-    server: "31.76.5.144"
-    port: 443
-    type: "vless"
-    uuid: "cd3bb7d9-7df3-4644-ac05-c260990ac277"
-    tls: true
-    flow: "xtls-rprx-vision"
-    servername: "norw-1.failspace.top"
-    client-fingerprint: "firefox"
-    network: "tcp"
-    udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-9..."
-    network: "ws"
-    port: 8880
-    server: "159.242.242.30"
-    tls: false
-    type: "vless"
-    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
-    ws-opts:
-      headers:
-        Host: "vms.lifetime58.workers.dev"
-      path: "/"
-  -
-    name: "[ermaozi/get_subscribe] 🇪🇸 西班牙 | ESP"
-    network: "ws"
-    port: 8880
-    server: "185.18.250.50"
-    tls: false
-    type: "vless"
-    udp: true
-    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
-    ws-opts:
-      headers:
-        Host: "vms.lifetime47.workers.dev"
-      path: "/?ed=2560&https://t.me/youtube@ZYFXS🇨🇳"
-  -
-    name: "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #7"
-    client-fingerprint: "firefox"
-    grpc-opts:
-      grpc-service-name: "hls.k1fr-s7fk.-hsMuCFam2-SF7Uu4JPQIhJUdKc.m3u8"
-    network: "grpc"
-    port: 443
-    server: "31.59.217.109"
-    servername: "h8cbtdld3jxdky.hat.onl"
-    tls: true
-    type: "vless"
-    uuid: "7f6adf9d-42f1-4fec-ab22-fb7f66bf3adc"
-  -
-    name: "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU #6"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 2096
-    server: "2.27.13.152"
-    servername: "st4834a.rumedia-cdn.com"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "d1641bc6-3757-43db-815a-9b3f4d9b0d7e"
-    ws-opts:
-      headers:
-        Host: "st4834a.rumedia-cdn.com"
-      path: "/cdn/v3/live"
-  -
-    name: "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 2"
-    server: "norw-mori-5.failspace.top"
-    port: 443
-    type: "vless"
-    uuid: "cd3bb7d9-7df3-4644-ac05-c260990ac277"
-    tls: true
-    flow: "xtls-rprx-vision"
-    servername: "norw-mori-5.failspace.top"
-    client-fingerprint: "chrome"
-    network: "tcp"
-    udp: true
-  -
-    name: "[ermaozi/get_subscribe] 🇫🇮[www.v2nodes.com] vless-FI-1... #1"
-    alpn:
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "ws"
-    port: 8443
-    server: "finp2g.yandex-api.store"
-    servername: "finp2g.yandex-api.store"
-    tls: true
-    type: "vless"
-    uuid: "78559873-84ef-4cab-a0b2-46d4cd20de4a"
-    ws-opts:
-      headers:
-        Host: "finp2g.yandex-api.store"
-      path: "/assets"
-  -
-    name: "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #2"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "8.210.29.68"
-    servername: "vp10.pages.dev"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "7b102311-43fd-4e8f-877e-8090623c101d"
-    ws-opts:
-      headers:
-        Host: "vp10.pages.dev"
-      path: "/"
-  -
-    name: "[ermaozi/get_subscribe] 🇦🇹_AT_奥地利->🇺🇸_US_美国"
-    type: "vless"
-    server: "au2.pad-service.com"
-    port: 8443
-    uuid: "2b0e5676-fb62-4bf0-9607-6e7818421e8e"
-    tls: true
-    servername: "au2.pad-sservice.lat"
-    sni: "au2.pad-sservice.lat"
-    skip-cert-verify: false
-    client-fingerprint: "chrome"
-    network: "ws"
-    ws-opts:
-      path: "/A11U"
-      headers:
-        Host: "au2.pad-service.com"
-  -
-    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #5"
-    network: "ws"
-    port: 8080
-    server: "172.66.158.115"
-    tls: false
-    type: "vless"
-    udp: true
-    uuid: "f8f5d3a5-54bd-4f52-9759-137bdbf950db"
-    ws-opts:
-      headers:
-        Host: "23g-lively-resonance-96b9hsf.msc633k2.workers.dev"
-      path: "/"
-  -
-    name: "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #3"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "104.16.72.30"
-    servername: "xstack.mahanfixe.workers.dev"
-    tls: true
-    type: "vless"
-    uuid: "a8b1d666-d3ba-4b17-90c4-ba7514c74f78"
-    ws-opts:
-      headers:
-        Host: "xstack.mahanfixe.workers.dev"
-      path: "/xiron"
-  -
-    name: "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #4"
-    encryption: "none"
-    network: "ws"
-    port: 8080
-    server: "104.21.70.21"
-    servername: "nautica-cff.kloningstrife002.workers.dev"
-    tls: false
-    type: "vless"
-    uuid: "fc60147e-76b8-4bc5-b691-90b2da79e3d2"
-    ws-opts:
-      headers:
-        Host: "nautica-cff.kloningstrife002.workers.dev"
-      path: "/138.2.74.219-28616"
-  -
-    name: "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] vless- #3"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "172.64.144.240"
-    servername: "pmpmppm.pages.dev"
-    tls: true
-    type: "vless"
-    uuid: "87c467e9-f0af-4b03-8fbd-65fd375d3a26"
-    ws-opts:
-      headers:
-        Host: "pmpmppm.pages.dev"
-      path: "/?ed=2048fp=randomized"
-  -
-    name: "[peasoft/NoMoreWalls] 🇹🇭[www.v2nodes.com] vless-TH-1... #1"
-    port: 443
-    server: "188.114.97.6"
-    tls: false
-    type: "vless"
-    uuid: "3c52e091-6714-4915-949f-2149fe69951b"
-    ws-opts:
-      path: "/ws"
-  -
-    name: "[peasoft/NoMoreWalls] 🇪🇬[www.v2nodes.com] ss-EG-1599..."
-    cipher: "aes-256-gcm"
-    password: "pKEW8JPByTVTLtM"
-    port: 443
-    server: "38.54.59.102"
-    type: "ss"
-  -
-    name: "[peasoft/NoMoreWalls] 🇬🇧[www.v2nodes.com] ss-GB-1247..."
-    cipher: "aes-256-gcm"
-    password: "RexnBgU7EV5ADxG"
-    port: 7001
-    server: "94.156.250.148"
-    type: "ss"
-  -
-    name: "[peasoft/NoMoreWalls] 🇰🇷[www.v2nodes.com] ss-KR-1185..."
-    cipher: "aes-256-gcm"
-    password: "PCnnH6SQSnfoS27"
-    port: 8091
-    server: "141.164.45.187"
-    type: "ss"
-  -
-    name: "[peasoft/NoMoreWalls] 🇵🇭[www.v2nodes.com] ss-PH-1540..."
-    cipher: "aes-256-gcm"
-    password: "kDWvXYZoTBcGkC4"
-    port: 8882
-    server: "149.104.109.252"
-    type: "ss"
-  -
-    name: "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] ss- #2"
-    cipher: "chacha20-ietf-poly1305"
-    password: "6heexyz"
-    port: 443
-    server: "pl140.vpnbook.com"
-    type: "ss"
-  -
-    name: "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] ss-SG-1559..."
-    cipher: "aes-256-gcm"
-    password: "qpSevKaUXYQKvSjp"
-    port: 8388
-    server: "139.180.220.175"
-    type: "ss"
-  -
-    name: "[peasoft/NoMoreWalls] 🇺🇦[www.v2nodes.com] ss-UA-1603..."
-    cipher: "chacha20-ietf-poly1305"
-    password: "G9ZuLN5DE9qqouTZwYUcvYsDJx8gyL1nCu3N7yRZFjPmYKhzSi8GkpVuexmTHAz2uvcErKkex1K2ceR2GH3L444HRNnN1YpP"
-    port: 49917
-    server: "staging.lastilhame.monster"
-    type: "ss"
-  -
-    name: "[peasoft/NoMoreWalls] 🇫🇷[www.v2nodes.com] trojan-FR-... #1"
-    network: "ws"
-    password: "humanity"
-    port: 443
-    server: "185.225.68.232"
-    skip-cert-verify: false
-    sni: "www.calmlunch.com"
-    type: "trojan"
-    ws-opts:
-      headers:
-        Host: "www.calmlunch.com"
-      path: "/assignment"
-  -
-    name: "[peasoft/NoMoreWalls] 🇳🇱[www.v2nodes.com] trojan-NL-... #1"
-    password: "humanity"
-    port: 443
-    server: "104.18.45.38"
-    type: "trojan"
-    ws-opts:
-      path: "%2Fassignment"
-  -
-    name: "[peasoft/NoMoreWalls] 🇹🇼[www.v2nodes.com] trojan-TW-..."
-    password: "29086912-33e4-4e06-ba2b-60f1a195864f"
-    port: 24999
-    server: "188.253.7.44"
-    type: "trojan"
-  -
-    name: "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #16"
+    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #16"
     client-fingerprint: "chrome"
     network: "ws"
     port: 443
@@ -16246,6 +15864,365 @@ proxies:
       headers:
         Host: "copy_az_channel_NUFiLTER_17i.global.ssl.fastly.net."
       path: "/?TELEGRAM--B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub--TELEGRAM"
+  -
+    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #11"
+    client-fingerprint: "chrome"
+    network: "ws"
+    port: 443
+    server: "104.18.33.209"
+    servername: "tamoai.ccwu.cc"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "45ceaca9-30f4-4035-85b7-8f83493911d8"
+    ws-opts:
+      headers:
+        Host: "tamoai.ccwu.cc"
+      path: "/proxyip=163.192.47.40,47.57.181.17,34.83.245.149,4.155.83.212,64.227.62.172,24.144.68.139,161.35.232.123,107.170.248.68"
+  -
+    name: "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #3"
+    client-fingerprint: "chrome"
+    network: "ws"
+    port: 443
+    server: "172.64.144.240"
+    servername: "pmpmppm.pages.dev"
+    tls: true
+    type: "vless"
+    uuid: "87c467e9-f0af-4b03-8fbd-65fd375d3a26"
+    ws-opts:
+      headers:
+        Host: "pmpmppm.pages.dev"
+      path: "/?ed=2048fp=randomized"
+  -
+    name: "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 3"
+    server: "de001.zestapp778.com"
+    port: 33770
+    type: "vless"
+    uuid: "e9a8144e-5237-488a-afb1-9ca3d8d54c80"
+    tls: true
+    servername: "de001.zestapp778.com"
+    client-fingerprint: "chrome"
+    network: "tcp"
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇺🇦[www.v2nodes.com] ss-UA-1603..."
+    cipher: "chacha20-ietf-poly1305"
+    password: "G9ZuLN5DE9qqouTZwYUcvYsDJx8gyL1nCu3N7yRZFjPmYKhzSi8GkpVuexmTHAz2uvcErKkex1K2ceR2GH3L444HRNnN1YpP"
+    port: 49917
+    server: "staging.lastilhame.monster"
+    type: "ss"
+  -
+    name: "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #11"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "85.90.197.156"
+    servername: "free.cndyw.ggff.net"
+    tls: true
+    type: "vless"
+    uuid: "04c808e2-0b59-47b0-a54b-32fc7ef1c902"
+    ws-opts:
+      headers:
+        Host: "free.cndyw.ggff.net"
+      path: "pyip=bpb.yousef.isegaro.com"
+  -
+    name: "[ermaozi/get_subscribe] 🇫🇷[www.v2nodes.com] vless-FR-1... #2"
+    client-fingerprint: "firefox"
+    network: "ws"
+    port: 8443
+    server: "179.255.176.28"
+    servername: "fra.yandex-api.store"
+    tls: true
+    type: "vless"
+    uuid: "69da3674-4941-468b-96f0-c17cf5b0a047"
+    ws-opts:
+      path: "/assets"
+  -
+    name: "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #9"
+    client-fingerprint: "unsafe"
+    network: "ws"
+    port: 8443
+    server: "95.130.84.36"
+    servername: "aio.eth0.dpdns.org"
+    tls: true
+    type: "vless"
+    uuid: "8d42d29a-ed53-4684-a9ff-6b33826149de"
+    ws-opts:
+      headers:
+        Host: "aio.eth0.dpdns.org"
+      path: "/aioproxybot/94.23.144.99-2053"
+  -
+    name: "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-9..."
+    network: "ws"
+    port: 8880
+    server: "159.242.242.30"
+    tls: false
+    type: "vless"
+    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
+    ws-opts:
+      headers:
+        Host: "vms.lifetime58.workers.dev"
+      path: "/"
+  -
+    name: "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #9"
+    client-fingerprint: "firefox"
+    grpc-opts:
+      grpc-service-name: "hls.k1fr-s7fk.-hsMuCFam2-SF7Uu4JPQIhJUdKc.m3u8"
+    network: "grpc"
+    port: 443
+    server: "31.59.217.109"
+    servername: "h8cbtdld3jxdky.hat.onl"
+    tls: true
+    type: "vless"
+    uuid: "7f6adf9d-42f1-4fec-ab22-fb7f66bf3adc"
+  -
+    name: "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 3"
+    server: "norw-mori-5.failspace.top"
+    port: 443
+    type: "vless"
+    uuid: "cd3bb7d9-7df3-4644-ac05-c260990ac277"
+    tls: true
+    flow: "xtls-rprx-vision"
+    servername: "norw-mori-5.failspace.top"
+    client-fingerprint: "chrome"
+    network: "tcp"
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #18"
+    password: "mMIywuxBtHHOAwAkkpwiCmBXIlKOysGv"
+    port: 6105
+    server: "209.38.66.47"
+    skip-cert-verify: true
+    sni: "hotspot-unlimited.com"
+    type: "trojan"
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇯🇵[www.v2nodes.com] ss-JP-1544..."
+    cipher: "aes-256-gcm"
+    password: "3eOFeNssde7PYYMv"
+    port: 80
+    server: "84.247.155.196"
+    type: "ss"
+  -
+    name: "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #14"
+    password: "hRtaKtsQkpklmssQDbbWRCNawDGdJePw"
+    port: 9998
+    server: "24.199.106.240"
+    skip-cert-verify: true
+    sni: "hotspot-unlimited.com"
+    type: "trojan"
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇰🇷[www.v2nodes.com] ss-KR-1185..."
+    cipher: "aes-256-gcm"
+    password: "PCnnH6SQSnfoS27"
+    port: 8091
+    server: "141.164.45.187"
+    type: "ss"
+  -
+    name: "[ermaozi/get_subscribe] 🇨🇱[www.v2nodes.com] ss-CL-1564..."
+    cipher: "aes-256-gcm"
+    password: "xBStBEVqvGwHPocc"
+    port: 8388
+    server: "64.176.2.21"
+    type: "ss"
+  -
+    name: "[ermaozi/get_subscribe] 🇪🇬[www.v2nodes.com] ss-EG-1599..."
+    cipher: "aes-256-gcm"
+    password: "pKEW8JPByTVTLtM"
+    port: 443
+    server: "38.54.59.102"
+    type: "ss"
+  -
+    name: "[ermaozi/get_subscribe] 🇹🇭[www.v2nodes.com] vless-TH-1... #1"
+    port: 443
+    server: "188.114.97.6"
+    tls: false
+    type: "vless"
+    uuid: "3c52e091-6714-4915-949f-2149fe69951b"
+    ws-opts:
+      path: "/ws"
+  -
+    name: "[ermaozi/get_subscribe] 🇳🇱 荷兰 | NLD"
+    server: "13.143.172.34"
+    port: 2083
+    type: "vless"
+    uuid: "fafc7c16-f890-45ee-a856-02df225172dd"
+    tls: true
+    flow: "xtls-rprx-vision"
+    reality-opts:
+      public-key: "cHJfClQkyUnSxMCi9kmfC8j5OpMrUpyvrjVboO50YXM"
+      short-id: "f5152b45697a2b58"
+    servername: "ya.ru"
+    client-fingerprint: "firefox"
+    network: "tcp"
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇸🇬 新加坡 | SGP"
+    server: "47.128.154.6"
+    port: 443
+    type: "vless"
+    uuid: "7e68e32f-8015-4f37-9082-70e8b0b58043"
+    tls: true
+    flow: "xtls-rprx-vision"
+    reality-opts:
+      public-key: "x8aCD8cJtkDvAjcRrcMG05MNiwh11LaKg70KIRvfN0g"
+      short-id: "819a87bf1651bf44"
+    servername: "a8n.rp-test.net"
+    client-fingerprint: "chrome"
+    network: "tcp"
+    udp: true
+  -
+    name: "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #3"
+    client-fingerprint: "chrome"
+    network: "ws"
+    port: 8443
+    server: "188.164.248.123"
+    servername: "vp21.cc.cd"
+    tls: true
+    type: "vless"
+    uuid: "7b102311-43fd-4e8f-877e-8090623c101d"
+    ws-opts:
+      headers:
+        Host: "vp21.cc.cd"
+      path: "/"
+  -
+    name: "[peasoft/NoMoreWalls] 🇬🇧[www.v2nodes.com] vless-GB-1..."
+    alpn:
+      - "h2"
+      - "http/1.1"
+    encryption: "none"
+    grpc-opts:
+      grpc-service-name: "beru-uk"
+    network: "grpc"
+    port: 8444
+    server: "ru3.radiolumens.uk"
+    servername: "ru3.radiolumens.uk"
+    tls: true
+    type: "vless"
+    uuid: "36cf792c-f07d-4500-97ea-a395e5178deb"
+  -
+    name: "[peasoft/NoMoreWalls] 🇭🇰[www.v2nodes.com] vless-HK-1... #4"
+    alpn:
+      - "h2"
+      - "http/1.1"
+    client-fingerprint: "chrome"
+    encryption: "none"
+    network: "tcp"
+    port: 11907
+    server: "195.58.144.56"
+    skip-cert-verify: false
+    tls: true
+    type: "vless"
+    uuid: "07cb07b9-0c4d-46c1-a15a-b147511b6b07"
+  -
+    name: "[peasoft/NoMoreWalls] 🇮🇱[www.v2nodes.com] vless-IL-1..."
+    network: "ws"
+    port: 443
+    server: "185.253.75.119"
+    servername: "ccc.010304.xyz"
+    tls: true
+    type: "vless"
+    uuid: "d342d11e-d224-4463-b982-532309285094"
+    ws-opts:
+      headers:
+        Host: "ccc.010304.xyz"
+      path: "/fp=chrome"
+  -
+    name: "[peasoft/NoMoreWalls] 🇹🇭[www.v2nodes.com] vless-TH-1... #1"
+    client-fingerprint: "chrome"
+    encryption: "none"
+    network: "ws"
+    port: 443
+    server: "104.16.10.2"
+    servername: "v2ray.simspeedup.com"
+    tls: true
+    type: "vless"
+    uuid: "3c52e091-6714-4915-949f-2149fe69951b"
+    ws-opts:
+      headers:
+        Host: "v2ray.simspeedup.com"
+      path: "/ws"
+  -
+    name: "[peasoft/NoMoreWalls] 🇹🇼[www.v2nodes.com] vless-TW-1..."
+    client-fingerprint: "chrome"
+    network: "ws"
+    port: 443
+    server: "59.125.69.23"
+    servername: "ty986gfazs.cainiaohub.xyz"
+    tls: true
+    type: "vless"
+    uuid: "c1c04450-bf71-4049-ad0c-9cf6d94d9f1f"
+    ws-opts:
+      headers:
+        Host: "ty986gfazs.cainiaohub.xyz"
+      path: "/81574b6b-c9d7-44a0-b83d-dad56e8cb530"
+  -
+    name: "[peasoft/NoMoreWalls] 🇳🇱[www.v2nodes.com] trojan-NL-..."
+    password: "humanity"
+    port: 443
+    server: "8.6.112.206"
+    type: "trojan"
+    ws-opts:
+      path: "%2Fassignment"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #5"
+    client-fingerprint: "qq"
+    network: "xhttp"
+    port: 443
+    server: "188.72.103.4"
+    servername: "cdn-1.frdmhere.com"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "3225c52d-bc6c-4b53-ba42-4747a37f4f12"
+    xhttp-opts:
+      host: "cdn-1.frdmhere.com"
+      mode: "packet-up"
+      path: "/api/v2/events/ingest"
+      seq-key: "x_seq"
+      seq-placement: "path"
+      session-key: "x_session"
+      session-placement: "path"
+      uplink-data-key: "X-Data"
+      uplink-data-placement: "header"
+      uplink-http-method: "GET"
+      x-padding-bytes: "1-16"
+      x-padding-header: "Referer"
+      x-padding-key: "utm_source"
+      x-padding-method: "tokenish"
+      x-padding-obfs-mode: true
+      x-padding-placement: "queryInHeader"
+  -
+    name: "[peasoft/NoMoreWalls] 🇸🇪 瑞典 | SWE #1"
+    http-opts:
+      headers:
+        Host:
+          - "play.googleapis.com"
+      method: "GET"
+      path:
+        - "/"
+    network: "http"
+    port: 443
+    server: "51.20.192.255"
+    tls: false
+    type: "vless"
+    udp: true
+    uuid: "7060231d-b9ba-495f-a218-bf427940cf3e"
+  -
+    name: "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA 3"
+    network: "ws"
+    password: "3aa78b49-5530-45a2-93cb-b093745824f1"
+    port: 2096
+    server: "www.visa.com.sg"
+    skip-cert-verify: true
+    sni: "au4.yang-1989.xyz"
+    type: "trojan"
+    udp: true
+    ws-opts:
+      headers:
+        Host: "au4.yang-1989.xyz"
+      path: "/ya87"
 proxy-groups:
   -
     name: "AUTO"
@@ -17244,6 +17221,7 @@ proxy-groups:
       - "[Ruk1ng001/freeSub] D🔴🇺🇸hos[🎬🤖📺🎭]_dokng.com_be044ae2"
       - "[Ruk1ng001/freeSub] A🟢🇩🇪res[🎬🤖📺🎭]_dokng.com_29c82dd2"
       - "[Ruk1ng001/freeSub] D🔴🇳🇱hos[🎬🤖📺🎭]_dokng.com_d4d1ccee"
+      - "[Ruk1ng001/freeSub] C🟠🇳🇱hos[🎬🤖📺🎭]_dokng.com_1c6da372"
       - "[Ruk1ng001/freeSub] D🔴🇳🇱hos[🎬🤖📺🎭]_dokng.com_2808c140"
       - "[Ruk1ng001/freeSub] D🔴🇯🇵hos[📺🎭🎪📦]_dokng.com_242bd845"
       - "[Ruk1ng001/freeSub] D🔴🇺🇸hos[🎬🤖📺🎭]_dokng.com_d32812f7"
@@ -17255,150 +17233,143 @@ proxy-groups:
       - "[Ruk1ng001/freeSub] A🟢🇺🇸res[🎬🤖📺🎭]_dokng.com_ada84799"
       - "[Ruk1ng001/freeSub] D🔴🇺🇸hos[🎬🤖📺🎭]_dokng.com_ba7c36f0"
       - "[Ruk1ng001/freeSub] D🔴🇩🇪hos[🎬🤖📺🎭]_dokng.com_1d61e4fd"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG] #3"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Staten Island [GH:barry-far/V2r]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro] #2"
+      - "[awesome-vpn/awesome-vpn] 🇷🇴 Romania [TG]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Staten Island [TG]"
       - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇦🇪 United Arab Emirates [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇳🇱 The Netherlands [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Newark [GH:barry-far/V2r]"
-      - "[awesome-vpn/awesome-vpn] 🇳🇱 The Netherlands/Rozendaal [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro] #2"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Dallas [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Dallas [GH:Mahdi0024/Pro] #2"
-      - "[awesome-vpn/awesome-vpn] 🇮🇹 Italy/Milan [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Jose [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇯🇵 Japan/Tokyo [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇮🇹 Italy/Milan [TG] #2"
-      - "[awesome-vpn/awesome-vpn] 🇩🇪 Germany/Frankfurt am Main [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro]"
       - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG] #2"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Reston [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Newark [GH:barry-far/V2r]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Ashburn [GH:barry-far/V2r]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Dallas [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇨🇭 Switzerland/Zurich [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Washington [GH:barry-far/V2r]"
       - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG] #3"
-      - "[awesome-vpn/awesome-vpn] 🇩🇪 Germany [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Miami [GH:barry-far/V2r]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Jose [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Los Angeles [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇨🇦 Canada/Toronto [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Chicago [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Las Vegas [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [GH:Mahdi0024/Pro]"
       - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [GH:Mahdi0024/Pro] #2"
-      - "[Misaka-blog/chromego_merge] Brazil_Brasília_ss_1039"
       - "[Misaka-blog/chromego_merge] Denmark_None_ss_1025"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1016"
-      - "[Misaka-blog/chromego_merge] Germany_Frankfurt am Main_ss_1093"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_10104"
-      - "[Misaka-blog/chromego_merge] United States_Santa Clara_trojan_10102"
-      - "[Misaka-blog/chromego_merge] South Africa_None_ss_1046"
-      - "[Misaka-blog/chromego_merge] Israel_None_trojan_1096"
-      - "[Misaka-blog/chromego_merge] United States_None_ss_1044"
+      - "[Misaka-blog/chromego_merge] None_None_trojan_11111"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1054"
+      - "[Misaka-blog/chromego_merge] South Africa_None_ss_1051"
+      - "[Misaka-blog/chromego_merge] United States_None_ss_1049"
+      - "[Misaka-blog/chromego_merge] United Kingdom_Newport_trojan_1068"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1013"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1084"
-      - "[Misaka-blog/chromego_merge] Italy_None_ss_1027"
-      - "[Misaka-blog/chromego_merge] Germany_None_trojan_1051"
-      - "[Misaka-blog/chromego_merge] Brazil_Curitiba_ss_1098"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_10100"
-      - "[Misaka-blog/chromego_merge] United States_Santa Clara_trojan_10109"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_10107"
-      - "[Misaka-blog/chromego_merge] United States_None_ss_1021"
-      - "[Misaka-blog/chromego_merge] Italy_None_ss_1033"
-      - "[Misaka-blog/chromego_merge] Romania_Bucharest_ss_1043"
-      - "[Misaka-blog/chromego_merge] Sweden_Spanga_ss_1045"
-      - "[Misaka-blog/chromego_merge] None_None_trojan_1053"
-      - "[Misaka-blog/chromego_merge] Norway_Oslo_ss_1042"
-      - "[Misaka-blog/chromego_merge] United States_Ashburn_ss_1036"
-      - "[Misaka-blog/chromego_merge] Japan_None_trojan_1063"
-      - "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1048"
-      - "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1047"
-      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1055"
-      - "[Misaka-blog/chromego_merge] Austria_Vienna_trojan_1059"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1097"
+      - "[Misaka-blog/chromego_merge] Italy_None_ss_1028"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1078"
+      - "[Misaka-blog/chromego_merge] Germany_None_trojan_1061"
+      - "[Misaka-blog/chromego_merge] United States_None_ss_1046"
+      - "[Misaka-blog/chromego_merge] Italy_None_ss_1035"
+      - "[Misaka-blog/chromego_merge] Romania_Bucharest_ss_1048"
+      - "[Misaka-blog/chromego_merge] Sweden_Spanga_ss_1050"
+      - "[Misaka-blog/chromego_merge] None_None_trojan_1058"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1075"
+      - "[Misaka-blog/chromego_merge] South Korea_Seoul_ss_1042"
+      - "[Misaka-blog/chromego_merge] Norway_Oslo_ss_1045"
+      - "[Misaka-blog/chromego_merge] United States_Ashburn_ss_1038"
+      - "[Misaka-blog/chromego_merge] Japan_None_trojan_1070"
+      - "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1053"
+      - "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1052"
+      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1060"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1080"
+      - "[Misaka-blog/chromego_merge] United Kingdom_None_ss_1022"
+      - "[Misaka-blog/chromego_merge] Austria_Vienna_trojan_1065"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1014"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1015"
-      - "[Misaka-blog/chromego_merge] Austria_Vienna_trojan_1065"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1099"
+      - "[Misaka-blog/chromego_merge] Hungary_Budapest_trojan_1056"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1020"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1083"
-      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1054"
-      - "[Misaka-blog/chromego_merge] Singapore_Singapore_trojan_1066"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1091"
-      - "[Misaka-blog/chromego_merge] United States_Saratoga_ss_1038"
-      - "[Misaka-blog/chromego_merge] The Netherlands_Groningen_trojan_1052"
-      - "[Misaka-blog/chromego_merge] Latvia_Riga_trojan_1050"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1085"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1090"
-      - "[Misaka-blog/chromego_merge] United States_None_ss_1068"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1056"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_10108"
-      - "[Misaka-blog/chromego_merge] India_Noida_ss_1026"
-      - "[Misaka-blog/chromego_merge] None_None_trojan_1057"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1089"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1049"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1096"
+      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1059"
+      - "[Misaka-blog/chromego_merge] Israel_None_trojan_1069"
+      - "[Misaka-blog/chromego_merge] Italy_None_ss_1030"
+      - "[Misaka-blog/chromego_merge] Singapore_Singapore_trojan_1073"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_10104"
+      - "[Misaka-blog/chromego_merge] Taiwan_None_trojan_1074"
+      - "[Misaka-blog/chromego_merge] United States_Saratoga_ss_1040"
+      - "[Misaka-blog/chromego_merge] The Netherlands_Groningen_trojan_1057"
+      - "[Misaka-blog/chromego_merge] China_None_trojan_10113"
+      - "[Misaka-blog/chromego_merge] Latvia_Riga_trojan_1055"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1098"
+      - "[Misaka-blog/chromego_merge] Iran_None_ss_11107"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_10103"
+      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_10116"
+      - "[Misaka-blog/chromego_merge] United States_None_ss_1081"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1062"
+      - "[Misaka-blog/chromego_merge] Italy_None_ss_1031"
+      - "[sunmiao4458/free-proxy-airport] 🇭🇰 香港 | HKG 5"
+      - "[sunmiao4458/free-proxy-airport] 🇭🇰 香港 | HKG 9"
       - "[sunmiao4458/free-proxy-airport] 🇺🇸US美国丨yoyapai.com_2"
-      - "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 11"
-      - "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 3"
       - "[sunmiao4458/free-proxy-airport] 🇺🇸US美国丨yoyapai.com_20"
+      - "[sunmiao4458/free-proxy-airport] 🇨🇦 加拿大 | CAN 2"
+      - "[sunmiao4458/free-proxy-airport] 🇦🇹 奥地利 | AUT 2"
+      - "[sunmiao4458/free-proxy-airport] 🇪🇸 西班牙 | ESP"
       - "[ermaozi/get_subscribe] 🇧🇾[www.v2nodes.com] vless-BY-1... #1"
-      - "[ermaozi/get_subscribe] 🇦🇹 奥地利 | AUT"
-      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 9"
+      - "[ermaozi/get_subscribe] 🇰🇷 韩国 | KOR"
+      - "[ermaozi/get_subscribe] 🇨🇳_CN_中国->🇺🇸_US_美国_2"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #8"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #3"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 2"
+      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 5"
       - "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #4"
-      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #9"
       - "[ermaozi/get_subscribe] 🇨🇱[www.v2nodes.com] vless-CL-1..."
-      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 12"
       - "[ermaozi/get_subscribe] 🇭🇺[www.v2nodes.com] vless-HU-1..."
-      - "[ermaozi/get_subscribe] 🇲🇩[www.v2nodes.com] vless-MD-4..."
       - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR"
-      - "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #3"
-      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 3"
-      - "[ermaozi/get_subscribe] 🇵🇱 波兰 | POL"
-      - "[ermaozi/get_subscribe] 🇺🇸_US_美国"
-      - "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR 3"
-      - "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #3"
+      - "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR #1"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #20"
+      - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 6"
+      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #1"
+      - "[ermaozi/get_subscribe] 🇭🇰[www.v2nodes.com] vless-HK-1... #4"
       - "[ermaozi/get_subscribe] 🇦🇪[www.v2nodes.com] vless-AE-1... #2"
       - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL"
-      - "[ermaozi/get_subscribe] 🇮🇱[www.v2nodes.com] vless-IL-1..."
+      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #4"
       - "[ermaozi/get_subscribe] 🇸🇪[www.v2nodes.com] vless-SE-1..."
       - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #1"
-      - "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #12"
-      - "[ermaozi/get_subscribe] 🇪🇪 爱沙尼亚 | EST"
-      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] trojan-SG-..."
-      - "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #6"
-      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 10"
-      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #5"
-      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-1... #11"
-      - "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR 2"
-      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #7"
-      - "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #7"
-      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #6"
-      - "[ermaozi/get_subscribe] 🇳🇱 荷兰 | NLD"
-      - "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #4"
-      - "[ermaozi/get_subscribe] 🇬🇷[www.v2nodes.com] vless-GR-3..."
-      - "[ermaozi/get_subscribe] 🇮🇹[www.v2nodes.com] ss-IT-1559..."
-      - "[ermaozi/get_subscribe] 🇮🇪 爱尔兰 | IRL"
-      - "[ermaozi/get_subscribe] 🇫🇷[www.v2nodes.com] vless-FR-1..."
-      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU"
-      - "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #10"
-      - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 4"
-      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-9..."
-      - "[ermaozi/get_subscribe] 🇪🇸 西班牙 | ESP"
       - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #7"
-      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU #6"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #1"
       - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 2"
-      - "[ermaozi/get_subscribe] 🇫🇮[www.v2nodes.com] vless-FI-1... #1"
-      - "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #2"
-      - "[ermaozi/get_subscribe] 🇦🇹_AT_奥地利->🇺🇸_US_美国"
-      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #5"
+      - "[ermaozi/get_subscribe] 🇨🇳_CN_中国->🇺🇸_US_美国"
+      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] ss-SG-1559..."
+      - "[ermaozi/get_subscribe] 🇲🇩[www.v2nodes.com] vless-MD-4..."
+      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #13"
+      - "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #5"
+      - "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #1"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #16"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #11"
+      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #3"
+      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 3"
+      - "[ermaozi/get_subscribe] 🇺🇦[www.v2nodes.com] ss-UA-1603..."
+      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #11"
+      - "[ermaozi/get_subscribe] 🇫🇷[www.v2nodes.com] vless-FR-1... #2"
+      - "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #9"
+      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-9..."
+      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #9"
+      - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 3"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #18"
+      - "[ermaozi/get_subscribe] 🇯🇵[www.v2nodes.com] ss-JP-1544..."
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #14"
+      - "[ermaozi/get_subscribe] 🇰🇷[www.v2nodes.com] ss-KR-1185..."
+      - "[ermaozi/get_subscribe] 🇨🇱[www.v2nodes.com] ss-CL-1564..."
+      - "[ermaozi/get_subscribe] 🇪🇬[www.v2nodes.com] ss-EG-1599..."
+      - "[ermaozi/get_subscribe] 🇹🇭[www.v2nodes.com] vless-TH-1... #1"
+      - "[ermaozi/get_subscribe] 🇳🇱 荷兰 | NLD"
+      - "[ermaozi/get_subscribe] 🇸🇬 新加坡 | SGP"
       - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #3"
-      - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #4"
-      - "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] vless- #3"
+      - "[peasoft/NoMoreWalls] 🇬🇧[www.v2nodes.com] vless-GB-1..."
+      - "[peasoft/NoMoreWalls] 🇭🇰[www.v2nodes.com] vless-HK-1... #4"
+      - "[peasoft/NoMoreWalls] 🇮🇱[www.v2nodes.com] vless-IL-1..."
       - "[peasoft/NoMoreWalls] 🇹🇭[www.v2nodes.com] vless-TH-1... #1"
-      - "[peasoft/NoMoreWalls] 🇪🇬[www.v2nodes.com] ss-EG-1599..."
-      - "[peasoft/NoMoreWalls] 🇬🇧[www.v2nodes.com] ss-GB-1247..."
-      - "[peasoft/NoMoreWalls] 🇰🇷[www.v2nodes.com] ss-KR-1185..."
-      - "[peasoft/NoMoreWalls] 🇵🇭[www.v2nodes.com] ss-PH-1540..."
-      - "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] ss- #2"
-      - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] ss-SG-1559..."
-      - "[peasoft/NoMoreWalls] 🇺🇦[www.v2nodes.com] ss-UA-1603..."
-      - "[peasoft/NoMoreWalls] 🇫🇷[www.v2nodes.com] trojan-FR-... #1"
-      - "[peasoft/NoMoreWalls] 🇳🇱[www.v2nodes.com] trojan-NL-... #1"
-      - "[peasoft/NoMoreWalls] 🇹🇼[www.v2nodes.com] trojan-TW-..."
-      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #16"
+      - "[peasoft/NoMoreWalls] 🇹🇼[www.v2nodes.com] vless-TW-1..."
+      - "[peasoft/NoMoreWalls] 🇳🇱[www.v2nodes.com] trojan-NL-..."
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #5"
+      - "[peasoft/NoMoreWalls] 🇸🇪 瑞典 | SWE #1"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA 3"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -18400,6 +18371,7 @@ proxy-groups:
       - "[Ruk1ng001/freeSub] D🔴🇺🇸hos[🎬🤖📺🎭]_dokng.com_be044ae2"
       - "[Ruk1ng001/freeSub] A🟢🇩🇪res[🎬🤖📺🎭]_dokng.com_29c82dd2"
       - "[Ruk1ng001/freeSub] D🔴🇳🇱hos[🎬🤖📺🎭]_dokng.com_d4d1ccee"
+      - "[Ruk1ng001/freeSub] C🟠🇳🇱hos[🎬🤖📺🎭]_dokng.com_1c6da372"
       - "[Ruk1ng001/freeSub] D🔴🇳🇱hos[🎬🤖📺🎭]_dokng.com_2808c140"
       - "[Ruk1ng001/freeSub] D🔴🇯🇵hos[📺🎭🎪📦]_dokng.com_242bd845"
       - "[Ruk1ng001/freeSub] D🔴🇺🇸hos[🎬🤖📺🎭]_dokng.com_d32812f7"
@@ -18411,150 +18383,143 @@ proxy-groups:
       - "[Ruk1ng001/freeSub] A🟢🇺🇸res[🎬🤖📺🎭]_dokng.com_ada84799"
       - "[Ruk1ng001/freeSub] D🔴🇺🇸hos[🎬🤖📺🎭]_dokng.com_ba7c36f0"
       - "[Ruk1ng001/freeSub] D🔴🇩🇪hos[🎬🤖📺🎭]_dokng.com_1d61e4fd"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Francisco [TG] #3"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Staten Island [GH:barry-far/V2r]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro] #2"
+      - "[awesome-vpn/awesome-vpn] 🇷🇴 Romania [TG]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Staten Island [TG]"
       - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇦🇪 United Arab Emirates [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇳🇱 The Netherlands [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Newark [GH:barry-far/V2r]"
-      - "[awesome-vpn/awesome-vpn] 🇳🇱 The Netherlands/Rozendaal [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro] #2"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Dallas [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Dallas [GH:Mahdi0024/Pro] #2"
-      - "[awesome-vpn/awesome-vpn] 🇮🇹 Italy/Milan [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Jose [GH:Mahdi0024/Pro]"
-      - "[awesome-vpn/awesome-vpn] 🇯🇵 Japan/Tokyo [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇮🇹 Italy/Milan [TG] #2"
-      - "[awesome-vpn/awesome-vpn] 🇩🇪 Germany/Frankfurt am Main [TG]"
-      - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/New York [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Phoenix [GH:Mahdi0024/Pro]"
       - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG] #2"
-      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Reston [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Newark [GH:barry-far/V2r]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Ashburn [GH:barry-far/V2r]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Dallas [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇨🇭 Switzerland/Zurich [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Washington [GH:barry-far/V2r]"
       - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [TG] #3"
-      - "[awesome-vpn/awesome-vpn] 🇩🇪 Germany [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Miami [GH:barry-far/V2r]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/San Jose [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Los Angeles [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇨🇦 Canada/Toronto [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Chicago [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇺🇸 United States/Las Vegas [GH:Mahdi0024/Pro]"
+      - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [GH:Mahdi0024/Pro]"
       - "[awesome-vpn/awesome-vpn] 🇬🇧 United Kingdom [GH:Mahdi0024/Pro] #2"
-      - "[Misaka-blog/chromego_merge] Brazil_Brasília_ss_1039"
       - "[Misaka-blog/chromego_merge] Denmark_None_ss_1025"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1016"
-      - "[Misaka-blog/chromego_merge] Germany_Frankfurt am Main_ss_1093"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_10104"
-      - "[Misaka-blog/chromego_merge] United States_Santa Clara_trojan_10102"
-      - "[Misaka-blog/chromego_merge] South Africa_None_ss_1046"
-      - "[Misaka-blog/chromego_merge] Israel_None_trojan_1096"
-      - "[Misaka-blog/chromego_merge] United States_None_ss_1044"
+      - "[Misaka-blog/chromego_merge] None_None_trojan_11111"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1054"
+      - "[Misaka-blog/chromego_merge] South Africa_None_ss_1051"
+      - "[Misaka-blog/chromego_merge] United States_None_ss_1049"
+      - "[Misaka-blog/chromego_merge] United Kingdom_Newport_trojan_1068"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1013"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1084"
-      - "[Misaka-blog/chromego_merge] Italy_None_ss_1027"
-      - "[Misaka-blog/chromego_merge] Germany_None_trojan_1051"
-      - "[Misaka-blog/chromego_merge] Brazil_Curitiba_ss_1098"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_10100"
-      - "[Misaka-blog/chromego_merge] United States_Santa Clara_trojan_10109"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_10107"
-      - "[Misaka-blog/chromego_merge] United States_None_ss_1021"
-      - "[Misaka-blog/chromego_merge] Italy_None_ss_1033"
-      - "[Misaka-blog/chromego_merge] Romania_Bucharest_ss_1043"
-      - "[Misaka-blog/chromego_merge] Sweden_Spanga_ss_1045"
-      - "[Misaka-blog/chromego_merge] None_None_trojan_1053"
-      - "[Misaka-blog/chromego_merge] Norway_Oslo_ss_1042"
-      - "[Misaka-blog/chromego_merge] United States_Ashburn_ss_1036"
-      - "[Misaka-blog/chromego_merge] Japan_None_trojan_1063"
-      - "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1048"
-      - "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1047"
-      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1055"
-      - "[Misaka-blog/chromego_merge] Austria_Vienna_trojan_1059"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1097"
+      - "[Misaka-blog/chromego_merge] Italy_None_ss_1028"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1078"
+      - "[Misaka-blog/chromego_merge] Germany_None_trojan_1061"
+      - "[Misaka-blog/chromego_merge] United States_None_ss_1046"
+      - "[Misaka-blog/chromego_merge] Italy_None_ss_1035"
+      - "[Misaka-blog/chromego_merge] Romania_Bucharest_ss_1048"
+      - "[Misaka-blog/chromego_merge] Sweden_Spanga_ss_1050"
+      - "[Misaka-blog/chromego_merge] None_None_trojan_1058"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1075"
+      - "[Misaka-blog/chromego_merge] South Korea_Seoul_ss_1042"
+      - "[Misaka-blog/chromego_merge] Norway_Oslo_ss_1045"
+      - "[Misaka-blog/chromego_merge] United States_Ashburn_ss_1038"
+      - "[Misaka-blog/chromego_merge] Japan_None_trojan_1070"
+      - "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1053"
+      - "[Misaka-blog/chromego_merge] South Africa_Johannesburg_ss_1052"
+      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1060"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1080"
+      - "[Misaka-blog/chromego_merge] United Kingdom_None_ss_1022"
+      - "[Misaka-blog/chromego_merge] Austria_Vienna_trojan_1065"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1014"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1015"
-      - "[Misaka-blog/chromego_merge] Austria_Vienna_trojan_1065"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1099"
+      - "[Misaka-blog/chromego_merge] Hungary_Budapest_trojan_1056"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1020"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1083"
-      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1054"
-      - "[Misaka-blog/chromego_merge] Singapore_Singapore_trojan_1066"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1091"
-      - "[Misaka-blog/chromego_merge] United States_Saratoga_ss_1038"
-      - "[Misaka-blog/chromego_merge] The Netherlands_Groningen_trojan_1052"
-      - "[Misaka-blog/chromego_merge] Latvia_Riga_trojan_1050"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1085"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1090"
-      - "[Misaka-blog/chromego_merge] United States_None_ss_1068"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1056"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_10108"
-      - "[Misaka-blog/chromego_merge] India_Noida_ss_1026"
-      - "[Misaka-blog/chromego_merge] None_None_trojan_1057"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1089"
-      - "[Misaka-blog/chromego_merge] United States_None_trojan_1049"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1096"
+      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_1059"
+      - "[Misaka-blog/chromego_merge] Israel_None_trojan_1069"
+      - "[Misaka-blog/chromego_merge] Italy_None_ss_1030"
+      - "[Misaka-blog/chromego_merge] Singapore_Singapore_trojan_1073"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_10104"
+      - "[Misaka-blog/chromego_merge] Taiwan_None_trojan_1074"
+      - "[Misaka-blog/chromego_merge] United States_Saratoga_ss_1040"
+      - "[Misaka-blog/chromego_merge] The Netherlands_Groningen_trojan_1057"
+      - "[Misaka-blog/chromego_merge] China_None_trojan_10113"
+      - "[Misaka-blog/chromego_merge] Latvia_Riga_trojan_1055"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1098"
+      - "[Misaka-blog/chromego_merge] Iran_None_ss_11107"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_10103"
+      - "[Misaka-blog/chromego_merge] Seychelles_None_trojan_10116"
+      - "[Misaka-blog/chromego_merge] United States_None_ss_1081"
+      - "[Misaka-blog/chromego_merge] United States_None_trojan_1062"
+      - "[Misaka-blog/chromego_merge] Italy_None_ss_1031"
+      - "[sunmiao4458/free-proxy-airport] 🇭🇰 香港 | HKG 5"
+      - "[sunmiao4458/free-proxy-airport] 🇭🇰 香港 | HKG 9"
       - "[sunmiao4458/free-proxy-airport] 🇺🇸US美国丨yoyapai.com_2"
-      - "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 11"
-      - "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 3"
       - "[sunmiao4458/free-proxy-airport] 🇺🇸US美国丨yoyapai.com_20"
+      - "[sunmiao4458/free-proxy-airport] 🇨🇦 加拿大 | CAN 2"
+      - "[sunmiao4458/free-proxy-airport] 🇦🇹 奥地利 | AUT 2"
+      - "[sunmiao4458/free-proxy-airport] 🇪🇸 西班牙 | ESP"
       - "[ermaozi/get_subscribe] 🇧🇾[www.v2nodes.com] vless-BY-1... #1"
-      - "[ermaozi/get_subscribe] 🇦🇹 奥地利 | AUT"
-      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 9"
+      - "[ermaozi/get_subscribe] 🇰🇷 韩国 | KOR"
+      - "[ermaozi/get_subscribe] 🇨🇳_CN_中国->🇺🇸_US_美国_2"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #8"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #3"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 2"
+      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 5"
       - "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #4"
-      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #9"
       - "[ermaozi/get_subscribe] 🇨🇱[www.v2nodes.com] vless-CL-1..."
-      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 12"
       - "[ermaozi/get_subscribe] 🇭🇺[www.v2nodes.com] vless-HU-1..."
-      - "[ermaozi/get_subscribe] 🇲🇩[www.v2nodes.com] vless-MD-4..."
       - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR"
-      - "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #3"
-      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA 3"
-      - "[ermaozi/get_subscribe] 🇵🇱 波兰 | POL"
-      - "[ermaozi/get_subscribe] 🇺🇸_US_美国"
-      - "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR 3"
-      - "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #3"
+      - "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR #1"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #20"
+      - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 6"
+      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #1"
+      - "[ermaozi/get_subscribe] 🇭🇰[www.v2nodes.com] vless-HK-1... #4"
       - "[ermaozi/get_subscribe] 🇦🇪[www.v2nodes.com] vless-AE-1... #2"
       - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL"
-      - "[ermaozi/get_subscribe] 🇮🇱[www.v2nodes.com] vless-IL-1..."
+      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #4"
       - "[ermaozi/get_subscribe] 🇸🇪[www.v2nodes.com] vless-SE-1..."
       - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG #1"
-      - "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #12"
-      - "[ermaozi/get_subscribe] 🇪🇪 爱沙尼亚 | EST"
-      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] trojan-SG-..."
-      - "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #6"
-      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 10"
-      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #5"
-      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-1... #11"
-      - "[ermaozi/get_subscribe] 🇹🇷 土耳其 | TUR 2"
-      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #7"
-      - "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #7"
-      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #6"
-      - "[ermaozi/get_subscribe] 🇳🇱 荷兰 | NLD"
-      - "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #4"
-      - "[ermaozi/get_subscribe] 🇬🇷[www.v2nodes.com] vless-GR-3..."
-      - "[ermaozi/get_subscribe] 🇮🇹[www.v2nodes.com] ss-IT-1559..."
-      - "[ermaozi/get_subscribe] 🇮🇪 爱尔兰 | IRL"
-      - "[ermaozi/get_subscribe] 🇫🇷[www.v2nodes.com] vless-FR-1..."
-      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU"
-      - "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #10"
-      - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 4"
-      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-9..."
-      - "[ermaozi/get_subscribe] 🇪🇸 西班牙 | ESP"
       - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #7"
-      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU #6"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #1"
       - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 2"
-      - "[ermaozi/get_subscribe] 🇫🇮[www.v2nodes.com] vless-FI-1... #1"
-      - "[ermaozi/get_subscribe] 🇭🇰 香港 | HKG #2"
-      - "[ermaozi/get_subscribe] 🇦🇹_AT_奥地利->🇺🇸_US_美国"
-      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #5"
+      - "[ermaozi/get_subscribe] 🇨🇳_CN_中国->🇺🇸_US_美国"
+      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] ss-SG-1559..."
+      - "[ermaozi/get_subscribe] 🇲🇩[www.v2nodes.com] vless-MD-4..."
+      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #13"
+      - "[ermaozi/get_subscribe] 🇬🇧[www.v2nodes.com] vless-GB-1... #5"
+      - "[ermaozi/get_subscribe] 🇬🇧 英国 | GBR #1"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #16"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #11"
+      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #3"
+      - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU 3"
+      - "[ermaozi/get_subscribe] 🇺🇦[www.v2nodes.com] ss-UA-1603..."
+      - "[ermaozi/get_subscribe] 🏳[www.v2nodes.com] vless- #11"
+      - "[ermaozi/get_subscribe] 🇫🇷[www.v2nodes.com] vless-FR-1... #2"
+      - "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #9"
+      - "[ermaozi/get_subscribe] 🇸🇬[www.v2nodes.com] vless-SG-9..."
+      - "[ermaozi/get_subscribe] 🇳🇱[www.v2nodes.com] vless-NL-1... #9"
+      - "[ermaozi/get_subscribe] 🇳🇴 挪威 | NOR 3"
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #18"
+      - "[ermaozi/get_subscribe] 🇯🇵[www.v2nodes.com] ss-JP-1544..."
+      - "[ermaozi/get_subscribe] 🇺🇸 美国 | USA #14"
+      - "[ermaozi/get_subscribe] 🇰🇷[www.v2nodes.com] ss-KR-1185..."
+      - "[ermaozi/get_subscribe] 🇨🇱[www.v2nodes.com] ss-CL-1564..."
+      - "[ermaozi/get_subscribe] 🇪🇬[www.v2nodes.com] ss-EG-1599..."
+      - "[ermaozi/get_subscribe] 🇹🇭[www.v2nodes.com] vless-TH-1... #1"
+      - "[ermaozi/get_subscribe] 🇳🇱 荷兰 | NLD"
+      - "[ermaozi/get_subscribe] 🇸🇬 新加坡 | SGP"
       - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #3"
-      - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] vless-SG #4"
-      - "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] vless- #3"
+      - "[peasoft/NoMoreWalls] 🇬🇧[www.v2nodes.com] vless-GB-1..."
+      - "[peasoft/NoMoreWalls] 🇭🇰[www.v2nodes.com] vless-HK-1... #4"
+      - "[peasoft/NoMoreWalls] 🇮🇱[www.v2nodes.com] vless-IL-1..."
       - "[peasoft/NoMoreWalls] 🇹🇭[www.v2nodes.com] vless-TH-1... #1"
-      - "[peasoft/NoMoreWalls] 🇪🇬[www.v2nodes.com] ss-EG-1599..."
-      - "[peasoft/NoMoreWalls] 🇬🇧[www.v2nodes.com] ss-GB-1247..."
-      - "[peasoft/NoMoreWalls] 🇰🇷[www.v2nodes.com] ss-KR-1185..."
-      - "[peasoft/NoMoreWalls] 🇵🇭[www.v2nodes.com] ss-PH-1540..."
-      - "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] ss- #2"
-      - "[peasoft/NoMoreWalls] 🇸🇬[www.v2nodes.com] ss-SG-1559..."
-      - "[peasoft/NoMoreWalls] 🇺🇦[www.v2nodes.com] ss-UA-1603..."
-      - "[peasoft/NoMoreWalls] 🇫🇷[www.v2nodes.com] trojan-FR-... #1"
-      - "[peasoft/NoMoreWalls] 🇳🇱[www.v2nodes.com] trojan-NL-... #1"
-      - "[peasoft/NoMoreWalls] 🇹🇼[www.v2nodes.com] trojan-TW-..."
-      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #16"
+      - "[peasoft/NoMoreWalls] 🇹🇼[www.v2nodes.com] vless-TW-1..."
+      - "[peasoft/NoMoreWalls] 🇳🇱[www.v2nodes.com] trojan-NL-..."
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #5"
+      - "[peasoft/NoMoreWalls] 🇸🇪 瑞典 | SWE #1"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA 3"
   -
     name: "PROXY"
     type: "select"
