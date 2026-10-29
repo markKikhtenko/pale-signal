@@ -1072,7 +1072,8 @@ def proxy_to_vless_uri(proxy: dict) -> str:
 
 def dedupe_and_name(proxies: list[dict]) -> list[dict]:
     seen_keys: dict[str, dict] = {}
-    used_names: dict[str, int] = {}
+    used_names: set[str] = set()
+    next_name_suffixes: dict[str, int] = {}
     result: list[dict] = []
 
     for input_order, proxy in enumerate(proxies):
@@ -1086,9 +1087,15 @@ def dedupe_and_name(proxies: list[dict]) -> list[dict]:
                 existing_sources.append(source_id)
             continue
 
-        count = used_names.get(source_name, 0) + 1
-        used_names[source_name] = count
-        proxy["name"] = source_name if count == 1 else f"{source_name} {count}"
+        suffix = next_name_suffixes.get(source_name, 1)
+        while True:
+            candidate_name = source_name if suffix == 1 else f"{source_name} {suffix}"
+            if candidate_name not in used_names:
+                break
+            suffix += 1
+        next_name_suffixes[source_name] = suffix + 1
+        used_names.add(candidate_name)
+        proxy["name"] = candidate_name
         named_proxy = {"name": proxy.pop("name"), "_sources": [source_id], "_input_order": input_order, **proxy}
         seen_keys[digest] = named_proxy
         result.append(named_proxy)

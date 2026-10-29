@@ -528,6 +528,32 @@ class LanExperimentalTests(unittest.TestCase):
         )
 
 
+class ProductionNamingTests(unittest.TestCase):
+    @staticmethod
+    def proxy(number: int, name: str) -> dict:
+        return {
+            "_source_name": name,
+            "_source_id": f"SOURCE_{number}",
+            "type": "vless",
+            "server": f"node-{number}.example.com",
+            "port": 443,
+            "uuid": str(uuid.UUID(int=number)),
+        }
+
+    def test_numbered_source_names_cannot_collide_with_generated_suffixes(self) -> None:
+        proxies = builder.dedupe_and_name(
+            [
+                self.proxy(1, "node 2"),
+                self.proxy(2, "node"),
+                self.proxy(3, "node"),
+            ]
+        )
+
+        names = [proxy["name"] for proxy in proxies]
+        self.assertEqual(names, ["node 2", "node", "node 3"])
+        self.assertEqual(len(names), len(set(names)))
+
+
 class LanGlobalFastCheckTests(unittest.TestCase):
     def setUp(self) -> None:
         self.proxies = [
