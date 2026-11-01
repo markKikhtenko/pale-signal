@@ -98,6 +98,32 @@ class LanExperimentalTests(unittest.TestCase):
         self.assertTrue(builder.EXPERIMENTAL_SOURCE_IDS)
         self.assertTrue(builder.EXPERIMENTAL_SOURCE_IDS.isdisjoint(production_ids))
 
+    def test_requested_mihomo_yaml_sources_are_registered(self) -> None:
+        sources = {source["id"]: source for source in builder.EXPERIMENTAL_SOURCES}
+        expected = {
+            "F0RC3RUN_BEST_RESULTS": (
+                "F0rc3Run",
+                "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/main/Best-Results/clash.yaml",
+                25,
+                178,
+            ),
+            "PROXYQUEEN_OUTPUT": (
+                "ProxyQueen",
+                "https://raw.githubusercontent.com/lyqnihao/proxy/main/proxyqueen/output.yaml",
+                13,
+                81,
+            ),
+        }
+        for source_id, (name, url, successful, checked) in expected.items():
+            source = sources[source_id]
+            self.assertEqual(source["name"], name)
+            self.assertEqual(source["url"], url)
+            self.assertEqual(source["format"], "clash_yaml")
+            self.assertIs(source["required"], False)
+            self.assertEqual(source["max_imported"], 50)
+            self.assertEqual(source["wireveil_successful"], successful)
+            self.assertEqual(source["wireveil_checked"], checked)
+
     def test_normalized_identity_ignores_case_display_and_service_fields(self) -> None:
         left = {
             "name": "first",
@@ -225,6 +251,7 @@ class LanExperimentalTests(unittest.TestCase):
         self.assertEqual(stats["protocols"], {"vless": 1, "ss": 2, "trojan": 1})
         self.assertEqual(stats["unsupported_protocols"], 3)
         self.assertEqual(stats["invalid"], 1)
+        self.assertEqual(stats["sources"]["MIXED"]["discarded"], 4)
         self.assertEqual(len(config["proxies"]), 4)
         self.assertNotIn("dns", config)
         self.assertNotIn("foreign", {group["name"] for group in config["proxy-groups"]})
@@ -274,7 +301,53 @@ class LanExperimentalTests(unittest.TestCase):
         reverse, reverse_stats = build(list(reversed(proxies)))
         self.assertEqual(forward, reverse)
         self.assertEqual(forward_stats["limited"], 3)
+        self.assertEqual(forward_stats["sources"]["LIMITED"]["discarded"], 3)
         self.assertEqual(reverse_stats["sources"]["LIMITED"]["added"], 2)
+
+    def test_bad_empty_and_unavailable_optional_yaml_sources_do_not_break_build(self) -> None:
+        required = self.source("REQUIRED")
+        malformed = self.yaml_source("MALFORMED")
+        empty = self.yaml_source("EMPTY")
+        unavailable = self.yaml_source("UNAVAILABLE")
+
+        def fetcher(source: dict) -> list[str]:
+            if source["id"] == "REQUIRED":
+                return [self.vless(1)]
+            if source["id"] == "MALFORMED":
+                return ["proxies: ["]
+            if source["id"] == "EMPTY":
+                return [yaml.safe_dump({"proxies": []})]
+            raise OSError("simulated outage")
+
+        with (
+            mock.patch.object(builder, "is_public_remote_server", return_value=True),
+            mock.patch.object(builder, "split_by_country", side_effect=self.mark_non_ru),
+        ):
+            text, stats = builder.build_lan_experimental(
+                [],
+                sources=[required, malformed, empty, unavailable],
+                fetcher=fetcher,
+                now="2026-10-27 12:00:00 МСК",
+                fallback_proxies_by_source={},
+            )
+
+        config = yaml.safe_load(text)
+        self.assertEqual(len(config["proxies"]), 1)
+        self.assertEqual(stats["sources"]["MALFORMED"]["status"], "unavailable")
+        self.assertEqual(
+            stats["sources"]["MALFORMED"]["exclusion_reasons"]["invalid:yaml"],
+            1,
+        )
+        self.assertEqual(stats["sources"]["EMPTY"]["status"], "unavailable")
+        self.assertEqual(
+            stats["sources"]["EMPTY"]["exclusion_reasons"]["source:truncated"],
+            1,
+        )
+        self.assertEqual(stats["sources"]["UNAVAILABLE"]["status"], "unavailable")
+        self.assertEqual(
+            stats["sources"]["UNAVAILABLE"]["exclusion_reasons"]["source:unavailable"],
+            1,
+        )
 
     def test_optional_yaml_outage_uses_last_published_source_pool(self) -> None:
         required = self.source("REQUIRED")
