@@ -423,6 +423,26 @@ EXPERIMENTAL_SOURCES = [
         "audit_https_2_of_2": "28/280",
         "audit_good": 6,
     },
+    {
+        "id": "F0RC3RUN_BEST_RESULTS",
+        "name": "F0rc3Run",
+        "url": "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/main/Best-Results/clash.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "max_imported": 50,
+        "wireveil_successful": 25,
+        "wireveil_checked": 178,
+    },
+    {
+        "id": "PROXYQUEEN_OUTPUT",
+        "name": "ProxyQueen",
+        "url": "https://raw.githubusercontent.com/lyqnihao/proxy/main/proxyqueen/output.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "max_imported": 50,
+        "wireveil_successful": 13,
+        "wireveil_checked": 81,
+    },
 ]
 EXPERIMENTAL_SOURCE_IDS = {source["id"] for source in EXPERIMENTAL_SOURCES}
 
@@ -2923,6 +2943,17 @@ def build_lan_experimental(
             protocol = str(proxy.get("type", "unknown")).casefold()
             protocols[protocol] = protocols.get(protocol, 0) + 1
         source_stats[source_id]["protocols"] = protocols
+        source_stats[source_id]["discarded"] = sum(
+            int(source_stats[source_id][field])
+            for field in (
+                "unsupported_protocols",
+                "invalid",
+                "filtered",
+                "duplicates",
+                "lan_global_overlap",
+                "limited",
+            )
+        )
         experimental_proxies.extend(eligible)
 
     if not experimental_proxies:
@@ -3143,6 +3174,23 @@ def validate_experimental_stats(stats: dict, proxy_count: int | None = None) -> 
         int(sources[source_id].get("limited", 0))
         for source_id in EXPERIMENTAL_SOURCE_IDS
     )
+    for source_id in EXPERIMENTAL_SOURCE_IDS:
+        source = sources[source_id]
+        discarded = sum(
+            int(source.get(field, 0))
+            for field in (
+                "unsupported_protocols",
+                "invalid",
+                "filtered",
+                "duplicates",
+                "lan_global_overlap",
+                "limited",
+            )
+        )
+        if int(source.get("discarded", -1)) != discarded:
+            raise RuntimeError(
+                f"LAN Experimental discarded total is inconsistent for {source_id}"
+            )
     if int(stats.get("unsupported_protocols", unsupported)) != unsupported:
         raise RuntimeError("LAN Experimental unsupported protocol total is inconsistent")
     if int(stats.get("invalid", invalid)) != invalid:
@@ -3175,18 +3223,18 @@ def parse_experimental_stats_from_readme(path: Path = README_FILE) -> dict:
             (
                 line
                 for line in matching_rows
-                if len(line.strip().strip("|").split("|")) == 14
+                if len(line.strip().strip("|").split("|")) == 15
             ),
             None,
         )
         if row is None:
             raise RuntimeError(f"README is missing LAN Experimental source row: {source['name']}")
         cells = [cell.strip().strip("`") for cell in row.strip().strip("|").split("|")]
-        if len(cells) != 14:
+        if len(cells) != 15:
             raise RuntimeError(f"README has an invalid LAN Experimental row: {source['name']}")
         protocols = {}
-        if cells[12] != "-":
-            for item in cells[12].split(","):
+        if cells[13] != "-":
+            for item in cells[13].split(","):
                 protocol, count = item.strip().split(":", 1)
                 protocols[protocol.strip()] = int(count.strip())
         source_stats[source["id"]] = {
@@ -3202,7 +3250,8 @@ def parse_experimental_stats_from_readme(path: Path = README_FILE) -> dict:
             "duplicates": int(cells[8]),
             "lan_global_overlap": int(cells[9]),
             "limited": int(cells[10]),
-            "added": int(cells[11]),
+            "discarded": int(cells[11]),
+            "added": int(cells[12]),
             "protocols": protocols,
             "exclusion_reasons": {},
             "error": "",
@@ -3570,8 +3619,8 @@ def source_table(
 
 def experimental_source_table(experimental_stats: dict) -> str:
     lines = [
-        "| Источник | Статус | Последнее успешное обновление | Получено | Валидных | Неподдерживаемых | Невалидных | Отфильтровано | Дубли | LAN Global | Лимит | Добавлено | Протоколы | Причины исключения |",
-        "|----------|--------|------------------------------|---------:|---------:|------------------:|-----------:|---------------:|-------:|-----------:|------:|---------:|-----------|--------------------|",
+        "| Источник | Статус | Последнее успешное обновление | Загружено | Разобрано | Неподдерживаемых | Невалидных | Отфильтровано | Дубли | LAN Global | Лимит | Отброшено | Добавлено | Протоколы | Причины исключения |",
+        "|----------|--------|------------------------------|-----------:|----------:|------------------:|-----------:|---------------:|-------:|-----------:|------:|----------:|---------:|-----------|--------------------|",
     ]
     stats_by_source = experimental_stats.get("sources", {})
     for source in EXPERIMENTAL_SOURCES:
@@ -3591,7 +3640,8 @@ def experimental_source_table(experimental_stats: dict) -> str:
             f"`{stats.get('unsupported_protocols', 0)}` | `{stats.get('invalid', 0)}` | "
             f"`{stats.get('filtered', 0)}` | `{stats.get('duplicates', 0)}` | "
             f"`{stats.get('lan_global_overlap', 0)}` | `{stats.get('limited', 0)}` | "
-            f"`{stats.get('added', 0)}` | `{protocols}` | `{reasons}` |"
+            f"`{stats.get('discarded', 0)}` | `{stats.get('added', 0)}` | "
+            f"`{protocols}` | `{reasons}` |"
         )
     return "\n".join(lines)
 
@@ -3607,6 +3657,21 @@ def experimental_audit_table() -> str:
         lines.append(
             f"| [{source['name']}]({source['url']}) | "
             f"`{source['audit_https_2_of_2']}` | `{source['audit_good']}` |"
+        )
+    return "\n".join(lines)
+
+
+def experimental_wireveil_audit_table() -> str:
+    lines = [
+        "| Источник из локальной проверки WireVeil Checker | Успешно | Проверено |",
+        "|-------------------------------------------------|---------:|----------:|",
+    ]
+    for source in EXPERIMENTAL_SOURCES:
+        if "wireveil_checked" not in source:
+            continue
+        lines.append(
+            f"| [{source['name']}]({source['url']}) | "
+            f"`{source['wireveil_successful']}` | `{source['wireveil_checked']}` |"
         )
     return "\n".join(lines)
 
@@ -3627,6 +3692,12 @@ def experimental_readme_section(experimental_stats: dict) -> str:
 {experimental_audit_table()}
 
 Эти числа описывают только тот сетевой прогон, а не все узлы источников. Валидный YAML и успешный `mihomo -t` подтверждают совместимость конфигурации, но не гарантируют сетевую доступность узла.
+
+Перед добавлением F0rc3Run и ProxyQueen локальный WireVeil Checker проверял HTTPS-доступ к ChatGPT, Instagram, Spotify, Telegram Web и YouTube:
+
+{experimental_wireveil_audit_table()}
+
+Результаты WireVeil — исторический ориентир на момент локальной проверки, а не гарантия актуальной работоспособности и не live-проверка при сборке.
 
 {experimental_source_table(experimental_stats)}
 {LAN_EXPERIMENTAL_README_END}"""
