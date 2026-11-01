@@ -1,10 +1,10 @@
 # ============================================================
 # Pale Signal - Custom PROXY Domain Rules
 # Purpose: Domains forced through PROXY by OpenClash/Mihomo
-# Version: 2026.10.12-1
+# Version: 2026.11.01-1
 # Created: 2026-10-11T08:12:00+03:00
-# Updated: 2026-10-12T11:25:41+03:00
-# Changes: Added Strava website, mobile app and API routing through PROXY
+# Updated: 2026-11-01
+# Changes: Added Spotify web, auth, API, media and dedicated CDN routing
 # Maintainer: markKikhtenko
 # ============================================================
 # Replace the reserved .invalid placeholder or append real entries;
@@ -52,3 +52,22 @@ payload:
 
   # Strava — website, mobile app and API
   - "+.strava.com"
+
+  # Spotify — Web, Auth, API, Media
+  - "+.spotify.com"
+  - "+.scdn.co"
+  - "+.pscdn.co"
+  - "+.spotifycdn.com"
+  - "+.spotifycdn.net"
+  - "+.spoti.fi"
+  - "+.spotify.link"
+  - "+.spotify-everywhere.com"
+
+  # Spotify Audio/CDN
+  - "audio-ak-spotify-com.akamaized.net"
+  - "audio4-ak-spotify-com.akamaized.net"
+  - "heads-ak-spotify-com.akamaized.net"
+  - "heads4-ak-spotify-com.akamaized.net"
+  - "spotify.com.edgesuite.net"
+  - "spotify.map.fastly.net"
+  - "spotify.map.fastlylb.net"
