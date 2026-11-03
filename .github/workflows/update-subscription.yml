@@ -9,7 +9,7 @@ on:
       - ".github/workflows/update-subscription.yml"
       - "scripts/build_subscription.py"
       - "scripts/check_lan_new_sources.py"
-      - "scripts/test_build_subscription.py"
+      - "scripts/test_*.py"
       - "scripts/verify_lan_experimental.py"
       - "scripts/validate_openclash_module.py"
       - "lan-experimental-stats.json"
