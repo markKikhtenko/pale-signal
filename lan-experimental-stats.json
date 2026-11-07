@@ -10,9 +10,9 @@
       "duplicates": 0,
       "lan_global_overlap": 0,
       "limited": 0,
-      "added": 941,
+      "added": 940,
       "protocols": {
-        "vless": 941
+        "vless": 940
       },
       "exclusion_reasons": {
         "invalid:vless": 3,
@@ -26,11 +26,11 @@
       "discarded": 4
     },
     "MEHRTAT_VLESS": {
-      "received": 33,
-      "valid_format": 32,
+      "received": 60,
+      "valid_format": 58,
       "unsupported_protocols": 0,
       "unsupported_by_protocol": {},
-      "invalid": 1,
+      "invalid": 2,
       "filtered": 0,
       "duplicates": 0,
       "lan_global_overlap": 0,
@@ -40,15 +40,15 @@
         "vless": 9
       },
       "exclusion_reasons": {
-        "invalid:vless": 1,
+        "invalid:vless": 2,
         "source:truncated": 1,
         "source:legacy_pool_fallback": 1
       },
       "status": "fallback",
-      "error": "Mehrtat VLESS: truncated or empty (received=33, required=100; valid=32, required=19)",
+      "error": "Mehrtat VLESS: truncated or empty (received=60, required=100; valid=58, required=16)",
       "last_successful_update": "2026-10-21 09:47 МСК",
       "last_updated": "2026-10-21 09:47 МСК",
-      "discarded": 1
+      "discarded": 2
     },
     "AU1RXX_VERIFIED": {
       "received": 1002,
@@ -74,29 +74,30 @@
     },
     "GO4SHARING_SUB": {
       "received": 13,
-      "valid_format": 9,
-      "unsupported_protocols": 4,
+      "valid_format": 11,
+      "unsupported_protocols": 2,
       "unsupported_by_protocol": {
-        "vmess": 4
+        "vmess": 2
       },
       "invalid": 0,
       "filtered": 0,
       "duplicates": 0,
-      "lan_global_overlap": 0,
+      "lan_global_overlap": 1,
       "limited": 0,
-      "added": 9,
+      "added": 10,
       "protocols": {
-        "trojan": 2,
-        "ss": 7
+        "ss": 9,
+        "trojan": 1
       },
       "exclusion_reasons": {
-        "unsupported:vmess": 4
+        "unsupported:vmess": 2,
+        "overlap:lan_global": 1
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-07 01:50:30 МСК",
-      "last_updated": "2026-11-07 01:50:30 МСК",
-      "discarded": 4
+      "last_successful_update": "2026-11-07 15:33:18 МСК",
+      "last_updated": "2026-11-07 15:33:18 МСК",
+      "discarded": 3
     },
     "RUK1NG001_FREESUB": {
       "received": 500,
@@ -112,13 +113,13 @@
         "ssr": 1
       },
       "invalid": 18,
-      "filtered": 5,
-      "duplicates": 3,
+      "filtered": 0,
+      "duplicates": 2,
       "lan_global_overlap": 2,
       "limited": 0,
-      "added": 24,
+      "added": 30,
       "protocols": {
-        "trojan": 18,
+        "trojan": 24,
         "vless": 5,
         "ss": 1
       },
@@ -132,276 +133,268 @@
         "unsupported:hysteria2": 2,
         "unsupported:ssr": 1,
         "invalid:unsupported_parameter:alterId": 3,
-        "filtered:non_public": 5,
-        "duplicate:experimental": 3,
+        "duplicate:experimental": 2,
         "overlap:lan_global": 2
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-07 01:50:30 МСК",
-      "last_updated": "2026-11-07 01:50:30 МСК",
-      "discarded": 476
+      "last_successful_update": "2026-11-07 15:33:18 МСК",
+      "last_updated": "2026-11-07 15:33:18 МСК",
+      "discarded": 470
     },
     "AWESOME_VPN": {
-      "received": 31,
-      "valid_format": 30,
-      "unsupported_protocols": 1,
+      "received": 50,
+      "valid_format": 45,
+      "unsupported_protocols": 5,
       "unsupported_by_protocol": {
-        "vmess": 1
+        "hysteria2": 5
       },
       "invalid": 0,
       "filtered": 0,
       "duplicates": 1,
-      "lan_global_overlap": 10,
+      "lan_global_overlap": 31,
       "limited": 0,
-      "added": 19,
+      "added": 13,
       "protocols": {
-        "trojan": 1,
-        "ss": 18
+        "vless": 2,
+        "trojan": 3,
+        "ss": 8
       },
       "exclusion_reasons": {
-        "unsupported:vmess": 1,
+        "unsupported:hysteria2": 5,
         "duplicate:experimental": 1,
-        "overlap:lan_global": 10
+        "overlap:lan_global": 31
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-07 01:50:30 МСК",
-      "last_updated": "2026-11-07 01:50:30 МСК",
-      "discarded": 12
+      "last_successful_update": "2026-11-07 15:33:18 МСК",
+      "last_updated": "2026-11-07 15:33:18 МСК",
+      "discarded": 37
     },
     "MISAKA_CHROMEGO_MERGE": {
-      "received": 268,
-      "valid_format": 240,
-      "unsupported_protocols": 28,
+      "received": 286,
+      "valid_format": 259,
+      "unsupported_protocols": 27,
       "unsupported_by_protocol": {
-        "vmess": 28
+        "vmess": 27
       },
       "invalid": 0,
-      "filtered": 2,
-      "duplicates": 129,
+      "filtered": 4,
+      "duplicates": 142,
       "lan_global_overlap": 0,
-      "limited": 59,
+      "limited": 63,
       "added": 50,
       "protocols": {
-        "ss": 36,
-        "trojan": 14
+        "ss": 38,
+        "trojan": 12
       },
       "exclusion_reasons": {
-        "unsupported:vmess": 28,
-        "filtered:ru": 2,
-        "duplicate:experimental": 129,
-        "limited:per_source": 59
+        "unsupported:vmess": 27,
+        "filtered:ru": 4,
+        "duplicate:experimental": 142,
+        "limited:per_source": 63
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-07 01:50:30 МСК",
-      "last_updated": "2026-11-07 01:50:30 МСК",
-      "discarded": 218
+      "last_successful_update": "2026-11-07 15:33:18 МСК",
+      "last_updated": "2026-11-07 15:33:18 МСК",
+      "discarded": 236
     },
     "SUNMIAO4458_FREE_PROXY_AIRPORT": {
-      "received": 29,
-      "valid_format": 21,
-      "unsupported_protocols": 5,
+      "received": 25,
+      "valid_format": 16,
+      "unsupported_protocols": 4,
       "unsupported_by_protocol": {
-        "vmess": 3,
-        "hysteria2": 1,
-        "hysteria": 1
+        "vmess": 2,
+        "hysteria": 1,
+        "hysteria2": 1
       },
-      "invalid": 3,
-      "filtered": 2,
-      "duplicates": 9,
+      "invalid": 5,
+      "filtered": 1,
+      "duplicates": 7,
       "lan_global_overlap": 5,
-      "limited": 0,
-      "added": 5,
-      "protocols": {
-        "vless": 5
-      },
-      "exclusion_reasons": {
-        "unsupported:vmess": 3,
-        "unsupported:hysteria2": 1,
-        "invalid:encryption": 1,
-        "unsupported:hysteria": 1,
-        "invalid:unsupported_parameter:skip-cert-verify": 2,
-        "filtered:ru": 2,
-        "duplicate:experimental": 9,
-        "overlap:lan_global": 5
-      },
-      "status": "ok",
-      "error": "",
-      "last_successful_update": "2026-11-07 01:50:30 МСК",
-      "last_updated": "2026-11-07 01:50:30 МСК",
-      "discarded": 24
-    },
-    "ERMAOZI_GET_SUBSCRIBE": {
-      "received": 356,
-      "valid_format": 219,
-      "unsupported_protocols": 126,
-      "unsupported_by_protocol": {
-        "hysteria2": 57,
-        "anytls": 4,
-        "vmess": 17,
-        "hysteria": 13,
-        "http": 35
-      },
-      "invalid": 11,
-      "filtered": 8,
-      "duplicates": 90,
-      "lan_global_overlap": 57,
-      "limited": 14,
-      "added": 50,
-      "protocols": {
-        "vless": 38,
-        "ss": 6,
-        "trojan": 6
-      },
-      "exclusion_reasons": {
-        "unsupported:hysteria2": 57,
-        "unsupported:anytls": 4,
-        "unsupported:vmess": 17,
-        "unsupported:hysteria": 13,
-        "invalid:unsupported_parameter:skip-cert-verify": 10,
-        "unsupported:http": 35,
-        "invalid:encryption": 1,
-        "filtered:non_public": 1,
-        "filtered:ru": 7,
-        "duplicate:experimental": 90,
-        "overlap:lan_global": 57,
-        "limited:per_source": 14
-      },
-      "status": "ok",
-      "error": "",
-      "last_successful_update": "2026-11-07 01:50:30 МСК",
-      "last_updated": "2026-11-07 01:50:30 МСК",
-      "discarded": 306
-    },
-    "PEASOFT_NOMOREWALLS": {
-      "received": 356,
-      "valid_format": 226,
-      "unsupported_protocols": 128,
-      "unsupported_by_protocol": {
-        "vmess": 14,
-        "hysteria": 6,
-        "hysteria2": 43,
-        "anytls": 1,
-        "http": 63,
-        "wireguard": 1
-      },
-      "invalid": 2,
-      "filtered": 9,
-      "duplicates": 195,
-      "lan_global_overlap": 19,
       "limited": 0,
       "added": 3,
       "protocols": {
         "vless": 3
       },
       "exclusion_reasons": {
-        "unsupported:vmess": 14,
-        "unsupported:hysteria": 6,
-        "unsupported:hysteria2": 43,
-        "unsupported:anytls": 1,
-        "invalid:unsupported_parameter:xudp": 2,
-        "unsupported:http": 63,
-        "unsupported:wireguard": 1,
-        "filtered:non_public": 1,
-        "filtered:ru": 8,
-        "duplicate:experimental": 195,
-        "overlap:lan_global": 19
+        "unsupported:vmess": 2,
+        "invalid:password": 1,
+        "invalid:unsupported_parameter:skip-cert-verify": 4,
+        "unsupported:hysteria": 1,
+        "unsupported:hysteria2": 1,
+        "filtered:ru": 1,
+        "duplicate:experimental": 7,
+        "overlap:lan_global": 5
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-07 01:50:30 МСК",
-      "last_updated": "2026-11-07 01:50:30 МСК",
-      "discarded": 353
+      "last_successful_update": "2026-11-07 15:33:18 МСК",
+      "last_updated": "2026-11-07 15:33:18 МСК",
+      "discarded": 22
+    },
+    "ERMAOZI_GET_SUBSCRIBE": {
+      "received": 366,
+      "valid_format": 256,
+      "unsupported_protocols": 96,
+      "unsupported_by_protocol": {
+        "anytls": 7,
+        "hysteria2": 43,
+        "hysteria": 8,
+        "vmess": 15,
+        "http": 23
+      },
+      "invalid": 14,
+      "filtered": 10,
+      "duplicates": 149,
+      "lan_global_overlap": 52,
+      "limited": 0,
+      "added": 45,
+      "protocols": {
+        "vless": 44,
+        "ss": 1
+      },
+      "exclusion_reasons": {
+        "invalid:unsupported_parameter:skip-cert-verify": 11,
+        "unsupported:anytls": 7,
+        "unsupported:hysteria2": 43,
+        "unsupported:hysteria": 8,
+        "unsupported:vmess": 15,
+        "unsupported:http": 23,
+        "invalid:encryption": 2,
+        "invalid:uuid": 1,
+        "filtered:non_public": 1,
+        "filtered:ru": 9,
+        "duplicate:experimental": 149,
+        "overlap:lan_global": 52
+      },
+      "status": "ok",
+      "error": "",
+      "last_successful_update": "2026-11-07 15:33:18 МСК",
+      "last_updated": "2026-11-07 15:33:18 МСК",
+      "discarded": 321
+    },
+    "PEASOFT_NOMOREWALLS": {
+      "received": 308,
+      "valid_format": 226,
+      "unsupported_protocols": 81,
+      "unsupported_by_protocol": {
+        "vmess": 12,
+        "hysteria": 3,
+        "hysteria2": 40,
+        "anytls": 3,
+        "http": 23
+      },
+      "invalid": 1,
+      "filtered": 8,
+      "duplicates": 218,
+      "lan_global_overlap": 0,
+      "limited": 0,
+      "added": 0,
+      "protocols": {},
+      "exclusion_reasons": {
+        "unsupported:vmess": 12,
+        "unsupported:hysteria": 3,
+        "unsupported:hysteria2": 40,
+        "unsupported:anytls": 3,
+        "unsupported:http": 23,
+        "invalid:encryption": 1,
+        "filtered:non_public": 1,
+        "filtered:ru": 7,
+        "duplicate:experimental": 218
+      },
+      "status": "ok",
+      "error": "",
+      "last_successful_update": "2026-11-07 15:33:18 МСК",
+      "last_updated": "2026-11-07 15:33:18 МСК",
+      "discarded": 308
     },
     "F0RC3RUN_BEST_RESULTS": {
-      "received": 252,
-      "valid_format": 215,
-      "unsupported_protocols": 37,
+      "received": 235,
+      "valid_format": 205,
+      "unsupported_protocols": 30,
       "unsupported_by_protocol": {
-        "vmess": 37
+        "vmess": 30
       },
       "invalid": 0,
-      "filtered": 0,
-      "duplicates": 95,
+      "filtered": 1,
+      "duplicates": 80,
       "lan_global_overlap": 1,
-      "limited": 69,
+      "limited": 73,
       "added": 50,
       "protocols": {
         "ss": 50
       },
       "exclusion_reasons": {
-        "unsupported:vmess": 37,
-        "duplicate:experimental": 95,
+        "unsupported:vmess": 30,
+        "filtered:ru": 1,
+        "duplicate:experimental": 80,
         "overlap:lan_global": 1,
-        "limited:per_source": 69
+        "limited:per_source": 73
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-07 01:50:30 МСК",
-      "last_updated": "2026-11-07 01:50:30 МСК",
-      "discarded": 202
+      "last_successful_update": "2026-11-07 15:33:18 МСК",
+      "last_updated": "2026-11-07 15:33:18 МСК",
+      "discarded": 185
     },
     "PROXYQUEEN_OUTPUT": {
-      "received": 111,
-      "valid_format": 86,
-      "unsupported_protocols": 14,
+      "received": 120,
+      "valid_format": 104,
+      "unsupported_protocols": 6,
       "unsupported_by_protocol": {
-        "anytls": 6,
-        "vmess": 8
+        "vmess": 6
       },
-      "invalid": 11,
-      "filtered": 5,
-      "duplicates": 27,
-      "lan_global_overlap": 19,
+      "invalid": 10,
+      "filtered": 2,
+      "duplicates": 29,
+      "lan_global_overlap": 31,
       "limited": 0,
-      "added": 35,
+      "added": 42,
       "protocols": {
-        "trojan": 3,
-        "vless": 32
+        "vless": 39,
+        "trojan": 3
       },
       "exclusion_reasons": {
-        "invalid:unsupported_parameter:skip-cert-verify": 11,
-        "unsupported:anytls": 6,
-        "unsupported:vmess": 8,
+        "invalid:unsupported_parameter:skip-cert-verify": 10,
+        "unsupported:vmess": 6,
         "filtered:non_public": 1,
-        "filtered:ru": 4,
-        "duplicate:experimental": 27,
-        "overlap:lan_global": 19
+        "filtered:ru": 1,
+        "duplicate:experimental": 29,
+        "overlap:lan_global": 31
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-07 01:50:30 МСК",
-      "last_updated": "2026-11-07 01:50:30 МСК",
-      "discarded": 76
+      "last_successful_update": "2026-11-07 15:33:18 МСК",
+      "last_updated": "2026-11-07 15:33:18 МСК",
+      "discarded": 78
     }
   },
-  "total": 1195,
-  "auto": 1195,
-  "lan_global_overlap": 113,
-  "duplicates": 549,
-  "unsupported_protocols": 791,
+  "total": 1192,
+  "auto": 1192,
+  "lan_global_overlap": 123,
+  "duplicates": 628,
+  "unsupported_protocols": 699,
   "unsupported_by_protocol": {
-    "vmess": 117,
-    "http": 506,
+    "vmess": 99,
+    "http": 454,
     "mieru": 1,
     "socks5": 28,
-    "anytls": 14,
-    "hysteria2": 103,
+    "anytls": 13,
+    "hysteria2": 91,
     "ssr": 1,
-    "hysteria": 20,
-    "wireguard": 1
+    "hysteria": 12
   },
-  "invalid": 81,
-  "limited": 142,
+  "invalid": 85,
+  "limited": 136,
   "protocols": {
-    "vless": 1033,
-    "trojan": 44,
-    "ss": 118
+    "vless": 1042,
+    "ss": 107,
+    "trojan": 43
   },
   "available_sources": 11,
   "fallback_sources": 3,
-  "updated": "2026-11-07 01:50:30 МСК",
+  "updated": "2026-11-07 15:33:18 МСК",
   "schema_version": 2
 }
