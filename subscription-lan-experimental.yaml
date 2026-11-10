@@ -1,7 +1,7 @@
 # LAN Experimental
-# Version: 2.20261110.172648
+# Version: 2.20261111.015925
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-11-10 17:26:08 МСК
+# Updated: 2026-11-11 01:58:55 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
@@ -15,7 +15,7 @@
 #   - peasoft/NoMoreWalls: https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml
 #   - F0rc3Run: https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/main/Best-Results/clash.yaml
 #   - ProxyQueen: https://raw.githubusercontent.com/lyqnihao/proxy/main/proxyqueen/output.yaml
-# Servers: 920
+# Servers: 958
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -10438,12 +10438,6 @@ proxies:
     sni: "advanceyouremploymentskillsandcareerdevelopmenthub.com"
     type: "trojan"
   -
-    name: "[Misaka-blog/chromego_merge] Türkiye_Istanbul_trojan_10102"
-    password: "happybirthdaydaniel"
-    port: 25267
-    server: "de-bots4.h1cloud.net"
-    type: "trojan"
-  -
     name: "[Misaka-blog/chromego_merge] Denmark_None_ss_1045"
     cipher: "aes-128-gcm"
     password: "shadowsocks"
@@ -10768,49 +10762,44 @@ proxies:
     type: "ss"
     udp: true
   -
-    name: "[sunmiao4458/free-proxy-airport] 🇭🇰 香港 | HKG 2"
-    server: "218.102.64.147"
-    port: 18246
-    type: "vless"
-    uuid: "8e39656e-1b09-4104-95c3-6b80782e7e4e"
-    tls: true
-    servername: "tele-6v9.pages.dev"
-    client-fingerprint: "chrome"
-    network: "ws"
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "tele-6v9.pages.dev"
+    name: "[sunmiao4458/free-proxy-airport] 🇯🇵 日本 | JPN 4"
+    server: "154.36.158.197"
+    port: 8388
+    type: "ss"
+    cipher: "aes-256-gcm"
+    password: "BeaUf9c0AEWH40Pu"
     udp: true
   -
-    name: "[sunmiao4458/free-proxy-airport] 🇨🇦 加拿大 | CAN 2"
-    server: "35.182.245.215"
+    name: "[sunmiao4458/free-proxy-airport] 🇸🇬 新加坡 | SGP 2"
+    server: "sg003.zestapp778.com"
+    port: 443
+    type: "vless"
+    uuid: "e9a8144e-5237-488a-afb1-9ca3d8d54c80"
+    tls: true
+    servername: "sg003.zestapp778.com"
+    client-fingerprint: "chrome"
+    network: "tcp"
+    udp: true
+  -
+    name: "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 9"
+    server: "panel.apexkey.store"
+    port: 2053
+    type: "vless"
+    uuid: "cdb7fa1d-6e7a-467c-da9c-da363c7bf779"
+    tls: true
+    reality-opts:
+      public-key: "DEFJSLdILrvauMpwtpvFZddadpt3rNtv03Dui2EkmRk"
+      short-id: "68"
+    servername: "www.cloudflare.com"
+    client-fingerprint: "chrome"
+    network: "tcp"
+  -
+    name: "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 4"
+    server: "18.226.88.63"
     port: 443
     type: "ss"
     cipher: "aes-256-cfb"
     password: "amazonskr05"
-    udp: true
-  -
-    name: "[sunmiao4458/free-proxy-airport] 🇮🇹 意大利 | ITA 2"
-    server: "202.50.253.27"
-    port: 19999
-    type: "ss"
-    cipher: "aes-256-gcm"
-    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
-    udp: true
-  -
-    name: "[sunmiao4458/free-proxy-airport] 🇹🇼 🇨🇳 台湾 | TWN"
-    server: "t2w2t2w2.bpca2026.top"
-    port: 443
-    type: "trojan"
-    password: "9efd3f19-c7cb-4fa9-8d66-0598043597dc"
-    sni: "t2w2t2w2.bpca2026.top"
-    skip-cert-verify: true
-    network: "ws"
-    ws-opts:
-      path: "/images"
-      headers:
-        Host: "t2w2t2w2.bpca2026.top"
     udp: true
   -
     name: "[sunmiao4458/free-proxy-airport] 🇨🇦 加拿大 | CAN"
@@ -10821,7 +10810,7 @@ proxies:
     password: "amazonskr05"
     udp: true
   -
-    name: "[sunmiao4458/free-proxy-airport] 🇩🇪 德国 | DEU 3"
+    name: "[sunmiao4458/free-proxy-airport] 🇩🇪 德国 | DEU 5"
     server: "193.160.208.240"
     port: 443
     type: "vless"
@@ -10835,20 +10824,85 @@ proxies:
       mode: "auto"
     udp: true
   -
-    name: "[sunmiao4458/free-proxy-airport] 🇰🇿 哈萨克斯坦 | KAZ"
-    server: "185.246.155.91"
-    port: 10403
-    type: "vless"
-    uuid: "dbf3f074-3b18-43f3-b82a-debd8c879c69"
-    tls: true
-    flow: "xtls-rprx-vision"
-    reality-opts:
-      public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
-      short-id: "6859f5b59e55aa30"
-    servername: "www.apple.com"
-    client-fingerprint: "chrome"
-    network: "tcp"
+    name: "[sunmiao4458/free-proxy-airport] 🇮🇪 爱尔兰 | IRL"
+    server: "146.70.90.198"
+    port: 17456
+    type: "ss"
+    cipher: "aes-128-gcm"
+    password: "881cf39affc5286799a585f1acd24d11"
     udp: true
+  -
+    name: "[sunmiao4458/free-proxy-airport] 🇩🇪 德国 | DEU 6"
+    server: "oztq9osla2ad.dop15.com"
+    port: 26412
+    type: "ss"
+    cipher: "2022-blake3-aes-256-gcm"
+    password: "L9F2GjYbyk6gICuLp2LFmHC0lKaEW7HOA32XTf29C6Y=:OvfxPVBCAsZFpN0pIx9AwgxwxV+U3A7XtRagdUwio+U="
+    udp: true
+  -
+    name: "[sunmiao4458/free-proxy-airport] 🇵🇱 波兰 | POL"
+    server: "cdn-ya.shamanapp.online"
+    port: 443
+    type: "vless"
+    uuid: "40c8a202-4b7f-45a6-b0aa-37db0fac4df8"
+    tls: true
+    alpn:
+      - "h2"
+      - "http/1.1"
+    servername: "cdn-ya.shamanapp.online"
+    client-fingerprint: "firefox"
+    network: "xhttp"
+    xhttp-opts:
+      path: "/media/hls/720p/"
+      host: "cdn-ya.shamanapp.online"
+      mode: "packet-up"
+      no-grpc-header: true
+      sc-max-each-post-bytes: 20000
+      sc-min-posts-interval-ms: 5
+      seq-key: "page"
+      seq-placement: "query"
+      uplink-chunk-size: 20000
+      uplink-data-key: "X-Request-Id"
+      uplink-data-placement: "header"
+      uplink-http-method: "GET"
+      x-padding-bytes: "100-1000"
+      x-padding-header: "X-Cache"
+      x-padding-key: "_dc"
+      x-padding-method: "tokenish"
+      x-padding-obfs-mode: true
+      x-padding-placement: "header"
+    udp: true
+  -
+    name: "[sunmiao4458/free-proxy-airport] 🇫🇷 法国 | FRA 3"
+    server: "151.101.36.2"
+    port: 443
+    type: "vless"
+    uuid: "67cd3349-f789-4cbb-8b91-4b6b1654ce7c"
+    tls: true
+    alpn:
+      - "h3"
+    servername: "accounts.fastly.com"
+    client-fingerprint: "edge"
+    network: "xhttp"
+    xhttp-opts:
+      path: "/"
+      host: "oh4.global.ssl.fastly.net"
+      mode: "auto"
+    udp: true
+  -
+    name: "[sunmiao4458/free-proxy-airport] 🇫🇷 法国 | FRA 2"
+    server: "13.36.165.6"
+    port: 443
+    type: "ss"
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+    udp: true
+  -
+    name: "[ermaozi/get_subscribe] 🇩🇪[www.v2nodes.com] trojan-DE-... #1"
+    password: "happybirthdaydaniel"
+    port: 25267
+    server: "de-bots4.h1cloud.net"
+    type: "trojan"
   -
     name: "[ermaozi/get_subscribe] 🇲🇽 墨西哥 | MEX #1"
     client-fingerprint: "chrome"
@@ -11166,6 +11220,20 @@ proxies:
       headers:
         Host: "speedtest.danfengno1.kdns.fr"
       path: "/danfeng-public-ng3zjr-qba1sq-5pqc-59s5q5st"
+  -
+    name: "[ermaozi/get_subscribe] 🇹🇼 🇨🇳 台湾 | TWN"
+    network: "ws"
+    password: "9efd3f19-c7cb-4fa9-8d66-0598043597dc"
+    port: 443
+    server: "t2w2t2w2.bpca2026.top"
+    skip-cert-verify: true
+    sni: "t2w2t2w2.bpca2026.top"
+    type: "trojan"
+    udp: true
+    ws-opts:
+      headers:
+        Host: "t2w2t2w2.bpca2026.top"
+      path: "/images"
   -
     name: "[ermaozi/get_subscribe] 🇰🇷 KR2@ripaojiedian"
     alpn:
@@ -11503,20 +11571,409 @@ proxies:
         Host: "bhjolq0d0l.flowersgood.top"
       path: "/service/telemetry/045d381f1166/"
   -
-    name: "[ermaozi/get_subscribe] 🇲🇾[www.v2nodes.com] trojan-MY-..."
-    password: "5931134d1cde66bf83a54acdfebe7ab2"
-    port: 443
-    server: "47.250.84.25"
-    type: "trojan"
+    name: "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] vless- #1"
+    network: "ws"
+    port: 80
+    server: "57.129.132.223"
+    servername: "---@External_Net---@External_Net---@External_Net---@External_Net---@External_Net"
+    tls: false
+    type: "vless"
+    uuid: "dbb78c94-9f87-4d7d-b945-2000b60352fd"
+    ws-opts:
+      path: "/vless/"
   -
-    name: "[ermaozi/get_subscribe] 🇦🇹[www.v2nodes.com] ss-AT-1614..."
+    name: "[peasoft/NoMoreWalls] 🇯🇵[www.v2nodes.com] vless-JP-1... #4"
+    client-fingerprint: "unsafe"
+    encryption: "none"
+    network: "ws"
+    port: 443
+    server: "172.64.152.19"
+    servername: "jp3.yohototo.top"
+    tls: true
+    type: "vless"
+    uuid: "4e4f1f70-5e56-4a76-bb9d-db087f4690c4"
+    ws-opts:
+      headers:
+        Host: "jp3.yohototo.top"
+      path: "/tyxyws"
+  -
+    name: "[peasoft/NoMoreWalls] 🇸🇪[www.v2nodes.com] ss-SE-1620..."
     cipher: "chacha20-ietf-poly1305"
-    password: "AdawffFMHymlasRb0VOP3HFf7sTG5sJx"
+    password: "2e555e46dbc421452416834962fd014f"
     port: 8388
-    server: "152.53.1.57"
+    server: "62.182.193.228"
     type: "ss"
   -
-    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 68ms | 029"
+    name: "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-..."
+    password: "5t6i121em5lkmsmk"
+    port: 46977
+    server: "216.128.185.90"
+    sni: "ca001.zestapp778.com"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-... #1"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "216.152.147.48"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-... #2"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "216.152.147.152"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-... #6"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "216.152.147.74"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇨🇭[www.v2nodes.com] trojan-CH-... #1"
+    password: "MiTiVPN"
+    port: 443
+    server: "167.82.64.120"
+    skip-cert-verify: false
+    sni: "firefox.com"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇨🇭[www.v2nodes.com] trojan-CH-... #3"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "208.69.78.158"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪[www.v2nodes.com] trojan-DE-... #2"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "193.108.119.96"
+    sni: "learn.iloverussia2026.com"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇪🇸[www.v2nodes.com] trojan-ES-..."
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "66.163.118.251"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇪🇸[www.v2nodes.com] trojan-ES-... #3"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "66.163.118.40"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇰🇷[www.v2nodes.com] trojan-KR-..."
+    password: "5t6i121em5lkmsmk"
+    port: 48851
+    server: "158.247.255.150"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇳🇱[www.v2nodes.com] trojan-NL-... #2"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "66.163.127.107"
+    type: "trojan"
+  -
+    name: "[peasoft/NoMoreWalls] 🇧🇪 比利时 | BEL #1"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "152.53.100.50"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #1"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "195.201.31.167"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #2"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "172.104.120.92"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #3"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "188.164.248.143"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #4"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "43.174.195.1"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #7"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "139.162.26.8"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #8"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "139.162.61.198"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #10"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "188.255.156.209"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #13"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "193.23.211.139"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇯🇵 日本 | JPN #1"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "200.180.163.38"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇯🇵 日本 | JPN #2"
+    password: "66dff097-fa47-4ae1-8ed8-5e147e564f1c"
+    port: 47040
+    server: "hwzl.fastfly.qzz.io"
+    skip-cert-verify: true
+    sni: "jp1.fastfly.uk"
+    type: "trojan"
+    udp: true
+  -
+    name: "[peasoft/NoMoreWalls] 🇯🇵 日本 | JPN #3"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "13.114.101.22"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇲🇾 马来西亚 | MYS #1"
+    password: "66dff097-fa47-4ae1-8ed8-5e147e564f1c"
+    port: 30323
+    server: "hwzl.fastfly.qzz.io"
+    skip-cert-verify: true
+    sni: "my1.fastfly.uk"
+    type: "trojan"
+    udp: true
+  -
+    name: "[peasoft/NoMoreWalls] 🇵🇭 菲律宾 | PHL #1"
+    password: "66dff097-fa47-4ae1-8ed8-5e147e564f1c"
+    port: 17430
+    server: "hwzl.fastfly.qzz.io"
+    skip-cert-verify: true
+    sni: "flb1.fastfly.uk"
+    type: "trojan"
+    udp: true
+  -
+    name: "[peasoft/NoMoreWalls] 🇸🇬 新加坡 | SGP #4"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "139.162.33.165"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇸🇬 新加坡 | SGP #5"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "139.162.46.201"
+    servername: "us-lax.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "us-lax.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #3"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "179.255.132.76"
+    servername: "us-lax.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "us-lax.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #5"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "saas.sin.fan"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #8"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "179.255.140.28"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #10"
+    client-fingerprint: "random"
+    network: "ws"
+    port: 443
+    server: "179.255.132.123"
+    servername: "eu-central.862400.xyz"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "5b28a0c9-eda3-4c78-b07b-48cbd1670771"
+    ws-opts:
+      headers:
+        Host: "eu-central.862400.xyz"
+      path: "/announcement?ed=2048"
+  -
+    name: "[peasoft/NoMoreWalls] 🇻🇳 越南 | VNM #1"
+    password: "66dff097-fa47-4ae1-8ed8-5e147e564f1c"
+    port: 29470
+    server: "hwzl.fastfly.qzz.io"
+    skip-cert-verify: true
+    sni: "yn1.fastfly.uk"
+    type: "trojan"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇦🇱 AL · Tirana · Shadowsocks · 514ms | 228"
+    type: "ss"
+    server: "130.49.189.158"
+    port: 43558
+    cipher: "chacha20-ietf-poly1305"
+    password: "LNc9h/4NA9Q6ZHNeYHoT5X/fR9aoE9KQR1SWhVDHBog="
+    udp: true
+  -
+    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 104ms | 048"
     type: "ss"
     server: "149.40.57.138"
     port: 19999
@@ -11524,7 +11981,7 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 262ms | 157"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 270ms | 136"
     type: "ss"
     server: "82.38.31.35"
     port: 8080
@@ -11532,7 +11989,7 @@ proxies:
     password: "oZIoA69Q8yhcQV8ka3Pa3A"
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 92ms | 049"
+    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 74ms | 018"
     type: "ss"
     server: "38.121.43.225"
     port: 19999
@@ -11540,7 +11997,7 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 224ms | 097"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 265ms | 109"
     type: "ss"
     server: "178.83.185.156"
     port: 8080
@@ -11548,7 +12005,15 @@ proxies:
     password: "oZIoA69Q8yhcQV8ka3Pa3A"
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 68ms | 027"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 275ms | 159"
+    type: "ss"
+    server: "82.38.31.203"
+    port: 8080
+    cipher: "chacha20-ietf-poly1305"
+    password: "k1dBOmOB4oqi7Ump37a1bQ"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 74ms | 020"
     type: "ss"
     server: "38.22.17.219"
     port: 19999
@@ -11556,7 +12021,7 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Clifton · Shadowsocks · 58ms | 018"
+    name: "[F0rc3Run] 🇺🇸 US · Clifton · Shadowsocks · 109ms | 050"
     type: "ss"
     server: "138.197.89.234"
     port: 28960
@@ -11564,15 +12029,7 @@ proxies:
     password: "DZRy4Q3QH0jUGfKFl2jDCZ"
     udp: true
   -
-    name: "[F0rc3Run] 🇩🇪 DE · Falkenstein · Shadowsocks · 289ms | 171"
-    type: "ss"
-    server: "136.243.249.198"
-    port: 443
-    cipher: "aes-256-gcm"
-    password: "jreo6expr05ujrcj"
-    udp: true
-  -
-    name: "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 17ms | 002"
+    name: "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 82ms | 026"
     type: "ss"
     server: "38.128.66.32"
     port: 19999
@@ -11580,23 +12037,7 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇫🇮 FI · Helsinki · Shadowsocks · 304ms | 178"
-    type: "ss"
-    server: "oztq9osla2ad.dop15.com"
-    port: 26412
-    cipher: "2022-blake3-aes-256-gcm"
-    password: "L9F2GjYbyk6gICuLp2LFmHC0lKaEW7HOA32XTf29C6Y=:OvfxPVBCAsZFpN0pIx9AwgxwxV+U3A7XtRagdUwio+U="
-    udp: true
-  -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 234ms | 130"
-    type: "ss"
-    server: "104.222.183.180"
-    port: 47195
-    cipher: "chacha20-ietf-poly1305"
-    password: "DYVqFDnYoMquRQunXC1xd2FyuDhd7JWs5jtf2eb7VkKLzXgZv8pt8gY1e91TT71V762zRX7MWW4HmjavanYdUF9bij8gG8AP"
-    udp: true
-  -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 223ms | 095"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 264ms | 107"
     type: "ss"
     server: "82.38.31.204"
     port: 8080
@@ -11604,7 +12045,7 @@ proxies:
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     udp: true
   -
-    name: "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 221ms | 090"
+    name: "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 294ms | 177"
     type: "ss"
     server: "57.129.76.233"
     port: 19999
@@ -11612,7 +12053,15 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 26ms | 008"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 262ms | 095"
+    type: "ss"
+    server: "82.38.31.176"
+    port: 8080
+    cipher: "chacha20-ietf-poly1305"
+    password: "k1dBOmOB4oqi7Ump37a1bQ"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 77ms | 024"
     type: "ss"
     server: "38.64.138.135"
     port: 19999
@@ -11620,15 +12069,7 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Naaldwijk · Shadowsocks · 342ms | 190"
-    type: "ss"
-    server: "dns27.m3hrzd.ir"
-    port: 8044
-    cipher: "chacha20-ietf-poly1305"
-    password: "H4JHkHU2pIRZ1sbruQ-p39Grh1z6nxY8"
-    udp: true
-  -
-    name: "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 71ms | 041"
+    name: "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 102ms | 046"
     type: "ss"
     server: "38.91.107.57"
     port: 19999
@@ -11636,7 +12077,7 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 67ms | 026"
+    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 75ms | 022"
     type: "ss"
     server: "38.121.43.18"
     port: 19999
@@ -11644,7 +12085,15 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 231ms | 122"
+    name: "[F0rc3Run] 🇺🇸 US · New York · Shadowsocks · 92ms | 033"
+    type: "ss"
+    server: "198.98.53.130"
+    port: 443
+    cipher: "chacha20-ietf-poly1305"
+    password: "eDfN7SODQceIOmIAbtJJtK"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 257ms | 086"
     type: "ss"
     server: "82.38.31.217"
     port: 8080
@@ -11652,7 +12101,7 @@ proxies:
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     udp: true
   -
-    name: "[F0rc3Run] 🇫🇮 FI · Helsinki · Shadowsocks · 264ms | 159"
+    name: "[F0rc3Run] 🇫🇮 FI · Helsinki · Shadowsocks · 306ms | 185"
     type: "ss"
     server: "2.29.138.56"
     port: 26412
@@ -11660,7 +12109,7 @@ proxies:
     password: "L9F2GjYbyk6gICuLp2LFmHC0lKaEW7HOA32XTf29C6Y=:OvfxPVBCAsZFpN0pIx9AwgxwxV+U3A7XtRagdUwio+U="
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 233ms | 126"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 273ms | 148"
     type: "ss"
     server: "82.38.31.191"
     port: 8080
@@ -11668,7 +12117,7 @@ proxies:
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 292ms | 172"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 263ms | 100"
     type: "ss"
     server: "82.38.31.182"
     port: 8080
@@ -11676,7 +12125,7 @@ proxies:
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 219ms | 089"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 263ms | 103"
     type: "ss"
     server: "82.38.31.181"
     port: 8080
@@ -11684,7 +12133,7 @@ proxies:
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 231ms | 119"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 271ms | 138"
     type: "ss"
     server: "82.38.31.193"
     port: 8080
@@ -11692,7 +12141,7 @@ proxies:
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 93ms | 050"
+    name: "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 55ms | 006"
     type: "ss"
     server: "156.146.38.169"
     port: 443
@@ -11700,7 +12149,15 @@ proxies:
     password: "shadowsocks"
     udp: true
   -
-    name: "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 892ms | 233"
+    name: "[F0rc3Run] 🇩🇪 DE · Düsseldorf · Shadowsocks · 247ms | 079"
+    type: "ss"
+    server: "213.202.208.199"
+    port: 7001
+    cipher: "aes-256-gcm"
+    password: "RexnBgU7EV5ADxG"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 261ms | 091"
     type: "ss"
     server: "185.226.172.8"
     port: 8008
@@ -11708,15 +12165,7 @@ proxies:
     password: "XKFKl2rULjIp74"
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Los Angeles · Shadowsocks · 99ms | 052"
-    type: "ss"
-    server: "23.150.152.38"
-    port: 19999
-    cipher: "aes-256-gcm"
-    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
-    udp: true
-  -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 229ms | 109"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 271ms | 143"
     type: "ss"
     server: "82.38.31.218"
     port: 8080
@@ -11724,7 +12173,7 @@ proxies:
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     udp: true
   -
-    name: "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 253ms | 150"
+    name: "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 279ms | 165"
     type: "ss"
     server: "193.108.118.247"
     port: 19999
@@ -11732,23 +12181,15 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 37ms | 011"
+    name: "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 547ms | 234"
     type: "ss"
-    server: "15.204.233.41"
-    port: 8882
-    cipher: "aes-256-gcm"
-    password: "kDWvXYZoTBcGkC4"
+    server: "173.244.56.9"
+    port: 443
+    cipher: "aes-128-gcm"
+    password: "shadowsocks"
     udp: true
   -
-    name: "[F0rc3Run] 🇰🇷 KR · Seoul · Shadowsocks · 453ms | 216"
-    type: "ss"
-    server: "141.164.45.187"
-    port: 8000
-    cipher: "aes-256-gcm"
-    password: "KixLvKzwjekG00rm"
-    udp: true
-  -
-    name: "[F0rc3Run] 🇬🇧 GB · Slough · Shadowsocks · 211ms | 079"
+    name: "[F0rc3Run] 🇬🇧 GB · Slough · Shadowsocks · 249ms | 080"
     type: "ss"
     server: "67.159.56.79"
     port: 8388
@@ -11756,7 +12197,7 @@ proxies:
     password: "~4HT,}bC@heiRai"
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 240ms | 138"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 279ms | 164"
     type: "ss"
     server: "82.38.31.62"
     port: 8080
@@ -11764,7 +12205,15 @@ proxies:
     password: "oZIoA69Q8yhcQV8ka3Pa3A"
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 69ms | 038"
+    name: "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 262ms | 098"
+    type: "ss"
+    server: "149.22.87.241"
+    port: 443
+    cipher: "aes-128-gcm"
+    password: "shadowsocks"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 101ms | 043"
     type: "ss"
     server: "38.91.107.19"
     port: 19999
@@ -11772,7 +12221,23 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 51ms | 015"
+    name: "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 267ms | 121"
+    type: "ss"
+    server: "82.38.31.201"
+    port: 8080
+    cipher: "chacha20-ietf-poly1305"
+    password: "k1dBOmOB4oqi7Ump37a1bQ"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 55ms | 005"
+    type: "ss"
+    server: "156.146.38.170"
+    port: 443
+    cipher: "aes-128-gcm"
+    password: "shadowsocks"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 95ms | 038"
     type: "ss"
     server: "15.204.246.132"
     port: 7307
@@ -11780,7 +12245,7 @@ proxies:
     password: "FoOiGlkAA9yPEGP"
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 219ms | 088"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 278ms | 163"
     type: "ss"
     server: "82.38.31.213"
     port: 8080
@@ -11788,7 +12253,15 @@ proxies:
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 61ms | 021"
+    name: "[F0rc3Run] 🇩🇪 DE · Düsseldorf · Shadowsocks · 384ms | 210"
+    type: "ss"
+    server: "213.202.208.199"
+    port: 5000
+    cipher: "aes-256-gcm"
+    password: "Y6R9pAtvxxzmGC"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 41ms | 001"
     type: "ss"
     server: "167.17.67.171"
     port: 19999
@@ -11796,7 +12269,7 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇪🇸 ES · Madrid · Shadowsocks · 292ms | 173"
+    name: "[F0rc3Run] 🇪🇸 ES · Madrid · Shadowsocks · 326ms | 191"
     type: "ss"
     server: "62.93.179.117"
     port: 19999
@@ -11804,7 +12277,7 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 108ms | 066"
+    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 73ms | 014"
     type: "ss"
     server: "167.88.63.39"
     port: 19999
@@ -11812,7 +12285,15 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 241ms | 139"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 260ms | 090"
+    type: "ss"
+    server: "193.29.139.223"
+    port: 8080
+    cipher: "chacha20-ietf-poly1305"
+    password: "k1dBOmOB4oqi7Ump37a1bQ"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 269ms | 131"
     type: "ss"
     server: "193.29.139.198"
     port: 8080
@@ -11820,7 +12301,7 @@ proxies:
     password: "k1dBOmOB4oqi7Ump37a1bQ"
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 68ms | 032"
+    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 103ms | 047"
     type: "ss"
     server: "149.40.57.135"
     port: 19999
@@ -11828,7 +12309,7 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 52ms | 016"
+    name: "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 94ms | 036"
     type: "ss"
     server: "15.204.247.206"
     port: 4444
@@ -11836,7 +12317,15 @@ proxies:
     password: "pKEW8JPByTVTLtM"
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 236ms | 135"
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 266ms | 115"
+    type: "ss"
+    server: "82.38.31.216"
+    port: 8080
+    cipher: "chacha20-ietf-poly1305"
+    password: "k1dBOmOB4oqi7Ump37a1bQ"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 272ms | 144"
     type: "ss"
     server: "82.38.31.170"
     port: 443
@@ -11844,7 +12333,7 @@ proxies:
     password: "oZIoA69Q8yhcQV8ka3Pa3A"
     udp: true
   -
-    name: "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 215ms | 083"
+    name: "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 254ms | 082"
     type: "ss"
     server: "193.108.117.84"
     port: 19999
@@ -11852,68 +12341,28 @@ proxies:
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇺🇸 US · Seattle · Shadowsocks · 103ms | 060"
+    name: "[F0rc3Run] 🇳🇱 NL · Eygelshoven · Shadowsocks · 274ms | 154"
     type: "ss"
-    server: "38.143.66.146"
+    server: "177.202.64.67"
+    port: 1080
+    cipher: "aes-256-gcm"
+    password: "FJo_V-KMvriDekN0CYkdNH0C"
+    udp: true
+  -
+    name: "[F0rc3Run] 🇨🇦 CA · Montreal · Shadowsocks · 153ms | 069"
+    type: "ss"
+    server: "158.51.121.221"
     port: 19999
     cipher: "aes-256-gcm"
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
     udp: true
   -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 276ms | 165"
+    name: "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 57ms | 007"
     type: "ss"
-    server: "82.38.31.165"
+    server: "156.146.38.168"
     port: 443
-    cipher: "chacha20-ietf-poly1305"
-    password: "oZIoA69Q8yhcQV8ka3Pa3A"
-    udp: true
-  -
-    name: "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 66ms | 023"
-    type: "ss"
-    server: "185.215.132.18"
-    port: 19999
-    cipher: "aes-256-gcm"
-    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
-    udp: true
-  -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 245ms | 144"
-    type: "ss"
-    server: "82.38.31.190"
-    port: 8080
-    cipher: "chacha20-ietf-poly1305"
-    password: "k1dBOmOB4oqi7Ump37a1bQ"
-    udp: true
-  -
-    name: "[F0rc3Run] 🇺🇸 US · Redondo Beach · Shadowsocks · 102ms | 057"
-    type: "ss"
-    server: "38.145.220.193"
-    port: 8443
-    cipher: "2022-blake3-aes-128-gcm"
-    password: "jUbDNsFamcyDfpm+rI3Zyw=="
-    udp: true
-  -
-    name: "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 71ms | 040"
-    type: "ss"
-    server: "38.91.107.188"
-    port: 19999
-    cipher: "aes-256-gcm"
-    password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
-    udp: true
-  -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 235ms | 131"
-    type: "ss"
-    server: "82.38.31.215"
-    port: 8080
-    cipher: "chacha20-ietf-poly1305"
-    password: "k1dBOmOB4oqi7Ump37a1bQ"
-    udp: true
-  -
-    name: "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 227ms | 107"
-    type: "ss"
-    server: "82.38.31.210"
-    port: 8080
-    cipher: "chacha20-ietf-poly1305"
-    password: "k1dBOmOB4oqi7Ump37a1bQ"
+    cipher: "aes-128-gcm"
+    password: "shadowsocks"
     udp: true
   -
     name: "[ProxyQueen] CA加拿大(v2clash.blog 2026-11.10更新)"
@@ -11959,23 +12408,6 @@ proxies:
     grpc-opts:
       grpc-service-name: "node03"
   -
-    name: "[ProxyQueen] CA加拿大(mibei77.com 米贝节点分享) (5)(v2clash.blog 2026-11.10更新)"
-    type: "vless"
-    server: "172.64.152.19"
-    port: 443
-    uuid: "4e4f1f70-5e56-4a76-bb9d-db087f4690c4"
-    udp: true
-    tls: true
-    servername: "jp3.yohototo.top"
-    sni: "jp3.yohototo.top"
-    skip-cert-verify: false
-    client-fingerprint: "unsafe"
-    network: "ws"
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-  -
     name: "[ProxyQueen] DE德国(v2clash.blog 2026-11.10更新)"
     type: "vless"
     server: "2.26.251.236"
@@ -11990,6 +12422,25 @@ proxies:
     reality-opts:
       public-key: "1iVMMhJZgXHRY7tRlR-1kypF0YeaBcB7EjcfHRsYZX4"
       short-id: "4ff31b18d1bd8227"
+  -
+    name: "[ProxyQueen] DE德国(mibei77.com 米贝节点分享) (6)(v2clash.blog 2026-11.10更新)"
+    type: "vless"
+    server: "162.159.249.92"
+    port: 443
+    uuid: "00c82fcb-2c67-465d-8432-6743a1593efa"
+    udp: true
+    tls: true
+    servername: "DD-xx.PAGES.DEV"
+    sni: "DD-xx.PAGES.DEV"
+    skip-cert-verify: false
+    alpn:
+      - "http/1.1"
+    client-fingerprint: "firefox"
+    network: "ws"
+    ws-opts:
+      path: "/?TELEGRAM--MARAMBASHI--MARAMBASHI--MARAMBASHI--MARAMBASHI?ed=2560"
+      headers:
+        Host: "dd-xx.pages.dev"
   -
     name: "[ProxyQueen] DE德国(mibei77.com 米贝节点分享) (9)(v2clash.blog 2026-11.10更新)"
     type: "vless"
@@ -13072,7 +13523,6 @@ proxy-groups:
       - "[Misaka-blog/chromego_merge] Unknown_trojan_1098"
       - "[Misaka-blog/chromego_merge] Germany_Frankfurt am Main_ss_1028"
       - "[Misaka-blog/chromego_merge] Chile_Santiago_trojan_10100"
-      - "[Misaka-blog/chromego_merge] Türkiye_Istanbul_trojan_10102"
       - "[Misaka-blog/chromego_merge] Denmark_None_ss_1045"
       - "[Misaka-blog/chromego_merge] United States_Export_ss_1011"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1018"
@@ -13119,13 +13569,18 @@ proxy-groups:
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1017"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1038"
       - "[Misaka-blog/chromego_merge] Poland_Przemet_ss_1063"
-      - "[sunmiao4458/free-proxy-airport] 🇭🇰 香港 | HKG 2"
-      - "[sunmiao4458/free-proxy-airport] 🇨🇦 加拿大 | CAN 2"
-      - "[sunmiao4458/free-proxy-airport] 🇮🇹 意大利 | ITA 2"
-      - "[sunmiao4458/free-proxy-airport] 🇹🇼 🇨🇳 台湾 | TWN"
+      - "[sunmiao4458/free-proxy-airport] 🇯🇵 日本 | JPN 4"
+      - "[sunmiao4458/free-proxy-airport] 🇸🇬 新加坡 | SGP 2"
+      - "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 9"
+      - "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 4"
       - "[sunmiao4458/free-proxy-airport] 🇨🇦 加拿大 | CAN"
-      - "[sunmiao4458/free-proxy-airport] 🇩🇪 德国 | DEU 3"
-      - "[sunmiao4458/free-proxy-airport] 🇰🇿 哈萨克斯坦 | KAZ"
+      - "[sunmiao4458/free-proxy-airport] 🇩🇪 德国 | DEU 5"
+      - "[sunmiao4458/free-proxy-airport] 🇮🇪 爱尔兰 | IRL"
+      - "[sunmiao4458/free-proxy-airport] 🇩🇪 德国 | DEU 6"
+      - "[sunmiao4458/free-proxy-airport] 🇵🇱 波兰 | POL"
+      - "[sunmiao4458/free-proxy-airport] 🇫🇷 法国 | FRA 3"
+      - "[sunmiao4458/free-proxy-airport] 🇫🇷 法国 | FRA 2"
+      - "[ermaozi/get_subscribe] 🇩🇪[www.v2nodes.com] trojan-DE-... #1"
       - "[ermaozi/get_subscribe] 🇲🇽 墨西哥 | MEX #1"
       - "[ermaozi/get_subscribe] 🇸🇬 新加坡 | SGP #5"
       - "[ermaozi/get_subscribe] 🇭🇰 HK2@ripaojiedian"
@@ -13149,6 +13604,7 @@ proxy-groups:
       - "[ermaozi/get_subscribe] 🇫🇷[www.v2nodes.com] vless-FR-1... #9"
       - "[ermaozi/get_subscribe] 🇱🇻 拉脱维亚 | LVA #1"
       - "[ermaozi/get_subscribe] 🇺🇸 US1@ripaojiedian"
+      - "[ermaozi/get_subscribe] 🇹🇼 🇨🇳 台湾 | TWN"
       - "[ermaozi/get_subscribe] 🇰🇷 KR2@ripaojiedian"
       - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU #8"
       - "[ermaozi/get_subscribe] 🇰🇷 韩国 | KOR #5"
@@ -13174,63 +13630,96 @@ proxy-groups:
       - "[ermaozi/get_subscribe] 🇩🇪[www.v2nodes.com] ss-DE-1616..."
       - "[ermaozi/get_subscribe] 🇨🇦[www.v2nodes.com] trojan-CA-... #4"
       - "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #2"
-      - "[ermaozi/get_subscribe] 🇲🇾[www.v2nodes.com] trojan-MY-..."
-      - "[ermaozi/get_subscribe] 🇦🇹[www.v2nodes.com] ss-AT-1614..."
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 68ms | 029"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 262ms | 157"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 92ms | 049"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 224ms | 097"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 68ms | 027"
-      - "[F0rc3Run] 🇺🇸 US · Clifton · Shadowsocks · 58ms | 018"
-      - "[F0rc3Run] 🇩🇪 DE · Falkenstein · Shadowsocks · 289ms | 171"
-      - "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 17ms | 002"
-      - "[F0rc3Run] 🇫🇮 FI · Helsinki · Shadowsocks · 304ms | 178"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 234ms | 130"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 223ms | 095"
-      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 221ms | 090"
-      - "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 26ms | 008"
-      - "[F0rc3Run] 🇳🇱 NL · Naaldwijk · Shadowsocks · 342ms | 190"
-      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 71ms | 041"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 67ms | 026"
-      - "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 231ms | 122"
-      - "[F0rc3Run] 🇫🇮 FI · Helsinki · Shadowsocks · 264ms | 159"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 233ms | 126"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 292ms | 172"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 219ms | 089"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 231ms | 119"
-      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 93ms | 050"
-      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 892ms | 233"
-      - "[F0rc3Run] 🇺🇸 US · Los Angeles · Shadowsocks · 99ms | 052"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 229ms | 109"
-      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 253ms | 150"
-      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 37ms | 011"
-      - "[F0rc3Run] 🇰🇷 KR · Seoul · Shadowsocks · 453ms | 216"
-      - "[F0rc3Run] 🇬🇧 GB · Slough · Shadowsocks · 211ms | 079"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 240ms | 138"
-      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 69ms | 038"
-      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 51ms | 015"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 219ms | 088"
-      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 61ms | 021"
-      - "[F0rc3Run] 🇪🇸 ES · Madrid · Shadowsocks · 292ms | 173"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 108ms | 066"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 241ms | 139"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 68ms | 032"
-      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 52ms | 016"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 236ms | 135"
-      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 215ms | 083"
-      - "[F0rc3Run] 🇺🇸 US · Seattle · Shadowsocks · 103ms | 060"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 276ms | 165"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 66ms | 023"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 245ms | 144"
-      - "[F0rc3Run] 🇺🇸 US · Redondo Beach · Shadowsocks · 102ms | 057"
-      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 71ms | 040"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 235ms | 131"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 227ms | 107"
+      - "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] vless- #1"
+      - "[peasoft/NoMoreWalls] 🇯🇵[www.v2nodes.com] vless-JP-1... #4"
+      - "[peasoft/NoMoreWalls] 🇸🇪[www.v2nodes.com] ss-SE-1620..."
+      - "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-..."
+      - "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-... #1"
+      - "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-... #2"
+      - "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-... #6"
+      - "[peasoft/NoMoreWalls] 🇨🇭[www.v2nodes.com] trojan-CH-... #1"
+      - "[peasoft/NoMoreWalls] 🇨🇭[www.v2nodes.com] trojan-CH-... #3"
+      - "[peasoft/NoMoreWalls] 🇩🇪[www.v2nodes.com] trojan-DE-... #2"
+      - "[peasoft/NoMoreWalls] 🇪🇸[www.v2nodes.com] trojan-ES-..."
+      - "[peasoft/NoMoreWalls] 🇪🇸[www.v2nodes.com] trojan-ES-... #3"
+      - "[peasoft/NoMoreWalls] 🇰🇷[www.v2nodes.com] trojan-KR-..."
+      - "[peasoft/NoMoreWalls] 🇳🇱[www.v2nodes.com] trojan-NL-... #2"
+      - "[peasoft/NoMoreWalls] 🇧🇪 比利时 | BEL #1"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #1"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #2"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #3"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #4"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #7"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #8"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #10"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #13"
+      - "[peasoft/NoMoreWalls] 🇯🇵 日本 | JPN #1"
+      - "[peasoft/NoMoreWalls] 🇯🇵 日本 | JPN #2"
+      - "[peasoft/NoMoreWalls] 🇯🇵 日本 | JPN #3"
+      - "[peasoft/NoMoreWalls] 🇲🇾 马来西亚 | MYS #1"
+      - "[peasoft/NoMoreWalls] 🇵🇭 菲律宾 | PHL #1"
+      - "[peasoft/NoMoreWalls] 🇸🇬 新加坡 | SGP #4"
+      - "[peasoft/NoMoreWalls] 🇸🇬 新加坡 | SGP #5"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #3"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #5"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #8"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #10"
+      - "[peasoft/NoMoreWalls] 🇻🇳 越南 | VNM #1"
+      - "[F0rc3Run] 🇦🇱 AL · Tirana · Shadowsocks · 514ms | 228"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 104ms | 048"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 270ms | 136"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 74ms | 018"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 265ms | 109"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 275ms | 159"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 74ms | 020"
+      - "[F0rc3Run] 🇺🇸 US · Clifton · Shadowsocks · 109ms | 050"
+      - "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 82ms | 026"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 264ms | 107"
+      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 294ms | 177"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 262ms | 095"
+      - "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 77ms | 024"
+      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 102ms | 046"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 75ms | 022"
+      - "[F0rc3Run] 🇺🇸 US · New York · Shadowsocks · 92ms | 033"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 257ms | 086"
+      - "[F0rc3Run] 🇫🇮 FI · Helsinki · Shadowsocks · 306ms | 185"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 273ms | 148"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 263ms | 100"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 263ms | 103"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 271ms | 138"
+      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 55ms | 006"
+      - "[F0rc3Run] 🇩🇪 DE · Düsseldorf · Shadowsocks · 247ms | 079"
+      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 261ms | 091"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 271ms | 143"
+      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 279ms | 165"
+      - "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 547ms | 234"
+      - "[F0rc3Run] 🇬🇧 GB · Slough · Shadowsocks · 249ms | 080"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 279ms | 164"
+      - "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 262ms | 098"
+      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 101ms | 043"
+      - "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 267ms | 121"
+      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 55ms | 005"
+      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 95ms | 038"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 278ms | 163"
+      - "[F0rc3Run] 🇩🇪 DE · Düsseldorf · Shadowsocks · 384ms | 210"
+      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 41ms | 001"
+      - "[F0rc3Run] 🇪🇸 ES · Madrid · Shadowsocks · 326ms | 191"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 73ms | 014"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 260ms | 090"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 269ms | 131"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 103ms | 047"
+      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 94ms | 036"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 266ms | 115"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 272ms | 144"
+      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 254ms | 082"
+      - "[F0rc3Run] 🇳🇱 NL · Eygelshoven · Shadowsocks · 274ms | 154"
+      - "[F0rc3Run] 🇨🇦 CA · Montreal · Shadowsocks · 153ms | 069"
+      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 57ms | 007"
       - "[ProxyQueen] CA加拿大(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] CA加拿大(mibei77.com 米贝节点分享) (2)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] CA加拿大(mibei77.com 米贝节点分享) (3)(v2clash.blog 2026-11.10更新)"
-      - "[ProxyQueen] CA加拿大(mibei77.com 米贝节点分享) (5)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] DE德国(v2clash.blog 2026-11.10更新)"
+      - "[ProxyQueen] DE德国(mibei77.com 米贝节点分享) (6)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] DE德国(mibei77.com 米贝节点分享) (9)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] DE德国(mibei77.com 米贝节点分享) (10)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] FR法国(mibei77.com 米贝节点分享) (4)(v2clash.blog 2026-11.10更新)"
@@ -14000,7 +14489,6 @@ proxy-groups:
       - "[Misaka-blog/chromego_merge] Unknown_trojan_1098"
       - "[Misaka-blog/chromego_merge] Germany_Frankfurt am Main_ss_1028"
       - "[Misaka-blog/chromego_merge] Chile_Santiago_trojan_10100"
-      - "[Misaka-blog/chromego_merge] Türkiye_Istanbul_trojan_10102"
       - "[Misaka-blog/chromego_merge] Denmark_None_ss_1045"
       - "[Misaka-blog/chromego_merge] United States_Export_ss_1011"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1018"
@@ -14047,13 +14535,18 @@ proxy-groups:
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1017"
       - "[Misaka-blog/chromego_merge] Canada_None_ss_1038"
       - "[Misaka-blog/chromego_merge] Poland_Przemet_ss_1063"
-      - "[sunmiao4458/free-proxy-airport] 🇭🇰 香港 | HKG 2"
-      - "[sunmiao4458/free-proxy-airport] 🇨🇦 加拿大 | CAN 2"
-      - "[sunmiao4458/free-proxy-airport] 🇮🇹 意大利 | ITA 2"
-      - "[sunmiao4458/free-proxy-airport] 🇹🇼 🇨🇳 台湾 | TWN"
+      - "[sunmiao4458/free-proxy-airport] 🇯🇵 日本 | JPN 4"
+      - "[sunmiao4458/free-proxy-airport] 🇸🇬 新加坡 | SGP 2"
+      - "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 9"
+      - "[sunmiao4458/free-proxy-airport] 🇺🇸 美国 | USA 4"
       - "[sunmiao4458/free-proxy-airport] 🇨🇦 加拿大 | CAN"
-      - "[sunmiao4458/free-proxy-airport] 🇩🇪 德国 | DEU 3"
-      - "[sunmiao4458/free-proxy-airport] 🇰🇿 哈萨克斯坦 | KAZ"
+      - "[sunmiao4458/free-proxy-airport] 🇩🇪 德国 | DEU 5"
+      - "[sunmiao4458/free-proxy-airport] 🇮🇪 爱尔兰 | IRL"
+      - "[sunmiao4458/free-proxy-airport] 🇩🇪 德国 | DEU 6"
+      - "[sunmiao4458/free-proxy-airport] 🇵🇱 波兰 | POL"
+      - "[sunmiao4458/free-proxy-airport] 🇫🇷 法国 | FRA 3"
+      - "[sunmiao4458/free-proxy-airport] 🇫🇷 法国 | FRA 2"
+      - "[ermaozi/get_subscribe] 🇩🇪[www.v2nodes.com] trojan-DE-... #1"
       - "[ermaozi/get_subscribe] 🇲🇽 墨西哥 | MEX #1"
       - "[ermaozi/get_subscribe] 🇸🇬 新加坡 | SGP #5"
       - "[ermaozi/get_subscribe] 🇭🇰 HK2@ripaojiedian"
@@ -14077,6 +14570,7 @@ proxy-groups:
       - "[ermaozi/get_subscribe] 🇫🇷[www.v2nodes.com] vless-FR-1... #9"
       - "[ermaozi/get_subscribe] 🇱🇻 拉脱维亚 | LVA #1"
       - "[ermaozi/get_subscribe] 🇺🇸 US1@ripaojiedian"
+      - "[ermaozi/get_subscribe] 🇹🇼 🇨🇳 台湾 | TWN"
       - "[ermaozi/get_subscribe] 🇰🇷 KR2@ripaojiedian"
       - "[ermaozi/get_subscribe] 🇩🇪 德国 | DEU #8"
       - "[ermaozi/get_subscribe] 🇰🇷 韩国 | KOR #5"
@@ -14102,63 +14596,96 @@ proxy-groups:
       - "[ermaozi/get_subscribe] 🇩🇪[www.v2nodes.com] ss-DE-1616..."
       - "[ermaozi/get_subscribe] 🇨🇦[www.v2nodes.com] trojan-CA-... #4"
       - "[ermaozi/get_subscribe] 🇵🇱[www.v2nodes.com] vless-PL-1... #2"
-      - "[ermaozi/get_subscribe] 🇲🇾[www.v2nodes.com] trojan-MY-..."
-      - "[ermaozi/get_subscribe] 🇦🇹[www.v2nodes.com] ss-AT-1614..."
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 68ms | 029"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 262ms | 157"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 92ms | 049"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 224ms | 097"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 68ms | 027"
-      - "[F0rc3Run] 🇺🇸 US · Clifton · Shadowsocks · 58ms | 018"
-      - "[F0rc3Run] 🇩🇪 DE · Falkenstein · Shadowsocks · 289ms | 171"
-      - "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 17ms | 002"
-      - "[F0rc3Run] 🇫🇮 FI · Helsinki · Shadowsocks · 304ms | 178"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 234ms | 130"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 223ms | 095"
-      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 221ms | 090"
-      - "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 26ms | 008"
-      - "[F0rc3Run] 🇳🇱 NL · Naaldwijk · Shadowsocks · 342ms | 190"
-      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 71ms | 041"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 67ms | 026"
-      - "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 231ms | 122"
-      - "[F0rc3Run] 🇫🇮 FI · Helsinki · Shadowsocks · 264ms | 159"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 233ms | 126"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 292ms | 172"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 219ms | 089"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 231ms | 119"
-      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 93ms | 050"
-      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 892ms | 233"
-      - "[F0rc3Run] 🇺🇸 US · Los Angeles · Shadowsocks · 99ms | 052"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 229ms | 109"
-      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 253ms | 150"
-      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 37ms | 011"
-      - "[F0rc3Run] 🇰🇷 KR · Seoul · Shadowsocks · 453ms | 216"
-      - "[F0rc3Run] 🇬🇧 GB · Slough · Shadowsocks · 211ms | 079"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 240ms | 138"
-      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 69ms | 038"
-      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 51ms | 015"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 219ms | 088"
-      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 61ms | 021"
-      - "[F0rc3Run] 🇪🇸 ES · Madrid · Shadowsocks · 292ms | 173"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 108ms | 066"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 241ms | 139"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 68ms | 032"
-      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 52ms | 016"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 236ms | 135"
-      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 215ms | 083"
-      - "[F0rc3Run] 🇺🇸 US · Seattle · Shadowsocks · 103ms | 060"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 276ms | 165"
-      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 66ms | 023"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 245ms | 144"
-      - "[F0rc3Run] 🇺🇸 US · Redondo Beach · Shadowsocks · 102ms | 057"
-      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 71ms | 040"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 235ms | 131"
-      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 227ms | 107"
+      - "[peasoft/NoMoreWalls] 🏳[www.v2nodes.com] vless- #1"
+      - "[peasoft/NoMoreWalls] 🇯🇵[www.v2nodes.com] vless-JP-1... #4"
+      - "[peasoft/NoMoreWalls] 🇸🇪[www.v2nodes.com] ss-SE-1620..."
+      - "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-..."
+      - "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-... #1"
+      - "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-... #2"
+      - "[peasoft/NoMoreWalls] 🇨🇦[www.v2nodes.com] trojan-CA-... #6"
+      - "[peasoft/NoMoreWalls] 🇨🇭[www.v2nodes.com] trojan-CH-... #1"
+      - "[peasoft/NoMoreWalls] 🇨🇭[www.v2nodes.com] trojan-CH-... #3"
+      - "[peasoft/NoMoreWalls] 🇩🇪[www.v2nodes.com] trojan-DE-... #2"
+      - "[peasoft/NoMoreWalls] 🇪🇸[www.v2nodes.com] trojan-ES-..."
+      - "[peasoft/NoMoreWalls] 🇪🇸[www.v2nodes.com] trojan-ES-... #3"
+      - "[peasoft/NoMoreWalls] 🇰🇷[www.v2nodes.com] trojan-KR-..."
+      - "[peasoft/NoMoreWalls] 🇳🇱[www.v2nodes.com] trojan-NL-... #2"
+      - "[peasoft/NoMoreWalls] 🇧🇪 比利时 | BEL #1"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #1"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #2"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #3"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #4"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #7"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #8"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #10"
+      - "[peasoft/NoMoreWalls] 🇩🇪 德国 | DEU #13"
+      - "[peasoft/NoMoreWalls] 🇯🇵 日本 | JPN #1"
+      - "[peasoft/NoMoreWalls] 🇯🇵 日本 | JPN #2"
+      - "[peasoft/NoMoreWalls] 🇯🇵 日本 | JPN #3"
+      - "[peasoft/NoMoreWalls] 🇲🇾 马来西亚 | MYS #1"
+      - "[peasoft/NoMoreWalls] 🇵🇭 菲律宾 | PHL #1"
+      - "[peasoft/NoMoreWalls] 🇸🇬 新加坡 | SGP #4"
+      - "[peasoft/NoMoreWalls] 🇸🇬 新加坡 | SGP #5"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #3"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #5"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #8"
+      - "[peasoft/NoMoreWalls] 🇺🇸 美国 | USA #10"
+      - "[peasoft/NoMoreWalls] 🇻🇳 越南 | VNM #1"
+      - "[F0rc3Run] 🇦🇱 AL · Tirana · Shadowsocks · 514ms | 228"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 104ms | 048"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 270ms | 136"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 74ms | 018"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 265ms | 109"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 275ms | 159"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 74ms | 020"
+      - "[F0rc3Run] 🇺🇸 US · Clifton · Shadowsocks · 109ms | 050"
+      - "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 82ms | 026"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 264ms | 107"
+      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 294ms | 177"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 262ms | 095"
+      - "[F0rc3Run] 🇺🇸 US · Chicago · Shadowsocks · 77ms | 024"
+      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 102ms | 046"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 75ms | 022"
+      - "[F0rc3Run] 🇺🇸 US · New York · Shadowsocks · 92ms | 033"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 257ms | 086"
+      - "[F0rc3Run] 🇫🇮 FI · Helsinki · Shadowsocks · 306ms | 185"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 273ms | 148"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 263ms | 100"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 263ms | 103"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 271ms | 138"
+      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 55ms | 006"
+      - "[F0rc3Run] 🇩🇪 DE · Düsseldorf · Shadowsocks · 247ms | 079"
+      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 261ms | 091"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 271ms | 143"
+      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 279ms | 165"
+      - "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 547ms | 234"
+      - "[F0rc3Run] 🇬🇧 GB · Slough · Shadowsocks · 249ms | 080"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 279ms | 164"
+      - "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 262ms | 098"
+      - "[F0rc3Run] 🇺🇸 US · Miami · Shadowsocks · 101ms | 043"
+      - "[F0rc3Run] 🇽🇽 XX · Shadowsocks · 267ms | 121"
+      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 55ms | 005"
+      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 95ms | 038"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 278ms | 163"
+      - "[F0rc3Run] 🇩🇪 DE · Düsseldorf · Shadowsocks · 384ms | 210"
+      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 41ms | 001"
+      - "[F0rc3Run] 🇪🇸 ES · Madrid · Shadowsocks · 326ms | 191"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 73ms | 014"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 260ms | 090"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 269ms | 131"
+      - "[F0rc3Run] 🇺🇸 US · Atlanta · Shadowsocks · 103ms | 047"
+      - "[F0rc3Run] 🇺🇸 US · Reston · Shadowsocks · 94ms | 036"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 266ms | 115"
+      - "[F0rc3Run] 🇳🇱 NL · Amsterdam · Shadowsocks · 272ms | 144"
+      - "[F0rc3Run] 🇩🇪 DE · Frankfurt am Main · Shadowsocks · 254ms | 082"
+      - "[F0rc3Run] 🇳🇱 NL · Eygelshoven · Shadowsocks · 274ms | 154"
+      - "[F0rc3Run] 🇨🇦 CA · Montreal · Shadowsocks · 153ms | 069"
+      - "[F0rc3Run] 🇺🇸 US · Dallas · Shadowsocks · 57ms | 007"
       - "[ProxyQueen] CA加拿大(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] CA加拿大(mibei77.com 米贝节点分享) (2)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] CA加拿大(mibei77.com 米贝节点分享) (3)(v2clash.blog 2026-11.10更新)"
-      - "[ProxyQueen] CA加拿大(mibei77.com 米贝节点分享) (5)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] DE德国(v2clash.blog 2026-11.10更新)"
+      - "[ProxyQueen] DE德国(mibei77.com 米贝节点分享) (6)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] DE德国(mibei77.com 米贝节点分享) (9)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] DE德国(mibei77.com 米贝节点分享) (10)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] FR法国(mibei77.com 米贝节点分享) (4)(v2clash.blog 2026-11.10更新)"
