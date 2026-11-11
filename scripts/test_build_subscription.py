@@ -100,7 +100,7 @@ class LanExperimentalTests(unittest.TestCase):
 
     def test_requested_mihomo_yaml_sources_are_registered(self) -> None:
         sources = {source["id"]: source for source in builder.EXPERIMENTAL_SOURCES}
-        expected = {
+        historical = {
             "F0RC3RUN_BEST_RESULTS": (
                 "F0rc3Run",
                 "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/main/Best-Results/clash.yaml",
@@ -114,7 +114,7 @@ class LanExperimentalTests(unittest.TestCase):
                 81,
             ),
         }
-        for source_id, (name, url, successful, checked) in expected.items():
+        for source_id, (name, url, successful, checked) in historical.items():
             source = sources[source_id]
             self.assertEqual(source["name"], name)
             self.assertEqual(source["url"], url)
@@ -123,6 +123,48 @@ class LanExperimentalTests(unittest.TestCase):
             self.assertEqual(source["max_imported"], 50)
             self.assertEqual(source["wireveil_successful"], successful)
             self.assertEqual(source["wireveil_checked"], checked)
+
+        requested = {
+            "WUGE0_FREE_NODES": (
+                "wuge0/free-nodes",
+                "https://raw.githubusercontent.com/wuge0/free-nodes/main/output/github.yaml",
+                "src-35a84abc9510",
+            ),
+            "SAKAZXC1400_FREE_VPN_SUB": (
+                "sakazxc1400/free-vpn-sub",
+                "https://raw.githubusercontent.com/sakazxc1400-creator/free-vpn-sub/data/output/clash.yaml",
+                "src-c81c139c5ffc",
+            ),
+            "LEARNLI_FREE_NODES": (
+                "learnLi/free-nodes",
+                "https://raw.githubusercontent.com/learnLi/free-nodes/output/list.meta.cn.yml",
+                "src-ff7d70808999",
+            ),
+            "BILY1258_BEIMI": (
+                "bily1258-design/beimi",
+                "https://raw.githubusercontent.com/bily1258-design/beimi/main/output/clash.yaml",
+                "src-1dee69e6b722",
+            ),
+            "DELTA_KRONECKER_V2RAY_CONFIG": (
+                "Delta-Kronecker/V2ray-Config",
+                "https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/batches/clash/batch_001.yaml",
+                "src-02bc600d947e",
+            ),
+            "HEZHANLEIOK_FREESUB": (
+                "hezhanleiok/freesub",
+                "https://raw.githubusercontent.com/hezhanleiok/freesub/main/output/clash.yaml",
+                "src-4976d10292c6",
+            ),
+        }
+        production_ids = {source["id"] for source in builder.SOURCES}
+        for source_id, (name, url, wireveil_source_id) in requested.items():
+            source = sources[source_id]
+            self.assertEqual(source["name"], name)
+            self.assertEqual(source["url"], url)
+            self.assertEqual(source["format"], "clash_yaml")
+            self.assertIs(source["required"], False)
+            self.assertEqual(source["wireveil_source_id"], wireveil_source_id)
+            self.assertNotIn(source_id, production_ids)
 
     def test_normalized_identity_ignores_case_display_and_service_fields(self) -> None:
         left = {
@@ -256,6 +298,216 @@ class LanExperimentalTests(unittest.TestCase):
         self.assertNotIn("dns", config)
         self.assertNotIn("foreign", {group["name"] for group in config["proxy-groups"]})
         self.assertTrue(all(proxy["name"].startswith("[MIXED] ") for proxy in config["proxies"]))
+
+    def test_wireveil_allowlist_imports_good_and_partial_only(self) -> None:
+        source = {
+            **self.yaml_source("WIREVEIL"),
+            "wireveil_source_id": "src-test",
+        }
+        good = {
+            "name": "good",
+            "type": "vless",
+            "server": "good.example.com",
+            "port": 443,
+            "uuid": str(uuid.UUID(int=1)),
+            "network": "tcp",
+            "tls": True,
+        }
+        partial = {
+            "name": "partial",
+            "type": "trojan",
+            "server": "partial.example.com",
+            "port": 443,
+            "password": "partial-secret",
+        }
+        unsupported = {
+            "name": "unsupported",
+            "type": "vmess",
+            "server": "unsupported.example.com",
+            "port": 443,
+            "uuid": str(uuid.UUID(int=2)),
+        }
+        unchecked = {
+            "name": "unchecked",
+            "type": "ss",
+            "server": "unchecked.example.com",
+            "port": 443,
+            "cipher": "aes-128-gcm",
+            "password": "must-not-be-imported",
+        }
+        allowlist = {
+            "schema_version": 1,
+            "report": {
+                "good": 2,
+                "partial": 1,
+                "selected_good": 1,
+                "selected_partial": 1,
+                "protocol_excluded": 1,
+            },
+            "candidates": [
+                {
+                    "node_id": builder.wireveil_proxy_node_id(good),
+                    "status": "good",
+                    "protocol": "vless",
+                    "source_ids": ["src-test"],
+                },
+                {
+                    "node_id": builder.wireveil_proxy_node_id(partial),
+                    "status": "partial",
+                    "protocol": "trojan",
+                    "source_ids": ["src-test"],
+                },
+                {
+                    "node_id": builder.wireveil_proxy_node_id(unsupported),
+                    "status": "good",
+                    "protocol": "vmess",
+                    "source_ids": ["src-test"],
+                },
+            ],
+        }
+
+        with (
+            mock.patch.object(builder, "is_public_remote_server", return_value=True),
+            mock.patch.object(builder, "split_by_country", side_effect=self.mark_non_ru),
+        ):
+            text, stats = builder.build_lan_experimental(
+                [],
+                sources=[source],
+                fetcher=lambda _source: [
+                    yaml.safe_dump(
+                        {"proxies": [partial, unchecked, unsupported, good]},
+                        allow_unicode=True,
+                        sort_keys=False,
+                    )
+                ],
+                now="2026-11-11 14:14:45 МСК",
+                fallback_proxies_by_source={},
+                wireveil_allowlist=allowlist,
+            )
+
+        config = yaml.safe_load(text)
+        self.assertEqual([proxy["name"] for proxy in config["proxies"]], [
+            "[WIREVEIL] good",
+            "[WIREVEIL] partial",
+        ])
+        source_stats = stats["sources"]["WIREVEIL"]
+        self.assertEqual(source_stats["wireveil_found"], 3)
+        self.assertEqual(source_stats["wireveil_good"], 2)
+        self.assertEqual(source_stats["wireveil_partial"], 1)
+        self.assertEqual(source_stats["wireveil_protocol_excluded"], 1)
+        self.assertEqual(source_stats["wireveil_unverified"], 1)
+        self.assertEqual(source_stats["discarded"], 2)
+        self.assertEqual(stats["wireveil"]["candidates"], 2)
+        self.assertEqual(stats["wireveil"]["found"], 2)
+        self.assertEqual(stats["wireveil"]["matched_protocol_excluded"], 1)
+        self.assertNotIn("must-not-be-imported", text)
+
+    def test_wireveil_node_id_requires_exact_parameters_but_ignores_name(self) -> None:
+        proxy = {
+            "name": "first name",
+            "type": "ss",
+            "server": "one.example.com",
+            "port": 443,
+            "cipher": "aes-128-gcm",
+            "password": "exact-secret",
+            "plugin-opts": {"host": "cdn.example.com", "mode": "websocket"},
+        }
+        renamed = {**proxy, "name": "cosmetic rename"}
+        changed_secret = {**proxy, "password": "guessed-secret"}
+        changed_options = {
+            **proxy,
+            "plugin-opts": {"host": "other.example.com", "mode": "websocket"},
+        }
+        self.assertEqual(
+            builder.wireveil_proxy_node_id(proxy),
+            builder.wireveil_proxy_node_id(renamed),
+        )
+        self.assertNotEqual(
+            builder.wireveil_proxy_node_id(proxy),
+            builder.wireveil_proxy_node_id(changed_secret),
+        )
+        self.assertNotEqual(
+            builder.wireveil_proxy_node_id(proxy),
+            builder.wireveil_proxy_node_id(changed_options),
+        )
+
+    def test_default_build_preserves_published_pool_and_fetches_wireveil_source(self) -> None:
+        old_source = self.yaml_source("OLD")
+        wireveil_source = {
+            **self.yaml_source("WIREVEIL"),
+            "wireveil_source_id": "src-test",
+        }
+        retained = {
+            "type": "ss",
+            "server": "retained.example.com",
+            "port": 443,
+            "cipher": "aes-128-gcm",
+            "password": "retained-secret",
+            "_source_name": "[OLD] retained",
+            "_source_id": "OLD",
+        }
+        added = {
+            "name": "added",
+            "type": "trojan",
+            "server": "added.example.com",
+            "port": 443,
+            "password": "added-secret",
+        }
+        allowlist = {
+            "schema_version": 1,
+            "report": {
+                "good": 1,
+                "partial": 0,
+                "selected_good": 1,
+                "selected_partial": 0,
+                "protocol_excluded": 0,
+            },
+            "candidates": [
+                {
+                    "node_id": builder.wireveil_proxy_node_id(added),
+                    "status": "good",
+                    "protocol": "trojan",
+                    "source_ids": ["src-test"],
+                }
+            ],
+        }
+        fetched: list[str] = []
+
+        def fetcher(source: dict) -> list[str]:
+            fetched.append(source["id"])
+            return [yaml.safe_dump({"proxies": [added]}, sort_keys=False)]
+
+        with (
+            mock.patch.object(
+                builder,
+                "EXPERIMENTAL_SOURCES",
+                [old_source, wireveil_source],
+            ),
+            mock.patch.object(
+                builder,
+                "load_experimental_source_fallbacks",
+                return_value={"OLD": [retained], "WIREVEIL": [], "__legacy__": []},
+            ),
+            mock.patch.object(builder, "is_public_remote_server", return_value=True),
+            mock.patch.object(builder, "split_by_country", side_effect=self.mark_non_ru),
+        ):
+            text, stats = builder.build_lan_experimental(
+                [],
+                fetcher=fetcher,
+                now="2026-11-11 14:14:45 МСК",
+                baseline_stats={"sources": {"OLD": {"added": 1}}},
+                wireveil_allowlist=allowlist,
+            )
+
+        config = yaml.safe_load(text)
+        self.assertEqual(fetched, ["WIREVEIL"])
+        self.assertEqual(
+            [proxy["name"] for proxy in config["proxies"]],
+            ["[OLD] retained", "[WIREVEIL] added"],
+        )
+        self.assertEqual(stats["sources"]["OLD"]["status"], "preserved")
+        self.assertEqual(stats["sources"]["OLD"]["added"], 1)
+        self.assertEqual(stats["sources"]["WIREVEIL"]["added"], 1)
 
     def test_protocol_identity_preserves_different_ss_and_trojan_credentials(self) -> None:
         common = {"server": "one.example.com", "port": 443}

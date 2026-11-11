@@ -1,7 +1,7 @@
 # LAN Experimental
-# Version: 2.20261111.015925
+# Version: 2.20261111.150922
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-11-11 01:58:55 МСК
+# Updated: 2026-11-11 15:09:13 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
@@ -15,7 +15,13 @@
 #   - peasoft/NoMoreWalls: https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml
 #   - F0rc3Run: https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/main/Best-Results/clash.yaml
 #   - ProxyQueen: https://raw.githubusercontent.com/lyqnihao/proxy/main/proxyqueen/output.yaml
-# Servers: 958
+#   - wuge0/free-nodes: https://raw.githubusercontent.com/wuge0/free-nodes/main/output/github.yaml
+#   - sakazxc1400/free-vpn-sub: https://raw.githubusercontent.com/sakazxc1400-creator/free-vpn-sub/data/output/clash.yaml
+#   - learnLi/free-nodes: https://raw.githubusercontent.com/learnLi/free-nodes/output/list.meta.cn.yml
+#   - bily1258-design/beimi: https://raw.githubusercontent.com/bily1258-design/beimi/main/output/clash.yaml
+#   - Delta-Kronecker/V2ray-Config: https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/batches/clash/batch_001.yaml
+#   - hezhanleiok/freesub: https://raw.githubusercontent.com/hezhanleiok/freesub/main/output/clash.yaml
+# Servers: 969
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -12777,6 +12783,151 @@ proxies:
     network: "ws"
     ws-opts:
       path: "/"
+  -
+    name: "[wuge0/free-nodes] 🇨🇦CA-35.182.245.215-0661"
+    type: "ss"
+    server: "35.182.245.215"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  -
+    name: "[sakazxc1400/free-vpn-sub] 135. 🇮🇪 Ирландия · ss · 291ms · 8ч"
+    type: "ss"
+    server: "18.202.232.173"
+    port: 8388
+    cipher: "chacha20-ietf-poly1305"
+    password: "KoJrr14BKAiBUHEoWHFsAVrNzbNVzjKN"
+    udp: true
+  -
+    name: "[sakazxc1400/free-vpn-sub] 153. 🇦🇺 Австралия · trojan · 858ms · 40ч"
+    type: "trojan"
+    server: "au001.zestapp778.com"
+    port: 54374
+    password: "5t6i121em5lkmsmk"
+    udp: true
+    tls: true
+    sni: "au001.zestapp778.com"
+    client-fingerprint: "chrome"
+    network: "tcp"
+  -
+    name: "[learnLi/free-nodes] 未知 VLESS-101 | free-nodes"
+    alpn:
+      - "h2"
+      - "http/1.1"
+    network: "xhttp"
+    port: 443
+    server: "cf.090227.xyz"
+    servername: "917ebe12s226.kuback.top"
+    skip-cert-verify: false
+    tfo: false
+    tls: true
+    type: "vless"
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    xhttp-opts:
+      host: "917ebe12s226.kuback.top"
+      path: "7205e56880b040369cf207ebfb8a6c81"
+      sc-max-each-post-bytes: "500000-1000000"
+      sc-min-posts-interval-ms: "30-80"
+      x-padding-bytes: "100-1000"
+      x-padding-header: "X-Forwarded-Uri"
+      x-padding-key: "_"
+      x-padding-method: "tokenish"
+      x-padding-obfs-mode: true
+      x-padding-placement: "queryInHeader"
+  -
+    name: "[learnLi/free-nodes] 未知 VLESS-73 | free-nodes"
+    alpn:
+      - "h2"
+      - "http/1.1"
+    client-fingerprint: "firefox"
+    network: "xhttp"
+    port: 443
+    server: "s2671.ccgfw.online"
+    servername: "u695098u75daf4ads2670.xxti.top"
+    skip-cert-verify: false
+    tfo: false
+    tls: true
+    type: "vless"
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    xhttp-opts:
+      host: "u695098u75daf4ads2670.xxti.top"
+      path: "85aca95c341ba5fe3245271db20116aa"
+  -
+    name: "[learnLi/free-nodes] 🇫🇷 法国 | FRA #6"
+    alpn:
+      - "h3"
+    client-fingerprint: "edge"
+    network: "xhttp"
+    port: 443
+    server: "151.101.36.246"
+    servername: "accounts.fastly.com"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "67cd3349-f789-4cbb-8b91-4b6b1654ce7c"
+    xhttp-opts:
+      host: "ovd12.global.ssl.fastly.net"
+      mode: "auto"
+      path: "/"
+  -
+    name: "[learnLi/free-nodes] 🇯🇵 JP VLESS-29 | free-nodes"
+    alpn:
+      - "h2"
+      - "http/1.1"
+    client-fingerprint: "firefox"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    port: 443
+    server: "s2503.ccgfw.online"
+    servername: "u695098u093da7d1s2502.xxti.top"
+    skip-cert-verify: false
+    tfo: false
+    tls: true
+    type: "vless"
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+  -
+    name: "[learnLi/free-nodes] 🇯🇵 JP VLESS-31 | free-nodes"
+    alpn:
+      - "h2"
+      - "http/1.1"
+    client-fingerprint: "firefox"
+    network: "xhttp"
+    port: 443
+    server: "s2523.fuhuovps.xyz"
+    servername: "u695098u6b0550c8s2521.xxti.top"
+    skip-cert-verify: false
+    tfo: false
+    tls: true
+    type: "vless"
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    xhttp-opts:
+      host: "u695098u6b0550c8s2521.xxti.top"
+      path: "356257a80f246d77bb43c7d9d7f98d05"
+  -
+    name: "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #1"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    port: 443
+    server: "158.247.253.243"
+    skip-cert-verify: true
+    sni: "connectgraduateswithjobopeningsandgrowprofessionally.com"
+    type: "trojan"
+  -
+    name: "[sakazxc1400/free-vpn-sub] 99. 🇫🇮 Финляндия · ss · 412ms · 8ч"
+    type: "ss"
+    server: "213.176.92.148"
+    port: 40647
+    cipher: "aes-256-gcm"
+    password: "DgMywXKqojHXeuXY8hOJaYGPFcjweCIJeD5cdg/cUUY="
+    udp: true
+  -
+    name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1615"
+    type: "trojan"
+    server: "66.163.118.203"
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "blog.discovergreatjobsandadvanceyourcareer.com"
+    skip-cert-verify: true
+    udp: true
 proxy-groups:
   -
     name: "AUTO"
@@ -13740,6 +13891,17 @@ proxy-groups:
       - "[ProxyQueen] US美国(mibei77.com 米贝节点分享) (18)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] US美国(mibei77.com 米贝节点分享) (29)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] US美国(mibei77.com 米贝节点分享) (30)(v2clash.blog 2026-11.10更新)"
+      - "[wuge0/free-nodes] 🇨🇦CA-35.182.245.215-0661"
+      - "[sakazxc1400/free-vpn-sub] 135. 🇮🇪 Ирландия · ss · 291ms · 8ч"
+      - "[sakazxc1400/free-vpn-sub] 153. 🇦🇺 Австралия · trojan · 858ms · 40ч"
+      - "[learnLi/free-nodes] 未知 VLESS-101 | free-nodes"
+      - "[learnLi/free-nodes] 未知 VLESS-73 | free-nodes"
+      - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #6"
+      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-29 | free-nodes"
+      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-31 | free-nodes"
+      - "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #1"
+      - "[sakazxc1400/free-vpn-sub] 99. 🇫🇮 Финляндия · ss · 412ms · 8ч"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1615"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -14706,6 +14868,17 @@ proxy-groups:
       - "[ProxyQueen] US美国(mibei77.com 米贝节点分享) (18)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] US美国(mibei77.com 米贝节点分享) (29)(v2clash.blog 2026-11.10更新)"
       - "[ProxyQueen] US美国(mibei77.com 米贝节点分享) (30)(v2clash.blog 2026-11.10更新)"
+      - "[wuge0/free-nodes] 🇨🇦CA-35.182.245.215-0661"
+      - "[sakazxc1400/free-vpn-sub] 135. 🇮🇪 Ирландия · ss · 291ms · 8ч"
+      - "[sakazxc1400/free-vpn-sub] 153. 🇦🇺 Австралия · trojan · 858ms · 40ч"
+      - "[learnLi/free-nodes] 未知 VLESS-101 | free-nodes"
+      - "[learnLi/free-nodes] 未知 VLESS-73 | free-nodes"
+      - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #6"
+      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-29 | free-nodes"
+      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-31 | free-nodes"
+      - "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #1"
+      - "[sakazxc1400/free-vpn-sub] 99. 🇫🇮 Финляндия · ss · 412ms · 8ч"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1615"
   -
     name: "PROXY"
     type: "select"
