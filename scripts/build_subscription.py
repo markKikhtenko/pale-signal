@@ -443,6 +443,54 @@ EXPERIMENTAL_SOURCES = [
         "wireveil_successful": 13,
         "wireveil_checked": 81,
     },
+    {
+        "id": "WUGE0_FREE_NODES",
+        "name": "wuge0/free-nodes",
+        "url": "https://raw.githubusercontent.com/wuge0/free-nodes/main/output/github.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "wireveil_source_id": "src-35a84abc9510",
+    },
+    {
+        "id": "SAKAZXC1400_FREE_VPN_SUB",
+        "name": "sakazxc1400/free-vpn-sub",
+        "url": "https://raw.githubusercontent.com/sakazxc1400-creator/free-vpn-sub/data/output/clash.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "wireveil_source_id": "src-c81c139c5ffc",
+    },
+    {
+        "id": "LEARNLI_FREE_NODES",
+        "name": "learnLi/free-nodes",
+        "url": "https://raw.githubusercontent.com/learnLi/free-nodes/output/list.meta.cn.yml",
+        "format": "clash_yaml",
+        "required": False,
+        "wireveil_source_id": "src-ff7d70808999",
+    },
+    {
+        "id": "BILY1258_BEIMI",
+        "name": "bily1258-design/beimi",
+        "url": "https://raw.githubusercontent.com/bily1258-design/beimi/main/output/clash.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "wireveil_source_id": "src-1dee69e6b722",
+    },
+    {
+        "id": "DELTA_KRONECKER_V2RAY_CONFIG",
+        "name": "Delta-Kronecker/V2ray-Config",
+        "url": "https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/batches/clash/batch_001.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "wireveil_source_id": "src-02bc600d947e",
+    },
+    {
+        "id": "HEZHANLEIOK_FREESUB",
+        "name": "hezhanleiok/freesub",
+        "url": "https://raw.githubusercontent.com/hezhanleiok/freesub/main/output/clash.yaml",
+        "format": "clash_yaml",
+        "required": False,
+        "wireveil_source_id": "src-4976d10292c6",
+    },
 ]
 EXPERIMENTAL_SOURCE_IDS = {source["id"] for source in EXPERIMENTAL_SOURCES}
 
@@ -525,6 +573,9 @@ LAN_GLOBAL_OUTPUT_FILE = ROOT / "subscription-lan-global.yaml"
 LAN_GLOBAL_FAST_CHECK_OUTPUT_FILE = ROOT / "subscription-lan-global-fast-check.yaml"
 LAN_EXPERIMENTAL_OUTPUT_FILE = ROOT / "subscription-lan-experimental.yaml"
 LAN_EXPERIMENTAL_STATS_FILE = ROOT / "lan-experimental-stats.json"
+LAN_EXPERIMENTAL_WIREVEIL_ALLOWLIST_FILE = (
+    ROOT / "scripts" / "lan_experimental_wireveil_allowlist.json"
+)
 LAN_EXPERIMENTAL_CANDIDATE_DIR = ROOT / ".tools" / "lan-experimental-candidate"
 LAN_EXPERIMENTAL_CANDIDATE_FILE = LAN_EXPERIMENTAL_CANDIDATE_DIR / "subscription-lan-experimental.yaml"
 LAN_EXPERIMENTAL_CANDIDATE_STATS_FILE = LAN_EXPERIMENTAL_CANDIDATE_DIR / "lan-experimental-stats.json"
@@ -2380,6 +2431,122 @@ EXPERIMENTAL_SS_PLUGINS = {
     "jls",
 }
 EXPERIMENTAL_SOURCE_METADATA_FIELDS = {"country", "delay"}
+WIREVEIL_ALLOWED_STATUSES = {"good", "partial"}
+
+
+def wireveil_canonical_proxy(proxy: dict) -> str:
+    """Match WireVeil's node-id canonicalisation exactly."""
+
+    def normalise(value: object) -> object:
+        if isinstance(value, dict):
+            return {
+                str(key): normalise(item)
+                for key, item in sorted(value.items(), key=lambda pair: str(pair[0]))
+            }
+        if isinstance(value, (list, tuple)):
+            return [normalise(item) for item in value]
+        if value is None or isinstance(value, (str, int, float, bool)):
+            return value
+        return str(value)
+
+    payload = normalise({key: value for key, value in proxy.items() if key != "name"})
+    return json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+        default=lambda value: str(value),
+    )
+
+
+def wireveil_proxy_node_id(proxy: dict) -> str:
+    return hashlib.sha256(wireveil_canonical_proxy(proxy).encode("utf-8")).hexdigest()
+
+
+def validate_wireveil_allowlist(payload: object, sources: list[dict]) -> dict:
+    if not isinstance(payload, dict) or int(payload.get("schema_version", -1)) != 1:
+        raise RuntimeError("WireVeil allowlist schema is unsupported")
+    report = payload.get("report")
+    candidates = payload.get("candidates")
+    if not isinstance(report, dict) or not isinstance(candidates, list):
+        raise RuntimeError("WireVeil allowlist is missing report metadata or candidates")
+
+    configured_source_ids = {
+        str(source["wireveil_source_id"])
+        for source in sources
+        if source.get("wireveil_source_id")
+    }
+    by_node: dict[str, dict] = {}
+    by_source: dict[str, dict[str, dict]] = {
+        source_id: {} for source_id in configured_source_ids
+    }
+    status_counts = {status: 0 for status in WIREVEIL_ALLOWED_STATUSES}
+    selected_counts = {status: 0 for status in WIREVEIL_ALLOWED_STATUSES}
+    protocol_excluded = 0
+
+    for candidate in candidates:
+        if not isinstance(candidate, dict):
+            raise RuntimeError("WireVeil allowlist candidate is not a mapping")
+        node_id = str(candidate.get("node_id", "")).strip().casefold()
+        status = str(candidate.get("status", "")).strip().casefold()
+        protocol = str(candidate.get("protocol", "")).strip().casefold()
+        source_ids = candidate.get("source_ids")
+        if re.fullmatch(r"[0-9a-f]{64}", node_id) is None:
+            raise RuntimeError("WireVeil allowlist contains an invalid node_id")
+        if node_id in by_node:
+            raise RuntimeError(f"WireVeil allowlist contains duplicate node_id {node_id}")
+        if status not in WIREVEIL_ALLOWED_STATUSES or not protocol:
+            raise RuntimeError(f"WireVeil allowlist candidate {node_id} is invalid")
+        if not isinstance(source_ids, list) or not source_ids:
+            raise RuntimeError(f"WireVeil allowlist candidate {node_id} has no source IDs")
+        normalized_sources = [str(source_id) for source_id in source_ids]
+        normalized = {
+            "node_id": node_id,
+            "status": status,
+            "protocol": protocol,
+            "source_ids": normalized_sources,
+        }
+        by_node[node_id] = normalized
+        status_counts[status] += 1
+        if protocol in LAN_EXPERIMENTAL_SUPPORTED_PROTOCOLS:
+            selected_counts[status] += 1
+        else:
+            protocol_excluded += 1
+        for source_id in normalized_sources:
+            if source_id in by_source:
+                by_source[source_id][node_id] = normalized
+
+    missing_source_ids = sorted(
+        source_id for source_id, entries in by_source.items() if not entries
+    )
+    if missing_source_ids:
+        raise RuntimeError(
+            f"WireVeil allowlist misses configured source IDs: {missing_source_ids}"
+        )
+    for status in WIREVEIL_ALLOWED_STATUSES:
+        if int(report.get(status, -1)) != status_counts[status]:
+            raise RuntimeError(f"WireVeil allowlist {status} total is inconsistent")
+        if int(report.get(f"selected_{status}", -1)) != selected_counts[status]:
+            raise RuntimeError(f"WireVeil selected {status} total is inconsistent")
+    if int(report.get("protocol_excluded", -1)) != protocol_excluded:
+        raise RuntimeError("WireVeil protocol exclusion total is inconsistent")
+
+    return {
+        "report": copy.deepcopy(report),
+        "by_node": by_node,
+        "by_source": by_source,
+    }
+
+
+def load_wireveil_allowlist(
+    sources: list[dict],
+    path: Path = LAN_EXPERIMENTAL_WIREVEIL_ALLOWLIST_FILE,
+) -> dict:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"could not load WireVeil allowlist from {path}: {exc}") from exc
+    return validate_wireveil_allowlist(payload, sources)
 
 
 def add_exclusion_reason(stats: dict, reason: str, count: int = 1) -> None:
@@ -2483,7 +2650,14 @@ def validate_experimental_yaml_proxy(
     return proxy, None, False
 
 
-def parse_experimental_yaml(text: str, source: dict, stats: dict) -> list[dict]:
+def parse_experimental_yaml(
+    text: str,
+    source: dict,
+    stats: dict,
+    wireveil_candidates: dict[str, dict] | None = None,
+    wireveil_seen_ids: set[str] | None = None,
+    wireveil_protocol_excluded_ids: set[str] | None = None,
+) -> list[dict]:
     try:
         import yaml
     except ImportError as exc:
@@ -2504,12 +2678,31 @@ def parse_experimental_yaml(text: str, source: dict, stats: dict) -> list[dict]:
     parsed: list[dict] = []
     for value in values:
         stats["received"] += 1
+        wireveil_candidate = None
+        wireveil_node_id = ""
+        if wireveil_candidates is not None:
+            if isinstance(value, dict):
+                wireveil_node_id = wireveil_proxy_node_id(value)
+                wireveil_candidate = wireveil_candidates.get(wireveil_node_id)
+            if wireveil_candidate is None:
+                stats["wireveil_unverified"] += 1
+                add_exclusion_reason(stats, "wireveil:not_allowlisted")
+                continue
+            status = wireveil_candidate["status"]
+            stats["wireveil_found"] += 1
+            stats[f"wireveil_{status}"] += 1
+            if wireveil_seen_ids is not None:
+                wireveil_seen_ids.add(wireveil_node_id)
+
         proxy, reason, unsupported = validate_experimental_yaml_proxy(
             value,
             source["id"],
             source["name"],
         )
         if proxy is not None:
+            if wireveil_candidate is not None:
+                proxy["_wireveil_node_id"] = wireveil_node_id
+                proxy["_wireveil_status"] = wireveil_candidate["status"]
             stats["valid_format"] += 1
             parsed.append(proxy)
             continue
@@ -2518,6 +2711,10 @@ def parse_experimental_yaml(text: str, source: dict, stats: dict) -> list[dict]:
             protocol = reason.split(":", 1)[1] if reason else "unknown"
             unsupported_by_protocol = stats.setdefault("unsupported_by_protocol", {})
             unsupported_by_protocol[protocol] = int(unsupported_by_protocol.get(protocol, 0)) + 1
+            if wireveil_candidate is not None:
+                stats["wireveil_protocol_excluded"] += 1
+                if wireveil_protocol_excluded_ids is not None:
+                    wireveil_protocol_excluded_ids.add(wireveil_node_id)
         else:
             stats["invalid"] += 1
         add_exclusion_reason(stats, reason or "invalid:unknown")
@@ -2678,6 +2875,7 @@ def build_lan_experimental(
     now: str | None = None,
     baseline_stats: dict | None = None,
     fallback_proxies_by_source: dict[str, list[dict]] | None = None,
+    wireveil_allowlist: dict | None = None,
 ) -> tuple[str, dict]:
     using_default_sources = sources is None
     sources = EXPERIMENTAL_SOURCES if sources is None else sources
@@ -2691,10 +2889,70 @@ def build_lan_experimental(
     )
     if fallbacks is None:
         fallbacks = {}
+    preserved_source_pools: dict[str, list[dict]] = {}
+    if using_default_sources and fallbacks:
+        for source in sources:
+            if source.get("wireveil_source_id"):
+                continue
+            retained = [
+                copy.deepcopy(proxy)
+                for proxy in fallbacks.get(source["id"], [])
+            ]
+            if retained:
+                preserved_source_pools[source["id"]] = retained
+
+        legacy = [
+            copy.deepcopy(proxy) for proxy in fallbacks.get("__legacy__", [])
+        ]
+        legacy_sources = [
+            source
+            for source in sources
+            if source.get("required", True)
+            and not source.get("wireveil_source_id")
+        ]
+        remaining = len(legacy)
+        offset = 0
+        for index, source in enumerate(legacy_sources):
+            if index == len(legacy_sources) - 1:
+                quota = remaining
+            else:
+                quota = min(
+                    max(0, int(baseline_sources.get(source["id"], {}).get("added", 0))),
+                    remaining,
+                )
+            pool = legacy[offset : offset + quota]
+            for proxy in pool:
+                proxy["_source_id"] = source["id"]
+            if pool:
+                preserved_source_pools[source["id"]] = pool
+            offset += quota
+            remaining -= quota
+
+        for pool in preserved_source_pools.values():
+            for proxy in pool:
+                proxy["_published_preserved"] = True
+    wireveil_sources = [source for source in sources if source.get("wireveil_source_id")]
+    if wireveil_sources:
+        wireveil_data = (
+            load_wireveil_allowlist(sources)
+            if wireveil_allowlist is None
+            else validate_wireveil_allowlist(wireveil_allowlist, sources)
+        )
+    else:
+        wireveil_data = {"report": {}, "by_node": {}, "by_source": {}}
+    wireveil_by_source = wireveil_data["by_source"]
     source_stats = {
         source["id"]: {
             "received": 0,
             "valid_format": 0,
+            "wireveil_allowlisted": len(
+                wireveil_by_source.get(str(source.get("wireveil_source_id", "")), {})
+            ),
+            "wireveil_found": 0,
+            "wireveil_good": 0,
+            "wireveil_partial": 0,
+            "wireveil_protocol_excluded": 0,
+            "wireveil_unverified": 0,
             "unsupported_protocols": 0,
             "unsupported_by_protocol": {},
             "invalid": 0,
@@ -2724,6 +2982,8 @@ def build_lan_experimental(
     required_unavailable = 0
     successful_sources = 0
     fallback_sources = 0
+    wireveil_seen_ids: set[str] = set()
+    wireveil_protocol_excluded_ids: set[str] = set()
 
     def retain_optional_fallback(source: dict, message: str, reason: str) -> None:
         nonlocal fallback_sources
@@ -2732,6 +2992,15 @@ def build_lan_experimental(
         source_stats[source_id]["error"] = message
         add_exclusion_reason(source_stats[source_id], reason)
         if retained:
+            baseline = baseline_sources.get(source_id, {})
+            for field in (
+                "wireveil_found",
+                "wireveil_good",
+                "wireveil_partial",
+                "wireveil_protocol_excluded",
+                "wireveil_unverified",
+            ):
+                source_stats[source_id][field] = int(baseline.get(field, 0))
             source_stats[source_id]["status"] = "fallback"
             fallback_sources += 1
             parsed.extend(retained)
@@ -2741,6 +3010,21 @@ def build_lan_experimental(
     for source in sources:
         source_id = source["id"]
         stats = source_stats[source_id]
+        preserved_pool = preserved_source_pools.get(source_id, [])
+        if preserved_pool:
+            stats["received"] = len(preserved_pool)
+            stats["valid_format"] = len(preserved_pool)
+            stats["status"] = "preserved"
+            stats["last_successful_update"] = str(
+                baseline_sources.get(source_id, {}).get(
+                    "last_successful_update",
+                    baseline_sources.get(source_id, {}).get("last_updated", "-"),
+                )
+            )
+            stats["last_updated"] = stats["last_successful_update"]
+            successful_sources += 1
+            parsed.extend(preserved_pool)
+            continue
         try:
             source_texts = fetcher(source)
         except Exception as exc:
@@ -2758,7 +3042,21 @@ def build_lan_experimental(
         source_parsed: list[dict] = []
         for source_text in source_texts:
             if source.get("format", "share_uri") == "clash_yaml":
-                source_parsed.extend(parse_experimental_yaml(source_text, source, stats))
+                wireveil_source_id = str(source.get("wireveil_source_id", ""))
+                source_parsed.extend(
+                    parse_experimental_yaml(
+                        source_text,
+                        source,
+                        stats,
+                        wireveil_candidates=(
+                            wireveil_by_source[wireveil_source_id]
+                            if wireveil_source_id
+                            else None
+                        ),
+                        wireveil_seen_ids=wireveil_seen_ids,
+                        wireveil_protocol_excluded_ids=wireveil_protocol_excluded_ids,
+                    )
+                )
                 continue
             for line in source_text.splitlines():
                 if not line.strip().startswith("vless://"):
@@ -2780,14 +3078,25 @@ def build_lan_experimental(
             math.ceil(int(baseline.get("received", 0)) * LAN_EXPERIMENTAL_MIN_SOURCE_RATIO),
         )
         minimum_valid = max(
-            1,
+            0 if source.get("wireveil_source_id") else 1,
             math.ceil(int(baseline.get("valid_format", 0)) * LAN_EXPERIMENTAL_MIN_SOURCE_RATIO),
         )
-        if received < minimum_received or valid_format < minimum_valid:
+        minimum_wireveil_found = max(
+            1,
+            math.ceil(
+                int(baseline.get("wireveil_found", 0))
+                * LAN_EXPERIMENTAL_MIN_SOURCE_RATIO
+            ),
+        )
+        wireveil_truncated = bool(source.get("wireveil_source_id")) and (
+            int(stats["wireveil_found"]) < minimum_wireveil_found
+        )
+        if received < minimum_received or valid_format < minimum_valid or wireveil_truncated:
             message = (
                 f"{source['name']}: truncated or empty "
                 f"(received={received}, required={minimum_received}; "
-                f"valid={valid_format}, required={minimum_valid})"
+                f"valid={valid_format}, required={minimum_valid}; "
+                f"WireVeil={stats['wireveil_found']}, required={minimum_wireveil_found})"
             )
             if source.get("required", True):
                 required_failures.append(message)
@@ -2854,8 +3163,12 @@ def build_lan_experimental(
     candidates = [prepare_experimental_proxy(proxy, index) for index, proxy in enumerate(parsed)]
     ensure_unique_names(candidates)
     safe_candidates: list[dict] = []
+    preserved_candidates: list[dict] = []
     for proxy in candidates:
         source_id = proxy["_experimental_owner"]
+        if proxy.get("_published_preserved"):
+            preserved_candidates.append(proxy)
+            continue
         if (
             blocked_proxy_key(proxy) in BLOCKED_PROXY_KEYS
             or blocked_proxy_name(proxy)
@@ -2870,11 +3183,12 @@ def build_lan_experimental(
         safe_candidates.append(proxy)
 
     if not safe_candidates:
-        raise RuntimeError("LAN Experimental has no safe public supported configs")
+        if not preserved_candidates:
+            raise RuntimeError("LAN Experimental has no safe public supported configs")
 
     ru_proxies, non_ru_proxies = split_by_country(safe_candidates)
     del ru_proxies
-    country_candidates: list[dict] = []
+    country_candidates: list[dict] = preserved_candidates.copy()
     for proxy in non_ru_proxies:
         source_id = proxy["_experimental_owner"]
         if proxy.get("_country") == "UNKNOWN":
@@ -2888,6 +3202,12 @@ def build_lan_experimental(
             source_stats[source_id]["filtered"] += 1
             add_exclusion_reason(source_stats[source_id], "filtered:ru")
 
+    country_candidates.sort(
+        key=lambda proxy: (
+            {"good": 1, "partial": 2}.get(proxy.get("_wireveil_status"), 0),
+            int(proxy.get("_input_order", 0)),
+        )
+    )
     unique_candidates: list[dict] = []
     seen_configs: dict[str, dict] = {}
     seen_endpoints: dict[tuple, dict] = {}
@@ -2946,6 +3266,7 @@ def build_lan_experimental(
         source_stats[source_id]["discarded"] = sum(
             int(source_stats[source_id][field])
             for field in (
+                "wireveil_unverified",
                 "unsupported_protocols",
                 "invalid",
                 "filtered",
@@ -2959,6 +3280,12 @@ def build_lan_experimental(
     if not experimental_proxies:
         raise RuntimeError("LAN Experimental has no new proxies after LAN Global deduplication")
 
+    experimental_proxies.sort(
+        key=lambda proxy: (
+            {"good": 1, "partial": 2}.get(proxy.get("_wireveil_status"), 0),
+            int(proxy.get("_input_order", 0)),
+        )
+    )
     config = build_config(experimental_proxies)
     validate_lan_experimental_config(config, lan_global_proxies)
     yaml_text = "\n".join(dump_yaml(config)) + "\n"
@@ -2980,6 +3307,19 @@ def build_lan_experimental(
             unsupported_by_protocol[protocol] = (
                 unsupported_by_protocol.get(protocol, 0) + int(count)
             )
+    supported_wireveil_ids = {
+        node_id
+        for node_id, candidate in wireveil_data["by_node"].items()
+        if candidate["protocol"] in LAN_EXPERIMENTAL_SUPPORTED_PROTOCOLS
+    }
+    found_supported_ids = wireveil_seen_ids & supported_wireveil_ids
+    found_wireveil_statuses = {
+        status: sum(
+            wireveil_data["by_node"][node_id]["status"] == status
+            for node_id in found_supported_ids
+        )
+        for status in WIREVEIL_ALLOWED_STATUSES
+    }
     stats = {
         "sources": source_stats,
         "total": len(experimental_proxies),
@@ -2993,6 +3333,14 @@ def build_lan_experimental(
         "protocols": protocols,
         "available_sources": successful_sources,
         "fallback_sources": fallback_sources,
+        "wireveil": {
+            **copy.deepcopy(wireveil_data["report"]),
+            "candidates": len(supported_wireveil_ids),
+            "found": len(found_supported_ids),
+            "found_good": found_wireveil_statuses["good"],
+            "found_partial": found_wireveil_statuses["partial"],
+            "matched_protocol_excluded": len(wireveil_protocol_excluded_ids),
+        },
         "updated": now,
         "schema_version": LAN_EXPERIMENTAL_SCHEMA_VERSION,
     }
@@ -3179,6 +3527,7 @@ def validate_experimental_stats(stats: dict, proxy_count: int | None = None) -> 
         discarded = sum(
             int(source.get(field, 0))
             for field in (
+                "wireveil_unverified",
                 "unsupported_protocols",
                 "invalid",
                 "filtered",
@@ -3197,6 +3546,18 @@ def validate_experimental_stats(stats: dict, proxy_count: int | None = None) -> 
         raise RuntimeError("LAN Experimental invalid configuration total is inconsistent")
     if int(stats.get("limited", limited)) != limited:
         raise RuntimeError("LAN Experimental source limit total is inconsistent")
+    wireveil = stats.get("wireveil")
+    if wireveil is not None:
+        if not isinstance(wireveil, dict):
+            raise RuntimeError("LAN Experimental WireVeil statistics are invalid")
+        candidates = int(wireveil.get("candidates", 0))
+        found = int(wireveil.get("found", 0))
+        found_good = int(wireveil.get("found_good", 0))
+        found_partial = int(wireveil.get("found_partial", 0))
+        if candidates < 0 or found < 0 or found > candidates:
+            raise RuntimeError("LAN Experimental WireVeil candidate totals are inconsistent")
+        if found_good + found_partial != found:
+            raise RuntimeError("LAN Experimental WireVeil status totals are inconsistent")
     if proxy_count is not None and total != proxy_count:
         raise RuntimeError(
             f"LAN Experimental statistics report {total} proxies, YAML contains {proxy_count}"
@@ -3223,35 +3584,47 @@ def parse_experimental_stats_from_readme(path: Path = README_FILE) -> dict:
             (
                 line
                 for line in matching_rows
-                if len(line.strip().strip("|").split("|")) == 15
+                if len(line.strip().strip("|").split("|")) == 19
             ),
             None,
         )
         if row is None:
             raise RuntimeError(f"README is missing LAN Experimental source row: {source['name']}")
         cells = [cell.strip().strip("`") for cell in row.strip().strip("|").split("|")]
-        if len(cells) != 15:
+        if len(cells) != 19:
             raise RuntimeError(f"README has an invalid LAN Experimental row: {source['name']}")
         protocols = {}
-        if cells[13] != "-":
-            for item in cells[13].split(","):
+        if cells[17] != "-":
+            for item in cells[17].split(","):
                 protocol, count = item.strip().split(":", 1)
                 protocols[protocol.strip()] = int(count.strip())
+        received = int(cells[3])
+        wireveil_found = int(cells[4])
         source_stats[source["id"]] = {
             "status": cells[1],
             "last_successful_update": cells[2],
             "last_updated": cells[2],
-            "received": int(cells[3]),
-            "valid_format": int(cells[4]),
-            "unsupported_protocols": int(cells[5]),
+            "received": received,
+            "wireveil_allowlisted": 0,
+            "wireveil_found": wireveil_found,
+            "wireveil_good": int(cells[5]),
+            "wireveil_partial": int(cells[6]),
+            "wireveil_protocol_excluded": int(cells[7]),
+            "wireveil_unverified": (
+                max(0, received - wireveil_found)
+                if source.get("wireveil_source_id")
+                else 0
+            ),
+            "valid_format": int(cells[8]),
+            "unsupported_protocols": int(cells[9]),
             "unsupported_by_protocol": {},
-            "invalid": int(cells[6]),
-            "filtered": int(cells[7]),
-            "duplicates": int(cells[8]),
-            "lan_global_overlap": int(cells[9]),
-            "limited": int(cells[10]),
-            "discarded": int(cells[11]),
-            "added": int(cells[12]),
+            "invalid": int(cells[10]),
+            "filtered": int(cells[11]),
+            "duplicates": int(cells[12]),
+            "lan_global_overlap": int(cells[13]),
+            "limited": int(cells[14]),
+            "discarded": int(cells[15]),
+            "added": int(cells[16]),
             "protocols": protocols,
             "exclusion_reasons": {},
             "error": "",
@@ -3619,8 +3992,8 @@ def source_table(
 
 def experimental_source_table(experimental_stats: dict) -> str:
     lines = [
-        "| Источник | Статус | Последнее успешное обновление | Загружено | Разобрано | Неподдерживаемых | Невалидных | Отфильтровано | Дубли | LAN Global | Лимит | Отброшено | Добавлено | Протоколы | Причины исключения |",
-        "|----------|--------|------------------------------|-----------:|----------:|------------------:|-----------:|---------------:|-------:|-----------:|------:|----------:|---------:|-----------|--------------------|",
+        "| Источник | Статус | Последнее успешное обновление | Загружено | Найдено WireVeil | Good | Partial | Исключено по протоколу | Разобрано | Неподдерживаемых | Невалидных | Отфильтровано | Дубли | LAN Global | Лимит | Отброшено | Добавлено | Протоколы | Причины исключения |",
+        "|----------|--------|------------------------------|-----------:|-------------------:|-----:|--------:|-----------------------:|----------:|------------------:|-----------:|---------------:|-------:|-----------:|------:|----------:|---------:|-----------|--------------------|",
     ]
     stats_by_source = experimental_stats.get("sources", {})
     for source in EXPERIMENTAL_SOURCES:
@@ -3636,7 +4009,10 @@ def experimental_source_table(experimental_stats: dict) -> str:
         lines.append(
             f"| [{source['name']}]({source['url']}) | `{stats.get('status', '-')}` | "
             f"`{stats.get('last_successful_update') or stats.get('last_updated') or '-'}` | "
-            f"`{stats.get('received', 0)}` | `{stats.get('valid_format', 0)}` | "
+            f"`{stats.get('received', 0)}` | `{stats.get('wireveil_found', 0)}` | "
+            f"`{stats.get('wireveil_good', 0)}` | `{stats.get('wireveil_partial', 0)}` | "
+            f"`{stats.get('wireveil_protocol_excluded', 0)}` | "
+            f"`{stats.get('valid_format', 0)}` | "
             f"`{stats.get('unsupported_protocols', 0)}` | `{stats.get('invalid', 0)}` | "
             f"`{stats.get('filtered', 0)}` | `{stats.get('duplicates', 0)}` | "
             f"`{stats.get('lan_global_overlap', 0)}` | `{stats.get('limited', 0)}` | "
@@ -3682,10 +4058,20 @@ def experimental_readme_section(experimental_stats: dict) -> str:
         f"{protocol}: {count}"
         for protocol, count in sorted(experimental_stats.get("protocols", {}).items())
     )
+    wireveil = experimental_stats.get("wireveil", {})
+    wireveil_candidates = int(wireveil.get("candidates", 0))
+    wireveil_found = int(wireveil.get("found", 0))
+    wireveil_good = int(wireveil.get("found_good", 0))
+    wireveil_partial = int(wireveil.get("found_partial", 0))
+    wireveil_protocol_excluded = int(
+        wireveil.get("matched_protocol_excluded", wireveil.get("protocol_excluded", 0))
+    )
     return f"""{LAN_EXPERIMENTAL_README_START}
 ## LAN Experimental
 
-Изолированная тестовая подписка: `{experimental_stats['total']}` серверов, все входят в `AUTO`. Протоколы: `{protocols}`. Дубли и совпадения с `LAN Global` удаляются до публикации. Новые YAML-источники ограничены 50 узлами каждый и выбираются детерминированно; при их временной недоступности используется последний опубликованный пул этого источника. Старые три источника остаются обязательными.
+Изолированная тестовая подписка: `{experimental_stats['total']}` серверов, все входят в `AUTO`. Протоколы: `{protocols}`. Дубли и совпадения с `LAN Global` удаляются до публикации. Опубликованный до этого пул сохранён без изменений и используется как базовый; при временной недоступности нового источника используется его последний опубликованный пул. Старые три источника остаются обязательными.
+
+Шесть GitHub YAML-источников `wuge0/free-nodes`, `sakazxc1400/free-vpn-sub`, `learnLi/free-nodes`, `bily1258-design/beimi`, `Delta-Kronecker/V2ray-Config` и `hezhanleiok/freesub` подключены только к LAN Experimental. Для них действует закрытый allowlist из отчёта `WireVeil-Mihomo-Report-20261111-141445.zip`: сборка допускает только точные конфигурации со статусом Good или Partial и никогда автоматически не импортирует остальные узлы источников. В отчёте 60 уникальных Good/Partial, из них 4 VMess/Hysteria2 исключены политикой протоколов, поэтому allowlist содержит `{wireveil_candidates}` разрешённых кандидатов. В текущих YAML найдено `{wireveil_found}` из них (`{wireveil_good}` Good, `{wireveil_partial}` Partial); кроме того, найдены и отклонены `{wireveil_protocol_excluded}` из четырёх запрещённых протоколов.
 
 Результаты выбора источников основаны на одном историческом сетевом аудите от 27.10.2026:
 
@@ -3697,7 +4083,7 @@ def experimental_readme_section(experimental_stats: dict) -> str:
 
 {experimental_wireveil_audit_table()}
 
-Результаты WireVeil — исторический ориентир на момент локальной проверки, а не гарантия актуальной работоспособности и не live-проверка при сборке.
+Результаты WireVeil — исторический ориентир на момент локальной проверки, а не гарантия актуальной работоспособности и не live-проверка при сборке. Разрешены только VLESS, Shadowsocks и Trojan; VMess и Hysteria2 исключаются.
 
 {experimental_source_table(experimental_stats)}
 {LAN_EXPERIMENTAL_README_END}"""
