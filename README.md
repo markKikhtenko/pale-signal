@@ -35,9 +35,9 @@
 | LAN 5K | `5000` |
 | LAN Global | `5270` |
 | LAN Global Fast Check | `5270` |
-| LAN Experimental | `970` |
-| LAN Experimental AUTO | `970` |
-| Исключено пересечений Experimental с LAN Global | `5` |
+| LAN Experimental | `2203` |
+| LAN Experimental AUTO | `2203` |
+| Исключено пересечений Experimental с LAN Global | `399` |
 | BS Safe MANUAL | `1368` |
 | BS Safe AUTO | `50` |
 | Happ Mobile | `473` |
@@ -45,9 +45,9 @@
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `970` серверов, все входят в `AUTO`. Протоколы: `ss: 116, trojan: 70, vless: 784`. Дубли и совпадения с `LAN Global` удаляются до публикации. Опубликованный до этого пул сохранён без изменений и используется как базовый; при временной недоступности нового источника используется его последний опубликованный пул. Старые три источника остаются обязательными.
+Изолированная тестовая подписка: `2203` серверов, все входят в `AUTO`. Протоколы: `ss: 385, trojan: 462, vless: 1356`. Дубли и совпадения с `LAN Global` удаляются до публикации. Опубликованный до этого пул сохранён без изменений и используется как базовый; при временной недоступности нового источника используется его последний опубликованный пул. Старые три источника остаются обязательными.
 
-Шесть GitHub YAML-источников `wuge0/free-nodes`, `sakazxc1400/free-vpn-sub`, `learnLi/free-nodes`, `bily1258-design/beimi`, `Delta-Kronecker/V2ray-Config` и `hezhanleiok/freesub` подключены только к LAN Experimental. Для них действует закрытый allowlist из отчёта `WireVeil-Mihomo-Report-20261111-141445.zip`: сборка допускает только точные конфигурации со статусом Good или Partial и никогда автоматически не импортирует остальные узлы источников. В отчёте 60 уникальных Good/Partial, из них 4 VMess/Hysteria2 исключены политикой протоколов, поэтому allowlist содержит `56` разрешённых кандидатов. В текущих YAML найдено `20` из них (`13` Good, `7` Partial); кроме того, найдены и отклонены `2` из четырёх запрещённых протоколов.
+Шесть GitHub YAML-источников `wuge0/free-nodes`, `sakazxc1400/free-vpn-sub`, `learnLi/free-nodes`, `bily1258-design/beimi`, `Delta-Kronecker/V2ray-Config` и `hezhanleiok/freesub` подключены целиком и только к LAN Experimental. Отчёт `WireVeil-Mihomo-Report-20261111-141445.zip` используется как историческая проверка актуальности самих источников и для статистики точных совпадений, а не как поузловой allowlist: при каждом обновлении импортируются все текущие валидные VLESS, Shadowsocks и Trojan. VMess, Hysteria2, невалидные записи, дубли и пересечения с LAN Global по-прежнему исключаются. В отчёте 60 уникальных Good/Partial, из них 4 VMess/Hysteria2 не поддерживаются политикой протоколов; в текущих YAML найдено `20` из `56` поддерживаемых проверенных записей (`13` Good, `7` Partial), а также `2` совпадений запрещённых протоколов.
 
 Результаты выбора источников основаны на одном историческом сетевом аудите от 27.10.2026:
 
@@ -86,12 +86,12 @@
 | [peasoft/NoMoreWalls](https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml) | `preserved` | `2026-11-11 01:58:55 МСК` | `35` | `0` | `0` | `0` | `0` | `35` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `35` | `ss: 1, trojan: 15, vless: 19` | `-` |
 | [F0rc3Run](https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/main/Best-Results/clash.yaml) | `preserved` | `2026-11-11 01:58:55 МСК` | `50` | `0` | `0` | `0` | `0` | `50` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `50` | `ss: 50` | `-` |
 | [ProxyQueen](https://raw.githubusercontent.com/lyqnihao/proxy/main/proxyqueen/output.yaml) | `preserved` | `2026-11-11 01:58:55 МСК` | `25` | `0` | `0` | `0` | `0` | `25` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `25` | `vless: 25` | `-` |
-| [wuge0/free-nodes](https://raw.githubusercontent.com/wuge0/free-nodes/main/output/github.yaml) | `ok` | `2026-11-12 03:10:49 МСК` | `60` | `2` | `1` | `1` | `0` | `2` | `0` | `0` | `0` | `1` | `0` | `0` | `59` | `1` | `ss: 1` | `duplicate:experimental: 1, wireveil:not_allowlisted: 58` |
-| [sakazxc1400/free-vpn-sub](https://raw.githubusercontent.com/sakazxc1400-creator/free-vpn-sub/data/output/clash.yaml) | `fallback` | `2026-11-11 16:39:56 МСК` | `200` | `10` | `7` | `3` | `0` | `4` | `0` | `0` | `0` | `0` | `0` | `0` | `190` | `3` | `ss: 2, trojan: 1` | `source:truncated: 1, wireveil:not_allowlisted: 196` |
-| [learnLi/free-nodes](https://raw.githubusercontent.com/learnLi/free-nodes/output/list.meta.cn.yml) | `fallback` | `2026-11-11 16:39:56 МСК` | `294` | `20` | `15` | `5` | `0` | `7` | `0` | `0` | `0` | `0` | `0` | `0` | `312` | `6` | `trojan: 1, vless: 5` | `source:truncated: 1, wireveil:not_allowlisted: 287` |
-| [bily1258-design/beimi](https://raw.githubusercontent.com/bily1258-design/beimi/main/output/clash.yaml) | `ok` | `2026-11-12 03:10:49 МСК` | `816` | `4` | `4` | `0` | `1` | `3` | `1` | `0` | `0` | `0` | `3` | `0` | `816` | `0` | `-` | `overlap:lan_global: 3, unsupported:hysteria2: 1, wireveil:not_allowlisted: 812` |
-| [Delta-Kronecker/V2ray-Config](https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/batches/clash/batch_001.yaml) | `ok` | `2026-11-12 03:10:49 МСК` | `500` | `4` | `2` | `2` | `0` | `4` | `0` | `0` | `0` | `0` | `2` | `0` | `498` | `2` | `trojan: 1, vless: 1` | `overlap:lan_global: 2, wireveil:not_allowlisted: 496` |
-| [hezhanleiok/freesub](https://raw.githubusercontent.com/hezhanleiok/freesub/main/output/clash.yaml) | `ok` | `2026-11-12 03:10:49 МСК` | `594` | `1` | `1` | `0` | `1` | `0` | `1` | `0` | `0` | `0` | `0` | `0` | `594` | `0` | `-` | `unsupported:hysteria2: 1, wireveil:not_allowlisted: 593` |
+| [wuge0/free-nodes](https://raw.githubusercontent.com/wuge0/free-nodes/main/output/github.yaml) | `ok` | `2026-11-12 09:55:34 МСК` | `60` | `2` | `1` | `1` | `0` | `53` | `6` | `1` | `0` | `12` | `2` | `0` | `21` | `39` | `ss: 25, trojan: 14` | `duplicate:experimental: 12, invalid:network: 1, overlap:lan_global: 2, unsupported:vmess: 6` |
+| [sakazxc1400/free-vpn-sub](https://raw.githubusercontent.com/sakazxc1400-creator/free-vpn-sub/data/output/clash.yaml) | `ok` | `2026-11-12 09:55:34 МСК` | `200` | `3` | `2` | `1` | `0` | `159` | `41` | `0` | `6` | `41` | `47` | `0` | `135` | `65` | `ss: 39, trojan: 13, vless: 13` | `duplicate:experimental: 41, filtered:ru: 6, overlap:lan_global: 47, unsupported:hysteria2: 22, unsupported:vmess: 19` |
+| [learnLi/free-nodes](https://raw.githubusercontent.com/learnLi/free-nodes/output/list.meta.cn.yml) | `ok` | `2026-11-12 09:55:34 МСК` | `294` | `7` | `4` | `3` | `0` | `205` | `80` | `9` | `4` | `49` | `36` | `0` | `178` | `116` | `ss: 12, trojan: 58, vless: 46` | `duplicate:experimental: 49, filtered:ru: 4, invalid:encryption: 2, invalid:unsupported_parameter:x-toolall-mihomo: 1, invalid:unsupported_parameter:xudp: 6, overlap:lan_global: 36, unsupported:anytls: 3, unsupported:hysteria2: 2, unsupported:vmess: 75` |
+| [bily1258-design/beimi](https://raw.githubusercontent.com/bily1258-design/beimi/main/output/clash.yaml) | `ok` | `2026-11-12 09:55:34 МСК` | `816` | `5` | `5` | `0` | `1` | `699` | `74` | `43` | `17` | `59` | `117` | `0` | `310` | `506` | `ss: 33, trojan: 94, vless: 379` | `duplicate:experimental: 59, filtered:non_public: 15, filtered:ru: 2, invalid:network: 41, invalid:uuid: 2, overlap:lan_global: 117, unsupported:hysteria2: 38, unsupported:vmess: 36` |
+| [Delta-Kronecker/V2ray-Config](https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/batches/clash/batch_001.yaml) | `ok` | `2026-11-12 09:55:34 МСК` | `500` | `4` | `2` | `2` | `0` | `478` | `22` | `0` | `8` | `126` | `86` | `0` | `242` | `258` | `ss: 60, trojan: 178, vless: 20` | `duplicate:experimental: 126, filtered:non_public: 1, filtered:ru: 7, overlap:lan_global: 86, unsupported:vmess: 22` |
+| [hezhanleiok/freesub](https://raw.githubusercontent.com/hezhanleiok/freesub/main/output/clash.yaml) | `ok` | `2026-11-12 09:55:34 МСК` | `594` | `1` | `1` | `0` | `1` | `508` | `86` | `0` | `40` | `96` | `111` | `0` | `333` | `261` | `ss: 103, trojan: 38, vless: 120` | `duplicate:experimental: 96, filtered:non_public: 34, filtered:ru: 6, overlap:lan_global: 111, unsupported:hysteria2: 52, unsupported:vmess: 34` |
 <!-- LAN-EXPERIMENTAL:END -->
 
 <!-- LAN-SOURCE-STATS:START -->
