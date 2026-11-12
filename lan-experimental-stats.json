@@ -360,13 +360,13 @@
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-11 16:39:56 МСК",
-      "last_updated": "2026-11-11 16:39:56 МСК",
+      "last_successful_update": "2026-11-12 03:10:49 МСК",
+      "last_updated": "2026-11-12 03:10:49 МСК",
       "discarded": 59
     },
     "SAKAZXC1400_FREE_VPN_SUB": {
       "received": 200,
-      "valid_format": 10,
+      "valid_format": 4,
       "wireveil_allowlisted": 17,
       "wireveil_found": 10,
       "wireveil_good": 7,
@@ -378,7 +378,7 @@
       "invalid": 0,
       "filtered": 0,
       "duplicates": 0,
-      "lan_global_overlap": 7,
+      "lan_global_overlap": 0,
       "limited": 0,
       "added": 3,
       "protocols": {
@@ -386,18 +386,18 @@
         "trojan": 1
       },
       "exclusion_reasons": {
-        "wireveil:not_allowlisted": 190,
-        "overlap:lan_global": 7
+        "wireveil:not_allowlisted": 196,
+        "source:truncated": 1
       },
-      "status": "ok",
-      "error": "",
+      "status": "fallback",
+      "error": "sakazxc1400/free-vpn-sub: truncated or empty (received=200, required=100; valid=4, required=5; WireVeil=4, required=5)",
       "last_successful_update": "2026-11-11 16:39:56 МСК",
       "last_updated": "2026-11-11 16:39:56 МСК",
-      "discarded": 197
+      "discarded": 190
     },
     "LEARNLI_FREE_NODES": {
-      "received": 332,
-      "valid_format": 16,
+      "received": 294,
+      "valid_format": 7,
       "wireveil_allowlisted": 20,
       "wireveil_found": 20,
       "wireveil_good": 15,
@@ -406,10 +406,10 @@
       "wireveil_unverified": 312,
       "unsupported_protocols": 0,
       "unsupported_by_protocol": {},
-      "invalid": 4,
+      "invalid": 0,
       "filtered": 0,
-      "duplicates": 2,
-      "lan_global_overlap": 8,
+      "duplicates": 0,
+      "lan_global_overlap": 0,
       "limited": 0,
       "added": 6,
       "protocols": {
@@ -417,48 +417,45 @@
         "trojan": 1
       },
       "exclusion_reasons": {
-        "wireveil:not_allowlisted": 312,
-        "invalid:unsupported_parameter:xudp": 4,
-        "duplicate:experimental": 2,
-        "overlap:lan_global": 8
+        "wireveil:not_allowlisted": 287,
+        "source:truncated": 1
       },
-      "status": "ok",
-      "error": "",
+      "status": "fallback",
+      "error": "learnLi/free-nodes: truncated or empty (received=294, required=166; valid=7, required=8; WireVeil=7, required=10)",
       "last_successful_update": "2026-11-11 16:39:56 МСК",
       "last_updated": "2026-11-11 16:39:56 МСК",
-      "discarded": 326
+      "discarded": 312
     },
     "BILY1258_BEIMI": {
-      "received": 806,
-      "valid_format": 4,
+      "received": 816,
+      "valid_format": 3,
       "wireveil_allowlisted": 5,
-      "wireveil_found": 5,
-      "wireveil_good": 5,
+      "wireveil_found": 4,
+      "wireveil_good": 4,
       "wireveil_partial": 0,
       "wireveil_protocol_excluded": 1,
-      "wireveil_unverified": 801,
+      "wireveil_unverified": 812,
       "unsupported_protocols": 1,
       "unsupported_by_protocol": {
         "hysteria2": 1
       },
       "invalid": 0,
       "filtered": 0,
-      "duplicates": 1,
+      "duplicates": 0,
       "lan_global_overlap": 3,
       "limited": 0,
       "added": 0,
       "protocols": {},
       "exclusion_reasons": {
-        "wireveil:not_allowlisted": 801,
+        "wireveil:not_allowlisted": 812,
         "unsupported:hysteria2": 1,
-        "duplicate:experimental": 1,
         "overlap:lan_global": 3
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-11 16:39:56 МСК",
-      "last_updated": "2026-11-11 16:39:56 МСК",
-      "discarded": 806
+      "last_successful_update": "2026-11-12 03:10:49 МСК",
+      "last_updated": "2026-11-12 03:10:49 МСК",
+      "discarded": 816
     },
     "DELTA_KRONECKER_V2RAY_CONFIG": {
       "received": 500,
@@ -474,21 +471,22 @@
       "invalid": 0,
       "filtered": 0,
       "duplicates": 0,
-      "lan_global_overlap": 3,
+      "lan_global_overlap": 2,
       "limited": 0,
-      "added": 1,
+      "added": 2,
       "protocols": {
+        "vless": 1,
         "trojan": 1
       },
       "exclusion_reasons": {
         "wireveil:not_allowlisted": 496,
-        "overlap:lan_global": 3
+        "overlap:lan_global": 2
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-11 16:39:56 МСК",
-      "last_updated": "2026-11-11 16:39:56 МСК",
-      "discarded": 499
+      "last_successful_update": "2026-11-12 03:10:49 МСК",
+      "last_updated": "2026-11-12 03:10:49 МСК",
+      "discarded": 498
     },
     "HEZHANLEIOK_FREESUB": {
       "received": 594,
@@ -516,28 +514,28 @@
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-11 16:39:56 МСК",
-      "last_updated": "2026-11-11 16:39:56 МСК",
+      "last_successful_update": "2026-11-12 03:10:49 МСК",
+      "last_updated": "2026-11-12 03:10:49 МСК",
       "discarded": 594
     }
   },
-  "total": 969,
-  "auto": 969,
-  "lan_global_overlap": 21,
-  "duplicates": 4,
+  "total": 970,
+  "auto": 970,
+  "lan_global_overlap": 5,
+  "duplicates": 1,
   "unsupported_protocols": 2,
   "unsupported_by_protocol": {
     "hysteria2": 2
   },
-  "invalid": 4,
+  "invalid": 0,
   "limited": 0,
   "protocols": {
-    "vless": 783,
+    "vless": 784,
     "trojan": 70,
     "ss": 116
   },
-  "available_sources": 18,
-  "fallback_sources": 0,
+  "available_sources": 16,
+  "fallback_sources": 2,
   "wireveil": {
     "filename": "WireVeil-Mihomo-Report-20261111-141445.zip",
     "sha256": "17fa242029b8b04fb5d821e0a022c923981f467f6b388f6d01144f39a491d004",
@@ -548,11 +546,11 @@
     "selected_partial": 16,
     "protocol_excluded": 4,
     "candidates": 56,
-    "found": 40,
-    "found_good": 29,
-    "found_partial": 11,
+    "found": 20,
+    "found_good": 13,
+    "found_partial": 7,
     "matched_protocol_excluded": 2
   },
-  "updated": "2026-11-11 16:39:56 МСК",
+  "updated": "2026-11-12 03:10:49 МСК",
   "schema_version": 2
 }

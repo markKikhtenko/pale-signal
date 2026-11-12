@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-7896-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-8093-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-11-11 16:36:03 МСК`
+**Последнее обновление:** `2026-11-12 03:07:30 МСК`
 
 ## Подписки
 
@@ -28,26 +28,26 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `7896` |
-| Россия | `1501` |
-| Global | `6395` |
-| Global 5K | `1685` |
+| Всего серверов | `8093` |
+| Россия | `1531` |
+| Global | `6562` |
+| Global 5K | `1760` |
 | LAN 5K | `5000` |
-| LAN Global | `5263` |
-| LAN Global Fast Check | `5263` |
-| LAN Experimental | `969` |
-| LAN Experimental AUTO | `969` |
-| Исключено пересечений Experimental с LAN Global | `21` |
-| BS Safe MANUAL | `1312` |
+| LAN Global | `5270` |
+| LAN Global Fast Check | `5270` |
+| LAN Experimental | `970` |
+| LAN Experimental AUTO | `970` |
+| Исключено пересечений Experimental с LAN Global | `5` |
+| BS Safe MANUAL | `1368` |
 | BS Safe AUTO | `50` |
-| Happ Mobile | `436` |
+| Happ Mobile | `473` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
 
-Изолированная тестовая подписка: `969` серверов, все входят в `AUTO`. Протоколы: `ss: 116, trojan: 70, vless: 783`. Дубли и совпадения с `LAN Global` удаляются до публикации. Опубликованный до этого пул сохранён без изменений и используется как базовый; при временной недоступности нового источника используется его последний опубликованный пул. Старые три источника остаются обязательными.
+Изолированная тестовая подписка: `970` серверов, все входят в `AUTO`. Протоколы: `ss: 116, trojan: 70, vless: 784`. Дубли и совпадения с `LAN Global` удаляются до публикации. Опубликованный до этого пул сохранён без изменений и используется как базовый; при временной недоступности нового источника используется его последний опубликованный пул. Старые три источника остаются обязательными.
 
-Шесть GitHub YAML-источников `wuge0/free-nodes`, `sakazxc1400/free-vpn-sub`, `learnLi/free-nodes`, `bily1258-design/beimi`, `Delta-Kronecker/V2ray-Config` и `hezhanleiok/freesub` подключены только к LAN Experimental. Для них действует закрытый allowlist из отчёта `WireVeil-Mihomo-Report-20261111-141445.zip`: сборка допускает только точные конфигурации со статусом Good или Partial и никогда автоматически не импортирует остальные узлы источников. В отчёте 60 уникальных Good/Partial, из них 4 VMess/Hysteria2 исключены политикой протоколов, поэтому allowlist содержит `56` разрешённых кандидатов. В текущих YAML найдено `40` из них (`29` Good, `11` Partial); кроме того, найдены и отклонены `2` из четырёх запрещённых протоколов.
+Шесть GitHub YAML-источников `wuge0/free-nodes`, `sakazxc1400/free-vpn-sub`, `learnLi/free-nodes`, `bily1258-design/beimi`, `Delta-Kronecker/V2ray-Config` и `hezhanleiok/freesub` подключены только к LAN Experimental. Для них действует закрытый allowlist из отчёта `WireVeil-Mihomo-Report-20261111-141445.zip`: сборка допускает только точные конфигурации со статусом Good или Partial и никогда автоматически не импортирует остальные узлы источников. В отчёте 60 уникальных Good/Partial, из них 4 VMess/Hysteria2 исключены политикой протоколов, поэтому allowlist содержит `56` разрешённых кандидатов. В текущих YAML найдено `20` из них (`13` Good, `7` Partial); кроме того, найдены и отклонены `2` из четырёх запрещённых протоколов.
 
 Результаты выбора источников основаны на одном историческом сетевом аудите от 27.10.2026:
 
@@ -86,18 +86,18 @@
 | [peasoft/NoMoreWalls](https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml) | `preserved` | `2026-11-11 01:58:55 МСК` | `35` | `0` | `0` | `0` | `0` | `35` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `35` | `ss: 1, trojan: 15, vless: 19` | `-` |
 | [F0rc3Run](https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/main/Best-Results/clash.yaml) | `preserved` | `2026-11-11 01:58:55 МСК` | `50` | `0` | `0` | `0` | `0` | `50` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `50` | `ss: 50` | `-` |
 | [ProxyQueen](https://raw.githubusercontent.com/lyqnihao/proxy/main/proxyqueen/output.yaml) | `preserved` | `2026-11-11 01:58:55 МСК` | `25` | `0` | `0` | `0` | `0` | `25` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `25` | `vless: 25` | `-` |
-| [wuge0/free-nodes](https://raw.githubusercontent.com/wuge0/free-nodes/main/output/github.yaml) | `ok` | `2026-11-11 16:39:56 МСК` | `60` | `2` | `1` | `1` | `0` | `2` | `0` | `0` | `0` | `1` | `0` | `0` | `59` | `1` | `ss: 1` | `duplicate:experimental: 1, wireveil:not_allowlisted: 58` |
-| [sakazxc1400/free-vpn-sub](https://raw.githubusercontent.com/sakazxc1400-creator/free-vpn-sub/data/output/clash.yaml) | `ok` | `2026-11-11 16:39:56 МСК` | `200` | `10` | `7` | `3` | `0` | `10` | `0` | `0` | `0` | `0` | `7` | `0` | `197` | `3` | `ss: 2, trojan: 1` | `overlap:lan_global: 7, wireveil:not_allowlisted: 190` |
-| [learnLi/free-nodes](https://raw.githubusercontent.com/learnLi/free-nodes/output/list.meta.cn.yml) | `ok` | `2026-11-11 16:39:56 МСК` | `332` | `20` | `15` | `5` | `0` | `16` | `0` | `4` | `0` | `2` | `8` | `0` | `326` | `6` | `trojan: 1, vless: 5` | `duplicate:experimental: 2, invalid:unsupported_parameter:xudp: 4, overlap:lan_global: 8, wireveil:not_allowlisted: 312` |
-| [bily1258-design/beimi](https://raw.githubusercontent.com/bily1258-design/beimi/main/output/clash.yaml) | `ok` | `2026-11-11 16:39:56 МСК` | `806` | `5` | `5` | `0` | `1` | `4` | `1` | `0` | `0` | `1` | `3` | `0` | `806` | `0` | `-` | `duplicate:experimental: 1, overlap:lan_global: 3, unsupported:hysteria2: 1, wireveil:not_allowlisted: 801` |
-| [Delta-Kronecker/V2ray-Config](https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/batches/clash/batch_001.yaml) | `ok` | `2026-11-11 16:39:56 МСК` | `500` | `4` | `2` | `2` | `0` | `4` | `0` | `0` | `0` | `0` | `3` | `0` | `499` | `1` | `trojan: 1` | `overlap:lan_global: 3, wireveil:not_allowlisted: 496` |
-| [hezhanleiok/freesub](https://raw.githubusercontent.com/hezhanleiok/freesub/main/output/clash.yaml) | `ok` | `2026-11-11 16:39:56 МСК` | `594` | `1` | `1` | `0` | `1` | `0` | `1` | `0` | `0` | `0` | `0` | `0` | `594` | `0` | `-` | `unsupported:hysteria2: 1, wireveil:not_allowlisted: 593` |
+| [wuge0/free-nodes](https://raw.githubusercontent.com/wuge0/free-nodes/main/output/github.yaml) | `ok` | `2026-11-12 03:10:49 МСК` | `60` | `2` | `1` | `1` | `0` | `2` | `0` | `0` | `0` | `1` | `0` | `0` | `59` | `1` | `ss: 1` | `duplicate:experimental: 1, wireveil:not_allowlisted: 58` |
+| [sakazxc1400/free-vpn-sub](https://raw.githubusercontent.com/sakazxc1400-creator/free-vpn-sub/data/output/clash.yaml) | `fallback` | `2026-11-11 16:39:56 МСК` | `200` | `10` | `7` | `3` | `0` | `4` | `0` | `0` | `0` | `0` | `0` | `0` | `190` | `3` | `ss: 2, trojan: 1` | `source:truncated: 1, wireveil:not_allowlisted: 196` |
+| [learnLi/free-nodes](https://raw.githubusercontent.com/learnLi/free-nodes/output/list.meta.cn.yml) | `fallback` | `2026-11-11 16:39:56 МСК` | `294` | `20` | `15` | `5` | `0` | `7` | `0` | `0` | `0` | `0` | `0` | `0` | `312` | `6` | `trojan: 1, vless: 5` | `source:truncated: 1, wireveil:not_allowlisted: 287` |
+| [bily1258-design/beimi](https://raw.githubusercontent.com/bily1258-design/beimi/main/output/clash.yaml) | `ok` | `2026-11-12 03:10:49 МСК` | `816` | `4` | `4` | `0` | `1` | `3` | `1` | `0` | `0` | `0` | `3` | `0` | `816` | `0` | `-` | `overlap:lan_global: 3, unsupported:hysteria2: 1, wireveil:not_allowlisted: 812` |
+| [Delta-Kronecker/V2ray-Config](https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/batches/clash/batch_001.yaml) | `ok` | `2026-11-12 03:10:49 МСК` | `500` | `4` | `2` | `2` | `0` | `4` | `0` | `0` | `0` | `0` | `2` | `0` | `498` | `2` | `trojan: 1, vless: 1` | `overlap:lan_global: 2, wireveil:not_allowlisted: 496` |
+| [hezhanleiok/freesub](https://raw.githubusercontent.com/hezhanleiok/freesub/main/output/clash.yaml) | `ok` | `2026-11-12 03:10:49 МСК` | `594` | `1` | `1` | `0` | `1` | `0` | `1` | `0` | `0` | `0` | `0` | `0` | `594` | `0` | `-` | `unsupported:hysteria2: 1, wireveil:not_allowlisted: 593` |
 <!-- LAN-EXPERIMENTAL:END -->
 
 <!-- LAN-SOURCE-STATS:START -->
 ## Новые LAN-источники
 
-Эталонные `2002` записей из `origin/main` и ранее добавленные `157` записей (всего `2159`) сохранены без изменения имён, параметров и порядка. Добавлено `3104` новых конфигураций; исключено `13223` новых дублей. Итого `5263` записей и `4374` уникальных `server + port + UUID` (в старом пуле: `1270`). Статус «проверено» присваивается только после успешного HTTPS через VLESS.
+Эталонные `2002` записей из `origin/main` и ранее добавленные `157` записей (всего `2159`) сохранены без изменения имён, параметров и порядка. Добавлено `3111` новых конфигураций; исключено `13480` новых дублей. Итого `5270` записей и `4381` уникальных `server + port + UUID` (в старом пуле: `1270`). Статус «проверено» присваивается только после успешного HTTPS через VLESS.
 
 Полные URL, время обновления, ошибки загрузки, причины отбраковки, транспорты и результаты стадий HTTPS сохранены в [`lan-source-stats.json`](lan-source-stats.json).
 
@@ -105,22 +105,22 @@
 
 | Источник | Получено | VLESS | Валидных | Уникальных | Дубли | Добавлено | HTTPS | Статус |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| [MahanKenway configs/vless.txt](https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt) | `149` | `149` | `136` | `84` | `52` | `80` | `0/3` | не проверено |
+| [MahanKenway configs/vless.txt](https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt) | `163` | `163` | `148` | `87` | `61` | `85` | `0/3` | не проверено |
 | [Epodonios Splitted-By-Protocol/vless.txt](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt) | `0` | `0` | `0` | `0` | `0` | `0` | `0/0` | не проверено |
-| [barry-far V2ray-config vless.txt](https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt) | `6526` | `6526` | `6077` | `2138` | `3939` | `1817` | `0/3` | не проверено |
-| [SoliSpirit Protocols/vless.txt](https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt) | `5132` | `5132` | `4532` | `468` | `4064` | `403` | `1/3` | проверено |
-| [liMilCo v2r pro/vless.txt](https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt) | `3668` | `3668` | `3333` | `291` | `3042` | `220` | `0/3` | не проверено |
-| [V2RayRoot Config/vless.txt](https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt) | `263` | `263` | `258` | `14` | `244` | `14` | `0/3` | не проверено |
-| [0xRadikal FAST](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/fast/configs.txt) | `826` | `358` | `354` | `138` | `216` | `137` | `0/3` | не проверено |
-| [v2go Live-tested VLESS](https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Protocol/vless.txt) | `229` | `229` | `216` | `96` | `120` | `93` | `0/3` | не проверено |
+| [barry-far V2ray-config vless.txt](https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt) | `6575` | `6575` | `6147` | `2088` | `4059` | `1789` | `0/3` | не проверено |
+| [SoliSpirit Protocols/vless.txt](https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt) | `5160` | `5160` | `4593` | `320` | `4273` | `266` | `0/3` | не проверено |
+| [liMilCo v2r pro/vless.txt](https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt) | `3668` | `3668` | `3333` | `547` | `2786` | `441` | `0/3` | не проверено |
+| [V2RayRoot Config/vless.txt](https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt) | `263` | `263` | `258` | `15` | `243` | `15` | `0/3` | не проверено |
+| [0xRadikal FAST](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/fast/configs.txt) | `1116` | `538` | `533` | `237` | `296` | `225` | `2/3` | проверено |
+| [v2go Live-tested VLESS](https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Protocol/vless.txt) | `176` | `176` | `166` | `48` | `118` | `44` | `0/3` | не проверено |
 | [PulseConfigs FAST](https://raw.githubusercontent.com/drmikecrypto/PulseConfigs/main/fast/configs.txt) | `130` | `10` | `10` | `0` | `10` | `0` | `0/0` | не проверено |
-| [free-xray-gcp VLESS](https://raw.githubusercontent.com/noahclanman/free-xray-gcp/main/output/protocols/vless.txt) | `528` | `528` | `521` | `138` | `383` | `122` | `2/3` | проверено |
-| [multi-proxy-config-fetcher tested](https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs_tested.txt) | `195` | `68` | `68` | `1` | `67` | `0` | `0/0` | не проверено |
-| [patterniha Free-Configs](https://raw.githubusercontent.com/patterniha/Free-Configs/main/configs.txt) | `39` | `39` | `33` | `10` | `23` | `6` | `0/3` | не проверено |
+| [free-xray-gcp VLESS](https://raw.githubusercontent.com/noahclanman/free-xray-gcp/main/output/protocols/vless.txt) | `555` | `555` | `550` | `100` | `450` | `80` | `2/3` | проверено |
+| [multi-proxy-config-fetcher tested](https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs_tested.txt) | `181` | `65` | `65` | `4` | `61` | `1` | `1/1` | проверено |
+| [patterniha Free-Configs](https://raw.githubusercontent.com/patterniha/Free-Configs/main/configs.txt) | `57` | `57` | `51` | `8` | `43` | `3` | `1/3` | проверено |
 | [CaptchaQ working_all](https://raw.githubusercontent.com/CaptchaQ/vless-servers/main/working_all.txt) | `84` | `84` | `84` | `21` | `63` | `17` | `0/3` | не проверено |
 | [NodesRadar v2ray](https://radarhub.top/v2ray.txt) | `500` | `0` | `0` | `0` | `0` | `0` | `0/0` | не проверено |
-| [mrdevmohamed VLESS](https://raw.githubusercontent.com/mrdevmohamed/v2ray-configs/main/Splitted-By-Protocol/vless.txt) | `1141` | `1141` | `1139` | `178` | `961` | `142` | `1/3` | проверено |
-| [Baarcuda top100 VLESS](https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt) | `100` | `100` | `98` | `59` | `39` | `53` | `0/3` | не проверено |
+| [mrdevmohamed VLESS](https://raw.githubusercontent.com/mrdevmohamed/v2ray-configs/main/Splitted-By-Protocol/vless.txt) | `1098` | `1098` | `1095` | `117` | `978` | `91` | `1/3` | проверено |
+| [Baarcuda top100 VLESS](https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt) | `100` | `100` | `98` | `59` | `39` | `54` | `0/3` | не проверено |
 <!-- LAN-SOURCE-STATS:END -->
 
 ## LAN Global и Fast Check
