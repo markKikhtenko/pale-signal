@@ -299,7 +299,7 @@ class LanExperimentalTests(unittest.TestCase):
         self.assertNotIn("foreign", {group["name"] for group in config["proxy-groups"]})
         self.assertTrue(all(proxy["name"].startswith("[MIXED] ") for proxy in config["proxies"]))
 
-    def test_wireveil_allowlist_imports_good_and_partial_only(self) -> None:
+    def test_wireveil_report_audits_source_without_blocking_current_nodes(self) -> None:
         source = {
             **self.yaml_source("WIREVEIL"),
             "wireveil_source_id": "src-test",
@@ -333,9 +333,9 @@ class LanExperimentalTests(unittest.TestCase):
             "server": "unchecked.example.com",
             "port": 443,
             "cipher": "aes-128-gcm",
-            "password": "must-not-be-imported",
+            "password": "current-source-node",
         }
-        allowlist = {
+        audit = {
             "schema_version": 1,
             "report": {
                 "good": 2,
@@ -382,11 +382,12 @@ class LanExperimentalTests(unittest.TestCase):
                 ],
                 now="2026-11-11 14:14:45 МСК",
                 fallback_proxies_by_source={},
-                wireveil_allowlist=allowlist,
+                wireveil_audit=audit,
             )
 
         config = yaml.safe_load(text)
         self.assertEqual([proxy["name"] for proxy in config["proxies"]], [
+            "[WIREVEIL] unchecked",
             "[WIREVEIL] good",
             "[WIREVEIL] partial",
         ])
@@ -395,12 +396,13 @@ class LanExperimentalTests(unittest.TestCase):
         self.assertEqual(source_stats["wireveil_good"], 2)
         self.assertEqual(source_stats["wireveil_partial"], 1)
         self.assertEqual(source_stats["wireveil_protocol_excluded"], 1)
-        self.assertEqual(source_stats["wireveil_unverified"], 1)
-        self.assertEqual(source_stats["discarded"], 2)
+        self.assertEqual(source_stats["wireveil_unmatched"], 1)
+        self.assertEqual(source_stats["discarded"], 1)
         self.assertEqual(stats["wireveil"]["candidates"], 2)
         self.assertEqual(stats["wireveil"]["found"], 2)
         self.assertEqual(stats["wireveil"]["matched_protocol_excluded"], 1)
-        self.assertNotIn("must-not-be-imported", text)
+        self.assertIn("current-source-node", text)
+        self.assertNotIn("wireveil:not_allowlisted", source_stats["exclusion_reasons"])
 
     def test_wireveil_node_id_requires_exact_parameters_but_ignores_name(self) -> None:
         proxy = {
@@ -453,7 +455,7 @@ class LanExperimentalTests(unittest.TestCase):
             "port": 443,
             "password": "added-secret",
         }
-        allowlist = {
+        audit = {
             "schema_version": 1,
             "report": {
                 "good": 1,
@@ -496,7 +498,7 @@ class LanExperimentalTests(unittest.TestCase):
                 fetcher=fetcher,
                 now="2026-11-11 14:14:45 МСК",
                 baseline_stats={"sources": {"OLD": {"added": 1}}},
-                wireveil_allowlist=allowlist,
+                wireveil_audit=audit,
             )
 
         config = yaml.safe_load(text)
