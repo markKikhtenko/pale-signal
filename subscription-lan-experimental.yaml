@@ -1,7 +1,7 @@
 # LAN Experimental
-# Version: 2.20261112.095816
+# Version: 2.20261112.102703
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-11-12 09:55:34 МСК
+# Updated: 2026-11-12 10:26:04 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
@@ -21,7 +21,7 @@
 #   - bily1258-design/beimi: https://raw.githubusercontent.com/bily1258-design/beimi/main/output/clash.yaml
 #   - Delta-Kronecker/V2ray-Config: https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/batches/clash/batch_001.yaml
 #   - hezhanleiok/freesub: https://raw.githubusercontent.com/hezhanleiok/freesub/main/output/clash.yaml
-# Servers: 2203
+# Servers: 2197
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -13438,6 +13438,21 @@ proxies:
       short-id: "8956c57cb4c4f8d2"
     network: "tcp"
   -
+    name: "[sakazxc1400/free-vpn-sub] 114. 🇳🇬 Нигерия · vless · 1305ms · 26ч"
+    type: "vless"
+    server: "196.196.149.80"
+    port: 443
+    uuid: "4201786b-d99b-4147-a5f0-20d47acddb81"
+    udp: true
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "7aa271t.es1.h1clayd.click"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ZSmetD4e9QG5CiXhniHg5HJB68L4kwbgAkJmMHtVwEE"
+      short-id: "42426c882c5fcd41"
+    network: "tcp"
+  -
     name: "[sakazxc1400/free-vpn-sub] 120. 🇸🇬 Сингапур · ss · 366ms · 58ч"
     type: "ss"
     server: "15.235.164.133"
@@ -13720,61 +13735,17 @@ proxies:
         Host: "de9.pad-service.com"
       path: "/DE9W"
   -
-    name: "[learnLi/free-nodes] 新加坡4|@ripaojiedian"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 8443
-    server: "cdn-sg.skyvora.app"
-    servername: "cdn-sg.skyvora.app"
-    skip-cert-verify: true
-    tls: true
-    type: "vless"
-    uuid: "3eb38d44-2e61-4553-b6ae-026033eacba5"
-    ws-opts:
-      headers:
-        Host: "cdn-sg.skyvora.app"
-      path: "/axzfrv47qcnflow="
-  -
-    name: "[learnLi/free-nodes] 日本4|@ripaojiedian"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 8443
-    server: "cdn-jp.skyvora.app"
-    servername: "cdn-jp.skyvora.app"
-    skip-cert-verify: true
-    tls: true
-    type: "vless"
-    uuid: "76825bbe-3ad2-4156-b9ed-a5bdfcc93bd3"
-    ws-opts:
-      headers:
-        Host: "cdn-jp.skyvora.app"
-      path: "/pmcxbjzdau6flow="
-  -
-    name: "[learnLi/free-nodes] 未知 VLESS-101 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "chrome"
-    network: "xhttp"
+    name: "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 455"
+    client-fingerprint: "firefox"
+    grpc-opts:
+      grpc-service-name: "v1.segment.9wLukD7VB0oToI10.ts"
+    network: "grpc"
     port: 443
-    server: "cf.090227.xyz"
-    servername: "917ebe12s226.kuback.top"
-    skip-cert-verify: false
-    tfo: false
+    server: "217.60.30.39"
+    servername: "u209akv3ob.hat.onl"
     tls: true
     type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "917ebe12s226.kuback.top"
-      path: "7205e56880b040369cf207ebfb8a6c81"
-      sc-max-each-post-bytes: "500000-1000000"
-      sc-min-posts-interval-ms: "30-80"
-      x-padding-bytes: "100-1000"
-      x-padding-header: "X-Forwarded-Uri"
-      x-padding-key: "_"
-      x-padding-method: "tokenish"
-      x-padding-obfs-mode: true
-      x-padding-placement: "queryInHeader"
+    uuid: "7592ca5c-b352-4562-8856-a9c936a3331b"
   -
     name: "[learnLi/free-nodes] 美国2|@ripaojiedian"
     client-fingerprint: "chrome"
@@ -13791,123 +13762,48 @@ proxies:
         Host: "imanvipreserved.pages.dev"
       path: "/flow="
   -
-    name: "[learnLi/free-nodes] 美国4|@ripaojiedian"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 8443
-    server: "cdn-us.skyvora.app"
-    servername: "cdn-us.skyvora.app"
-    skip-cert-verify: true
-    tls: true
-    type: "vless"
-    uuid: "71d6fdb8-eda2-4aa8-b3e2-34a3aad51382"
-    ws-opts:
-      headers:
-        Host: "cdn-us.skyvora.app"
-      path: "/kqdyeo2k4b1flow="
-  -
-    name: "[learnLi/free-nodes] 香港4|@ripaojiedian"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 8443
-    server: "cdn-hk.skyvora.app"
-    servername: "cdn-hk.skyvora.app"
-    skip-cert-verify: true
-    tls: true
-    type: "vless"
-    uuid: "3b8896fd-ba38-4da7-b365-d0f01f37aa40"
-    ws-opts:
-      headers:
-        Host: "cdn-hk.skyvora.app"
-      path: "/zmeadqv620kflow="
-  -
     name: "[learnLi/free-nodes] 🇧🇬 保加利亚 | BGR #1"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "185.255.93.189"
-    servername: "v1n3.11676767.xyz"
+    client-fingerprint: "firefox"
+    network: "xhttp"
+    port: 8443
+    server: "37.18.15.112"
+    servername: "earlytrain.net"
     tls: true
     type: "vless"
     udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/picture/lessons"
+    uuid: "37af0181-5598-4aad-a040-d926bcb65757"
+    xhttp-opts:
+      host: "earlytrain.net"
+      mode: "auto"
+      path: "/api/v1/upload"
+      x-padding-bytes: "100-1000"
+      x-padding-obfs-mode: false
   -
-    name: "[learnLi/free-nodes] 🇧🇬[www.v2nodes.com] vless-BG-3... #1"
-    network: "ws"
-    port: 443
-    server: "203.202.232.110"
-    servername: "vlso5.1d.mom"
-    tls: false
-    type: "vless"
-    uuid: "a1de0630-5786-48a0-84f6-dc6f2de10d6d"
-    ws-opts:
-      headers:
-        Host: "vlso5.1d.mom"
-      path: "/socks5=888:888@hkip.1d.mom:1080fp=chromesecurity=tls"
-  -
-    name: "[learnLi/free-nodes] 🇩🇪 德国 | DEU #11"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "91.184.248.161"
-    servername: "v1n3.11676767.xyz"
+    name: "[learnLi/free-nodes] 🇧🇬 保加利亚 | BGR #2"
+    client-fingerprint: "firefox"
+    network: "xhttp"
+    port: 8443
+    server: "earlytrain.net"
+    servername: "earlytrain.net"
     tls: true
     type: "vless"
     udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/manhua/doujin"
+    uuid: "37af0181-5598-4aad-a040-d926bcb65757"
+    xhttp-opts:
+      host: "earlytrain.net"
+      mode: "auto"
+      path: "/api/v1/upload"
   -
-    name: "[learnLi/free-nodes] 🇩🇪 德国 | DEU #13"
+    name: "[learnLi/free-nodes] 🇩🇪 德国 | DEU #7"
+    alpn:
+      - "h2"
     client-fingerprint: "chrome"
-    network: "ws"
     port: 443
-    server: "134.209.227.233"
-    servername: "v1n3.11676767.xyz"
+    server: "146.75.59.186"
+    servername: "community.fastly.steamstatic.com"
     tls: true
     type: "vless"
-    udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/go.php/products"
-  -
-    name: "[learnLi/free-nodes] 🇩🇪 德国 | DEU #14"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "213.176.94.31"
-    servername: "v1n3.11676767.xyz"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/go.php/products"
-  -
-    name: "[learnLi/free-nodes] 🇩🇪 德国 | DEU #15"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 2053
-    server: "83.147.254.59"
-    servername: "v1n3.11676767.xyz"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/picture/lessons"
+    uuid: "93761b91-be43-4f3f-af40-65ea34d3eae2"
   -
     name: "[learnLi/free-nodes] 🇩🇪 德国 | DEU #9"
     client-fingerprint: "chrome"
@@ -13918,7 +13814,7 @@ proxies:
     type: "vless"
     uuid: "b7374077-9fdc-4d28-9fb1-5cbc262fb53d"
   -
-    name: "[learnLi/free-nodes] 🇩🇪[www.v2nodes.com] vless-DE-1... #16"
+    name: "[learnLi/free-nodes] 🇩🇪[www.v2nodes.com] vless-DE-1..."
     network: "ws"
     port: 80
     server: "104.27.88.172"
@@ -13931,43 +13827,33 @@ proxies:
         Host: "web-app-nr6wpa.app-tp57xz.workers.dev"
       path: "/api/ws"
   -
-    name: "[learnLi/free-nodes] 🇫🇷 法国 | FRA #6 #1"
-    client-fingerprint: "chrome"
+    name: "[learnLi/free-nodes] 🇫🇷 法国 | FRA #17"
+    alpn:
+      - "h3"
+    client-fingerprint: "edge"
+    network: "xhttp"
     port: 443
     server: "151.101.36.201"
+    servername: "accounts.fastly.com"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "67cd3349-f789-4cbb-8b91-4b6b1654ce7c"
+    xhttp-opts:
+      host: "oh6.global.ssl.fastly.net"
+      mode: "auto"
+      path: "/"
+  -
+    name: "[learnLi/free-nodes] 🇬🇧 英国 | GBR #1 #1"
+    alpn:
+      - "h3"
+    client-fingerprint: "chrome"
+    port: 443
+    server: "151.101.36.235"
+    servername: "accounts.fastly.com"
     tls: true
     type: "vless"
     uuid: "67cd3349-f789-4cbb-8b91-4b6b1654ce7c"
-  -
-    name: "[learnLi/free-nodes] 🇭🇰 香港 | HKG #8"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "82.152.167.236"
-    servername: "v1n3.11676767.xyz"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/go.php/products"
-  -
-    name: "[learnLi/free-nodes] 🇮🇸 冰岛 | ISL #2"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 8443
-    server: "89.147.108.16"
-    servername: "v1n3.11676767.xyz"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/go.php/products"
   -
     name: "[learnLi/free-nodes] 🇮🇸[www.v2nodes.com] vless-IS-3..."
     network: "ws"
@@ -13982,144 +13868,6 @@ proxies:
         Host: "orbylume.my.to"
       path: "/tvpn-tor/isfp=chrome"
   -
-    name: "[learnLi/free-nodes] 🇯🇵 JP VLESS-07 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s2572.sspcccdn.xyz"
-    servername: "u695098u77c95bees2571.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098u77c95bees2571.xxti.top"
-      path: "aa34e53cdd078631ce7430da06d64c09"
-  -
-    name: "[learnLi/free-nodes] 🇯🇵 JP VLESS-40 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s2573.csgfw.top"
-    servername: "u695098u77c95bees2571.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098u77c95bees2571.xxti.top"
-      path: "aa34e53cdd078631ce7430da06d64c09"
-  -
-    name: "[learnLi/free-nodes] 🇯🇵 JP VLESS-69 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s2623.ccgfw.online"
-    servername: "u695098ud4a1e126s2622.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098ud4a1e126s2622.xxti.top"
-      path: "fd528e38b5e1d0a1c8dadad0d1c2e84b"
-  -
-    name: "[learnLi/free-nodes] 🇰🇷 KR VLESS-38 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s2562.uugfw.top"
-    servername: "u695098u53aeed47s2556.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098u53aeed47s2556.xxti.top"
-      path: "bb73f97fe26972118c6eca821c963bb0"
-  -
-    name: "[learnLi/free-nodes] 🇰🇷 KR VLESS-51 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s2659.ccgfw.online"
-    servername: "u695098u270a8f9cs2658.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098u270a8f9cs2658.xxti.top"
-      path: "224b0868abf552a7f3e1cd34bd90f2de"
-  -
-    name: "[learnLi/free-nodes] 🇰🇷 KR VLESS-74 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s2449.gogocs.xyz"
-    servername: "u695098u66e05ed8s2448.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098u66e05ed8s2448.xxti.top"
-      path: "bfaa4bbe8cd76b7477b05453d8d48ecc"
-  -
-    name: "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #3"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 8443
-    server: "123.111.169.70"
-    servername: "v1n3.11676767.xyz"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/go.php/products"
-  -
-    name: "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #5"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 2096
-    server: "123.111.169.70"
-    servername: "v1n3.11676767.xyz"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/go.php/products"
-  -
     name: "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #1"
     alpn:
       - "h2"
@@ -14131,22 +13879,28 @@ proxies:
     type: "vless"
     uuid: "cfe4c965-5a5e-4840-bee6-5f9208236671"
   -
-    name: "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #10"
+    name: "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #2"
     alpn:
       - "h2"
       - "http/1.1"
     client-fingerprint: "chrome"
-    network: "xhttp"
     port: 443
     server: "94.241.172.107"
     servername: "94.241.172.107"
     tls: true
     type: "vless"
-    udp: true
     uuid: "4777d90d-265b-4927-a0d1-63f36ed1421c"
-    xhttp-opts:
-      mode: "packet-up"
-      path: "/assets/nl02/"
+  -
+    name: "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #3"
+    alpn:
+      - "h3"
+    client-fingerprint: "edge"
+    port: 443
+    server: "151.101.36.246"
+    servername: "accounts.fastly.com"
+    tls: true
+    type: "vless"
+    uuid: "67cd3349-f789-4cbb-8b91-4b6b1654ce7c"
   -
     name: "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #3 #1"
     alpn:
@@ -14168,6 +13922,18 @@ proxies:
     type: "vless"
     uuid: "d38d73fd-88d8-4097-91d3-d6f7217c8279"
   -
+    name: "[learnLi/free-nodes] 🇳🇱NL_1|1.1MB/s"
+    alpn:
+      - "h2"
+      - "http/1.1"
+    client-fingerprint: "chrome"
+    port: 443
+    server: "cf.090227.xyz"
+    servername: "1ef92476s124.kuback.top"
+    tls: true
+    type: "vless"
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+  -
     name: "[learnLi/free-nodes] 🇳🇱NL_6|1.1MB/s"
     client-fingerprint: "firefox"
     port: 443
@@ -14176,6 +13942,15 @@ proxies:
     tls: true
     type: "vless"
     uuid: "cda0862a-0f87-4be9-8ed8-1d0c9e382839"
+  -
+    name: "[learnLi/free-nodes] 🇵🇱 波兰 | POL #1"
+    client-fingerprint: "chrome"
+    port: 443
+    server: "188.72.103.4"
+    servername: "cdn-ya.shamanapp.online"
+    tls: true
+    type: "vless"
+    uuid: "40c8a202-4b7f-45a6-b0aa-37db0fac4df8"
   -
     name: "[learnLi/free-nodes] 🇵🇱 波兰 | POL #1 #1"
     alpn:
@@ -14189,182 +13964,82 @@ proxies:
     type: "vless"
     uuid: "60214840-e4b9-4b4d-8661-4254f324cfe5"
   -
-    name: "[learnLi/free-nodes] 🇸🇬 新加坡 | SGP #8"
+    name: "[learnLi/free-nodes] 🇵🇱 波兰 | POL #4"
+    alpn:
+      - "h3"
     client-fingerprint: "chrome"
-    network: "ws"
+    network: "xhttp"
     port: 443
-    server: "5.34.176.32"
-    servername: "v2n4.11676767.xyz"
+    server: "151.101.36.253"
+    servername: "accounts.fastly.com"
     tls: true
     type: "vless"
     udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v2n4.11676767.xyz"
-      path: "/resource/topics"
-  -
-    name: "[learnLi/free-nodes] 🇸🇬[www.v2nodes.com] vless-SG-1... #10"
-    network: "ws"
-    port: 8443
-    server: "sg01.cf.sh-cloudflare.sbs"
-    servername: "sg01.cdn00.top"
-    tls: true
-    type: "vless"
-    uuid: "a8d9c86f-cddb-4fa5-96f7-f68eb48b3cb3"
-    ws-opts:
-      headers:
-        Host: "sg01.cdn00.top"
-      path: "/shanhai/sg01fp=chrome"
-  -
-    name: "[learnLi/free-nodes] 🇺🇸 US VLESS-08 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s2582.wagahaha.xyz"
-    servername: "u695098u58eae533s2570.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    uuid: "67cd3349-f789-4cbb-8b91-4b6b1654ce7c"
     xhttp-opts:
-      host: "u695098u58eae533s2570.xxti.top"
-      path: "64477e52343cfc0449eb5319593538ee"
-  -
-    name: "[learnLi/free-nodes] 🇺🇸 US VLESS-13 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s554.wagahaha.xyz"
-    servername: "u695098u8fc3d2e1s552.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098u8fc3d2e1s552.xxti.top"
-      path: "bba4e8e938f9ea04f6fb64f71f29a519"
-  -
-    name: "[learnLi/free-nodes] 🇺🇸 US VLESS-44 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s553.gogocs.xyz"
-    servername: "u695098u8fc3d2e1s552.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098u8fc3d2e1s552.xxti.top"
-      path: "bba4e8e938f9ea04f6fb64f71f29a519"
-  -
-    name: "[learnLi/free-nodes] 🇺🇸 US VLESS-75 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s5016.xxti.top"
-    servername: "u695098u47db298fs5014.gogocs.xyz"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098u47db298fs5014.gogocs.xyz"
-      path: "14b1fde4fc4e373d0b258425c76e8cf8"
-  -
-    name: "[learnLi/free-nodes] 🇺🇸 US VLESS-84 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s2317.gogocs.xyz"
-    servername: "u695098uf215742bs2316.fuhuovps.xyz"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098uf215742bs2316.fuhuovps.xyz"
-      path: "d299cd2149b1adf9e9ad034d1ecadb4f"
-  -
-    name: "[learnLi/free-nodes] 🇺🇸 美国 | USA #1"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "172.66.0.118"
-    servername: "v1n3.11676767.xyz"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/manhua/doujin"
-  -
-    name: "[learnLi/free-nodes] 🇺🇸 美国 | USA #11"
-    client-fingerprint: "chrome"
-    network: "ws"
-    port: 443
-    server: "bestcf.030101.xyz"
-    servername: "v1n3.11676767.xyz"
-    tls: true
-    type: "vless"
-    udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
-    ws-opts:
-      headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/go.php/products"
+      host: "ovd9.global.ssl.fastly.net"
+      mode: "auto"
+      path: "/"
   -
     name: "[learnLi/free-nodes] 🇺🇸 美国 | USA #12"
     client-fingerprint: "chrome"
     network: "ws"
-    port: 443
-    server: "149.28.8.10"
-    servername: "v1n3.11676767.xyz"
+    port: 2096
+    server: "188.114.97.6"
+    servername: "levikoconfig.levikogjgfdd.ir"
     tls: true
     type: "vless"
     udp: true
-    uuid: "5d7b401c-78fa-4254-872e-6d42bf7e75ec"
+    uuid: "50414e45-4c5f-5a45-5553-6f51879c0594"
     ws-opts:
       headers:
-        Host: "v1n3.11676767.xyz"
-      path: "/go.php/products"
+        Host: "levikoconfig.levikogjgfdd.ir"
+      path: "/"
   -
-    name: "[learnLi/free-nodes] 🏳[www.v2nodes.com] vless- #10"
+    name: "[learnLi/free-nodes] 🇺🇸 美国 | USA #15"
+    client-fingerprint: "chrome"
     network: "ws"
-    port: 443
-    server: "141.193.213.10"
-    servername: "partner.catchplay.com.r3xxe.eu.cc"
-    skip-cert-verify: false
+    port: 2053
+    server: "188.114.97.6"
+    servername: "levikoconfig.levikogjgfdd.ir"
     tls: true
     type: "vless"
-    uuid: "977b814d-d9e0-4889-bb71-98d6bfb8f462"
+    udp: true
+    uuid: "50414e45-4c5f-5a45-5553-6f51879c0594"
     ws-opts:
       headers:
-        Host: "partner.catchplay.com.r3xxe.eu.cc"
-      path: "/sg-amzfp=chrome"
+        Host: "levikoconfig.levikogjgfdd.ir"
+      path: "/"
+  -
+    name: "[learnLi/free-nodes] 🇺🇸 美国 | USA #16"
+    client-fingerprint: "chrome"
+    network: "ws"
+    port: 2096
+    server: "172.67.208.235"
+    servername: "courses.mftplus.qzz.io"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "b9ede7a5-5b4b-4aee-ac37-2c307e587e47"
+    ws-opts:
+      headers:
+        Host: "courses.mftplus.qzz.io"
+      path: "/eyJqdW5rIjoidVkzQm1ROUg4dyIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0="
+  -
+    name: "[learnLi/free-nodes] 🇺🇸 美国 | USA #8"
+    client-fingerprint: "chrome"
+    network: "xhttp"
+    port: 443
+    server: "200.102.179.69"
+    servername: "dmbdnpctq8hjxx.hat.onl"
+    tls: true
+    type: "vless"
+    udp: true
+    uuid: "7592ca5c-b352-4562-8856-a9c936a3331b"
+    xhttp-opts:
+      host: "dmbdnpctq8hjxx.hat.onl"
+      mode: "auto"
+      path: "/hls/014373eq/seg"
   -
     name: "[learnLi/free-nodes] FR法国丨yoyapai.com\\r"
     password: "humanity"
@@ -14415,6 +14090,14 @@ proxies:
     server: "172.66.40.99"
     skip-cert-verify: true
     sni: "www.trusteeforward.com"
+    type: "trojan"
+  -
+    name: "[learnLi/free-nodes] trojan-1827938592"
+    network: "ws"
+    password: "humanity"
+    port: 443
+    server: "162.159.91.211"
+    sni: "www.calmlunch.com"
     type: "trojan"
   -
     name: "[learnLi/free-nodes] trojan-1828472626"
@@ -14574,6 +14257,26 @@ proxies:
     sni: "www.trusteeforward.com"
     type: "trojan"
   -
+    name: "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 349"
+    network: "ws"
+    password: "eeb6823c-b926-4ea2-866a-5542edd26e59"
+    port: 443
+    server: "162.159.60.167"
+    sni: "hhcm.hhxaf.cc.cd"
+    type: "trojan"
+    ws-opts:
+      path: "/"
+  -
+    name: "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 378"
+    network: "ws"
+    password: "eeb6823c-b926-4ea2-866a-5542edd26e59"
+    port: 443
+    server: "172.64.53.74"
+    sni: "hhcm.hhxaf.cc.cd"
+    type: "trojan"
+    ws-opts:
+      path: "/"
+  -
     name: "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 578"
     network: "ws"
     password: "eeb6823c-b926-4ea2-866a-5542edd26e59"
@@ -14584,7 +14287,7 @@ proxies:
     ws-opts:
       path: "/"
   -
-    name: "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 797"
+    name: "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 797 #1"
     network: "ws"
     password: "eeb6823c-b926-4ea2-866a-5542edd26e59"
     port: 443
@@ -14594,15 +14297,13 @@ proxies:
     ws-opts:
       path: "/"
   -
-    name: "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 948"
-    network: "ws"
+    name: "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r"
     password: "humanity"
     port: 443
-    server: "104.16.174.148"
+    server: "104.26.14.137"
+    skip-cert-verify: true
     sni: "www.ignitelimit.com"
     type: "trojan"
-    ws-opts:
-      path: "/assignment"
   -
     name: "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r #1"
     password: "humanity"
@@ -14756,13 +14457,6 @@ proxies:
     sni: "www.ignitelimit.com"
     type: "trojan"
   -
-    name: "[learnLi/free-nodes] 🇨🇦[www.v2nodes.com] trojan-CA-... #6"
-    password: "5t6i121em5lkmsmk"
-    port: 46977
-    server: "ca001.zestapp778.com"
-    sni: "ca001.zestapp778.com"
-    type: "trojan"
-  -
     name: "[learnLi/free-nodes] 🇫🇷FR法国丨yoyapai.com\\r"
     password: "humanity"
     port: 443
@@ -14819,12 +14513,28 @@ proxies:
     sni: "www.ignitelimit.com"
     type: "trojan"
   -
+    name: "[learnLi/free-nodes] 🇸🇬 新加坡 | SGP #5"
+    password: "trojan"
+    port: 8443
+    server: "104.18.35.86"
+    skip-cert-verify: true
+    sni: "longwanghen.pages.dev"
+    type: "trojan"
+  -
     name: "[learnLi/free-nodes] 🇹🇷TR土耳其丨yoyapai.com\\r"
     password: "humanity"
     port: 443
     server: "86.38.214.205"
     skip-cert-verify: true
     sni: "www.ignitelimit.com"
+    type: "trojan"
+  -
+    name: "[learnLi/free-nodes] 🇹🇷[www.v2nodes.com] trojan-TR-..."
+    password: "d7563108-615c-4338-a7bd-77f359869a4a"
+    port: 20027
+    server: "sclass-b1.catcat321.com"
+    skip-cert-verify: true
+    sni: "hk.catxstar.com"
     type: "trojan"
   -
     name: "[learnLi/free-nodes] 🇺🇸US美国丨yoyapai.com\\r"
@@ -14835,7 +14545,7 @@ proxies:
     sni: "www.ignitelimit.com"
     type: "trojan"
   -
-    name: "[learnLi/free-nodes] 🏳[www.v2nodes.com] trojan- #2"
+    name: "[learnLi/free-nodes] 🏳[www.v2nodes.com] trojan- #1"
     network: "ws"
     password: "humanity"
     port: 443
@@ -14845,20 +14555,6 @@ proxies:
     type: "trojan"
     ws-opts:
       path: "%2Fassignment"
-  -
-    name: "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 783"
-    cipher: "aes-128-gcm"
-    password: "shadowsocks"
-    port: 443
-    server: "141.98.101.178"
-    type: "ss"
-  -
-    name: "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 784"
-    cipher: "chacha20-ietf-poly1305"
-    password: "GvsjQ0OZ5nGQXDGfzfWZf5"
-    port: 443
-    server: "212.227.146.33"
-    type: "ss"
   -
     name: "[learnLi/free-nodes] 🇫🇷 法国 | FRA"
     cipher: "aes-256-cfb"
@@ -14888,48 +14584,19 @@ proxies:
     server: "16.60.30.137"
     type: "ss"
   -
-    name: "[learnLi/free-nodes] 🇬🇧GB-141.98.101.179-5348"
-    cipher: "aes-128-gcm"
-    password: "shadowsocks"
-    port: 443
-    server: "141.98.101.179"
-    type: "ss"
-  -
-    name: "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #2"
-    cipher: "chacha20-ietf-poly1305"
-    password: "7e68e32f-8015-4f37-9082-70e8b0b58043"
-    port: 8443
-    server: "3.36.109.202"
-    type: "ss"
-    udp: true
-  -
-    name: "[learnLi/free-nodes] 🇳🇱[www.v2nodes.com] ss-NL-1620... #2"
-    cipher: "chacha20-ietf-poly1305"
-    password: "DYVqFDnYoMquRQunXC1xd2FyuDhd7JWs5jtf2eb7VkKLzXgZv8pt8gY1e91TT71V762zRX7MWW4HmjavanYdUF9bij8gG8AP"
-    port: 47195
-    server: "104.222.183.180"
-    type: "ss"
-  -
-    name: "[learnLi/free-nodes] 🇺🇸 美国 | USA #8"
+    name: "[learnLi/free-nodes] 🇺🇸 美国 | USA #7"
     cipher: "aes-256-cfb"
     password: "amazonskr05"
     port: 443
-    server: "3.16.78.3"
+    server: "18.117.92.138"
     type: "ss"
     udp: true
   -
-    name: "[learnLi/free-nodes] 🇺🇸US-54.196.238.241-0655"
-    cipher: "aes-256-cfb"
-    password: "amazonskr05"
-    port: 443
-    server: "54.196.238.241"
-    type: "ss"
-  -
-    name: "[learnLi/free-nodes] 🇺🇸[www.v2nodes.com] ss-US-1620... #1"
+    name: "[learnLi/free-nodes] 🇺🇸US-216.105.168.18-5406"
     cipher: "chacha20-ietf-poly1305"
-    password: "ijoUwfdnkz7mX4pWdkSpmEixTZCt2TRm1JDr4BSaBAWkLxYGoXBHXadFKY5D5ZfoVTwqsx46jCmEUDnQUizJDYrM7B5anhnu"
-    port: 42878
-    server: "23.230.52.119"
+    password: "hCCWOcIsK5wrFz4OX70rWf"
+    port: 443
+    server: "216.105.168.18"
     type: "ss"
   -
     name: "[bily1258-design/beimi] HK香港(mibei77.com 米贝节点分享)-28"
@@ -14947,20 +14614,33 @@ proxies:
       public-key: "Ur8yUWNKpZ60t2Vrf9YjbzUSA4uP-dcluSVPWNg2Kn8"
       short-id: "ab1f4b270774308f"
   -
+    name: "[bily1258-design/beimi] JP日本(mibei77.com 米贝节点分享)"
+    type: "vless"
+    server: "s2534.wagahaha.xyz"
+    port: 443
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    udp: true
+    network: "tcp"
+    tls: true
+    servername: "u695098udfec02ees2532.xxti.top"
+    flow: "xtls-rprx-vision"
+    client-fingerprint: "firefox"
+  -
+    name: "[bily1258-design/beimi] JP日本(mibei77.com 米贝节点分享)-32"
+    type: "vless"
+    server: "s2533.gogocs.xyz"
+    port: 443
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    udp: true
+    network: "tcp"
+    tls: true
+    servername: "u695098udfec02ees2532.xxti.top"
+    flow: "xtls-rprx-vision"
+    client-fingerprint: "firefox"
+  -
     name: "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-55"
     type: "vless"
     server: "151.101.36.128"
-    port: 443
-    uuid: "67cd3349-f789-4cbb-8b91-4b6b1654ce7c"
-    udp: true
-    network: "xhttp"
-    tls: true
-    servername: "accounts.fastly.com"
-    client-fingerprint: "chrome"
-  -
-    name: "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-56"
-    type: "vless"
-    server: "151.101.36.235"
     port: 443
     uuid: "67cd3349-f789-4cbb-8b91-4b6b1654ce7c"
     udp: true
@@ -15882,6 +15562,21 @@ proxies:
     tls: true
     servername: "jamph131-1228.pages.dev"
   -
+    name: "[bily1258-design/beimi] 🇺🇸US_527"
+    type: "vless"
+    server: "23.95.115.116"
+    port: 2053
+    uuid: "2739258b-a278-4bed-bc5d-f88830824dce"
+    udp: true
+    network: "tcp"
+    tls: true
+    servername: "www.cloudflare.com"
+    flow: "xtls-rprx-vision"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "plwyjJZIVDt1OtwDAxfcLjDsR7dseVCe9Ia3HceIKEg"
+      short-id: "a1b2c3d4"
+  -
     name: "[bily1258-design/beimi] 日本(shop.tgaaaa.co"
     type: "vless"
     server: "203.137.165.164"
@@ -16606,6 +16301,17 @@ proxies:
     tls: true
     servername: "ccc.010304.xyz"
   -
+    name: "[bily1258-design/beimi] US VLESS-54"
+    type: "vless"
+    server: "s2317.gogocs.xyz"
+    port: 443
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    udp: true
+    network: "xhttp"
+    tls: true
+    servername: "u695098uf215742bs2316.fuhuovps.xyz"
+    client-fingerprint: "firefox"
+  -
     name: "[bily1258-design/beimi] 🇭🇰-766"
     type: "vless"
     server: "91.193.58.179"
@@ -16741,6 +16447,18 @@ proxies:
     udp: true
     sni: "au4.yang-1989.xyz"
     servername: "au4.yang-1989.xyz"
+  -
+    name: "[bily1258-design/beimi] JP VLESS-39"
+    type: "vless"
+    server: "s2547.fuhuovps.xyz"
+    port: 443
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    udp: true
+    network: "tcp"
+    tls: true
+    servername: "u695098uf08a6307s2544.xxti.top"
+    flow: "xtls-rprx-vision"
+    client-fingerprint: "firefox"
   -
     name: "[bily1258-design/beimi] 🇺🇸US_290"
     type: "trojan"
@@ -17237,6 +16955,18 @@ proxies:
     tls: true
     servername: "usa.lovehk.xyz"
     client-fingerprint: "chrome"
+  -
+    name: "[bily1258-design/beimi] JP VLESS-38"
+    type: "vless"
+    server: "s2546.wagahaha.xyz"
+    port: 443
+    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    udp: true
+    network: "tcp"
+    tls: true
+    servername: "u695098uf08a6307s2544.xxti.top"
+    flow: "xtls-rprx-vision"
+    client-fingerprint: "firefox"
   -
     name: "[bily1258-design/beimi] 🇺🇸-1028"
     type: "vless"
@@ -18015,6 +17745,20 @@ proxies:
       path: "%2Fassignment"
       headers:
         Host: "www.ignitelimit.com"
+  -
+    name: "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1121"
+    type: "trojan"
+    server: "104.16.174.148"
+    port: 443
+    password: "humanity"
+    udp: true
+    sni: "www.ignitelimit.com"
+    servername: "www.ignitelimit.com"
+    network: "ws"
+    ws-opts:
+      path: "%2Fassignment"
+      headers:
+        Host: ""
   -
     name: "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1122"
     type: "trojan"
@@ -21641,6 +21385,21 @@ proxies:
     skip-cert-verify: true
     udp: true
   -
+    name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_867"
+    type: "vless"
+    server: "xray2-direct-mci1-fs-ce.freesocks.work"
+    port: 443
+    uuid: "94bfdcea-b921-4d85-860f-3dde54aa746a"
+    udp: true
+    tls: true
+    skip-cert-verify: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "7j3hmlHrEDk3Kjx-dFG3E3jf0c6PZF45trIPFsuKWmI"
+      short-id: ""
+    flow: "xtls-rprx-vision"
+  -
     name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1025"
     type: "trojan"
     server: "78.142.194.9"
@@ -21990,6 +21749,22 @@ proxies:
     skip-cert-verify: true
     udp: true
   -
+    name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_524"
+    type: "vless"
+    server: "185.200.66.193"
+    port: 443
+    uuid: "4e4f1f70-5e56-4a76-bb9d-db087f4690c4"
+    udp: true
+    tls: true
+    skip-cert-verify: true
+    servername: "jp3.yohototo.top"
+    client-fingerprint: "unsafe"
+    network: "ws"
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+  -
     name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1322"
     type: "trojan"
     server: "91.199.84.39"
@@ -22298,6 +22073,14 @@ proxies:
       path: "/tyxyws"
       headers:
         Host: "jp3.yohototo.top"
+  -
+    name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2584"
+    type: "ss"
+    server: "141.98.101.178"
+    port: 443
+    cipher: "aes-128-gcm"
+    password: "shadowsocks"
+    udp: true
   -
     name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1290"
     type: "trojan"
@@ -22820,6 +22603,22 @@ proxies:
     skip-cert-verify: true
     udp: true
   -
+    name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_736"
+    type: "vless"
+    server: "5.253.38.69"
+    port: 443
+    uuid: "99c5b713-dedf-4a10-8070-916ff3f49b0e"
+    udp: true
+    tls: true
+    skip-cert-verify: true
+    servername: "fs.qicai99.com"
+    client-fingerprint: "chrome"
+    network: "ws"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "fs.qicai99.com"
+  -
     name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1365"
     type: "trojan"
     server: "195.133.93.234"
@@ -22870,6 +22669,15 @@ proxies:
     port: 19999
     cipher: "aes-256-gcm"
     password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+    udp: true
+  -
+    name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1682"
+    type: "trojan"
+    server: "tw2.microsoft-orgwly.vip"
+    port: 443
+    password: "b5a21d2a-6208-4e23-91ab-c2423c2ae362"
+    sni: "tls.microsoft-orgwly.vip"
+    skip-cert-verify: true
     udp: true
   -
     name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1529"
@@ -23041,6 +22849,14 @@ proxies:
       host: "woshinidie-et3.pages.dev"
       tls: true
   -
+    name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2759"
+    type: "ss"
+    server: "104.222.183.180"
+    port: 47195
+    cipher: "chacha20-ietf-poly1305"
+    password: "DYVqFDnYoMquRQunXC1xd2FyuDhd7JWs5jtf2eb7VkKLzXgZv8pt8gY1e91TT71V762zRX7MWW4HmjavanYdUF9bij8gG8AP"
+    udp: true
+  -
     name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1105"
     type: "trojan"
     server: "nl-4.tr202504.com"
@@ -23084,6 +22900,21 @@ proxies:
     sni: "38.54.15.140"
     skip-cert-verify: true
     udp: true
+  -
+    name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_458"
+    type: "vless"
+    server: "xray1-direct-mci1-fs-ce.freesocks.work"
+    port: 443
+    uuid: "5e9579bf-65b0-4dd1-a9d0-91bc3463de1e"
+    udp: true
+    tls: true
+    skip-cert-verify: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "7j3hmlHrEDk3Kjx-dFG3E3jf0c6PZF45trIPFsuKWmI"
+      short-id: ""
+    flow: "xtls-rprx-vision"
   -
     name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1687"
     type: "trojan"
@@ -23497,6 +23328,21 @@ proxies:
     sni: "ja262.magiclampcloud.cn"
     skip-cert-verify: true
     udp: true
+  -
+    name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_177"
+    type: "vless"
+    server: "39.109.111.23"
+    port: 39675
+    uuid: "57beeeb0-03fc-4fc9-94da-7604488a7134"
+    udp: true
+    tls: true
+    skip-cert-verify: true
+    servername: "www.lamer.com.hk"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "VW9b1Lj_TPfa52PVrmLypSxQjRiV06sgG96uEd6oBRM"
+      short-id: "551a216445"
+    flow: "xtls-rprx-vision"
   -
     name: "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1208"
     type: "trojan"
@@ -26237,6 +26083,22 @@ proxies:
     servername: "deepl.com"
     client-fingerprint: "chrome"
   -
+    name: "[hezhanleiok/freesub] 🇸🇪 瑞典 (Sweden) 457 - xiaohe"
+    server: "94.143.231.146"
+    port: 443
+    udp: true
+    type: "vless"
+    uuid: "6e05822a-e9da-4135-a9db-71aa07a944af"
+    tls: true
+    servername: "sub.merky.top"
+    skip-cert-verify: false
+    client-fingerprint: "chrome"
+    network: "ws"
+    ws-opts:
+      path: "/merky-connect/de6/"
+      headers:
+        Host: "sub.merky.top"
+  -
     name: "[hezhanleiok/freesub] 🇳🇱 荷兰 (Netherlands) 458 - xiaohe"
     server: "193.29.139.147"
     port: 8080
@@ -26949,39 +26811,17 @@ proxies:
     cipher: "aes-256-cfb"
     password: "amazonskr05"
   -
-    name: "[learnLi/free-nodes] 未知 VLESS-73 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    network: "xhttp"
-    port: 443
-    server: "s2671.ccgfw.online"
-    servername: "u695098u75daf4ads2670.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
+    name: "[bily1258-design/beimi] JP VLESS-18"
     type: "vless"
-    uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
-    xhttp-opts:
-      host: "u695098u75daf4ads2670.xxti.top"
-      path: "85aca95c341ba5fe3245271db20116aa"
-  -
-    name: "[learnLi/free-nodes] 🇯🇵 JP VLESS-29 | free-nodes"
-    alpn:
-      - "h2"
-      - "http/1.1"
-    client-fingerprint: "firefox"
-    flow: "xtls-rprx-vision"
-    network: "tcp"
-    port: 443
     server: "s2503.ccgfw.online"
-    servername: "u695098u093da7d1s2502.xxti.top"
-    skip-cert-verify: false
-    tfo: false
-    tls: true
-    type: "vless"
+    port: 443
     uuid: "30e52776-55ac-3cb4-8d36-e2910f07e2c3"
+    udp: true
+    network: "tcp"
+    tls: true
+    servername: "u695098u093da7d1s2502.xxti.top"
+    flow: "xtls-rprx-vision"
+    client-fingerprint: "firefox"
   -
     name: "[sakazxc1400/free-vpn-sub] 147. 🇫🇮 Финляндия · ss · 414ms · 26ч"
     type: "ss"
@@ -28052,6 +27892,7 @@ proxy-groups:
       - "[sakazxc1400/free-vpn-sub] 95. 🇷🇴 Румыния · ss · 355ms · 58ч"
       - "[sakazxc1400/free-vpn-sub] 98. 🇪🇪 Эстония · vless · 444ms"
       - "[sakazxc1400/free-vpn-sub] 109. 🇸🇰 Словакия · vless · 594ms"
+      - "[sakazxc1400/free-vpn-sub] 114. 🇳🇬 Нигерия · vless · 1305ms · 26ч"
       - "[sakazxc1400/free-vpn-sub] 120. 🇸🇬 Сингапур · ss · 366ms · 58ч"
       - "[sakazxc1400/free-vpn-sub] 121. 🇸🇬 Сингапур · ss · 383ms · 58ч"
       - "[sakazxc1400/free-vpn-sub] 123. 🇸🇬 Сингапур · ss · 389ms · 58ч"
@@ -28080,55 +27921,37 @@ proxy-groups:
       - "[sakazxc1400/free-vpn-sub] 199. 🇨🇳 Китай · trojan · 1146ms · 58ч · ⚠"
       - "[sakazxc1400/free-vpn-sub] 200. 🇮🇷 Иран · trojan · 1330ms · 18ч · ⚠"
       - "[learnLi/free-nodes] BR_speednode_0003"
-      - "[learnLi/free-nodes] 新加坡4|@ripaojiedian"
-      - "[learnLi/free-nodes] 日本4|@ripaojiedian"
-      - "[learnLi/free-nodes] 未知 VLESS-101 | free-nodes"
+      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 455"
       - "[learnLi/free-nodes] 美国2|@ripaojiedian"
-      - "[learnLi/free-nodes] 美国4|@ripaojiedian"
-      - "[learnLi/free-nodes] 香港4|@ripaojiedian"
       - "[learnLi/free-nodes] 🇧🇬 保加利亚 | BGR #1"
-      - "[learnLi/free-nodes] 🇧🇬[www.v2nodes.com] vless-BG-3... #1"
-      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #11"
-      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #13"
-      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #14"
-      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #15"
+      - "[learnLi/free-nodes] 🇧🇬 保加利亚 | BGR #2"
+      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #7"
       - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #9"
-      - "[learnLi/free-nodes] 🇩🇪[www.v2nodes.com] vless-DE-1... #16"
-      - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #6 #1"
-      - "[learnLi/free-nodes] 🇭🇰 香港 | HKG #8"
-      - "[learnLi/free-nodes] 🇮🇸 冰岛 | ISL #2"
+      - "[learnLi/free-nodes] 🇩🇪[www.v2nodes.com] vless-DE-1..."
+      - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #17"
+      - "[learnLi/free-nodes] 🇬🇧 英国 | GBR #1 #1"
       - "[learnLi/free-nodes] 🇮🇸[www.v2nodes.com] vless-IS-3..."
-      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-07 | free-nodes"
-      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-40 | free-nodes"
-      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-69 | free-nodes"
-      - "[learnLi/free-nodes] 🇰🇷 KR VLESS-38 | free-nodes"
-      - "[learnLi/free-nodes] 🇰🇷 KR VLESS-51 | free-nodes"
-      - "[learnLi/free-nodes] 🇰🇷 KR VLESS-74 | free-nodes"
-      - "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #3"
-      - "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #5"
       - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #1"
-      - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #10"
+      - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #2"
+      - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #3"
       - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #3 #1"
       - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #4"
+      - "[learnLi/free-nodes] 🇳🇱NL_1|1.1MB/s"
       - "[learnLi/free-nodes] 🇳🇱NL_6|1.1MB/s"
+      - "[learnLi/free-nodes] 🇵🇱 波兰 | POL #1"
       - "[learnLi/free-nodes] 🇵🇱 波兰 | POL #1 #1"
-      - "[learnLi/free-nodes] 🇸🇬 新加坡 | SGP #8"
-      - "[learnLi/free-nodes] 🇸🇬[www.v2nodes.com] vless-SG-1... #10"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-08 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-13 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-44 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-75 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-84 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #1"
-      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #11"
+      - "[learnLi/free-nodes] 🇵🇱 波兰 | POL #4"
       - "[learnLi/free-nodes] 🇺🇸 美国 | USA #12"
-      - "[learnLi/free-nodes] 🏳[www.v2nodes.com] vless- #10"
+      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #15"
+      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #16"
+      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #8"
       - "[learnLi/free-nodes] FR法国丨yoyapai.com\\r"
       - "[learnLi/free-nodes] trojan-1827148859"
       - "[learnLi/free-nodes] trojan-1827148954"
       - "[learnLi/free-nodes] trojan-1827149109"
       - "[learnLi/free-nodes] trojan-1827149560"
       - "[learnLi/free-nodes] trojan-1827188005"
+      - "[learnLi/free-nodes] trojan-1827938592"
       - "[learnLi/free-nodes] trojan-1828472626"
       - "[learnLi/free-nodes] trojan-1853348743"
       - "[learnLi/free-nodes] trojan-1853461582"
@@ -28148,9 +27971,11 @@ proxy-groups:
       - "[learnLi/free-nodes] trojan-1944218170"
       - "[learnLi/free-nodes] trojan-1944218172"
       - "[learnLi/free-nodes] trojan-1947413506"
+      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 349"
+      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 378"
       - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 578"
-      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 797"
-      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 948"
+      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 797 #1"
+      - "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r"
       - "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r #1"
       - "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r #2"
       - "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r #3"
@@ -28170,7 +27995,6 @@ proxy-groups:
       - "[learnLi/free-nodes] 🇨🇦CA加拿大丨yoyapai.com\\r #7"
       - "[learnLi/free-nodes] 🇨🇦CA加拿大丨yoyapai.com\\r #8"
       - "[learnLi/free-nodes] 🇨🇦CA加拿大丨yoyapai.com\\r #9"
-      - "[learnLi/free-nodes] 🇨🇦[www.v2nodes.com] trojan-CA-... #6"
       - "[learnLi/free-nodes] 🇫🇷FR法国丨yoyapai.com\\r"
       - "[learnLi/free-nodes] 🇫🇷FR法國丨yoyapai.com\\r"
       - "[learnLi/free-nodes] 🇫🇷FR法國丨yoyapai.com\\r #1"
@@ -28178,24 +28002,21 @@ proxy-groups:
       - "[learnLi/free-nodes] 🇫🇷法国丨yoyapai.com\\r #1"
       - "[learnLi/free-nodes] 🇫🇷法国丨yoyapai.com\\r #2"
       - "[learnLi/free-nodes] 🇫🇷法国丨yoyapai.com\\r #3"
+      - "[learnLi/free-nodes] 🇸🇬 新加坡 | SGP #5"
       - "[learnLi/free-nodes] 🇹🇷TR土耳其丨yoyapai.com\\r"
+      - "[learnLi/free-nodes] 🇹🇷[www.v2nodes.com] trojan-TR-..."
       - "[learnLi/free-nodes] 🇺🇸US美国丨yoyapai.com\\r"
-      - "[learnLi/free-nodes] 🏳[www.v2nodes.com] trojan- #2"
-      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 783"
-      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 784"
+      - "[learnLi/free-nodes] 🏳[www.v2nodes.com] trojan- #1"
       - "[learnLi/free-nodes] 🇫🇷 法国 | FRA"
       - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #10"
       - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #11"
       - "[learnLi/free-nodes] 🇬🇧 英国 | GBR"
-      - "[learnLi/free-nodes] 🇬🇧GB-141.98.101.179-5348"
-      - "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #2"
-      - "[learnLi/free-nodes] 🇳🇱[www.v2nodes.com] ss-NL-1620... #2"
-      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #8"
-      - "[learnLi/free-nodes] 🇺🇸US-54.196.238.241-0655"
-      - "[learnLi/free-nodes] 🇺🇸[www.v2nodes.com] ss-US-1620... #1"
+      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #7"
+      - "[learnLi/free-nodes] 🇺🇸US-216.105.168.18-5406"
       - "[bily1258-design/beimi] HK香港(mibei77.com 米贝节点分享)-28"
+      - "[bily1258-design/beimi] JP日本(mibei77.com 米贝节点分享)"
+      - "[bily1258-design/beimi] JP日本(mibei77.com 米贝节点分享)-32"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-55"
-      - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-56"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-57"
       - "[bily1258-design/beimi] 🇺🇸US_591"
       - "[bily1258-design/beimi] 🇺🇸US_284"
@@ -28274,6 +28095,7 @@ proxy-groups:
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-458"
       - "[bily1258-design/beimi] 🇺🇸US_538"
       - "[bily1258-design/beimi] 🇭🇰-471"
+      - "[bily1258-design/beimi] 🇺🇸US_527"
       - "[bily1258-design/beimi] 日本(shop.tgaaaa.co"
       - "[bily1258-design/beimi] 🇯🇵JP_38"
       - "[bily1258-design/beimi] 🇺🇸US_619"
@@ -28333,6 +28155,7 @@ proxy-groups:
       - "[bily1258-design/beimi] JP VLESS-44"
       - "[bily1258-design/beimi] 🇭🇰-751"
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-756"
+      - "[bily1258-design/beimi] US VLESS-54"
       - "[bily1258-design/beimi] 🇭🇰-766"
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-768"
       - "[bily1258-design/beimi] 🇭🇰-778"
@@ -28347,6 +28170,7 @@ proxy-groups:
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-808"
       - "[bily1258-design/beimi] 🇸🇬-814"
       - "[bily1258-design/beimi] 加拿大(shop.tgaaaa.co-817"
+      - "[bily1258-design/beimi] JP VLESS-39"
       - "[bily1258-design/beimi] 🇺🇸US_290"
       - "[bily1258-design/beimi] 🇺🇸-829"
       - "[bily1258-design/beimi] 🇺🇸-832"
@@ -28388,6 +28212,7 @@ proxy-groups:
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-1005"
       - "[bily1258-design/beimi] 🇯🇵-1009"
       - "[bily1258-design/beimi] 🇺🇸-1017"
+      - "[bily1258-design/beimi] JP VLESS-38"
       - "[bily1258-design/beimi] 🇺🇸-1028"
       - "[bily1258-design/beimi] 🇺🇸US_298"
       - "[bily1258-design/beimi] 🇺🇸US_364"
@@ -28445,6 +28270,7 @@ proxy-groups:
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1118"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1119"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1120"
+      - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1121"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1122"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1123"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1124"
@@ -28702,6 +28528,7 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2770"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1123"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_973"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_867"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1025"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1805"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2634"
@@ -28739,6 +28566,7 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1160"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2113"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1942"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_524"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1322"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1067"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1838"
@@ -28771,6 +28599,7 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1911"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2159"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_673"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2584"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1290"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1872"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1334"
@@ -28826,12 +28655,14 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2616"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1395"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1289"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_736"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1365"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1262"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1036"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1875"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2134"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2726"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1682"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1529"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1263"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1567"
@@ -28850,11 +28681,13 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_997"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1925"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2329"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2759"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1105"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1521"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2007"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_999"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1185"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_458"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1687"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2775"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_438"
@@ -28899,6 +28732,7 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1502"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2265"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1712"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_177"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1208"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_646"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2780"
@@ -29161,6 +28995,7 @@ proxy-groups:
       - "[hezhanleiok/freesub] 🇫🇷 法国 (France) 450 - xiaohe"
       - "[hezhanleiok/freesub] 🇰🇷 韩国 (South Korea) 452 - xiaohe"
       - "[hezhanleiok/freesub] 🇮🇶 IQ 455 - xiaohe"
+      - "[hezhanleiok/freesub] 🇸🇪 瑞典 (Sweden) 457 - xiaohe"
       - "[hezhanleiok/freesub] 🇳🇱 荷兰 (Netherlands) 458 - xiaohe"
       - "[hezhanleiok/freesub] 🇳🇱 荷兰 (Netherlands) 459 - xiaohe"
       - "[hezhanleiok/freesub] 🇩🇪 德国 (Germany) 463 - xiaohe"
@@ -29217,8 +29052,7 @@ proxy-groups:
       - "[hezhanleiok/freesub] 🇺🇸 美国 (United States) 589 - xiaohe"
       - "[hezhanleiok/freesub] 🇰🇷 韩国 (South Korea) 591 - xiaohe"
       - "[wuge0/free-nodes] 🇨🇦CA-35.182.245.215-0661"
-      - "[learnLi/free-nodes] 未知 VLESS-73 | free-nodes"
-      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-29 | free-nodes"
+      - "[bily1258-design/beimi] JP VLESS-18"
       - "[sakazxc1400/free-vpn-sub] 147. 🇫🇮 Финляндия · ss · 414ms · 26ч"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_363"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1615"
@@ -30263,6 +30097,7 @@ proxy-groups:
       - "[sakazxc1400/free-vpn-sub] 95. 🇷🇴 Румыния · ss · 355ms · 58ч"
       - "[sakazxc1400/free-vpn-sub] 98. 🇪🇪 Эстония · vless · 444ms"
       - "[sakazxc1400/free-vpn-sub] 109. 🇸🇰 Словакия · vless · 594ms"
+      - "[sakazxc1400/free-vpn-sub] 114. 🇳🇬 Нигерия · vless · 1305ms · 26ч"
       - "[sakazxc1400/free-vpn-sub] 120. 🇸🇬 Сингапур · ss · 366ms · 58ч"
       - "[sakazxc1400/free-vpn-sub] 121. 🇸🇬 Сингапур · ss · 383ms · 58ч"
       - "[sakazxc1400/free-vpn-sub] 123. 🇸🇬 Сингапур · ss · 389ms · 58ч"
@@ -30291,55 +30126,37 @@ proxy-groups:
       - "[sakazxc1400/free-vpn-sub] 199. 🇨🇳 Китай · trojan · 1146ms · 58ч · ⚠"
       - "[sakazxc1400/free-vpn-sub] 200. 🇮🇷 Иран · trojan · 1330ms · 18ч · ⚠"
       - "[learnLi/free-nodes] BR_speednode_0003"
-      - "[learnLi/free-nodes] 新加坡4|@ripaojiedian"
-      - "[learnLi/free-nodes] 日本4|@ripaojiedian"
-      - "[learnLi/free-nodes] 未知 VLESS-101 | free-nodes"
+      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 455"
       - "[learnLi/free-nodes] 美国2|@ripaojiedian"
-      - "[learnLi/free-nodes] 美国4|@ripaojiedian"
-      - "[learnLi/free-nodes] 香港4|@ripaojiedian"
       - "[learnLi/free-nodes] 🇧🇬 保加利亚 | BGR #1"
-      - "[learnLi/free-nodes] 🇧🇬[www.v2nodes.com] vless-BG-3... #1"
-      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #11"
-      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #13"
-      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #14"
-      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #15"
+      - "[learnLi/free-nodes] 🇧🇬 保加利亚 | BGR #2"
+      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #7"
       - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #9"
-      - "[learnLi/free-nodes] 🇩🇪[www.v2nodes.com] vless-DE-1... #16"
-      - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #6 #1"
-      - "[learnLi/free-nodes] 🇭🇰 香港 | HKG #8"
-      - "[learnLi/free-nodes] 🇮🇸 冰岛 | ISL #2"
+      - "[learnLi/free-nodes] 🇩🇪[www.v2nodes.com] vless-DE-1..."
+      - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #17"
+      - "[learnLi/free-nodes] 🇬🇧 英国 | GBR #1 #1"
       - "[learnLi/free-nodes] 🇮🇸[www.v2nodes.com] vless-IS-3..."
-      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-07 | free-nodes"
-      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-40 | free-nodes"
-      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-69 | free-nodes"
-      - "[learnLi/free-nodes] 🇰🇷 KR VLESS-38 | free-nodes"
-      - "[learnLi/free-nodes] 🇰🇷 KR VLESS-51 | free-nodes"
-      - "[learnLi/free-nodes] 🇰🇷 KR VLESS-74 | free-nodes"
-      - "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #3"
-      - "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #5"
       - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #1"
-      - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #10"
+      - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #2"
+      - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #3"
       - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #3 #1"
       - "[learnLi/free-nodes] 🇳🇱 荷兰 | NLD #4"
+      - "[learnLi/free-nodes] 🇳🇱NL_1|1.1MB/s"
       - "[learnLi/free-nodes] 🇳🇱NL_6|1.1MB/s"
+      - "[learnLi/free-nodes] 🇵🇱 波兰 | POL #1"
       - "[learnLi/free-nodes] 🇵🇱 波兰 | POL #1 #1"
-      - "[learnLi/free-nodes] 🇸🇬 新加坡 | SGP #8"
-      - "[learnLi/free-nodes] 🇸🇬[www.v2nodes.com] vless-SG-1... #10"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-08 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-13 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-44 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-75 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 US VLESS-84 | free-nodes"
-      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #1"
-      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #11"
+      - "[learnLi/free-nodes] 🇵🇱 波兰 | POL #4"
       - "[learnLi/free-nodes] 🇺🇸 美国 | USA #12"
-      - "[learnLi/free-nodes] 🏳[www.v2nodes.com] vless- #10"
+      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #15"
+      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #16"
+      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #8"
       - "[learnLi/free-nodes] FR法国丨yoyapai.com\\r"
       - "[learnLi/free-nodes] trojan-1827148859"
       - "[learnLi/free-nodes] trojan-1827148954"
       - "[learnLi/free-nodes] trojan-1827149109"
       - "[learnLi/free-nodes] trojan-1827149560"
       - "[learnLi/free-nodes] trojan-1827188005"
+      - "[learnLi/free-nodes] trojan-1827938592"
       - "[learnLi/free-nodes] trojan-1828472626"
       - "[learnLi/free-nodes] trojan-1853348743"
       - "[learnLi/free-nodes] trojan-1853461582"
@@ -30359,9 +30176,11 @@ proxy-groups:
       - "[learnLi/free-nodes] trojan-1944218170"
       - "[learnLi/free-nodes] trojan-1944218172"
       - "[learnLi/free-nodes] trojan-1947413506"
+      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 349"
+      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 378"
       - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 578"
-      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 797"
-      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 948"
+      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 797 #1"
+      - "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r"
       - "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r #1"
       - "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r #2"
       - "[learnLi/free-nodes] ❓未知丨yoyapai.com\\r #3"
@@ -30381,7 +30200,6 @@ proxy-groups:
       - "[learnLi/free-nodes] 🇨🇦CA加拿大丨yoyapai.com\\r #7"
       - "[learnLi/free-nodes] 🇨🇦CA加拿大丨yoyapai.com\\r #8"
       - "[learnLi/free-nodes] 🇨🇦CA加拿大丨yoyapai.com\\r #9"
-      - "[learnLi/free-nodes] 🇨🇦[www.v2nodes.com] trojan-CA-... #6"
       - "[learnLi/free-nodes] 🇫🇷FR法国丨yoyapai.com\\r"
       - "[learnLi/free-nodes] 🇫🇷FR法國丨yoyapai.com\\r"
       - "[learnLi/free-nodes] 🇫🇷FR法國丨yoyapai.com\\r #1"
@@ -30389,24 +30207,21 @@ proxy-groups:
       - "[learnLi/free-nodes] 🇫🇷法国丨yoyapai.com\\r #1"
       - "[learnLi/free-nodes] 🇫🇷法国丨yoyapai.com\\r #2"
       - "[learnLi/free-nodes] 🇫🇷法国丨yoyapai.com\\r #3"
+      - "[learnLi/free-nodes] 🇸🇬 新加坡 | SGP #5"
       - "[learnLi/free-nodes] 🇹🇷TR土耳其丨yoyapai.com\\r"
+      - "[learnLi/free-nodes] 🇹🇷[www.v2nodes.com] trojan-TR-..."
       - "[learnLi/free-nodes] 🇺🇸US美国丨yoyapai.com\\r"
-      - "[learnLi/free-nodes] 🏳[www.v2nodes.com] trojan- #2"
-      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 783"
-      - "[learnLi/free-nodes] ⚡ b2n.ir/v2ray-configs | 784"
+      - "[learnLi/free-nodes] 🏳[www.v2nodes.com] trojan- #1"
       - "[learnLi/free-nodes] 🇫🇷 法国 | FRA"
       - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #10"
       - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #11"
       - "[learnLi/free-nodes] 🇬🇧 英国 | GBR"
-      - "[learnLi/free-nodes] 🇬🇧GB-141.98.101.179-5348"
-      - "[learnLi/free-nodes] 🇰🇷 韩国 | KOR #2"
-      - "[learnLi/free-nodes] 🇳🇱[www.v2nodes.com] ss-NL-1620... #2"
-      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #8"
-      - "[learnLi/free-nodes] 🇺🇸US-54.196.238.241-0655"
-      - "[learnLi/free-nodes] 🇺🇸[www.v2nodes.com] ss-US-1620... #1"
+      - "[learnLi/free-nodes] 🇺🇸 美国 | USA #7"
+      - "[learnLi/free-nodes] 🇺🇸US-216.105.168.18-5406"
       - "[bily1258-design/beimi] HK香港(mibei77.com 米贝节点分享)-28"
+      - "[bily1258-design/beimi] JP日本(mibei77.com 米贝节点分享)"
+      - "[bily1258-design/beimi] JP日本(mibei77.com 米贝节点分享)-32"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-55"
-      - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-56"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-57"
       - "[bily1258-design/beimi] 🇺🇸US_591"
       - "[bily1258-design/beimi] 🇺🇸US_284"
@@ -30485,6 +30300,7 @@ proxy-groups:
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-458"
       - "[bily1258-design/beimi] 🇺🇸US_538"
       - "[bily1258-design/beimi] 🇭🇰-471"
+      - "[bily1258-design/beimi] 🇺🇸US_527"
       - "[bily1258-design/beimi] 日本(shop.tgaaaa.co"
       - "[bily1258-design/beimi] 🇯🇵JP_38"
       - "[bily1258-design/beimi] 🇺🇸US_619"
@@ -30544,6 +30360,7 @@ proxy-groups:
       - "[bily1258-design/beimi] JP VLESS-44"
       - "[bily1258-design/beimi] 🇭🇰-751"
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-756"
+      - "[bily1258-design/beimi] US VLESS-54"
       - "[bily1258-design/beimi] 🇭🇰-766"
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-768"
       - "[bily1258-design/beimi] 🇭🇰-778"
@@ -30558,6 +30375,7 @@ proxy-groups:
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-808"
       - "[bily1258-design/beimi] 🇸🇬-814"
       - "[bily1258-design/beimi] 加拿大(shop.tgaaaa.co-817"
+      - "[bily1258-design/beimi] JP VLESS-39"
       - "[bily1258-design/beimi] 🇺🇸US_290"
       - "[bily1258-design/beimi] 🇺🇸-829"
       - "[bily1258-design/beimi] 🇺🇸-832"
@@ -30599,6 +30417,7 @@ proxy-groups:
       - "[bily1258-design/beimi] 美国(shop.tgaaaa.co-1005"
       - "[bily1258-design/beimi] 🇯🇵-1009"
       - "[bily1258-design/beimi] 🇺🇸-1017"
+      - "[bily1258-design/beimi] JP VLESS-38"
       - "[bily1258-design/beimi] 🇺🇸-1028"
       - "[bily1258-design/beimi] 🇺🇸US_298"
       - "[bily1258-design/beimi] 🇺🇸US_364"
@@ -30656,6 +30475,7 @@ proxy-groups:
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1118"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1119"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1120"
+      - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1121"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1122"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1123"
       - "[bily1258-design/beimi] US美国(mibei77.com 米贝节点分享)-1124"
@@ -30913,6 +30733,7 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2770"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1123"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_973"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_867"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1025"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1805"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2634"
@@ -30950,6 +30771,7 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1160"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2113"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1942"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_524"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1322"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1067"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1838"
@@ -30982,6 +30804,7 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1911"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2159"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_673"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2584"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1290"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1872"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1334"
@@ -31037,12 +30860,14 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2616"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1395"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1289"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_736"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1365"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1262"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1036"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1875"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2134"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2726"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1682"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1529"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1263"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1567"
@@ -31061,11 +30886,13 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_997"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1925"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2329"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2759"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1105"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1521"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2007"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_999"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1185"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_458"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1687"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2775"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_438"
@@ -31110,6 +30937,7 @@ proxy-groups:
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1502"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2265"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1712"
+      - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_177"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1208"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_646"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_2780"
@@ -31372,6 +31200,7 @@ proxy-groups:
       - "[hezhanleiok/freesub] 🇫🇷 法国 (France) 450 - xiaohe"
       - "[hezhanleiok/freesub] 🇰🇷 韩国 (South Korea) 452 - xiaohe"
       - "[hezhanleiok/freesub] 🇮🇶 IQ 455 - xiaohe"
+      - "[hezhanleiok/freesub] 🇸🇪 瑞典 (Sweden) 457 - xiaohe"
       - "[hezhanleiok/freesub] 🇳🇱 荷兰 (Netherlands) 458 - xiaohe"
       - "[hezhanleiok/freesub] 🇳🇱 荷兰 (Netherlands) 459 - xiaohe"
       - "[hezhanleiok/freesub] 🇩🇪 德国 (Germany) 463 - xiaohe"
@@ -31428,8 +31257,7 @@ proxy-groups:
       - "[hezhanleiok/freesub] 🇺🇸 美国 (United States) 589 - xiaohe"
       - "[hezhanleiok/freesub] 🇰🇷 韩国 (South Korea) 591 - xiaohe"
       - "[wuge0/free-nodes] 🇨🇦CA-35.182.245.215-0661"
-      - "[learnLi/free-nodes] 未知 VLESS-73 | free-nodes"
-      - "[learnLi/free-nodes] 🇯🇵 JP VLESS-29 | free-nodes"
+      - "[bily1258-design/beimi] JP VLESS-18"
       - "[sakazxc1400/free-vpn-sub] 147. 🇫🇮 Финляндия · ss · 414ms · 26ч"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_363"
       - "[Delta-Kronecker/V2ray-Config] @DeltaKroneckerGithub_1615"
