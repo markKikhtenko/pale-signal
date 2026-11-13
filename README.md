@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-7926-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-8191-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-11-13 16:58:51 МСК`
+**Последнее обновление:** `2026-11-14 02:20:18 МСК`
 
 ## Подписки
 
@@ -28,13 +28,13 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `7926` |
-| Россия | `1507` |
-| Global | `6419` |
-| Global 5K | `1618` |
+| Всего серверов | `8191` |
+| Россия | `1555` |
+| Global | `6636` |
+| Global 5K | `1724` |
 | LAN 5K | `5000` |
-| LAN Global | `5201` |
-| LAN Global Fast Check | `5201` |
+| LAN Global | `5317` |
+| LAN Global Fast Check | `5317` |
 | LAN Experimental | `2165` |
 | LAN Experimental AUTO | `2165` |
 | Исключено пересечений Experimental с LAN Global | `401` |
@@ -97,7 +97,7 @@
 <!-- LAN-SOURCE-STATS:START -->
 ## Новые LAN-источники
 
-Эталонные `2002` записей из `origin/main` и ранее добавленные `157` записей (всего `2159`) сохранены без изменения имён, параметров и порядка. Добавлено `3042` новых конфигураций; исключено `12978` новых дублей. Итого `5201` записей и `4312` уникальных `server + port + UUID` (в старом пуле: `1270`). Статус «проверено» присваивается только после успешного HTTPS через VLESS.
+Эталонные `2002` записей из `origin/main` и ранее добавленные `157` записей (всего `2159`) сохранены без изменения имён, параметров и порядка. Добавлено `3158` новых конфигураций; исключено `13526` новых дублей. Итого `5317` записей и `4428` уникальных `server + port + UUID` (в старом пуле: `1270`). Статус «проверено» присваивается только после успешного HTTPS через VLESS.
 
 Полные URL, время обновления, ошибки загрузки, причины отбраковки, транспорты и результаты стадий HTTPS сохранены в [`lan-source-stats.json`](lan-source-stats.json).
 
@@ -105,21 +105,21 @@
 
 | Источник | Получено | VLESS | Валидных | Уникальных | Дубли | Добавлено | HTTPS | Статус |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| [MahanKenway configs/vless.txt](https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt) | `133` | `133` | `122` | `72` | `50` | `69` | `0/3` | не проверено |
+| [MahanKenway configs/vless.txt](https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt) | `133` | `133` | `122` | `74` | `48` | `71` | `0/3` | не проверено |
 | [Epodonios Splitted-By-Protocol/vless.txt](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt) | `0` | `0` | `0` | `0` | `0` | `0` | `0/0` | не проверено |
-| [barry-far V2ray-config vless.txt](https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt) | `6312` | `6312` | `5938` | `2130` | `3808` | `1828` | `0/3` | не проверено |
-| [SoliSpirit Protocols/vless.txt](https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt) | `5074` | `5074` | `4528` | `445` | `4083` | `378` | `0/3` | не проверено |
-| [liMilCo v2r pro/vless.txt](https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt) | `3630` | `3630` | `3332` | `350` | `2982` | `274` | `0/3` | не проверено |
-| [V2RayRoot Config/vless.txt](https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt) | `263` | `263` | `258` | `15` | `243` | `15` | `0/3` | не проверено |
-| [0xRadikal FAST](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/fast/configs.txt) | `785` | `322` | `321` | `132` | `189` | `126` | `3/3` | проверено |
-| [v2go Live-tested VLESS](https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Protocol/vless.txt) | `214` | `214` | `211` | `92` | `119` | `85` | `1/3` | проверено |
+| [barry-far V2ray-config vless.txt](https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt) | `6653` | `6653` | `6190` | `2113` | `4077` | `1815` | `0/3` | не проверено |
+| [SoliSpirit Protocols/vless.txt](https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Protocols/vless.txt) | `5338` | `5338` | `4751` | `379` | `4372` | `318` | `0/3` | не проверено |
+| [liMilCo v2r pro/vless.txt](https://raw.githubusercontent.com/liMilCo/v2r/main/pro/vless.txt) | `3630` | `3630` | `3332` | `541` | `2791` | `437` | `0/3` | не проверено |
+| [V2RayRoot Config/vless.txt](https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt) | `263` | `263` | `258` | `14` | `244` | `14` | `0/3` | не проверено |
+| [0xRadikal FAST](https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/fast/configs.txt) | `848` | `341` | `336` | `144` | `192` | `141` | `3/3` | проверено |
+| [v2go Live-tested VLESS](https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Protocol/vless.txt) | `181` | `181` | `174` | `62` | `112` | `60` | `0/3` | не проверено |
 | [PulseConfigs FAST](https://raw.githubusercontent.com/drmikecrypto/PulseConfigs/main/fast/configs.txt) | `130` | `10` | `10` | `0` | `10` | `0` | `0/0` | не проверено |
-| [free-xray-gcp VLESS](https://raw.githubusercontent.com/noahclanman/free-xray-gcp/main/output/protocols/vless.txt) | `463` | `463` | `461` | `111` | `350` | `90` | `2/3` | проверено |
-| [multi-proxy-config-fetcher tested](https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs_tested.txt) | `179` | `66` | `66` | `3` | `63` | `1` | `0/1` | не проверено |
-| [patterniha Free-Configs](https://raw.githubusercontent.com/patterniha/Free-Configs/main/configs.txt) | `75` | `75` | `69` | `8` | `61` | `5` | `0/3` | не проверено |
+| [free-xray-gcp VLESS](https://raw.githubusercontent.com/noahclanman/free-xray-gcp/main/output/protocols/vless.txt) | `537` | `537` | `522` | `125` | `397` | `102` | `3/3` | проверено |
+| [multi-proxy-config-fetcher tested](https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs_tested.txt) | `216` | `72` | `72` | `2` | `70` | `1` | `1/1` | проверено |
+| [patterniha Free-Configs](https://raw.githubusercontent.com/patterniha/Free-Configs/main/configs.txt) | `93` | `93` | `90` | `4` | `86` | `2` | `0/2` | не проверено |
 | [CaptchaQ working_all](https://raw.githubusercontent.com/CaptchaQ/vless-servers/main/working_all.txt) | `84` | `84` | `84` | `21` | `63` | `17` | `0/3` | не проверено |
 | [NodesRadar v2ray](https://radarhub.top/v2ray.txt) | `500` | `0` | `0` | `0` | `0` | `0` | `0/0` | не проверено |
-| [mrdevmohamed VLESS](https://raw.githubusercontent.com/mrdevmohamed/v2ray-configs/main/Splitted-By-Protocol/vless.txt) | `1039` | `1039` | `1036` | `103` | `933` | `85` | `2/3` | проверено |
+| [mrdevmohamed VLESS](https://raw.githubusercontent.com/mrdevmohamed/v2ray-configs/main/Splitted-By-Protocol/vless.txt) | `1169` | `1169` | `1169` | `129` | `1040` | `111` | `0/3` | не проверено |
 | [Baarcuda top100 VLESS](https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt) | `100` | `100` | `99` | `75` | `24` | `69` | `0/3` | не проверено |
 <!-- LAN-SOURCE-STATS:END -->
 
