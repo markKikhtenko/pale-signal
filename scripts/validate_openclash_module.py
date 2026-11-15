@@ -21,6 +21,19 @@ import build_subscription as builder
 
 
 MATCH_RULE = re.compile(r"^MATCH,.*$")
+DIRECT_PROVIDERS = {
+    "pale-signal-custom-direct-domain",
+    "pale-signal-custom-direct-ip",
+}
+VP_NBOT_POLICY = "🌐 VPnBot"
+VP_NBOT_GROUPS = (
+    VP_NBOT_POLICY,
+    "🛡 Стабильный",
+    "⚡ По задержке",
+    "👆 Ручной выбор",
+    "🧭 VLESS",
+)
+MODULE_KEYS = {"rule-providers", "rules*", "rules+", "+rules"}
 
 
 def parse_key(key: str) -> tuple[str, str]:
@@ -157,36 +170,67 @@ def validate_general_contract(module_path: Path) -> None:
         raise RuntimeError(f"{module_path}: DNS override settings are forbidden: {present}")
 
 
-def validate_module_contract(module: dict) -> list[str]:
-    if "+rules" in module:
-        raise RuntimeError("unsafe +rules prepend is not allowed")
+def validate_module_contract(
+    module: dict,
+    expected_policy: str,
+    rule_placement: str,
+) -> list[str]:
+    unexpected_keys = sorted(set(module) - MODULE_KEYS)
+    if unexpected_keys:
+        raise RuntimeError(
+            "routing module must not change connection settings; "
+            f"unexpected keys: {unexpected_keys}"
+        )
+
     keys = list(module)
     if "rules*" not in module or "rules+" not in module:
-        raise RuntimeError("module must delete catch-all rules and append its own rules")
+        raise RuntimeError("module must delete catch-all rules and append a final rule")
     if keys.index("rules*") > keys.index("rules+"):
         raise RuntimeError("rules* must run before rules+")
-    if "dns" in module:
-        raise RuntimeError("module must not replace existing DNS configuration")
 
-    module_rules = module["rules+"]
-    if not isinstance(module_rules, list) or module_rules[-1] != "MATCH,DIRECT":
-        raise RuntimeError("module must append MATCH,DIRECT as its final rule")
-    if any(MATCH_RULE.match(rule) for rule in module_rules[:-1]):
+    if rule_placement == "after-existing":
+        if "+rules" in module:
+            raise RuntimeError("after-existing modules must not prepend rules")
+        appended_rules = module["rules+"]
+        if (
+            not isinstance(appended_rules, list)
+            or not appended_rules
+            or appended_rules[-1] != "MATCH,DIRECT"
+        ):
+            raise RuntimeError("module must append MATCH,DIRECT as its final rule")
+        module_rules = appended_rules[:-1]
+    elif rule_placement == "before-existing":
+        if "+rules" not in module:
+            raise RuntimeError("before-existing modules must define +rules")
+        if keys.index("rules*") > keys.index("+rules") or keys.index("+rules") > keys.index("rules+"):
+            raise RuntimeError("rules must be processed as rules*, +rules, rules+")
+        module_rules = module["+rules"]
+        if not isinstance(module_rules, list) or not module_rules:
+            raise RuntimeError("+rules must contain routing rules")
+        if module["rules+"] != ["MATCH,DIRECT"]:
+            raise RuntimeError("rules+ must contain exactly one final MATCH,DIRECT")
+    else:
+        raise RuntimeError(f"unsupported rule placement: {rule_placement}")
+
+    if any(MATCH_RULE.match(str(rule)) for rule in module_rules):
         raise RuntimeError("module contains an early MATCH rule")
 
     providers = module.get("rule-providers")
     if not isinstance(providers, dict) or not providers:
         raise RuntimeError("module has no rule providers")
     rule_indexes: dict[str, int] = {}
-    for index, rule in enumerate(module_rules[:-1]):
+    for index, rule in enumerate(module_rules):
         parts = rule.split(",")
         if len(parts) < 3 or parts[0] != "RULE-SET":
             raise RuntimeError(f"unexpected module rule: {rule}")
         provider_name, policy = parts[1], parts[2]
         if provider_name not in providers:
             raise RuntimeError(f"rule references missing provider {provider_name}")
-        if policy not in {"DIRECT", "PROXY"}:
-            raise RuntimeError(f"unexpected policy {policy} in {rule}")
+        required_policy = "DIRECT" if provider_name in DIRECT_PROVIDERS else expected_policy
+        if policy != required_policy:
+            raise RuntimeError(
+                f"provider {provider_name} must use {required_policy}, got {policy}"
+            )
         rule_indexes[provider_name] = index
 
     for name, provider in providers.items():
@@ -194,6 +238,8 @@ def validate_module_contract(module: dict) -> list[str]:
             raise RuntimeError(f"provider {name} must update over DIRECT HTTP")
         if not provider.get("url") or not provider.get("path") or not provider.get("interval"):
             raise RuntimeError(f"provider {name} is missing update metadata")
+    if len(module_rules) != len(providers) or set(rule_indexes) != set(providers):
+        raise RuntimeError("every rule provider must be referenced exactly once")
 
     priorities = (
         ("pale-signal-custom-direct-domain", "pale-signal-custom-proxy-domain"),
@@ -210,28 +256,47 @@ def validate_module_contract(module: dict) -> list[str]:
     return module_rules
 
 
-def validate_merged(base: dict, merged: dict, module_rules: list[str], label: str) -> None:
+def validate_merged(
+    base: dict,
+    merged: dict,
+    module_rules: list[str],
+    label: str,
+    expected_policy: str,
+    rule_placement: str,
+) -> None:
     group_names = {
         group.get("name")
         for group in merged.get("proxy-groups", [])
         if isinstance(group, dict)
     }
-    if "PROXY" not in group_names:
-        raise RuntimeError(f"{label}: required PROXY group is missing")
+    if expected_policy not in group_names:
+        raise RuntimeError(f"{label}: required {expected_policy} group is missing")
 
     base_rules = base.get("rules") or []
     merged_rules = merged.get("rules") or []
     specific_rules = [rule for rule in base_rules if not MATCH_RULE.match(str(rule))]
-    if merged_rules[: len(specific_rules)] != specific_rules:
-        raise RuntimeError(f"{label}: existing specific rules changed order")
-    if merged_rules[len(specific_rules) :] != module_rules:
-        raise RuntimeError(f"{label}: module rules are not immediately before final MATCH")
+    if rule_placement == "after-existing":
+        expected_rules = specific_rules + module_rules + ["MATCH,DIRECT"]
+    else:
+        expected_rules = module_rules + specific_rules + ["MATCH,DIRECT"]
+    if merged_rules != expected_rules:
+        raise RuntimeError(f"{label}: merged rule priority is incorrect")
     if merged_rules[-1] != "MATCH,DIRECT":
         raise RuntimeError(f"{label}: MATCH,DIRECT is not the final effective rule")
     if any(MATCH_RULE.match(str(rule)) for rule in merged_rules[:-1]):
         raise RuntimeError(f"{label}: an early MATCH rule is still present")
-    if base.get("dns") != merged.get("dns"):
-        raise RuntimeError(f"{label}: DNS configuration was modified")
+    if sum(1 for rule in merged_rules if MATCH_RULE.match(str(rule))) != 1:
+        raise RuntimeError(f"{label}: expected exactly one MATCH rule")
+
+    for key, value in base.items():
+        if key not in {"rules", "rule-providers"} and merged.get(key) != value:
+            raise RuntimeError(f"{label}: connection setting {key} was modified")
+
+    base_providers = base.get("rule-providers") or {}
+    merged_providers = merged.get("rule-providers") or {}
+    for name, provider in base_providers.items():
+        if merged_providers.get(name) != provider:
+            raise RuntimeError(f"{label}: existing rule provider {name} was modified")
 
 
 def proxy_fingerprint(proxy: dict) -> str:
@@ -309,16 +374,106 @@ def validate_lan_global_fast_check(configs: dict[str, dict]) -> int:
     return len(fast_check["proxies"])
 
 
+def make_synthetic_config(profile: str, expected_policy: str) -> tuple[str, dict]:
+    common = {
+        "mixed-port": 7890,
+        "mode": "rule",
+        "ipv6": True,
+        "dns": {
+            "enable": True,
+            "enhanced-mode": "fake-ip",
+            "fake-ip-range": "198.18.0.1/16",
+            "fake-ip-filter": ["+.lan", "+.local"],
+            "default-nameserver": ["1.1.1.1"],
+            "nameserver": ["https://1.1.1.1/dns-query"],
+            "proxy-server-nameserver": ["tls://8.8.8.8"],
+        },
+        "tun": {
+            "enable": False,
+            "stack": "mixed",
+            "auto-route": False,
+        },
+    }
+    if profile == "vpnbot":
+        if expected_policy != VP_NBOT_POLICY:
+            raise RuntimeError(
+                f"VPnBot synthetic profile requires policy {VP_NBOT_POLICY}"
+            )
+        node_name = "VPnBot synthetic node"
+        common.update(
+            {
+                "proxies": [
+                    {
+                        "name": node_name,
+                        "type": "ss",
+                        "server": "127.0.0.1",
+                        "port": 8388,
+                        "cipher": "aes-128-gcm",
+                        "password": "validation-only",
+                        "udp": True,
+                    }
+                ],
+                "proxy-groups": [
+                    {
+                        "name": VP_NBOT_POLICY,
+                        "type": "select",
+                        "proxies": list(VP_NBOT_GROUPS[1:]),
+                    },
+                    *[
+                        {"name": name, "type": "select", "proxies": [node_name]}
+                        for name in VP_NBOT_GROUPS[1:]
+                    ],
+                ],
+                "rules": [
+                    "DOMAIN-SUFFIX,subscription-security.example,REJECT",
+                    f"DOMAIN-SUFFIX,subscription-route.example,{VP_NBOT_POLICY}",
+                    f"MATCH,{VP_NBOT_POLICY}",
+                    "IP-CIDR,203.0.113.0/24,DIRECT,no-resolve",
+                ],
+            }
+        )
+        return "synthetic-vpnbot.yaml", common
+
+    common.update(
+        {
+            "proxy-groups": [
+                {"name": expected_policy, "type": "select", "proxies": ["DIRECT"]}
+            ],
+            "rules": [
+                "DOMAIN-SUFFIX,existing-before.example,DIRECT",
+                f"MATCH,{expected_policy}",
+                "IP-CIDR,203.0.113.0/24,REJECT,no-resolve",
+            ],
+        }
+    )
+    return "synthetic-special-rules.yaml", common
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--module", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("configs", nargs="+", type=Path)
+    parser.add_argument("--expected-policy", default="PROXY")
+    parser.add_argument(
+        "--rule-placement",
+        choices=("after-existing", "before-existing"),
+        default="after-existing",
+    )
+    parser.add_argument(
+        "--synthetic-profile",
+        choices=("generic", "vpnbot"),
+        default="generic",
+    )
+    parser.add_argument("configs", nargs="*", type=Path)
     args = parser.parse_args()
 
     validate_general_contract(args.module)
     module = load_module_yaml(args.module)
-    module_rules = validate_module_contract(module)
+    module_rules = validate_module_contract(
+        module,
+        args.expected_policy,
+        args.rule_placement,
+    )
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
     loaded_configs: dict[str, dict] = {}
@@ -327,7 +482,14 @@ def main() -> int:
         if not isinstance(base, dict):
             raise RuntimeError(f"{config_path}: root is not a mapping")
         merged = overwrite(base, module)
-        validate_merged(base, merged, module_rules, config_path.name)
+        validate_merged(
+            base,
+            merged,
+            module_rules,
+            config_path.name,
+            args.expected_policy,
+            args.rule_placement,
+        )
         loaded_configs[config_path.name] = base
         output_path = args.output_dir / config_path.name
         output_path.write_text(
@@ -336,25 +498,24 @@ def main() -> int:
             newline="\n",
         )
 
-    synthetic = {
-        "mixed-port": 7890,
-        "mode": "rule",
-        "dns": {
-            "enable": True,
-            "default-nameserver": ["1.1.1.1"],
-            "nameserver": ["https://1.1.1.1/dns-query"],
-            "proxy-server-nameserver": ["tls://8.8.8.8"],
-        },
-        "proxy-groups": [{"name": "PROXY", "type": "select", "proxies": ["DIRECT"]}],
-        "rules": [
-            "DOMAIN-SUFFIX,existing-before.example,DIRECT",
-            "MATCH,PROXY",
-            "IP-CIDR,203.0.113.0/24,REJECT,no-resolve",
-        ],
-    }
+    synthetic_name, synthetic = make_synthetic_config(
+        args.synthetic_profile,
+        args.expected_policy,
+    )
     synthetic_merged = overwrite(synthetic, module)
-    validate_merged(synthetic, synthetic_merged, module_rules, "synthetic-special-rules")
-    (args.output_dir / "synthetic-special-rules.yaml").write_text(
+    validate_merged(
+        synthetic,
+        synthetic_merged,
+        module_rules,
+        synthetic_name,
+        args.expected_policy,
+        args.rule_placement,
+    )
+    if args.synthetic_profile == "vpnbot":
+        group_names = tuple(group["name"] for group in synthetic_merged["proxy-groups"])
+        if group_names != VP_NBOT_GROUPS:
+            raise RuntimeError("VPnBot groups changed or additional groups were created")
+    (args.output_dir / synthetic_name).write_text(
         dump_compatible_yaml(synthetic_merged),
         encoding="utf-8",
         newline="\n",

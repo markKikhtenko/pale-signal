@@ -178,7 +178,14 @@
 
 ## Маршрутизация
 
-[OpenClash Overwrite Module](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) направляет заблокированные ресурсы в `PROXY`, остальной трафик оставляет на `DIRECT` и не меняет DNS.
+Доступны два OpenClash Override Module с общими обновляемыми списками маршрутизации:
+
+| Подписка | Override Module |
+|----------|-----------------|
+| Бесплатные подписки Pale Signal | [`blacklist-routing.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) |
+| Платная подписка VPnBot | [`blacklist-routing-vpnbot.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing-vpnbot.conf) |
+
+В OpenClash откройте **Overwrite Settings → Overwrite Modules**, добавьте URL одного модуля, включите его для нужного профиля и примените профиль в режиме `Rule`. Для VPnBot основная целевая группа — `🌐 VPnBot`; обычный трафик оба модуля оставляют на `DIRECT`, DNS не меняют.
 
 ## Обновление
 
