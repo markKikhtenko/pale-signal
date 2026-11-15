@@ -1,7 +1,7 @@
 # LAN Experimental
-# Version: 2.20261116.000030
+# Version: 2.20261116.013809
 # Created: 2026-10-12 12:38:24 МСК
-# Updated: 2026-11-15 23:59:44 МСК
+# Updated: 2026-11-16 01:37:09 МСК
 # Sources:
 #   - MorpheusAdam Best: https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt
 #   - Mehrtat VLESS: https://raw.githubusercontent.com/mehrtat/vless-collector/main/vless.txt
@@ -21,7 +21,7 @@
 #   - bily1258-design/beimi: https://raw.githubusercontent.com/bily1258-design/beimi/main/output/clash.yaml
 #   - Delta-Kronecker/V2ray-Config: https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/batches/clash/batch_001.yaml
 #   - hezhanleiok/freesub: https://raw.githubusercontent.com/hezhanleiok/freesub/main/output/clash.yaml
-# Servers: 2121
+# Servers: 2122
 mixed-port: 7890
 allow-lan: true
 mode: "rule"
@@ -13680,6 +13680,18 @@ proxies:
         Host: "cvhpyn.pages.dev"
       path: "/"
   -
+    name: "[learnLi/free-nodes] 🇩🇪 德国 | DEU"
+    client-fingerprint: "safari"
+    grpc-opts:
+      grpc-service-name: "api"
+    network: "grpc"
+    port: 443
+    server: "200.165.236.84"
+    servername: "yandex.ru"
+    tls: true
+    type: "vless"
+    uuid: "a54c6d0b-56d8-4bb8-a4af-8c5a7f0c0b34"
+  -
     name: "[learnLi/free-nodes] 🇩🇪 德国 | DEU #10"
     network: "ws"
     port: 80
@@ -27181,6 +27193,7 @@ proxy-groups:
       - "[learnLi/free-nodes] 美国2|@ripaojiedian"
       - "[learnLi/free-nodes] 🇧🇬BG_1|2.5MB/s"
       - "[learnLi/free-nodes] 🇨🇦[www.v2nodes.com] vless-CA-1... #11"
+      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU"
       - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #10"
       - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #2"
       - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #3"
@@ -29310,6 +29323,7 @@ proxy-groups:
       - "[learnLi/free-nodes] 美国2|@ripaojiedian"
       - "[learnLi/free-nodes] 🇧🇬BG_1|2.5MB/s"
       - "[learnLi/free-nodes] 🇨🇦[www.v2nodes.com] vless-CA-1... #11"
+      - "[learnLi/free-nodes] 🇩🇪 德国 | DEU"
       - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #10"
       - "[learnLi/free-nodes] 🇩🇪 德国 | DEU #2"
       - "[learnLi/free-nodes] 🇫🇷 法国 | FRA #3"
