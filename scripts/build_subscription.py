@@ -64,6 +64,11 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt",
     },
     {
+        "id": "PULSEPROXY_BS_30",
+        "name": "PulseProxy 30 SNI/CIDR whitelist",
+        "url": "https://raw.githubusercontent.com/pie-with-jam/PulseProxy/main/githubmirror/30.txt",
+    },
+    {
         "id": "RKP_BYPASS",
         "name": "RKPchannel whitelist.txt",
         "url": "https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/refs/heads/main/whitelist.txt",
@@ -525,6 +530,7 @@ BYPASS_SOURCE_IDS = {
     "ETONEYA_WHITELIST",
     "ETONEYA_GH_WHITELIST",
     "RJSXRD_BYPASS_ALL",
+    "PULSEPROXY_BS_30",
     "RKP_BYPASS",
     "AETRIS_BYPASS",
     "FLEXIYO_RUSSIA_WHITELIST",
@@ -672,6 +678,7 @@ BLOCKED_PROXY_NAME_MARKERS = (
     "\u0440\u043e\u0441\u0442\u0443\u043d\u043d\u0435\u043b\u044c",
 )
 GLOBAL_SOURCE_PRIORITY = (
+    "PULSEPROXY_BS_30",
     "RKP_BYPASS",
     "SOLOVYOV_ALL_SUBS",
     "AETRIS_BYPASS",
@@ -5171,6 +5178,8 @@ def write_final_readme(
 | [subscription-mobile.txt](https://markkikhtenko.github.io/pale-signal/subscription-mobile.txt) | Компактная мобильная Reality-подписка для Happ/Happ Plus |
 | [subscription-zapret.yaml](https://markkikhtenko.github.io/pale-signal/subscription-zapret.yaml) | Изолированный VLESS/VMess/Shadowsocks-пул Zapret из страниц 1–25 |
 
+`subscription-global.yaml`, `subscription-global-5k.yaml` и `subscription-bs-safe.yaml` используют `PulseProxy/30.txt` как приоритетный источник узлов для обхода SNI/CIDR белых списков. Из него импортируются только валидные VLESS-конфигурации; дубли удаляются общей сборкой.
+
 ## Статус
 
 | Показатель | Значение |
@@ -5232,7 +5241,14 @@ def write_final_readme(
 
 ## Маршрутизация
 
-[OpenClash Overwrite Module](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) направляет заблокированные ресурсы в `PROXY`, остальной трафик оставляет на `DIRECT` и не меняет DNS.
+Доступны два OpenClash Override Module с общими обновляемыми списками маршрутизации:
+
+| Подписка | Override Module |
+|----------|-----------------|
+| Бесплатные подписки Pale Signal | [`blacklist-routing.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) |
+| Платная подписка VPnBot | [`blacklist-routing-vpnbot.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing-vpnbot.conf) |
+
+В OpenClash откройте **Overwrite Settings → Overwrite Modules**, добавьте URL одного модуля, включите его для нужного профиля и примените профиль в режиме `Rule`. Для VPnBot основная целевая группа — `🌐 VPnBot`; обычный трафик оба модуля оставляют на `DIRECT`, DNS не меняют.
 
 ## Обновление
 

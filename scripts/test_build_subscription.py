@@ -856,6 +856,26 @@ class LanExperimentalTests(unittest.TestCase):
         )
 
 
+class ProductionSourcePolicyTests(unittest.TestCase):
+    def test_pulseproxy_bs_source_is_prioritized_in_global_pools(self) -> None:
+        source = next(
+            source for source in builder.SOURCES if source["id"] == "PULSEPROXY_BS_30"
+        )
+
+        self.assertEqual(
+            source["url"],
+            "https://raw.githubusercontent.com/pie-with-jam/PulseProxy/main/githubmirror/30.txt",
+        )
+        self.assertIn(source["id"], builder.BASE_SOURCE_IDS)
+        self.assertIn(source["id"], builder.BYPASS_SOURCE_IDS)
+        self.assertIn(source["id"], builder.BS_SAFE_SOURCE_IDS)
+        self.assertEqual(builder.GLOBAL_SOURCE_PRIORITY[0], source["id"])
+        self.assertNotIn(source["id"], builder.LAN_SOURCE_IDS)
+        self.assertNotIn(source["id"], builder.MOBILE_SOURCE_IDS)
+        self.assertNotIn(source["id"], builder.ZAPRET_SOURCE_IDS)
+        self.assertNotIn(source["id"], builder.EXPERIMENTAL_SOURCE_IDS)
+
+
 class ProductionNamingTests(unittest.TestCase):
     @staticmethod
     def proxy(number: int, name: str) -> dict:
