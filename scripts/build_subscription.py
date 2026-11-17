@@ -326,6 +326,25 @@ SOURCES = [
     },
 ]
 
+# This source is intentionally isolated from the production, LAN and mobile
+# pools. Its 25 numbered files are fetched as one all-or-nothing subscription
+# so a temporarily missing page cannot silently publish a partial result.
+ZAPRET_SOURCES = [
+    {
+        "id": "HIZTIN_VLESS_PO_GRIBI",
+        "name": "hiztin/VLESS-PO-GRIBI pages 1-25",
+        "url": "https://raw.githubusercontent.com/hiztin/VLESS-PO-GRIBI/main/deploy/subscriptions/1.txt",
+        "type": "numbered_files",
+        "url_template": "https://raw.githubusercontent.com/hiztin/VLESS-PO-GRIBI/main/deploy/subscriptions/{page}.txt",
+        "first_page": 1,
+        "last_page": 25,
+        "minimum_valid_vless": 1000,
+        "allowed_protocols": ("vless", "vmess", "ss"),
+        "required": True,
+    },
+]
+ZAPRET_SOURCE_IDS = {source["id"] for source in ZAPRET_SOURCES}
+
 # Experimental sources are deliberately kept outside SOURCES. This prevents
 # them from entering any production subscription when source groups evolve.
 EXPERIMENTAL_SOURCES = [
@@ -562,6 +581,14 @@ BS_SAFE_SOURCE_IDS = BYPASS_SOURCE_IDS
 
 if EXPERIMENTAL_SOURCE_IDS & (BASE_SOURCE_IDS | LAN_SOURCE_IDS | BYPASS_SOURCE_IDS | BS_SAFE_SOURCE_IDS):
     raise RuntimeError("experimental sources must not belong to production source groups")
+if ZAPRET_SOURCE_IDS & (
+    BASE_SOURCE_IDS
+    | LAN_SOURCE_IDS
+    | BYPASS_SOURCE_IDS
+    | BS_SAFE_SOURCE_IDS
+    | EXPERIMENTAL_SOURCE_IDS
+):
+    raise RuntimeError("Zapret sources must remain isolated from other source groups")
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "subscription.yaml"
@@ -584,6 +611,8 @@ LAN_HEALTH_CANDIDATES_FILE = ROOT / ".tools" / "lan-health-candidates.json"
 GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
 BS_SAFE_OUTPUT_FILE = ROOT / "subscription-bs-safe.yaml"
 MOBILE_OUTPUT_FILE = ROOT / "subscription-mobile.txt"
+ZAPRET_OUTPUT_FILE = ROOT / "subscription-zapret.yaml"
+ZAPRET_STATS_FILE = ROOT / "zapret-stats.json"
 README_FILE = ROOT / "README.md"
 UPDATE_HISTORY_FILE = ROOT / "update-history.json"
 URL_TEST = "https://cp.cloudflare.com/generate_204"
@@ -602,6 +631,7 @@ LAN_PRESERVED_BASELINE_DIGEST = "5597d0bbcbab37dd410a0dee1ca2abe2f3208d6eaaa551c
 BS_SAFE_SUBSCRIPTION_LIMIT = 2500
 BS_SAFE_AUTO_LIMIT = 50
 MOBILE_SUBSCRIPTION_LIMIT = 500
+ZAPRET_MINIMUM_RETAINED_RATIO = 0.5
 LAN_EXPERIMENTAL_SCHEMA_VERSION = 2
 LAN_EXPERIMENTAL_MIN_SOURCE_RATIO = 0.5
 LAN_EXPERIMENTAL_SUPPORTED_PROTOCOLS = {"vless", "ss", "trojan"}
@@ -676,6 +706,8 @@ GITHUB_PUBLICATION_CACHE: dict[str, tuple[float, str]] = {}
 TRUE_VALUES = {"1", "true", "yes", "on"}
 SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "xhttp"}
 SUPPORTED_XHTTP_MODES = {"auto", "stream-one", "stream-up", "packet-up"}
+ZAPRET_VMESS_NETWORKS = {"tcp", "ws", "http", "h2", "grpc"}
+ZAPRET_VMESS_CIPHERS = {"auto", "aes-128-gcm", "chacha20-poly1305", "none", "zero"}
 GEOIP_BATCH_URL = "http://ip-api.com/batch?fields=status,countryCode,query,message"
 GEOIP_BATCH_SIZE = int(os.environ.get("GEOIP_BATCH_SIZE", "100"))
 GEOIP_RETRIES = int(os.environ.get("GEOIP_RETRIES", "6"))
@@ -844,7 +876,56 @@ def expand_subscription_texts(text: str) -> list[str]:
     return texts
 
 
+def numbered_source_page_urls(source: dict) -> list[tuple[int, str]]:
+    template = source.get("url_template")
+    first_page = source.get("first_page")
+    last_page = source.get("last_page")
+    if not isinstance(template, str) or "{page}" not in template:
+        raise RuntimeError(f"{source['name']} has an invalid numbered URL template")
+    if not isinstance(first_page, int) or not isinstance(last_page, int):
+        raise RuntimeError(f"{source['name']} has invalid page bounds")
+    if first_page < 1 or last_page < first_page or last_page - first_page >= 1000:
+        raise RuntimeError(f"{source['name']} has unsafe page bounds")
+
+    pages = [(page, template.format(page=page)) for page in range(first_page, last_page + 1)]
+    if pages[0][1] != source.get("url"):
+        raise RuntimeError(f"{source['name']} first page does not match its primary URL")
+    if any(not url.startswith(("http://", "https://")) for _, url in pages):
+        raise RuntimeError(f"{source['name']} generated a non-HTTP page URL")
+    return pages
+
+
+def validate_numbered_source_page(source: dict, page: int, text: str) -> None:
+    if not text.strip():
+        raise RuntimeError(f"{source['name']} page {page} is empty")
+    if re.search(r"(?mi)^\s*(?:vless|vmess|ss|trojan)://", text) is None:
+        raise RuntimeError(
+            f"{source['name']} page {page} contains no supported subscription links"
+        )
+
+
+def fetch_numbered_source_pages(source: dict) -> list[tuple[int, str]]:
+    page_urls = numbered_source_page_urls(source)
+    first_page, _ = page_urls[0]
+    first_text = fetch_source(source)
+    validate_numbered_source_page(source, first_page, first_text)
+    pages = [(first_page, first_text)]
+
+    for page, url in page_urls[1:]:
+        text = fetch_url(url, timeout=int(source.get("timeout", 45)), source_id=source["id"])
+        validate_numbered_source_page(source, page, text)
+        pages.append((page, text))
+    return pages
+
+
 def fetch_source_texts(source: dict[str, str]) -> list[str]:
+    if source.get("type") == "numbered_files":
+        return [
+            expanded
+            for _, page_text in fetch_numbered_source_pages(source)
+            for expanded in expand_subscription_texts(page_text)
+        ]
+
     source_text = fetch_source(source)
     if source.get("type") != "url_list_json":
         return expand_subscription_texts(source_text)
@@ -1073,6 +1154,213 @@ def parse_vless(line: str, source_id: str) -> dict | None:
         return proxy
     except Exception:
         return None
+
+
+def decode_share_base64(value: str) -> bytes | None:
+    compact = re.sub(r"\s+", "", urllib.parse.unquote(value).strip())
+    if not compact or re.fullmatch(r"[A-Za-z0-9+/_=-]+", compact) is None:
+        return None
+    try:
+        return base64.b64decode(
+            compact + "=" * (-len(compact) % 4),
+            altchars=b"-_",
+            validate=True,
+        )
+    except (ValueError, binascii.Error):
+        return None
+
+
+def parse_vmess(line: str, source_id: str) -> dict | None:
+    line = line.strip()
+    if not line.startswith("vmess://"):
+        return None
+    encoded, _, fragment = line[len("vmess://") :].partition("#")
+    decoded = decode_share_base64(encoded)
+    if decoded is None:
+        return None
+    try:
+        payload = json.loads(decoded.decode("utf-8-sig"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return None
+    if not isinstance(payload, dict):
+        return None
+
+    try:
+        parsed_uuid = uuid.UUID(str(payload.get("id", "")).strip())
+        if parsed_uuid.int == 0:
+            return None
+        server = str(payload.get("add", "")).strip()
+        port = int(payload.get("port"))
+        alter_id = int(payload.get("aid", 0) or 0)
+    except (TypeError, ValueError, AttributeError):
+        return None
+    if not valid_server(server) or not 1 <= port <= 65535 or not 0 <= alter_id <= 65535:
+        return None
+
+    network = normalize_network(str(payload.get("net", "tcp") or "tcp"))
+    header_type = str(payload.get("type", "") or "").strip().lower()
+    if network == "tcp" and header_type == "http":
+        network = "http"
+    if network not in ZAPRET_VMESS_NETWORKS:
+        return None
+    cipher = str(payload.get("scy", payload.get("security", "auto")) or "auto").strip().lower()
+    if cipher not in ZAPRET_VMESS_CIPHERS:
+        return None
+
+    proxy: dict = {
+        "type": "vmess",
+        "server": server,
+        "port": port,
+        "uuid": str(parsed_uuid),
+        "alterId": alter_id,
+        "cipher": cipher,
+        "udp": True,
+        "network": network,
+    }
+    tls_value = str(payload.get("tls", "") or "").strip().lower()
+    if tls_value in {"tls", "1", "true"}:
+        proxy["tls"] = True
+        servername = str(payload.get("sni", "") or "").strip()
+        if servername:
+            proxy["servername"] = servername
+        fingerprint = normalize_fingerprint(str(payload.get("fp", "") or ""))
+        if fingerprint:
+            proxy["client-fingerprint"] = fingerprint
+        alpn = payload.get("alpn")
+        if isinstance(alpn, str) and alpn.strip():
+            proxy["alpn"] = [item.strip() for item in alpn.split(",") if item.strip()]
+        insecure = payload.get("skip-cert-verify", payload.get("insecure", False))
+        if insecure is True or (isinstance(insecure, str) and is_truthy(insecure)):
+            proxy["skip-cert-verify"] = True
+
+    path = str(payload.get("path", "") or "").strip()
+    host = str(payload.get("host", "") or "").strip()
+    if network == "ws":
+        ws_opts: dict = {"path": path or "/"}
+        if host:
+            ws_opts["headers"] = {"Host": host}
+        proxy["ws-opts"] = ws_opts
+    elif network == "grpc":
+        if path:
+            proxy["grpc-opts"] = {"grpc-service-name": path.lstrip("/")}
+    elif network == "http":
+        http_opts: dict = {"path": [path or "/"]}
+        if host:
+            http_opts["headers"] = {"Host": [host]}
+        proxy["http-opts"] = http_opts
+    elif network == "h2":
+        h2_opts: dict = {"path": path or "/"}
+        if host:
+            h2_opts["host"] = [host]
+        proxy["h2-opts"] = h2_opts
+
+    json_name = str(payload.get("ps", payload.get("name", "")) or "")
+    proxy["_source_name"] = clean_name(json_name or fragment, f"{server}:{port}")
+    proxy["_source_id"] = source_id
+    return proxy
+
+
+def parse_shadowsocks_plugin(plugin_value: str) -> tuple[str, dict] | None:
+    parts = [urllib.parse.unquote(part).strip() for part in plugin_value.split(";")]
+    plugin_name = parts[0].lower() if parts else ""
+    options: dict[str, str | bool] = {}
+    for part in parts[1:]:
+        if not part:
+            continue
+        key, separator, value = part.partition("=")
+        options[key.strip().lower()] = value.strip() if separator else True
+
+    if plugin_name == "v2ray-plugin":
+        mode = str(options.get("mode", "websocket")).lower()
+        if mode not in {"websocket", "ws"}:
+            return None
+        plugin_opts: dict = {"mode": "websocket"}
+        for key in ("host", "path"):
+            value = options.get(key)
+            if isinstance(value, str) and value:
+                plugin_opts[key] = value
+        if options.get("tls") is True or is_truthy(str(options.get("tls", ""))):
+            plugin_opts["tls"] = True
+        return "v2ray-plugin", plugin_opts
+
+    if plugin_name in {"obfs-local", "simple-obfs", "obfs"}:
+        mode = str(options.get("obfs", options.get("mode", ""))).lower()
+        if mode not in {"http", "tls"}:
+            return None
+        plugin_opts = {"mode": mode}
+        host = options.get("obfs-host", options.get("host"))
+        if isinstance(host, str) and host:
+            plugin_opts["host"] = host
+        return "obfs", plugin_opts
+    return None
+
+
+def parse_shadowsocks(line: str, source_id: str) -> dict | None:
+    line = line.strip()
+    if not line.startswith("ss://"):
+        return None
+    raw, _, fragment = line[len("ss://") :].partition("#")
+    endpoint, _, query = raw.partition("?")
+    endpoint = urllib.parse.unquote(endpoint).strip()
+    if not endpoint:
+        return None
+
+    if "@" in endpoint:
+        credentials, location = endpoint.rsplit("@", 1)
+    else:
+        decoded_endpoint = decode_share_base64(endpoint)
+        if decoded_endpoint is None:
+            return None
+        try:
+            decoded_text = decoded_endpoint.decode("utf-8")
+        except UnicodeDecodeError:
+            return None
+        if "@" not in decoded_text:
+            return None
+        credentials, location = decoded_text.rsplit("@", 1)
+
+    if ":" not in credentials:
+        decoded_credentials = decode_share_base64(credentials)
+        if decoded_credentials is None:
+            return None
+        try:
+            credentials = decoded_credentials.decode("utf-8")
+        except UnicodeDecodeError:
+            return None
+    cipher, separator, password = credentials.partition(":")
+    cipher = cipher.strip().lower()
+    if not separator or cipher not in EXPERIMENTAL_SS_CIPHERS:
+        return None
+    if cipher != "none" and not password:
+        return None
+
+    try:
+        parsed_location = urllib.parse.urlsplit(f"//{location}")
+        server = parsed_location.hostname
+        port = parsed_location.port
+    except (ValueError, urllib.parse.UnicodeError):
+        return None
+    if not server or not valid_server(server) or not port or not 1 <= port <= 65535:
+        return None
+
+    proxy: dict = {
+        "type": "ss",
+        "server": server,
+        "port": port,
+        "cipher": cipher,
+        "password": password,
+        "udp": True,
+    }
+    plugin_value = first_param(parse_query(query), "plugin")
+    if plugin_value:
+        parsed_plugin = parse_shadowsocks_plugin(plugin_value)
+        if parsed_plugin is None:
+            return None
+        proxy["plugin"], proxy["plugin-opts"] = parsed_plugin
+
+    proxy["_source_name"] = clean_name(fragment, f"{server}:{port}")
+    proxy["_source_id"] = source_id
+    return proxy
 
 
 def proxy_to_vless_uri(proxy: dict) -> str:
@@ -2023,6 +2311,151 @@ def validate_config(config: dict) -> None:
         missing = [name for name in refs if name not in available or name == group.get("name")]
         if missing:
             raise RuntimeError(f"group {group.get('name')} references missing proxies: {missing}")
+
+
+def build_zapret_subscription(
+    *,
+    sources: list[dict] | None = None,
+    existing_path: Path | None = None,
+    now: str | None = None,
+) -> tuple[str, dict]:
+    sources = ZAPRET_SOURCES if sources is None else sources
+    existing_path = ZAPRET_OUTPUT_FILE if existing_path is None else existing_path
+    parsed: list[dict] = []
+    source_stats: dict[str, dict] = {}
+
+    for source in sources:
+        if source.get("type") != "numbered_files":
+            raise RuntimeError(f"unsupported Zapret source type for {source['name']}")
+        pages = fetch_numbered_source_pages(source)
+        source_parsed: list[dict] = []
+        page_stats: list[dict] = []
+        source_protocols: dict[str, int] = {}
+        source_valid_protocols: dict[str, int] = {}
+        source_invalid_protocols: dict[str, int] = {}
+        allowed_protocols = set(source.get("allowed_protocols", ("vless",)))
+        parsers = {
+            "vless": parse_vless,
+            "vmess": parse_vmess,
+            "ss": parse_shadowsocks,
+        }
+        if not allowed_protocols or not allowed_protocols <= parsers.keys():
+            raise RuntimeError(f"{source['name']} has invalid allowed protocols")
+
+        for page, page_text in pages:
+            page_protocols: dict[str, int] = {}
+            page_valid_protocols: dict[str, int] = {}
+            page_invalid_protocols: dict[str, int] = {}
+            for expanded_text in expand_subscription_texts(page_text):
+                for line in expanded_text.splitlines():
+                    stripped = line.strip()
+                    match = re.match(r"^(vless|vmess|ss|trojan)://", stripped, flags=re.IGNORECASE)
+                    if match is None:
+                        continue
+                    protocol = match.group(1).lower()
+                    page_protocols[protocol] = page_protocols.get(protocol, 0) + 1
+                    source_protocols[protocol] = source_protocols.get(protocol, 0) + 1
+                    if protocol not in allowed_protocols:
+                        continue
+                    proxy = parsers[protocol](stripped, source["id"])
+                    if proxy is None:
+                        page_invalid_protocols[protocol] = page_invalid_protocols.get(protocol, 0) + 1
+                        source_invalid_protocols[protocol] = source_invalid_protocols.get(protocol, 0) + 1
+                    else:
+                        page_valid_protocols[protocol] = page_valid_protocols.get(protocol, 0) + 1
+                        source_valid_protocols[protocol] = source_valid_protocols.get(protocol, 0) + 1
+                        source_parsed.append(proxy)
+            page_stats.append(
+                {
+                    "page": page,
+                    "protocols": page_protocols,
+                    "valid": page_valid_protocols,
+                    "invalid": page_invalid_protocols,
+                    "valid_vless": page_valid_protocols.get("vless", 0),
+                    "invalid_vless": page_invalid_protocols.get("vless", 0),
+                }
+            )
+
+        minimum_valid = int(source.get("minimum_valid_vless", 1))
+        if source_valid_protocols.get("vless", 0) < minimum_valid:
+            raise RuntimeError(
+                f"{source['name']} produced {source_valid_protocols.get('vless', 0)} valid VLESS links; "
+                f"required at least {minimum_valid}"
+            )
+        parsed.extend(source_parsed)
+        source_stats[source["id"]] = {
+            "name": source["name"],
+            "pages": page_stats,
+            "page_count": len(pages),
+            "protocols": source_protocols,
+            "valid": source_valid_protocols,
+            "invalid": source_invalid_protocols,
+            "valid_vless": source_valid_protocols.get("vless", 0),
+            "invalid_vless": source_invalid_protocols.get("vless", 0),
+        }
+
+    if not parsed:
+        raise RuntimeError("no valid proxy links were produced for Zapret")
+    valid_count = len(parsed)
+    proxies = dedupe_and_name(parsed)
+    duplicate_count = valid_count - len(proxies)
+    blocked_count = count_blocked_proxies(proxies)
+    proxies = drop_blocked_proxies(proxies)
+    if not proxies:
+        raise RuntimeError("Zapret subscription is empty after filtering")
+
+    old_count = len(proxy_block_keys(existing_path.read_text(encoding="utf-8", errors="replace"))) if existing_path.exists() else 0
+    required_count = math.ceil(old_count * ZAPRET_MINIMUM_RETAINED_RATIO)
+    if old_count and len(proxies) < required_count:
+        raise RuntimeError(
+            f"Zapret candidate shrank from {old_count} to {len(proxies)} proxies; "
+            f"minimum retained count is {required_count}"
+        )
+
+    config = build_config(proxies)
+    validate_config(config)
+    yaml_text = "\n".join(dump_yaml(config)) + "\n"
+    if not yaml_text.strip():
+        raise RuntimeError("Zapret YAML output is empty")
+    stats = {
+        "updated_at": now or msk_timestamp(),
+        "sources": source_stats,
+        "pages": sum(item["page_count"] for item in source_stats.values()),
+        "valid": {
+            protocol: sum(item["valid"].get(protocol, 0) for item in source_stats.values())
+            for protocol in ("vless", "vmess", "ss")
+        },
+        "invalid": {
+            protocol: sum(item["invalid"].get(protocol, 0) for item in source_stats.values())
+            for protocol in ("vless", "vmess", "ss")
+        },
+        "valid_vless": sum(item["valid_vless"] for item in source_stats.values()),
+        "invalid_vless": sum(item["invalid_vless"] for item in source_stats.values()),
+        "duplicates": duplicate_count,
+        "blocked": blocked_count,
+        "published": len(proxies),
+        "published_protocols": {
+            protocol: sum(proxy.get("type") == protocol for proxy in proxies)
+            for protocol in ("vless", "vmess", "ss")
+        },
+        "previously_published": old_count,
+        "minimum_retained_ratio": ZAPRET_MINIMUM_RETAINED_RATIO,
+    }
+    return yaml_text, stats
+
+
+def write_zapret_subscription(
+    yaml_text: str,
+    stats: dict,
+    *,
+    output_path: Path = ZAPRET_OUTPUT_FILE,
+    stats_path: Path = ZAPRET_STATS_FILE,
+    refresh_readme: bool = True,
+) -> None:
+    atomic_write_text(output_path, yaml_text)
+    atomic_write_text(stats_path, json.dumps(stats, ensure_ascii=False, indent=2) + "\n")
+    if refresh_readme:
+        refresh_readme_zapret(int(stats["published"]))
 
 
 def validate_lan_global_fast_check_config(
@@ -3774,6 +4207,7 @@ def history_entry(now: str, stats: dict[str, int], changes: dict[str, dict[str, 
             "lan_global": stats.get("lan_global", 0),
             "bs_safe": stats.get("bs_safe", 0),
             "mobile": stats.get("mobile", 0),
+            "zapret": stats.get("zapret", 0),
         },
         "changes": changes,
     }
@@ -4160,6 +4594,59 @@ def refresh_readme_lan_source_stats(stats: dict, path: Path = README_FILE) -> No
         )
         if replacements != 1:
             raise RuntimeError(f"README status row was not found: {label}")
+    atomic_write_text(path, text)
+
+
+def refresh_readme_zapret(count: int, path: Path = README_FILE) -> None:
+    text = path.read_text(encoding="utf-8")
+    subscription_row = (
+        "| [subscription-zapret.yaml]"
+        "(https://markkikhtenko.github.io/pale-signal/subscription-zapret.yaml) "
+        "| Изолированный VLESS/VMess/Shadowsocks-пул Zapret из страниц 1–25 |"
+    )
+    if subscription_row not in text:
+        anchor_pattern = r"^(\| \[subscription-mobile\.txt\].*\|)$"
+        text, replacements = re.subn(
+            anchor_pattern,
+            lambda match: f"{match.group(1)}\n{subscription_row}",
+            text,
+            count=1,
+            flags=re.MULTILINE,
+        )
+        if replacements != 1:
+            raise RuntimeError("README subscription table anchor was not found")
+
+    status_row = f"| Zapret | `{count}` |"
+    status_pattern = r"^\| Zapret \| `\d+` \|$"
+    if re.search(status_pattern, text, flags=re.MULTILINE):
+        text = re.sub(status_pattern, lambda _match: status_row, text, count=1, flags=re.MULTILINE)
+    else:
+        anchor_pattern = r"^(\| Happ Mobile \| `\d+` \|)$"
+        text, replacements = re.subn(
+            anchor_pattern,
+            lambda match: f"{match.group(1)}\n{status_row}",
+            text,
+            count=1,
+            flags=re.MULTILINE,
+        )
+        if replacements != 1:
+            raise RuntimeError("README status table anchor was not found: Happ Mobile")
+
+    if "\n### Zapret\n" not in text:
+        section = (
+            "\n### Zapret\n\n"
+            "`subscription-zapret.yaml` пересобирается только из 25 страниц "
+            "`hiztin/VLESS-PO-GRIBI`. Только для этого источника разрешены VLESS, "
+            "VMess и Shadowsocks; некорректные записи отбрасываются, точные дубли "
+            "конфигураций удаляются. Все страницы обязательны, а резкое сокращение "
+            "пула блокирует публикацию; проверка синтаксиса не гарантирует сетевую "
+            "доступность узлов. Подробности каждой сборки сохраняются в "
+            "[`zapret-stats.json`](https://markkikhtenko.github.io/pale-signal/zapret-stats.json).\n"
+        )
+        anchor = "\n## Маршрутизация"
+        if anchor not in text:
+            raise RuntimeError("README routing section anchor was not found")
+        text = text.replace(anchor, f"{section}{anchor}", 1)
     atomic_write_text(path, text)
 
 
@@ -4646,6 +5133,7 @@ def write_final_readme(
     mobile_count: int | None = None,
     experimental_stats: dict | None = None,
     lan_source_stats: dict | None = None,
+    zapret_count: int | None = None,
 ) -> None:
     if stats is None:
         stats = stats_for(proxies)
@@ -4681,6 +5169,7 @@ def write_final_readme(
 | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) | Тестовая Global |
 | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима блокировок |
 | [subscription-mobile.txt](https://markkikhtenko.github.io/pale-signal/subscription-mobile.txt) | Компактная мобильная Reality-подписка для Happ/Happ Plus |
+| [subscription-zapret.yaml](https://markkikhtenko.github.io/pale-signal/subscription-zapret.yaml) | Изолированный VLESS/VMess/Shadowsocks-пул Zapret из страниц 1–25 |
 
 ## Статус
 
@@ -4699,6 +5188,7 @@ def write_final_readme(
 | BS Safe MANUAL | `{bs_safe_stats['total'] if bs_safe_stats is not None else stats.get('bs_safe', 0)}` |
 | BS Safe AUTO | `{bs_safe_auto_count if bs_safe_auto_count is not None else 0}` |
 | Happ Mobile | `{mobile_count if mobile_count is not None else stats.get('mobile', 0)}` |
+| Zapret | `{zapret_count if zapret_count is not None else stats.get('zapret', 0)}` |
 
 {experimental_readme_section(experimental_stats)}
 
@@ -4735,6 +5225,10 @@ def write_final_readme(
 ### Happ/Happ Plus
 
 Добавьте URL `subscription-mobile.txt` как обычную подписку. Файл содержит только VLESS-ссылки без YAML, групп и правил; выбор сервера и проверка задержки выполняются в приложении.
+
+### Zapret
+
+`subscription-zapret.yaml` пересобирается только из 25 страниц `hiztin/VLESS-PO-GRIBI`. Только для этого источника разрешены VLESS, VMess и Shadowsocks; некорректные записи отбрасываются, точные дубли конфигураций удаляются. Все страницы обязательны, а резкое сокращение пула блокирует публикацию. Это исключение не меняет VLESS-only правила остальных production-подписок. Проверка синтаксиса не гарантирует сетевую доступность узлов. Подробности каждой сборки сохраняются в [`zapret-stats.json`](https://markkikhtenko.github.io/pale-signal/zapret-stats.json).
 
 ## Маршрутизация
 
@@ -4923,11 +5417,22 @@ def main(
     lan_only: bool = False,
     bs_safe_only: bool = False,
     mobile_only: bool = False,
+    zapret_only: bool = False,
     lan_baseline_path: Path | None = None,
 ) -> int:
+    if zapret_only:
+        zapret_text, zapret_stats = build_zapret_subscription()
+        write_zapret_subscription(zapret_text, zapret_stats)
+        print(
+            f"wrote subscription-zapret.yaml with {zapret_stats['published']} proxies "
+            f"from {zapret_stats['pages']} pages "
+            f"({zapret_stats['duplicates']} duplicates removed)"
+        )
+        return 0
+
     parsed = []
     builds_lan = lan_only or not (
-        non_stable_only or bs_safe_only or mobile_only
+        non_stable_only or bs_safe_only or mobile_only or zapret_only
     )
     lan_preserved_proxies = (
         load_lan_preserved_baseline(lan_baseline_path or LAN_GLOBAL_OUTPUT_FILE)
@@ -5221,6 +5726,7 @@ def main(
     validate_happ_subscription(mobile_text, len(mobile_proxies))
 
     now = msk_timestamp()
+    zapret_text, zapret_stats = build_zapret_subscription(now=now)
     lan_source_stats = build_lan_source_stats(
         lan_fetch_stats,
         lan_global_proxies,
@@ -5250,6 +5756,7 @@ def main(
             existing_experimental_text,
         ),
         "bs_safe": compare_with_existing(BS_SAFE_OUTPUT_FILE, bs_safe_yaml_text),
+        "zapret": compare_with_existing(ZAPRET_OUTPUT_FILE, zapret_text),
     }
     stats = stats_for(base_proxies)
     stats["ru"] = len(ru_proxies)
@@ -5259,6 +5766,7 @@ def main(
     stats["lan_global"] = len(lan_global_proxies)
     stats["bs_safe"] = len(bs_safe_proxies)
     stats["mobile"] = len(mobile_proxies)
+    stats["zapret"] = int(zapret_stats["published"])
     stats["unknown"] = sum(1 for proxy in global_proxies if proxy.get("_country") == "UNKNOWN")
     global_stats = stats_for(global_proxies)
     global_5k_stats = stats_for(global_5k_proxies)
@@ -5285,6 +5793,7 @@ def main(
     )
     BS_SAFE_OUTPUT_FILE.write_text(bs_safe_yaml_text, encoding="utf-8", newline="\n")
     MOBILE_OUTPUT_FILE.write_text(mobile_text, encoding="utf-8", newline="\n")
+    write_zapret_subscription(zapret_text, zapret_stats, refresh_readme=False)
     write_final_readme(
         base_proxies,
         now,
@@ -5300,6 +5809,7 @@ def main(
         len(mobile_proxies),
         experimental_stats,
         lan_source_stats,
+        zapret_count=int(zapret_stats["published"]),
     )
     print(
         f"wrote subscription files with {len(base_proxies)} base proxies "
@@ -5311,7 +5821,8 @@ def main(
         f"{len(global_non_stable_auto_proxies)} non-stable AUTO, "
         f"{len(bs_safe_proxies)} BS Safe MANUAL, "
         f"{len(bs_safe_auto_proxies)} BS Safe AUTO, "
-        f"{len(mobile_proxies)} Happ mobile)"
+        f"{len(mobile_proxies)} Happ mobile, "
+        f"{zapret_stats['published']} Zapret)"
     )
     return 0
 
@@ -5324,6 +5835,7 @@ if __name__ == "__main__":
             "--lan-only",
             "--bs-safe-only",
             "--mobile-only",
+            "--zapret-only",
             "--experimental-only",
             "--promote-experimental",
             "--reconcile-experimental",
@@ -5347,6 +5859,7 @@ if __name__ == "__main__":
                 lan_only="--lan-only" in arguments,
                 bs_safe_only="--bs-safe-only" in arguments,
                 mobile_only="--mobile-only" in arguments,
+                zapret_only="--zapret-only" in arguments,
             )
         )
     except Exception as exc:

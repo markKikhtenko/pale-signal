@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import base64
 import inspect
 import json
 import tempfile
@@ -879,6 +880,169 @@ class ProductionNamingTests(unittest.TestCase):
         names = [proxy["name"] for proxy in proxies]
         self.assertEqual(names, ["node 2", "node", "node 3"])
         self.assertEqual(len(names), len(set(names)))
+
+
+class ZapretSubscriptionTests(unittest.TestCase):
+    @staticmethod
+    def vless(number: int, *, name: str | None = None) -> str:
+        return (
+            f"vless://{uuid.UUID(int=number)}@node-{number}.example.com:443"
+            f"?encryption=none&security=tls&type=ws&host=cdn.example.com&path=%2F"
+            f"#{name or f'node-{number}'}"
+        )
+
+    @staticmethod
+    def vmess(number: int, *, network: str = "ws") -> str:
+        payload = {
+            "v": "2",
+            "ps": f"vmess-{number}",
+            "add": f"vmess-{number}.example.com",
+            "port": "443",
+            "id": str(uuid.UUID(int=number)),
+            "aid": "0",
+            "scy": "auto",
+            "net": network,
+            "type": "none",
+            "host": "cdn.example.com",
+            "path": "/vmess",
+            "tls": "tls",
+            "sni": "cdn.example.com",
+        }
+        encoded = base64.b64encode(json.dumps(payload).encode()).decode()
+        return f"vmess://{encoded}"
+
+    @staticmethod
+    def shadowsocks(number: int) -> str:
+        credentials = base64.b64encode(b"aes-128-gcm:test-password").decode().rstrip("=")
+        return f"ss://{credentials}@ss-{number}.example.com:8388#ss-{number}"
+
+    @staticmethod
+    def source(*, last_page: int = 3, minimum: int = 1) -> dict:
+        return {
+            "id": "ZAPRET_TEST",
+            "name": "Zapret test",
+            "url": "https://example.test/1.txt",
+            "type": "numbered_files",
+            "url_template": "https://example.test/{page}.txt",
+            "first_page": 1,
+            "last_page": last_page,
+            "minimum_valid_vless": minimum,
+            "allowed_protocols": ("vless", "vmess", "ss"),
+            "required": True,
+        }
+
+    def test_hiztin_source_is_isolated_and_has_exactly_25_pages(self) -> None:
+        self.assertEqual(builder.ZAPRET_SOURCE_IDS, {"HIZTIN_VLESS_PO_GRIBI"})
+        self.assertTrue(
+            builder.ZAPRET_SOURCE_IDS.isdisjoint(
+                builder.BASE_SOURCE_IDS
+                | builder.LAN_SOURCE_IDS
+                | builder.BYPASS_SOURCE_IDS
+                | builder.BS_SAFE_SOURCE_IDS
+                | builder.EXPERIMENTAL_SOURCE_IDS
+            )
+        )
+        source = builder.ZAPRET_SOURCES[0]
+        self.assertEqual(set(source["allowed_protocols"]), {"vless", "vmess", "ss"})
+        pages = builder.numbered_source_page_urls(source)
+        self.assertEqual([page for page, _ in pages], list(range(1, 26)))
+        self.assertEqual(
+            [url for _, url in pages],
+            [
+                f"https://raw.githubusercontent.com/hiztin/VLESS-PO-GRIBI/main/deploy/subscriptions/{page}.txt"
+                for page in range(1, 26)
+            ],
+        )
+
+    def test_numbered_source_fetch_is_all_or_nothing(self) -> None:
+        source = self.source()
+        with (
+            mock.patch.object(builder, "fetch_source", return_value=self.vless(1)),
+            mock.patch.object(
+                builder,
+                "fetch_url",
+                side_effect=[self.vless(2), RuntimeError("page 3 unavailable")],
+            ),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "page 3 unavailable"):
+                builder.fetch_numbered_source_pages(source)
+
+    def test_zapret_build_validates_and_deduplicates(self) -> None:
+        source = self.source(last_page=2)
+        duplicate = self.vless(1, name="duplicate name")
+        pages = [
+            (1, self.vless(1)),
+            (
+                2,
+                "\n".join(
+                    [
+                        duplicate,
+                        "vless://not-a-uuid@example.com:443?security=tls#invalid",
+                        self.vmess(2),
+                        self.shadowsocks(3),
+                    ]
+                ),
+            ),
+        ]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            missing_output = Path(temp_dir) / "subscription-zapret.yaml"
+            with mock.patch.object(builder, "fetch_numbered_source_pages", return_value=pages):
+                text, stats = builder.build_zapret_subscription(
+                    sources=[source],
+                    existing_path=missing_output,
+                    now="2026-11-17 12:00:00 МСК",
+                )
+
+        config = yaml.safe_load(text)
+        builder.validate_config(config)
+        self.assertEqual(stats["pages"], 2)
+        self.assertEqual(stats["valid_vless"], 2)
+        self.assertEqual(stats["invalid_vless"], 1)
+        self.assertEqual(stats["duplicates"], 1)
+        self.assertEqual(stats["valid"], {"vless": 2, "vmess": 1, "ss": 1})
+        self.assertEqual(stats["published"], 3)
+        self.assertEqual(len(config["proxies"]), 3)
+        self.assertEqual({proxy["type"] for proxy in config["proxies"]}, {"vless", "vmess", "ss"})
+
+    def test_vmess_and_shadowsocks_parsers_are_zapret_compatible(self) -> None:
+        vmess = builder.parse_vmess(self.vmess(11), "ZAPRET_TEST")
+        vmess_raw = builder.parse_vmess(self.vmess(13, network="raw"), "ZAPRET_TEST")
+        shadowsocks = builder.parse_shadowsocks(self.shadowsocks(12), "ZAPRET_TEST")
+
+        self.assertEqual(vmess["type"], "vmess")
+        self.assertEqual(vmess["network"], "ws")
+        self.assertTrue(vmess["tls"])
+        self.assertEqual(vmess_raw["network"], "tcp")
+        self.assertEqual(shadowsocks["type"], "ss")
+        self.assertEqual(shadowsocks["cipher"], "aes-128-gcm")
+
+    def test_zapret_build_rejects_abrupt_pool_shrink(self) -> None:
+        source = self.source(last_page=1)
+        existing_proxies = [
+            {
+                "name": f"existing-{number}",
+                "type": "vless",
+                "server": f"existing-{number}.example.com",
+                "port": 443,
+                "uuid": str(uuid.UUID(int=number)),
+                "network": "tcp",
+            }
+            for number in range(1, 5)
+        ]
+        existing_text = "\n".join(builder.dump_yaml(builder.build_config(existing_proxies))) + "\n"
+        with tempfile.TemporaryDirectory() as temp_dir:
+            existing_path = Path(temp_dir) / "subscription-zapret.yaml"
+            existing_path.write_text(existing_text, encoding="utf-8")
+            with mock.patch.object(
+                builder,
+                "fetch_numbered_source_pages",
+                return_value=[(1, self.vless(10))],
+            ):
+                with self.assertRaisesRegex(RuntimeError, "shrank from 4 to 1"):
+                    builder.build_zapret_subscription(
+                        sources=[source],
+                        existing_path=existing_path,
+                    )
 
 
 class LanGlobalFastCheckTests(unittest.TestCase):

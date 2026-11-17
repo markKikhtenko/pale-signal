@@ -23,6 +23,7 @@
 | [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) | Тестовая Global |
 | [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима блокировок |
 | [subscription-mobile.txt](https://markkikhtenko.github.io/pale-signal/subscription-mobile.txt) | Компактная мобильная Reality-подписка для Happ/Happ Plus |
+| [subscription-zapret.yaml](https://markkikhtenko.github.io/pale-signal/subscription-zapret.yaml) | Изолированный VLESS/VMess/Shadowsocks-пул Zapret из страниц 1–25 |
 
 ## Статус
 
@@ -41,6 +42,7 @@
 | BS Safe MANUAL | `1467` |
 | BS Safe AUTO | `50` |
 | Happ Mobile | `500` |
+| Zapret | `2775` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
@@ -175,6 +177,10 @@
 ### Happ/Happ Plus
 
 Добавьте URL `subscription-mobile.txt` как обычную подписку. Файл содержит только VLESS-ссылки без YAML, групп и правил; выбор сервера и проверка задержки выполняются в приложении.
+
+### Zapret
+
+`subscription-zapret.yaml` пересобирается только из 25 страниц `hiztin/VLESS-PO-GRIBI`. Только для этого источника разрешены VLESS, VMess и Shadowsocks; некорректные записи отбрасываются, точные дубли конфигураций удаляются. Все страницы обязательны, а резкое сокращение пула блокирует публикацию. Это исключение не меняет VLESS-only правила остальных production-подписок. Проверка синтаксиса не гарантирует сетевую доступность узлов. Подробности каждой сборки сохраняются в [`zapret-stats.json`](https://markkikhtenko.github.io/pale-signal/zapret-stats.json).
 
 ## Маршрутизация
 

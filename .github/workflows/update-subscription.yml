@@ -65,6 +65,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
             python scripts/build_subscription.py --lan-only
+            python scripts/build_subscription.py --zapret-only
           else
             python scripts/build_subscription.py
           fi
@@ -92,6 +93,8 @@ jobs:
         run: |
           python -m unittest discover -s scripts -p 'test_*.py'
           test -s subscription-mobile.txt
+          test -s subscription-zapret.yaml
+          test -s zapret-stats.json
           python -c 'import sys; sys.path.insert(0, "scripts"); import build_subscription as b; text=open("subscription-mobile.txt", encoding="utf-8").read(); print(f"Happ mobile links: {b.validate_happ_subscription(text)}")'
           mkdir -p .tools/mihomo/home
           curl -fsSL --retry 5 --retry-all-errors \
@@ -118,7 +121,8 @@ jobs:
             subscription-lan-global.yaml \
             subscription-lan-global-fast-check.yaml \
             subscription-global-non-stable.yaml \
-            subscription-bs-safe.yaml
+            subscription-bs-safe.yaml \
+            subscription-zapret.yaml
           for config in .tools/openclash-merged/*.yaml; do
             .tools/mihomo/mihomo -t -f "$config" -d .tools/mihomo/home
           done
@@ -249,7 +253,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md update-history.json lan-experimental-stats.json lan-source-stats.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-global-fast-check.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml subscription-mobile.txt
+          git add README.md update-history.json lan-experimental-stats.json lan-source-stats.json zapret-stats.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-global-fast-check.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml subscription-mobile.txt subscription-zapret.yaml
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else
@@ -285,6 +289,8 @@ jobs:
           cp subscription-global-non-stable.yaml public/subscription-global-non-stable.yaml
           cp subscription-bs-safe.yaml public/subscription-bs-safe.yaml
           cp subscription-mobile.txt public/subscription-mobile.txt
+          cp subscription-zapret.yaml public/subscription-zapret.yaml
+          cp zapret-stats.json public/zapret-stats.json
           cp -R openclash public/openclash
           test -f public/openclash/blacklist-routing.conf
           test -f public/openclash/blacklist-routing-vpnbot.conf
@@ -294,6 +300,8 @@ jobs:
           test -f public/openclash/rules/custom-proxy-ip.yaml
           test -s public/subscription-lan-global-fast-check.yaml
           test -s public/subscription-lan-experimental.yaml
+          test -s public/subscription-zapret.yaml
+          test -s public/zapret-stats.json
 
       - name: Upload Pages artifact
         if: steps.freshness.outputs.stale != 'true'
