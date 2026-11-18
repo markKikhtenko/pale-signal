@@ -12,6 +12,12 @@
 payload:
   - "+.example.invalid"
 
+  # Zapret Status
+  - "+.zapret.moe"
+
+  # Speedtest by Ookla
+  - "+.speedtest.net"
+
   # Official OpenAI/ChatGPT network allowlist:
   # https://help.openai.com/en/articles/9247338
   # "+.chatgpt.com" also covers the ws.chatgpt.com WebSocket endpoint and
