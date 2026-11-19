@@ -18,6 +18,23 @@ payload:
   # Speedtest by Ookla
   - "+.speedtest.net"
 
+  # Additional forced PROXY domains
+  - "+.vercel.app"
+  - "+.vercel.com"
+  - "+.supabase.co"
+  - "+.supabase.com"
+  - "+.licdn.com"
+  - "+.lnkd.in"
+  - "+.d3nn82uaxijpm6.cloudfront.net"
+  - "+.dgalywyr863hv.cloudfront.net"
+  - "+.openaimerge.com"
+  - "+.pornhub.org"
+  - "+.pornhubpremium.com"
+  - "+.34travel.me"
+  - "+.cgtrader.com"
+  - "+.pally.info"
+  - "+.zarahome.com"
+
   # Official OpenAI/ChatGPT network allowlist:
   # https://help.openai.com/en/articles/9247338
   # "+.chatgpt.com" also covers the ws.chatgpt.com WebSocket endpoint and
