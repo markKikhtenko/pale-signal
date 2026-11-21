@@ -16,6 +16,7 @@
 | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) | Россия |
 | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) | Все non-RU серверы |
 | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) | Global, до 5000 серверов |
+| [subscription-global-megafon-candidates.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-megafon-candidates.yaml) | Ограниченный список кандидатов, прошедших HTTPS через Mihomo вне сети МегаФона; требует роутерной проверки |
 | [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | Основная LAN-подписка для проводного интернета, до 5000 серверов; при меньшем пуле совпадает с LAN Global |
 | [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | Полный LAN-пул для проводного интернета без лимита |
 | [subscription-lan-global-fast-check.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global-fast-check.yaml) | LAN Global Fast Check — те же серверы LAN Global, более активная автоматическая проверка |
@@ -33,8 +34,8 @@
 |------------|----------|
 | Всего серверов | `8298` |
 | Россия | `1846` |
-| Global | `6452` |
-| Global 5K | `1877` |
+| Global | `7390` |
+| Global 5K | `2450` |
 | LAN 5K | `5000` |
 | LAN Global | `5379` |
 | LAN Global Fast Check | `5379` |
@@ -45,6 +46,53 @@
 | BS Safe AUTO | `50` |
 | Happ Mobile | `449` |
 | Zapret | `2798` |
+
+<!-- GLOBAL-SOURCE-STATS:START -->
+## Global: источники обхода белых списков
+
+Три новых whitelist/SNI-источника добавляются только в production Global-контур. Дедупликация выполняется по фактическим параметрам VLESS, TLS/REALITY и транспорта; имя узла в ключ не входит. PulseProxy сохраняет первый приоритет, относительный порядок всех прежних источников не изменён.
+
+HTTPS в этой таблице выполняется через Mihomo в среде GitHub Actions/локального прогона и не является проверкой в сети МегаФона. До запуска роутерного теста колонка МегаФон всегда содержит `NOT TESTED`.
+
+| Источник | HTTP | Обновлён | Получено | Валидных | Уникальных в источнике | Новых Global | Дубли/невалидные | DNS | HTTPS | МегаФон |
+|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---|
+| [hussaroff lte-universal-checked whitelist.txt](https://raw.githubusercontent.com/hussaroff/lte-universal-checked/main/whitelist.txt) | `200` | `2026-11-21 05:54 МСК` | `126` | `126` | `79` | `1` | `47` | `5/5` | `3/5` | `NOT TESTED` |
+| [coloramamoe whitelist-vless.txt](https://raw.githubusercontent.com/coloramamoe/vless-parser/main/githubmirror/whitelist-vless.txt) | `200` | `2026-11-21 06:57 МСК` | `697` | `697` | `652` | `0` | `45` | `5/5` | `0/5` | `NOT TESTED` |
+| [coloramamoe ru-sni-best-vless.txt](https://raw.githubusercontent.com/coloramamoe/vless-parser/main/githubmirror/ru-sni-best-vless.txt) | `200` | `2026-11-21 06:57 МСК` | `120` | `120` | `120` | `0` | `0` | `5/5` | `0/5` | `NOT TESTED` |
+
+### Недоступные старые источники
+
+Текущая диагностика получила HTTP 404. Источники не удалены автоматически; для каждого предлагается проверить перенос или переименование и только затем исключать.
+
+| Источник | HTTP | Серия 404 | Рекомендация |
+|---|---:|---:|---|
+| [EtoNeYaProject GitHub whitelist](https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/whitelist) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [FLEXIY0 matryoshka-vpn russia_whitelist.txt](https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [Epodonios Splitted-By-Protocol/vless.txt](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [Epodonios Sub26.txt](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [MahsaNetConfigTopic xray_final.txt](https://raw.githubusercontent.com/MahsaNetConfigTopic/config/refs/heads/main/xray_final.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [AvenCores 26_urls.json](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [AvenCores githubmirror/26.txt](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/githubmirror/26.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [PrinceVSFX Adapt-Configs White_list.txt](https://raw.githubusercontent.com/PrinceVSFX/Adapt-Configs/main/Configs/White_list.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+
+### Кандидаты для проверки на МегаФоне
+
+В этот список попадают только узлы, уже выполнившие реальный HTTPS-запрос через Mihomo. Это ещё не подтверждение работы в мобильной сети.
+
+| Имя | Источник | мс | HTTPS | МегаФон |
+|---|---|---:|---|---|
+| 荷兰_112106571 t.me/rjsxrd | hussaroff lte-universal-checked whitelist.txt | `1555` | PASS | NOT TESTED |
+| [OpenRay] 🇸🇪SE-1 | hussaroff lte-universal-checked whitelist.txt | `646` | PASS | NOT TESTED |
+| [OpenRay] 🇦🇹AT-5 | hussaroff lte-universal-checked whitelist.txt | `812` | PASS | NOT TESTED |
+
+Ограниченный тест на роутере (по умолчанию не более 12 узлов, 2 параллельных процесса, таймаут 12 секунд):
+
+```sh
+python3 scripts/check_megafon.py --mihomo /usr/bin/mihomo --confirm-megafon --limit 12 --workers 2 --timeout 12
+```
+
+Скрипт классифицирует DNS, TCP, TLS, HTTPS и таймауты и создаёт отдельную проверенную подписку только из фактических `PASS` в подтверждённой сети МегаФона.
+<!-- GLOBAL-SOURCE-STATS:END -->
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## LAN Experimental
