@@ -5,7 +5,7 @@ log-level: "info"
 ipv6: false
 proxies:
   -
-    name: "🇺🇸 United States — #134"
+    name: "🇺🇸 United States — #131"
     type: "vless"
     server: "95.129.236.70"
     port: 443
@@ -21,10 +21,26 @@ proxies:
       headers:
         Host: "static.lk.pc-club.app"
   -
-    name: "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd 2"
+    name: "荷兰_112113566 t.me/rjsxrd"
     type: "vless"
     server: "185.246.155.91"
     port: 10403
+    uuid: "dbf3f074-3b18-43f3-b82a-debd8c879c69"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
+      short-id: "6859f5b59e55aa30"
+  -
+    name: "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd"
+    type: "vless"
+    server: "185.246.155.91"
+    port: 10103
     uuid: "dbf3f074-3b18-43f3-b82a-debd8c879c69"
     network: "tcp"
     udp: true
@@ -67,15 +83,33 @@ proxies:
     reality-opts:
       public-key: "IjWYbHNrZb3UCQxsTJyekEOA3tHq42L6Jw3O8MmLYVQ"
       short-id: "fa514b83"
+  -
+    name: "🇹🇼_台湾 (11) t.me/rjsxrd"
+    type: "vless"
+    server: "free.fugui.lol"
+    port: 51283
+    uuid: "ead3595f-4020-4e76-a3ec-c248e1a2f2f7"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "swdist.apple.com"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "IjWYbHNrZb3UCQxsTJyekEOA3tHq42L6Jw3O8MmLYVQ"
+      short-id: "fa514b83"
 proxy-groups:
   -
     name: "AUTO"
     type: "url-test"
     proxies:
-      - "🇺🇸 United States — #134"
-      - "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd 2"
+      - "🇺🇸 United States — #131"
+      - "荷兰_112113566 t.me/rjsxrd"
+      - "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd"
       - "LV 🇱🇻 | @Raydikalx | D611CB"
       - "🇹🇼_台湾 (10) t.me/rjsxrd"
+      - "🇹🇼_台湾 (11) t.me/rjsxrd"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -84,10 +118,12 @@ proxy-groups:
     name: "MANUAL"
     type: "select"
     proxies:
-      - "🇺🇸 United States — #134"
-      - "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd 2"
+      - "🇺🇸 United States — #131"
+      - "荷兰_112113566 t.me/rjsxrd"
+      - "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd"
       - "LV 🇱🇻 | @Raydikalx | D611CB"
       - "🇹🇼_台湾 (10) t.me/rjsxrd"
+      - "🇹🇼_台湾 (11) t.me/rjsxrd"
   -
     name: "PROXY"
     type: "select"

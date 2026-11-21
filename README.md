@@ -38,8 +38,8 @@
 |------------|----------|
 | Всего серверов | `8733` |
 | Россия | `1868` |
-| Global | `6910` |
-| Global 5K | `2378` |
+| Global | `6829` |
+| Global 5K | `2387` |
 | LAN 5K | `5000` |
 | LAN Global | `5210` |
 | LAN Global Fast Check | `5210` |
@@ -89,7 +89,6 @@
 | BS Safe — whitelist | [`whitelist-routing.conf`](https://markkikhtenko.github.io/pale-signal/openclash/whitelist-routing.conf) |
 
 Добавьте подходящий URL в **Overwrite Settings → Overwrite Modules** и подключите только один модуль к профилю. `whitelist-routing.conf` предназначен для отдельного BS Safe-роутера и заменяет на нём `/etc/openclash/custom/openclash_custom_overwrite.sh`, поэтому перед включением сохраните резервную копию этого файла.
-
 ## Обновление
 
 Сборка запускается в 09:00 и 21:00 МСК. Некорректные конфигурации не публикуются. Наличие узла в подписке не гарантирует его доступность у конкретного провайдера.
