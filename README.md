@@ -34,8 +34,8 @@
 |------------|----------|
 | Всего серверов | `8298` |
 | Россия | `1846` |
-| Global | `7390` |
-| Global 5K | `2450` |
+| Global | `6979` |
+| Global 5K | `2459` |
 | LAN 5K | `5000` |
 | LAN Global | `5379` |
 | LAN Global Fast Check | `5379` |
@@ -56,9 +56,10 @@ HTTPS в этой таблице выполняется через Mihomo в с�
 
 | Источник | HTTP | Обновлён | Получено | Валидных | Уникальных в источнике | Новых Global | Дубли/невалидные | DNS | HTTPS | МегаФон |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---|
-| [hussaroff lte-universal-checked whitelist.txt](https://raw.githubusercontent.com/hussaroff/lte-universal-checked/main/whitelist.txt) | `200` | `2026-11-21 05:54 МСК` | `126` | `126` | `79` | `1` | `47` | `5/5` | `3/5` | `NOT TESTED` |
-| [coloramamoe whitelist-vless.txt](https://raw.githubusercontent.com/coloramamoe/vless-parser/main/githubmirror/whitelist-vless.txt) | `200` | `2026-11-21 06:57 МСК` | `697` | `697` | `652` | `0` | `45` | `5/5` | `0/5` | `NOT TESTED` |
+| [hussaroff lte-universal-checked whitelist.txt](https://raw.githubusercontent.com/hussaroff/lte-universal-checked/main/whitelist.txt) | `200` | `2026-11-21 09:30 МСК` | `111` | `111` | `75` | `2` | `36` | `5/5` | `2/5` | `NOT TESTED` |
+| [coloramamoe whitelist-vless.txt](https://raw.githubusercontent.com/coloramamoe/vless-parser/main/githubmirror/whitelist-vless.txt) | `200` | `2026-11-21 06:57 МСК` | `697` | `697` | `652` | `4` | `45` | `5/5` | `0/5` | `NOT TESTED` |
 | [coloramamoe ru-sni-best-vless.txt](https://raw.githubusercontent.com/coloramamoe/vless-parser/main/githubmirror/ru-sni-best-vless.txt) | `200` | `2026-11-21 06:57 МСК` | `120` | `120` | `120` | `0` | `0` | `5/5` | `0/5` | `NOT TESTED` |
+| [RaViraNet premium.txt](https://raw.githubusercontent.com/btsk161/Freeinternet_byMygalaru.github.io/refs/heads/main/premium.txt) | `200` | `2026-11-20 12:09 МСК` | `130` | `130` | `114` | `40` | `16` | `5/5` | `2/5` | `NOT TESTED` |
 
 ### Недоступные старые источники
 
@@ -66,14 +67,14 @@ HTTPS в этой таблице выполняется через Mihomo в с�
 
 | Источник | HTTP | Серия 404 | Рекомендация |
 |---|---:|---:|---|
-| [EtoNeYaProject GitHub whitelist](https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/whitelist) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
-| [FLEXIY0 matryoshka-vpn russia_whitelist.txt](https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
-| [Epodonios Splitted-By-Protocol/vless.txt](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
-| [Epodonios Sub26.txt](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
-| [MahsaNetConfigTopic xray_final.txt](https://raw.githubusercontent.com/MahsaNetConfigTopic/config/refs/heads/main/xray_final.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
-| [AvenCores 26_urls.json](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
-| [AvenCores githubmirror/26.txt](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/githubmirror/26.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
-| [PrinceVSFX Adapt-Configs White_list.txt](https://raw.githubusercontent.com/PrinceVSFX/Adapt-Configs/main/Configs/White_list.txt) | `404` | `1` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [EtoNeYaProject GitHub whitelist](https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/whitelist) | `404` | `2` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [FLEXIY0 matryoshka-vpn russia_whitelist.txt](https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt) | `404` | `2` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [Epodonios Splitted-By-Protocol/vless.txt](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt) | `404` | `2` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [Epodonios Sub26.txt](https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub26.txt) | `404` | `2` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [MahsaNetConfigTopic xray_final.txt](https://raw.githubusercontent.com/MahsaNetConfigTopic/config/refs/heads/main/xray_final.txt) | `404` | `2` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [AvenCores 26_urls.json](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/source/config/26_urls.json) | `404` | `2` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [AvenCores githubmirror/26.txt](https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/main/githubmirror/26.txt) | `404` | `2` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
+| [PrinceVSFX Adapt-Configs White_list.txt](https://raw.githubusercontent.com/PrinceVSFX/Adapt-Configs/main/Configs/White_list.txt) | `404` | `2` | HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён |
 
 ### Кандидаты для проверки на МегаФоне
 
@@ -81,9 +82,10 @@ HTTPS в этой таблице выполняется через Mihomo в с�
 
 | Имя | Источник | мс | HTTPS | МегаФон |
 |---|---|---:|---|---|
-| 荷兰_112106571 t.me/rjsxrd | hussaroff lte-universal-checked whitelist.txt | `1555` | PASS | NOT TESTED |
-| [OpenRay] 🇸🇪SE-1 | hussaroff lte-universal-checked whitelist.txt | `646` | PASS | NOT TESTED |
-| [OpenRay] 🇦🇹AT-5 | hussaroff lte-universal-checked whitelist.txt | `812` | PASS | NOT TESTED |
+| 🇺🇸 United States — #158 | hussaroff lte-universal-checked whitelist.txt | `2097` | PASS | NOT TESTED |
+| 🇹🇷TR_1|922KB/s|F003-260618 | hussaroff lte-universal-checked whitelist.txt | `787` | PASS | NOT TESTED |
+| LV 🇱🇻 | @Raydikalx | D611CB | RaViraNet premium.txt | `2072` | PASS | NOT TESTED |
+| 🇹🇼_台湾 (11) t.me/rjsxrd | RaViraNet premium.txt | `4693` | PASS | NOT TESTED |
 
 Ограниченный тест на роутере (по умолчанию не более 12 узлов, 2 параллельных процесса, таймаут 12 секунд):
 

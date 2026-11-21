@@ -5,10 +5,26 @@ log-level: "info"
 ipv6: false
 proxies:
   -
-    name: "荷兰_112106571 t.me/rjsxrd"
+    name: "🇺🇸 United States — #158"
+    type: "vless"
+    server: "95.129.236.70"
+    port: 443
+    uuid: "1547ed3d-3bb7-4153-afdc-8eb3e9373c84"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "static.lk.pc-club.app"
+    client-fingerprint: "firefox"
+    ws-opts:
+      path: "/gateway/v1/ws/de963c1a03a37c66383da198813099b1"
+      headers:
+        Host: "static.lk.pc-club.app"
+  -
+    name: "🇹🇷TR_1|922KB/s|F003-260618"
     type: "vless"
     server: "185.246.155.91"
-    port: 10403
+    port: 10103
     uuid: "dbf3f074-3b18-43f3-b82a-debd8c879c69"
     network: "tcp"
     udp: true
@@ -21,44 +37,45 @@ proxies:
       public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
       short-id: "6859f5b59e55aa30"
   -
-    name: "[OpenRay] 🇸🇪SE-1"
+    name: "LV 🇱🇻 | @Raydikalx | D611CB"
     type: "vless"
-    server: "88.216.214.159"
-    port: 443
-    uuid: "a30903dc-1bf0-4be5-8b1b-603a3a56211c"
+    server: "45.38.143.210"
+    port: 30584
+    uuid: "cebc5f19-18d9-48e6-9029-fb4b04caf393"
     network: "tcp"
     udp: true
     encryption: "none"
     tls: true
-    servername: "api-svc-mgr.galioncc.com"
-    client-fingerprint: "firefox"
+    servername: "m.vk.com"
+    client-fingerprint: "chrome"
     reality-opts:
-      public-key: "drl7nndYdfzZY1aQ0eUAWmNV0nsHig2uDnu9siy9biQ"
-      short-id: "a7c92e4b10d6f835"
+      public-key: "2hV4TY2ygvQ7ISa5o4u_FUKXzlIhLgbsScE8M1h0m3Y"
+      short-id: "67ece882d65d0f1a"
   -
-    name: "[OpenRay] 🇦🇹AT-5"
+    name: "🇹🇼_台湾 (11) t.me/rjsxrd"
     type: "vless"
-    server: "185.220.223.78"
-    port: 443
-    uuid: "70f1696c-8b82-4614-9c1e-8ec21201684d"
+    server: "free.fugui.lol"
+    port: 51283
+    uuid: "ead3595f-4020-4e76-a3ec-c248e1a2f2f7"
     network: "tcp"
     udp: true
     encryption: "none"
     flow: "xtls-rprx-vision"
     tls: true
-    servername: "lv.meltun.org"
-    client-fingerprint: "safari"
+    servername: "swdist.apple.com"
+    client-fingerprint: "ios"
     reality-opts:
-      public-key: "wEJIqlLqor9Z_LMHvcsXh5FSoKMz3NbbcORwPDBgbhw"
-      short-id: "5a8e1a04f3d92b67"
+      public-key: "IjWYbHNrZb3UCQxsTJyekEOA3tHq42L6Jw3O8MmLYVQ"
+      short-id: "fa514b83"
 proxy-groups:
   -
     name: "AUTO"
     type: "url-test"
     proxies:
-      - "荷兰_112106571 t.me/rjsxrd"
-      - "[OpenRay] 🇸🇪SE-1"
-      - "[OpenRay] 🇦🇹AT-5"
+      - "🇺🇸 United States — #158"
+      - "🇹🇷TR_1|922KB/s|F003-260618"
+      - "LV 🇱🇻 | @Raydikalx | D611CB"
+      - "🇹🇼_台湾 (11) t.me/rjsxrd"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -67,9 +84,10 @@ proxy-groups:
     name: "MANUAL"
     type: "select"
     proxies:
-      - "荷兰_112106571 t.me/rjsxrd"
-      - "[OpenRay] 🇸🇪SE-1"
-      - "[OpenRay] 🇦🇹AT-5"
+      - "🇺🇸 United States — #158"
+      - "🇹🇷TR_1|922KB/s|F003-260618"
+      - "LV 🇱🇻 | @Raydikalx | D611CB"
+      - "🇹🇼_台湾 (11) t.me/rjsxrd"
   -
     name: "PROXY"
     type: "select"
