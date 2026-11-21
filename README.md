@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-8298-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-8733-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Готовые автоматически обновляемые подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-11-20 17:59:02 МСК`
+**Последнее обновление:** `2026-11-21 14:47:05 МСК`
 
 ## Подписки
 
@@ -36,17 +36,17 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `8298` |
-| Россия | `1846` |
-| Global | `6925` |
-| Global 5K | `2398` |
+| Всего серверов | `8733` |
+| Россия | `1868` |
+| Global | `6910` |
+| Global 5K | `2378` |
 | LAN 5K | `5000` |
-| LAN Global | `5379` |
-| LAN Global Fast Check | `5379` |
+| LAN Global | `5210` |
+| LAN Global Fast Check | `5210` |
 | LAN Experimental | `2143` |
-| BS Safe (MANUAL / AUTO) | `1566 / 50` |
-| Happ Mobile | `449` |
-| Zapret | `2798` |
+| BS Safe (MANUAL / AUTO) | `1632 / 50` |
+| Happ Mobile | `494` |
+| Zapret | `2766` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## Тестовые подписки
