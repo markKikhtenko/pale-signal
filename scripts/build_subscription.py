@@ -243,6 +243,12 @@ SOURCES = [
         "scope": "global_only",
     },
     {
+        "id": "RAVIRANET_PREMIUM",
+        "name": "RaViraNet premium.txt",
+        "url": "https://raw.githubusercontent.com/btsk161/Freeinternet_byMygalaru.github.io/refs/heads/main/premium.txt",
+        "scope": "global_only",
+    },
+    {
         "id": "WIREVEIL_VLESS",
         "name": "WireVeil VLESS (wired blacklist mode)",
         "url": "https://raw.githubusercontent.com/markKikhtenko/WireVeil/main/vless.txt",
@@ -571,12 +577,14 @@ BYPASS_SOURCE_IDS = {
     "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
     "COLORAMA_WHITELIST_VLESS",
     "COLORAMA_RU_SNI_BEST_VLESS",
+    "RAVIRANET_PREMIUM",
 }
 
 NEW_GLOBAL_SOURCE_PRIORITY = (
     "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
     "COLORAMA_WHITELIST_VLESS",
     "COLORAMA_RU_SNI_BEST_VLESS",
+    "RAVIRANET_PREMIUM",
 )
 NEW_GLOBAL_SOURCE_IDS = set(NEW_GLOBAL_SOURCE_PRIORITY)
 GLOBAL_PRODUCTION_SOURCE_IDS = BASE_SOURCE_IDS | NEW_GLOBAL_SOURCE_IDS

@@ -18,12 +18,14 @@ class GlobalSourcePolicyTests(unittest.TestCase):
             "HUSSAROFF_LTE_UNIVERSAL_CHECKED": "https://raw.githubusercontent.com/hussaroff/lte-universal-checked/main/whitelist.txt",
             "COLORAMA_WHITELIST_VLESS": "https://raw.githubusercontent.com/coloramamoe/vless-parser/main/githubmirror/whitelist-vless.txt",
             "COLORAMA_RU_SNI_BEST_VLESS": "https://raw.githubusercontent.com/coloramamoe/vless-parser/main/githubmirror/ru-sni-best-vless.txt",
+            "RAVIRANET_PREMIUM": "https://raw.githubusercontent.com/btsk161/Freeinternet_byMygalaru.github.io/refs/heads/main/premium.txt",
         }
         sources = {source["id"]: source for source in builder.SOURCES}
         self.assertEqual(tuple(expected), builder.NEW_GLOBAL_SOURCE_PRIORITY)
         self.assertEqual(builder.GLOBAL_SOURCE_PRIORITY[0], "PULSEPROXY_BS_30")
         self.assertEqual(
-            builder.GLOBAL_SOURCE_PRIORITY[-3:], builder.NEW_GLOBAL_SOURCE_PRIORITY
+            builder.GLOBAL_SOURCE_PRIORITY[-len(expected):],
+            builder.NEW_GLOBAL_SOURCE_PRIORITY,
         )
         for source_id, url in expected.items():
             with self.subTest(source_id=source_id):
