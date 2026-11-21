@@ -5,71 +5,21 @@ log-level: "info"
 ipv6: false
 proxies:
   -
-    name: "🇮🇷 Iran — #39"
+    name: "🏳[openproxylist.com] vless-"
     type: "vless"
-    server: "46.243.233.194"
-    port: 443
-    uuid: "7955bf18-35c4-412d-aabd-c0b36c793063"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "pssdwynorv.newwl.pro"
-    client-fingerprint: "firefox"
-    ws-opts:
-      path: "/service/telemetry/0294da469190/"
-      headers:
-        Host: "pssdwynorv.newwl.pro"
-  -
-    name: "🇮🇷 Iran [*CIDR] CDN t.me/rjsxrd"
-    type: "vless"
-    server: "pssdwynorv.newwl.pro"
-    port: 443
-    uuid: "7955bf18-35c4-412d-aabd-c0b36c793063"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "pssdwynorv.newwl.pro"
-    client-fingerprint: "firefox"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/service/telemetry/0294da469190/"
-      headers:
-        Host: "pssdwynorv.newwl.pro"
-  -
-    name: "🇳🇱 The Netherlands [*CIDR] t.me/rjsxrd 2"
-    type: "vless"
-    server: "135.106.208.37"
-    port: 443
-    uuid: "7384d777-cd1b-56f3-a31a-d7f69daf45ed"
+    server: "185.246.155.91"
+    port: 10103
+    uuid: "dbf3f074-3b18-43f3-b82a-debd8c879c69"
     network: "tcp"
     udp: true
     encryption: "none"
     flow: "xtls-rprx-vision"
     tls: true
-    servername: "max.ru"
-    client-fingerprint: "safari"
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
     reality-opts:
-      public-key: "VgX9N3I4ELJA5PCSaEXwJMly3GprvfDWhNTAu5yfgm0"
-      short-id: "c00d8a77"
-  -
-    name: "🇪🇺🥥9🏝️ BL"
-    type: "vless"
-    server: "89.127.197.84"
-    port: 29926
-    uuid: "44c57fa6-0a84-436b-b732-92ae91ea7fb5"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "external-api.mediabilling.kinopoisk.ru"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "bvPPuQSATtIYbXepTFHpxhRaNRetAimrtjO5UPymb3g"
-      short-id: "e893"
+      public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
+      short-id: "6859f5b59e55aa30"
   -
     name: "LV 🇱🇻 | @Raydikalx | D611CB"
     type: "vless"
@@ -86,23 +36,7 @@ proxies:
       public-key: "2hV4TY2ygvQ7ISa5o4u_FUKXzlIhLgbsScE8M1h0m3Y"
       short-id: "67ece882d65d0f1a"
   -
-    name: "🇹🇼 Taiwan (сервер) | 🌐 Выход не определён | @RaViraNet t.me/rjsxrd 2"
-    type: "vless"
-    server: "free.fugui.lol"
-    port: 19482
-    uuid: "ead3595f-4020-4e76-a3ec-c248e1a2f2f7"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "swdist.apple.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "IjWYbHNrZb3UCQxsTJyekEOA3tHq42L6Jw3O8MmLYVQ"
-      short-id: "fa514b83"
-  -
-    name: "🇺🇸 United States — #130"
+    name: "🇺🇸 United States — #154"
     type: "vless"
     server: "195.123.240.65"
     port: 443
@@ -117,18 +51,31 @@ proxies:
     reality-opts:
       public-key: "StPbcmBuzpuYUfa4oZ5SI3Bq1OSF_-oU1vp2AcyvQVE"
       short-id: "19296c9f1bf9c7b1"
+  -
+    name: "🇹🇼_台湾 (10) t.me/rjsxrd"
+    type: "vless"
+    server: "free.fugui.lol"
+    port: 19482
+    uuid: "ead3595f-4020-4e76-a3ec-c248e1a2f2f7"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "swdist.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "IjWYbHNrZb3UCQxsTJyekEOA3tHq42L6Jw3O8MmLYVQ"
+      short-id: "fa514b83"
 proxy-groups:
   -
     name: "AUTO"
     type: "url-test"
     proxies:
-      - "🇮🇷 Iran — #39"
-      - "🇮🇷 Iran [*CIDR] CDN t.me/rjsxrd"
-      - "🇳🇱 The Netherlands [*CIDR] t.me/rjsxrd 2"
-      - "🇪🇺🥥9🏝️ BL"
+      - "🏳[openproxylist.com] vless-"
       - "LV 🇱🇻 | @Raydikalx | D611CB"
-      - "🇹🇼 Taiwan (сервер) | 🌐 Выход не определён | @RaViraNet t.me/rjsxrd 2"
-      - "🇺🇸 United States — #130"
+      - "🇺🇸 United States — #154"
+      - "🇹🇼_台湾 (10) t.me/rjsxrd"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -137,13 +84,10 @@ proxy-groups:
     name: "MANUAL"
     type: "select"
     proxies:
-      - "🇮🇷 Iran — #39"
-      - "🇮🇷 Iran [*CIDR] CDN t.me/rjsxrd"
-      - "🇳🇱 The Netherlands [*CIDR] t.me/rjsxrd 2"
-      - "🇪🇺🥥9🏝️ BL"
+      - "🏳[openproxylist.com] vless-"
       - "LV 🇱🇻 | @Raydikalx | D611CB"
-      - "🇹🇼 Taiwan (сервер) | 🌐 Выход не определён | @RaViraNet t.me/rjsxrd 2"
-      - "🇺🇸 United States — #130"
+      - "🇺🇸 United States — #154"
+      - "🇹🇼_台湾 (10) t.me/rjsxrd"
   -
     name: "PROXY"
     type: "select"
