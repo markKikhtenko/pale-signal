@@ -1,39 +1,13 @@
 {
-  "updated": "2026-11-21 15:16:22 МСК",
+  "updated": "2026-11-21 15:31:20 МСК",
   "environment": "GitHub Actions or local runner; not MegaFon",
   "candidates": [
     {
       "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
       "source": "hussaroff lte-universal-checked whitelist.txt",
-      "checked_at": "2026-11-21 15:16:22 МСК",
+      "checked_at": "2026-11-21 15:31:20 МСК",
       "github_https": "PASS",
-      "latency_ms": 1974,
-      "proxy": {
-        "name": "🇺🇸 United States — #131",
-        "type": "vless",
-        "server": "95.129.236.70",
-        "port": 443,
-        "uuid": "1547ed3d-3bb7-4153-afdc-8eb3e9373c84",
-        "network": "ws",
-        "udp": true,
-        "encryption": "none",
-        "tls": true,
-        "servername": "static.lk.pc-club.app",
-        "client-fingerprint": "firefox",
-        "ws-opts": {
-          "path": "/gateway/v1/ws/de963c1a03a37c66383da198813099b1",
-          "headers": {
-            "Host": "static.lk.pc-club.app"
-          }
-        }
-      }
-    },
-    {
-      "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
-      "source": "hussaroff lte-universal-checked whitelist.txt",
-      "checked_at": "2026-11-21 15:16:22 МСК",
-      "github_https": "PASS",
-      "latency_ms": 1567,
+      "latency_ms": 1383,
       "proxy": {
         "name": "荷兰_112113566 t.me/rjsxrd",
         "type": "vless",
@@ -56,9 +30,9 @@
     {
       "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
       "source": "hussaroff lte-universal-checked whitelist.txt",
-      "checked_at": "2026-11-21 15:16:22 МСК",
+      "checked_at": "2026-11-21 15:31:20 МСК",
       "github_https": "PASS",
-      "latency_ms": 886,
+      "latency_ms": 693,
       "proxy": {
         "name": "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd",
         "type": "vless",
@@ -79,35 +53,36 @@
       }
     },
     {
-      "source_id": "RAVIRANET_PREMIUM",
-      "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-21 15:16:22 МСК",
+      "source_id": "COLORAMA_WHITELIST_VLESS",
+      "source": "coloramamoe whitelist-vless.txt",
+      "checked_at": "2026-11-21 15:31:20 МСК",
       "github_https": "PASS",
-      "latency_ms": 4830,
+      "latency_ms": 5951,
       "proxy": {
-        "name": "LV 🇱🇻 | @Raydikalx | D611CB",
+        "name": "🇳🇱 The Netherlands [*CIDR] 2",
         "type": "vless",
-        "server": "45.38.143.210",
-        "port": 30584,
-        "uuid": "cebc5f19-18d9-48e6-9029-fb4b04caf393",
+        "server": "135.106.208.37",
+        "port": 443,
+        "uuid": "7384d777-cd1b-56f3-a31a-d7f69daf45ed",
         "network": "tcp",
         "udp": true,
         "encryption": "none",
+        "flow": "xtls-rprx-vision",
         "tls": true,
-        "servername": "m.vk.com",
-        "client-fingerprint": "chrome",
+        "servername": "max.ru",
+        "client-fingerprint": "safari",
         "reality-opts": {
-          "public-key": "2hV4TY2ygvQ7ISa5o4u_FUKXzlIhLgbsScE8M1h0m3Y",
-          "short-id": "67ece882d65d0f1a"
+          "public-key": "VgX9N3I4ELJA5PCSaEXwJMly3GprvfDWhNTAu5yfgm0",
+          "short-id": "c00d8a77"
         }
       }
     },
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-21 15:16:22 МСК",
+      "checked_at": "2026-11-21 15:31:20 МСК",
       "github_https": "PASS",
-      "latency_ms": 1930,
+      "latency_ms": 3044,
       "proxy": {
         "name": "🇹🇼_台湾 (10) t.me/rjsxrd",
         "type": "vless",
@@ -130,9 +105,34 @@
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-21 15:16:22 МСК",
+      "checked_at": "2026-11-21 15:31:20 МСК",
       "github_https": "PASS",
-      "latency_ms": 1132,
+      "latency_ms": 932,
+      "proxy": {
+        "name": "🇺🇸 United States — #125",
+        "type": "vless",
+        "server": "195.123.240.65",
+        "port": 443,
+        "uuid": "ce18d0eb-5c71-41f9-96e5-1632e22456e4",
+        "network": "tcp",
+        "udp": true,
+        "encryption": "none",
+        "flow": "xtls-rprx-vision",
+        "tls": true,
+        "servername": "www.cloudflare.com",
+        "client-fingerprint": "chrome",
+        "reality-opts": {
+          "public-key": "StPbcmBuzpuYUfa4oZ5SI3Bq1OSF_-oU1vp2AcyvQVE",
+          "short-id": "19296c9f1bf9c7b1"
+        }
+      }
+    },
+    {
+      "source_id": "RAVIRANET_PREMIUM",
+      "source": "RaViraNet premium.txt",
+      "checked_at": "2026-11-21 15:31:20 МСК",
+      "github_https": "PASS",
+      "latency_ms": 4879,
       "proxy": {
         "name": "🇹🇼_台湾 (11) t.me/rjsxrd",
         "type": "vless",
