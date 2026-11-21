@@ -1,13 +1,13 @@
 {
-  "updated": "2026-11-21 17:13:12 МСК",
+  "updated": "2026-11-21 17:30:26 МСК",
   "environment": "GitHub Actions or local runner; not MegaFon",
   "candidates": [
     {
       "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
       "source": "hussaroff lte-universal-checked whitelist.txt",
-      "checked_at": "2026-11-21 17:13:12 МСК",
+      "checked_at": "2026-11-21 17:30:26 МСК",
       "github_https": "PASS",
-      "latency_ms": 5677,
+      "latency_ms": 5778,
       "proxy": {
         "name": "🇮🇷 Iran — #39",
         "type": "vless",
@@ -29,37 +29,40 @@
       }
     },
     {
-      "source_id": "COLORAMA_WHITELIST_VLESS",
-      "source": "coloramamoe whitelist-vless.txt",
-      "checked_at": "2026-11-21 17:13:12 МСК",
+      "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
+      "source": "hussaroff lte-universal-checked whitelist.txt",
+      "checked_at": "2026-11-21 17:30:26 МСК",
       "github_https": "PASS",
-      "latency_ms": 378,
+      "latency_ms": 6025,
       "proxy": {
-        "name": "🇳🇱 The Netherlands (сервер) | 🇷🇺 Russia (выход 138.16.248.206) | БЕЛЫЙ IP | @RaViraNet t.me/rjsx",
+        "name": "🇮🇷 Iran [*CIDR] CDN t.me/rjsxrd",
         "type": "vless",
-        "server": "78.159.245.147",
-        "port": 445,
-        "uuid": "37af0181-5598-4aad-a040-d926bcb65757",
-        "network": "grpc",
+        "server": "pssdwynorv.newwl.pro",
+        "port": 443,
+        "uuid": "7955bf18-35c4-412d-aabd-c0b36c793063",
+        "network": "ws",
         "udp": true,
         "encryption": "none",
         "tls": true,
-        "servername": "passport.yandex.ru",
+        "servername": "pssdwynorv.newwl.pro",
         "client-fingerprint": "firefox",
-        "reality-opts": {
-          "public-key": "VHWmCkZwC5XE-ctv0p8BinjoIx4SWgJUIsZPrhNf6TA"
-        },
-        "grpc-opts": {
-          "grpc-service-name": "grpc"
+        "alpn": [
+          "http/1.1"
+        ],
+        "ws-opts": {
+          "path": "/service/telemetry/0294da469190/",
+          "headers": {
+            "Host": "pssdwynorv.newwl.pro"
+          }
         }
       }
     },
     {
       "source_id": "COLORAMA_WHITELIST_VLESS",
       "source": "coloramamoe whitelist-vless.txt",
-      "checked_at": "2026-11-21 17:13:12 МСК",
+      "checked_at": "2026-11-21 17:30:26 МСК",
       "github_https": "PASS",
-      "latency_ms": 3873,
+      "latency_ms": 6422,
       "proxy": {
         "name": "🇳🇱 The Netherlands [*CIDR] t.me/rjsxrd 2",
         "type": "vless",
@@ -82,35 +85,34 @@
     {
       "source_id": "COLORAMA_WHITELIST_VLESS",
       "source": "coloramamoe whitelist-vless.txt",
-      "checked_at": "2026-11-21 17:13:12 МСК",
+      "checked_at": "2026-11-21 17:30:26 МСК",
       "github_https": "PASS",
-      "latency_ms": 350,
+      "latency_ms": 794,
       "proxy": {
-        "name": "🇳🇱 The Netherlands (сервер) | 🇷🇺 Russia (выход 89.208.220.252) | БЕЛЫЙ IP | @RaViraNet t.me/rjsx",
+        "name": "🇪🇺🥥9🏝️ BL",
         "type": "vless",
-        "server": "78.159.245.147",
-        "port": 445,
-        "uuid": "37af0181-5598-4aad-a040-d926bcb65757",
-        "network": "grpc",
+        "server": "89.127.197.84",
+        "port": 29926,
+        "uuid": "44c57fa6-0a84-436b-b732-92ae91ea7fb5",
+        "network": "tcp",
         "udp": true,
         "encryption": "none",
+        "flow": "xtls-rprx-vision",
         "tls": true,
-        "servername": "passport.yandex.ru",
-        "client-fingerprint": "ios",
+        "servername": "external-api.mediabilling.kinopoisk.ru",
+        "client-fingerprint": "firefox",
         "reality-opts": {
-          "public-key": "VHWmCkZwC5XE-ctv0p8BinjoIx4SWgJUIsZPrhNf6TA"
-        },
-        "grpc-opts": {
-          "grpc-service-name": "grpc"
+          "public-key": "bvPPuQSATtIYbXepTFHpxhRaNRetAimrtjO5UPymb3g",
+          "short-id": "e893"
         }
       }
     },
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-21 17:13:12 МСК",
+      "checked_at": "2026-11-21 17:30:26 МСК",
       "github_https": "PASS",
-      "latency_ms": 2047,
+      "latency_ms": 5980,
       "proxy": {
         "name": "LV 🇱🇻 | @Raydikalx | D611CB",
         "type": "vless",
@@ -132,9 +134,9 @@
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-21 17:13:12 МСК",
+      "checked_at": "2026-11-21 17:30:26 МСК",
       "github_https": "PASS",
-      "latency_ms": 7425,
+      "latency_ms": 3123,
       "proxy": {
         "name": "🇹🇼 Taiwan (сервер) | 🌐 Выход не определён | @RaViraNet t.me/rjsxrd 2",
         "type": "vless",
@@ -157,9 +159,9 @@
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-21 17:13:12 МСК",
+      "checked_at": "2026-11-21 17:30:26 МСК",
       "github_https": "PASS",
-      "latency_ms": 621,
+      "latency_ms": 3446,
       "proxy": {
         "name": "🇺🇸 United States — #130",
         "type": "vless",
