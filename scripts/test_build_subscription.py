@@ -848,12 +848,8 @@ class LanExperimentalTests(unittest.TestCase):
         )
         self.assertIn(builder.experimental_readme_section(stats), readme)
         self.assertIn(f"| LAN Experimental | `{stats['total']}` |", readme)
-        self.assertIn(f"| LAN Experimental AUTO | `{stats['auto']}` |", readme)
-        self.assertIn(
-            "| Исключено пересечений Experimental с LAN Global | "
-            f"`{stats['lan_global_overlap']}` |",
-            readme,
-        )
+        self.assertNotIn("LAN Experimental AUTO", readme)
+        self.assertNotIn("Исключено пересечений Experimental с LAN Global", readme)
 
 
 class ProductionSourcePolicyTests(unittest.TestCase):

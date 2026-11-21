@@ -4288,10 +4288,7 @@ def load_experimental_stats(
         validate_experimental_stats(stats)
         return stats
     except Exception as exc:
-        if strict:
-            raise RuntimeError(f"could not load LAN Experimental statistics from {path}: {exc}") from exc
-        print(f"warning: {exc}; recovering LAN Experimental statistics from README", file=sys.stderr)
-        return parse_experimental_stats_from_readme()
+        raise RuntimeError(f"could not load LAN Experimental statistics from {path}: {exc}") from exc
 
 
 def write_experimental_stats(path: Path, stats: dict) -> None:
@@ -4677,210 +4674,34 @@ def experimental_wireveil_audit_table() -> str:
 
 def experimental_readme_section(experimental_stats: dict) -> str:
     validate_experimental_stats(experimental_stats)
-    protocols = ", ".join(
-        f"{protocol}: {count}"
-        for protocol, count in sorted(experimental_stats.get("protocols", {}).items())
-    )
-    wireveil = experimental_stats.get("wireveil", {})
-    wireveil_candidates = int(wireveil.get("candidates", 0))
-    wireveil_found = int(wireveil.get("found", 0))
-    wireveil_good = int(wireveil.get("found_good", 0))
-    wireveil_partial = int(wireveil.get("found_partial", 0))
-    wireveil_protocol_excluded = int(
-        wireveil.get("matched_protocol_excluded", wireveil.get("protocol_excluded", 0))
-    )
     return f"""{LAN_EXPERIMENTAL_README_START}
-## LAN Experimental
+## Тестовые подписки
 
-Изолированная тестовая подписка: `{experimental_stats['total']}` серверов, все входят в `AUTO`. Протоколы: `{protocols}`. Дубли и совпадения с `LAN Global` удаляются до публикации. Опубликованный до этого пул сохранён без изменений и используется как базовый; при временной недоступности нового источника используется его последний опубликованный пул. Старые три источника остаются обязательными.
+- [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) — тестовый Global-пул.
+- [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) — изолированный LAN-пул на `{experimental_stats['total']}` серверов; все серверы входят в `AUTO`, пересечения с LAN Global удаляются.
 
-Шесть GitHub YAML-источников `wuge0/free-nodes`, `sakazxc1400/free-vpn-sub`, `learnLi/free-nodes`, `bily1258-design/beimi`, `Delta-Kronecker/V2ray-Config` и `hezhanleiok/freesub` подключены целиком и только к LAN Experimental. Отчёт `WireVeil-Mihomo-Report-20261111-141445.zip` используется как историческая проверка актуальности самих источников и для статистики точных совпадений, а не как поузловой allowlist: при каждом обновлении импортируются все текущие валидные VLESS, Shadowsocks и Trojan. VMess, Hysteria2, невалидные записи, дубли и пересечения с LAN Global по-прежнему исключаются. В отчёте 60 уникальных Good/Partial, из них 4 VMess/Hysteria2 не поддерживаются политикой протоколов; в текущих YAML найдено `{wireveil_found}` из `{wireveil_candidates}` поддерживаемых проверенных записей (`{wireveil_good}` Good, `{wireveil_partial}` Partial), а также `{wireveil_protocol_excluded}` совпадений запрещённых протоколов.
-
-Результаты выбора источников основаны на одном историческом сетевом аудите от 27.10.2026:
-
-{experimental_audit_table()}
-
-Эти числа описывают только тот сетевой прогон, а не все узлы источников. Валидный YAML и успешный `mihomo -t` подтверждают совместимость конфигурации, но не гарантируют сетевую доступность узла.
-
-Перед добавлением F0rc3Run и ProxyQueen локальный WireVeil Checker проверял HTTPS-доступ к ChatGPT, Instagram, Spotify, Telegram Web и YouTube:
-
-{experimental_wireveil_audit_table()}
-
-Результаты WireVeil — исторический ориентир на момент локальной проверки, а не гарантия актуальной работоспособности и не live-проверка при сборке. Разрешены только VLESS, Shadowsocks и Trojan; VMess и Hysteria2 исключаются.
-
-{experimental_source_table(experimental_stats)}
+Эти варианты могут меняться заметнее основных подписок и не рекомендуются как единственный рабочий профиль.
 {LAN_EXPERIMENTAL_README_END}"""
 
 
 def lan_source_stats_readme_section(stats: dict) -> str:
-    unique_before = int(stats.get("unique_endpoints_before", stats.get("lan_global_before", 0)))
-    unique_after = int(stats.get("unique_endpoints_after", stats.get("lan_global_after", 0)))
-    lines = [
-        LAN_SOURCE_STATS_README_START,
-        "## Новые LAN-источники",
-        "",
-        (
-            f"Эталонные `{stats.get('legacy_preserved', 0)}` записей из `origin/main` и "
-            f"ранее добавленные `{stats.get('previous_additions_preserved', 0)}` записей "
-            f"(всего `{stats.get('preserved_total', stats.get('lan_global_before', 0))}`) "
-            "сохранены без изменения имён, параметров и порядка. "
-            f"Добавлено `{stats.get('new_added', 0)}` новых конфигураций; исключено "
-            f"`{stats.get('new_duplicates_excluded', 0)}` новых дублей. Итого "
-            f"`{stats.get('lan_global_after', 0)}` записей и `{unique_after}` уникальных "
-            f"`server + port + UUID` (в старом пуле: `{unique_before}`). "
-            "Статус «проверено» присваивается только после успешного HTTPS через VLESS."
-        ),
-        "",
-        (
-            "Полные URL, время обновления, ошибки загрузки, причины отбраковки, "
-            "транспорты и результаты стадий HTTPS сохранены в "
-            "[`lan-source-stats.json`](lan-source-stats.json)."
-        ),
-        "",
-        (
-            "Политика дальнейшего обновления: фиксированный префикс из 2159 записей "
-            "не накапливается заново; при каждом запуске пересобирается только текущий "
-            "суффикс из доступных источников. Удаление или замена узлов фиксированного "
-            "префикса требует отдельной проверяемой миграции."
-        ),
-        "",
-        "| Источник | Получено | VLESS | Валидных | Уникальных | Дубли | Добавлено | HTTPS | Статус |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---|",
-    ]
-    source_stats = stats.get("sources", {})
-    for source in SOURCES:
-        source_id = source["id"]
-        if source_id not in NEW_LAN_SOURCE_IDS:
-            continue
-        item = source_stats.get(source_id, {})
-        lines.append(
-            f"| [{source['name']}]({source['url']}) | "
-            f"`{item.get('received', 0)}` | `{item.get('received_vless', 0)}` | "
-            f"`{item.get('valid', 0)}` | `{item.get('unique', 0)}` | "
-            f"`{item.get('duplicates', 0)}` | `{item.get('added', 0)}` | "
-            f"`{item.get('https_success', 0)}/{item.get('https_tested', 0)}` | "
-            f"{item.get('verification_status', 'не проверено')} |"
-        )
-    lines.append(LAN_SOURCE_STATS_README_END)
-    return "\n".join(lines)
+    return f"{LAN_SOURCE_STATS_README_START}\n{LAN_SOURCE_STATS_README_END}"
 
 
 def global_source_stats_readme_section(stats: dict) -> str:
-    source_stats = stats.get("sources", {})
-    lines = [
-        GLOBAL_SOURCE_STATS_README_START,
-        "## Global: источники обхода белых списков",
-        "",
-        (
-            "Три новых whitelist/SNI-источника добавляются только в production Global-контур. "
-            "Дедупликация выполняется по фактическим параметрам VLESS, TLS/REALITY и транспорта; "
-            "имя узла в ключ не входит. PulseProxy сохраняет первый приоритет, относительный "
-            "порядок всех прежних источников не изменён."
-        ),
-        "",
-        (
-            "HTTPS в этой таблице выполняется через Mihomo в среде GitHub Actions/локального "
-            "прогона и не является проверкой в сети МегаФона. До запуска роутерного теста "
-            "колонка МегаФон всегда содержит `NOT TESTED`."
-        ),
-        "",
-        "| Источник | HTTP | Обновлён | Получено | Валидных | Уникальных в источнике | Новых Global | Дубли/невалидные | DNS | HTTPS | МегаФон |",
-        "|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---|",
-    ]
-    for source_id in NEW_GLOBAL_SOURCE_PRIORITY:
-        item = source_stats.get(source_id, {})
-        rejected = int(item.get("duplicates_in_source", 0)) + int(item.get("invalid", 0))
-        http_status = item.get("http_status")
-        lines.append(
-            f"| [{item.get('name', source_id)}]({item.get('url', '')}) | "
-            f"`{http_status if http_status is not None else '-'}` | "
-            f"`{item.get('last_updated', '-')}` | `{item.get('received_vless', 0)}` | "
-            f"`{item.get('valid', 0)}` | `{item.get('unique_in_source', 0)}` | "
-            f"`{item.get('unique_added_global', 0)}` | `{rejected}` | "
-            f"`{item.get('dns_success', 0)}/{item.get('dns_tested', 0)}` | "
-            f"`{item.get('https_success', 0)}/{item.get('https_tested', 0)}` | "
-            f"`{item.get('megafon', 'NOT TESTED')}` |"
-        )
-
-    unavailable = [
-        (source_id, item)
-        for source_id, item in source_stats.items()
-        if item.get("review_for_removal")
-    ]
-    lines.extend(["", "### Недоступные старые источники", ""])
-    if unavailable:
-        lines.append(
-            "Текущая диагностика получила HTTP 404. Источники не удалены автоматически; "
-            "для каждого предлагается проверить перенос или переименование и только затем исключать."
-        )
-        lines.extend(["", "| Источник | HTTP | Серия 404 | Рекомендация |", "|---|---:|---:|---|"])
-        for _source_id, item in unavailable:
-            lines.append(
-                f"| [{item.get('name', '-')}]({item.get('url', '')}) | "
-                f"`{item.get('http_status', '-')}` | `{item.get('consecutive_http_404', 0)}` | "
-                f"{item.get('removal_recommendation', '-')} |"
-            )
-    else:
-        lines.append("HTTP 404 среди production Global-источников не обнаружены.")
-
-    report_rows = stats.get("megafon_report", [])
-    lines.extend(
-        [
-            "",
-            "### Кандидаты для проверки на МегаФоне",
-            "",
-            "В этот список попадают только узлы, уже выполнившие реальный HTTPS-запрос через Mihomo. Это ещё не подтверждение работы в мобильной сети.",
-            "",
-            "| Имя | Источник | мс | HTTPS | МегаФон |",
-            "|---|---|---:|---|---|",
-        ]
-    )
-    if report_rows:
-        for row in report_rows:
-            lines.append(
-                f"| {row.get('name', '-')} | {row.get('source', '-')} | "
-                f"`{row.get('latency_ms') if row.get('latency_ms') is not None else '-'}` | "
-                f"{row.get('https', 'FAIL')} | {row.get('megafon', 'NOT TESTED')} |"
-            )
-    else:
-        lines.append("| Кандидаты ещё не сформированы | - | `-` | FAIL | NOT TESTED |")
-    lines.extend(
-        [
-            "",
-            "Ограниченный тест на роутере (по умолчанию не более 12 узлов, 2 параллельных процесса, таймаут 12 секунд):",
-            "",
-            "```sh",
-            "python3 scripts/check_megafon.py --mihomo /usr/bin/mihomo --confirm-megafon --limit 12 --workers 2 --timeout 12",
-            "```",
-            "",
-            "Скрипт классифицирует DNS, TCP, TLS, HTTPS и таймауты и создаёт отдельную проверенную подписку только из фактических `PASS` в подтверждённой сети МегаФона.",
-            GLOBAL_SOURCE_STATS_README_END,
-        ]
-    )
-    return "\n".join(lines)
+    return f"{GLOBAL_SOURCE_STATS_README_START}\n{GLOBAL_SOURCE_STATS_README_END}"
 
 
 def refresh_readme_global_source_stats(
     stats: dict, path: Path = README_FILE
 ) -> None:
     text = path.read_text(encoding="utf-8")
-    candidate_row = (
-        "| [subscription-global-megafon-candidates.yaml]"
-        "(https://markkikhtenko.github.io/pale-signal/subscription-global-megafon-candidates.yaml) "
-        "| Ограниченный список кандидатов, прошедших HTTPS через Mihomo вне сети МегаФона; "
-        "требует роутерной проверки |"
+    text = re.sub(
+        r"^\| \[subscription-global-megafon-candidates\.yaml\].*\|\n?",
+        "",
+        text,
+        flags=re.MULTILINE,
     )
-    if candidate_row not in text:
-        anchor_pattern = r"^(\| \[subscription-global-5k\.yaml\].*\|)$"
-        text, replacements = re.subn(
-            anchor_pattern,
-            lambda match: f"{match.group(1)}\n{candidate_row}",
-            text,
-            count=1,
-            flags=re.MULTILINE,
-        )
-        if replacements != 1:
-            raise RuntimeError("README Global 5K subscription row was not found")
     replacement = global_source_stats_readme_section(stats)
     marker_pattern = (
         re.escape(GLOBAL_SOURCE_STATS_README_START)
@@ -4895,11 +4716,6 @@ def refresh_readme_global_source_stats(
             count=1,
             flags=re.DOTALL,
         )
-    else:
-        anchor = "\n<!-- LAN-EXPERIMENTAL:START -->"
-        if anchor not in text:
-            raise RuntimeError("README LAN Experimental marker was not found")
-        text = text.replace(anchor, f"\n{replacement}\n{anchor}", 1)
     for label, value in (
         ("Global", int(stats.get("totals", {}).get("global", 0))),
         ("Global 5K", int(stats.get("totals", {}).get("global_5k", 0))),
@@ -4928,11 +4744,6 @@ def refresh_readme_lan_source_stats(stats: dict, path: Path = README_FILE) -> No
     )
     if re.search(marker_pattern, text, flags=re.DOTALL):
         text = re.sub(marker_pattern, lambda _match: replacement, text, count=1, flags=re.DOTALL)
-    else:
-        anchor = "\n## LAN Global и Fast Check"
-        if anchor not in text:
-            raise RuntimeError("README LAN Global section was not found")
-        text = text.replace(anchor, f"\n{replacement}\n{anchor}", 1)
     status_values = {
         "LAN 5K": int(stats.get("lan_5k_after", stats.get("lan_global_after", 0))),
         "LAN Global": int(stats.get("lan_global_after", 0)),
@@ -5026,13 +4837,7 @@ def refresh_readme_experimental(
             raise RuntimeError("README LAN Experimental section was not found")
         text = re.sub(legacy_pattern, lambda _match: replacement, text, count=1, flags=re.DOTALL)
 
-    status_values = {
-        "LAN Experimental": int(experimental_stats["total"]),
-        "LAN Experimental AUTO": int(experimental_stats["auto"]),
-        "Исключено пересечений Experimental с LAN Global": int(
-            experimental_stats["lan_global_overlap"]
-        ),
-    }
+    status_values = {"LAN Experimental": int(experimental_stats["total"])}
     for label, value in status_values.items():
         pattern = rf"^\| {re.escape(label)} \| `\d+` \|$"
         replacement_row = f"| {label} | `{value}` |"
@@ -5506,7 +5311,7 @@ def write_final_readme(
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Servers](https://img.shields.io/badge/servers-{stats['total']}-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
-Автоматически обновляемые VLESS-подписки для Mihomo, OpenClash и Happ/Happ Plus.
+Готовые автоматически обновляемые подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
 **Последнее обновление:** `{now}`
 
@@ -5514,21 +5319,25 @@ def write_final_readme(
 
 | Файл | Назначение |
 |------|------------|
-| [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) | Все серверы |
-| [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) | Россия |
-| [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) | Все non-RU серверы |
+| [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) | Полный VLESS-пул |
+| [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) | Серверы России |
+| [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) | Все серверы вне России |
 | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) | Global, до {GLOBAL_5K_SUBSCRIPTION_LIMIT} серверов |
-| [subscription-global-megafon-candidates.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-megafon-candidates.yaml) | Ограниченный список кандидатов, прошедших HTTPS через Mihomo вне сети МегаФона; требует роутерной проверки |
-| [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | Основная LAN-подписка для проводного интернета, до {LAN_5K_SUBSCRIPTION_LIMIT} серверов; при меньшем пуле совпадает с LAN Global |
-| [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | Полный LAN-пул для проводного интернета без лимита |
-| [subscription-lan-global-fast-check.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global-fast-check.yaml) | LAN Global Fast Check — те же серверы LAN Global, более активная автоматическая проверка |
-| [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) | Изолированная тестовая LAN-подписка |
-| [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) | Тестовая Global |
-| [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима блокировок |
-| [subscription-mobile.txt](https://markkikhtenko.github.io/pale-signal/subscription-mobile.txt) | Компактная мобильная Reality-подписка для Happ/Happ Plus |
+| [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | Основной LAN-пул, до {LAN_5K_SUBSCRIPTION_LIMIT} серверов |
+| [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | Полный LAN-пул без лимита |
+| [subscription-lan-global-fast-check.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global-fast-check.yaml) | Тот же LAN Global с более быстрой проверкой |
+| [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима белых списков |
+| [subscription-mobile.txt](https://markkikhtenko.github.io/pale-signal/subscription-mobile.txt) | Мобильная Reality-подписка для Happ/Happ Plus |
 | [subscription-zapret.yaml](https://markkikhtenko.github.io/pale-signal/subscription-zapret.yaml) | Изолированный VLESS/VMess/Shadowsocks-пул Zapret из страниц 1–25 |
 
-`subscription-global.yaml`, `subscription-global-5k.yaml` и `subscription-bs-safe.yaml` используют `PulseProxy/30.txt` как приоритетный источник узлов для обхода SNI/CIDR белых списков. Из него импортируются только валидные VLESS-конфигурации; дубли удаляются общей сборкой. Новые hussaroff/coloramamoe-источники добавлены после всех прежних приоритетов и не меняют LAN, Zapret или правила маршрутизации.
+## Быстрый выбор
+
+- Обычный роутер: `subscription-lan-5k.yaml`.
+- Максимальный LAN-пул: `subscription-lan-global.yaml`.
+- Частая перепроверка узлов: `subscription-lan-global-fast-check.yaml`.
+- Режим белых списков: `subscription-bs-safe.yaml` вместе с отдельным BS Safe override ниже.
+- Телефон: `subscription-mobile.txt`.
+- Отдельный контур Zapret: `subscription-zapret.yaml`.
 
 ## Статус
 
@@ -5542,34 +5351,13 @@ def write_final_readme(
 | LAN Global | `{stats['lan_global']}` |
 | LAN Global Fast Check | `{stats['lan_global']}` |
 | LAN Experimental | `{experimental_stats['total']}` |
-| LAN Experimental AUTO | `{experimental_stats['auto']}` |
-| Исключено пересечений Experimental с LAN Global | `{experimental_stats['lan_global_overlap']}` |
-| BS Safe MANUAL | `{bs_safe_stats['total'] if bs_safe_stats is not None else stats.get('bs_safe', 0)}` |
-| BS Safe AUTO | `{bs_safe_auto_count if bs_safe_auto_count is not None else 0}` |
+| BS Safe (MANUAL / AUTO) | `{bs_safe_stats['total'] if bs_safe_stats is not None else stats.get('bs_safe', 0)} / {bs_safe_auto_count if bs_safe_auto_count is not None else 0}` |
 | Happ Mobile | `{mobile_count if mobile_count is not None else stats.get('mobile', 0)}` |
 | Zapret | `{zapret_count if zapret_count is not None else stats.get('zapret', 0)}` |
 
 {experimental_readme_section(experimental_stats)}
 
 {lan_source_stats_readme_section(lan_source_stats)}
-
-## LAN Global и Fast Check
-
-Обе подписки содержат одинаковые серверы в одинаковом порядке и используют один URL проверки: `{URL_TEST}`.
-Сейчас специализированный пул меньше лимита {LAN_5K_SUBSCRIPTION_LIMIT}, поэтому LAN 5K также содержит все серверы LAN Global.
-Используются только отдельные пулы для обычного проводного подключения и режима чёрных списков. Whitelist/CIDR-источники pale-signal в эти LAN-подписки не входят:
-
-{lan_source_urls()}
-
-| Параметр `AUTO` | LAN Global | LAN Global Fast Check |
-|-----------------|------------|-----------------------|
-| `interval` | `900` | `{LAN_GLOBAL_FAST_CHECK_INTERVAL}` |
-| `tolerance` | `100` | `{LAN_GLOBAL_FAST_CHECK_TOLERANCE}` |
-| `timeout` | значение Mihomo по умолчанию | `{LAN_GLOBAL_FAST_CHECK_TIMEOUT}` мс |
-| `max-failed-times` | значение Mihomo по умолчанию | `{LAN_GLOBAL_FAST_CHECK_MAX_FAILED_TIMES}` |
-| `lazy` | `true` | `true` |
-
-`url-test` измеряет доступность узла и задержку ответа на тестовый URL. Он не измеряет реальную скорость передачи данных до Instagram, ChatGPT или других приложений.
 
 ## Подключение
 
@@ -5583,26 +5371,42 @@ def write_final_readme(
 
 ### Happ/Happ Plus
 
-Добавьте URL `subscription-mobile.txt` как обычную подписку. Файл содержит только VLESS-ссылки без YAML, групп и правил; выбор сервера и проверка задержки выполняются в приложении.
+Добавьте URL `subscription-mobile.txt` как обычную подписку.
 
 ### Zapret
 
-`subscription-zapret.yaml` пересобирается только из 25 страниц `hiztin/VLESS-PO-GRIBI`. Только для этого источника разрешены VLESS, VMess и Shadowsocks; некорректные записи отбрасываются, точные дубли конфигураций удаляются. Все страницы обязательны, а резкое сокращение пула блокирует публикацию. Это исключение не меняет VLESS-only правила остальных production-подписок. Проверка синтаксиса не гарантирует сетевую доступность узлов. Подробности каждой сборки сохраняются в [`zapret-stats.json`](https://markkikhtenko.github.io/pale-signal/zapret-stats.json).
+Добавьте `subscription-zapret.yaml` как отдельный профиль. Эта подписка не смешивается с остальными пулами.
 
 ## Маршрутизация
 
-Доступны два OpenClash Override Module с общими обновляемыми списками маршрутизации:
+Два существующих routing-модуля используют общие обновляемые RULE-SET и оставляют обычный трафик на `DIRECT`:
 
 | Подписка | Override Module |
 |----------|-----------------|
 | Бесплатные подписки Pale Signal | [`blacklist-routing.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) |
 | Платная подписка VPnBot | [`blacklist-routing-vpnbot.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing-vpnbot.conf) |
 
-В OpenClash откройте **Overwrite Settings → Overwrite Modules**, добавьте URL одного модуля, включите его для нужного профиля и примените профиль в режиме `Rule`. Для VPnBot основная целевая группа — `🌐 VPnBot`; обычный трафик оба модуля оставляют на `DIRECT`, DNS не меняют.
+Они не меняют DNS, Fake-IP, серверы или параметры подключения. Подключайте только один routing-модуль к одному профилю.
+
+### Custom overwrite для BS Safe
+
+Подписочный модуль для `subscription-bs-safe.yaml`:
+
+`https://markkikhtenko.github.io/pale-signal/openclash/whitelist-routing.conf`
+
+Модуль не изменяет два routing-модуля выше. Он загружает сохранённый shell-overwrite в штатный путь `/etc/openclash/custom/openclash_custom_overwrite.sh` и настраивает DIRECT/VPN, DNS и Fake-IP для режима белых списков Huawei/MegaFon.
+
+Перед подключением:
+
+1. Сохраните резервную копию существующего `openclash_custom_overwrite.sh`.
+2. Добавьте URL `whitelist-routing.conf` в **Overwrite Settings → Overwrite Modules**.
+3. Используйте его только с BS Safe и не включайте routing-модули для того же профиля.
+
+Путь custom overwrite общий для всего OpenClash. Для отката отключите BS Safe-модуль, восстановите прежний файл и перезапустите OpenClash.
 
 ## Обновление
 
-Сборка запускается ежедневно в 09:00 и 21:00 МСК. Некорректные конфигурации не публикуются. Наличие сервера в списке не гарантирует его доступность у конкретного провайдера.
+Сборка запускается в 09:00 и 21:00 МСК. Некорректные конфигурации не публикуются. Наличие узла в подписке не гарантирует его доступность у конкретного провайдера.
 """
     README_FILE.write_text(text, encoding="utf-8", newline="\n")
 

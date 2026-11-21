@@ -321,6 +321,8 @@ jobs:
           cp -R openclash public/openclash
           test -f public/openclash/blacklist-routing.conf
           test -f public/openclash/blacklist-routing-vpnbot.conf
+          test -s public/openclash/whitelist-routing.conf
+          test -s public/openclash/whitelist-routing.sh
           test -f public/openclash/rules/custom-direct-domains.yaml
           test -f public/openclash/rules/custom-proxy-domains.yaml
           test -f public/openclash/rules/custom-direct-ip.yaml

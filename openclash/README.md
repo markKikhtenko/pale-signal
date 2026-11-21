@@ -1,41 +1,52 @@
-# Модули маршрутизации OpenClash по чёрным спискам
+# OpenClash overrides
 
-Оба веб-оверрайда используют одни и те же обновляемые RULE-SET, оставляют обычный трафик на `DIRECT` и не меняют DNS, Fake-IP, TUN, IPv6, серверы или параметры подключения.
+В репозитории есть два routing-модуля и отдельный custom overwrite для режима белых списков.
 
-| Подписка | Override Module |
-|----------|-----------------|
-| Бесплатные подписки Pale Signal | `blacklist-routing.conf` |
-| Платная подписка VPnBot | `blacklist-routing-vpnbot.conf` |
+## Routing-модули
 
-Прямые URL:
+| Назначение | URL |
+|------------|-----|
+| Бесплатные подписки Pale Signal | `https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf` |
+| Платная подписка VPnBot | `https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing-vpnbot.conf` |
 
-- Pale Signal: `https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf`
-- VPnBot: `https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing-vpnbot.conf`
+Оба модуля используют обновляемые RULE-SET, оставляют обычный трафик на `DIRECT` и не меняют DNS, Fake-IP, TUN, IPv6, серверы или параметры подключения.
 
-## Какой модуль выбрать
+- `blacklist-routing.conf` направляет заблокированные ресурсы в группу `PROXY`.
+- `blacklist-routing-vpnbot.conf` направляет их в существующую группу `🌐 VPnBot`.
 
-`blacklist-routing.conf` предназначен для подписок Pale Signal с группой `PROXY`. Он сохраняет прежний порядок: специальные правила подписки идут перед списками Pale Signal.
+Подключайте только один routing-модуль к одному профилю.
 
-`blacklist-routing-vpnbot.conf` предназначен только для платной подписки VPnBot и направляет заблокированные ресурсы в уже существующую группу `🌐 VPnBot`. Модуль не создаёт групп и не ссылается на `PROXY`. Его RULE-SET ставятся перед правилами VPnBot, чтобы раннее правило подписки не перехватывало запрос. Все специфические правила безопасности и маршрутизации VPnBot сохраняются в исходном относительном порядке; их исходный `MATCH` заменяется единственным завершающим `MATCH,DIRECT`.
+## Custom overwrite для BS Safe
 
-## Приоритет RULE-SET
+URL подписочного модуля:
 
-1. Пользовательские домены DIRECT.
-2. Пользовательские домены через целевую группу.
-3. Домены Re:filter: сообщества и очищенный список РКН.
-4. Пользовательские IP/CIDR DIRECT, включая частные сети.
-5. Пользовательские IP/CIDR через целевую группу.
-6. IP-наборы Re:filter: сообщества, Discord и суммарный список.
-7. Единственный `MATCH,DIRECT`.
+`https://markkikhtenko.github.io/pale-signal/openclash/whitelist-routing.conf`
 
-Провайдеры Re:filter обновляются каждые 6 часов, пользовательские списки из этого репозитория — каждый час. Загрузка выполняется через `DIRECT`, чтобы избежать цикла запуска прокси.
+Он предназначен только для `subscription-bs-safe.yaml` на роутере в режиме белых списков Huawei/MegaFon. Модуль загружает сохранённый скрипт в `/etc/openclash/custom/openclash_custom_overwrite.sh` и применяет его без изменения исходной логики:
+
+- выбранные публичные и операторские сервисы идут через `DIRECT`;
+- Т-Банк, Сбер и Спортмастер принудительно идут через VPN-политику профиля;
+- для DIRECT-доменов возвращаются реальные IP вместо Fake-IP;
+- используются локальные сети и DNS Huawei/MegaFon;
+- IPv6 внутри Mihomo отключается.
+
+Этот модуль не изменяет `blacklist-routing.conf`, `blacklist-routing-vpnbot.conf` или их RULE-SET.
+
+Важно: путь `openclash_custom_overwrite.sh` общий для всего OpenClash. Модуль заменит существующий локальный custom overwrite и после установки скрипт может выполняться при запуске других профилей на том же роутере.
 
 ## Подключение
 
-1. Используйте OpenClash 0.47.081 или новее с ядром Meta/Mihomo.
-2. Откройте **OpenClash → Overwrite Settings → Overwrite Modules**.
-3. Добавьте URL ровно одного подходящего модуля, обновите его и включите для нужного профиля. Если есть другие модули с правилами, применяйте Pale Signal последним.
-4. Примените профиль в режиме `Rule`. Для VPnBot выберите рабочий узел в `🌐 VPnBot`; для Pale Signal — в `PROXY`.
-5. Проверьте журнал: все провайдеры `pale-signal-*` должны загрузиться, а в итоговом конфиге должен быть один завершающий `MATCH,DIRECT`.
+### Routing-модуль
 
-Для отката отключите модуль и повторно примените профиль.
+1. Откройте **OpenClash → Overwrite Settings → Overwrite Modules**.
+2. Добавьте URL подходящего routing-модуля и включите автоматическое обновление.
+3. Назначьте его нужному профилю и примените профиль в режиме `Rule`.
+
+### BS Safe
+
+1. Сохраните резервную копию `/etc/openclash/custom/openclash_custom_overwrite.sh`.
+2. Добавьте URL `whitelist-routing.conf` в **Overwrite Modules**.
+3. Используйте его только с `subscription-bs-safe.yaml`.
+4. Не включайте routing-модули для того же BS Safe-профиля.
+
+Для отката отключите BS Safe-модуль, восстановите прежний `openclash_custom_overwrite.sh` и перезапустите OpenClash.
