@@ -5,39 +5,39 @@ log-level: "info"
 ipv6: false
 proxies:
   -
-    name: "荷兰_112113566 t.me/rjsxrd"
+    name: "🇮🇷 Iran — #39"
     type: "vless"
-    server: "185.246.155.91"
-    port: 10403
-    uuid: "dbf3f074-3b18-43f3-b82a-debd8c879c69"
-    network: "tcp"
+    server: "46.243.233.194"
+    port: 443
+    uuid: "7955bf18-35c4-412d-aabd-c0b36c793063"
+    network: "ws"
     udp: true
     encryption: "none"
-    flow: "xtls-rprx-vision"
     tls: true
-    servername: "www.apple.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
-      short-id: "6859f5b59e55aa30"
+    servername: "pssdwynorv.newwl.pro"
+    client-fingerprint: "firefox"
+    ws-opts:
+      path: "/service/telemetry/0294da469190/"
+      headers:
+        Host: "pssdwynorv.newwl.pro"
   -
-    name: "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd"
+    name: "🇳🇱 The Netherlands (сервер) | 🇷🇺 Russia (выход 138.16.248.206) | БЕЛЫЙ IP | @RaViraNet t.me/rjsx"
     type: "vless"
-    server: "185.246.155.91"
-    port: 10103
-    uuid: "dbf3f074-3b18-43f3-b82a-debd8c879c69"
-    network: "tcp"
+    server: "78.159.245.147"
+    port: 445
+    uuid: "37af0181-5598-4aad-a040-d926bcb65757"
+    network: "grpc"
     udp: true
     encryption: "none"
-    flow: "xtls-rprx-vision"
     tls: true
-    servername: "www.apple.com"
-    client-fingerprint: "chrome"
+    servername: "passport.yandex.ru"
+    client-fingerprint: "firefox"
     reality-opts:
-      public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
-      short-id: "6859f5b59e55aa30"
+      public-key: "VHWmCkZwC5XE-ctv0p8BinjoIx4SWgJUIsZPrhNf6TA"
+    grpc-opts:
+      grpc-service-name: "grpc"
   -
-    name: "🇳🇱 The Netherlands [*CIDR] 2"
+    name: "🇳🇱 The Netherlands [*CIDR] t.me/rjsxrd 2"
     type: "vless"
     server: "135.106.208.37"
     port: 443
@@ -53,7 +53,38 @@ proxies:
       public-key: "VgX9N3I4ELJA5PCSaEXwJMly3GprvfDWhNTAu5yfgm0"
       short-id: "c00d8a77"
   -
-    name: "🇹🇼_台湾 (10) t.me/rjsxrd"
+    name: "🇳🇱 The Netherlands (сервер) | 🇷🇺 Russia (выход 89.208.220.252) | БЕЛЫЙ IP | @RaViraNet t.me/rjsx"
+    type: "vless"
+    server: "78.159.245.147"
+    port: 445
+    uuid: "37af0181-5598-4aad-a040-d926bcb65757"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "passport.yandex.ru"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "VHWmCkZwC5XE-ctv0p8BinjoIx4SWgJUIsZPrhNf6TA"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  -
+    name: "LV 🇱🇻 | @Raydikalx | D611CB"
+    type: "vless"
+    server: "45.38.143.210"
+    port: 30584
+    uuid: "cebc5f19-18d9-48e6-9029-fb4b04caf393"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "m.vk.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "2hV4TY2ygvQ7ISa5o4u_FUKXzlIhLgbsScE8M1h0m3Y"
+      short-id: "67ece882d65d0f1a"
+  -
+    name: "🇹🇼 Taiwan (сервер) | 🌐 Выход не определён | @RaViraNet t.me/rjsxrd 2"
     type: "vless"
     server: "free.fugui.lol"
     port: 19482
@@ -69,7 +100,7 @@ proxies:
       public-key: "IjWYbHNrZb3UCQxsTJyekEOA3tHq42L6Jw3O8MmLYVQ"
       short-id: "fa514b83"
   -
-    name: "🇺🇸 United States — #125"
+    name: "🇺🇸 United States — #130"
     type: "vless"
     server: "195.123.240.65"
     port: 443
@@ -84,33 +115,18 @@ proxies:
     reality-opts:
       public-key: "StPbcmBuzpuYUfa4oZ5SI3Bq1OSF_-oU1vp2AcyvQVE"
       short-id: "19296c9f1bf9c7b1"
-  -
-    name: "🇹🇼_台湾 (11) t.me/rjsxrd"
-    type: "vless"
-    server: "free.fugui.lol"
-    port: 51283
-    uuid: "ead3595f-4020-4e76-a3ec-c248e1a2f2f7"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "swdist.apple.com"
-    client-fingerprint: "ios"
-    reality-opts:
-      public-key: "IjWYbHNrZb3UCQxsTJyekEOA3tHq42L6Jw3O8MmLYVQ"
-      short-id: "fa514b83"
 proxy-groups:
   -
     name: "AUTO"
     type: "url-test"
     proxies:
-      - "荷兰_112113566 t.me/rjsxrd"
-      - "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd"
-      - "🇳🇱 The Netherlands [*CIDR] 2"
-      - "🇹🇼_台湾 (10) t.me/rjsxrd"
-      - "🇺🇸 United States — #125"
-      - "🇹🇼_台湾 (11) t.me/rjsxrd"
+      - "🇮🇷 Iran — #39"
+      - "🇳🇱 The Netherlands (сервер) | 🇷🇺 Russia (выход 138.16.248.206) | БЕЛЫЙ IP | @RaViraNet t.me/rjsx"
+      - "🇳🇱 The Netherlands [*CIDR] t.me/rjsxrd 2"
+      - "🇳🇱 The Netherlands (сервер) | 🇷🇺 Russia (выход 89.208.220.252) | БЕЛЫЙ IP | @RaViraNet t.me/rjsx"
+      - "LV 🇱🇻 | @Raydikalx | D611CB"
+      - "🇹🇼 Taiwan (сервер) | 🌐 Выход не определён | @RaViraNet t.me/rjsxrd 2"
+      - "🇺🇸 United States — #130"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -119,12 +135,13 @@ proxy-groups:
     name: "MANUAL"
     type: "select"
     proxies:
-      - "荷兰_112113566 t.me/rjsxrd"
-      - "AetrisVPN White list ┃ ✅ SNI: www.apple.com ┃ 🇩🇪 Германия t.me/rjsxrd"
-      - "🇳🇱 The Netherlands [*CIDR] 2"
-      - "🇹🇼_台湾 (10) t.me/rjsxrd"
-      - "🇺🇸 United States — #125"
-      - "🇹🇼_台湾 (11) t.me/rjsxrd"
+      - "🇮🇷 Iran — #39"
+      - "🇳🇱 The Netherlands (сервер) | 🇷🇺 Russia (выход 138.16.248.206) | БЕЛЫЙ IP | @RaViraNet t.me/rjsx"
+      - "🇳🇱 The Netherlands [*CIDR] t.me/rjsxrd 2"
+      - "🇳🇱 The Netherlands (сервер) | 🇷🇺 Russia (выход 89.208.220.252) | БЕЛЫЙ IP | @RaViraNet t.me/rjsx"
+      - "LV 🇱🇻 | @Raydikalx | D611CB"
+      - "🇹🇼 Taiwan (сервер) | 🌐 Выход не определён | @RaViraNet t.me/rjsxrd 2"
+      - "🇺🇸 United States — #130"
   -
     name: "PROXY"
     type: "select"
