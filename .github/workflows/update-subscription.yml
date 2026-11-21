@@ -9,6 +9,8 @@ on:
       - ".github/workflows/update-subscription.yml"
       - "scripts/build_subscription.py"
       - "scripts/check_lan_new_sources.py"
+      - "scripts/check_global_sources.py"
+      - "scripts/check_megafon.py"
       - "scripts/test_*.py"
       - "scripts/verify_lan_experimental.py"
       - "scripts/validate_openclash_module.py"
@@ -64,8 +66,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
-            python scripts/build_subscription.py --lan-only
-            python scripts/build_subscription.py --zapret-only
+            python scripts/build_subscription.py --global-only
           else
             python scripts/build_subscription.py
           fi
@@ -109,6 +110,8 @@ jobs:
           chmod +x .tools/mihomo/mihomo
           .tools/mihomo/mihomo -t -f subscription-lan-global.yaml -d .tools/mihomo/home
           .tools/mihomo/mihomo -t -f subscription-lan-global-fast-check.yaml -d .tools/mihomo/home
+          .tools/mihomo/mihomo -t -f subscription-global.yaml -d .tools/mihomo/home
+          .tools/mihomo/mihomo -t -f subscription-global-5k.yaml -d .tools/mihomo/home
           mkdir -p .tools/openclash-merged
           python scripts/validate_openclash_module.py \
             --module openclash/blacklist-routing.conf \
@@ -150,6 +153,20 @@ jobs:
           echo "- OpenClash merged configs: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- VPnBot override and priority merge: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- Custom rule providers: passed" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check new Global sources through Mihomo HTTPS
+        timeout-minutes: 15
+        run: |
+          python scripts/check_global_sources.py \
+            --mihomo .tools/mihomo/mihomo \
+            --max-per-source 5 \
+            --workers 4 \
+            --timeout 10
+          if [ -s subscription-global-megafon-candidates.yaml ]; then
+            .tools/mihomo/mihomo -t \
+              -f subscription-global-megafon-candidates.yaml \
+              -d .tools/mihomo/home
+          fi
 
       - name: Sample new LAN sources through Mihomo
         id: lan_source_health
@@ -254,6 +271,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md update-history.json lan-experimental-stats.json lan-source-stats.json zapret-stats.json subscription.yaml subscription-ru.yaml subscription-global.yaml subscription-global-5k.yaml subscription-lan-5k.yaml subscription-lan-global.yaml subscription-lan-global-fast-check.yaml subscription-lan-experimental.yaml subscription-global-non-stable.yaml subscription-bs-safe.yaml subscription-mobile.txt subscription-zapret.yaml
+          git add global-source-stats.json megafon-candidates.json megafon-report.json
+          if [ -s subscription-global-megafon-candidates.yaml ]; then
+            git add subscription-global-megafon-candidates.yaml
+          fi
           if git diff --cached --quiet; then
             echo "subscription files are unchanged"
           else
@@ -282,6 +303,12 @@ jobs:
           cp subscription-ru.yaml public/subscription-ru.yaml
           cp subscription-global.yaml public/subscription-global.yaml
           cp subscription-global-5k.yaml public/subscription-global-5k.yaml
+          cp global-source-stats.json public/global-source-stats.json
+          cp megafon-candidates.json public/megafon-candidates.json
+          cp megafon-report.json public/megafon-report.json
+          if [ -s subscription-global-megafon-candidates.yaml ]; then
+            cp subscription-global-megafon-candidates.yaml public/subscription-global-megafon-candidates.yaml
+          fi
           cp subscription-lan-5k.yaml public/subscription-lan-5k.yaml
           cp subscription-lan-global.yaml public/subscription-lan-global.yaml
           cp subscription-lan-global-fast-check.yaml public/subscription-lan-global-fast-check.yaml
@@ -302,6 +329,9 @@ jobs:
           test -s public/subscription-lan-experimental.yaml
           test -s public/subscription-zapret.yaml
           test -s public/zapret-stats.json
+          test -s public/global-source-stats.json
+          test -s public/megafon-candidates.json
+          test -s public/megafon-report.json
 
       - name: Upload Pages artifact
         if: steps.freshness.outputs.stale != 'true'

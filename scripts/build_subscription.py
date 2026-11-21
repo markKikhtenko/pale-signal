@@ -225,6 +225,24 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/solovyov-jenya2004/all_subs/main/final_sorted",
     },
     {
+        "id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
+        "name": "hussaroff lte-universal-checked whitelist.txt",
+        "url": "https://raw.githubusercontent.com/hussaroff/lte-universal-checked/main/whitelist.txt",
+        "scope": "global_only",
+    },
+    {
+        "id": "COLORAMA_WHITELIST_VLESS",
+        "name": "coloramamoe whitelist-vless.txt",
+        "url": "https://raw.githubusercontent.com/coloramamoe/vless-parser/main/githubmirror/whitelist-vless.txt",
+        "scope": "global_only",
+    },
+    {
+        "id": "COLORAMA_RU_SNI_BEST_VLESS",
+        "name": "coloramamoe ru-sni-best-vless.txt",
+        "url": "https://raw.githubusercontent.com/coloramamoe/vless-parser/main/githubmirror/ru-sni-best-vless.txt",
+        "scope": "global_only",
+    },
+    {
         "id": "WIREVEIL_VLESS",
         "name": "WireVeil VLESS (wired blacklist mode)",
         "url": "https://raw.githubusercontent.com/markKikhtenko/WireVeil/main/vless.txt",
@@ -550,7 +568,18 @@ BYPASS_SOURCE_IDS = {
     "VLADVARP_WHITELIST_VLESS",
     "PRINCE_WHITE_LIST",
     "SOLOVYOV_ALL_SUBS",
+    "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
+    "COLORAMA_WHITELIST_VLESS",
+    "COLORAMA_RU_SNI_BEST_VLESS",
 }
+
+NEW_GLOBAL_SOURCE_PRIORITY = (
+    "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
+    "COLORAMA_WHITELIST_VLESS",
+    "COLORAMA_RU_SNI_BEST_VLESS",
+)
+NEW_GLOBAL_SOURCE_IDS = set(NEW_GLOBAL_SOURCE_PRIORITY)
+GLOBAL_PRODUCTION_SOURCE_IDS = BASE_SOURCE_IDS | NEW_GLOBAL_SOURCE_IDS
 
 # Keep the original wired/blacklist pools explicit and ahead of additions. This
 # guarantees that an existing config and its name win over a duplicate supplied
@@ -583,9 +612,11 @@ NEW_LAN_SOURCE_PRIORITY = (
 )
 NEW_LAN_SOURCE_IDS = set(NEW_LAN_SOURCE_PRIORITY)
 LAN_SOURCE_IDS = LEGACY_LAN_SOURCE_IDS | NEW_LAN_SOURCE_IDS
-BS_SAFE_SOURCE_IDS = BYPASS_SOURCE_IDS
+BS_SAFE_SOURCE_IDS = BYPASS_SOURCE_IDS - NEW_GLOBAL_SOURCE_IDS
 
-if EXPERIMENTAL_SOURCE_IDS & (BASE_SOURCE_IDS | LAN_SOURCE_IDS | BYPASS_SOURCE_IDS | BS_SAFE_SOURCE_IDS):
+if EXPERIMENTAL_SOURCE_IDS & (
+    GLOBAL_PRODUCTION_SOURCE_IDS | LAN_SOURCE_IDS | BYPASS_SOURCE_IDS | BS_SAFE_SOURCE_IDS
+):
     raise RuntimeError("experimental sources must not belong to production source groups")
 if ZAPRET_SOURCE_IDS & (
     BASE_SOURCE_IDS
@@ -614,6 +645,11 @@ LAN_EXPERIMENTAL_CANDIDATE_FILE = LAN_EXPERIMENTAL_CANDIDATE_DIR / "subscription
 LAN_EXPERIMENTAL_CANDIDATE_STATS_FILE = LAN_EXPERIMENTAL_CANDIDATE_DIR / "lan-experimental-stats.json"
 LAN_SOURCE_STATS_FILE = ROOT / "lan-source-stats.json"
 LAN_HEALTH_CANDIDATES_FILE = ROOT / ".tools" / "lan-health-candidates.json"
+GLOBAL_SOURCE_STATS_FILE = ROOT / "global-source-stats.json"
+GLOBAL_HEALTH_CANDIDATES_FILE = ROOT / ".tools" / "global-health-candidates.json"
+MEGAFON_CANDIDATES_FILE = ROOT / "subscription-global-megafon-candidates.yaml"
+MEGAFON_CANDIDATES_STATS_FILE = ROOT / "megafon-candidates.json"
+MEGAFON_REPORT_FILE = ROOT / "megafon-report.json"
 GLOBAL_NON_STABLE_OUTPUT_FILE = ROOT / "subscription-global-non-stable.yaml"
 BS_SAFE_OUTPUT_FILE = ROOT / "subscription-bs-safe.yaml"
 MOBILE_OUTPUT_FILE = ROOT / "subscription-mobile.txt"
@@ -654,6 +690,8 @@ LAN_EXPERIMENTAL_README_START = "<!-- LAN-EXPERIMENTAL:START -->"
 LAN_EXPERIMENTAL_README_END = "<!-- LAN-EXPERIMENTAL:END -->"
 LAN_SOURCE_STATS_README_START = "<!-- LAN-SOURCE-STATS:START -->"
 LAN_SOURCE_STATS_README_END = "<!-- LAN-SOURCE-STATS:END -->"
+GLOBAL_SOURCE_STATS_README_START = "<!-- GLOBAL-SOURCE-STATS:START -->"
+GLOBAL_SOURCE_STATS_README_END = "<!-- GLOBAL-SOURCE-STATS:END -->"
 BS_SAFE_RU_LIMIT = BS_SAFE_SUBSCRIPTION_LIMIT // 2
 BS_SAFE_MEGAFON_PROFILE_LIMIT = 12
 BS_SAFE_FINGERPRINTS = {"chrome", "firefox", "edge", "qq", "safari", "android"}
@@ -705,6 +743,9 @@ GLOBAL_SOURCE_PRIORITY = (
     "IGARECK_WHITE_CIDR_CHECKED",
     "IGARECK_WHITE_MOBILE_1",
     "PRINCE_WHITE_LIST",
+    # New sources are deliberately appended: every pre-existing source keeps
+    # its relative priority, and PulseProxy remains the first preference.
+    *NEW_GLOBAL_SOURCE_PRIORITY,
 )
 GLOBAL_SOURCE_RANK = {source_id: index for index, source_id in enumerate(GLOBAL_SOURCE_PRIORITY)}
 SOURCE_PUBLICATION_INFO: dict[str, dict[str, str | float]] = {}
@@ -1445,7 +1486,10 @@ def dedupe_and_name(proxies: list[dict]) -> list[dict]:
     for input_order, proxy in enumerate(proxies):
         source_name = proxy.pop("_source_name")
         source_id = proxy.pop("_source_id")
-        key = json.dumps(proxy, sort_keys=True, ensure_ascii=False)
+        # Display names and harmless spelling differences must not let the
+        # same connection enter the subscription twice.  The canonical key
+        # includes every effective VLESS/TLS/REALITY/transport parameter.
+        key = canonical_proxy_config(proxy)
         digest = hashlib.sha256(key.encode("utf-8")).hexdigest()
         if digest in seen_keys:
             existing_sources = seen_keys[digest].setdefault("_sources", [])
@@ -2550,6 +2594,24 @@ def canonical_proxy_config(proxy: dict) -> str:
         normalized["server"] = normalized_server_identity(normalized["server"])
     if "uuid" in normalized:
         normalized["uuid"] = normalized_uuid_identity(normalized["uuid"])
+    if "servername" in normalized:
+        normalized["servername"] = normalized_server_identity(
+            normalized["servername"]
+        )
+    if "client-fingerprint" in normalized:
+        normalized["client-fingerprint"] = str(
+            normalized["client-fingerprint"]
+        ).strip().casefold()
+    ws_opts = normalized.get("ws-opts")
+    if isinstance(ws_opts, dict):
+        headers = ws_opts.get("headers")
+        if isinstance(headers, dict):
+            for host_key in ("Host", "host"):
+                if host_key in headers:
+                    headers[host_key] = normalized_server_identity(headers[host_key])
+    xhttp_opts = normalized.get("xhttp-opts")
+    if isinstance(xhttp_opts, dict) and "host" in xhttp_opts:
+        xhttp_opts["host"] = normalized_server_identity(xhttp_opts["host"])
     return json.dumps(normalized, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
 
 
@@ -3785,6 +3847,132 @@ def atomic_write_text(path: Path, text: str) -> None:
             temporary.unlink()
 
 
+def load_global_source_stats(path: Path = GLOBAL_SOURCE_STATS_FILE) -> dict:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"sources": {}}
+    if not isinstance(payload, dict) or not isinstance(payload.get("sources"), dict):
+        return {"sources": {}}
+    return payload
+
+
+def build_global_source_stats(
+    fetch_stats: dict[str, dict],
+    all_proxies: list[dict],
+    global_proxies: list[dict],
+    global_5k_proxies: list[dict],
+    now: str,
+    previous_stats: dict | None = None,
+) -> dict:
+    previous_sources = (previous_stats or {}).get("sources", {})
+    source_stats: dict[str, dict] = {}
+    for source in SOURCES:
+        source_id = source["id"]
+        if source_id not in GLOBAL_PRODUCTION_SOURCE_IDS:
+            continue
+        fetched = fetch_stats.get(source_id, {})
+        previous = previous_sources.get(source_id, {})
+        status_code = fetched.get("http_status")
+        consecutive_404 = (
+            int(previous.get("consecutive_http_404", 0)) + 1
+            if status_code == 404
+            else 0
+        )
+        unique_all = sum(
+            1
+            for proxy in all_proxies
+            if (proxy.get("_sources") or [""])[0] == source_id
+        )
+        unique_global = sum(
+            1
+            for proxy in global_proxies
+            if (proxy.get("_sources") or [""])[0] == source_id
+        )
+        item = {
+            "name": source["name"],
+            "url": source["url"],
+            "new_source": source_id in NEW_GLOBAL_SOURCE_IDS,
+            "available": bool(fetched.get("available")),
+            "http_status": status_code,
+            "last_updated": str(fetched.get("last_updated", "-")),
+            "error": str(fetched.get("error", "")),
+            "received": int(fetched.get("received", 0)),
+            "received_vless": int(fetched.get("received_vless", 0)),
+            "valid": int(fetched.get("valid", 0)),
+            "invalid": int(fetched.get("parser_invalid", 0)),
+            "unique_in_source": int(fetched.get("unique_in_source", 0)),
+            "duplicates_in_source": int(fetched.get("duplicates_in_source", 0)),
+            "unique_added_all": unique_all,
+            "unique_added_global": unique_global,
+            "global_referenced": sum(
+                source_id in proxy.get("_sources", []) for proxy in global_proxies
+            ),
+            "global_5k_referenced": sum(
+                source_id in proxy.get("_sources", []) for proxy in global_5k_proxies
+            ),
+            "consecutive_http_404": consecutive_404,
+            "review_for_removal": status_code == 404,
+            "removal_recommendation": (
+                "HTTP 404: проверить перенос/переименование и предложить исключение; автоматически не удалён"
+                if status_code == 404
+                else ""
+            ),
+            "dns_tested": 0,
+            "dns_success": 0,
+            "tcp_tested": 0,
+            "tcp_success": 0,
+            "https_tested": 0,
+            "https_success": 0,
+            "https_failed": 0,
+            "transfer_success": 0,
+            "median_latency_ms": None,
+            "health_results": [],
+            "megafon": "NOT TESTED",
+        }
+        source_stats[source_id] = item
+    return {
+        "updated": now,
+        "environment": "source parsing and DNS/HTTPS checks run outside MegaFon unless explicitly stated",
+        "new_source_ids": list(NEW_GLOBAL_SOURCE_PRIORITY),
+        "sources": source_stats,
+        "totals": {
+            "global": len(global_proxies),
+            "global_5k": len(global_5k_proxies),
+            "new_unique_global": sum(
+                source_stats[source_id]["unique_added_global"]
+                for source_id in NEW_GLOBAL_SOURCE_PRIORITY
+            ),
+        },
+    }
+
+
+def write_global_source_stats(
+    stats: dict, path: Path = GLOBAL_SOURCE_STATS_FILE
+) -> None:
+    atomic_write_text(
+        path,
+        json.dumps(stats, ensure_ascii=False, indent=2) + "\n",
+    )
+
+
+def write_global_health_candidates(
+    global_proxies: list[dict],
+    path: Path = GLOBAL_HEALTH_CANDIDATES_FILE,
+) -> None:
+    candidates: dict[str, list[dict]] = {
+        source_id: [] for source_id in NEW_GLOBAL_SOURCE_PRIORITY
+    }
+    for proxy in global_proxies:
+        for source_id in proxy.get("_sources", []):
+            if source_id in candidates:
+                candidates[source_id].append(copy.deepcopy(proxy))
+    atomic_write_text(
+        path,
+        json.dumps(candidates, ensure_ascii=False, indent=2) + "\n",
+    )
+
+
 def build_lan_source_stats(
     fetch_stats: dict[str, dict],
     lan_global_proxies: list[dict],
@@ -4373,7 +4561,7 @@ def source_table(
 
     lines = [
         "`subscription-global.yaml` берёт все non-RU узлы из базовых источников и остаётся полным большим global-списком. Специализированные LAN-only источники в него не попадают.",
-        f"`subscription-global-5k.yaml` берёт до {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих узлов с подтверждённой страной не RU только из БС / whitelist / bypass источников ({global_shortlist_text}). Проверок живости в GitHub Actions нет.",
+        f"`subscription-global-5k.yaml` берёт до {GLOBAL_5K_SUBSCRIPTION_LIMIT} самых свежих узлов с подтверждённой страной не RU только из БС / whitelist / bypass источников ({global_shortlist_text}). Для новых источников GitHub Actions выполняет ограниченную HTTPS-выборку через Mihomo; это не тест сети МегаФона.",
         f"`subscription-lan-5k.yaml` берёт до {LAN_5K_SUBSCRIPTION_LIMIT} узлов с подтверждённой страной не RU только из обычных проводных пулов ({lan_sources_text}); БС, whitelist, mobile и CIDR-источники исключены.",
         "`subscription-lan-global.yaml` использует те же LAN-пулы и фильтры, но включает все доступные узлы без искусственного лимита.",
         "`SOLOVYOV_ALL_SUBS` — базовый LTE/whitelist-источник: его узлы участвуют в общей, RU, Global, Global 5K, Global Non-Stable и BS Safe, но исключены из LAN 5K и LAN Global.",
@@ -4567,6 +4755,159 @@ def lan_source_stats_readme_section(stats: dict) -> str:
         )
     lines.append(LAN_SOURCE_STATS_README_END)
     return "\n".join(lines)
+
+
+def global_source_stats_readme_section(stats: dict) -> str:
+    source_stats = stats.get("sources", {})
+    lines = [
+        GLOBAL_SOURCE_STATS_README_START,
+        "## Global: источники обхода белых списков",
+        "",
+        (
+            "Три новых whitelist/SNI-источника добавляются только в production Global-контур. "
+            "Дедупликация выполняется по фактическим параметрам VLESS, TLS/REALITY и транспорта; "
+            "имя узла в ключ не входит. PulseProxy сохраняет первый приоритет, относительный "
+            "порядок всех прежних источников не изменён."
+        ),
+        "",
+        (
+            "HTTPS в этой таблице выполняется через Mihomo в среде GitHub Actions/локального "
+            "прогона и не является проверкой в сети МегаФона. До запуска роутерного теста "
+            "колонка МегаФон всегда содержит `NOT TESTED`."
+        ),
+        "",
+        "| Источник | HTTP | Обновлён | Получено | Валидных | Уникальных в источнике | Новых Global | Дубли/невалидные | DNS | HTTPS | МегаФон |",
+        "|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---|",
+    ]
+    for source_id in NEW_GLOBAL_SOURCE_PRIORITY:
+        item = source_stats.get(source_id, {})
+        rejected = int(item.get("duplicates_in_source", 0)) + int(item.get("invalid", 0))
+        http_status = item.get("http_status")
+        lines.append(
+            f"| [{item.get('name', source_id)}]({item.get('url', '')}) | "
+            f"`{http_status if http_status is not None else '-'}` | "
+            f"`{item.get('last_updated', '-')}` | `{item.get('received_vless', 0)}` | "
+            f"`{item.get('valid', 0)}` | `{item.get('unique_in_source', 0)}` | "
+            f"`{item.get('unique_added_global', 0)}` | `{rejected}` | "
+            f"`{item.get('dns_success', 0)}/{item.get('dns_tested', 0)}` | "
+            f"`{item.get('https_success', 0)}/{item.get('https_tested', 0)}` | "
+            f"`{item.get('megafon', 'NOT TESTED')}` |"
+        )
+
+    unavailable = [
+        (source_id, item)
+        for source_id, item in source_stats.items()
+        if item.get("review_for_removal")
+    ]
+    lines.extend(["", "### Недоступные старые источники", ""])
+    if unavailable:
+        lines.append(
+            "Текущая диагностика получила HTTP 404. Источники не удалены автоматически; "
+            "для каждого предлагается проверить перенос или переименование и только затем исключать."
+        )
+        lines.extend(["", "| Источник | HTTP | Серия 404 | Рекомендация |", "|---|---:|---:|---|"])
+        for _source_id, item in unavailable:
+            lines.append(
+                f"| [{item.get('name', '-')}]({item.get('url', '')}) | "
+                f"`{item.get('http_status', '-')}` | `{item.get('consecutive_http_404', 0)}` | "
+                f"{item.get('removal_recommendation', '-')} |"
+            )
+    else:
+        lines.append("HTTP 404 среди production Global-источников не обнаружены.")
+
+    report_rows = stats.get("megafon_report", [])
+    lines.extend(
+        [
+            "",
+            "### Кандидаты для проверки на МегаФоне",
+            "",
+            "В этот список попадают только узлы, уже выполнившие реальный HTTPS-запрос через Mihomo. Это ещё не подтверждение работы в мобильной сети.",
+            "",
+            "| Имя | Источник | мс | HTTPS | МегаФон |",
+            "|---|---|---:|---|---|",
+        ]
+    )
+    if report_rows:
+        for row in report_rows:
+            lines.append(
+                f"| {row.get('name', '-')} | {row.get('source', '-')} | "
+                f"`{row.get('latency_ms') if row.get('latency_ms') is not None else '-'}` | "
+                f"{row.get('https', 'FAIL')} | {row.get('megafon', 'NOT TESTED')} |"
+            )
+    else:
+        lines.append("| Кандидаты ещё не сформированы | - | `-` | FAIL | NOT TESTED |")
+    lines.extend(
+        [
+            "",
+            "Ограниченный тест на роутере (по умолчанию не более 12 узлов, 2 параллельных процесса, таймаут 12 секунд):",
+            "",
+            "```sh",
+            "python3 scripts/check_megafon.py --mihomo /usr/bin/mihomo --confirm-megafon --limit 12 --workers 2 --timeout 12",
+            "```",
+            "",
+            "Скрипт классифицирует DNS, TCP, TLS, HTTPS и таймауты и создаёт отдельную проверенную подписку только из фактических `PASS` в подтверждённой сети МегаФона.",
+            GLOBAL_SOURCE_STATS_README_END,
+        ]
+    )
+    return "\n".join(lines)
+
+
+def refresh_readme_global_source_stats(
+    stats: dict, path: Path = README_FILE
+) -> None:
+    text = path.read_text(encoding="utf-8")
+    candidate_row = (
+        "| [subscription-global-megafon-candidates.yaml]"
+        "(https://markkikhtenko.github.io/pale-signal/subscription-global-megafon-candidates.yaml) "
+        "| Ограниченный список кандидатов, прошедших HTTPS через Mihomo вне сети МегаФона; "
+        "требует роутерной проверки |"
+    )
+    if candidate_row not in text:
+        anchor_pattern = r"^(\| \[subscription-global-5k\.yaml\].*\|)$"
+        text, replacements = re.subn(
+            anchor_pattern,
+            lambda match: f"{match.group(1)}\n{candidate_row}",
+            text,
+            count=1,
+            flags=re.MULTILINE,
+        )
+        if replacements != 1:
+            raise RuntimeError("README Global 5K subscription row was not found")
+    replacement = global_source_stats_readme_section(stats)
+    marker_pattern = (
+        re.escape(GLOBAL_SOURCE_STATS_README_START)
+        + r".*?"
+        + re.escape(GLOBAL_SOURCE_STATS_README_END)
+    )
+    if re.search(marker_pattern, text, flags=re.DOTALL):
+        text = re.sub(
+            marker_pattern,
+            lambda _match: replacement,
+            text,
+            count=1,
+            flags=re.DOTALL,
+        )
+    else:
+        anchor = "\n<!-- LAN-EXPERIMENTAL:START -->"
+        if anchor not in text:
+            raise RuntimeError("README LAN Experimental marker was not found")
+        text = text.replace(anchor, f"\n{replacement}\n{anchor}", 1)
+    for label, value in (
+        ("Global", int(stats.get("totals", {}).get("global", 0))),
+        ("Global 5K", int(stats.get("totals", {}).get("global_5k", 0))),
+    ):
+        pattern = rf"^\| {re.escape(label)} \| `\d+` \|$"
+        replacement_row = f"| {label} | `{value}` |"
+        text, replacements = re.subn(
+            pattern,
+            lambda _match, row=replacement_row: row,
+            text,
+            count=1,
+            flags=re.MULTILINE,
+        )
+        if replacements != 1:
+            raise RuntimeError(f"README status row was not found: {label}")
+    atomic_write_text(path, text)
 
 
 def refresh_readme_lan_source_stats(stats: dict, path: Path = README_FILE) -> None:
@@ -5169,6 +5510,7 @@ def write_final_readme(
 | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) | Россия |
 | [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) | Все non-RU серверы |
 | [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) | Global, до {GLOBAL_5K_SUBSCRIPTION_LIMIT} серверов |
+| [subscription-global-megafon-candidates.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-megafon-candidates.yaml) | Ограниченный список кандидатов, прошедших HTTPS через Mihomo вне сети МегаФона; требует роутерной проверки |
 | [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | Основная LAN-подписка для проводного интернета, до {LAN_5K_SUBSCRIPTION_LIMIT} серверов; при меньшем пуле совпадает с LAN Global |
 | [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | Полный LAN-пул для проводного интернета без лимита |
 | [subscription-lan-global-fast-check.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global-fast-check.yaml) | LAN Global Fast Check — те же серверы LAN Global, более активная автоматическая проверка |
@@ -5178,7 +5520,7 @@ def write_final_readme(
 | [subscription-mobile.txt](https://markkikhtenko.github.io/pale-signal/subscription-mobile.txt) | Компактная мобильная Reality-подписка для Happ/Happ Plus |
 | [subscription-zapret.yaml](https://markkikhtenko.github.io/pale-signal/subscription-zapret.yaml) | Изолированный VLESS/VMess/Shadowsocks-пул Zapret из страниц 1–25 |
 
-`subscription-global.yaml`, `subscription-global-5k.yaml` и `subscription-bs-safe.yaml` используют `PulseProxy/30.txt` как приоритетный источник узлов для обхода SNI/CIDR белых списков. Из него импортируются только валидные VLESS-конфигурации; дубли удаляются общей сборкой.
+`subscription-global.yaml`, `subscription-global-5k.yaml` и `subscription-bs-safe.yaml` используют `PulseProxy/30.txt` как приоритетный источник узлов для обхода SNI/CIDR белых списков. Из него импортируются только валидные VLESS-конфигурации; дубли удаляются общей сборкой. Новые hussaroff/coloramamoe-источники добавлены после всех прежних приоритетов и не меняют LAN, Zapret или правила маршрутизации.
 
 ## Статус
 
@@ -5431,6 +5773,7 @@ def reconcile_retained_experimental(
 def main(
     non_stable_only: bool = False,
     lan_only: bool = False,
+    global_only: bool = False,
     bs_safe_only: bool = False,
     mobile_only: bool = False,
     zapret_only: bool = False,
@@ -5448,7 +5791,7 @@ def main(
 
     parsed = []
     builds_lan = lan_only or not (
-        non_stable_only or bs_safe_only or mobile_only or zapret_only
+        non_stable_only or global_only or bs_safe_only or mobile_only or zapret_only
     )
     lan_preserved_proxies = (
         load_lan_preserved_baseline(lan_baseline_path or LAN_GLOBAL_OUTPUT_FILE)
@@ -5468,8 +5811,29 @@ def main(
         }
         for source_id in NEW_LAN_SOURCE_IDS
     }
+    global_fetch_stats = {
+        source_id: {
+            "available": False,
+            "http_status": None,
+            "error": "not fetched",
+            "received": 0,
+            "received_vless": 0,
+            "valid": 0,
+            "parser_invalid": 0,
+            "unique_in_source": 0,
+            "duplicates_in_source": 0,
+            "last_updated": "-",
+        }
+        for source_id in GLOBAL_PRODUCTION_SOURCE_IDS
+    }
     if lan_only:
         selected_sources = [source for source in SOURCES if source["id"] in LAN_SOURCE_IDS]
+    elif global_only:
+        selected_sources = [
+            source
+            for source in SOURCES
+            if source["id"] in GLOBAL_PRODUCTION_SOURCE_IDS
+        ]
     elif bs_safe_only:
         selected_sources = [source for source in SOURCES if source["id"] in BS_SAFE_SOURCE_IDS]
     elif mobile_only:
@@ -5484,6 +5848,14 @@ def main(
         except Exception as exc:
             if source["id"] in lan_fetch_stats:
                 lan_fetch_stats[source["id"]]["error"] = str(exc)
+            if source["id"] in global_fetch_stats:
+                http_status = exc.code if isinstance(exc, urllib.error.HTTPError) else None
+                global_fetch_stats[source["id"]].update(
+                    {
+                        "http_status": http_status,
+                        "error": f"{type(exc).__name__}: {exc}",
+                    }
+                )
             print(f"warning: skipped source {source['name']}: {exc}", file=sys.stderr)
             continue
         source_parsed: list[dict] = []
@@ -5500,6 +5872,20 @@ def main(
                 if proxy is not None:
                     source_parsed.append(proxy)
         parsed.extend(source_parsed)
+        if source["id"] in global_fetch_stats:
+            source_unique = {canonical_proxy_config(proxy) for proxy in source_parsed}
+            global_fetch_stats[source["id"]] = {
+                "available": True,
+                "http_status": 200,
+                "error": "",
+                "received": received,
+                "received_vless": received_vless,
+                "valid": len(source_parsed),
+                "parser_invalid": max(0, received_vless - len(source_parsed)),
+                "unique_in_source": len(source_unique),
+                "duplicates_in_source": max(0, len(source_parsed) - len(source_unique)),
+                "last_updated": source_published_label(source["id"]),
+            }
         if source["id"] in lan_fetch_stats:
             lan_fetch_stats[source["id"]] = {
                 "available": True,
@@ -5520,13 +5906,19 @@ def main(
             }
     if not parsed and not lan_only:
         raise RuntimeError("no valid VLESS servers were parsed")
-    new_lan_proxies, lan_duplicate_counts = dedupe_new_lan_candidates(
-        parsed, lan_preserved_proxies
-    )
-    new_lan_proxies, experimental_overlap_counts = exclude_lan_experimental_overlaps(
-        new_lan_proxies
-    )
-    new_lan_proxies, non_public_counts = filter_public_lan_proxies(new_lan_proxies)
+    if builds_lan:
+        new_lan_proxies, lan_duplicate_counts = dedupe_new_lan_candidates(
+            parsed, lan_preserved_proxies
+        )
+        new_lan_proxies, experimental_overlap_counts = exclude_lan_experimental_overlaps(
+            new_lan_proxies
+        )
+        new_lan_proxies, non_public_counts = filter_public_lan_proxies(new_lan_proxies)
+    else:
+        new_lan_proxies = []
+        lan_duplicate_counts = {}
+        experimental_overlap_counts = {}
+        non_public_counts = {}
     proxies = dedupe_and_name(parsed)
     blocked_count = count_blocked_proxies(proxies)
     proxies = drop_blocked_proxies(proxies)
@@ -5559,7 +5951,10 @@ def main(
     global_candidates = [
         proxy
         for proxy in all_global_candidates
-        if any(source in BASE_SOURCE_IDS for source in proxy.get("_sources", []))
+        if any(
+            source in GLOBAL_PRODUCTION_SOURCE_IDS
+            for source in proxy.get("_sources", [])
+        )
     ]
     global_proxies = prioritize_global_proxies(global_candidates)
     if lan_only:
@@ -5681,6 +6076,31 @@ def main(
         or not global_non_stable_yaml_text.strip()
     ):
         raise RuntimeError("empty YAML output")
+
+    global_stats_payload = build_global_source_stats(
+        global_fetch_stats,
+        proxies,
+        global_proxies,
+        global_5k_proxies,
+        msk_timestamp(),
+        previous_stats=load_global_source_stats(),
+    )
+    write_global_health_candidates(global_proxies)
+
+    if global_only:
+        GLOBAL_OUTPUT_FILE.write_text(
+            global_yaml_text, encoding="utf-8", newline="\n"
+        )
+        GLOBAL_5K_OUTPUT_FILE.write_text(
+            global_5k_yaml_text, encoding="utf-8", newline="\n"
+        )
+        write_global_source_stats(global_stats_payload)
+        refresh_readme_global_source_stats(global_stats_payload)
+        print(
+            f"wrote subscription-global.yaml with {len(global_proxies)} proxies and "
+            f"subscription-global-5k.yaml with {len(global_5k_proxies)} proxies"
+        )
+        return 0
 
     if non_stable_only:
         GLOBAL_NON_STABLE_OUTPUT_FILE.write_text(
@@ -5827,6 +6247,8 @@ def main(
         lan_source_stats,
         zapret_count=int(zapret_stats["published"]),
     )
+    write_global_source_stats(global_stats_payload)
+    refresh_readme_global_source_stats(global_stats_payload)
     print(
         f"wrote subscription files with {len(base_proxies)} base proxies "
         f"({len(ru_proxies)} ru, {len(global_proxies)} global, "
@@ -5849,6 +6271,7 @@ if __name__ == "__main__":
         known_modes = {
             "--non-stable-only",
             "--lan-only",
+            "--global-only",
             "--bs-safe-only",
             "--mobile-only",
             "--zapret-only",
@@ -5873,6 +6296,7 @@ if __name__ == "__main__":
             main(
                 non_stable_only="--non-stable-only" in arguments,
                 lan_only="--lan-only" in arguments,
+                global_only="--global-only" in arguments,
                 bs_safe_only="--bs-safe-only" in arguments,
                 mobile_only="--mobile-only" in arguments,
                 zapret_only="--zapret-only" in arguments,
