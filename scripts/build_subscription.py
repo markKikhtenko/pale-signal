@@ -5379,30 +5379,15 @@ def write_final_readme(
 
 ## Маршрутизация
 
-Два существующих routing-модуля используют общие обновляемые RULE-SET и оставляют обычный трафик на `DIRECT`:
+Для OpenClash доступны три Override Module:
 
 | Подписка | Override Module |
 |----------|-----------------|
-| Бесплатные подписки Pale Signal | [`blacklist-routing.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) |
-| Платная подписка VPnBot | [`blacklist-routing-vpnbot.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing-vpnbot.conf) |
+| Бесплатные подписки Pale Signal — blacklist | [`blacklist-routing.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing.conf) |
+| Платная подписка VPnBot — blacklist | [`blacklist-routing-vpnbot.conf`](https://markkikhtenko.github.io/pale-signal/openclash/blacklist-routing-vpnbot.conf) |
+| BS Safe — whitelist | [`whitelist-routing.conf`](https://markkikhtenko.github.io/pale-signal/openclash/whitelist-routing.conf) |
 
-Они не меняют DNS, Fake-IP, серверы или параметры подключения. Подключайте только один routing-модуль к одному профилю.
-
-### Custom overwrite для BS Safe
-
-Подписочный модуль для `subscription-bs-safe.yaml`:
-
-`https://markkikhtenko.github.io/pale-signal/openclash/whitelist-routing.conf`
-
-Модуль не изменяет два routing-модуля выше. Он загружает сохранённый shell-overwrite в штатный путь `/etc/openclash/custom/openclash_custom_overwrite.sh` и настраивает DIRECT/VPN, DNS и Fake-IP для режима белых списков Huawei/MegaFon.
-
-Перед подключением:
-
-1. Сохраните резервную копию существующего `openclash_custom_overwrite.sh`.
-2. Добавьте URL `whitelist-routing.conf` в **Overwrite Settings → Overwrite Modules**.
-3. Используйте его только с BS Safe и не включайте routing-модули для того же профиля.
-
-Путь custom overwrite общий для всего OpenClash. Для отката отключите BS Safe-модуль, восстановите прежний файл и перезапустите OpenClash.
+Добавьте подходящий URL в **Overwrite Settings → Overwrite Modules** и подключите только один модуль к профилю. `whitelist-routing.conf` предназначен для отдельного BS Safe-роутера и заменяет на нём `/etc/openclash/custom/openclash_custom_overwrite.sh`, поэтому перед включением сохраните резервную копию этого файла.
 
 ## Обновление
 
