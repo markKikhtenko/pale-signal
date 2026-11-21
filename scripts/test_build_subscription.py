@@ -853,6 +853,43 @@ class LanExperimentalTests(unittest.TestCase):
 
 
 class ProductionSourcePolicyTests(unittest.TestCase):
+    def test_global_pools_cover_whitelist_sources(self) -> None:
+        self.assertTrue(builder.BYPASS_SOURCE_IDS)
+        self.assertTrue(
+            builder.BYPASS_SOURCE_IDS <= builder.GLOBAL_PRODUCTION_SOURCE_IDS
+        )
+
+        whitelist_proxy = {
+            "name": "whitelist",
+            "server": "whitelist.example.com",
+            "port": 443,
+            "network": "tcp",
+            "_country": "US",
+            "_sources": ["PULSEPROXY_BS_30"],
+        }
+        ordinary_global_proxy = {
+            "name": "ordinary",
+            "server": "ordinary.example.com",
+            "port": 443,
+            "network": "tcp",
+            "_country": "US",
+            "_sources": [
+                next(
+                    iter(
+                        builder.GLOBAL_PRODUCTION_SOURCE_IDS
+                        - builder.BYPASS_SOURCE_IDS
+                    )
+                )
+            ],
+        }
+
+        self.assertEqual(
+            builder.select_global_5k_proxies(
+                [ordinary_global_proxy, whitelist_proxy]
+            ),
+            [whitelist_proxy],
+        )
+
     def test_pulseproxy_bs_source_is_prioritized_in_global_pools(self) -> None:
         source = next(
             source for source in builder.SOURCES if source["id"] == "PULSEPROXY_BS_30"

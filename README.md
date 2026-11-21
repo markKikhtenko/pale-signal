@@ -14,12 +14,12 @@
 |------|------------|
 | [subscription.yaml](https://markkikhtenko.github.io/pale-signal/subscription.yaml) | Полный VLESS-пул |
 | [subscription-ru.yaml](https://markkikhtenko.github.io/pale-signal/subscription-ru.yaml) | Серверы России |
-| [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) | Все серверы вне России |
-| [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) | Global, до 5000 серверов |
+| [subscription-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global.yaml) | Полный Global-пул, включая источники для белых списков |
+| [subscription-global-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-5k.yaml) | Приоритетный пул для белых списков, до 5000 серверов |
 | [subscription-lan-5k.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-5k.yaml) | Основной LAN-пул, до 5000 серверов |
 | [subscription-lan-global.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global.yaml) | Полный LAN-пул без лимита |
 | [subscription-lan-global-fast-check.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-global-fast-check.yaml) | Тот же LAN Global с более быстрой проверкой |
-| [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Reality-узлы для режима белых списков |
+| [subscription-bs-safe.yaml](https://markkikhtenko.github.io/pale-signal/subscription-bs-safe.yaml) | Отдельный Reality-only пул для режима белых списков |
 | [subscription-mobile.txt](https://markkikhtenko.github.io/pale-signal/subscription-mobile.txt) | Мобильная Reality-подписка для Happ/Happ Plus |
 | [subscription-zapret.yaml](https://markkikhtenko.github.io/pale-signal/subscription-zapret.yaml) | Изолированный VLESS/VMess/Shadowsocks-пул Zapret из страниц 1–25 |
 
@@ -28,7 +28,7 @@
 - Обычный роутер: `subscription-lan-5k.yaml`.
 - Максимальный LAN-пул: `subscription-lan-global.yaml`.
 - Частая перепроверка узлов: `subscription-lan-global-fast-check.yaml`.
-- Режим белых списков: `subscription-bs-safe.yaml` вместе с отдельным BS Safe override ниже.
+- Режим белых списков: `subscription-global.yaml` (полный пул), `subscription-global-5k.yaml` (приоритетный пул до 5000) или `subscription-bs-safe.yaml` (Reality-only). Для всех трёх используйте `whitelist-routing.conf`.
 - Телефон: `subscription-mobile.txt`.
 - Отдельный контур Zapret: `subscription-zapret.yaml`.
 
