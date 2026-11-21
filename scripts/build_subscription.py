@@ -1345,7 +1345,7 @@ def parse_shadowsocks(line: str, source_id: str) -> dict | None:
         parsed_location = urllib.parse.urlsplit(f"//{location}")
         server = parsed_location.hostname
         port = parsed_location.port
-    except (ValueError, urllib.parse.UnicodeError):
+    except (ValueError, UnicodeError):
         return None
     if not server or not valid_server(server) or not port or not 1 <= port <= 65535:
         return None

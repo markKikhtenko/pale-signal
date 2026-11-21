@@ -1036,6 +1036,11 @@ class ZapretSubscriptionTests(unittest.TestCase):
         self.assertEqual(shadowsocks["type"], "ss")
         self.assertEqual(shadowsocks["cipher"], "aes-128-gcm")
 
+    def test_shadowsocks_parser_rejects_malformed_endpoint(self) -> None:
+        malformed = "ss://aes-128-gcm:test-password@[invalid-ipv6]:8388#invalid"
+
+        self.assertIsNone(builder.parse_shadowsocks(malformed, "ZAPRET_TEST"))
+
     def test_zapret_build_rejects_abrupt_pool_shrink(self) -> None:
         source = self.source(last_page=1)
         existing_proxies = [
