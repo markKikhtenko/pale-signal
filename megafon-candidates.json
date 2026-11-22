@@ -1,15 +1,40 @@
 {
-  "updated": "2026-11-22 01:54:00 МСК",
+  "updated": "2026-11-22 17:07:21 МСК",
   "environment": "GitHub Actions or local runner; not MegaFon",
   "candidates": [
     {
       "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
       "source": "hussaroff lte-universal-checked whitelist.txt",
-      "checked_at": "2026-11-22 01:54:00 МСК",
+      "checked_at": "2026-11-22 17:07:21 МСК",
       "github_https": "PASS",
-      "latency_ms": 637,
+      "latency_ms": 1315,
       "proxy": {
-        "name": "🏳[openproxylist.com] vless-",
+        "name": "[OpenRay] 🇳🇱NL-506",
+        "type": "vless",
+        "server": "185.246.155.91",
+        "port": 10403,
+        "uuid": "dbf3f074-3b18-43f3-b82a-debd8c879c69",
+        "network": "tcp",
+        "udp": true,
+        "encryption": "none",
+        "flow": "xtls-rprx-vision",
+        "tls": true,
+        "servername": "www.apple.com",
+        "client-fingerprint": "chrome",
+        "reality-opts": {
+          "public-key": "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko",
+          "short-id": "6859f5b59e55aa30"
+        }
+      }
+    },
+    {
+      "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
+      "source": "hussaroff lte-universal-checked whitelist.txt",
+      "checked_at": "2026-11-22 17:07:21 МСК",
+      "github_https": "PASS",
+      "latency_ms": 701,
+      "proxy": {
+        "name": "[OpenRay] 🇳🇱NL-369",
         "type": "vless",
         "server": "185.246.155.91",
         "port": 10103,
@@ -30,74 +55,101 @@
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-22 01:54:00 МСК",
+      "checked_at": "2026-11-22 17:07:21 МСК",
       "github_https": "PASS",
-      "latency_ms": 2994,
+      "latency_ms": 1166,
       "proxy": {
-        "name": "LV 🇱🇻 | @Raydikalx | D611CB",
+        "name": "🇩🇪 Germany — #30",
         "type": "vless",
-        "server": "45.38.143.210",
-        "port": 30584,
-        "uuid": "cebc5f19-18d9-48e6-9029-fb4b04caf393",
-        "network": "tcp",
-        "udp": true,
-        "encryption": "none",
-        "tls": true,
-        "servername": "m.vk.com",
-        "client-fingerprint": "chrome",
-        "reality-opts": {
-          "public-key": "2hV4TY2ygvQ7ISa5o4u_FUKXzlIhLgbsScE8M1h0m3Y",
-          "short-id": "67ece882d65d0f1a"
-        }
-      }
-    },
-    {
-      "source_id": "RAVIRANET_PREMIUM",
-      "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-22 01:54:00 МСК",
-      "github_https": "PASS",
-      "latency_ms": 308,
-      "proxy": {
-        "name": "🇺🇸 United States — #154",
-        "type": "vless",
-        "server": "195.123.240.65",
+        "server": "95.129.236.239",
         "port": 443,
-        "uuid": "ce18d0eb-5c71-41f9-96e5-1632e22456e4",
-        "network": "tcp",
+        "uuid": "a71d6c6d-c95e-4ec1-a892-22e21733bf09",
+        "network": "ws",
         "udp": true,
         "encryption": "none",
-        "flow": "xtls-rprx-vision",
         "tls": true,
-        "servername": "www.cloudflare.com",
-        "client-fingerprint": "chrome",
-        "reality-opts": {
-          "public-key": "StPbcmBuzpuYUfa4oZ5SI3Bq1OSF_-oU1vp2AcyvQVE",
-          "short-id": "19296c9f1bf9c7b1"
+        "servername": "files-qzgs.login.opendns.stream",
+        "client-fingerprint": "firefox",
+        "ws-opts": {
+          "path": "/origin/246825491/fetch",
+          "headers": {
+            "Host": "files-qzgs.login.opendns.stream"
+          }
         }
       }
     },
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-22 01:54:00 МСК",
+      "checked_at": "2026-11-22 17:07:21 МСК",
       "github_https": "PASS",
-      "latency_ms": 1625,
+      "latency_ms": 1278,
       "proxy": {
-        "name": "🇹🇼_台湾 (10) t.me/rjsxrd",
+        "name": "🇩🇪 Germany — #36",
         "type": "vless",
-        "server": "free.fugui.lol",
-        "port": 19482,
-        "uuid": "ead3595f-4020-4e76-a3ec-c248e1a2f2f7",
-        "network": "tcp",
+        "server": "185.178.208.167",
+        "port": 443,
+        "uuid": "6bd1d88f-0a26-4d21-b325-15d85120b883",
+        "network": "ws",
         "udp": true,
         "encryption": "none",
-        "flow": "xtls-rprx-vision",
         "tls": true,
-        "servername": "swdist.apple.com",
-        "client-fingerprint": "chrome",
-        "reality-opts": {
-          "public-key": "IjWYbHNrZb3UCQxsTJyekEOA3tHq42L6Jw3O8MmLYVQ",
-          "short-id": "fa514b83"
+        "servername": "sw-api.telemetryapi.org",
+        "client-fingerprint": "firefox",
+        "ws-opts": {
+          "path": "/api/v2/client/session/connect",
+          "headers": {
+            "Host": "sw-api.telemetryapi.org"
+          }
+        }
+      }
+    },
+    {
+      "source_id": "RAVIRANET_PREMIUM",
+      "source": "RaViraNet premium.txt",
+      "checked_at": "2026-11-22 17:07:21 МСК",
+      "github_https": "PASS",
+      "latency_ms": 399,
+      "proxy": {
+        "name": "🇩🇪 Germany — #32",
+        "type": "vless",
+        "server": "188.225.36.219",
+        "port": 443,
+        "uuid": "0b6a7fe0-206b-4071-9f96-cd397d1ec01a",
+        "network": "grpc",
+        "udp": true,
+        "encryption": "none",
+        "tls": true,
+        "servername": "olvento.space",
+        "client-fingerprint": "firefox",
+        "grpc-opts": {
+          "grpc-service-name": "olvento.sync.v1"
+        }
+      }
+    },
+    {
+      "source_id": "RAVIRANET_PREMIUM",
+      "source": "RaViraNet premium.txt",
+      "checked_at": "2026-11-22 17:07:21 МСК",
+      "github_https": "PASS",
+      "latency_ms": 1325,
+      "proxy": {
+        "name": "🇩🇪 Germany [*CIDR] t.me/rjsxrd 6",
+        "type": "vless",
+        "server": "files-qzgs.login.opendns.stream",
+        "port": 443,
+        "uuid": "a71d6c6d-c95e-4ec1-a892-22e21733bf09",
+        "network": "ws",
+        "udp": true,
+        "encryption": "none",
+        "tls": true,
+        "servername": "files-qzgs.login.opendns.stream",
+        "client-fingerprint": "firefox",
+        "alpn": [
+          "http/1.1"
+        ],
+        "ws-opts": {
+          "path": "/origin/246825491/fetch"
         }
       }
     }

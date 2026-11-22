@@ -5,7 +5,23 @@ log-level: "info"
 ipv6: false
 proxies:
   -
-    name: "🏳[openproxylist.com] vless-"
+    name: "[OpenRay] 🇳🇱NL-506"
+    type: "vless"
+    server: "185.246.155.91"
+    port: 10403
+    uuid: "dbf3f074-3b18-43f3-b82a-debd8c879c69"
+    network: "tcp"
+    udp: true
+    encryption: "none"
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
+      short-id: "6859f5b59e55aa30"
+  -
+    name: "[OpenRay] 🇳🇱NL-369"
     type: "vless"
     server: "185.246.155.91"
     port: 10103
@@ -21,61 +37,78 @@ proxies:
       public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
       short-id: "6859f5b59e55aa30"
   -
-    name: "LV 🇱🇻 | @Raydikalx | D611CB"
+    name: "🇩🇪 Germany — #30"
     type: "vless"
-    server: "45.38.143.210"
-    port: 30584
-    uuid: "cebc5f19-18d9-48e6-9029-fb4b04caf393"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "m.vk.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "2hV4TY2ygvQ7ISa5o4u_FUKXzlIhLgbsScE8M1h0m3Y"
-      short-id: "67ece882d65d0f1a"
-  -
-    name: "🇺🇸 United States — #154"
-    type: "vless"
-    server: "195.123.240.65"
+    server: "95.129.236.239"
     port: 443
-    uuid: "ce18d0eb-5c71-41f9-96e5-1632e22456e4"
-    network: "tcp"
+    uuid: "a71d6c6d-c95e-4ec1-a892-22e21733bf09"
+    network: "ws"
     udp: true
     encryption: "none"
-    flow: "xtls-rprx-vision"
     tls: true
-    servername: "www.cloudflare.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "StPbcmBuzpuYUfa4oZ5SI3Bq1OSF_-oU1vp2AcyvQVE"
-      short-id: "19296c9f1bf9c7b1"
+    servername: "files-qzgs.login.opendns.stream"
+    client-fingerprint: "firefox"
+    ws-opts:
+      path: "/origin/246825491/fetch"
+      headers:
+        Host: "files-qzgs.login.opendns.stream"
   -
-    name: "🇹🇼_台湾 (10) t.me/rjsxrd"
+    name: "🇩🇪 Germany — #36"
     type: "vless"
-    server: "free.fugui.lol"
-    port: 19482
-    uuid: "ead3595f-4020-4e76-a3ec-c248e1a2f2f7"
-    network: "tcp"
+    server: "185.178.208.167"
+    port: 443
+    uuid: "6bd1d88f-0a26-4d21-b325-15d85120b883"
+    network: "ws"
     udp: true
     encryption: "none"
-    flow: "xtls-rprx-vision"
     tls: true
-    servername: "swdist.apple.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "IjWYbHNrZb3UCQxsTJyekEOA3tHq42L6Jw3O8MmLYVQ"
-      short-id: "fa514b83"
+    servername: "sw-api.telemetryapi.org"
+    client-fingerprint: "firefox"
+    ws-opts:
+      path: "/api/v2/client/session/connect"
+      headers:
+        Host: "sw-api.telemetryapi.org"
+  -
+    name: "🇩🇪 Germany — #32"
+    type: "vless"
+    server: "188.225.36.219"
+    port: 443
+    uuid: "0b6a7fe0-206b-4071-9f96-cd397d1ec01a"
+    network: "grpc"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "olvento.space"
+    client-fingerprint: "firefox"
+    grpc-opts:
+      grpc-service-name: "olvento.sync.v1"
+  -
+    name: "🇩🇪 Germany [*CIDR] t.me/rjsxrd 6"
+    type: "vless"
+    server: "files-qzgs.login.opendns.stream"
+    port: 443
+    uuid: "a71d6c6d-c95e-4ec1-a892-22e21733bf09"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "files-qzgs.login.opendns.stream"
+    client-fingerprint: "firefox"
+    alpn:
+      - "http/1.1"
+    ws-opts:
+      path: "/origin/246825491/fetch"
 proxy-groups:
   -
     name: "AUTO"
     type: "url-test"
     proxies:
-      - "🏳[openproxylist.com] vless-"
-      - "LV 🇱🇻 | @Raydikalx | D611CB"
-      - "🇺🇸 United States — #154"
-      - "🇹🇼_台湾 (10) t.me/rjsxrd"
+      - "[OpenRay] 🇳🇱NL-506"
+      - "[OpenRay] 🇳🇱NL-369"
+      - "🇩🇪 Germany — #30"
+      - "🇩🇪 Germany — #36"
+      - "🇩🇪 Germany — #32"
+      - "🇩🇪 Germany [*CIDR] t.me/rjsxrd 6"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -84,10 +117,12 @@ proxy-groups:
     name: "MANUAL"
     type: "select"
     proxies:
-      - "🏳[openproxylist.com] vless-"
-      - "LV 🇱🇻 | @Raydikalx | D611CB"
-      - "🇺🇸 United States — #154"
-      - "🇹🇼_台湾 (10) t.me/rjsxrd"
+      - "[OpenRay] 🇳🇱NL-506"
+      - "[OpenRay] 🇳🇱NL-369"
+      - "🇩🇪 Germany — #30"
+      - "🇩🇪 Germany — #36"
+      - "🇩🇪 Germany — #32"
+      - "🇩🇪 Germany [*CIDR] t.me/rjsxrd 6"
   -
     name: "PROXY"
     type: "select"
