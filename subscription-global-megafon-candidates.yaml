@@ -5,22 +5,6 @@ log-level: "info"
 ipv6: false
 proxies:
   -
-    name: "[OpenRay] 🇳🇱NL-506"
-    type: "vless"
-    server: "185.246.155.91"
-    port: 10403
-    uuid: "dbf3f074-3b18-43f3-b82a-debd8c879c69"
-    network: "tcp"
-    udp: true
-    encryption: "none"
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.apple.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
-      short-id: "6859f5b59e55aa30"
-  -
     name: "[OpenRay] 🇳🇱NL-369"
     type: "vless"
     server: "185.246.155.91"
@@ -37,6 +21,22 @@ proxies:
       public-key: "obQkp5VlQpnlt1hRLQ3VfHISYiiISZJyJZAMaIdjCko"
       short-id: "6859f5b59e55aa30"
   -
+    name: "🇩🇪 Germany — #68"
+    type: "vless"
+    server: "95.129.236.239"
+    port: 443
+    uuid: "a71d6c6d-c95e-4ec1-a892-22e21733bf09"
+    network: "ws"
+    udp: true
+    encryption: "none"
+    tls: true
+    servername: "files-qzgs.login.opendns.stream"
+    client-fingerprint: "ios"
+    ws-opts:
+      path: "/origin/246825491/fetch"
+      headers:
+        Host: "files-qzgs.login.opendns.stream"
+  -
     name: "🇩🇪 Germany — #30"
     type: "vless"
     server: "95.129.236.239"
@@ -47,29 +47,13 @@ proxies:
     encryption: "none"
     tls: true
     servername: "files-qzgs.login.opendns.stream"
-    client-fingerprint: "firefox"
+    client-fingerprint: "qq"
     ws-opts:
       path: "/origin/246825491/fetch"
       headers:
         Host: "files-qzgs.login.opendns.stream"
   -
-    name: "🇩🇪 Germany — #36"
-    type: "vless"
-    server: "185.178.208.167"
-    port: 443
-    uuid: "6bd1d88f-0a26-4d21-b325-15d85120b883"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "sw-api.telemetryapi.org"
-    client-fingerprint: "firefox"
-    ws-opts:
-      path: "/api/v2/client/session/connect"
-      headers:
-        Host: "sw-api.telemetryapi.org"
-  -
-    name: "🇩🇪 Germany — #32"
+    name: "🇩🇪 Germany — #26"
     type: "vless"
     server: "188.225.36.219"
     port: 443
@@ -82,33 +66,15 @@ proxies:
     client-fingerprint: "firefox"
     grpc-opts:
       grpc-service-name: "olvento.sync.v1"
-  -
-    name: "🇩🇪 Germany [*CIDR] t.me/rjsxrd 6"
-    type: "vless"
-    server: "files-qzgs.login.opendns.stream"
-    port: 443
-    uuid: "a71d6c6d-c95e-4ec1-a892-22e21733bf09"
-    network: "ws"
-    udp: true
-    encryption: "none"
-    tls: true
-    servername: "files-qzgs.login.opendns.stream"
-    client-fingerprint: "firefox"
-    alpn:
-      - "http/1.1"
-    ws-opts:
-      path: "/origin/246825491/fetch"
 proxy-groups:
   -
     name: "AUTO"
     type: "url-test"
     proxies:
-      - "[OpenRay] 🇳🇱NL-506"
       - "[OpenRay] 🇳🇱NL-369"
+      - "🇩🇪 Germany — #68"
       - "🇩🇪 Germany — #30"
-      - "🇩🇪 Germany — #36"
-      - "🇩🇪 Germany — #32"
-      - "🇩🇪 Germany [*CIDR] t.me/rjsxrd 6"
+      - "🇩🇪 Germany — #26"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -117,12 +83,10 @@ proxy-groups:
     name: "MANUAL"
     type: "select"
     proxies:
-      - "[OpenRay] 🇳🇱NL-506"
       - "[OpenRay] 🇳🇱NL-369"
+      - "🇩🇪 Germany — #68"
       - "🇩🇪 Germany — #30"
-      - "🇩🇪 Germany — #36"
-      - "🇩🇪 Germany — #32"
-      - "🇩🇪 Germany [*CIDR] t.me/rjsxrd 6"
+      - "🇩🇪 Germany — #26"
   -
     name: "PROXY"
     type: "select"

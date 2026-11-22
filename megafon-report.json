@@ -1,47 +1,33 @@
 {
-  "updated": "2026-11-22 17:07:21 МСК",
+  "updated": "2026-11-22 17:46:24 МСК",
   "network": "NOT TESTED on MegaFon",
   "candidate_status": "updated",
   "rows": [
     {
-      "name": "[OpenRay] 🇳🇱NL-506",
+      "name": "[OpenRay] 🇳🇱NL-369",
       "source": "hussaroff lte-universal-checked whitelist.txt",
-      "latency_ms": 1315,
+      "latency_ms": 620,
       "https": "PASS",
       "megafon": "NOT TESTED"
     },
     {
-      "name": "[OpenRay] 🇳🇱NL-369",
+      "name": "🇩🇪 Germany — #68",
       "source": "hussaroff lte-universal-checked whitelist.txt",
-      "latency_ms": 701,
+      "latency_ms": 1289,
       "https": "PASS",
       "megafon": "NOT TESTED"
     },
     {
       "name": "🇩🇪 Germany — #30",
-      "source": "RaViraNet premium.txt",
-      "latency_ms": 1166,
+      "source": "hussaroff lte-universal-checked whitelist.txt",
+      "latency_ms": 1321,
       "https": "PASS",
       "megafon": "NOT TESTED"
     },
     {
-      "name": "🇩🇪 Germany — #36",
+      "name": "🇩🇪 Germany — #26",
       "source": "RaViraNet premium.txt",
-      "latency_ms": 1278,
-      "https": "PASS",
-      "megafon": "NOT TESTED"
-    },
-    {
-      "name": "🇩🇪 Germany — #32",
-      "source": "RaViraNet premium.txt",
-      "latency_ms": 399,
-      "https": "PASS",
-      "megafon": "NOT TESTED"
-    },
-    {
-      "name": "🇩🇪 Germany [*CIDR] t.me/rjsxrd 6",
-      "source": "RaViraNet premium.txt",
-      "latency_ms": 1325,
+      "latency_ms": 390,
       "https": "PASS",
       "megafon": "NOT TESTED"
     }
