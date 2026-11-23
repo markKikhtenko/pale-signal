@@ -1,57 +1,58 @@
 {
-  "updated": "2026-11-23 02:20:19 МСК",
+  "updated": "2026-11-23 20:24:15 МСК",
   "environment": "GitHub Actions or local runner; not MegaFon",
   "candidates": [
     {
       "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
       "source": "hussaroff lte-universal-checked whitelist.txt",
-      "checked_at": "2026-11-23 02:20:19 МСК",
+      "checked_at": "2026-11-23 20:24:15 МСК",
       "github_https": "PASS",
-      "latency_ms": 867,
+      "latency_ms": 3471,
       "proxy": {
-        "name": "🇦🇹 Austria [*CIDR]",
-        "type": "vless",
-        "server": "185.244.182.162",
-        "port": 443,
-        "uuid": "c50eae6b-18de-4bdc-a22f-9edda40a57ed",
-        "network": "xhttp",
-        "udp": true,
-        "encryption": "none",
-        "tls": true,
-        "servername": "atd1.tunnely.space",
-        "client-fingerprint": "firefox",
-        "alpn": [
-          "h2",
-          "http/1.1"
-        ],
-        "xhttp-opts": {
-          "path": "/xhttp/",
-          "mode": "packet-up"
-        }
-      }
-    },
-    {
-      "source_id": "RAVIRANET_PREMIUM",
-      "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-23 02:20:19 МСК",
-      "github_https": "PASS",
-      "latency_ms": 981,
-      "proxy": {
-        "name": "🇩🇪 Germany — #51",
+        "name": "LTE/5G Все операторы 🇪🇺 t.me/rjsxrd",
         "type": "vless",
         "server": "185.178.208.167",
         "port": 443,
-        "uuid": "6bd1d88f-0a26-4d21-b325-15d85120b883",
+        "uuid": "c2b17066-5386-0001-803b-5e652c0528f9",
         "network": "ws",
         "udp": true,
         "encryption": "none",
         "tls": true,
-        "servername": "sw-api.telemetryapi.org",
-        "client-fingerprint": "edge",
+        "servername": "trx.tools",
+        "client-fingerprint": "android",
         "ws-opts": {
-          "path": "/api/v2/client/session/connect",
+          "path": "/session",
           "headers": {
-            "Host": "sw-api.telemetryapi.org"
+            "Host": "api.14887277.xyz"
+          }
+        }
+      }
+    },
+    {
+      "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
+      "source": "hussaroff lte-universal-checked whitelist.txt",
+      "checked_at": "2026-11-23 20:24:15 МСК",
+      "github_https": "PASS",
+      "latency_ms": 1387,
+      "proxy": {
+        "name": "🇬🇧 United Kingdom — #67",
+        "type": "vless",
+        "server": "95.129.236.117",
+        "port": 443,
+        "uuid": "77998cc6-8a4d-4251-b974-ebff48a84c4d",
+        "network": "ws",
+        "udp": true,
+        "encryption": "none",
+        "tls": true,
+        "servername": "cdn.dash.gearmonster.org",
+        "client-fingerprint": "chrome",
+        "alpn": [
+          "http/1.1"
+        ],
+        "ws-opts": {
+          "path": "/edge/node8/push",
+          "headers": {
+            "Host": "cdn.dash.gearmonster.org"
           }
         }
       }
@@ -59,26 +60,74 @@
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-23 02:20:19 МСК",
+      "checked_at": "2026-11-23 20:24:15 МСК",
       "github_https": "PASS",
-      "latency_ms": 1007,
+      "latency_ms": 533,
       "proxy": {
-        "name": "🇩🇪 Germany [*CIDR] t.me/rjsxrd 7",
+        "name": "🇩🇪 Germany — #37",
         "type": "vless",
-        "server": "sw-api.telemetryapi.org",
+        "server": "188.225.78.178",
         "port": 443,
-        "uuid": "6bd1d88f-0a26-4d21-b325-15d85120b883",
-        "network": "ws",
+        "uuid": "a4740bee-81ad-4a58-99c9-eca576ecb6e6",
+        "network": "grpc",
         "udp": true,
         "encryption": "none",
         "tls": true,
-        "servername": "sw-api.telemetryapi.org",
+        "servername": "cadrin.wtf",
         "client-fingerprint": "edge",
         "alpn": [
-          "http%2F1.1"
+          "h2"
         ],
-        "ws-opts": {
-          "path": "/api/v2/client/session/connect"
+        "grpc-opts": {
+          "grpc-service-name": "cache.sync.v1"
+        }
+      }
+    },
+    {
+      "source_id": "RAVIRANET_PREMIUM",
+      "source": "RaViraNet premium.txt",
+      "checked_at": "2026-11-23 20:24:15 МСК",
+      "github_https": "PASS",
+      "latency_ms": 508,
+      "proxy": {
+        "name": "🇩🇪 Germany — #40",
+        "type": "vless",
+        "server": "188.225.36.219",
+        "port": 443,
+        "uuid": "0b6a7fe0-206b-4071-9f96-cd397d1ec01a",
+        "network": "grpc",
+        "udp": true,
+        "encryption": "none",
+        "tls": true,
+        "servername": "olvento.space",
+        "client-fingerprint": "firefox",
+        "grpc-opts": {
+          "grpc-service-name": "olvento.sync.v1"
+        }
+      }
+    },
+    {
+      "source_id": "RAVIRANET_PREMIUM",
+      "source": "RaViraNet premium.txt",
+      "checked_at": "2026-11-23 20:24:15 МСК",
+      "github_https": "PASS",
+      "latency_ms": 689,
+      "proxy": {
+        "name": "🇮🇹 Italy — #74",
+        "type": "vless",
+        "server": "82.118.16.187",
+        "port": 443,
+        "uuid": "dc2259c4-388e-4285-ba18-df619b6672b6",
+        "network": "tcp",
+        "udp": true,
+        "encryption": "none",
+        "flow": "xtls-rprx-vision",
+        "tls": true,
+        "servername": "www.cloudflare.com",
+        "client-fingerprint": "chrome",
+        "reality-opts": {
+          "public-key": "R5ycsjJ-v024902dMSqTsSdqxUwCFEXMebdBEWFt9VU",
+          "short-id": "cd6065902eea7a02"
         }
       }
     }
