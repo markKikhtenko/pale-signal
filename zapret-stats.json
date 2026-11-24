@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24 06:53:48 МСК",
+  "updated_at": "2026-11-24 20:03:00 МСК",
   "sources": {
     "HIZTIN_VLESS_PO_GRIBI": {
       "name": "hiztin/VLESS-PO-GRIBI pages 1-25",
@@ -7,20 +7,18 @@
         {
           "page": 1,
           "protocols": {
-            "ss": 53,
-            "vless": 127,
-            "vmess": 20
+            "ss": 14,
+            "vless": 181,
+            "vmess": 5
           },
           "valid": {
-            "ss": 53,
-            "vless": 126,
-            "vmess": 20
+            "ss": 14,
+            "vless": 181,
+            "vmess": 5
           },
-          "invalid": {
-            "vless": 1
-          },
-          "valid_vless": 126,
-          "invalid_vless": 1
+          "invalid": {},
+          "valid_vless": 181,
+          "invalid_vless": 0
         },
         {
           "page": 2,
@@ -42,10 +40,10 @@
             "ss": 200
           },
           "valid": {
-            "ss": 186
+            "ss": 184
           },
           "invalid": {
-            "ss": 14
+            "ss": 16
           },
           "valid_vless": 0,
           "invalid_vless": 0
@@ -72,49 +70,47 @@
         {
           "page": 5,
           "protocols": {
-            "vless": 111,
-            "ss": 75,
-            "vmess": 14
+            "ss": 86,
+            "vless": 108,
+            "vmess": 6
           },
           "valid": {
-            "vless": 111,
-            "ss": 75,
-            "vmess": 11
+            "ss": 86,
+            "vless": 108,
+            "vmess": 6
           },
-          "invalid": {
-            "vmess": 3
-          },
-          "valid_vless": 111,
+          "invalid": {},
+          "valid_vless": 108,
           "invalid_vless": 0
         },
         {
           "page": 6,
           "protocols": {
-            "vless": 19,
-            "ss": 53,
-            "vmess": 2
+            "ss": 62,
+            "vless": 33,
+            "vmess": 3
           },
           "valid": {
-            "vless": 19,
-            "ss": 53,
-            "vmess": 2
+            "ss": 62,
+            "vless": 33,
+            "vmess": 3
           },
           "invalid": {},
-          "valid_vless": 19,
+          "valid_vless": 33,
           "invalid_vless": 0
         },
         {
           "page": 7,
           "protocols": {
-            "vless": 131
+            "vless": 136
           },
           "valid": {
-            "vless": 129
+            "vless": 134
           },
           "invalid": {
             "vless": 2
           },
-          "valid_vless": 129,
+          "valid_vless": 134,
           "invalid_vless": 2
         },
         {
@@ -192,18 +188,18 @@
         {
           "page": 13,
           "protocols": {
-            "ss": 136,
-            "vless": 64
+            "ss": 144,
+            "vless": 56
           },
           "valid": {
-            "ss": 136,
-            "vless": 57
+            "ss": 144,
+            "vless": 51
           },
           "invalid": {
-            "vless": 7
+            "vless": 5
           },
-          "valid_vless": 57,
-          "invalid_vless": 7
+          "valid_vless": 51,
+          "invalid_vless": 5
         },
         {
           "page": 14,
@@ -323,17 +319,17 @@
         {
           "page": 22,
           "protocols": {
-            "vless": 51,
-            "vmess": 149
+            "vless": 86,
+            "vmess": 114
           },
           "valid": {
-            "vless": 50,
-            "vmess": 149
+            "vless": 85,
+            "vmess": 114
           },
           "invalid": {
             "vless": 1
           },
-          "valid_vless": 50,
+          "valid_vless": 85,
           "invalid_vless": 1
         },
         {
@@ -351,17 +347,17 @@
         {
           "page": 24,
           "protocols": {
-            "vless": 63,
-            "vmess": 71
+            "vless": 120,
+            "vmess": 27
           },
           "valid": {
-            "vless": 63,
-            "vmess": 60
+            "vless": 120,
+            "vmess": 23
           },
           "invalid": {
-            "vmess": 11
+            "vmess": 4
           },
-          "valid_vless": 63,
+          "valid_vless": 120,
           "invalid_vless": 0
         },
         {
@@ -381,45 +377,45 @@
       ],
       "page_count": 25,
       "protocols": {
-        "ss": 1626,
-        "vless": 2319,
-        "vmess": 311
+        "ss": 1615,
+        "vless": 2473,
+        "vmess": 210
       },
       "valid": {
-        "ss": 1484,
-        "vless": 2147,
-        "vmess": 297
+        "ss": 1471,
+        "vless": 2304,
+        "vmess": 206
       },
       "invalid": {
-        "vless": 172,
-        "ss": 142,
-        "vmess": 14
+        "vless": 169,
+        "ss": 144,
+        "vmess": 4
       },
-      "valid_vless": 2147,
-      "invalid_vless": 172
+      "valid_vless": 2304,
+      "invalid_vless": 169
     }
   },
   "pages": 25,
   "valid": {
-    "vless": 2147,
-    "vmess": 297,
-    "ss": 1484
+    "vless": 2304,
+    "vmess": 206,
+    "ss": 1471
   },
   "invalid": {
-    "vless": 172,
-    "vmess": 14,
-    "ss": 142
+    "vless": 169,
+    "vmess": 4,
+    "ss": 144
   },
-  "valid_vless": 2147,
-  "invalid_vless": 172,
-  "duplicates": 1190,
+  "valid_vless": 2304,
+  "invalid_vless": 169,
+  "duplicates": 1174,
   "blocked": 0,
-  "published": 2738,
+  "published": 2807,
   "published_protocols": {
-    "vless": 1723,
-    "vmess": 190,
-    "ss": 825
+    "vless": 1852,
+    "vmess": 136,
+    "ss": 819
   },
-  "previously_published": 2707,
+  "previously_published": 2738,
   "minimum_retained_ratio": 0.5
 }
