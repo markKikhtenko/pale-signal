@@ -5,23 +5,23 @@ log-level: "info"
 ipv6: false
 proxies:
   -
-    name: "🇪🇸 Spain — #24"
+    name: "🇮🇹 Italy — #48"
     type: "vless"
-    server: "46.28.71.247"
+    server: "82.118.16.187"
     port: 443
-    uuid: "12c53e32-e589-47d6-b857-e4132294f767"
+    uuid: "dc2259c4-388e-4285-ba18-df619b6672b6"
     network: "tcp"
     udp: true
     encryption: "none"
     flow: "xtls-rprx-vision"
     tls: true
     servername: "www.cloudflare.com"
-    client-fingerprint: "firefox"
+    client-fingerprint: "random"
     reality-opts:
-      public-key: "v4MuZIvFrTPT5GHMSaPryUAbIZlLstmsUTzmC1E-JTE"
-      short-id: "0dfc23fe80778c00"
+      public-key: "R5ycsjJ-v024902dMSqTsSdqxUwCFEXMebdBEWFt9VU"
+      short-id: "cd6065902eea7a02"
   -
-    name: "🇵🇱 Poland — #66"
+    name: "🇵🇱 Poland — #80"
     type: "vless"
     server: "82.118.22.161"
     port: 443
@@ -32,12 +32,12 @@ proxies:
     flow: "xtls-rprx-vision"
     tls: true
     servername: "www.cloudflare.com"
-    client-fingerprint: "safari"
+    client-fingerprint: "chrome"
     reality-opts:
       public-key: "xY1KpNxaIGmi6jfeudYQ_aaLGQqWK_uHStnwUFd2_2E"
       short-id: "fa3ea655619a3e78"
   -
-    name: "🇵🇱 Poland — #68"
+    name: "🇵🇱 Poland — #81"
     type: "vless"
     server: "82.118.22.161"
     port: 443
@@ -57,9 +57,9 @@ proxy-groups:
     name: "AUTO"
     type: "url-test"
     proxies:
-      - "🇪🇸 Spain — #24"
-      - "🇵🇱 Poland — #66"
-      - "🇵🇱 Poland — #68"
+      - "🇮🇹 Italy — #48"
+      - "🇵🇱 Poland — #80"
+      - "🇵🇱 Poland — #81"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 900
     tolerance: 100
@@ -68,9 +68,9 @@ proxy-groups:
     name: "MANUAL"
     type: "select"
     proxies:
-      - "🇪🇸 Spain — #24"
-      - "🇵🇱 Poland — #66"
-      - "🇵🇱 Poland — #68"
+      - "🇮🇹 Italy — #48"
+      - "🇵🇱 Poland — #80"
+      - "🇵🇱 Poland — #81"
   -
     name: "PROXY"
     type: "select"
