@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-8633-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-9428-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Готовые автоматически обновляемые подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-11-24 20:03:00 МСК`
+**Последнее обновление:** `2026-11-25 05:02:47 МСК`
 
 ## Подписки
 
@@ -36,23 +36,23 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `8633` |
-| Россия | `1886` |
-| Global | `6756` |
-| Global 5K | `2397` |
+| Всего серверов | `9428` |
+| Россия | `2009` |
+| Global | `7438` |
+| Global 5K | `2798` |
 | LAN 5K | `5000` |
-| LAN Global | `5133` |
-| LAN Global Fast Check | `5133` |
-| LAN Experimental | `2143` |
-| BS Safe (MANUAL / AUTO) | `1655 / 50` |
+| LAN Global | `5367` |
+| LAN Global Fast Check | `5367` |
+| LAN Experimental | `2100` |
+| BS Safe (MANUAL / AUTO) | `1795 / 50` |
 | Happ Mobile | `500` |
-| Zapret | `2807` |
+| Zapret | `2725` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## Тестовые подписки
 
 - [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) — тестовый Global-пул.
-- [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) — изолированный LAN-пул на `2143` серверов; все серверы входят в `AUTO`, пересечения с LAN Global удаляются.
+- [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) — изолированный LAN-пул на `2100` серверов; все серверы входят в `AUTO`, пересечения с LAN Global удаляются.
 
 Эти варианты могут меняться заметнее основных подписок и не рекомендуются как единственный рабочий профиль.
 <!-- LAN-EXPERIMENTAL:END -->
