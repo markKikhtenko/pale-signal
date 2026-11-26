@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26 04:37:10 МСК",
+  "updated_at": "2026-11-26 19:24:09 МСК",
   "sources": {
     "HIZTIN_VLESS_PO_GRIBI": {
       "name": "hiztin/VLESS-PO-GRIBI pages 1-25",
@@ -42,10 +42,10 @@
             "ss": 200
           },
           "valid": {
-            "ss": 183
+            "ss": 185
           },
           "invalid": {
-            "ss": 17
+            "ss": 15
           },
           "valid_vless": 0,
           "invalid_vless": 0
@@ -72,53 +72,53 @@
         {
           "page": 5,
           "protocols": {
-            "vless": 107,
-            "ss": 86,
-            "vmess": 7
+            "ss": 62,
+            "vless": 129,
+            "vmess": 9
           },
           "valid": {
-            "vless": 104,
-            "ss": 86,
-            "vmess": 6
+            "ss": 60,
+            "vless": 124,
+            "vmess": 9
           },
           "invalid": {
-            "vless": 3,
-            "vmess": 1
+            "vless": 5,
+            "ss": 2
           },
-          "valid_vless": 104,
-          "invalid_vless": 3
+          "valid_vless": 124,
+          "invalid_vless": 5
         },
         {
           "page": 6,
           "protocols": {
-            "vless": 24,
-            "vmess": 3,
-            "ss": 55
+            "vless": 28,
+            "ss": 63,
+            "vmess": 5
           },
           "valid": {
-            "vless": 23,
-            "vmess": 3,
-            "ss": 55
+            "vless": 27,
+            "ss": 63,
+            "vmess": 5
           },
           "invalid": {
             "vless": 1
           },
-          "valid_vless": 23,
+          "valid_vless": 27,
           "invalid_vless": 1
         },
         {
           "page": 7,
           "protocols": {
-            "vless": 112
+            "vless": 76
           },
           "valid": {
-            "vless": 110
+            "vless": 72
           },
           "invalid": {
-            "vless": 2
+            "vless": 4
           },
-          "valid_vless": 110,
-          "invalid_vless": 2
+          "valid_vless": 72,
+          "invalid_vless": 4
         },
         {
           "page": 8,
@@ -195,18 +195,18 @@
         {
           "page": 13,
           "protocols": {
-            "ss": 148,
-            "vless": 52
+            "ss": 149,
+            "vless": 51
           },
           "valid": {
-            "ss": 148,
-            "vless": 48
+            "ss": 149,
+            "vless": 46
           },
           "invalid": {
-            "vless": 4
+            "vless": 5
           },
-          "valid_vless": 48,
-          "invalid_vless": 4
+          "valid_vless": 46,
+          "invalid_vless": 5
         },
         {
           "page": 14,
@@ -253,18 +253,18 @@
         {
           "page": 17,
           "protocols": {
-            "vless": 168,
-            "ss": 32
+            "vless": 173,
+            "ss": 27
           },
           "valid": {
-            "vless": 164,
-            "ss": 31
+            "vless": 169,
+            "ss": 26
           },
           "invalid": {
             "vless": 4,
             "ss": 1
           },
-          "valid_vless": 164,
+          "valid_vless": 169,
           "invalid_vless": 4
         },
         {
@@ -287,13 +287,13 @@
             "vless": 200
           },
           "valid": {
-            "vless": 125
+            "vless": 124
           },
           "invalid": {
-            "vless": 75
+            "vless": 76
           },
-          "valid_vless": 125,
-          "invalid_vless": 75
+          "valid_vless": 124,
+          "invalid_vless": 76
         },
         {
           "page": 20,
@@ -326,17 +326,17 @@
         {
           "page": 22,
           "protocols": {
-            "vless": 63,
-            "vmess": 137
+            "vmess": 136,
+            "vless": 64
           },
           "valid": {
-            "vless": 62,
-            "vmess": 137
+            "vmess": 136,
+            "vless": 63
           },
           "invalid": {
             "vless": 1
           },
-          "valid_vless": 62,
+          "valid_vless": 63,
           "invalid_vless": 1
         },
         {
@@ -354,17 +354,19 @@
         {
           "page": 24,
           "protocols": {
-            "vless": 124,
-            "vmess": 19
+            "vless": 114,
+            "ss": 4,
+            "vmess": 18
           },
           "valid": {
-            "vless": 124,
-            "vmess": 17
+            "vless": 114,
+            "ss": 4,
+            "vmess": 12
           },
           "invalid": {
-            "vmess": 2
+            "vmess": 6
           },
-          "valid_vless": 124,
+          "valid_vless": 114,
           "invalid_vless": 0
         },
         {
@@ -384,45 +386,45 @@
       ],
       "page_count": 25,
       "protocols": {
-        "ss": 1608,
-        "vless": 2420,
-        "vmess": 226
+        "ss": 1592,
+        "vless": 2405,
+        "vmess": 228
       },
       "valid": {
-        "ss": 1441,
-        "vless": 2268,
-        "vmess": 223
+        "ss": 1425,
+        "vless": 2247,
+        "vmess": 222
       },
       "invalid": {
-        "vless": 152,
+        "vless": 158,
         "ss": 167,
-        "vmess": 3
+        "vmess": 6
       },
-      "valid_vless": 2268,
-      "invalid_vless": 152
+      "valid_vless": 2247,
+      "invalid_vless": 158
     }
   },
   "pages": 25,
   "valid": {
-    "vless": 2268,
-    "vmess": 223,
-    "ss": 1441
+    "vless": 2247,
+    "vmess": 222,
+    "ss": 1425
   },
   "invalid": {
-    "vless": 152,
-    "vmess": 3,
+    "vless": 158,
+    "vmess": 6,
     "ss": 167
   },
-  "valid_vless": 2268,
-  "invalid_vless": 152,
-  "duplicates": 1131,
+  "valid_vless": 2247,
+  "invalid_vless": 158,
+  "duplicates": 1139,
   "blocked": 0,
-  "published": 2801,
+  "published": 2755,
   "published_protocols": {
-    "vless": 1850,
-    "vmess": 142,
-    "ss": 809
+    "vless": 1812,
+    "vmess": 138,
+    "ss": 805
   },
-  "previously_published": 2855,
+  "previously_published": 2801,
   "minimum_retained_ratio": 0.5
 }
