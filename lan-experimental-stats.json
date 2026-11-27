@@ -366,120 +366,121 @@
     },
     "SAKAZXC1400_FREE_VPN_SUB": {
       "received": 200,
-      "valid_format": 110,
+      "valid_format": 122,
       "wireveil_audited": 17,
       "wireveil_found": 1,
       "wireveil_good": 0,
       "wireveil_partial": 1,
       "wireveil_protocol_excluded": 0,
       "wireveil_unmatched": 199,
-      "unsupported_protocols": 90,
+      "unsupported_protocols": 78,
       "unsupported_by_protocol": {
-        "hysteria2": 42,
-        "vmess": 48
+        "hysteria2": 37,
+        "vmess": 41
       },
       "invalid": 0,
       "filtered": 6,
-      "duplicates": 40,
-      "lan_global_overlap": 8,
+      "duplicates": 45,
+      "lan_global_overlap": 24,
       "limited": 0,
-      "added": 56,
+      "added": 47,
       "protocols": {
         "ss": 42,
-        "vless": 10,
-        "trojan": 4
+        "trojan": 1,
+        "vless": 4
       },
       "exclusion_reasons": {
-        "unsupported:hysteria2": 42,
-        "unsupported:vmess": 48,
+        "unsupported:hysteria2": 37,
+        "unsupported:vmess": 41,
         "filtered:ru": 6,
-        "duplicate:experimental": 40,
-        "overlap:lan_global": 8
+        "duplicate:experimental": 45,
+        "overlap:lan_global": 24
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-27 04:39:30 МСК",
-      "last_updated": "2026-11-27 04:39:30 МСК",
-      "discarded": 144
+      "last_successful_update": "2026-11-27 19:12:43 МСК",
+      "last_updated": "2026-11-27 19:12:43 МСК",
+      "discarded": 153
     },
     "LEARNLI_FREE_NODES": {
-      "received": 241,
-      "valid_format": 160,
+      "received": 333,
+      "valid_format": 278,
       "wireveil_audited": 20,
       "wireveil_found": 1,
       "wireveil_good": 0,
       "wireveil_partial": 1,
       "wireveil_protocol_excluded": 0,
-      "wireveil_unmatched": 240,
-      "unsupported_protocols": 80,
+      "wireveil_unmatched": 332,
+      "unsupported_protocols": 54,
       "unsupported_by_protocol": {
-        "vmess": 74,
-        "anytls": 6
+        "vmess": 49,
+        "anytls": 5
       },
       "invalid": 1,
-      "filtered": 10,
-      "duplicates": 29,
-      "lan_global_overlap": 28,
+      "filtered": 5,
+      "duplicates": 47,
+      "lan_global_overlap": 27,
       "limited": 0,
-      "added": 93,
+      "added": 199,
       "protocols": {
-        "vless": 23,
-        "trojan": 46,
-        "ss": 24
+        "vless": 33,
+        "trojan": 73,
+        "ss": 93
       },
       "exclusion_reasons": {
-        "unsupported:vmess": 74,
+        "unsupported:vmess": 49,
         "invalid:encryption": 1,
-        "unsupported:anytls": 6,
-        "filtered:ru": 10,
-        "duplicate:experimental": 29,
-        "overlap:lan_global": 28
+        "unsupported:anytls": 5,
+        "filtered:ru": 5,
+        "duplicate:experimental": 47,
+        "overlap:lan_global": 27
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-27 04:39:30 МСК",
-      "last_updated": "2026-11-27 04:39:30 МСК",
-      "discarded": 148
+      "last_successful_update": "2026-11-27 19:12:43 МСК",
+      "last_updated": "2026-11-27 19:12:43 МСК",
+      "discarded": 134
     },
     "BILY1258_BEIMI": {
-      "received": 867,
-      "valid_format": 747,
+      "received": 895,
+      "valid_format": 771,
       "wireveil_audited": 5,
-      "wireveil_found": 0,
-      "wireveil_good": 0,
+      "wireveil_found": 1,
+      "wireveil_good": 1,
       "wireveil_partial": 0,
       "wireveil_protocol_excluded": 0,
-      "wireveil_unmatched": 867,
-      "unsupported_protocols": 79,
+      "wireveil_unmatched": 894,
+      "unsupported_protocols": 83,
       "unsupported_by_protocol": {
-        "hysteria2": 44,
-        "vmess": 35
+        "vmess": 38,
+        "hysteria2": 45
       },
       "invalid": 41,
-      "filtered": 17,
-      "duplicates": 31,
-      "lan_global_overlap": 109,
+      "filtered": 19,
+      "duplicates": 111,
+      "lan_global_overlap": 103,
       "limited": 0,
-      "added": 590,
+      "added": 538,
       "protocols": {
-        "vless": 384,
-        "ss": 119,
-        "trojan": 87
+        "vless": 411,
+        "trojan": 88,
+        "ss": 39
       },
       "exclusion_reasons": {
+        "unsupported:vmess": 38,
         "invalid:network": 38,
-        "unsupported:hysteria2": 44,
+        "unsupported:hysteria2": 45,
         "invalid:uuid": 3,
-        "unsupported:vmess": 35,
-        "filtered:non_public": 17,
-        "duplicate:experimental": 31,
-        "overlap:lan_global": 109
+        "filtered:non_public": 18,
+        "filtered:ru": 1,
+        "duplicate:experimental": 111,
+        "overlap:lan_global": 103
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-27 04:39:30 МСК",
-      "last_updated": "2026-11-27 04:39:30 МСК",
-      "discarded": 277
+      "last_successful_update": "2026-11-27 19:12:43 МСК",
+      "last_updated": "2026-11-27 19:12:43 МСК",
+      "discarded": 357
     },
     "DELTA_KRONECKER_V2RAY_CONFIG": {
       "received": 0,
@@ -493,26 +494,25 @@
       "unsupported_protocols": 0,
       "unsupported_by_protocol": {},
       "invalid": 0,
-      "filtered": 1,
-      "duplicates": 12,
+      "filtered": 0,
+      "duplicates": 3,
       "lan_global_overlap": 0,
       "limited": 0,
-      "added": 279,
+      "added": 276,
       "protocols": {
-        "trojan": 198,
+        "trojan": 195,
         "vless": 11,
         "ss": 70
       },
       "exclusion_reasons": {
         "source:unavailable": 1,
-        "filtered:ru": 1,
-        "duplicate:experimental": 12
+        "duplicate:experimental": 3
       },
       "status": "fallback",
       "error": "HTTP Error 404: Not Found",
       "last_successful_update": "2026-11-20 18:02:16 МСК",
       "last_updated": "2026-11-20 18:02:16 МСК",
-      "discarded": 13
+      "discarded": 3
     },
     "HEZHANLEIOK_FREESUB": {
       "received": 594,
@@ -530,8 +530,8 @@
       },
       "invalid": 0,
       "filtered": 42,
-      "duplicates": 81,
-      "lan_global_overlap": 116,
+      "duplicates": 84,
+      "lan_global_overlap": 113,
       "limited": 0,
       "added": 269,
       "protocols": {
@@ -544,32 +544,32 @@
         "unsupported:vmess": 34,
         "filtered:non_public": 36,
         "filtered:ru": 6,
-        "duplicate:experimental": 81,
-        "overlap:lan_global": 116
+        "duplicate:experimental": 84,
+        "overlap:lan_global": 113
       },
       "status": "ok",
       "error": "",
-      "last_successful_update": "2026-11-27 04:39:30 МСК",
-      "last_updated": "2026-11-27 04:39:30 МСК",
+      "last_successful_update": "2026-11-27 19:12:43 МСК",
+      "last_updated": "2026-11-27 19:12:43 МСК",
       "discarded": 325
     }
   },
-  "total": 2284,
-  "auto": 2284,
-  "lan_global_overlap": 261,
-  "duplicates": 193,
-  "unsupported_protocols": 335,
+  "total": 2326,
+  "auto": 2326,
+  "lan_global_overlap": 267,
+  "duplicates": 290,
+  "unsupported_protocols": 301,
   "unsupported_by_protocol": {
-    "hysteria2": 138,
-    "vmess": 191,
-    "anytls": 6
+    "hysteria2": 134,
+    "vmess": 162,
+    "anytls": 5
   },
   "invalid": 42,
   "limited": 0,
   "protocols": {
-    "vless": 1330,
-    "trojan": 454,
-    "ss": 500
+    "vless": 1361,
+    "trojan": 476,
+    "ss": 489
   },
   "available_sources": 16,
   "fallback_sources": 2,
@@ -583,11 +583,11 @@
     "selected_partial": 16,
     "protocol_excluded": 4,
     "candidates": 56,
-    "found": 2,
-    "found_good": 0,
+    "found": 3,
+    "found_good": 1,
     "found_partial": 2,
     "matched_protocol_excluded": 1
   },
-  "updated": "2026-11-27 04:39:30 МСК",
+  "updated": "2026-11-27 19:12:43 МСК",
   "schema_version": 2
 }
