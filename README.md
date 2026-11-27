@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-7932-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-8081-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Готовые автоматически обновляемые подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-11-26 19:24:09 МСК`
+**Последнее обновление:** `2026-11-27 04:34:40 МСК`
 
 ## Подписки
 
@@ -36,23 +36,23 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `7932` |
-| Россия | `1790` |
-| Global | `6169` |
-| Global 5K | `1903` |
-| LAN 5K | `4912` |
-| LAN Global | `4912` |
-| LAN Global Fast Check | `4912` |
-| LAN Experimental | `2097` |
-| BS Safe (MANUAL / AUTO) | `1521 / 50` |
+| Всего серверов | `8081` |
+| Россия | `1733` |
+| Global | `6381` |
+| Global 5K | `2132` |
+| LAN 5K | `4986` |
+| LAN Global | `4986` |
+| LAN Global Fast Check | `4986` |
+| LAN Experimental | `2284` |
+| BS Safe (MANUAL / AUTO) | `1630 / 50` |
 | Happ Mobile | `79` |
-| Zapret | `2755` |
+| Zapret | `2723` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## Тестовые подписки
 
 - [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) — тестовый Global-пул.
-- [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) — изолированный LAN-пул на `2097` серверов; все серверы входят в `AUTO`, пересечения с LAN Global удаляются.
+- [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) — изолированный LAN-пул на `2284` серверов; все серверы входят в `AUTO`, пересечения с LAN Global удаляются.
 
 Эти варианты могут меняться заметнее основных подписок и не рекомендуются как единственный рабочий профиль.
 <!-- LAN-EXPERIMENTAL:END -->
