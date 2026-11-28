@@ -2,11 +2,11 @@
 
 [![Regenerate subscription](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml/badge.svg)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
 [![Updated 09:00 and 21:00 MSK](https://img.shields.io/badge/update-09%3A00%20%2F%2021%3A00%20MSK-blue)](https://github.com/markKikhtenko/pale-signal/actions/workflows/update-subscription.yml)
-[![Servers](https://img.shields.io/badge/servers-7701-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
+[![Servers](https://img.shields.io/badge/servers-8312-brightgreen)](https://markkikhtenko.github.io/pale-signal/subscription.yaml)
 
 Готовые автоматически обновляемые подписки для Mihomo, OpenClash и Happ/Happ Plus.
 
-**Последнее обновление:** `2026-11-27 19:08:34 МСК`
+**Последнее обновление:** `2026-11-28 04:07:32 МСК`
 
 ## Подписки
 
@@ -36,23 +36,23 @@
 
 | Показатель | Значение |
 |------------|----------|
-| Всего серверов | `7701` |
-| Россия | `1716` |
-| Global | `6020` |
-| Global 5K | `1967` |
-| LAN 5K | `4845` |
-| LAN Global | `4845` |
-| LAN Global Fast Check | `4845` |
-| LAN Experimental | `2326` |
-| BS Safe (MANUAL / AUTO) | `1604 / 50` |
-| Happ Mobile | `80` |
-| Zapret | `2776` |
+| Всего серверов | `8312` |
+| Россия | `1773` |
+| Global | `6573` |
+| Global 5K | `2287` |
+| LAN 5K | `5000` |
+| LAN Global | `5048` |
+| LAN Global Fast Check | `5048` |
+| LAN Experimental | `2202` |
+| BS Safe (MANUAL / AUTO) | `1643 / 50` |
+| Happ Mobile | `73` |
+| Zapret | `2749` |
 
 <!-- LAN-EXPERIMENTAL:START -->
 ## Тестовые подписки
 
 - [subscription-global-non-stable.yaml](https://markkikhtenko.github.io/pale-signal/subscription-global-non-stable.yaml) — тестовый Global-пул.
-- [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) — изолированный LAN-пул на `2326` серверов; все серверы входят в `AUTO`, пересечения с LAN Global удаляются.
+- [subscription-lan-experimental.yaml](https://markkikhtenko.github.io/pale-signal/subscription-lan-experimental.yaml) — изолированный LAN-пул на `2202` серверов; все серверы входят в `AUTO`, пересечения с LAN Global удаляются.
 
 Эти варианты могут меняться заметнее основных подписок и не рекомендуются как единственный рабочий профиль.
 <!-- LAN-EXPERIMENTAL:END -->
