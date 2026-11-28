@@ -1,94 +1,87 @@
 {
-  "updated": "2026-11-28 04:09:48 МСК",
+  "updated": "2026-11-28 18:07:34 МСК",
   "environment": "GitHub Actions or local runner; not MegaFon",
   "candidates": [
     {
       "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
       "source": "hussaroff lte-universal-checked whitelist.txt",
-      "checked_at": "2026-11-28 04:09:48 МСК",
+      "checked_at": "2026-11-28 18:07:34 МСК",
       "github_https": "PASS",
-      "latency_ms": 492,
+      "latency_ms": 192,
       "proxy": {
-        "name": "🇸🇪 Sweden | TG: @HardVpn_robot t.me/rjsxrd",
+        "name": "[OpenRay] 🇮🇱IL-17",
         "type": "vless",
-        "server": "79.141.174.144",
+        "server": "185.95.231.156",
         "port": 443,
-        "uuid": "ba373a70-295f-482d-a471-8bc17b54e23b",
-        "network": "grpc",
+        "uuid": "1f8cf47a-b66a-4916-979f-26edfcf44eea",
+        "network": "tcp",
         "udp": true,
         "encryption": "none",
+        "flow": "xtls-rprx-vision",
         "tls": true,
-        "servername": "seb.899themes.pro",
+        "servername": "www.apple.com",
         "client-fingerprint": "firefox",
         "reality-opts": {
-          "public-key": "pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ",
-          "short-id": "27350908de933e09"
-        },
-        "grpc-opts": {
-          "grpc-service-name": "neurex"
+          "public-key": "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To",
+          "short-id": "a3a578ab"
         }
       }
     },
     {
-      "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
-      "source": "hussaroff lte-universal-checked whitelist.txt",
-      "checked_at": "2026-11-28 04:09:48 МСК",
+      "source_id": "COLORAMA_WHITELIST_VLESS",
+      "source": "coloramamoe whitelist-vless.txt",
+      "checked_at": "2026-11-28 18:07:34 МСК",
       "github_https": "PASS",
-      "latency_ms": 343,
+      "latency_ms": 7622,
       "proxy": {
-        "name": "🇮🇹 Italy | TG: @HardVpn_robot t.me/rjsxrd",
+        "name": "🇩🇪 Germany — #28",
         "type": "vless",
-        "server": "194.180.207.155",
-        "port": 443,
-        "uuid": "ba373a70-295f-482d-a471-8bc17b54e23b",
-        "network": "grpc",
+        "server": "151.236.114.141",
+        "port": 6443,
+        "uuid": "0d4807a7-260b-4d66-a71e-5e793c46c66e",
+        "network": "tcp",
         "udp": true,
         "encryption": "none",
         "tls": true,
-        "servername": "duskbrook.xyz",
-        "client-fingerprint": "firefox",
+        "servername": "max.ru",
+        "client-fingerprint": "qq",
         "reality-opts": {
-          "public-key": "pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ",
-          "short-id": "27350908de933e09"
-        },
-        "grpc-opts": {
-          "grpc-service-name": "neurex"
-        }
-      }
-    },
-    {
-      "source_id": "HUSSAROFF_LTE_UNIVERSAL_CHECKED",
-      "source": "hussaroff lte-universal-checked whitelist.txt",
-      "checked_at": "2026-11-28 04:09:48 МСК",
-      "github_https": "PASS",
-      "latency_ms": 141,
-      "proxy": {
-        "name": "Бесплатный VPN tg:VLESSFORU 🇺🇸 t.me/rjsxrd 2",
-        "type": "vless",
-        "server": "79.141.163.152",
-        "port": 443,
-        "uuid": "ba373a70-295f-482d-a471-8bc17b54e23b",
-        "network": "grpc",
-        "udp": true,
-        "encryption": "none",
-        "tls": true,
-        "servername": "usa.899themes.pro",
-        "client-fingerprint": "firefox",
-        "reality-opts": {
-          "public-key": "pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ",
-          "short-id": "27350908de933e09"
-        },
-        "grpc-opts": {
-          "grpc-service-name": "neurex"
+          "public-key": "pGFgy_rrpU51v3IFm-dYHOJskMDJO0kCAkIIHJdUSF8",
+          "short-id": "f3e8b2b1",
+          "spider-x": "/"
         }
       }
     },
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-28 04:09:48 МСК",
+      "checked_at": "2026-11-28 18:07:34 МСК",
       "github_https": "PASS",
-      "latency_ms": 1604,
+      "latency_ms": 992,
+      "proxy": {
+        "name": "🌀 CYBERPORTAL | White List | 🇳🇱 Нидерланды #73 t.me/rjsxrd",
+        "type": "vless",
+        "server": "201.51.11.65",
+        "port": 443,
+        "uuid": "1e2b9c0c-4f9b-56f5-a062-1c4f2d2aa200",
+        "network": "tcp",
+        "udp": true,
+        "encryption": "none",
+        "flow": "xtls-rprx-vision",
+        "tls": true,
+        "servername": "absolute-disaster.org",
+        "client-fingerprint": "edge",
+        "reality-opts": {
+          "public-key": "GiDgVRVYrTkv1mZJeFVWkr736Iey2kqLM6L0eUbffV8"
+        }
+      }
+    },
+    {
+      "source_id": "RAVIRANET_PREMIUM",
+      "source": "RaViraNet premium.txt",
+      "checked_at": "2026-11-28 18:07:34 МСК",
+      "github_https": "PASS",
+      "latency_ms": 650,
       "proxy": {
         "name": "🇹🇷 Türkiye (сервер) | 🇳🇱 The Netherlands (выход 9.247.54.225) | @RaViraNet t.me/rjsxrd",
         "type": "vless",
@@ -113,75 +106,82 @@
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-28 04:09:48 МСК",
+      "checked_at": "2026-11-28 18:07:34 МСК",
       "github_https": "PASS",
-      "latency_ms": 769,
+      "latency_ms": 1027,
       "proxy": {
-        "name": "🇪🇸 Spain — #32",
+        "name": "🇫🇷 France (сервер) | 🇳🇱 The Netherlands (выход 9.247.54.225) | @RaViraNet t.me/rjsxrd",
         "type": "vless",
-        "server": "46.28.71.247",
+        "server": "717252g.nl8.h1clayd.click",
         "port": 443,
-        "uuid": "12c53e32-e589-47d6-b857-e4132294f767",
-        "network": "tcp",
+        "uuid": "cda0862a-0f87-4be9-8ed8-1d0c9e382839",
+        "network": "grpc",
         "udp": true,
         "encryption": "none",
-        "flow": "xtls-rprx-vision",
         "tls": true,
-        "servername": "www.cloudflare.com",
+        "servername": "717252g.nl8.h1clayd.click",
+        "client-fingerprint": "chrome",
+        "reality-opts": {
+          "public-key": "PD8Jdlg3xB9QY--jwQjp8PFPzCS8-Oryw6-HWBcHMFU",
+          "short-id": "d3bd772514c87d28"
+        },
+        "grpc-opts": {
+          "grpc-service-name": "204adda7e3da"
+        }
+      }
+    },
+    {
+      "source_id": "RAVIRANET_PREMIUM",
+      "source": "RaViraNet premium.txt",
+      "checked_at": "2026-11-28 18:07:34 МСК",
+      "github_https": "PASS",
+      "latency_ms": 840,
+      "proxy": {
+        "name": "🇫🇷 France (сервер) | 🇳🇱 The Netherlands (выход 9.247.54.225) | @RaViraNet t.me/rjsxrd 2",
+        "type": "vless",
+        "server": "717252g.nl8.h1clayd.click",
+        "port": 443,
+        "uuid": "cda0862a-0f87-4be9-8ed8-1d0c9e382839",
+        "network": "grpc",
+        "udp": true,
+        "encryption": "none",
+        "tls": true,
+        "servername": "717252g.nl8.h1clayd.click",
         "client-fingerprint": "firefox",
         "reality-opts": {
-          "public-key": "v4MuZIvFrTPT5GHMSaPryUAbIZlLstmsUTzmC1E-JTE",
-          "short-id": "0dfc23fe80778c00"
+          "public-key": "PD8Jdlg3xB9QY--jwQjp8PFPzCS8-Oryw6-HWBcHMFU",
+          "short-id": "d3bd772514c87d28",
+          "spider-x": "/"
+        },
+        "grpc-opts": {
+          "grpc-service-name": "204adda7e3da"
         }
       }
     },
     {
       "source_id": "RAVIRANET_PREMIUM",
       "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-28 04:09:48 МСК",
+      "checked_at": "2026-11-28 18:07:34 МСК",
       "github_https": "PASS",
-      "latency_ms": 714,
+      "latency_ms": 794,
       "proxy": {
-        "name": "🇮🇹 Italy — #45",
+        "name": "🇫🇷 France (сервер) | 🇳🇱 The Netherlands (выход 9.247.54.225) | @RaViraNet t.me/rjsxrd 3",
         "type": "vless",
-        "server": "82.118.16.187",
+        "server": "717252g.nl8.h1clayd.click",
         "port": 443,
-        "uuid": "dc2259c4-388e-4285-ba18-df619b6672b6",
-        "network": "tcp",
+        "uuid": "cda0862a-0f87-4be9-8ed8-1d0c9e382839",
+        "network": "grpc",
         "udp": true,
         "encryption": "none",
-        "flow": "xtls-rprx-vision",
         "tls": true,
-        "servername": "www.cloudflare.com",
-        "client-fingerprint": "random",
+        "servername": "717252g.nl8.h1clayd.click",
+        "client-fingerprint": "ios",
         "reality-opts": {
-          "public-key": "R5ycsjJ-v024902dMSqTsSdqxUwCFEXMebdBEWFt9VU",
-          "short-id": "cd6065902eea7a02"
-        }
-      }
-    },
-    {
-      "source_id": "RAVIRANET_PREMIUM",
-      "source": "RaViraNet premium.txt",
-      "checked_at": "2026-11-28 04:09:48 МСК",
-      "github_https": "PASS",
-      "latency_ms": 749,
-      "proxy": {
-        "name": "🇵🇱 Poland — #76",
-        "type": "vless",
-        "server": "82.118.22.161",
-        "port": 443,
-        "uuid": "05488656-d4bf-4634-8b2e-e4ff5a56c7e2",
-        "network": "tcp",
-        "udp": true,
-        "encryption": "none",
-        "flow": "xtls-rprx-vision",
-        "tls": true,
-        "servername": "www.cloudflare.com",
-        "client-fingerprint": "safari",
-        "reality-opts": {
-          "public-key": "xY1KpNxaIGmi6jfeudYQ_aaLGQqWK_uHStnwUFd2_2E",
-          "short-id": "fa3ea655619a3e78"
+          "public-key": "PD8Jdlg3xB9QY--jwQjp8PFPzCS8-Oryw6-HWBcHMFU",
+          "short-id": "d3bd772514c87d28"
+        },
+        "grpc-opts": {
+          "grpc-service-name": "204adda7e3da"
         }
       }
     }
